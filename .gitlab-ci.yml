@@ -1,9 +1,5 @@
 image: node:12
 
-.exclude_template: &exclude_template
-    except:
-        changes:
-            - "*.md"
 cache:
     paths:
         - node_modules/
@@ -12,18 +8,6 @@ stages:
     - lint
     - test
     - build
-    - deploy
-
-before_script:
-    - which ssh-agent || (apk add --update --no-cache openssh-client)
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan gitlab.com >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-    - export SOURCE_BRANCH_SHA=`git ls-remote git@gitlab.com:infgosp/popen.git $CI_MERGE_REQUEST_TARGET_BRANCH_NAME | awk '{ print $1}'`
-    - echo "$SOURCE_BRANCH_SHA"
 
 lint:
     stage: lint
@@ -32,7 +16,6 @@ lint:
         - npm run ci:lint
     only:
         - merge_request
-    <<: *exclude_template
 
 test:
     stage: test
@@ -41,7 +24,6 @@ test:
         - npm run ci:test
     only:
         - merge_request
-    <<: *exclude_template
     artifacts:
         paths:
             - coverage/apps/
@@ -54,7 +36,6 @@ regular-build:
         - npm run ci:build
     only:
         - merge_request
-    <<: *exclude_template
 
 master-build:
     stage: build
@@ -63,8 +44,20 @@ master-build:
         - npm run all:build
     only:
         - master
-    <<: *exclude_template
     artifacts:
         paths:
             - dist/apps/
         expire_in: 1 week
+
+master-test:
+    stage: test
+    script:
+        - npm install
+        - npm run all:test
+    artifacts:
+        paths:
+            - coverage/
+        expire_in: 1 week
+    only:
+        - master
+
