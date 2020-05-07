@@ -1,7 +1,10 @@
 export {
     StandardBaseConverter,
     fromNumber,
-    fromString
+    fromString,
+    Conversion,
+    ConversionToArbitrary,
+    ConversionToDecimal
 } from './positional/base-converter';
 
 export {
