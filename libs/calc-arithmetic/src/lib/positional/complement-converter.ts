@@ -71,9 +71,9 @@ export class ComplementConverter {
      */
     public static getComplement(
         value: string | NumberComplement,
-        base: number = 10
+        base = 10
     ): NumberComplement {
-        let val: string = '';
+        let val = '';
         if (value instanceof NumberComplement) {
             val = value.noSignValue();
             base = value.base;
