@@ -24,13 +24,34 @@ export class Conversion {
         return this.stages[this.stages.length - 1].result;
     }
 
+    get resultNumDigits(): number {
+        return this.result.integerPart.length + this.result.fractionalPart.length;
+    }
+
+    get inputNumDigits(): number {
+        const [inputStr, base] = this.stages[0].input;
+        return base >= 36 ? inputStr.split(' ').length : inputStr.length;
+    }
+
     public addStage(stage: ConversionStage): void {
         this.stages.push(stage);
         this.assignConversionType();
     }
 
-    public concatConversion(conv: Conversion): void {
-        this.stages = this.stages.concat(conv.stages);
+    public getStage(index: number): ConversionStage {
+        return this.stages[index];
+    }
+
+    public getLastStage(): ConversionStage {
+        return this.stages[this.stages.length -1];
+    }
+
+    public getFirstStage(): ConversionStage {
+        return this.stages[0];
+    }
+
+    public concatConversion(conversion: Conversion): void {
+        this.stages = this.stages.concat(conversion.stages);
         this.assignConversionType();
     }
 

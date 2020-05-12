@@ -1,0 +1,14 @@
+
+.number-grid-cell {
+    min-width: 20px;
+    width: 32px;
+    height: 32px;
+    min-height: 20px;
+    padding: 4px;
+    text-align: center;
+}
+
+.number-grid-row {
+    display: flex;
+    flex-direction: row;
+}

@@ -1,8 +1,12 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Input, InputNumber } from 'antd';
-import { fromString } from '@calc/calc-arithmetic';
+import { Conversion, fromString } from '@calc/calc-arithmetic';
 
-export const BaseConverterComponent: FC = () => {
+interface P {
+    onConversionChange?: (conversion: Conversion) => void;
+}
+
+export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
     const defaultInputBase = 10;
     const defaultOutputBase = 8;
 
@@ -26,6 +30,7 @@ export const BaseConverterComponent: FC = () => {
             );
             setOutputNumber(result.result.toString());
             setComplementStr(result.result.complement.toString());
+            onConversionChange(result);
         } catch (err) {
             console.log(err);
         }
@@ -69,7 +74,7 @@ export const BaseConverterComponent: FC = () => {
                 />
             </Input.Group>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '20%' }}></div>
+                <div style={{ width: '20%' }}/>
                 <div style={{ width: '80%' }}>
                     <span>Input number complement</span>
                 </div>
@@ -101,7 +106,7 @@ export const BaseConverterComponent: FC = () => {
                 <Input style={{ width: '80%' }} readOnly value={outputNumber}/>
             </Input.Group>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '20%' }}></div>
+                <div style={{ width: '20%' }}/>
                 <div style={{ width: '80%' }}>
                     <span>Output number complement</span>
                 </div>
