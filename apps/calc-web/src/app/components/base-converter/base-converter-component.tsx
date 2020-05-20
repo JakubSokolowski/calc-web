@@ -8,9 +8,9 @@ interface P {
 
 export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
     const defaultInputBase = 10;
-    const defaultOutputBase = 8;
+    const defaultOutputBase = 2;
 
-    const [inputNumber, setInputNumber] = useState('1024');
+    const [inputNumber, setInputNumber] = useState('24');
     const [outputNumber, setOutputNumber] = useState('');
     const [inputBase, setInputBase] = useState(defaultInputBase);
     const [outputBase, setOutputBase] = useState(defaultOutputBase);
@@ -68,7 +68,7 @@ export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
                 />
                 <Input
                     style={{ width: '80%' }}
-                    defaultValue="1024"
+                    defaultValue="24"
                     allowClear
                     onChange={onInputNumberChange}
                 />

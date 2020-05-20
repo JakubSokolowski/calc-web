@@ -1,4 +1,4 @@
-import { Conversion, ConversionToArbitrary, fromNumber } from '@calc/calc-arithmetic';
+import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
 
 export interface CellConfig {
     value: string,
@@ -13,50 +13,57 @@ export interface OperationGrid {
     height: number
 }
 
-
-export function buildConversionGrid(conversion: Conversion = fromNumber(24, 2)): OperationGrid {
-    const maxRowWidth = getMaxRowWidth(conversion);
-    const numRows = getNumRows(conversion);
-    const firstStage = conversion.stages.length > 1 ? conversion.getStage(1) as ConversionToArbitrary : conversion.getStage(0) as ConversionToArbitrary;
-    const resultDigits = firstStage.result.integerPart.digits.reverse();
-    const rawRows = [];
-    let initial = [[], []];
-
-    firstStage.integralDivisors.forEach((value, index, arr) => {
-        if (index === arr.length - 1) return;
-        const [initialLeft, initialRight] = initial;
-
-        const currLeft: CellConfig[] = [...value.split('').map((val) => ({value: val}))];
-        const leftOffset: CellConfig[] = getOffset(initialLeft, currLeft);
-
-        let currRight: CellConfig[] = [...arr[index + 1].split('')].map((val) => ({value: val}));
-        const defaultRight: CellConfig[] = [{value: ' '}];
-        let rightOffset: CellConfig[] = getOffset(initialRight, currRight).concat(defaultRight);
-
-        if(index===arr.length -2) {
-            currRight = currRight.map((val) => ({...val, highlight: true}));
-            rightOffset = rightOffset.map((val) => ({...val, highlight: true}));
-        }
-
-        rawRows.push([
-            ...leftOffset,
-            ...currLeft,
-            ...currRight,
-            ...rightOffset,
-            {value: resultDigits[index], highlight: true}
-        ]);
-        if (index === 0) initial = [currLeft, currRight];
-    });
+export function buildConversionGrid(conversion: Conversion): OperationGrid {
+    const conversionToArbitrary = conversion.stages.length > 1
+        ? conversion.getLastStage()
+        : conversion.getFirstStage();
 
     return {
-        values: rawRows,
-        width: maxRowWidth,
-        height: numRows,
+        values: buildToArbitraryGrid(conversionToArbitrary as ConversionToArbitrary),
+        width: getMaxRowWidth(conversion),
+        height: getNumRows(conversion),
         verticalLine: conversion.inputNumDigits - 1
     };
 }
 
-function getOffset(initial: CellConfig[], curr: CellConfig[]): CellConfig[] {
+function buildToArbitraryGrid(firstStage: ConversionToArbitrary): CellConfig[][] {
+    const reversedResultDigits = [...firstStage.result.integerPart.digits].reverse();
+    const rows: CellConfig[][] = [];
+    let initialEmptyCellOffset = [[], []];
+    const divisors = firstStage.integralDivisors;
+
+    divisors.forEach((value, index) => {
+        if (index === divisors.length - 1) return;
+        const [emptyLeft, emptyRight] = initialEmptyCellOffset;
+
+        const left: CellConfig[] = [...value.split('').map((val) => ({ value: val }))];
+        const leftEmptyCells: CellConfig[] = getEmptyCellOffset(emptyLeft, left);
+
+        let right: CellConfig[] = [...divisors[index + 1].split('')].map((val) => ({ value: val }));
+        const defaultRightEmptyCell: CellConfig[] = [{ value: ' ' }];
+        let rightEmptyCells: CellConfig[] = getEmptyCellOffset(emptyRight, right).concat(defaultRightEmptyCell);
+
+        if (index === divisors.length - 2) {
+            right = right.map((val) => ({ ...val, highlight: true }));
+            rightEmptyCells = rightEmptyCells.map((val) => ({ ...val, highlight: true }));
+        }
+
+        const newRow = [
+            ...leftEmptyCells,
+            ...left,
+            ...right,
+            ...rightEmptyCells,
+            { value: reversedResultDigits[index], highlight: true }
+        ];
+
+        rows.push(newRow);
+        if (index === 0) initialEmptyCellOffset = [left, right];
+    });
+
+    return rows;
+}
+
+function getEmptyCellOffset(initial: CellConfig[], curr: CellConfig[]): CellConfig[] {
     const offset = initial.length - curr.length;
     return offset > 0 ? ' '.repeat(offset).split('').map((value) => ({ value })) : [];
 }
@@ -78,14 +85,14 @@ export function gridToAscii(grid: OperationGrid): string {
     let ascii = '\n';
 
     grid.values.forEach((row, rowIndex) => {
-        if(rowIndex === grid.horizontalLine) {
+        if (rowIndex === grid.horizontalLine) {
             ascii = ascii.concat('-'.repeat(grid.width * 2).concat('\n'));
-            return
+            return;
         }
 
-        row.forEach((cell, columnIndex )=> {
+        row.forEach((cell, columnIndex) => {
             ascii = ascii.concat(cell.value + ' ');
-            if(grid.verticalLine === columnIndex) {
+            if (grid.verticalLine === columnIndex) {
                 ascii = ascii.concat('| ');
             }
         });

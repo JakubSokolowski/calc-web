@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react';
+import React, { useState } from 'react';
 
 import './app.scss';
 
@@ -10,19 +10,16 @@ import { Conversion } from '@calc/calc-arithmetic';
 import { ConversionDetails } from './components/conversion-details/conversion-details';
 
 export const App = () => {
-    /*
-     * Replace the elements below with your own.
-     *
-     * Note: The corresponding styles are in the ./app.scss file.
-     */
     const [grid, setGrid] = useState<OperationGrid>();
     const [conversion, setConv] = useState<Conversion>();
     const onChange = (conv) => {
-        const newGrid = buildConversionGrid(conv);
-        setGrid(newGrid);
-        setConv(conv);
-
-        console.log(gridToAscii(newGrid))
+        if(conv) {
+            console.log('onChange');
+            const newGrid = buildConversionGrid(conv);
+            setGrid(newGrid);
+            setConv(conv);
+            console.log(gridToAscii(newGrid))
+        }
     };
 
     return (
@@ -33,7 +30,7 @@ export const App = () => {
             </header>
             <main>
                 <BaseConverterComponent onConversionChange={onChange}/>
-                <ConversionDetails conversion={conversion}/>
+                {conversion && <ConversionDetails conversion={conversion}/>}
             </main>
         </div>
     );
