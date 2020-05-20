@@ -16,6 +16,51 @@ describe('operation-grid', () => {
             expect(result.height).toEqual(expectedHeight);
             expect(result.width).toEqual(expectedWidth);
         });
+
+        it('should return grid with proper row values for conversion result', () => {
+            // given
+            const conversion = fromNumber(24, 2);
+            const expectedRows = [
+                [
+                    { value: '2' },
+                    { value: '4' },
+                    { value: '1' },
+                    { value: '2' },
+                    { value: ' ' },
+                    { value: '0', highlight: true }
+                ],
+                [
+                    { value: '1' },
+                    { value: '2' },
+                    { value: '6' },
+                    { value: ' ' },
+                    { value: ' ' },
+                    { value: '0', highlight: true }
+                ],
+                [
+                    { value: ' ' },
+                    { value: '6' },
+                    { value: '3' },
+                    { value: ' ' },
+                    { value: ' ' },
+                    { value: '0', highlight: true }
+                ],
+                [
+                    { value: ' ' },
+                    { value: '3' },
+                    { value: '1', highlight: true },
+                    { value: ' ', highlight: true },
+                    { value: ' ', highlight: true },
+                    { value: '1', highlight: true }
+                ]
+            ];
+
+            // when
+            const result = buildConversionGrid(conversion);
+
+            // then
+            expect(result.values).toEqual(expectedRows);
+        });
     });
 
     describe('#gridToAscii', () => {
@@ -24,11 +69,11 @@ describe('operation-grid', () => {
             const conversion = fromNumber(24, 2);
             const grid = buildConversionGrid(conversion);
             const expected =
-                  "\n"
-                + "2 4 | 1 2   0 \n"
-                + "1 2 | 6     0 \n"
-                + "  6 | 3     0 \n"
-                + "  3 | 1     1 \n"
+                '\n'
+                + '2 4 | 1 2   0 \n'
+                + '1 2 | 6     0 \n'
+                + '  6 | 3     0 \n'
+                + '  3 | 1     1 \n'
             ;
 
             // when

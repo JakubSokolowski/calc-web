@@ -168,6 +168,7 @@ export class StandardBaseConverter implements BaseConverter {
         if (isValidString(valueStr, inputBase)) {
             const conversion = new Conversion();
             let decimalValue = new BigNumber(0);
+
             if (isFloatingPointStr(valueStr)) {
                 const valueParts = valueStr.split('.');
                 const integerPart = arbitraryIntegralToDecimal(

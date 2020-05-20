@@ -11,7 +11,7 @@ interface P {
 
 export const ConversionDetails: FC<P> = ({ conversion }) => {
     const grid = buildConversionGrid(conversion);
-
+    console.log(grid);
     return (
         <div>
             <Typography>II. Conversion to target base</Typography>
