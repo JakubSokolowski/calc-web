@@ -23,13 +23,6 @@
   justify-content: center;
 }
 
-.app header {
-  background-color: #143055;
-  color: white;
-  padding: 5px;
-  border-radius: 3px;
-}
-
 .app main {
   padding: 0 36px;
 }
@@ -129,4 +122,10 @@
   height: 16px;
   width: 16px;
   margin-right: 4px;
+}
+
+.logo {
+    height: 32px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 14px;
 }
