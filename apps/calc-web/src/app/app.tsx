@@ -1,39 +1,62 @@
 import React, { useState } from 'react';
-
-import './app.scss';
-
-import { ReactComponent as Logo } from './logo.svg';
+import { Layout, Menu } from 'antd';
+import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
+import { UserOutlined } from '@ant-design/icons/lib';
+import { BaseConverterView } from './components/base-converter-view/base-converter-view';
+import { HomeView } from './components/home-view/home-view';
 import 'antd/dist/antd.css';
-import { BaseConverterComponent } from './components/base-converter/base-converter-component';
-import { buildConversionGrid, gridToAscii, OperationGrid } from './core/operation-grid';
-import { Conversion } from '@calc/calc-arithmetic';
-import { ConversionDetails } from './components/conversion-details/conversion-details';
+import './app.scss';
+import '../assets/i18n/i18n';
+
+const { Header, Sider, Content } = Layout;
 
 export const App = () => {
-    const [grid, setGrid] = useState<OperationGrid>();
-    const [conversion, setConv] = useState<Conversion>();
-    const onChange = (conv) => {
-        if(conv) {
-            console.log('onChange');
-            const newGrid = buildConversionGrid(conv);
-            setGrid(newGrid);
-            setConv(conv);
-            console.log(gridToAscii(newGrid))
-        }
-    };
+    const [collapsed, setCollapsed] = useState(true);
 
     return (
-        <div className="app">
-            <header className="flex">
-                <Logo width="75" height="75"/>
-                <h1>Welcome to calc-web!</h1>
-            </header>
-            <main>
-                <BaseConverterComponent onConversionChange={onChange}/>
-                {conversion && <ConversionDetails conversion={conversion}/>}
-            </main>
-        </div>
+        <Router>
+            <Layout>
+                <Sider collapsible collapsed={collapsed} onCollapse={() => setCollapsed(!collapsed)} style={{
+                    overflow: 'auto',
+                    height: '100vh',
+                    position: 'sticky',
+                    top: 0,
+                    left: 0
+                }}>
+                    <div className="logo"/>
+                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
+                        <Menu.Item key="1" icon={<UserOutlined/>}>
+                            <Link to={'/'} style={{ color: 'inherit' }}>Home </Link>
+                        </Menu.Item>
+                        <Menu.Item key="2" icon={<UserOutlined/>}>
+                            <Link to={'/base-converter'} style={{ color: 'inherit' }}>Base Converter</Link>
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+                <Layout className="site-layout">
+                    <Header className="site-layout-background" style={{ padding: 0 }}>
+
+                    </Header>
+                    <Content
+                        className="site-layout-background"
+                        style={{
+                            margin: '24px 16px',
+                            padding: 24,
+                            overflow: 'initial'
+                        }}
+                    >
+                        <main>
+                            <Switch>
+                                <Route exact path="/" component={HomeView}/>
+                                <Route path="/base-converter" component={BaseConverterView}/>
+                            </Switch>
+                        </main>
+                    </Content>
+                </Layout>
+            </Layout>
+        </Router>
     );
 };
-
 export default App;
+
+
