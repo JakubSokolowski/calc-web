@@ -7,5 +7,5 @@ module.exports = {
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
     coverageDirectory: '../../coverage/apps/calc-web',
-    setupFilesAfterEnv: ["<rootDir>/src/jest.setup.ts"]
+    setupFilesAfterEnv: ["<rootDir>/src/jest.setup.js"]
 };

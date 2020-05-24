@@ -1,6 +1,7 @@
 import { padLeft } from '../helpers/conversion-helpers';
 import { fromString } from '../positional/base-converter';
-
+import { chunks } from '@calc/utils';
+const Buffer = require('buffer/').Buffer;
 export enum FloatProperty {
     Normalized,
     Denormalized,
@@ -54,9 +55,18 @@ export class FloatConverter {
     }
 
     public static BinaryStringToSingle(s: string): number {
-        const num = Number.parseInt(s, 2);
+        const byteChunks = chunks(s.split(''), 8)
+            .map((chunk) => chunk.join(''));
+
+        let offset = 0;
         const buffer = new Buffer(4);
-        buffer.writeInt32BE(num, 0);
+        byteChunks.forEach((byteStr) => {
+            let byte = Number.parseInt(byteStr, 2);
+            if(byte > 127) byte -= 256;
+            buffer.writeInt8(byte, offset);
+            offset +=1;
+        });
+
         return buffer.readFloatBE(0);
     }
 
@@ -177,6 +187,14 @@ export class SingleRepresentation extends FloatingRepresentation {
 
     get sign() {
         return this.binary[0];
+    }
+
+    get signEncoding() {
+        return this.binary[0];
+    }
+
+    get signValue() {
+        return this.binary[0] === '0' ? '+1' : '-1';
     }
 
     get exponent() {
