@@ -3,6 +3,7 @@ import { NumberGridRow, RowClickEvent } from './number-grid-row/number-grid-row'
 import { OperationGrid } from '../../core/operation-grid';
 import './number-grid.scss';
 import { CellClickEvent } from './number-grid-cell/number-grid-cell';
+import { Popover } from 'antd';
 
 export interface ColumnClickEvent {
     columnValue: any[],
@@ -47,6 +48,7 @@ export const NumberGrid: FC<P> = (
             onColumnClick(columnClickEvent)
         }
     };
+
 
     const rows = grid.values.map((row, index) => {
         return (

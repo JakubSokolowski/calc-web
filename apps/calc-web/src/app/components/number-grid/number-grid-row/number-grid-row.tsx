@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-import './number-grid-row.scss';
 import { CellClickEvent, NumberGridCell } from '../number-grid-cell/number-grid-cell';
 import { CellConfig } from '../../../core/operation-grid';
+import { Popover } from 'antd';
 
 export interface RowClickEvent {
     rowValue: CellConfig[],
@@ -14,6 +14,7 @@ interface P {
     verticalLineIndex?: number,
     rowIndex: number,
     onCellClick?: (event: CellClickEvent) => void;
+    highlightRow?: boolean
 }
 
 export const NumberGridRow: FC<P> = (
@@ -22,6 +23,7 @@ export const NumberGridRow: FC<P> = (
         horizontalLine,
         verticalLineIndex,
         rowIndex,
+        highlightRow,
         onCellClick
     }) => {
 
@@ -29,9 +31,18 @@ export const NumberGridRow: FC<P> = (
         if (onCellClick) onCellClick(event);
     };
 
-    const cells = values.map((value, index) => {
-        return (
+    const content = (
+        <div>
+            <p>Content</p>
+            <p>Content</p>
+        </div>
+    );
+
+
+    const cells = values.map((value, index, arr) => {
+        const cell = (
             <NumberGridCell
+                highlightRow={highlightRow}
                 horizontalLine={horizontalLine}
                 value={value}
                 key={index}
@@ -41,6 +52,17 @@ export const NumberGridRow: FC<P> = (
                 verticalLine={index === verticalLineIndex}
             />
         );
+
+        return index === arr.length - 1
+            ?  (
+                <Popover key={index} placement={'right'} title={'Row'} content={content} trigger={'click'}>
+                    <div>
+                        {cell}
+                    </div>
+                </Popover>
+            )
+            : cell;
+
     });
 
     return (
