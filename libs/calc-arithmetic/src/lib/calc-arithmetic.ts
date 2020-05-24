@@ -4,7 +4,7 @@ export {
     fromString,
     Conversion,
     ConversionToArbitrary,
-    ConversionToDecimal
+    ConversionToDecimal,
 } from './positional/base-converter';
 
 export {
@@ -21,3 +21,7 @@ export {
     DoubleRepresentation,
     FloatProperty
 } from './floating/float-converter';
+
+export {
+    isValidString
+} from './helpers/conversion-helpers'

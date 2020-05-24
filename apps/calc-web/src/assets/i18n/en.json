@@ -1,5 +1,23 @@
 {
     "home": {
         "header": "Calc"
+    },
+    "baseConverter": {
+        "title": "Base Converter"
+    },
+    "floatConverter": {
+        "title": "Float Converter",
+        "sign": "Sign",
+        "exponent": "Exponent",
+        "mantissa": "Mantissa",
+        "entered": "Entered value",
+        "stored": "Stored value",
+        "binary": "Float binary"
+    },
+    "complementConverter": {
+        "title": "Complement Converter"
+    },
+    "common": {
+        "copy": "Copied to clipboard!"
     }
 }

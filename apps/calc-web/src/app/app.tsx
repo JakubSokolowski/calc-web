@@ -1,14 +1,16 @@
 import React, { useState } from 'react';
-import { Layout, Menu } from 'antd';
-import { BrowserRouter as Router, Link, Route, Switch } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons/lib';
+import { Layout } from 'antd';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { BaseConverterView } from './components/base-converter-view/base-converter-view';
 import { HomeView } from './components/home-view/home-view';
 import 'antd/dist/antd.css';
 import './app.scss';
 import '../assets/i18n/i18n';
+import SiderMenu from './components/sider-menu/SiderMenu';
+import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
+import { FloatConverterView } from './components/float-converter-view/float-converter-view';
 
-const { Header, Sider, Content } = Layout;
+const { Sider, Content } = Layout;
 
 export const App = () => {
     const [collapsed, setCollapsed] = useState(true);
@@ -24,24 +26,13 @@ export const App = () => {
                     left: 0
                 }}>
                     <div className="logo"/>
-                    <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-                        <Menu.Item key="1" icon={<UserOutlined/>}>
-                            <Link to={'/'} style={{ color: 'inherit' }}>Home </Link>
-                        </Menu.Item>
-                        <Menu.Item key="2" icon={<UserOutlined/>}>
-                            <Link to={'/base-converter'} style={{ color: 'inherit' }}>Base Converter</Link>
-                        </Menu.Item>
-                    </Menu>
+                    <SiderMenu/>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header className="site-layout-background" style={{ padding: 0 }}>
-
-                    </Header>
                     <Content
                         className="site-layout-background"
                         style={{
-                            margin: '24px 16px',
-                            padding: 24,
+                            margin: '24px',
                             overflow: 'initial'
                         }}
                     >
@@ -49,6 +40,8 @@ export const App = () => {
                             <Switch>
                                 <Route exact path="/" component={HomeView}/>
                                 <Route path="/base-converter" component={BaseConverterView}/>
+                                <Route path="/complement-converter" component={ComplementConverterView}/>
+                                <Route path="/float-converter" component={FloatConverterView}/>
                             </Switch>
                         </main>
                     </Content>
