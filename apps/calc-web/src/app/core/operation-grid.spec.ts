@@ -13,8 +13,8 @@ describe('operation-grid', () => {
             const result = buildConversionGrid(conversion);
 
             // then
-            expect(result.height).toEqual(expectedHeight);
-            expect(result.width).toEqual(expectedWidth);
+            expect(result.grid.height).toEqual(expectedHeight);
+            expect(result.grid.width).toEqual(expectedWidth);
         });
 
         it('should return grid with proper row values for conversion result', () => {
@@ -59,7 +59,7 @@ describe('operation-grid', () => {
             const result = buildConversionGrid(conversion);
 
             // then
-            expect(result.values).toEqual(expectedRows);
+            expect(result.grid.values).toEqual(expectedRows);
         });
     });
 
@@ -67,7 +67,7 @@ describe('operation-grid', () => {
         it('should return proper ascii representation', () => {
             // given
             const conversion = fromNumber(24, 2);
-            const grid = buildConversionGrid(conversion);
+            const gridInfo = buildConversionGrid(conversion);
             const expected =
                 '\n'
                 + '2 4 | 1 2   0 \n'
@@ -77,7 +77,7 @@ describe('operation-grid', () => {
             ;
 
             // when
-            const result = gridToAscii(grid);
+            const result = gridToAscii(gridInfo.grid);
 
             // then
             expect(result).toEqual(expected);

@@ -11,6 +11,7 @@ export interface ColumnClickEvent {
 
 interface P {
     grid: OperationGrid;
+    hooverComponents?: any[];
     onCellClick?: (event: CellClickEvent) => void;
     onRowClick?: (event: RowClickEvent) => void;
     onColumnClick?: (event: ColumnClickEvent) => void;
@@ -21,7 +22,8 @@ export const NumberGrid: FC<P> = (
         grid,
         onRowClick,
         onCellClick,
-        onColumnClick
+        onColumnClick,
+        hooverComponents
     }) => {
 
     const handleCellClick = (event: CellClickEvent) => {
@@ -48,6 +50,7 @@ export const NumberGrid: FC<P> = (
         }
     };
 
+
     const rows = grid.values.map((row, index) => {
         return (
             <NumberGridRow
@@ -57,6 +60,7 @@ export const NumberGrid: FC<P> = (
                 verticalLineIndex={grid.verticalLine}
                 rowIndex={index}
                 onCellClick={handleCellClick}
+                rowHooverContent={hooverComponents[index]}
             />
         );
     });

@@ -14,6 +14,7 @@ interface P {
     verticalLine?: boolean;
     x: number;
     y: number;
+    highlightRow?: boolean;
     onClick?: (event: CellClickEvent) => void;
 }
 
@@ -24,6 +25,7 @@ export const NumberGridCell: FC<P> = (
         value,
         horizontalLine,
         verticalLine,
+        highlightRow,
         onClick
     }) => {
 
@@ -40,15 +42,24 @@ export const NumberGridCell: FC<P> = (
         }
     };
 
+    const borders = {
+        border: defaultBorder,
+        borderBottom: horizontalLine ? '1px #333333 solid' : defaultBorder,
+        borderRight: verticalLine ? '1px #333333 solid' : defaultBorder
+    };
+
+    const getHighlightStyle = () => {
+        if(highlightRow)
+            return {background: "rgba(0, 0, 0, 0.65)", color: "#fff", border: 'none'};
+        return {background:  value.highlight ? '#e3e3e3' : '', ...borders}
+    };
+
+    const style =  {
+        ...getHighlightStyle()
+    };
+
     return (
-        <div className="number-grid-cell" onClick={handleClick} style={
-            {
-                border: defaultBorder,
-                borderBottom: horizontalLine ? '1px #333333 solid' : defaultBorder,
-                borderRight: verticalLine ? '1px #333333 solid' : defaultBorder,
-                background: value.highlight ? '#e3e3e3' : ''
-            }
-        }>
+        <div className="number-grid-cell" onClick={handleClick} style={style} >
             {value?.value}
         </div>
     );
