@@ -42,16 +42,19 @@ export const NumberGridCell: FC<P> = (
         }
     };
 
+    const borders = {
+        border: defaultBorder,
+        borderBottom: horizontalLine ? '1px #333333 solid' : defaultBorder,
+        borderRight: verticalLine ? '1px #333333 solid' : defaultBorder
+    };
+
     const getHighlightStyle = () => {
         if(highlightRow)
-            return {background: "rgba(0, 0, 0, 0.65)", color: "#fff"};
-        return {background:  value.highlight ? '#e3e3e3' : ''}
+            return {background: "rgba(0, 0, 0, 0.65)", color: "#fff", border: 'none'};
+        return {background:  value.highlight ? '#e3e3e3' : '', ...borders}
     };
 
     const style =  {
-        border: defaultBorder,
-        borderBottom: horizontalLine ? '1px #333333 solid' : defaultBorder,
-        borderRight: verticalLine ? '1px #333333 solid' : defaultBorder,
         ...getHighlightStyle()
     };
 

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { CellClickEvent, NumberGridCell } from '../number-grid-cell/number-grid-cell';
 import { CellConfig } from '../../../core/operation-grid';
 import { Popover } from 'antd';
@@ -9,12 +9,13 @@ export interface RowClickEvent {
 }
 
 interface P {
-    values: CellConfig[],
-    horizontalLine?: boolean,
-    verticalLineIndex?: number,
-    rowIndex: number,
+    values: CellConfig[];
+    horizontalLine?: boolean;
+    verticalLineIndex?: number;
+    rowIndex: number;
     onCellClick?: (event: CellClickEvent) => void;
-    highlightRow?: boolean
+    highlightRow?: boolean;
+    rowHooverContent?: any;
 }
 
 export const NumberGridRow: FC<P> = (
@@ -24,25 +25,20 @@ export const NumberGridRow: FC<P> = (
         verticalLineIndex,
         rowIndex,
         highlightRow,
-        onCellClick
+        onCellClick,
+        rowHooverContent
     }) => {
+
+    const [hoover, setHoover] = useState(false);
 
     const handleCellClick = (event: CellClickEvent) => {
         if (onCellClick) onCellClick(event);
     };
 
-    const content = (
-        <div>
-            <p>Content</p>
-            <p>Content</p>
-        </div>
-    );
-
-
     const cells = values.map((value, index, arr) => {
         const cell = (
             <NumberGridCell
-                highlightRow={highlightRow}
+                highlightRow={highlightRow || hoover}
                 horizontalLine={horizontalLine}
                 value={value}
                 key={index}
@@ -55,7 +51,7 @@ export const NumberGridRow: FC<P> = (
 
         return index === arr.length - 1
             ?  (
-                <Popover key={index} placement={'right'} title={'Row'} content={content} trigger={'click'}>
+                <Popover key={index} placement={'right'} content={rowHooverContent} visible={hoover}>
                     <div>
                         {cell}
                     </div>
@@ -66,7 +62,11 @@ export const NumberGridRow: FC<P> = (
     });
 
     return (
-        <div className="number-grid-row">
+        <div
+            className="number-grid-row"
+            onMouseEnter={() => setHoover(true)}
+            onMouseLeave={() => setHoover(false)}
+        >
             {cells}
         </div>
     );

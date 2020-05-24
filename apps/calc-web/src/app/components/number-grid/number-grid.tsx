@@ -3,7 +3,6 @@ import { NumberGridRow, RowClickEvent } from './number-grid-row/number-grid-row'
 import { OperationGrid } from '../../core/operation-grid';
 import './number-grid.scss';
 import { CellClickEvent } from './number-grid-cell/number-grid-cell';
-import { Popover } from 'antd';
 
 export interface ColumnClickEvent {
     columnValue: any[],
@@ -12,6 +11,7 @@ export interface ColumnClickEvent {
 
 interface P {
     grid: OperationGrid;
+    hooverComponents?: any[];
     onCellClick?: (event: CellClickEvent) => void;
     onRowClick?: (event: RowClickEvent) => void;
     onColumnClick?: (event: ColumnClickEvent) => void;
@@ -22,7 +22,8 @@ export const NumberGrid: FC<P> = (
         grid,
         onRowClick,
         onCellClick,
-        onColumnClick
+        onColumnClick,
+        hooverComponents
     }) => {
 
     const handleCellClick = (event: CellClickEvent) => {
@@ -59,6 +60,7 @@ export const NumberGrid: FC<P> = (
                 verticalLineIndex={grid.verticalLine}
                 rowIndex={index}
                 onCellClick={handleCellClick}
+                rowHooverContent={hooverComponents[index]}
             />
         );
     });

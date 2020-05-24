@@ -6,31 +6,54 @@ export interface CellConfig {
 }
 
 export interface OperationGrid {
-    values: CellConfig[][]
-    horizontalLine?: number
-    verticalLine?: number
-    width: number,
-    height: number
+    values: CellConfig[][];
+    horizontalLine?: number;
+    verticalLine?: number;
+    width: number;
+    height: number;
 }
 
-export function buildConversionGrid(conversion: Conversion): OperationGrid {
+export interface OperationGridInfo {
+    grid: OperationGrid,
+    hooverContentProps?: any[];
+}
+
+export interface RowConversionOperation {
+    base: string,
+    dividend: string,
+    result: string,
+    remainder: string
+}
+
+export interface GridInfo {
+    values: CellConfig[][],
+    hooverContentProps: RowConversionOperation[]
+}
+
+export function buildConversionGrid(conversion: Conversion): OperationGridInfo {
     const conversionToArbitrary = conversion.stages.length > 1
         ? conversion.getLastStage()
         : conversion.getFirstStage();
 
+    const gridInfo =  buildToArbitraryGrid(conversionToArbitrary as ConversionToArbitrary);
+
     return {
-        values: buildToArbitraryGrid(conversionToArbitrary as ConversionToArbitrary),
-        width: getMaxRowWidth(conversion),
-        height: getNumRows(conversion),
-        verticalLine: conversion.inputNumDigits - 1
+        grid: {
+            values: gridInfo.values,
+            width: getMaxRowWidth(conversion),
+            height: getNumRows(conversion),
+            verticalLine: conversion.inputNumDigits - 1
+        },
+        hooverContentProps: gridInfo.hooverContentProps
     };
 }
 
-function buildToArbitraryGrid(firstStage: ConversionToArbitrary): CellConfig[][] {
+function buildToArbitraryGrid(firstStage: ConversionToArbitrary): GridInfo {
     const reversedResultDigits = [...firstStage.result.integerPart.digits].reverse();
     const rows: CellConfig[][] = [];
     let initialEmptyCellOffset = [[], []];
     const divisors = firstStage.integralDivisors;
+    const props: RowConversionOperation[] = [];
 
     divisors.forEach((value, index) => {
         if (index === divisors.length - 1) return;
@@ -48,6 +71,13 @@ function buildToArbitraryGrid(firstStage: ConversionToArbitrary): CellConfig[][]
             rightEmptyCells = rightEmptyCells.map((val) => ({ ...val, highlight: true }));
         }
 
+        props.push({
+            base: firstStage.result.base.toString(),
+            dividend: value,
+            remainder: reversedResultDigits[index],
+            result: divisors[index +1]
+        });
+
         const newRow = [
             ...leftEmptyCells,
             ...left,
@@ -60,7 +90,10 @@ function buildToArbitraryGrid(firstStage: ConversionToArbitrary): CellConfig[][]
         if (index === 0) initialEmptyCellOffset = [left, right];
     });
 
-    return rows;
+    return {
+        values: rows,
+        hooverContentProps: props
+    };
 }
 
 function getEmptyCellOffset(initial: CellConfig[], curr: CellConfig[]): CellConfig[] {
