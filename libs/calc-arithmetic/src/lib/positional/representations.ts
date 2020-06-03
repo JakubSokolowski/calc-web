@@ -77,15 +77,16 @@ export class NumberComplement implements PositionalRepresentation {
         return this.fractionalPart.length ? '.' : '';
     }
 
-    public toString(): string {
-        return this.sign + this.noSignValue();
+    public toString(precision = 30): string {
+        return this.sign + this.noSignValue(precision);
     }
 
-    public noSignValue(): string {
+
+    public noSignValue(precision = 30): string {
         return (
             this.integerPart.toString() +
             this.delimiter +
-            this.fractionalPart.toString()
+            this.fractionalPart.toString().slice(0, precision)
         );
     }
 }

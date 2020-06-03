@@ -208,6 +208,7 @@ export function decimalFractionToArbitrary(
     for (let i = 0; i < precision; i++) {
         fractions.push(fractionPart.toString());
         num = fractionPart.multipliedBy(base);
+        fractions.push(num.toString());
         fractionPart = num.mod(1);
         wholePart = num.minus(fractionPart).toNumber();
         result.push(BaseDigits.getDigit(wholePart, base));

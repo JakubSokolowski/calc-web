@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, ReactNode, useState } from 'react';
 import { CellClickEvent, NumberGridCell } from '../number-grid-cell/number-grid-cell';
 import { CellConfig } from '../../../core/operation-grid';
 import { Popover } from 'antd';
@@ -10,12 +10,13 @@ export interface RowClickEvent {
 
 interface P {
     values: CellConfig[];
+    rowHooverProps?: any;
     horizontalLine?: boolean;
     verticalLineIndex?: number;
     rowIndex: number;
     onCellClick?: (event: CellClickEvent) => void;
     highlightRow?: boolean;
-    rowHooverContent?: any;
+    rowHooverBuilder?: (rowValues: any[], rowHooverProps: any) => ReactNode
 }
 
 export const NumberGridRow: FC<P> = (
@@ -26,7 +27,8 @@ export const NumberGridRow: FC<P> = (
         rowIndex,
         highlightRow,
         onCellClick,
-        rowHooverContent
+        rowHooverBuilder,
+        rowHooverProps,
     }) => {
 
     const [hoover, setHoover] = useState(false);
@@ -51,7 +53,7 @@ export const NumberGridRow: FC<P> = (
 
         return index === arr.length - 1
             ?  (
-                <Popover key={index} placement={'right'} content={rowHooverContent} visible={hoover}>
+                <Popover key={index} placement={'right'} content={rowHooverBuilder && rowHooverBuilder(values, rowHooverProps)} visible={hoover}>
                     <div>
                         {cell}
                     </div>

@@ -11,7 +11,7 @@ import {
 import { ComplementConverter } from './complement-converter';
 import { PositionalNumber } from './representations';
 
-enum ConversionType {
+export enum ConversionType {
     DIRECT,
     INDIRECT
 }
@@ -30,7 +30,13 @@ export class Conversion {
 
     get inputNumDigits(): number {
         const [inputStr, base] = this.stages[0].input;
-        return base >= 36 ? inputStr.split(' ').length : inputStr.length;
+        return  base >= 36 ? inputStr.split(' ').length : inputStr.length;
+    }
+
+    get inputIntegralPartNumDigits(): number {
+        const [inputStr, base] = this.stages[0].input;
+        const integralPart = inputStr.split('.')[0];
+        return  base >= 36 ? integralPart.split(' ').length : integralPart.length;
     }
 
     public addStage(stage: ConversionStage): void {
