@@ -13,8 +13,8 @@ import { ConversionToDecimalDetails } from '../conversion-to-decimal/conversion-
 import { FractionalConversionRow } from './fractional-conversion-row/fractional-conversion-row';
 
 interface P {
-    conversion: Conversion
-    precision: number
+    conversion: Conversion;
+    precision: number;
 }
 
 export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
@@ -46,7 +46,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                                 <Typography>I. Conversion to decimal</Typography>
                                 <ConversionToDecimalDetails conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
                             </div>
-                            <div style={{paddingTop: "12px"}}>
+                            <div style={{paddingTop: '12px'}}>
                                 <Typography>{`II. Conversion to base ${conversion.result.base}`}</Typography>
                                 <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
                             </div>

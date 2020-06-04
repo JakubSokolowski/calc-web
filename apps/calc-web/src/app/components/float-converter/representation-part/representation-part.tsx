@@ -9,11 +9,11 @@ export enum PartType {
 }
 
 interface P {
-    part: string[],
-    partEncoding: string,
-    partValue: string,
-    partType: PartType
-    onChange?: (value: string) => void
+    part: string[];
+    partEncoding: string;
+    partValue: string;
+    partType: PartType;
+    onChange?: (value: string) => void;
 }
 
 export const RepresentationPart: FC<P> = (

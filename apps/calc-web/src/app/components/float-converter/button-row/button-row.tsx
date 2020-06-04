@@ -2,8 +2,8 @@ import React, { FC } from 'react';
 import { BinaryButton } from '../binary-button/binary-button';
 
 interface P {
-    onChange?: (value: string[]) => void
-    values: string[]
+    onChange?: (value: string[]) => void;
+    values: string[];
 }
 
 export const ButtonRowComponent: FC<P> = ({ onChange, values }) => {

@@ -1,4 +1,4 @@
-import { fromString } from '../..';
+import { fromString } from '../positional/base-converter';
 import { chunks } from '@calc/utils';
 
 const Buffer = require('buffer/').Buffer;

@@ -9,7 +9,7 @@ describe('NumberGridCell', () => {
     beforeEach(() => {
         container = shallow(
             <NumberGridCell
-                value={{value: '', highlight: false}}
+                value={{ value: '', highlight: false }}
                 x={1}
                 y={2}
             />
@@ -45,7 +45,7 @@ describe('NumberGridCell', () => {
         const expectedBorder = '1px #333333 solid';
         container = shallow(
             <NumberGridCell
-                value={{value: '', highlight: false}}
+                value={{ value: '', highlight: false }}
                 horizontalLine
                 x={1}
                 y={2}
@@ -67,7 +67,7 @@ describe('NumberGridCell', () => {
         const expectedBorder = '1px #333333 solid';
         container = shallow(
             <NumberGridCell
-                value={{value: '', highlight: false}}
+                value={{ value: '', highlight: false }}
                 verticalLine
                 x={1}
                 y={2}
@@ -89,7 +89,7 @@ describe('NumberGridCell', () => {
         const expectedBorder = '1px #333333 solid';
         container = shallow(
             <NumberGridCell
-                value={{value: '', highlight: false}}
+                value={{ value: '', highlight: false }}
                 verticalLine
                 x={1}
                 y={2}
@@ -111,7 +111,7 @@ describe('NumberGridCell', () => {
         const highlight = '#e3e3e3';
         container = shallow(
             <NumberGridCell
-                value={{value: '', highlight: true}}
+                value={{ value: '', highlight: true }}
                 verticalLine
                 x={1}
                 y={2}
@@ -134,10 +134,10 @@ describe('NumberGridCell', () => {
         const x = 1;
         const y = 2;
         const value = 'F';
-        const expectedEvent: CellClickEvent = {x, y, value: {value: 'F'} };
+        const expectedEvent: CellClickEvent = { x, y, value: { value: 'F' } };
         container = shallow(
             <NumberGridCell
-                value={{value}}
+                value={{ value }}
                 verticalLine
                 onClick={onClickSpy}
                 x={1}
@@ -163,7 +163,7 @@ describe('NumberGridCell', () => {
         const value = 'F';
         container = shallow(
             <NumberGridCell
-                value={{value}}
+                value={{ value }}
                 verticalLine
                 x={1}
                 y={2}

@@ -70,13 +70,13 @@ export const FloatConverterComponent: FC = () => {
                 size={'small'}
             >
                 <div style={{ width: '600px' }}>
-                    <Form.Item label={t("floatConverter.entered")} style={formItemStyle}>
+                    <Form.Item label={t('floatConverter.entered')} style={formItemStyle}>
                         <InputWithCopy value={rawValue} onChange={handleChange} inputType={InputType.Number}/>
                     </Form.Item>
-                    <Form.Item label={t("floatConverter.stored")} style={formItemStyle}>
+                    <Form.Item label={t('floatConverter.stored')} style={formItemStyle}>
                         <InputWithCopy readOnly value={floatingNumber.value.toString()} inputType={InputType.Text}/>
                     </Form.Item>
-                    <Form.Item label={t("floatConverter.binary")} style={formItemStyle}>
+                    <Form.Item label={t('floatConverter.binary')} style={formItemStyle}>
                         <InputWithCopy readOnly value={floatingNumber.binary} inputType={InputType.Text}/>
                     </Form.Item>
                 </div>

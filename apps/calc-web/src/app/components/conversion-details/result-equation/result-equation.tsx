@@ -3,9 +3,9 @@ import { Conversion } from '@calc/calc-arithmetic';
 import { PositionalNumberText } from '../../positional-number/positional-number-text';
 
 interface P {
-    conversion: Conversion
-    firstStage: number,
-    lastStage: number
+    conversion: Conversion;
+    firstStage: number;
+    lastStage: number;
 }
 
 export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => {

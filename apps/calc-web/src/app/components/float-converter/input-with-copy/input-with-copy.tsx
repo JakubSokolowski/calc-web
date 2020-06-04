@@ -9,10 +9,10 @@ export enum InputType {
 }
 
 interface P {
-    value?: string | number,
+    value?: string | number;
     onChange?: (value: string) => void;
-    readOnly?: boolean,
-    inputType?: InputType,
+    readOnly?: boolean;
+    inputType?: InputType;
 }
 
 export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) => {
@@ -58,7 +58,7 @@ export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) =
             }
             {
                 document.queryCommandSupported('copy') &&
-                <div style={{paddingLeft: "5px"}}>
+                <div style={{paddingLeft: '5px'}}>
                     <Button size={'small'} onClick={copyToClipboard}>
                         <CopyOutlined/>
                     </Button>

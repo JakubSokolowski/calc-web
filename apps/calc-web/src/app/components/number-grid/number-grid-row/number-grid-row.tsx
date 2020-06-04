@@ -4,8 +4,8 @@ import { CellConfig } from '../../../core/operation-grid';
 import { Popover } from 'antd';
 
 export interface RowClickEvent {
-    rowValue: CellConfig[],
-    rowIndex: number
+    rowValue: CellConfig[];
+    rowIndex: number;
 }
 
 interface P {
@@ -16,7 +16,7 @@ interface P {
     rowIndex: number;
     onCellClick?: (event: CellClickEvent) => void;
     highlightRow?: boolean;
-    rowHooverBuilder?: (rowValues: any[], rowHooverProps: any) => ReactNode
+    rowHooverBuilder?: (rowValues: any[], rowHooverProps: any) => ReactNode;
 }
 
 export const NumberGridRow: FC<P> = (
