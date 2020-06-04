@@ -1,7 +1,8 @@
-import { padLeft } from '../helpers/conversion-helpers';
-import { fromString } from '../positional/base-converter';
+import { fromString } from '../..';
 import { chunks } from '@calc/utils';
+
 const Buffer = require('buffer/').Buffer;
+
 export enum FloatProperty {
     Normalized,
     Denormalized,
@@ -32,8 +33,8 @@ export class FloatConverter {
         doubleView[0] = d;
         let low = (intView[0] >>> 0).toString(2);
         let high = (intView[1] >>> 0).toString(2);
-        low = padLeft('0', low, 32);
-        high = padLeft('0', high, 32);
+        low = low.padStart(32, '0');
+        high = high.padStart(32, '0');
         return high + low;
     }
 
@@ -51,7 +52,7 @@ export class FloatConverter {
         const intView = new Int32Array(buffer);
         const floatView = new Float32Array(buffer);
         floatView[0] = f;
-        return padLeft('0', (intView[0] >>> 0).toString(2), 32);
+        return (intView[0] >>> 0).toString(2).padStart(32, '0');
     }
 
     public static BinaryStringToSingle(s: string): number {
@@ -62,9 +63,9 @@ export class FloatConverter {
         const buffer = new Buffer(4);
         byteChunks.forEach((byteStr) => {
             let byte = Number.parseInt(byteStr, 2);
-            if(byte > 127) byte -= 256;
+            if (byte > 127) byte -= 256;
             buffer.writeInt8(byte, offset);
-            offset +=1;
+            offset += 1;
         });
 
         return buffer.readFloatBE(0);

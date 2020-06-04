@@ -63,25 +63,6 @@ export function getRepresentationRegexPattern(base: number): string {
 }
 
 /**
- * Pads left of string with single char padding until desired length is reached.
- * If padding string is longer then one, only first character will be used
- * @param padding char to pad
- * @param str
- * @param desiredLength
- */
-export function padLeft(
-    padding: string,
-    str: string,
-    desiredLength: number
-): string {
-    if (str.length > desiredLength) {
-        return str;
-    }
-    const count = desiredLength - str.length;
-    return padding[0].repeat(count) + str;
-}
-
-/**
  * Removes any digits that represent value 0 from the end of digit array
  * @param digits
  */
