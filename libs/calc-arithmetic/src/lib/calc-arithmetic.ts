@@ -5,6 +5,7 @@ export {
     Conversion,
     ConversionToArbitrary,
     ConversionToDecimal,
+    ConversionType
 } from './positional/base-converter';
 
 export {

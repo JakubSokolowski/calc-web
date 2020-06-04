@@ -12,7 +12,7 @@ interface P {
     value?: string | number,
     onChange?: (value: string) => void;
     readOnly?: boolean,
-    inputType?: InputType
+    inputType?: InputType,
 }
 
 export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) => {

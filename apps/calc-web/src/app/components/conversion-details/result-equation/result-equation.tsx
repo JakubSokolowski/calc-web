@@ -1,22 +1,25 @@
 import React, { FC } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
+import { PositionalNumberText } from '../../positional-number/positional-number-text';
 
 interface P {
     conversion: Conversion
+    firstStage: number,
+    lastStage: number
 }
 
-export const ResultEquation: FC<P> = ({ conversion }) => {
+export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => {
     if (!conversion) return null;
 
-    const input = conversion.getFirstStage();
-    const output = conversion.getLastStage();
+    const input = conversion.getStage(firstStage);
+    const output = conversion.getStage(lastStage);
 
     const [num, base] = input.input;
     return (
         <span>
-            {num}<sub>({base})</sub>
+            <PositionalNumberText value={num} base={base}/>
             &nbsp;=&nbsp;
-            {output.result.toString()}<sub>({output.result.base})</sub>
+            <PositionalNumberText value={output.result.toString()} base={output.result.base}/>
         </span>
     );
 };

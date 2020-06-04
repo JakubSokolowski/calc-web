@@ -1,23 +1,29 @@
 import React, { FC, useState } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
-import { buildConversionGrid, gridToAscii, OperationGrid, OperationGridInfo } from '../../core/operation-grid';
+import {
+    buildIntegralPartConversionGrid,
+    CellConfig,
+    gridToAscii,
+    OperationGrid,
+} from '../../core/operation-grid';
 import { BaseConverterComponent } from '../base-converter/base-converter-component';
 import { ConversionDetails } from '../conversion-details/conversion-details';
 import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 
-const { Title, Paragraph, Text } = Typography;
+const { Title } = Typography;
 export const BaseConverterView: FC = () => {
     const { t } = useTranslation();
-    const [grid, setGrid] = useState<OperationGridInfo>();
+    const [grid, setGrid] = useState<OperationGrid<CellConfig>>();
     const [conversion, setConv] = useState<Conversion>();
-
-    const onChange = (newConversion: Conversion) => {
+    const [precision, setPrecision] = useState(5);
+    const onChange = (newConversion: Conversion, precision: number) => {
         if (newConversion) {
-            const newGrid = buildConversionGrid(newConversion);
+            const newGrid = buildIntegralPartConversionGrid(newConversion);
             setGrid(newGrid);
             setConv(newConversion);
-            console.log(gridToAscii(newGrid.grid));
+            setPrecision(precision);
+            console.log(gridToAscii(newGrid));
         }
     };
     return (
@@ -26,7 +32,7 @@ export const BaseConverterView: FC = () => {
                 {t('baseConverter.title')}
             </Title>
             <BaseConverterComponent onConversionChange={onChange}/>
-            {conversion && <ConversionDetails conversion={conversion}/>}
+            {conversion && <ConversionDetails conversion={conversion} precision={precision}/>}
         </div>
     );
 };
