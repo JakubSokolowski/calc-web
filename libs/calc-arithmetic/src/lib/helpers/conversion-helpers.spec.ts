@@ -7,7 +7,6 @@ import {
     getRepresentationRegexPattern,
     isFloatingPointStr,
     isValidString,
-    padLeft,
     removeZeroDigits,
     replaceAll,
     representationStrToStrArray,
@@ -103,23 +102,6 @@ describe('conversion-helpers', () => {
             const input = 'ACAC';
             const actual = replaceAll(input, '#', 'B');
             const expected = 'ACAC';
-            expect(actual).toEqual(expected);
-        });
-    });
-
-    describe('padLeft tests', () => {
-        it('prepends character to the string until the desired length is reached', () => {
-            const input = '1111';
-            const desiredLenght = 8;
-            const actual = padLeft('1', input, desiredLenght);
-            const expected = '11111111';
-            expect(actual).toEqual(expected);
-        });
-        it('does not modify the string that is longer than desiredLength', () => {
-            const input = '1111';
-            const desiredLenght = 3;
-            const actual = padLeft('1', input, desiredLenght);
-            const expected = '1111';
             expect(actual).toEqual(expected);
         });
     });
