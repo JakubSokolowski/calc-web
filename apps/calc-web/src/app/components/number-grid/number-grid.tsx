@@ -6,8 +6,8 @@ import { CellClickEvent } from './number-grid-cell/number-grid-cell';
 import { Typography } from 'antd';
 
 export interface ColumnClickEvent {
-    columnValue: any[],
-    columnIndex: number
+    columnValue: any[];
+    columnIndex: number;
 }
 
 interface P {

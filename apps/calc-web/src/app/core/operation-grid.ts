@@ -1,8 +1,8 @@
 import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
 
 export interface CellConfig {
-    value: string,
-    highlight?: boolean
+    value: string;
+    highlight?: boolean;
 }
 
 export interface OperationGrid<T> {
@@ -15,15 +15,15 @@ export interface OperationGrid<T> {
 }
 
 export interface OperationGridInfo<T> {
-    grid: OperationGrid<T>,
+    grid: OperationGrid<T>;
     hooverContentProps?: any[];
 }
 
 export interface RowConversionOperation {
-    base: string,
-    dividend: string,
-    result: string,
-    remainder: string
+    base: string;
+    dividend: string;
+    result: string;
+    remainder: string;
 }
 
 export interface FloatingPartConversionInfo {
@@ -33,8 +33,8 @@ export interface FloatingPartConversionInfo {
 }
 
 export interface GridInfo {
-    values: CellConfig[][],
-    hooverContentProps?: RowConversionOperation[]
+    values: CellConfig[][];
+    hooverContentProps?: RowConversionOperation[];
 }
 
 export function buildIntegralPartConversionGrid(conversion: Conversion): OperationGrid<CellConfig> {

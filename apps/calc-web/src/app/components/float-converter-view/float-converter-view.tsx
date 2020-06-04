@@ -11,7 +11,7 @@ export const FloatConverterView: FC = () => {
     return (
         <div>
             <Title>
-                {t("floatConverter.title")}
+                {t('floatConverter.title')}
             </Title>
             <FloatConverterComponent/>
         </div>

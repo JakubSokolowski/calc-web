@@ -2,9 +2,9 @@ import React, { FC } from 'react';
 import { Button } from 'antd';
 
 interface P {
-    onChange?: (value: string, index: number) => void
-    value?: string
-    index?: number
+    onChange?: (value: string, index: number) => void;
+    value?: string;
+    index?: number;
 }
 
 export const BinaryButton: FC<P> = ({ onChange, value, index }) => {

@@ -3,7 +3,7 @@ import { ConversionToDecimal } from '@calc/calc-arithmetic';
 import { PositionalNumberText } from '../positional-number/positional-number-text';
 
 interface P {
-    conversionStage: ConversionToDecimal
+    conversionStage: ConversionToDecimal;
 }
 
 export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {

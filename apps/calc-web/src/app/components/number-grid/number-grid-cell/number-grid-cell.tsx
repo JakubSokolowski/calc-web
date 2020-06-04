@@ -50,7 +50,7 @@ export const NumberGridCell: FC<P> = (
 
     const getHighlightStyle = () => {
         if(highlightRow)
-            return {background: "rgba(0, 0, 0, 0.65)", color: "#fff", border: 'none'};
+            return {background: 'rgba(0, 0, 0, 0.65)', color: '#fff', border: 'none'};
         return {background:  value.highlight ? '#e3e3e3' : '', ...borders}
     };
 
