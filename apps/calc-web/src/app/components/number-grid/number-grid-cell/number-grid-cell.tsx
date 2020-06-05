@@ -43,14 +43,20 @@ export const NumberGridCell: FC<P> = (
     };
 
     const borders = {
-        border: defaultBorder,
         borderBottom: horizontalLine ? '1px #333333 solid' : defaultBorder,
         borderRight: verticalLine ? '1px #333333 solid' : defaultBorder
     };
 
     const getHighlightStyle = () => {
-        if(highlightRow)
+        if(highlightRow) {
+            if(value.highlight) {
+                return {color: 'rgba(0, 0, 0, 0.65)', background: '#fff', border: 'none'}
+            }
+            if(verticalLine) {
+                return {background: 'rgba(0, 0, 0, 0.65)', color: '#fff', borderRight: '1px #fff solid'}
+            }
             return {background: 'rgba(0, 0, 0, 0.65)', color: '#fff', border: 'none'};
+        }
         return {background:  value.highlight ? '#e3e3e3' : '', ...borders}
     };
 
@@ -59,7 +65,7 @@ export const NumberGridCell: FC<P> = (
     };
 
     return (
-        <div className="number-grid-cell" onClick={handleClick} style={style} >
+        <div className={value.delimiterAfter ? 'number-grid-cell delimiter-cell' : 'number-grid-cell'} onClick={handleClick} style={style} >
             {value?.value}
         </div>
     );

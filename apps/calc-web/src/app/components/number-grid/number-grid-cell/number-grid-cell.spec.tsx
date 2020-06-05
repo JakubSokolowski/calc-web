@@ -24,7 +24,6 @@ describe('NumberGridCell', () => {
         // given
         const defaultBorder = '1px #e3e3e3 dashed';
         const expectedStyle = {
-            border: defaultBorder,
             borderBottom: defaultBorder,
             borderRight: defaultBorder,
             background: ''

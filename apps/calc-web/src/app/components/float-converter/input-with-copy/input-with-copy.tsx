@@ -15,6 +15,15 @@ interface P {
     inputType?: InputType;
 }
 
+export function copyToClipboard(text: string): void {
+    const textarea = document.createElement('textarea');
+    document.body.appendChild(textarea);
+    textarea.value = text;
+    textarea.select();
+    document.execCommand('copy');
+    document.body.removeChild(textarea);
+}
+
 export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
@@ -58,7 +67,7 @@ export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) =
             }
             {
                 document.queryCommandSupported('copy') &&
-                <div style={{paddingLeft: '5px'}}>
+                <div style={{ paddingLeft: '5px' }}>
                     <Button size={'small'} onClick={copyToClipboard}>
                         <CopyOutlined/>
                     </Button>

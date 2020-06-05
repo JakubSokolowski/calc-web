@@ -7,7 +7,23 @@
     text-align: center;
 }
 
+.delimiter-cell::after {
+    content:"\A";
+    width:3px;
+    height:3px;
+    border-radius:50%;
+    background: #000;
+    display:inline-block;
+    position: fixed;
+    margin-left: 11px;
+    margin-top: 14px;
+}
+
 .number-grid-row {
     display: flex;
     flex-direction: row;
+}
+
+.highlighted-cell {
+    color: rgb(0, 0, 0.65);
 }

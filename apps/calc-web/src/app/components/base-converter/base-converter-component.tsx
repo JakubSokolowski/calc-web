@@ -40,7 +40,7 @@ export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
         } catch (err) {
             console.log(err);
         }
-    }, [inputNumber, inputBase, outputBase, precision, onConversionChange]);
+    }, [inputNumber, inputBase, outputBase, precision]);
 
     const onInputNumberChange = event => {
         setInputNumber(event.target.value);

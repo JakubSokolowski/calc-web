@@ -1,9 +1,11 @@
 import React, { FC, ReactNode } from 'react';
 import { NumberGridRow, RowClickEvent } from './number-grid-row/number-grid-row';
-import { OperationGrid } from '../../core/operation-grid';
+import { gridToAscii, OperationGrid } from '../../core/operation-grid';
 import './number-grid.scss';
 import { CellClickEvent } from './number-grid-cell/number-grid-cell';
-import { Typography } from 'antd';
+import { Button, message, Typography } from 'antd';
+import { CopyOutlined } from '@ant-design/icons/lib';
+import { copyToClipboard } from '../float-converter/input-with-copy/input-with-copy';
 
 export interface ColumnClickEvent {
     columnValue: any[];
@@ -56,6 +58,12 @@ export const NumberGrid: FC<P> = (
         }
     };
 
+    const handleCopy = () => {
+        const ascii = gridToAscii(grid);
+        copyToClipboard(ascii);
+        message.info('Copied ascii to clipboard');
+    };
+
 
     const rows = grid.cellDisplayValues.map((row, index) => {
         return (
@@ -75,7 +83,14 @@ export const NumberGrid: FC<P> = (
     return (
         <div style={{ paddingTop: '12px', width: '100%', flexGrow: 1 }}>
             {
-                title && <Typography>{title}</Typography>
+                title &&
+                <div style={{paddingBottom: '12px', display: 'flex', flexDirection: 'row'}}>
+                    <Typography>{title}</Typography>
+                    <div style={{ flexGrow: 1 }}/>
+                    <Button style={{marginRight: '2px'}} size={'small'} onClick={handleCopy}>
+                        <CopyOutlined/>
+                    </Button>
+                </div>
             }
             {rows}
         </div>

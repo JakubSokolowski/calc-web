@@ -3,6 +3,7 @@ import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
 export interface CellConfig {
     value: string;
     highlight?: boolean;
+    delimiterAfter?: boolean;
 }
 
 export interface OperationGrid<T> {
@@ -63,13 +64,17 @@ export function buildFloatingPartConversionGrid(conversion: Conversion, precisio
         .reduce((a, b) => a.length > b.length ? a : b)
         .length - 2;
 
-    walk(fractionalMultipliers, 2, ([leftMultiplier, rightResult], index) => {
+    walk(fractionalMultipliers, 2, ([leftMultiplier, rightResult] : [string, string], index) => {
         if (index === fractionalMultipliers.length - 1) return;
         const [emptyLeft, emptyRight] = initialEmptyCellOffset;
+        const leftDelimiterIndex = leftMultiplier.indexOf('.');
         const multiplierWithoutDelimiter = leftMultiplier.replace('.', '');
-        const left: CellConfig[] = [...multiplierWithoutDelimiter.split('').map((val) => ({ value: val }))];
+        const left: CellConfig[] = [...multiplierWithoutDelimiter.split('').map((val, index) => {
+            return index === leftDelimiterIndex -1 ? {value: val + '.'} : { value: val };
+        })];
+        const rightDelimiterIndex = rightResult.indexOf('.');
         const right: CellConfig[] = [...rightResult.replace('.', '').split('').map((val, index) => {
-            return index === 0 ? { value: val, highlight: true } : { value: val };
+            return index === 0 ? { value: val + '.', highlight: true } : { value: val };
         })];
         const leftEmptyCells: CellConfig[] = getEmptyCellOffset(emptyLeft, left);
         const defaultRightEmptyCell: CellConfig[] = [{ value: ' ' }];
