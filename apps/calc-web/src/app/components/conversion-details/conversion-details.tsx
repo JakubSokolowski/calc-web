@@ -54,7 +54,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                 }
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {gridInfo && <NumberGrid title={'Integral part conversion:'} rowHooverBuilder={integralPopoverContent} grid={gridInfo}/>}
-                    <div style={{width: '20px'}}/>
+                    <div style={{width: '20px', flexGrow: 1}}/>
                     {floatingGrid && <NumberGrid title={'Floating part conversion:'} rowHooverBuilder={floatingPopoverContent} grid={floatingGrid}/>}
                 </div>
             </div>
