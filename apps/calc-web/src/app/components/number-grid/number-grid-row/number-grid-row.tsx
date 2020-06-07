@@ -2,6 +2,7 @@ import React, { FC, ReactNode, useState } from 'react';
 import { CellClickEvent, NumberGridCell } from '../number-grid-cell/number-grid-cell';
 import { CellConfig } from '../../../core/operation-grid';
 import { Popover } from 'antd';
+import { TooltipPlacement } from 'antd/lib/tooltip';
 
 export interface RowClickEvent {
     rowValue: CellConfig[];
@@ -16,6 +17,7 @@ interface P {
     rowIndex: number;
     onCellClick?: (event: CellClickEvent) => void;
     highlightRow?: boolean;
+    tooltipPlacement?: TooltipPlacement;
     rowHooverBuilder?: (rowValues: any[], rowHooverProps: any) => ReactNode;
 }
 
@@ -29,6 +31,7 @@ export const NumberGridRow: FC<P> = (
         onCellClick,
         rowHooverBuilder,
         rowHooverProps,
+        tooltipPlacement
     }) => {
 
     const [hoover, setHoover] = useState(false);
@@ -38,7 +41,7 @@ export const NumberGridRow: FC<P> = (
     };
 
     const cells = values.map((value, index, arr) => {
-        const cell = (
+        return (
             <NumberGridCell
                 highlightRow={highlightRow || hoover}
                 horizontalLine={horizontalLine}
@@ -50,26 +53,18 @@ export const NumberGridRow: FC<P> = (
                 verticalLine={index === verticalLineIndex}
             />
         );
-
-        return index === arr.length - 1
-            ?  (
-                <Popover key={index} placement={'right'} content={rowHooverBuilder && rowHooverBuilder(values, rowHooverProps)} visible={hoover}>
-                    <div>
-                        {cell}
-                    </div>
-                </Popover>
-            )
-            : cell;
-
     });
 
     return (
-        <div
-            className="number-grid-row"
-            onMouseEnter={() => setHoover(true)}
-            onMouseLeave={() => setHoover(false)}
-        >
-            {cells}
-        </div>
+        <Popover placement={tooltipPlacement || 'right'} content={rowHooverBuilder && rowHooverBuilder(values, rowHooverProps)} visible={hoover}>
+            <div
+                className="number-grid-row"
+                onMouseEnter={() => setHoover(true)}
+                onMouseLeave={() => setHoover(false)}
+            >
+                {cells}
+            </div>
+        </Popover>
+
     );
 };

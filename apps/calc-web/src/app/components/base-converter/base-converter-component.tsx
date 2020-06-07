@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { Input, InputNumber } from 'antd';
 import { Conversion, fromNumber, fromString } from '@calc/calc-arithmetic';
+import { BigNumber } from 'bignumber.js';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -24,7 +25,7 @@ export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
             if (!inputNumber || !inputBase || !outputBase) return;
             const result =
                 inputBase === 10
-                    ? fromNumber(parseFloat(inputNumber), outputBase)
+                    ? fromNumber(new BigNumber(inputNumber), outputBase)
                     : fromString(inputNumber, inputBase, outputBase);
             setInputComplementStr(
                 fromString(
@@ -33,7 +34,6 @@ export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
                     inputBase
                 ).result.complement.toString(precision)
             );
-            console.log(result);
             setOutputNumber(result.result.toString(precision));
             setComplementStr(result.result.complement.toString(precision));
             onConversionChange(result, precision);
@@ -55,7 +55,7 @@ export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
     };
 
     return (
-        <div style={{ paddingTop: '24px' }}>
+        <div>
             <div style={{ display: 'flex', flexDirection: 'row' }}>
                 <div style={{ width: '20%' }}>
                     <span> Input base </span>

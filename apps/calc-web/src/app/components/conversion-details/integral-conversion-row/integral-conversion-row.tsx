@@ -4,7 +4,10 @@ import { RowConversionOperation } from '../../../core/operation-grid';
 export const IntegralConversionRow: FC<RowConversionOperation> = ({result, base, dividend, remainder}) => {
     return (
       <div className="integral-conversion-popover-content">
-          {`${dividend} / ${base} = ${result} r ${remainder}`}
+          {`${dividend} / ${base} = ${result} r `}
+          <span style={{fontWeight: 'bold'}}>
+              {remainder}
+          </span>
       </div>
     );
 };

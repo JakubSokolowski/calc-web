@@ -1,4 +1,5 @@
 import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
+import { walk } from '@calc/utils';
 
 export interface CellConfig {
     value: string;
@@ -55,14 +56,14 @@ export function buildIntegralPartConversionGrid(conversion: Conversion): Operati
 }
 
 export function buildFloatingPartConversionGrid(conversion: Conversion, precision = 5): OperationGrid<CellConfig> {
-    const { result, fractionalMultipliers } = extractConversionToArbitrary(conversion);
-    console.log(result, fractionalMultipliers);
+    const { fractionalMultipliers } = extractConversionToArbitrary(conversion);
     const rows: CellConfig[][] = [];
     let initialEmptyCellOffset = [[], []];
     const rowProps: FloatingPartConversionInfo[] = [];
+    const usesTwoDigitsForResultOffset = conversion.result.base > 36 ? 1 : 0;
     const verticalLine = fractionalMultipliers
         .reduce((a, b) => a.length > b.length ? a : b)
-        .length - 2;
+        .length - 2 - usesTwoDigitsForResultOffset;
 
     walk(fractionalMultipliers, 2, ([leftMultiplier, rightResult] : [string, string], index) => {
         if (index === fractionalMultipliers.length - 1) return;
@@ -72,10 +73,12 @@ export function buildFloatingPartConversionGrid(conversion: Conversion, precisio
         const left: CellConfig[] = [...multiplierWithoutDelimiter.split('').map((val, index) => {
             return index === leftDelimiterIndex -1 ? {value: val + '.'} : { value: val };
         })];
-        const rightDelimiterIndex = rightResult.indexOf('.');
-        const right: CellConfig[] = [...rightResult.replace('.', '').split('').map((val, index) => {
-            return index === 0 ? { value: val + '.', highlight: true } : { value: val };
-        })];
+        const [beforeRightDelimiter, afterRightDelimiter] = rightResult.split('.');
+        const firstRightCell: CellConfig = {value: beforeRightDelimiter + '.', highlight: true};
+        const restOfRightCells = afterRightDelimiter
+            ? [...afterRightDelimiter.split('').map((val) => ({ value: val }))]
+            : [];
+        const right: CellConfig[] = [firstRightCell].concat(restOfRightCells);
         const leftEmptyCells: CellConfig[] = getEmptyCellOffset(emptyLeft, left);
         const defaultRightEmptyCell: CellConfig[] = [{ value: ' ' }];
         const rightEmptyCells: CellConfig[] = getEmptyCellOffset(emptyRight, right).concat(defaultRightEmptyCell);
@@ -106,10 +109,7 @@ export function buildFloatingPartConversionGrid(conversion: Conversion, precisio
     };
 }
 
-function walk(arr, n, fn) {
-    for (let i = 0; i < arr.length; i += n)
-        fn(arr.slice(i, i + n), i);
-}
+
 
 
 function extractConversionToArbitrary(conversion: Conversion): ConversionToArbitrary {

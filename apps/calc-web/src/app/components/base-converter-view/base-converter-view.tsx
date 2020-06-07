@@ -23,12 +23,11 @@ export const BaseConverterView: FC = () => {
             setGrid(newGrid);
             setConv(newConversion);
             setPrecision(precision);
-            console.log(gridToAscii(newGrid));
         }
     };
     return (
         <div>
-            <Title>
+            <Title level={2}>
                 {t('baseConverter.title')}
             </Title>
             <BaseConverterComponent onConversionChange={onChange}/>

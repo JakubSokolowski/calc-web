@@ -42,7 +42,6 @@ export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) =
     };
 
     const handleNumberChange = (value) => {
-        console.log('numValue', value);
         if (onChange) {
             onChange(value);
         }
