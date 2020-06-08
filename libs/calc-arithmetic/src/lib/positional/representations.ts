@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from './base-digits';
+import { Digit } from './addition';
 
 export class Digits {
     public digits: string[];
@@ -113,5 +114,31 @@ export class PositionalNumber extends NumberComplement {
 
     public get sign(): string {
         return this.decimalValue.isNegative() ? '-' : '';
+    }
+
+    public toDigitsList(): Digit[] {
+        const integerPart: Digit[] = this.integerPart.digits.map((digit, index) => {
+            const position = (this.integerPart.digits.length - 1) - index;
+
+            return {
+                position,
+                base: this.base,
+                valueInBase: digit,
+                valueInDecimal: BaseDigits.getValue(digit, this.base)
+            }
+        });
+
+        const fractionalPart: Digit[] = this.fractionalPart.digits.map((digit, index) => {
+            const position = - 1 - index;
+
+            return {
+                position,
+                base: this.base,
+                valueInBase: digit,
+                valueInDecimal: BaseDigits.getValue(digit, this.base)
+            }
+        });
+
+        return [...integerPart, ...fractionalPart];
     }
 }
