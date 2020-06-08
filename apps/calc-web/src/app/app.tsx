@@ -9,6 +9,7 @@ import '../assets/i18n/i18n';
 import SiderMenu from './components/sider-menu/SiderMenu';
 import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
 import { FloatConverterView } from './components/float-converter-view/float-converter-view';
+import { PositionalCalculatorView } from './components/positional-calculator/positional-calculator-view';
 
 const { Sider, Content } = Layout;
 
@@ -42,6 +43,7 @@ export const App = () => {
                                 <Route path="/base-converter" component={BaseConverterView}/>
                                 <Route path="/complement-converter" component={ComplementConverterView}/>
                                 <Route path="/float-converter" component={FloatConverterView}/>
+                                <Route path="/positional-calculator" component={PositionalCalculatorView}/>
                             </Switch>
                         </main>
                     </Content>

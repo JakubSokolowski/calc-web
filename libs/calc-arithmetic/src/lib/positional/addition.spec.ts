@@ -1,5 +1,5 @@
-import { addDigitsArrays, addDigitsAtPosition, addPositionalNumbers, Digit, PositionResult } from './addition';
-import { fromNumber, fromString } from '@calc/calc-arithmetic';
+import { addDigitsArrays, addDigitsAtPosition, addPositionalNumbers } from './addition';
+import { Digit, fromNumber, fromString, PositionResult } from '@calc/calc-arithmetic';
 
 describe('addition', () => {
     describe('#addDigitsAtPosition', () => {
@@ -26,7 +26,8 @@ describe('addition', () => {
                     base: 10,
                     position: 0
                 },
-                carry: []
+                carry: [],
+                operands: [x, y]
             };
 
             // when
@@ -66,7 +67,8 @@ describe('addition', () => {
                         base: 10,
                         position: 1
                     }
-                ]
+                ],
+                operands: [x, y]
             };
 
             // when
@@ -107,7 +109,8 @@ describe('addition', () => {
                         position: 1,
                         base: 10
                     }
-                ]
+                ],
+                operands: [...digits]
             };
 
             // when
@@ -142,7 +145,8 @@ describe('addition', () => {
                         position: 2,
                         base: 2
                     }
-                ]
+                ],
+                operands: [...digits]
             };
 
             // when
@@ -186,50 +190,6 @@ describe('addition', () => {
                 }
             ];
 
-            const expectedPositionResults: PositionResult[] = [
-                {
-                    valueAtPosition: {
-                        valueInDecimal: 4,
-                        valueInBase: '4',
-                        base: 10,
-                        position: 0
-                    },
-                    carry: [
-                        {
-                            position: 1,
-                            base: 10,
-                            valueInDecimal: 1,
-                            valueInBase: '1'
-                        }
-                    ]
-                },
-                {
-                   valueAtPosition: {
-                       valueInDecimal: 4,
-                       valueInBase: '4',
-                       base: 10,
-                       position: 1
-                   },
-                    carry: [
-                        {
-                            position: 2,
-                            base: 10,
-                            valueInDecimal: 1,
-                            valueInBase: '1'
-                        }
-                    ]
-                },
-                {
-                    carry: [],
-                    valueAtPosition: {
-                        base: 10,
-                        position: 2,
-                        valueInBase: '1',
-                        valueInDecimal: 1
-                    }
-                }
-            ];
-
             const expectedDigits: Digit[] = [
                 {
                     valueInDecimal: 1,
@@ -255,7 +215,6 @@ describe('addition', () => {
             const result = addDigitsArrays([x, y]);
 
             // then
-            expect(result.positionResults).toEqual(expectedPositionResults);
             expect(result.resultDigits).toEqual(expectedDigits);
         });
 

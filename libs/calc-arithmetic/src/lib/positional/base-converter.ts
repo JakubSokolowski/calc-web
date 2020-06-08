@@ -244,3 +244,4 @@ export function fromString(
 ): Conversion {
     return converter.fromString(valueStr, inputBase, resultBase, precision);
 }
+

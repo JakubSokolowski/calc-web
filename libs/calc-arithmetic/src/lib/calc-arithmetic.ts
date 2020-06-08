@@ -5,12 +5,23 @@ export {
     Conversion,
     ConversionToArbitrary,
     ConversionToDecimal,
-    ConversionType
+    ConversionType,
 } from './positional/base-converter';
 
 export {
+    addPositionalNumbers,
+} from './positional/addition'
+
+export {
+    PositionResult,
+    Digit,
+    AdditionResult
+} from './models'
+
+export {
     NumberComplement,
-    PositionalNumber
+    PositionalNumber,
+    Digits
 } from './positional/representations';
 
 export { ComplementConverter } from './positional/complement-converter';
@@ -24,5 +35,9 @@ export {
 } from './floating/float-converter';
 
 export {
-    isValidString
+    isValidString,
 } from './helpers/conversion-helpers'
+
+export {
+    BaseDigits
+} from './positional/base-digits'
