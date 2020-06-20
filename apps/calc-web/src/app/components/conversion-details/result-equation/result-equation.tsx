@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
-import { PositionalNumberText } from '../../positional-number/positional-number-text';
+import { NumberSubscript } from '../../positional-number/number-subscript';
 
 interface P {
     conversion: Conversion;
@@ -17,9 +17,9 @@ export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => 
     const [num, base] = input.input;
     return (
         <span>
-            <PositionalNumberText value={num} base={base}/>
+            <NumberSubscript value={num} subscript={base}/>
             &nbsp;=&nbsp;
-            <PositionalNumberText value={output.result.toString()} base={output.result.base}/>
+            <NumberSubscript value={output.result.toString()} subscript={output.result.base}/>
         </span>
     );
 };

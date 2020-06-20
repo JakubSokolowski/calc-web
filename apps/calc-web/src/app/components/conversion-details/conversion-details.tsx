@@ -1,11 +1,6 @@
 import React, { FC } from 'react';
 import { Conversion, ConversionToDecimal, ConversionType } from '@calc/calc-arithmetic';
-import {
-    buildFloatingPartConversionGrid,
-    buildIntegralPartConversionGrid, FloatingPartConversionInfo,
-    RowConversionOperation
-} from '../../core/operation-grid';
-import { NumberGrid } from '../number-grid/number-grid';
+import { buildFractionalConversionGrid, buildIntegralConversionGrid, HoverGrid } from '@calc/ui';
 import { ResultEquation } from './result-equation/result-equation';
 import { Typography } from 'antd';
 import { IntegralConversionRow } from './integral-conversion-row/integral-conversion-row';
@@ -18,18 +13,17 @@ interface P {
 }
 
 export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
-    const gridInfo = buildIntegralPartConversionGrid(conversion);
+    const fractionalHooverGrid = conversion.result.fractionalPart.length > 0
+        ? buildFractionalConversionGrid(conversion, precision): undefined;
 
-    const floatingGrid = conversion.result.fractionalPart.length > 0 ?
-        buildFloatingPartConversionGrid(conversion, precision)
-    : undefined;
+    const integralHooverGrid = buildIntegralConversionGrid(conversion);
 
-    const integralPopoverContent = (_, hooverProps: RowConversionOperation) => {
-        return <IntegralConversionRow {...hooverProps}/>;
+    const floatingHooverPopover = (hooverProps) => {
+        return <FractionalConversionRow {...hooverProps}/>
     };
 
-    const floatingPopoverContent = (_, hooverProps: FloatingPartConversionInfo) => {
-        return <FractionalConversionRow {...hooverProps}/>
+    const integralHooverPopover = (hooverProps) => {
+        return <IntegralConversionRow {...hooverProps}/>
     };
 
     return (
@@ -44,20 +38,37 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                         <div>
                             <div>
                                 <Typography>I. Conversion to decimal</Typography>
-                                <ConversionToDecimalDetails conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
+                                <ConversionToDecimalDetails
+                                    conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
                             </div>
-                            <div style={{paddingTop: '12px'}}>
+                            <div style={{ paddingTop: '12px' }}>
                                 <Typography>{`II. Conversion to base ${conversion.result.base}`}</Typography>
                                 <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
                             </div>
                         </div>
                 }
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
-                    {gridInfo && <NumberGrid title={'Integral part conversion:'} rowHooverBuilder={integralPopoverContent} grid={gridInfo}/>}
-                    <div style={{width: '20px', flexGrow: 1}}/>
-                    {floatingGrid && <NumberGrid title={'Floating part conversion:'} rowHooverBuilder={floatingPopoverContent} grid={floatingGrid}/>}
+                    {
+                        integralHooverGrid &&
+                        <HoverGrid
+                            {...integralHooverGrid}
+                            title={'Integral part conversion:'}
+                            groupBuilder={integralHooverPopover}
+                        />
+                    }
+                    <div style={{ width: '20px', flexGrow: 1 }}/>
+                    {
+                        fractionalHooverGrid &&
+                        <HoverGrid
+                            {...fractionalHooverGrid}
+                            title={'Floating part conversion:'}
+                            groupBuilder={floatingHooverPopover}
+                        />
+                    }
                 </div>
             </div>
+
+
         </div>
     );
 };

@@ -24,6 +24,12 @@ export const SiderMenu = () => {
                 >
                     {t('complementConverter.title')}
                 </Menu.Item>
+                <Menu.Item
+                    key="pos-3"
+                    onClick={() => history.push('/positional-calculator')}
+                >
+                    {t('positionalCalculator.title')}
+                </Menu.Item>
             </SubMenu>
             <SubMenu key="sub2" icon={<UserOutlined/>} title="Floating">
                 <Menu.Item
@@ -31,6 +37,14 @@ export const SiderMenu = () => {
                     onClick={() => history.push('/float-converter')}
                 >
                     {t('floatConverter.title')}
+                </Menu.Item>
+            </SubMenu>
+            <SubMenu key="sub3" icon={<UserOutlined/>} title="Sandbox">
+                <Menu.Item
+                    key="sandbox-3"
+                    onClick={() => history.push('/hover-grid')}
+                >
+                    {'Hoover grid'}
                 </Menu.Item>
             </SubMenu>
         </Menu>

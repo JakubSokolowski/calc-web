@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import { FloatingPartConversionInfo } from '../../../core/operation-grid';
 import { FractionalConversionRow } from './fractional-conversion-row';
+import { FloatingPartConversionInfo } from '@calc/ui';
 
 
 describe('FractionalConversionRow', () => {

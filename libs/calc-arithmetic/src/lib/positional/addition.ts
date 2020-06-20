@@ -1,23 +1,8 @@
-import { fromNumber, fromString, PositionalNumber } from '@calc/calc-arithmetic';
+
 import { BaseDigits } from './base-digits';
-
-export interface Digit {
-    valueInDecimal: number;
-    valueInBase: string;
-    base: number;
-    position: number;
-}
-
-export interface PositionResult {
-    valueAtPosition: Digit;
-    carry: Digit[];
-}
-
-export interface AdditionResult {
-    positionResults: PositionResult[];
-    resultDigits: Digit[];
-    numberResult?: PositionalNumber;
-}
+import { PositionalNumber } from './representations';
+import { fromNumber, fromString } from './base-converter';
+import { AdditionResult, Digit, PositionResult } from '../models';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if(!areSameBaseNumbers(numbers)) {
@@ -76,7 +61,8 @@ export function addDigitsArrays(digits: Digit[][]): AdditionResult {
     return {
         positionResults: result,
         resultDigits,
-        numberResult
+        numberResult,
+        operands: digits
     };
 }
 
@@ -136,7 +122,8 @@ export function addDigitsAtPosition(digits: Digit[], position: number): Position
                 valueInDecimal: 0,
                 position: position,
                 base
-            }
+            },
+            operands: []
         }
     }
 
@@ -155,11 +142,12 @@ export function addDigitsAtPosition(digits: Digit[], position: number): Position
         position: position
     };
 
-    if (!decimalCarry) return { valueAtPosition, carry: [] };
+    if (!decimalCarry) return { valueAtPosition, carry: [], operands: digits };
 
     return {
         valueAtPosition,
-        carry: carryToDigits(decimalCarry, base, position + 1)
+        carry: carryToDigits(decimalCarry, base, position + 1),
+        operands: digits
     };
 }
 

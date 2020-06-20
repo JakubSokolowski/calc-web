@@ -19,5 +19,8 @@
     },
     "common": {
         "copy": "Copied to clipboard!"
+    },
+    "positionalCalculator": {
+        "title": "Positional Calculator"
     }
 }

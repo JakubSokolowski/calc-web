@@ -1,5 +1,4 @@
-import { fromNumber } from '@calc/calc-arithmetic';
-import { Digit } from './addition';
+import { Digit, fromNumber } from '@calc/calc-arithmetic';
 
 describe('representation', () => {
    describe('PositionalNumber', () => {

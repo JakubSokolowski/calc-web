@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IntegralConversionRow } from './integral-conversion-row';
-import { RowConversionOperation } from '../../../core/operation-grid';
+import { RowConversionOperation } from '@calc/ui';
 
 
 describe('IntegralConversionRow', () => {
@@ -14,7 +14,7 @@ describe('IntegralConversionRow', () => {
             dividend: '12',
             result: '24'
         };
-        
+
         container = shallow(
             <IntegralConversionRow
                 {...props}

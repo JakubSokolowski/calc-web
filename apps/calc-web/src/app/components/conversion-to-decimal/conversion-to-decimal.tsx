@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ConversionToDecimal } from '@calc/calc-arithmetic';
-import { PositionalNumberText } from '../positional-number/positional-number-text';
+import { NumberSubscript } from '../positional-number/number-subscript';
 
 interface P {
     conversionStage: ConversionToDecimal;
@@ -34,11 +34,11 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     return (
         <div>
             <div id="decimal-conversion-details" style={{ display: 'inline-block' }}>
-                <PositionalNumberText value={inputStr} base={inputBase}/>
+                <NumberSubscript value={inputStr} subscript={inputBase}/>
                 &nbsp;=&nbsp;
                 {integerParts} {fractionalParts}
                 &nbsp;=&nbsp;
-                <PositionalNumberText value={conversionStage.result.valueInBase} base={conversionStage.result.base}/>
+                <NumberSubscript value={conversionStage.result.valueInBase} subscript={conversionStage.result.base}/>
             </div>
         </div>
     );

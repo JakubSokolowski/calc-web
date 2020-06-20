@@ -3,7 +3,7 @@ import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
 import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { InputType, InputWithCopy } from './input-with-copy/input-with-copy';
+import { InputType, InputWithCopy } from '@calc/ui';
 
 export const FloatConverterComponent: FC = () => {
     const initialNum = FloatConverter.ToSingle(0.0);
