@@ -39,14 +39,6 @@ export const SiderMenu = () => {
                     {t('floatConverter.title')}
                 </Menu.Item>
             </SubMenu>
-            <SubMenu key="sub3" icon={<UserOutlined/>} title="Sandbox">
-                <Menu.Item
-                    key="sandbox-3"
-                    onClick={() => history.push('/hover-grid')}
-                >
-                    {'Hoover grid'}
-                </Menu.Item>
-            </SubMenu>
         </Menu>
     );
 };

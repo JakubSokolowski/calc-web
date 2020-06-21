@@ -1,4 +1,4 @@
-import { CellCoords, CellGroup, gridToAscii } from '@calc/ui';
+import { CellCoords, CellGroup, gridToAscii } from '@calc/grid';
 import {
     buildCellGroupLookup,
     buildColumnGroups,

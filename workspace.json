@@ -166,9 +166,9 @@
         }
       }
     },
-    "ui": {
-      "root": "libs/ui",
-      "sourceRoot": "libs/ui/src",
+    "grid": {
+      "root": "libs/grid",
+      "sourceRoot": "libs/grid/src",
       "projectType": "library",
       "schematics": {},
       "architect": {
@@ -176,19 +176,19 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-            "config": "libs/ui/.eslintrc",
+            "config": "libs/grid/.eslintrc",
             "tsConfig": [
-              "libs/ui/tsconfig.lib.json",
-              "libs/ui/tsconfig.spec.json"
+              "libs/grid/tsconfig.lib.json",
+              "libs/grid/tsconfig.spec.json"
             ],
-            "exclude": ["**/node_modules/**", "!libs/ui/**"]
+            "exclude": ["**/node_modules/**", "!libs/grid/**"]
           }
         },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
-            "jestConfig": "libs/ui/jest.config.js",
-            "tsConfig": "libs/ui/tsconfig.spec.json",
+            "jestConfig": "libs/grid/jest.config.js",
+            "tsConfig": "libs/grid/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

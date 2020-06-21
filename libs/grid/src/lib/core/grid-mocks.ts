@@ -1,4 +1,4 @@
-import { HoverOperationGrid, LineType } from '@calc/ui';
+import { HoverOperationGrid, LineType } from '@calc/grid';
 
 export const fractionalConversionGridMock: HoverOperationGrid = {
     groups: [

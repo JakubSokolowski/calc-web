@@ -3,7 +3,7 @@ import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { addPositionalNumbers, fromString, PositionResult } from '@calc/calc-arithmetic';
 import { AddAtPositionHoverContent } from './add-at-position-hover-content';
-import { buildAdditionGrid, HoverGrid } from '@calc/ui';
+import { buildAdditionGrid, HoverGrid } from '@calc/grid';
 
 const { Title } = Typography;
 

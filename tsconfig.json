@@ -29,8 +29,8 @@
             "@calc/utils": [
                 "libs/utils/src/index.ts"
             ],
-            "@calc/ui": [
-                "libs/ui/src/index.ts"
+            "@calc/grid": [
+                "libs/grid/src/index.ts"
             ]
         }
     },
