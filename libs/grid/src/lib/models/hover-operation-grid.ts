@@ -1,4 +1,4 @@
-import { CellGroup, GridCellConfig, GridLine } from '@calc/ui';
+import { CellGroup, GridCellConfig, GridLine } from '@calc/grid';
 
 export interface HoverOperationGrid {
     values: GridCellConfig[][];

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Conversion, ConversionToDecimal, ConversionType } from '@calc/calc-arithmetic';
-import { buildFractionalConversionGrid, buildIntegralConversionGrid, HoverGrid } from '@calc/ui';
+import { buildFractionalConversionGrid, buildIntegralConversionGrid, HoverGrid } from '@calc/grid';
 import { ResultEquation } from './result-equation/result-equation';
 import { Typography } from 'antd';
 import { IntegralConversionRow } from './integral-conversion-row/integral-conversion-row';

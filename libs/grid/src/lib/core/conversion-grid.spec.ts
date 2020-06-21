@@ -4,7 +4,7 @@ import {
 } from './conversion-grid';
 import { fromNumber } from '@calc/calc-arithmetic';
 import { fractionalConversionGridMock, integralConversionGridMock } from './grid-mocks';
-import { HoverOperationGrid } from '@calc/ui';
+import { HoverOperationGrid } from '@calc/grid';
 
 describe('hover-operation-grid', () => {
     describe('#buildFractionalConversionGrid', () => {

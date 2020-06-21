@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { FloatingPartConversionInfo } from '@calc/ui';
+import { FloatingPartConversionInfo } from '@calc/grid';
 
 export const FractionalConversionRow: FC<FloatingPartConversionInfo> = ({ result, multiplier, base }) => {
     const [digit, rest] = result.split('.');

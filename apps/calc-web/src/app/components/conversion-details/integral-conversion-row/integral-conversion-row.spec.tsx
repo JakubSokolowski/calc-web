@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { IntegralConversionRow } from './integral-conversion-row';
-import { RowConversionOperation } from '@calc/ui';
+import { RowConversionOperation } from '@calc/grid';
 
 
 describe('IntegralConversionRow', () => {

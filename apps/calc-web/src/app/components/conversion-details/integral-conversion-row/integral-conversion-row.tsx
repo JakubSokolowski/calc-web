@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { RowConversionOperation } from '@calc/ui';
+import { RowConversionOperation } from '@calc/grid';
 
 export const IntegralConversionRow: FC<RowConversionOperation> = ({result, base, dividend, remainder}) => {
     return (
