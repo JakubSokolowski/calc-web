@@ -1,10 +1,9 @@
 import React, { FC, useState } from 'react';
 
 import './hover-grid.scss';
-import HoverGridCell, { GridCellEvent } from './hover-grid-cell';
+import HoverGridCell, { GridCellEvent } from '../hover-cell/hover-grid-cell';
 import { Button, message, Popover, Typography } from 'antd';
 import { CopyOutlined } from '@ant-design/icons/lib';
-import { copyToClipboard } from '../input-with-copy/input-with-copy';
 import {
     buildCellGroupLookup,
     coordsEqual,
@@ -17,6 +16,7 @@ import { GridCellConfig } from '../../models/grid-cell-config';
 import { LineType } from '../../models/line-type';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
+import { copyToClipboard } from '@calc/ui';
 
 interface P {
     values: GridCellConfig[][];
