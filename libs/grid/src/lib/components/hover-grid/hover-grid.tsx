@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react';
 
 import './hover-grid.scss';
-import HoverGridCell, { GridCellEvent } from '../hover-cell/hover-grid-cell';
+import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
 import { Button, message, Popover, Typography } from 'antd';
 import { CopyOutlined } from '@ant-design/icons/lib';
 import {
@@ -37,7 +37,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
 
 
     const handleHoover = (event: GridCellEvent) => {
-        if (event.hoovered) {
+        if (event.hovered) {
             const { x, y } = event;
             const sameCell = hooveredCell && hooveredCell.x === event.x
                 && hooveredCell.y === event.y;
@@ -72,10 +72,10 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
             const horizontalLine = !!lines.find((line) => line.type === LineType.Vertical && line.index === x);
             const verticalLine = !!lines.find((line) => line.type === LineType.Horizontal && line.index === y);
 
-            const props = {
+            const props: HoverCellProps = {
                 onClick: handleClick,
-                onHoover: handleHoover,
-                hoovered: shouldHoover(x, y),
+                onHover: handleHoover,
+                hovered: shouldHoover(x, y),
                 key: `${x}-${y}`,
                 x,
                 y,

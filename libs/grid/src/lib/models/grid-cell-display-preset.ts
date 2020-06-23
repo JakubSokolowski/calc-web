@@ -1,5 +1,5 @@
 export interface GridCellDisplayPreset {
   default: string;
-  hoover?: string;
+  hover?: string;
   click?: string;
 }
