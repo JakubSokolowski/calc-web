@@ -1,15 +1,10 @@
-import React, { FC, useState } from 'react';
+import React, { FC, forwardRef, useState } from 'react';
 
 import './hover-grid.scss';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
 import { Button, message, Popover, Typography } from 'antd';
 import { CopyOutlined } from '@ant-design/icons/lib';
-import {
-    buildCellGroupLookup,
-    coordsEqual,
-    getOutlierAtPosition,
-    gridToAscii
-} from '../../core/grid-utils';
+import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition, gridToAscii } from '../../core/grid-utils';
 import { CellCoords } from '../../models/cell-coords';
 import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
@@ -28,54 +23,68 @@ interface P {
 
 export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title }) => {
     const lookup = buildCellGroupLookup(groups);
-    const [hooveredCell, setHooveredCell] = useState<CellCoords>();
-    const [hooveredGroup, setHooveredGroup] = useState<CellGroup>();
+    const [hoverCell, setHoveredCell] = useState<CellCoords>();
+    const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
 
     const handleClick = (event) => {
         console.log('Click Event', event);
     };
 
-
-    const handleHoover = (event: GridCellEvent) => {
+    const handleHover = (event: GridCellEvent) => {
         if (event.hovered) {
             const { x, y } = event;
-            const sameCell = hooveredCell && hooveredCell.x === event.x
-                && hooveredCell.y === event.y;
-            if (sameCell) return;
-            setHooveredCell({ x, y });
-            const groupKey = `${x}-${y}`;
-            const group = lookup[groupKey];
-            if (group && group.length) setHooveredGroup(group[0]);
+
+            const cellAlreadyHovered =
+                hoverCell
+                && hoverCell.x === event.x
+                && hoverCell.y === event.y;
+
+            if (cellAlreadyHovered) return;
+
+            // find which group of cells
+            // need to hovered, and set first group
+            setHoveredCell({ x, y });
+            const hoverGroupKey = `${x}-${y}`;
+            const group = lookup[hoverGroupKey];
+
+            if (group && group.length) setHoveredGroup(group[0]);
         } else {
-            setHooveredCell(undefined);
-            setHooveredGroup(undefined);
+            setHoveredCell(undefined);
+            setHoveredGroup(undefined);
         }
     };
 
-    const shouldHoover = (x: number, y: number): boolean => {
-        if (!hooveredGroup) return false;
+    const cellBelongsToHoveredGroup = (x: number, y: number): boolean => {
+        if (!hoveredGroup) return false;
 
-        return !!hooveredGroup.cells.find((cell) => {
+        return !!hoveredGroup.cells.find((cell) => {
             return cell.x === x && cell.y === y;
         });
     };
 
-    const popoverAnchor = () => {
-        if (!hooveredGroup) return { x: -1, y: -1 };
-        const position = hooveredGroup.popoverPlacement || CellPosition.Top;
-        return getOutlierAtPosition(hooveredGroup, position);
+    const getGroupPopoverAnchorCoords = (): CellCoords => {
+        if (!hoveredGroup) return { x: -1, y: -1 };
+        const position = hoveredGroup.popoverPlacement || CellPosition.Top;
+        return getOutlierAtPosition(hoveredGroup, position);
     };
 
-    const anchor = popoverAnchor();
+    const matchLine = (lineType: LineType, index: number): boolean => {
+        return !!lines.find((line) => line.index === index && line.type === lineType)
+    };
+
+    const anchor = getGroupPopoverAnchorCoords();
+
     const rows = values.map((row, y) => {
         const cells = row.map((cellConfig, x) => {
-            const horizontalLine = !!lines.find((line) => line.type === LineType.Vertical && line.index === x);
-            const verticalLine = !!lines.find((line) => line.type === LineType.Horizontal && line.index === y);
 
-            const props: HoverCellProps = {
+            const horizontalLine = matchLine(LineType.Horizontal, y);
+            const verticalLine = matchLine(LineType.Vertical, x);
+            const shouldHover = cellBelongsToHoveredGroup(x, y);
+
+            const cellProps: HoverCellProps = {
                 onClick: handleClick,
-                onHover: handleHoover,
-                hovered: shouldHoover(x, y),
+                onHover: handleHover,
+                hovered: shouldHover,
                 key: `${x}-${y}`,
                 x,
                 y,
@@ -84,20 +93,25 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
                 config: cellConfig
             };
 
+            const isCellGroupAnchor = coordsEqual(anchor, { x, y }) && shouldHover;
+            const hasBuilder = hoveredGroup && (hoveredGroup.contentBuilder || groupBuilder);
+            const canBuildPopoverContent = hasBuilder && !!hoveredGroup.contentProps;
 
-            if (coordsEqual(anchor, { x, y }) && shouldHoover(x, y) && (hooveredGroup.contentBuilder || groupBuilder) && !!hooveredGroup.contentProps) {
+            if (isCellGroupAnchor && canBuildPopoverContent) {
                 const content = groupBuilder
-                    ? groupBuilder(hooveredGroup.contentProps)
-                    : hooveredGroup.contentBuilder(hooveredGroup.contentProps);
+                    ? groupBuilder(hoveredGroup.contentProps)
+                    : hoveredGroup.contentBuilder(hoveredGroup.contentProps);
 
                 return (
                     <Popover content={content} visible={true} key={`${x}-${y}`}>
-                        <HoverGridCell {...props} />
+                        <div>
+                            <HoverGridCell {...cellProps} />
+                        </div>
                     </Popover>
                 );
             }
 
-            return <HoverGridCell {...props} />;
+            return <HoverGridCell {...cellProps} />;
         });
 
         return (
