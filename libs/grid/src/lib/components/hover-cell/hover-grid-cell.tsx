@@ -77,6 +77,7 @@ const HoverGridCell: FC<HoverCellProps> = (
         <div
             className={getClassNames()}
             onClick={handleClick}
+            key={`${x}-${y}`}
             onMouseEnter={() => handleHoover(true)}
             onMouseLeave={() => handleHoover(false)}
         >

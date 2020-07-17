@@ -3,7 +3,7 @@ import { shallow, ShallowWrapper } from 'enzyme';
 import React from 'react';
 import HoverGridCell from './hover-grid-cell';
 
-describe('#HooverGridCell', () => {
+describe('#HoverGridCell', () => {
     let container: ShallowWrapper;
     const defaultClassName = '.default-cell';
     const config: GridCellConfig = {
