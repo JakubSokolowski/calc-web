@@ -15,11 +15,11 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
     const rows: GridCellConfig[][] = [];
     const base = result.resultDigits[0].base;
     const info = extractDelimiterInfo(result);
-    const verticalLine = info.numIntegerPartDigits;
+    const verticalLineIndex = info.numIntegerPartDigits;
 
     const carryRows = carriesToCellConfig(result);
     rows.push(...carryRows);
-    const horizontalLine = result.operands.length - 1 + carryRows.length;
+    const horizontalLineIndex = result.operands.length - 1 + carryRows.length;
 
     result.operands.forEach((operandDigits, index) => {
         const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
@@ -31,18 +31,17 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
     rows.push(padWithEmptyCells(resultRow, info.totalWidth + 1, 'Left'));
     const groups = buildColumnGroups(rows, [undefined, ...result.positionResults.reverse()]);
 
-
     return {
         values: rows,
         groups,
         lines: [
             {
                 type: LineType.Vertical,
-                index: verticalLine
+                index: verticalLineIndex
             },
             {
                 type: LineType.Horizontal,
-                index: horizontalLine
+                index: horizontalLineIndex
             }
         ]
     };

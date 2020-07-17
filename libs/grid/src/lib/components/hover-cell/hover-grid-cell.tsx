@@ -6,29 +6,30 @@ import { GridCellConfig } from '../../models/grid-cell-config';
 export interface GridCellEvent {
     x: number;
     y: number;
-    hoovered?: boolean;
+    hovered?: boolean;
 }
 
-interface P {
+export interface HoverCellProps {
     x: number;
     y: number;
     config: GridCellConfig;
-    hoovered?: boolean;
+    hovered?: boolean;
     horizontalLine?: boolean;
     verticalLine?: boolean;
     onClick?: (event: GridCellEvent) => void;
-    onHoover?: (event: GridCellEvent) => void;
+    onHover?: (event: GridCellEvent) => void;
+    key? : string;
 }
 
-const HoverGridCell: FC<P> = (
+const HoverGridCell: FC<HoverCellProps> = (
     {
         x,
         y,
         config,
-        hoovered,
+        hovered,
         horizontalLine,
         verticalLine,
-        onHoover,
+        onHover,
         onClick
     }) => {
 
@@ -42,40 +43,41 @@ const HoverGridCell: FC<P> = (
     };
 
     const handleHoover = (hoovered: boolean) => {
-        if (onHoover) {
-            const cellEvent: GridCellEvent = { x, y, hoovered };
-            onHoover(cellEvent);
+        if (onHover) {
+            const cellEvent: GridCellEvent = { x, y, hovered: hoovered };
+            onHover(cellEvent);
         }
     };
 
-    const getCellClassName = () => {
-        if (hoovered) return getHooveredCellClassName();
+    const getCellClassName = (): string => {
+        if (hovered) return getHooveredCellClassName();
         if(preset && preset.default) return preset.default;
         return 'default-cell';
     };
 
-
-    const getHooveredCellClassName = () => {
-        if(preset && !!preset.hoover) return preset.hoover;
+    const getHooveredCellClassName = (): string => {
+        if(preset && !!preset.hover) return preset.hover;
         return 'hoover-cell';
     };
 
-    const getLineClassName = () => {
-        let classNames = '';
-        if(verticalLine) classNames += ' horizontal-line';
-        if(horizontalLine) classNames += ' vertical-line';
+    const getLineClassName = (): string[] => {
+        const classNames = [];
+        if(horizontalLine) classNames.push('horizontal-line');
+        if(verticalLine) classNames.push('vertical-line');
 
         return classNames;
     };
 
-    const getClassNames = () => {
-        return `${getCellClassName()} ${getLineClassName()}`
+    const getClassNames = (): string => {
+        const classNames = [getCellClassName(), ...getLineClassName()];
+        return classNames.join(' ')
     };
 
     return (
         <div
             className={getClassNames()}
             onClick={handleClick}
+            key={`${x}-${y}`}
             onMouseEnter={() => handleHoover(true)}
             onMouseLeave={() => handleHoover(false)}
         >
