@@ -12,12 +12,12 @@ import { FloatingPartConversionInfo } from '../models/floating-part-conversion-i
 
 export const defaultCellPreset: GridCellDisplayPreset = {
     default: 'default-cell',
-    hover: 'hoover-cell'
+    hover: 'hover-cell'
 };
 
 export const highlightedCellPreset: GridCellDisplayPreset = {
     default: 'highlighted-cell',
-    hover: 'highlighted-cell-hoover'
+    hover: 'highlighted-cell-hover'
 };
 
 export function buildFractionalConversionGrid(conversion: Conversion, precision = 5): HoverOperationGrid {

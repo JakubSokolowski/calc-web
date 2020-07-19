@@ -34,7 +34,7 @@ describe('hover-operation-grid', () => {
         });
     });
 
-    describe('#buildHooverCoversionToArbitraryGrid', () => {
+    describe('#buildhoverCoversionToArbitraryGrid', () => {
         // given
         let grid: HoverOperationGrid;
         const conversion = fromNumber(24.23, 2);

@@ -42,22 +42,22 @@ const HoverGridCell: FC<HoverCellProps> = (
         }
     };
 
-    const handleHoover = (hoovered: boolean) => {
+    const handlehover = (hovered: boolean) => {
         if (onHover) {
-            const cellEvent: GridCellEvent = { x, y, hovered: hoovered };
+            const cellEvent: GridCellEvent = { x, y, hovered: hovered };
             onHover(cellEvent);
         }
     };
 
     const getCellClassName = (): string => {
-        if (hovered) return getHooveredCellClassName();
+        if (hovered) return gethoveredCellClassName();
         if(preset && preset.default) return preset.default;
         return 'default-cell';
     };
 
-    const getHooveredCellClassName = (): string => {
+    const gethoveredCellClassName = (): string => {
         if(preset && !!preset.hover) return preset.hover;
-        return 'hoover-cell';
+        return 'hover-cell';
     };
 
     const getLineClassName = (): string[] => {
@@ -78,8 +78,8 @@ const HoverGridCell: FC<HoverCellProps> = (
             className={getClassNames()}
             onClick={handleClick}
             key={`${x}-${y}`}
-            onMouseEnter={() => handleHoover(true)}
-            onMouseLeave={() => handleHoover(false)}
+            onMouseEnter={() => handlehover(true)}
+            onMouseLeave={() => handlehover(false)}
         >
             {content}
         </div>

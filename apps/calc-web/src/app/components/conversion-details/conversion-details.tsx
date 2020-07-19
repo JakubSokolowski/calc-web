@@ -13,17 +13,17 @@ interface P {
 }
 
 export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
-    const fractionalHooverGrid = conversion.result.fractionalPart.length > 0
+    const fractionalhoverGrid = conversion.result.fractionalPart.length > 0
         ? buildFractionalConversionGrid(conversion, precision): undefined;
 
-    const integralHooverGrid = buildIntegralConversionGrid(conversion);
+    const integralhoverGrid = buildIntegralConversionGrid(conversion);
 
-    const floatingHooverPopover = (hooverProps) => {
-        return <FractionalConversionRow {...hooverProps}/>
+    const floatinghoverPopover = (hoverProps) => {
+        return <FractionalConversionRow {...hoverProps}/>
     };
 
-    const integralHooverPopover = (hooverProps) => {
-        return <IntegralConversionRow {...hooverProps}/>
+    const integralhoverPopover = (hoverProps) => {
+        return <IntegralConversionRow {...hoverProps}/>
     };
 
     return (
@@ -49,20 +49,20 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                 }
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {
-                        integralHooverGrid &&
+                        integralhoverGrid &&
                         <HoverGrid
-                            {...integralHooverGrid}
+                            {...integralhoverGrid}
                             title={'Integral part conversion:'}
-                            groupBuilder={integralHooverPopover}
+                            groupBuilder={integralhoverPopover}
                         />
                     }
                     <div style={{ width: '20px', flexGrow: 1 }}/>
                     {
-                        fractionalHooverGrid &&
+                        fractionalhoverGrid &&
                         <HoverGrid
-                            {...fractionalHooverGrid}
+                            {...fractionalhoverGrid}
                             title={'Floating part conversion:'}
-                            groupBuilder={floatingHooverPopover}
+                            groupBuilder={floatinghoverPopover}
                         />
                     }
                 </div>
