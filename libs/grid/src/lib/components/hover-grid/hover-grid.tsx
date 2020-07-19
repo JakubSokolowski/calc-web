@@ -115,7 +115,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
         });
 
         return (
-            <div className='hoover-grid-row' key={y}>
+            <div className='hover-grid-row' key={y}>
                 {cells}
             </div>
         );

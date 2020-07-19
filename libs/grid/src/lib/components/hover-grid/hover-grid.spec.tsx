@@ -41,8 +41,8 @@ describe('#HoverGrid', () => {
 
         it('should mark cells belonging to hovered cell group on cell mouseover', () => {
             // given
-            const hoveredCellClass = '.hoover-cell';
-            const hoveredHighlightedCellClass = '.highlighted-cell-hoover';
+            const hoveredCellClass = '.hover-cell';
+            const hoveredHighlightedCellClass = '.highlighted-cell-hover';
             const numHovered = 5;
             const numHighlighted = 1;
 
@@ -109,7 +109,7 @@ describe('#HoverGrid', () => {
             // given
             const cellInFirstGroupIndex = 0;
             const cellInSecondGroupIndex = 10;
-            const hoveredCellClass = '.hoover-cell';
+            const hoveredCellClass = '.hover-cell';
             const expectedKeys = ['0-1', '1-1', '2-1', '3-1', '4-1'];
 
             // when

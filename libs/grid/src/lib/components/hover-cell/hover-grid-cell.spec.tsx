@@ -33,7 +33,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with hover style when cell is hovered and preset is not defined', () => {
             // given
-            const defaultHoverStyle = '.hoover-cell';
+            const defaultHoverStyle = '.hover-cell';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} hovered={true}/>
             );
@@ -47,7 +47,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with default hover style when cell is hovered and preset is defined but does not specify hover style', () => {
             // given
-            const defaultHoverStyle = '.hoover-cell';
+            const defaultHoverStyle = '.hover-cell';
             const cellConfig: GridCellConfig = {
                 preset: {
                     default: 'some-cell-preset'
@@ -65,7 +65,7 @@ describe('#HoverGridCell', () => {
             expect(cell).toHaveLength(1);
         });
 
-        it('should render with specified style when cell preset is defined and cell is hoovered', () => {
+        it('should render with specified style when cell preset is defined and cell is hovered', () => {
             // given
             const hoverPresetStyle = '.some-hover-preset';
             const cellConfig: GridCellConfig = {
@@ -153,9 +153,9 @@ describe('#HoverGridCell', () => {
     describe('#onHover', () => {
         it('should emit proper event when mouse is over the cell and onHover callback is defined', () => {
             // given
-            const onHooverSpy = jest.fn();
+            const onhoverSpy = jest.fn();
             container = shallow(
-                <HoverGridCell config={config} x={x} y={y} onHover={onHooverSpy}/>
+                <HoverGridCell config={config} x={x} y={y} onHover={onhoverSpy}/>
             );
             const event: GridCellEvent = {
                 x,
@@ -170,14 +170,14 @@ describe('#HoverGridCell', () => {
                 .simulate('mouseenter');
 
             // then
-            expect(onHooverSpy).toBeCalledWith(event);
+            expect(onhoverSpy).toBeCalledWith(event);
         });
 
         it('should emit proper event when mouse leaves cell and onHover callback is defined', () => {
             // given
-            const onHooverSpy = jest.fn();
+            const onhoverSpy = jest.fn();
             container = shallow(
-                <HoverGridCell config={config} x={x} y={y} onHover={onHooverSpy}/>
+                <HoverGridCell config={config} x={x} y={y} onHover={onhoverSpy}/>
             );
             const event: GridCellEvent = {
                 x,
@@ -192,12 +192,12 @@ describe('#HoverGridCell', () => {
                 .simulate('mouseleave');
 
             // then
-            expect(onHooverSpy).toBeCalledWith(event);
+            expect(onhoverSpy).toBeCalledWith(event);
         });
 
         it('should do nothing when onHover is not defined', () => {
             // given
-            const onHooverSpy = jest.fn();
+            const onhoverSpy = jest.fn();
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y}/>
             );
@@ -209,7 +209,7 @@ describe('#HoverGridCell', () => {
                 .simulate('mouseleave');
 
             // then
-            expect(onHooverSpy).not.toBeCalledWith();
+            expect(onhoverSpy).not.toBeCalledWith();
         });
     });
 
