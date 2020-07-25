@@ -1,5 +1,5 @@
-import React, { FC, forwardRef, useState } from 'react';
-
+import React, { FC, useRef, useState } from 'react';
+import domtoimage from 'dom-to-image';
 import './hover-grid.scss';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
 import { Button, message, Popover, Typography } from 'antd';
@@ -12,6 +12,7 @@ import { LineType } from '../../models/line-type';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
 import { copyToClipboard } from '@calc/ui';
+import { saveAs } from 'file-saver';
 
 interface P {
     values: GridCellConfig[][];
@@ -25,6 +26,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
     const lookup = buildCellGroupLookup(groups);
     const [hoverCell, setHoveredCell] = useState<CellCoords>();
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
+    const gridRef = useRef(null);
 
     const handleClick = (event) => {
         console.log('Click Event', event);
@@ -69,7 +71,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
     };
 
     const matchLine = (lineType: LineType, index: number): boolean => {
-        return !!lines.find((line) => line.index === index && line.type === lineType)
+        return !!lines.find((line) => line.index === index && line.type === lineType);
     };
 
     const anchor = getGroupPopoverAnchorCoords();
@@ -121,10 +123,20 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
         );
     });
 
-    const handleCopy = () => {
-        const ascii = gridToAscii({values, groups, lines});
+    const copyAscii = () => {
+        const ascii = gridToAscii({ values, groups, lines });
         copyToClipboard(ascii);
         message.info('Copied ascii to clipboard');
+    };
+
+    const saveAsImage = async () => {
+        if(gridRef) {
+            await domtoimage
+                .toBlob(gridRef.current)
+                .then(function (blob) {
+                    saveAs(blob, 'result.png');
+                }).catch((error) => console.log(error));
+        }
     };
 
     return (
@@ -133,12 +145,12 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
                 title &&
                 <div className='title'>
                     <Typography>{title}</Typography>
-                    <Button className='copy-ascii-button' size={'small'} onClick={handleCopy}>
+                    <Button className='copy-image-button' size={'small'} onClick={saveAsImage}>
                         <CopyOutlined/>
                     </Button>
                 </div>
             }
-            <div className='cell-box'>
+            <div className='cell-box' id='xd' ref={gridRef}>
                 {rows}
             </div>
         </div>
