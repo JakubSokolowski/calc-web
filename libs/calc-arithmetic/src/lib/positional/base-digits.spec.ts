@@ -36,6 +36,7 @@ describe('GetValue tests', () => {
         }).toThrow();
     });
 });
+
 describe('GetDigit above 36 radix test', () => {
     it('returns proper digit for value 10 in base 64', () => {
         expect(BaseDigits.getDigit(10, 64)).toBe('10');
