@@ -84,6 +84,16 @@ export class ConversionToDecimal implements ConversionStage {
     }
 }
 
+export class DirectConversion implements ConversionStage {
+    public input: [string, number];
+    public result: PositionalNumber;
+
+    constructor(input: [string, number], result: PositionalNumber) {
+        this.input = input;
+        this.result = result;
+    }
+}
+
 export class ConversionToArbitrary extends ConversionToDecimal {
     public integralDivisors: string[];
     public fractionalMultipliers: string[];
@@ -173,27 +183,8 @@ export class StandardBaseConverter implements BaseConverter {
     ): Conversion {
         if (isValidString(valueStr, inputBase)) {
             const conversion = new Conversion();
-            let decimalValue = new BigNumber(0);
+            const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
 
-            if (isFloatingPointStr(valueStr)) {
-                const valueParts = valueStr.split('.');
-                const integerPart = arbitraryIntegralToDecimal(
-                    valueParts[0],
-                    inputBase
-                );
-                let fractionalPart = arbitraryFractionToDecimal(
-                    valueParts[1],
-                    inputBase
-                );
-                // Make the fractionalPart negative if the integer part is also negative
-                // This is needed when both parts are added together to create whole value
-                if (integerPart.isNegative()) {
-                    fractionalPart = fractionalPart.negated();
-                }
-                decimalValue = integerPart.plus(fractionalPart);
-            } else {
-                decimalValue = arbitraryIntegralToDecimal(valueStr, inputBase);
-            }
             const complement = ComplementConverter.getComplement(
                 decimalValue.toString(),
                 resultBase
@@ -223,6 +214,63 @@ export class StandardBaseConverter implements BaseConverter {
                 `The string ${valueStr} does not match the input base ${inputBase}`
             );
         }
+    }
+
+    public fromStringDirect(
+        valueStr: string,
+        inputBase: number,
+    ): Conversion {
+        if (isValidString(valueStr, inputBase)) {
+            const conversion = new Conversion();
+
+            const digits = splitToPartsArr(valueStr, inputBase);
+            const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
+            const complement = ComplementConverter.getComplement(valueStr, inputBase);
+
+            const inputInDecimal = new PositionalNumber(
+                digits[0],
+                digits[1],
+                inputBase,
+                decimalValue,
+                complement
+            );
+
+            conversion.addStage(
+                new DirectConversion([valueStr, inputBase], inputInDecimal)
+            );
+
+            return conversion;
+        } else {
+            throw new Error(
+                `The string ${valueStr} does not match the input base ${inputBase}`
+            );
+        }
+    }
+
+    private static getDecimalValue(valueStr: string, inputBase: number): BigNumber {
+        let decimalValue: BigNumber;
+
+        if (isFloatingPointStr(valueStr)) {
+            const valueParts = valueStr.split('.');
+            const integerPart = arbitraryIntegralToDecimal(
+                valueParts[0],
+                inputBase
+            );
+            let fractionalPart = arbitraryFractionToDecimal(
+                valueParts[1],
+                inputBase
+            );
+            // Make the fractionalPart negative if the integer part is also negative
+            // This is needed when both parts are added together to create whole value
+            if (integerPart.isNegative()) {
+                fractionalPart = fractionalPart.negated();
+            }
+            decimalValue = integerPart.plus(fractionalPart);
+        } else {
+            decimalValue = arbitraryIntegralToDecimal(valueStr, inputBase);
+        }
+
+        return decimalValue
     }
 }
 
