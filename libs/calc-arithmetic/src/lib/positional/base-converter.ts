@@ -10,6 +10,8 @@ import {
 } from '../helpers/conversion-helpers';
 import { ComplementConverter } from './complement-converter';
 import { PositionalNumber } from './representations';
+import { Digit } from '../models';
+import { AssociatedBaseConversionDetails } from './associated-base-converter';
 
 export enum ConversionType {
     DIRECT,
@@ -110,6 +112,18 @@ export class ConversionToArbitrary extends ConversionToDecimal {
     }
 }
 
+export class AssociatedBaseConversion implements ConversionStage {
+    public input: [string, number];
+    public result: PositionalNumber;
+    public details: AssociatedBaseConversionDetails;
+
+    constructor(input: [string, number], result: PositionalNumber, details: AssociatedBaseConversionDetails) {
+        this.input = input;
+        this.result = result;
+        this.details = details;
+    }
+}
+
 export interface BaseConverter {
     fromNumber(
         num: number | BigNumber,
@@ -181,96 +195,109 @@ export class StandardBaseConverter implements BaseConverter {
         resultBase: number,
         precision = 30
     ): Conversion {
-        if (isValidString(valueStr, inputBase)) {
-            const conversion = new Conversion();
-            const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
-
-            const complement = ComplementConverter.getComplement(
-                decimalValue.toString(),
-                resultBase
-            );
-            // Split into two str arrays - integral part digits arr and
-            // fractional part digits arr
-            const digits = splitToPartsArr(decimalValue);
-            const inputInDecimal = new PositionalNumber(
-                digits[0],
-                digits[1],
-                10,
-                decimalValue,
-                complement
-            );
-            conversion.addStage(
-                new ConversionToDecimal([valueStr, inputBase], inputInDecimal)
-            );
-            if (resultBase === 10) {
-                return conversion;
-            }
-            conversion.concatConversion(
-                this.fromNumber(inputInDecimal.decimalValue, resultBase)
-            );
-            return conversion;
-        } else {
+        if (!isValidString(valueStr, inputBase)) {
             throw new Error(
                 `The string ${valueStr} does not match the input base ${inputBase}`
             );
         }
+
+        const conversion = new Conversion();
+        const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
+
+        const complement = ComplementConverter.getComplement(
+            decimalValue.toString(),
+            resultBase
+        );
+        // Split into two str arrays - integral part digits arr and
+        // fractional part digits arr
+        const digits = splitToPartsArr(decimalValue);
+        const inputInDecimal = new PositionalNumber(
+            digits[0],
+            digits[1],
+            10,
+            decimalValue,
+            complement
+        );
+        conversion.addStage(
+            new ConversionToDecimal([valueStr, inputBase], inputInDecimal)
+        );
+        if (resultBase === 10) {
+            return conversion;
+        }
+        conversion.concatConversion(
+            this.fromNumber(inputInDecimal.decimalValue, resultBase)
+        );
+        return conversion;
     }
 
     public fromStringDirect(
         valueStr: string,
         inputBase: number,
     ): Conversion {
-        if (isValidString(valueStr, inputBase)) {
-            const conversion = new Conversion();
-
-            const digits = splitToPartsArr(valueStr, inputBase);
-            const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
-            const complement = ComplementConverter.getComplement(valueStr, inputBase);
-
-            const inputInDecimal = new PositionalNumber(
-                digits[0],
-                digits[1],
-                inputBase,
-                decimalValue,
-                complement
-            );
-
-            conversion.addStage(
-                new DirectConversion([valueStr, inputBase], inputInDecimal)
-            );
-
-            return conversion;
-        } else {
+        if (!isValidString(valueStr, inputBase)) {
             throw new Error(
                 `The string ${valueStr} does not match the input base ${inputBase}`
             );
         }
+        const conversion = new Conversion();
+
+        const digits = splitToPartsArr(valueStr, inputBase);
+        const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
+        const complement = ComplementConverter.getComplement(valueStr, inputBase);
+
+        const inputInDecimal = new PositionalNumber(
+            digits[0],
+            digits[1],
+            inputBase,
+            decimalValue,
+            complement
+        );
+
+        conversion.addStage(
+            new DirectConversion([valueStr, inputBase], inputInDecimal)
+        );
+
+        return conversion;
     }
 
-    private static getDecimalValue(valueStr: string, inputBase: number): BigNumber {
-        let decimalValue: BigNumber;
+    public fromDigitsDirect(
+        digits: Digit[],
+        isNegative? : boolean
+    ): Conversion {
+        const valueStr = digits.reduce((str, digit) => {
+            return digit.position === -1
+                ? str.concat(`.${digit.valueInBase}`)
+                : str.concat(digit.valueInBase);
+        }, isNegative ? '-' : '');
 
-        if (isFloatingPointStr(valueStr)) {
-            const valueParts = valueStr.split('.');
-            const integerPart = arbitraryIntegralToDecimal(
-                valueParts[0],
-                inputBase
-            );
-            let fractionalPart = arbitraryFractionToDecimal(
-                valueParts[1],
-                inputBase
-            );
-            // Make the fractionalPart negative if the integer part is also negative
-            // This is needed when both parts are added together to create whole value
-            if (integerPart.isNegative()) {
-                fractionalPart = fractionalPart.negated();
-            }
-            decimalValue = integerPart.plus(fractionalPart);
-        } else {
-            decimalValue = arbitraryIntegralToDecimal(valueStr, inputBase);
+        const base = digits[0].base;
+
+        return this.fromStringDirect(valueStr, base)
+    }
+
+
+    private static getDecimalValue(valueStr: string, inputBase: number): BigNumber {
+        if (!isFloatingPointStr(valueStr)) {
+            return arbitraryIntegralToDecimal(valueStr, inputBase);
         }
 
-        return decimalValue
+        const valueParts = valueStr.split('.');
+        const integerPart = arbitraryIntegralToDecimal(
+            valueParts[0],
+            inputBase
+        );
+        let fractionalPart = arbitraryFractionToDecimal(
+            valueParts[1],
+            inputBase
+        );
+
+        // Make the fractionalPart negative if the integer part is also negative
+        // This is needed when both parts are added together to create whole value
+        if (integerPart.isNegative()) {
+            fractionalPart = fractionalPart.negated();
+        }
+
+        return integerPart.plus(fractionalPart);
     }
 }
 
@@ -292,4 +319,21 @@ export function fromString(
 ): Conversion {
     return converter.fromString(valueStr, inputBase, resultBase, precision);
 }
+
+export function fromStringDirect(
+    valueStr: string,
+    inputBase: number,
+): Conversion {
+    const converter = new StandardBaseConverter();
+    return converter.fromStringDirect(valueStr, inputBase);
+}
+
+export function fromDigits(
+    digit: Digit[],
+    isNegative? : boolean,
+): Conversion {
+    const converter = new StandardBaseConverter();
+    return converter.fromDigitsDirect(digit, isNegative);
+}
+
 

@@ -1,5 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { fromNumber, StandardBaseConverter } from './base-converter';
+import { Digit } from '@calc/calc-arithmetic';
 
 describe('StandardBaseConverter fromNumber tests', () => {
     const BaseConverter = new StandardBaseConverter();
@@ -250,7 +251,7 @@ describe('StandardBaseConverter fromString tests', () => {
             expect(secondStage.result.valueInBase).toEqual(valueInBase);
             expect(secondStage.result.base).toEqual(outputRadix);
         });
-    })
+    });
 
 });
 
@@ -389,6 +390,58 @@ describe('StandardBaseConverter fromStringDirect tests', () => {
     });
 
 });
+
+describe('StandardBaseConverter fromDigitsDirect tests', () => {
+    const BaseConverter = new StandardBaseConverter();
+
+    it('converts positive base 2 integer to base 10', () => {
+        // given
+        const digits: Digit[] = [
+            { base: 2, position: 4, valueInBase: '1', valueInDecimal: 1 },
+            { base: 2, position: 3, valueInBase: '1', valueInDecimal: 1 },
+            { base: 2, position: 2, valueInBase: '0', valueInDecimal: 0 },
+            { base: 2, position: 1, valueInBase: '0', valueInDecimal: 0 },
+            { base: 2, position: 0, valueInBase: '1', valueInDecimal: 1 },
+        ];
+        const expectedValueInBase = '11001';
+        const expectedValue = new BigNumber(25);
+        const expectedComplement = '(0)11001';
+
+        // when
+        const result = BaseConverter.fromDigitsDirect(digits).result;
+
+        // then
+        expect(result.valueInBase).toEqual(expectedValueInBase);
+        expect(result.decimalValue).toEqual(expectedValue);
+        expect(result.complement.toString()).toEqual(expectedComplement);
+    });
+
+    it('converts positive base 2 integer with fractional part to base 10', () => {
+        // given
+        const digits: Digit[] = [
+            { base: 2, position: 4, valueInBase: '1', valueInDecimal: 1 },
+            { base: 2, position: 3, valueInBase: '1', valueInDecimal: 1 },
+            { base: 2, position: 2, valueInBase: '0', valueInDecimal: 0 },
+            { base: 2, position: 1, valueInBase: '0', valueInDecimal: 0 },
+            { base: 2, position: 0, valueInBase: '1', valueInDecimal: 1 },
+            { base: 2, position: -1, valueInBase: '1', valueInDecimal: 1 },
+        ];
+        const expectedValueInBase = '11001.1';
+        const expectedValue = new BigNumber(25.5);
+        const expectedComplement = '(0)11001.1';
+
+        // when
+        const result = BaseConverter.fromDigitsDirect(digits)
+            .result;
+
+        // then
+        expect(result.valueInBase).toEqual(expectedValueInBase);
+        expect(result.decimalValue).toEqual(expectedValue);
+        expect(result.complement.toString()).toEqual(expectedComplement);
+    });
+
+});
+
 
 describe('fromNumber tests', () => {
     it('converts number with variable precision', () => {
