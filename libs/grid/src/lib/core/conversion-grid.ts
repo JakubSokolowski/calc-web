@@ -41,7 +41,7 @@ export function buildFractionalConversionGrid(conversion: Conversion, precision 
          */
         if (index === fractionalMultipliers.length - 1) return;
 
-        const multiplicandCells = buildMultiplicandCells(leftMultiplicand, multiplicandMaxLength);
+        const multiplicandCells = buildMultiplicandCells(leftMultiplicand, multiplicandMaxLength + 1);
         const multiplicationResultCells = buildMultiplicationResultCells(rightResult, resultMaxLength);
         const baseCell = { content: conversion.result.base.toString() };
 

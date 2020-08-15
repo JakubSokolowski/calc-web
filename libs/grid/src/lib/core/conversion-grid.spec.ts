@@ -3,7 +3,11 @@ import {
     buildIntegralConversionGrid,
 } from './conversion-grid';
 import { fromNumber } from '@calc/calc-arithmetic';
-import { fractionalConversionGridMock, integralConversionGridMock } from './grid-mocks';
+import {
+    fractionalConversionExactGridMock,
+    fractionalConversionGridMock,
+    integralConversionGridMock
+} from './grid-mocks';
 import { HoverOperationGrid } from '@calc/grid';
 
 describe('hover-operation-grid', () => {
@@ -32,6 +36,20 @@ describe('hover-operation-grid', () => {
             // then
             expect(grid.values).toEqual(fractionalConversionGridMock.values);
         });
+
+        // ISSUE_ID: 32
+        it('should return proper gird values for such conversion which subsequent multiplicands are shorted than previous', () => {
+            // given
+            const conv = fromNumber(24.125, 2);
+            const precision = 5;
+
+            // when
+            grid = buildFractionalConversionGrid(conv, precision);
+
+            // then
+            console.log(grid.values);
+            expect(grid.values).toEqual(fractionalConversionExactGridMock.values);
+        })
     });
 
     describe('#buildhoverCoversionToArbitraryGrid', () => {

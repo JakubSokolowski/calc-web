@@ -5,13 +5,9 @@ import { PositionResult } from '@calc/calc-arithmetic';
 interface P {
     positionResult: PositionResult;
 }
-export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
-    const operandsWithCarriesAtFront = [
-        ...positionResult.operands.filter((operand) => operand.isCarry),
-        ...positionResult.operands.filter((operand) => !operand.isCarry),
-    ];
 
-    const operands = operandsWithCarriesAtFront.map((operand, index) => {
+export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
+    const operands = positionResult.operands.map((operand, index) => {
         return (
             <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
                 <NumberSubscript value={operand.valueInBase} subscript={''} noBraces={true}/>

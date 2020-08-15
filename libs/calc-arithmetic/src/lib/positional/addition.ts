@@ -33,8 +33,8 @@ export function addDigitsArrays(digits: Operand[][]): AdditionResult {
 
         const allCarriesAtCurrentPosition = carryLookup[currentPosition] || [];
         const digitsToAdd = [
-            ...allDigitsAtCurrentPosition,
-            ...allCarriesAtCurrentPosition.map((carry) => ({...carry, isCarry: true }))
+            ...allCarriesAtCurrentPosition.map((carry) => ({...carry, isCarry: true })),
+            ...allDigitsAtCurrentPosition
         ];
 
         const positionResult = addDigitsAtPosition(digitsToAdd, currentPosition);
