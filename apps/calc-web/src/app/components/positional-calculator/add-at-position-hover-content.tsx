@@ -6,10 +6,14 @@ interface P {
     positionResult: PositionResult;
 }
 export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
+    const operandsWithCarriesAtFront = [
+        ...positionResult.operands.filter((operand) => operand.isCarry),
+        ...positionResult.operands.filter((operand) => !operand.isCarry),
+    ];
 
-    const operands = positionResult.operands.map((operand, index) => {
+    const operands = operandsWithCarriesAtFront.map((operand, index) => {
         return (
-            <span key={index}>
+            <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
                 <NumberSubscript value={operand.valueInBase} subscript={''} noBraces={true}/>
                 {index !== positionResult.operands.length -1 && '+'}
             </span>

@@ -2,7 +2,7 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromString } from './base-converter';
-import { AdditionResult, Digit, PositionResult } from '../models';
+import { AdditionResult, Digit, Operand, PositionResult } from '../models';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if(!areSameBaseNumbers(numbers)) {
@@ -17,9 +17,9 @@ export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
     return numbers.map((num) => num.base).every((numBase) => numBase === base);
 }
 
-export function addDigitsArrays(digits: Digit[][]): AdditionResult {
-    const carryLookup: Record<number, Digit[]> = {};
-    const digitsPositionLookup: Record<number, Digit>[] = digits.map(toDigitMap);
+export function addDigitsArrays(digits: Operand[][]): AdditionResult {
+    const carryLookup: Record<number, Operand[]> = {};
+    const digitsPositionLookup: Record<number, Operand>[] = digits.map(toDigitMap);
     const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(digits);
     const result: PositionResult[] = [];
 
@@ -27,12 +27,15 @@ export function addDigitsArrays(digits: Digit[][]): AdditionResult {
     let mostSignificant = mostSignificantPosition;
 
     while(currentPosition <= mostSignificant) {
-        const allDigitsAtCurrentPosition = digitsPositionLookup
+        const allDigitsAtCurrentPosition: Operand[] = digitsPositionLookup
             .map((digits) => digits[currentPosition])
             .filter((digit) => !!digit);
 
         const allCarriesAtCurrentPosition = carryLookup[currentPosition] || [];
-        const digitsToAdd = [...allDigitsAtCurrentPosition, ...allCarriesAtCurrentPosition];
+        const digitsToAdd = [
+            ...allDigitsAtCurrentPosition,
+            ...allCarriesAtCurrentPosition.map((carry) => ({...carry, isCarry: true }))
+        ];
 
         const positionResult = addDigitsAtPosition(digitsToAdd, currentPosition);
 
