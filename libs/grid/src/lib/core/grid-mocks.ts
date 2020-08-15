@@ -468,6 +468,158 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
     ]
 };
 
+export const fractionalConversionExactGridMock: Partial<HoverOperationGrid> = {
+    values: [
+        [
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '0.'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '1'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '2'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '5'
+            },
+            {
+                content: '0.',
+                preset: {
+                    'default': 'highlighted-cell',
+                    hover: 'highlighted-cell-hover'
+                }
+            },
+            {
+                content: '2',
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                }
+            },
+            {
+                content: '5',
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                }
+            },
+            {
+                content: ' '
+            },
+            {
+                content: '2'
+            }
+        ],
+        [
+            {
+                content: ' '
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '0.'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '2'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '5'
+            },
+            {
+                content: '0.',
+                preset: {
+                    'default': 'highlighted-cell',
+                    hover: 'highlighted-cell-hover'
+                }
+            },
+            {
+                content: '5',
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                }
+            },
+            {
+                content: ' '
+            },
+            {
+                content: ' '
+            },
+            {
+                content: '2'
+            }
+        ],
+        [
+            {
+                content: ' '
+            },
+            {
+                content: ' '
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '0.'
+            },
+            {
+                preset: {
+                    'default': 'default-cell',
+                    hover: 'hover-cell'
+                },
+                content: '5'
+            },
+            {
+                content: '1.',
+                preset: {
+                    'default': 'highlighted-cell',
+                    hover: 'highlighted-cell-hover'
+                }
+            },
+            {
+                content: ' '
+            },
+            {
+                content: ' '
+            },
+            {
+                content: ' '
+            },
+            {
+                content: '2'
+            }
+        ]
+    ]
+};
+
 export const integralConversionGridMock: HoverOperationGrid = {
     groups: [
         {
@@ -644,7 +796,7 @@ export const integralConversionGridMock: HoverOperationGrid = {
                 }
             },
             {
-                content: ' ',
+                content: ' '
             },
             {
                 content: '0',
@@ -677,10 +829,10 @@ export const integralConversionGridMock: HoverOperationGrid = {
                 }
             },
             {
-                content: ' ',
+                content: ' '
             },
             {
-                content: ' ',
+                content: ' '
             },
             {
                 content: '0',
@@ -692,7 +844,7 @@ export const integralConversionGridMock: HoverOperationGrid = {
         ],
         [
             {
-                content: ' ',
+                content: ' '
             },
             {
                 content: '6',
@@ -709,10 +861,10 @@ export const integralConversionGridMock: HoverOperationGrid = {
                 }
             },
             {
-                content: ' ',
+                content: ' '
             },
             {
-                content: ' ',
+                content: ' '
             },
             {
                 content: '0',
@@ -724,7 +876,7 @@ export const integralConversionGridMock: HoverOperationGrid = {
         ],
         [
             {
-                content: ' ',
+                content: ' '
             },
             {
                 content: '3',

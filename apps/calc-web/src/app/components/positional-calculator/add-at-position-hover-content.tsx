@@ -5,11 +5,11 @@ import { PositionResult } from '@calc/calc-arithmetic';
 interface P {
     positionResult: PositionResult;
 }
-export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
 
+export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
     const operands = positionResult.operands.map((operand, index) => {
         return (
-            <span key={index}>
+            <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
                 <NumberSubscript value={operand.valueInBase} subscript={''} noBraces={true}/>
                 {index !== positionResult.operands.length -1 && '+'}
             </span>

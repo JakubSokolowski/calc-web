@@ -13,16 +13,16 @@ interface P {
 }
 
 export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
-    const fractionalhoverGrid = conversion.result.fractionalPart.length > 0
+    const fractionalHoverGrid = conversion.result.fractionalPart.length > 0
         ? buildFractionalConversionGrid(conversion, precision): undefined;
 
-    const integralhoverGrid = buildIntegralConversionGrid(conversion);
+    const integralHoverGrid = buildIntegralConversionGrid(conversion);
 
-    const floatinghoverPopover = (hoverProps) => {
+    const floatingHoverPopover = (hoverProps) => {
         return <FractionalConversionRow {...hoverProps}/>
     };
 
-    const integralhoverPopover = (hoverProps) => {
+    const integralHoverPopover = (hoverProps) => {
         return <IntegralConversionRow {...hoverProps}/>
     };
 
@@ -49,26 +49,24 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                 }
                 <div style={{ display: 'flex', flexDirection: 'row' }}>
                     {
-                        integralhoverGrid &&
+                        integralHoverGrid &&
                         <HoverGrid
-                            {...integralhoverGrid}
+                            {...integralHoverGrid}
                             title={'Integral part conversion:'}
-                            groupBuilder={integralhoverPopover}
+                            groupBuilder={integralHoverPopover}
                         />
                     }
                     <div style={{ width: '20px', flexGrow: 1 }}/>
                     {
-                        fractionalhoverGrid &&
+                        fractionalHoverGrid &&
                         <HoverGrid
-                            {...fractionalhoverGrid}
+                            {...fractionalHoverGrid}
                             title={'Floating part conversion:'}
-                            groupBuilder={floatinghoverPopover}
+                            groupBuilder={floatingHoverPopover}
                         />
                     }
                 </div>
             </div>
-
-
         </div>
     );
 };

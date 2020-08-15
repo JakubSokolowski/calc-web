@@ -42,22 +42,37 @@ describe('conversion-helpers', () => {
         });
 
         it('removes trailing zero digits from double char digit array', () => {
+            // given
             const input = ['11', '23', '30', '50', '10', '00', '00'];
+
+            // when
             const actual = removeZeroDigits(input);
+
+            // then
             const expected = ['11', '23', '30', '50', '10'];
             expect(actual).toEqual(expected);
         });
 
         it('does not modify string with nothing to remove', () => {
+            // given
             const input = ['1', '2', '3', '0', '1'];
+
+            // when
             const actual = removeZeroDigits(input);
+
+            // then
             const expected = ['1', '2', '3', '0', '1'];
             expect(actual).toEqual(expected);
         });
 
         it('does not modify empty array', () => {
+            // given
             const input: string[] = [];
+
+            // when
             const actual = removeZeroDigits(input);
+
+            // then
             const expected: string[] = [];
             expect(actual).toEqual(expected);
         });
@@ -93,14 +108,25 @@ describe('conversion-helpers', () => {
 
     describe('replaceAll tests', () => {
         it('replaces all characters in string', () => {
+            // given
             const input = 'A#CA#C';
+
+            // when
             const actual = replaceAll(input, '#', 'B');
+
+            // then
             const expected = 'ABCABC';
             expect(actual).toEqual(expected);
         });
+
         it('does not modify string without character to replace', () => {
+            // given
             const input = 'ACAC';
+
+            // when
             const actual = replaceAll(input, '#', 'B');
+
+            // then
             const expected = 'ACAC';
             expect(actual).toEqual(expected);
         });
@@ -108,23 +134,37 @@ describe('conversion-helpers', () => {
 
     describe('getRepresentationRegexPattern test', () => {
         it('returns correct pattern for base binary numbers', () => {
+            // given
             const radix = 2;
             const expected = '^-?[0-1]+([.][0-1]+)?$';
+
+            // when
             expect(getRepresentationRegexPattern(radix)).toEqual(expected);
         });
+
         it('returns correct pattern for base 10 numbers', () => {
+            // given
             const radix = 10;
             const expected = '^-?[0-9]+([.][0-9]+)?$';
+
+            // when
             expect(getRepresentationRegexPattern(radix)).toEqual(expected);
         });
+
         it('returns correct pattern for base 16 numbers', () => {
+            // given
             const radix = 16;
             const expected = '^-?[0-9A-F]+([.][0-9A-F]+)?$';
+            // when
             expect(getRepresentationRegexPattern(radix)).toEqual(expected);
         });
+
         it('throws error if radix > 36', () => {
+            // given
             const radix = 40;
+
             expect(() => {
+                // when
                 getRepresentationRegexPattern(radix);
             }).toThrow();
         });
@@ -132,104 +172,171 @@ describe('conversion-helpers', () => {
 
     describe('isValidString test', () => {
         it('returns true if string matches the radix', () => {
+            // given
             const str = 'FFFA.6556A';
             const radix = 16;
+
+            // when
             expect(isValidString(str, radix)).toBeTruthy();
         });
+
         it('returns false if string is invalid for radix', () => {
+            // given
             const str = 'ZZZa asd1  sad';
             const radix = 10;
+
+            // when
             expect(isValidString(str, radix)).toBeFalsy();
         });
+
         it('returns false if string does not match the radix', () => {
+            // given
             const str = 'AABFBAA.FF';
             const radix = 15;
+
+            // when
             expect(isValidString(str, radix)).toBeFalsy();
         });
+
         it('returns true if string matches the radix for base > 36', () => {
+            // given
             const str = '-01 36 56.92 34';
             const radix = 64;
+
+            // when
             expect(isValidString(str, radix)).toBeTruthy();
         });
+
         it('returns false if string does not match the radix for base > 36', () => {
+            // given
             const str = '01 78';
             const radix = 64;
+
+            // when
             expect(isValidString(str, radix)).toBeTruthy();
         });
 
         it('returns false if the string has multiple signs', () => {
+            // given
             const str = '--1234.-230';
             const radix = 10;
+
+            // when
             expect(isValidString(str, radix)).toBeFalsy();
         });
+
         it('returns false if the string has multiple delimiters', () => {
+            // given
             const str = '1234..230';
             const radix = 10;
+
+            // when
             expect(isValidString(str, radix)).toBeFalsy();
         });
     });
 
     describe('decimalIntegralToArbitrary tests', () => {
         it('returns correct pattern for 0 in base 2', () => {
+            // given
             const input = new BigNumber(0);
             const radix = 2;
             const expected = '0'.split('');
             const expectedDivisors: string[] = [];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for 25 in base 2', () => {
+            // given
             const input = new BigNumber(25);
             const radix = 2;
             const expected = '11001'.split('');
             const expectedDivisors: string[] = ['25', '12', '6', '3', '1'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for -25 in base 2', () => {
+            // given
             const input = new BigNumber(-25);
             const radix = 2;
             const expected = '11001'.split('');
             const expectedDivisors: string[] = ['25', '12', '6', '3', '1'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for 255 in base 16', () => {
+            // given
             const input = new BigNumber(255);
             const radix = 16;
             const expected = 'FF'.split('');
             const expectedDivisors: string[] = ['255', '15'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for -255 in base 16', () => {
+            // given
             const input = new BigNumber(-255);
             const radix = 16;
             const expected = 'FF'.split('');
             const expectedDivisors = ['255', '15'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for 100 in base 64', () => {
+            // given
             const input = new BigNumber(100);
             const radix = 64;
             const expected = '01 36'.split(' ');
             const expectedDivisors = ['100', '1'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
+
         it('returns correct pattern for -100 in base 64', () => {
+            // given
             const input = new BigNumber(-100);
             const radix = 64;
             const expected = '01 36'.split(' ');
             const expectedDivisors = ['100', '1'];
+
+            // when
             const result = decimalIntegerToArbitrary(input, radix);
+
+            // then
             expect(result[0].digits).toEqual(expected);
             expect(result[1]).toEqual(expectedDivisors);
         });
@@ -237,50 +344,81 @@ describe('conversion-helpers', () => {
 
     describe('arbitraryIntegralToDecimal tests', () => {
         it('converts 0 in base 2 to base 10', () => {
+            // given
             const input = '0';
             const radix = 2;
             const expected = new BigNumber(0);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts positive number in base 2 to base 10', () => {
+            // given
             const input = '11001';
             const radix = 2;
             const expected = new BigNumber(25);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts negative number in base 2 to base 10', () => {
+            // given
             const input = '-11001';
             const radix = 2;
             const expected = new BigNumber(-25);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts positive number in base 16 to base 10', () => {
+            // given
             const input = 'FF';
             const radix = 16;
             const expected = new BigNumber(255);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts negative number in base 16 to base 10', () => {
+            // given
             const input = '-FF';
             const radix = 16;
             const expected = new BigNumber(-255);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts positive number in base 64 to base 10', () => {
+            // given
             const input = '01 36';
             const radix = 64;
             const expected = new BigNumber(100);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts negative number in base 64 to base 10', () => {
+            // given
             const input = '-01 36';
             const radix = 64;
             const expected = new BigNumber(-100);
+
+            // when
             expect(arbitraryIntegralToDecimal(input, radix)).toEqual(expected);
         });
+
         it('throws error if repStr does match input radix', () => {
+            // given
             const input = 'FF8';
             const inputRadix = 10;
+
+            // when
             expect(() => {
                 arbitraryIntegralToDecimal(input, inputRadix);
             }).toThrow();
@@ -429,23 +567,34 @@ describe('conversion-helpers', () => {
 
     describe('arbitraryFractionToDecimal tests', () => {
         it('converts base 2 fraction to exact decimal', () => {
+            // given
             const input = '11';
             const radix = 2;
             const expected = new BigNumber(0.75);
+
+            // when
             expect(arbitraryFractionToDecimal(input, radix)).toEqual(expected);
         });
+
         it('converts base 2 fraction to exact decimal without rounding', () => {
+            // given
             const input = '010011001100110011001100110011';
             const radix = 2;
             const expected = '0.2999999998137354850769035';
+
+            // when
             expect(arbitraryFractionToDecimal(input, radix).toString()).toEqual(
                 expected
             );
         });
+
         it('converts base 2 fraction to exact decimal with rounding', () => {
+            // given
             const input = '010011001100110011001100110011';
             const radix = 2;
             const expected = '0.3';
+
+            // when
             expect(
                 arbitraryFractionToDecimal(input, radix)
                     .toPrecision(1)
@@ -456,38 +605,61 @@ describe('conversion-helpers', () => {
 
     describe('isFloatingPointStr tests', () => {
         it('returns true if string has delimiter', () => {
+            // given
             const input = '1.1';
+
+            // when
             expect(isFloatingPointStr(input)).toBeTruthy();
         });
 
         it('returns false if string has no delimiter', () => {
+            // given
             const input = '1121';
+
+            // when
             expect(isFloatingPointStr(input)).toBeFalsy();
         });
     });
 
     describe('toDigitsLists tests', () => {
         it('Converts float number to lists of integer and fraction part digits', () => {
+            // given
             const num = new BigNumber(25.5);
             const expectedIntegral = ['2', '5'];
             const expectedFractional = ['5'];
+
+            // when
             const result = splitToPartsArr(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
+
         it('Converts int number to lists of integer and fraction part digits', () => {
+            // given
             const num = new BigNumber(25);
             const expectedIntegral = ['2', '5'];
             const expectedFractional: string[] = [];
+
+            // when
             const result = splitToPartsArr(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
+
         it('Converts negative int number to lists of integer and fraction part digits', () => {
+            // given
             const num = new BigNumber(-25);
             const expectedIntegral = ['2', '5'];
             const expectedFractional: string[] = [];
+
+            // when
             const result = splitToPartsArr(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
@@ -495,41 +667,63 @@ describe('conversion-helpers', () => {
 
     describe('splitToDigits tests', () => {
         it('Splits floating number to list of its digit parts', () => {
+            // given
             const num = new BigNumber(25.5);
             const base = 10;
             const expectedIntegral = new Digits(['2', '5'], base);
             const expectedFractional = new Digits(['5'], base);
+
+            // when
             const result = splitToDigits(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
+
         it('Splits number string to list of its digit parts', () => {
+            // given
             const num = '25.5';
             const base = 10;
             const expectedIntegral = new Digits(['2', '5'], base);
             const expectedFractional = new Digits(['5'], base);
+
+            // when
             const result = splitToDigits(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
+
         it('Splits number string to list of its digit parts for base > 36', () => {
+            // given
             const num = '12 45 23.52';
             const base = 64;
             const expectedIntegral = new Digits(['12', '45', '23'], base);
             const expectedFractional = new Digits(['52'], base);
+
+            // when
             const result = splitToDigits(num, base);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
+
         it('Splits number string to list of its digit parts', () => {
+            // given
             const num = 25.5;
             const base = 10;
             const expectedIntegral = new Digits(['2', '5'], base);
             const expectedFractional = new Digits(['5'], base);
+
+            // when
             const result = splitToDigits(num);
+
+            // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
         });
     });
-
 });
