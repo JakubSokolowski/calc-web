@@ -10,10 +10,11 @@ import {
     removeZeroDigits,
     replaceAll,
     representationStrToStrArray,
-    splitToDigits,
+    splitToDigits, splitToDigitsList,
     splitToPartsArr
 } from './conversion-helpers';
 import { Digits } from '../positional/representations';
+import { Digit } from '@calc/calc-arithmetic';
 
 describe('conversion-helpers', () => {
     describe('#removeZeroDigits', () => {
@@ -724,6 +725,40 @@ describe('conversion-helpers', () => {
             // then
             expect(result[0]).toEqual(expectedIntegral);
             expect(result[1]).toEqual(expectedFractional);
+        });
+    });
+
+    describe('splitToDigitList tests', () => {
+        it('splits floating number to list of digits', () => {
+            // given
+            const num = new BigNumber(25.5);
+            const base = 10;
+
+            // when
+            const result = splitToDigitsList(num, base);
+
+            // then
+            const expected: Digit[] = [
+                {
+                    base: 10,
+                    position: 1,
+                    valueInBase: '2',
+                    valueInDecimal: 2
+                },
+                {
+                    base: 10,
+                    position: 0,
+                    valueInBase: '5',
+                    valueInDecimal: 5
+                },
+                {
+                    base: 10,
+                    position: -1,
+                    valueInBase: '5',
+                    valueInDecimal: 5
+                }
+            ];
+            expect(result).toEqual(expected)
         });
     });
 });

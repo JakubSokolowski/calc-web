@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from '../positional/base-digits';
 import { Digits } from '../positional/representations';
+import { Digit } from '../models';
 
 /**
  *  Splits the representation string into digits array
@@ -266,4 +267,26 @@ export function splitToDigits(
 ): [Digits, Digits] {
     const result = splitToPartsArr(num, base);
     return [new Digits(result[0], base), new Digits(result[1], base)];
+}
+
+export function splitToDigitsList( num: BigNumber | number | string,  base = 10): Digit[] {
+    const [integerPart, fractionalPart] = splitToPartsArr(num, base);
+    return [
+        ...integerPart.map((digit, index) => {
+            return {
+                valueInDecimal: BaseDigits.getValue(digit, base),
+                base,
+                position: integerPart.length - 1 - index,
+                valueInBase: digit
+            }
+        }),
+        ...fractionalPart.map((digit, index) => {
+            return {
+                valueInDecimal: BaseDigits.getValue(digit, base),
+                base,
+                position: -1 * (index + 1),
+                valueInBase: digit
+            }
+        })
+    ]
 }

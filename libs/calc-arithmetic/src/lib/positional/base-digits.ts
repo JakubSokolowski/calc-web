@@ -25,7 +25,7 @@ export class BaseDigits {
      */
     public static getDigit(value: number, base: number): string {
         if (!this.isValidRadix(base)) {
-            throw new Error(`Base must be between ${this.MIN_BASE} and ${this.MAX_BASE}`);
+            throw new Error(`Base must be between ${this.MIN_BASE} and ${this.MAX_BASE}, but was "${base}"`);
         }
         if (value < base) {
             if (base <= 36) {

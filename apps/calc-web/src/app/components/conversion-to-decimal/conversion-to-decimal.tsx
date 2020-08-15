@@ -9,23 +9,12 @@ interface P {
 export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     const [inputStr, inputBase] = conversionStage.input;
 
-    const integerParts = conversionStage.result.integerPart.digits.map((digit, index, arr) => {
+    const digits = conversionStage.inputDigitList.map((digit, index, arr) => {
         return (
             <span key={index}>
-                {digit}*
-                {inputBase}
-                <sup>{arr.length - index - 1}</sup>
-                {' + '}
-            </span>
-        )
-    });
-
-    const fractionalParts = conversionStage.result.fractionalPart.digits.map((digit, index, arr) => {
-        return (
-            <span key={index}>
-                {digit}*
-                {inputBase}
-                <sup>{- 1 * (index + 1)}</sup>
+                {digit.valueInBase}*
+                {digit.base}
+                <sup>{digit.position}</sup>
                 {index !== arr.length -1 && ' + '}
             </span>
         )
@@ -36,7 +25,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
             <div id="decimal-conversion-details" style={{ display: 'inline-block' }}>
                 <NumberSubscript value={inputStr} subscript={inputBase}/>
                 &nbsp;=&nbsp;
-                {integerParts} {fractionalParts}
+                {digits}
                 &nbsp;=&nbsp;
                 <NumberSubscript value={conversionStage.result.valueInBase} subscript={conversionStage.result.base}/>
             </div>
