@@ -5,7 +5,7 @@ import {
     decimalFractionToArbitrary,
     decimalIntegerToArbitrary,
     isFloatingPointStr,
-    isValidString,
+    isValidString, splitToDigits, splitToDigitsList,
     splitToPartsArr
 } from '../helpers/conversion-helpers';
 import { ComplementConverter } from './complement-converter';
@@ -79,20 +79,24 @@ interface ConversionStage {
 export class ConversionToDecimal implements ConversionStage {
     public input: [string, number];
     public result: PositionalNumber;
+    public inputDigitList: Digit[];
 
     constructor(input: [string, number], result: PositionalNumber) {
         this.input = input;
         this.result = result;
+        this.inputDigitList = splitToDigitsList(input[0], input[1]);
     }
 }
 
 export class DirectConversion implements ConversionStage {
     public input: [string, number];
     public result: PositionalNumber;
+    public digitList: Digit[];
 
     constructor(input: [string, number], result: PositionalNumber) {
         this.input = input;
         this.result = result;
+        this.digitList = splitToDigitsList(input[0], input[1]);
     }
 }
 
@@ -218,6 +222,7 @@ export class StandardBaseConverter implements BaseConverter {
             decimalValue,
             complement
         );
+
         conversion.addStage(
             new ConversionToDecimal([valueStr, inputBase], inputInDecimal)
         );
