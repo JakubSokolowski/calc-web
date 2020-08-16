@@ -28,7 +28,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
 
     return (
         <div>
-            <div id="integral-conversion-details" style={{ display: 'inline-block' }}>
+            <div id="integral-conversion-details">
                 {
                     conversion.type === ConversionType.DIRECT ?
                         <div>
@@ -56,7 +56,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                             groupBuilder={integralHoverPopover}
                         />
                     }
-                    <div style={{ width: '20px', flexGrow: 1 }}/>
+                    <div style={{ width: '20px'}}/>
                     {
                         fractionalHoverGrid &&
                         <HoverGrid
