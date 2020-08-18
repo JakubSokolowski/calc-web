@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { Conversion, ConversionToDecimal, ConversionType } from '@calc/calc-arithmetic';
 import { buildFractionalConversionGrid, buildIntegralConversionGrid, HoverGrid } from '@calc/grid';
 import { ResultEquation } from './result-equation/result-equation';
-import { Typography } from 'antd';
+import { Input, Typography } from 'antd';
 import { IntegralConversionRow } from './integral-conversion-row/integral-conversion-row';
 import { ConversionToDecimalDetails } from '../conversion-to-decimal/conversion-to-decimal';
 import { FractionalConversionRow } from './fractional-conversion-row/fractional-conversion-row';
+import { InputWithCopy } from '@calc/ui';
 
 interface P {
     conversion: Conversion;
@@ -29,6 +30,13 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
     return (
         <div>
             <div id="integral-conversion-details">
+                <span>Output number</span>
+                <Input.Group compact style={{marginBottom: '20px'}}>
+                    <InputWithCopy
+                        readOnly
+                        value={conversion.result.toString(precision)}
+                    />
+                </Input.Group>
                 {
                     conversion.type === ConversionType.DIRECT ?
                         <div>

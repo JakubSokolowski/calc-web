@@ -23,7 +23,6 @@ export const App = () => {
             <Layout>
                 <Sider collapsedWidth={80} collapsible collapsed={leftMenuCollapsed} onCollapse={() => setLeftMenuCollapsed(!leftMenuCollapsed)} style={{
                     overflow: 'auto',
-                    height: '100vh',
                     position: 'sticky',
                     top: 0,
                     left: 0

@@ -23,6 +23,11 @@ export const BaseConverterView: FC = () => {
                 {t('baseConverter.title')}
             </Title>
             <BaseConverterComponent onConversionChange={onChange}/>
+            {conversion &&
+                <Title level={3} style={{paddingTop: '20px'}}>
+                    {t('baseConverter.result')}
+                </Title>
+            }
             {conversion && <ConversionDetails conversion={conversion} precision={precision}/>}
         </div>
     );
