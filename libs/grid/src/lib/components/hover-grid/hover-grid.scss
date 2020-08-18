@@ -21,6 +21,11 @@
     width: 100%;
     max-height: 500px;
     display: inline-block;
-    overflow-y: auto;
+    overflow-y: scroll;
+}
+
+.cell-content {
+    width: auto;
+    height: auto;
 }
 
