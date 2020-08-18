@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
+import { Form } from 'antd';
 import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
-import { Form } from 'antd';
 import { useTranslation } from 'react-i18next';
-import { InputType, InputWithCopy } from '@calc/grid';
+import { InputType, InputWithCopy } from '@calc/ui';
 
 export const FloatConverterComponent: FC = () => {
     const initialNum = FloatConverter.ToSingle(0.0);
@@ -71,13 +71,13 @@ export const FloatConverterComponent: FC = () => {
             >
                 <div style={{ width: '600px' }}>
                     <Form.Item label={t('floatConverter.entered')} style={formItemStyle}>
-                        <InputWithCopy value={rawValue} onChange={handleChange} inputType={InputType.Number}/>
+                        <InputWithCopy value={rawValue} onChange={handleChange} size={'small'} inputType={InputType.Number}/>
                     </Form.Item>
                     <Form.Item label={t('floatConverter.stored')} style={formItemStyle}>
-                        <InputWithCopy readOnly value={floatingNumber.value.toString()} inputType={InputType.Text}/>
+                        <InputWithCopy readOnly value={floatingNumber.value.toString()} size={'small'} inputType={InputType.Text}/>
                     </Form.Item>
                     <Form.Item label={t('floatConverter.binary')} style={formItemStyle}>
-                        <InputWithCopy readOnly value={floatingNumber.binary} inputType={InputType.Text}/>
+                        <InputWithCopy readOnly value={floatingNumber.binary} size={'small'} inputType={InputType.Text}/>
                     </Form.Item>
                 </div>
             </Form>

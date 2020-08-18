@@ -13,9 +13,10 @@ interface P {
     onChange?: (value: string) => void;
     readOnly?: boolean;
     inputType?: InputType;
+    size?: 'small' | 'middle' | 'large';
 }
 
-export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) => {
+export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
 
@@ -58,7 +59,7 @@ export const InputWithCopy: FC<P> = ({ onChange, value, inputType, readOnly }) =
             {
                 document.queryCommandSupported('copy') &&
                 <div style={{ paddingLeft: '5px' }}>
-                    <Button size={'small'} onClick={copyToClipboard}>
+                    <Button size={size || 'middle'} onClick={copyToClipboard}>
                         <CopyOutlined/>
                     </Button>
                 </div>

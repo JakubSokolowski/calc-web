@@ -3,7 +3,8 @@
         "header": "Calc"
     },
     "baseConverter": {
-        "title": "Base Converter"
+        "title": "Base Converter",
+        "result": "Conversion result"
     },
     "floatConverter": {
         "title": "Float Converter",

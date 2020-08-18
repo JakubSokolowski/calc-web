@@ -1,140 +1,116 @@
-import React, { FC, useEffect, useState } from 'react';
-import { Input, InputNumber } from 'antd';
-import { Conversion, fromNumber, fromString } from '@calc/calc-arithmetic';
-import { BigNumber } from 'bignumber.js';
+import React, { FC } from 'react';
+import { Button, Form, Input, Tooltip } from 'antd';
+import { BaseDigits, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
+import './base-converter-component.scss';
+import { useForm } from 'antd/es/form/util';
+import { SwapOutlined } from '@ant-design/icons/lib';
+import { InputWithCopy } from '@calc/ui';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
 }
 
-export const BaseConverterComponent: FC<P> = ({onConversionChange}) => {
-    const defaultInputBase = 10;
-    const defaultOutputBase = 2;
-    const defaultPrecision = 5;
+interface FormValues {
+    inputStr: string;
+    inputBase: number;
+    outputBase: number;
+    precision: number;
+}
 
-    const [inputNumber, setInputNumber] = useState('24');
-    const [outputNumber, setOutputNumber] = useState('');
-    const [inputBase, setInputBase] = useState(defaultInputBase);
-    const [outputBase, setOutputBase] = useState(defaultOutputBase);
-    const [precision, setPrecision] = useState(defaultPrecision);
-    const [complementStr, setComplementStr] = useState('');
-    const [inputComplementStr, setInputComplementStr] = useState('');
+export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
+    const [form] = useForm();
 
-    useEffect(() => {
-        try {
-            if (!inputNumber || !inputBase || !outputBase) return;
-            const result =
-                inputBase === 10
-                    ? fromNumber(new BigNumber(inputNumber), outputBase)
-                    : fromString(inputNumber, inputBase, outputBase);
-            setInputComplementStr(
-                fromString(
-                    inputNumber,
-                    inputBase,
-                    inputBase
-                ).result.complement.toString(precision)
-            );
-            setOutputNumber(result.result.toString(precision));
-            setComplementStr(result.result.complement.toString(precision));
-            onConversionChange(result, precision);
-        } catch (err) {
-            console.log(err);
+    const initialValues: FormValues = {
+        inputStr: '123.45',
+        inputBase: 10,
+        outputBase: 2,
+        precision: 10
+    };
+
+    const onFinish = (values: FormValues) => {
+        const { inputStr, inputBase, outputBase, precision } = values;
+        const conversion = fromString(inputStr, inputBase, outputBase);
+        onConversionChange(conversion, precision);
+    };
+
+    const checkBase = (_, base: number) => {
+        if (!BaseDigits.isValidRadix(base)) {
+            return Promise.reject(`Base must be between ${BaseDigits.MIN_BASE} and ${BaseDigits.MAX_BASE}`);
         }
-    }, [inputNumber, inputBase, outputBase, precision]);
-
-    const onInputNumberChange = event => {
-        setInputNumber(event.target.value);
+        return Promise.resolve();
     };
 
-    const onInputBaseChange = value => {
-        setInputBase(parseInt(value, 10));
+    const checkValueStr = (_, valueStr: string) => {
+        const { inputBase } = form.getFieldsValue();
+        if (!isValidString(valueStr, inputBase)) {
+            return Promise.reject(`Representation strings contains invalid digits for base ${inputBase}`);
+        }
+        return Promise.resolve();
     };
 
-    const onOutputBaseChange = value => {
-        setOutputBase(parseInt(value, 10));
+    const swap = () => {
+        const { inputBase, outputBase } = form.getFieldsValue() as FormValues;
+        form.setFieldsValue({ inputBase: outputBase, outputBase: inputBase });
+        form.validateFields();
     };
 
     return (
         <div>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '20%' }}>
-                    <span> Input base </span>
-                </div>
-                <div style={{ width: '80%' }}>
-                    <span> Input number </span>
-                </div>
-            </div>
-            <Input.Group compact>
-                <InputNumber
-                    style={{ width: '20%' }}
-                    min={2}
-                    max={64}
-                    defaultValue={defaultInputBase}
-                    onChange={onInputBaseChange}
-                />
-                <Input
-                    style={{ width: '80%' }}
-                    allowClear
-                    defaultValue={'24'}
-                    onChange={onInputNumberChange}
-                />
-            </Input.Group>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '20%' }}/>
-                <div style={{ width: '80%' }}>
-                    <span>Input number complement</span>
-                </div>
-            </div>
-            <Input.Group compact>
-                <div style={{ width: '20%' }}/>
-                <Input
-                    style={{ width: '80%' }}
-                    readOnly
-                    value={inputComplementStr}
-                />
-            </Input.Group>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '10%' }}>
-                    <span> Output base </span>
-                </div>
-                <div style={{ width: '10%' }}>
-                    <span> Precision </span>
-                </div>
-                <div style={{ width: '80%' }}>
-                    <span> Output number </span>
-                </div>
-            </div>
-            <Input.Group compact>
-                <InputNumber
-                    style={{ width: '10%' }}
-                    min={2}
-                    max={64}
-                    value={outputBase}
-                    onChange={onOutputBaseChange}
-                />
-                <InputNumber
-                    style={{ width: '10%' }}
-                    min={1}
-                    max={30}
-                    value={precision}
-                    onChange={setPrecision}
-                />
-                <Input style={{ width: '80%' }} readOnly value={outputNumber}/>
-            </Input.Group>
-            <div style={{ display: 'flex', flexDirection: 'row' }}>
-                <div style={{ width: '20%' }}/>
-                <div style={{ width: '80%' }}>
-                    <span>Output number complement</span>
-                </div>
-            </div>
-            <Input.Group compact>
-                <div style={{ width: '20%' }}/>
-                <Input
-                    style={{ width: '80%' }}
-                    readOnly
-                    value={complementStr}
-                />
-            </Input.Group>
+            <Form layout={'vertical'} form={form} onFinish={onFinish} initialValues={initialValues}>
+                <Form.Item
+                    name={'inputStr'}
+                    label={'Input number'}
+                    rules={[{ validator: checkValueStr }]}
+                >
+                    <InputWithCopy
+                        onChange={() => form.validateFields()}
+                    />
+                </Form.Item>
+                <Form.Item className="action-row">
+                    <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
+                        <Form.Item
+                            name={'inputBase'}
+                            label={'Input Base'}
+                            style={{ width: '25%' }}
+                            rules={[{ validator: checkBase }]}
+                        >
+                            <Input
+                                type="number"
+                                onChange={() => form.validateFields()}
+                            />
+                        </Form.Item>
+                        <div className="button-wrapper">
+                            <Tooltip title="Swap bases">
+                                <Button
+                                    onClick={swap}
+                                    className="inline-form-button"
+                                    type="default"
+                                    icon={<SwapOutlined/>}
+                                />
+                            </Tooltip>
+                        </div>
+                        <Form.Item
+                            name={'outputBase'}
+                            label={'Output Base'}
+                            style={{ width: '25%' }}
+                            rules={[{ validator: checkBase }]}
+                        >
+                            <Input type="number"/>
+                        </Form.Item>
+                        <div style={{ width: '20px' }}/>
+                        <Form.Item
+                            name={'precision'}
+                            label={'Precision'}
+                            style={{ width: '25%' }}
+                        >
+                            <Input type="number"/>
+                        </Form.Item>
+                        <div className="button-wrapper convert-button-wrapper">
+                            <Button className="inline-form-button" type="primary" htmlType="submit"> Convert </Button>
+                        </div>
+                    </Input.Group>
+                </Form.Item>
+            </Form>
         </div>
     );
 };

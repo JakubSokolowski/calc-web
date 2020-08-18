@@ -1,5 +1,4 @@
 import React, { FC, useRef, useState } from 'react';
-import domtoimage from 'dom-to-image';
 import './hover-grid.scss';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
 import { Button, message, Popover, Typography } from 'antd';
@@ -12,6 +11,7 @@ import { LineType } from '../../models/line-type';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
 import { copyToClipboard } from '@calc/ui';
+import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 
 interface P {

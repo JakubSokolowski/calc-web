@@ -18,7 +18,6 @@ export {
 } from './lib/core/conversion-grid';
 export { buildAdditionGrid } from './lib/core/addition-gid';
 export { HoverGrid } from './lib/components/hover-grid/hover-grid';
-export { InputWithCopy, InputType } from '../../ui/src/lib/components/input-with-copy/input-with-copy';
 export { RowConversionOperation } from './lib/models/row-conversion-operation';
 export { FloatingPartConversionInfo } from './lib/models/floating-part-conversion-info';
 export { GridLookup } from './lib/models/grid-lookup';
