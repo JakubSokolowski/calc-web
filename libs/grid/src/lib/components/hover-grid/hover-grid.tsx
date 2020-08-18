@@ -150,8 +150,10 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
                     </Button>
                 </div>
             }
-            <div className='cell-box' id='xd' ref={gridRef}>
-                {rows}
+            <div className='cell-box'>
+                <div className='cell-content' ref={gridRef}>
+                    {rows}
+                </div>
             </div>
         </div>
 
