@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { NumberSubscript } from '../positional-number/number-subscript';
 import { PositionResult } from '@calc/calc-arithmetic';
+import { NumberSubscript } from '@calc/ui';
 
 interface P {
     positionResult: PositionResult;
