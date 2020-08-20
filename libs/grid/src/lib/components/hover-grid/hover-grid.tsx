@@ -9,20 +9,23 @@ import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
-import { copyToClipboard } from '@calc/ui';
+import { copyToClipboard, NumberSubscript } from '@calc/ui';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
+import { range } from '@calc/utils';
+import { AxisConfig } from '../../models/axis-config';
 
 interface P {
     values: GridCellConfig[][];
     groups: CellGroup[];
     lines: GridLine[];
     groupBuilder?: any;
+    xAxis?: AxisConfig;
     title?: string;
 }
 
-export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title }) => {
+export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, xAxis }) => {
     const lookup = buildCellGroupLookup(groups);
     const [hoverCell, setHoveredCell] = useState<CellCoords>();
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
@@ -118,6 +121,14 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
         );
     });
 
+    const xAxisIndices = xAxis ? xAxis.indices.map((value) => {
+        return (
+            <div key={value} className="column-index">
+                <NumberSubscript value={xAxis.prefix} subscript={value} noBraces/>
+            </div>
+        )
+    }) : [];
+
     const copyAscii = () => {
         const ascii = gridToAscii({ values, groups, lines });
         copyToClipboard(ascii);
@@ -145,12 +156,18 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
                     </Button>
                 </div>
             }
+            {
+                xAxis &&
+                <div className="indices-box">
+                    {xAxisIndices}
+                </div>
+            }
+
             <div className='cell-box'>
                 <div className='cell-content' ref={gridRef}>
                     {rows}
                 </div>
             </div>
         </div>
-
     );
 };

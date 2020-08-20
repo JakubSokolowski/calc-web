@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
-import { NumberSubscript } from '../../positional-number/number-subscript';
+import { NumberSubscript } from '@calc/ui';
 
 interface P {
     conversion: Conversion;

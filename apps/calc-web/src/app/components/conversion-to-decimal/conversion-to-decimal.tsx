@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ConversionToDecimal } from '@calc/calc-arithmetic';
-import { NumberSubscript } from '../positional-number/number-subscript';
+import { NumberSubscript } from '@calc/ui';
 
 interface P {
     conversionStage: ConversionToDecimal;

@@ -6,6 +6,8 @@ import { buildColumnGroups } from './grid-utils';
 import { LineType } from '../models/line-type';
 import { GridLine } from '../..';
 import { LineDefinition } from '../models/grid-line';
+import { AxisConfig } from '../models/axis-config';
+import { buildAxis } from './axis-utils';
 
 interface DigitsInfo {
     totalWidth: number;
@@ -33,6 +35,8 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
     rows.push(padWithEmptyCells(resultRow, info.totalWidth + 1, 'Left'));
     const groups = buildColumnGroups(rows, [undefined, ...result.positionResults.reverse()]);
 
+    const xAxis: AxisConfig = buildAxis(result.resultDigits[0].position + 1, result.resultDigits.length + 1);
+
     return {
         values: rows,
         groups,
@@ -46,7 +50,8 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
                 index: horizontalLineIndex
             },
             getUnderlineForCarries(carryRows)
-        ]
+        ],
+        xAxis
     };
 }
 
