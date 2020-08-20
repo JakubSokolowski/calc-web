@@ -7,12 +7,12 @@ import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition, gridToAscii } 
 import { CellCoords } from '../../models/cell-coords';
 import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
-import { LineType } from '../../models/line-type';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
 import { copyToClipboard } from '@calc/ui';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 
 interface P {
     values: GridCellConfig[][];
@@ -70,17 +70,12 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
         return getOutlierAtPosition(hoveredGroup, position);
     };
 
-    const matchLine = (lineType: LineType, index: number): boolean => {
-        return !!lines.find((line) => line.index === index && line.type === lineType);
-    };
-
     const anchor = getGroupPopoverAnchorCoords();
 
     const rows = values.map((row, y) => {
         const cells = row.map((cellConfig, x) => {
-
-            const horizontalLine = matchLine(LineType.Horizontal, y);
-            const verticalLine = matchLine(LineType.Vertical, x);
+            const horizontalLine = anyHorizontalLineIntersects(x, y, lines);
+            const verticalLine = anyVerticalLineIntersects(x, y, lines);
             const shouldHover = cellBelongsToHoveredGroup(x, y);
 
             const cellProps: HoverCellProps = {
@@ -130,10 +125,10 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title })
     };
 
     const saveAsImage = async () => {
-        if(gridRef) {
+        if (gridRef) {
             await domtoimage
                 .toBlob(gridRef.current)
-                .then(function (blob) {
+                .then(function(blob) {
                     saveAs(blob, 'result.png');
                 }).catch((error) => console.log(error));
         }
