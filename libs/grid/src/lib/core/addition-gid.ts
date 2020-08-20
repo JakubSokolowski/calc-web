@@ -4,6 +4,8 @@ import { GridCellConfig } from '../models/grid-cell-config';
 import { HoverOperationGrid } from '../models/hover-operation-grid';
 import { buildColumnGroups } from './grid-utils';
 import { LineType } from '../models/line-type';
+import { GridLine } from '../..';
+import { LineDefinition } from '../models/grid-line';
 
 interface DigitsInfo {
     totalWidth: number;
@@ -37,14 +39,28 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
         lines: [
             {
                 type: LineType.Vertical,
-                index: verticalLineIndex
+                index: verticalLineIndex,
             },
             {
                 type: LineType.Horizontal,
                 index: horizontalLineIndex
-            }
+            },
+            getUnderlineForCarries(carryRows)
         ]
     };
+}
+
+function getUnderlineForCarries(carryRows: GridCellConfig[][]): GridLine {
+    const index = carryRows.length - 1;
+    const span: LineDefinition = {
+        from: carryRows[index].findIndex((cell) => cell.content !== '')
+    };
+
+    return {
+        type: LineType.Horizontal,
+        index,
+        span
+    }
 }
 
 function carriesToCellConfig(result: AdditionResult): GridCellConfig[][] {
@@ -77,14 +93,12 @@ function carriesToCellConfig(result: AdditionResult): GridCellConfig[][] {
     const emptyCarryGrid = buildEmptyGrid(width, mostCarriesPerPosition);
 
     Object.entries(positionCarryLookup).forEach(([strPosition, positionCarries]) => {
-        {
-            const numPosition = parseInt(strPosition);
-            positionCarries.forEach((carry, carryIndex) => {
-                const positionIndex = positionIndexLookup[numPosition];
-                emptyCarryGrid[carryIndex][positionIndex].content = carry.valueInBase;
-                emptyCarryGrid[carryIndex][positionIndex].preset = highlightedCellPreset;
-            });
-        }
+        const numPosition = parseInt(strPosition);
+        positionCarries.forEach((carry, carryIndex) => {
+            const positionIndex = positionIndexLookup[numPosition];
+            emptyCarryGrid[carryIndex][positionIndex].content = carry.valueInBase;
+            emptyCarryGrid[carryIndex][positionIndex].preset = highlightedCellPreset;
+        });
     });
 
 
