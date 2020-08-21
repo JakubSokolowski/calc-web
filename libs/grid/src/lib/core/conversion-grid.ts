@@ -1,4 +1,4 @@
-import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
+import { Conversion, ConversionToArbitrary, ConversionType } from '@calc/calc-arithmetic';
 import { walk } from '@calc/utils';
 import { GridCellDisplayPreset } from '../models/grid-cell-display-preset';
 import { GridCellConfig } from '../models/grid-cell-config';
@@ -22,12 +22,14 @@ export const highlightedCellPreset: GridCellDisplayPreset = {
 
 export function buildFractionalConversionGrid(conversion: Conversion, precision = 5): HoverOperationGrid {
     const { fractionalMultipliers } = extractConversionToArbitrary(conversion);
+
     const rows: GridCellConfig[][] = [];
     const groups: CellGroup[] = [];
     const lines: GridLine[] = [ ];
 
     let multiplicandMaxLength = 0;
     let resultMaxLength = 0;
+
 
     walk(fractionalMultipliers.slice(0, precision * 2), 2, ([leftMultiplicand, rightResult]: [string, string], index) => {
         /*
@@ -109,19 +111,11 @@ export function buildIntegralConversionGrid(conversion: Conversion): HoverOperat
     const firstStage = extractConversionToArbitrary(conversion);
     const reversedResultDigits = [...firstStage.result.integerPart.digits].reverse();
     const rows: GridCellConfig[][] = [];
+
     let initialEmptyCellOffset = [[], []];
-    const divisors = firstStage.integralDivisors;
-    const bias = firstStage.result.isNegative ? 2 : 1;
-    const lines: GridLine[] = [
-        {
-            type: LineType.Vertical,
-            index: conversion.inputIntegralPartNumDigits - bias
-        }
-    ];
-
-
     const rowGroups: CellGroup[] = [];
-
+    const lines: GridLine[] = [];
+    const divisors = firstStage.integralDivisors;
 
     divisors.forEach((value, index) => {
         if (index === divisors.length - 1) return;
@@ -137,6 +131,13 @@ export function buildIntegralConversionGrid(conversion: Conversion): HoverOperat
         if (index === divisors.length - 2) {
             right = right.map((val) => ({ content: val.content, preset: highlightedCellPreset }));
             rightEmptyCells = rightEmptyCells.map((val) => ({ content: val.content, preset: highlightedCellPreset }));
+
+            const separatorLine: GridLine = {
+                type: LineType.Vertical,
+                index: leftEmptyCells.length + left.length - 1
+            };
+
+            lines.push(separatorLine)
         }
 
         const propContent: RowConversionOperation = {
@@ -159,6 +160,7 @@ export function buildIntegralConversionGrid(conversion: Conversion): HoverOperat
         rows.push(newRow);
         if (index === 0) initialEmptyCellOffset = [left, right];
     });
+
 
     return {
         values: rows,
