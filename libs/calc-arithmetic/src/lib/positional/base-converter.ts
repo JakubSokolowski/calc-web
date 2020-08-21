@@ -5,7 +5,8 @@ import {
     decimalFractionToArbitrary,
     decimalIntegerToArbitrary,
     isFloatingPointStr,
-    isValidString, splitToDigits, splitToDigitsList,
+    isValidString,
+    splitToDigitsList,
     splitToPartsArr
 } from '../helpers/conversion-helpers';
 import { ComplementConverter } from './complement-converter';
@@ -14,8 +15,8 @@ import { Digit } from '../models';
 import { AssociatedBaseConversionDetails } from './associated-base-converter';
 
 export enum ConversionType {
-    DIRECT,
-    INDIRECT
+    DIRECT = 'direct',
+    INDIRECT = 'indirect'
 }
 
 export class Conversion {
@@ -33,12 +34,6 @@ export class Conversion {
     get inputNumDigits(): number {
         const [inputStr, base] = this.stages[0].input;
         return  base >= 36 ? inputStr.split(' ').length : inputStr.length;
-    }
-
-    get inputIntegralPartNumDigits(): number {
-        const [inputStr, base] = this.stages[0].input;
-        const integralPart = inputStr.split('.')[0];
-        return  base >= 36 ? integralPart.split(' ').length : integralPart.length;
     }
 
     public addStage(stage: ConversionStage): void {
@@ -226,9 +221,6 @@ export class StandardBaseConverter implements BaseConverter {
         conversion.addStage(
             new ConversionToDecimal([valueStr, inputBase], inputInDecimal)
         );
-        if (resultBase === 10) {
-            return conversion;
-        }
         conversion.concatConversion(
             this.fromNumber(inputInDecimal.decimalValue, resultBase)
         );
