@@ -6,6 +6,11 @@
         "title": "Base Converter",
         "result": "Conversion result"
     },
+    "associatedBaseConverter": {
+        "title": "Associated Base Converter",
+        "result": "Conversion result",
+        "mappings": "Mappings"
+    },
     "floatConverter": {
         "title": "Float Converter",
         "sign": "Sign",

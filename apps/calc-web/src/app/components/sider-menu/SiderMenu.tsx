@@ -20,12 +20,18 @@ export const SiderMenu = () => {
                 </Menu.Item>
                 <Menu.Item
                     key="pos-2"
+                    onClick={() => history.push('/associated-base-converter')}
+                >
+                    {t('associatedBaseConverter.title')}
+                </Menu.Item>
+                <Menu.Item
+                    key="pos-3"
                     onClick={() => history.push('/complement-converter')}
                 >
                     {t('complementConverter.title')}
                 </Menu.Item>
                 <Menu.Item
-                    key="pos-3"
+                    key="pos-4"
                     onClick={() => history.push('/positional-calculator')}
                 >
                     {t('positionalCalculator.title')}

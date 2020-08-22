@@ -1,16 +1,9 @@
-import { BaseDigits, Conversion, Digit, fromNumber, fromString } from '@calc/calc-arithmetic';
-import { AssociatedBaseConversion, fromDigits } from './base-converter';
+import { AssociatedBaseConversion, Conversion, fromDigits, fromNumber, fromString } from './base-converter';
 import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
-
-export interface DigitMapping {
-    input: Digit[];
-    output: Digit[];
-}
-
-export interface AssociatedBaseConversionDetails {
-    resultDigits: Digit[];
-    positionMappings: DigitMapping[];
-}
+import { Digit } from '../models';
+import { BaseDigits } from './base-digits';
+import { DigitMapping } from '../models/digit-mapping';
+import { AssociatedBaseConversionDetails } from '../models/associated-base-conversion-details';
 
 export function convertUsingAssociatedBases(
     valueStr: string,

@@ -12,7 +12,7 @@ import {
 import { ComplementConverter } from './complement-converter';
 import { PositionalNumber } from './representations';
 import { Digit } from '../models';
-import { AssociatedBaseConversionDetails } from './associated-base-converter';
+import { AssociatedBaseConversionDetails } from '../..';
 
 export enum ConversionType {
     DIRECT = 'direct',

@@ -127,8 +127,8 @@ function operandDigitsToCellConfig(digits: Digit[], info: DigitsInfo, base: numb
     const integerPartDigits = digits.slice(0, indexOfZeroPositionDigit + 1);
     const fractionalPartDigits = digits.slice(indexOfZeroPositionDigit + 1);
 
-    const paddedIntegerPartDigits = padWithEmptyDigits(integerPartDigits, info.numIntegerPartDigits + 1, base, 'Left');
-    const paddedFractionalPartDigits = padWithEmptyDigits(fractionalPartDigits, info.numFractionalDigits, base, 'Right');
+    const paddedIntegerPartDigits = padWithEmptyCellDigits(integerPartDigits, info.numIntegerPartDigits + 1, base, 'Left');
+    const paddedFractionalPartDigits = padWithEmptyCellDigits(fractionalPartDigits, info.numFractionalDigits, base, 'Right');
 
     return [...paddedIntegerPartDigits, ...paddedFractionalPartDigits];
 }
@@ -149,7 +149,7 @@ export function padWithEmptyCells(cells: GridCellConfig[], desiredWidth: number,
     return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];
 }
 
-export function padWithEmptyDigits(digits: Digit[], desiredWidth: number, base: number, direction?: 'Left' | 'Right'): GridCellConfig[] {
+export function padWithEmptyCellDigits(digits: Digit[], desiredWidth: number, base: number, direction?: 'Left' | 'Right'): GridCellConfig[] {
     const cells = digitsToCellConfig(digits);
     if (desiredWidth <= digits.length) return cells;
 

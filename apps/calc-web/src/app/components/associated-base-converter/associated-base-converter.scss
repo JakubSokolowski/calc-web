@@ -1,0 +1,32 @@
+
+.ant-form-item {
+    margin-bottom: 20px;
+}
+
+.ant-form-item-with-help {
+    margin-bottom: 20px;
+}
+
+.action-row {
+    margin-bottom: 0 !important;
+    width: 50%;
+    @media screen and (max-width: 992px) {
+        width: 100%;
+    }
+}
+
+.button-wrapper {
+    width: 70px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.convert-button-wrapper {
+    margin-left: 20px;
+}
+
+.inline-form-button {
+    margin-top: 6px;
+}
