@@ -1,0 +1,23 @@
+
+.mappings-box {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+}
+
+.digits-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding-bottom: 20px;
+}
+
+.digit-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 12px;
+    height: 12px;
+    min-height: 20px;
+    padding: 1px 6px;
+}

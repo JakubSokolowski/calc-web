@@ -11,6 +11,7 @@ import { ComplementConverterView } from './components/complement-converter-view/
 import { FloatConverterView } from './components/float-converter-view/float-converter-view';
 import { PositionalCalculatorView } from './components/positional-calculator/positional-calculator-view';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons/lib';
+import { AssociatedBaseConverterView } from './components/associated-base-converter-view/associated-base-converter-view';
 
 const { Sider, Content, Header } = Layout;
 
@@ -48,6 +49,7 @@ export const App = () => {
                                    <Switch>
                                        <Route exact path="/" component={HomeView}/>
                                        <Route path="/base-converter" component={BaseConverterView}/>
+                                       <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
                                        <Route path="/complement-converter" component={ComplementConverterView}/>
                                        <Route path="/float-converter" component={FloatConverterView}/>
                                        <Route path="/positional-calculator" component={PositionalCalculatorView}/>

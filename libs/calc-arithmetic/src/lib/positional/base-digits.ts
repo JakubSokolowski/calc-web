@@ -54,6 +54,8 @@ export class BaseDigits {
     }
 
     public static getAllPossibleBasesForAssociateConversion(base: number): number[] {
+        if(!this.isValidRadix(base)) return [];
+
         return [
             ...this.getSmallerAssociateBases(base),
             ...this.getGreaterAssociateBases(base)

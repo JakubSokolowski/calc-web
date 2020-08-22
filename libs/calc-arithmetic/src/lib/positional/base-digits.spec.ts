@@ -112,6 +112,18 @@ describe('base-digits', () => {
             const expected = [];
             expect(possibleBases).toEqual(expected);
         });
+
+        it('should return empty array when base is not valid', () => {
+            // given
+            const base = 1;
+
+            // when
+            const possibleBases = BaseDigits.getAllPossibleBasesForAssociateConversion(base);
+
+            // then
+            const expected = [];
+            expect(possibleBases).toEqual(expected);
+        });
     });
 
     describe('#canConvertUsingAssociateBaseMethod', () => {

@@ -6,11 +6,16 @@ export {
     ConversionToArbitrary,
     ConversionToDecimal,
     ConversionType,
+    AssociatedBaseConversion
 } from './positional/base-converter';
 
 export {
     addPositionalNumbers,
 } from './positional/addition'
+
+export {
+    convertUsingAssociatedBases
+} from './positional/associated-base-converter';
 
 export {
     PositionResult,
@@ -41,3 +46,5 @@ export {
 export {
     BaseDigits
 } from './positional/base-digits'
+export { DigitMapping } from './models/digit-mapping';
+export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
