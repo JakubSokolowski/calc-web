@@ -60,9 +60,13 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
         )
     });
 
+    const boxClassName = mapping.output[0].position === -1
+        ? 'mappings-box-border'
+        : 'mappings-box';
+
     return (
         <div
-            className="mappings-box"
+            className={boxClassName}
         >
             <ArcherContainer noCurves ref={ref}>
                 <div
@@ -71,7 +75,7 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
                     flexDirection:  mapping.input.length < mapping.output.length ? 'column' : 'column-reverse'
                 }}>
                     <ArcherElement id='root'>
-                        <div className="digits-row">
+                        <div className="root-digits-row">
                             {rootDigits}
                         </div>
                     </ArcherElement>

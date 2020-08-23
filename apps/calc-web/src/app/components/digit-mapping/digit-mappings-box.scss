@@ -1,14 +1,19 @@
-
-.mappings-box {
+.mappings-box-border {
+    border-left: 1px solid #d9d9d9;
+}
+.mappings-box , .mappings-box-border {
     display: flex;
     flex-direction: column;
     padding: 5px;
 }
 
-.digits-row {
+.digits-row, .root-digits-row {
     display: flex;
     flex-direction: row;
     justify-content: center;
+}
+
+.root-digits-row {
     padding-bottom: 20px;
 }
 
