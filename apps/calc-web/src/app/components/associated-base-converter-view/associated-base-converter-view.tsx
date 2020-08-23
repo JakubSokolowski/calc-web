@@ -9,13 +9,10 @@ const { Title } = Typography;
 export const AssociatedBaseConverterView: FC = () => {
     const { t } = useTranslation();
     const [conversion, setConv] = useState<Conversion>();
-    const [precision, setPrecision] = useState(5);
 
     const onChange = (newConversion: Conversion) => {
         if (newConversion) {
-            console.log(newConversion);
             setConv(newConversion);
-            setPrecision(precision);
         }
     };
 

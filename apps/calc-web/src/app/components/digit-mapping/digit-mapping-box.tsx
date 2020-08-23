@@ -1,4 +1,4 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, useEffect, useRef } from 'react';
 import { DigitMapping } from '@calc/calc-arithmetic';
 import './digit-mappings-box.scss'
 import { Button } from 'antd';
@@ -9,7 +9,7 @@ interface P {
 }
 
 export const DigitMappingBox: FC<P> = ({mapping}) => {
-    const ref = useRef(null);
+    const ref = useRef<ArcherContainer>(null);
 
     const targetDigitsSource = mapping.input.length < mapping.output.length
         ? mapping.output
@@ -26,6 +26,12 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
             </Button>
         )
     });
+
+    useEffect(() => {
+        if(ref.current) {
+            ref.current.forceUpdate();
+        }
+    }, [mapping]);
 
     const targetDigits = targetDigitsSource.map((digit, index) => {
         return (
