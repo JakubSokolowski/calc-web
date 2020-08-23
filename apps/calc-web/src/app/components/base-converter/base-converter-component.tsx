@@ -1,10 +1,13 @@
-import React, { FC } from 'react';
+import React, { FC, useCallback, useState } from 'react';
 import { Button, Form, Input, Tooltip } from 'antd';
-import { BaseDigits, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
+import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
 import './base-converter-component.scss';
 import { useForm } from 'antd/es/form/util';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/ui';
+import {  useSelector } from 'react-redux';
+import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
+import { ConversionOptions } from '../conversion-options/conversion-options';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -19,6 +22,8 @@ interface FormValues {
 
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const [form] = useForm();
+    const showComplement = useSelector(selectShowComplement);
+    const showDecimalValue = useSelector(selectShowDecimalValue);
 
     const initialValues: FormValues = {
         inputStr: '123.45',
@@ -26,6 +31,9 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         outputBase: 2,
         precision: 10
     };
+
+    const [inputValue, setInputValue] = useState(initialValues.inputStr);
+    const [inputBase, setInputBase] = useState(initialValues.inputBase);
 
     const onFinish = (values: FormValues) => {
         const { inputStr, inputBase, outputBase, precision } = values;
@@ -54,18 +62,72 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         form.validateFields();
     };
 
+    const label = (
+        <div style={{display: 'flex', 'flexDirection': 'row'}}>
+            <span>{'Input number'}</span>
+            <ConversionOptions style={{marginLeft: '100px'}}/>
+        </div>
+    );
+
+    const getDecimal = useCallback(() => {
+        try {
+            if(inputBase === 10) return inputValue;
+            return fromString(
+                inputValue,
+                inputBase,
+                10
+            ).result.decimalValue.toString()
+        } catch(e) {
+            console.log(e);
+            return '0.0'
+        }
+    }, [inputBase, inputValue]);
+
+    const getComplement = useCallback(() => {
+        try {
+            return ComplementConverter.getComplement(
+                inputValue,
+                inputBase,
+            ).toString()
+        } catch(e) {
+            console.log(e);
+            return '0.0'
+        }
+    }, [inputBase, inputValue]);
+
+
     return (
         <div>
             <Form layout={'vertical'} form={form} onFinish={onFinish} initialValues={initialValues}>
                 <Form.Item
                     name={'inputStr'}
-                    label={'Input number'}
+                    label={label}
                     rules={[{ validator: checkValueStr }]}
                 >
                     <InputWithCopy
-                        onChange={() => form.validateFields()}
+                        onChange={(value) => {
+                            setInputValue(value);
+                            form.validateFields()
+                        }}
                     />
                 </Form.Item>
+                {
+                    showDecimalValue &&
+                    <Form.Item
+                        label={'Input decimal value'}
+                    >
+                        <InputWithCopy readOnly value={getDecimal()}/>
+                    </Form.Item>
+                }
+
+                {
+                    showComplement &&
+                    <Form.Item
+                        label={'Input complement'}
+                    >
+                        <InputWithCopy readOnly value={getComplement()}/>
+                    </Form.Item>
+                }
                 <Form.Item className="action-row">
                     <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
                         <Form.Item
@@ -76,7 +138,10 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         >
                             <Input
                                 type="number"
-                                onChange={() => form.validateFields()}
+                                onChange={(e) => {
+                                    form.validateFields();
+                                    setInputBase(Number.parseInt(e.target.value));
+                                }}
                             />
                         </Form.Item>
                         <div className="button-wrapper">
