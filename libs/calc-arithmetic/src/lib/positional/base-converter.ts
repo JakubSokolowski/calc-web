@@ -314,7 +314,8 @@ export function fromString(
     precision = 30,
     converter: BaseConverter = new StandardBaseConverter()
 ): Conversion {
-    return converter.fromString(valueStr, inputBase, resultBase, precision);
+    const valueStrWithoutExtraSpaces =  valueStr.replace(/\s+/g, ' ').trim();
+    return converter.fromString(valueStrWithoutExtraSpaces, inputBase, resultBase, precision);
 }
 
 export function fromStringDirect(
@@ -322,7 +323,8 @@ export function fromStringDirect(
     inputBase: number,
 ): Conversion {
     const converter = new StandardBaseConverter();
-    return converter.fromStringDirect(valueStr, inputBase);
+    const valueStrWithoutExtraSpaces =  valueStr.replace(/\s+/g, ' ').trim();
+    return converter.fromStringDirect(valueStrWithoutExtraSpaces, inputBase);
 }
 
 export function fromDigits(
