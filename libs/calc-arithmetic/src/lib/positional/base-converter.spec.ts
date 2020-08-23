@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js';
-import { fromNumber, StandardBaseConverter } from './base-converter';
+import { fromNumber, fromString, StandardBaseConverter } from './base-converter';
 import { Digit } from '@calc/calc-arithmetic';
 
 describe('StandardBaseConverter fromNumber tests', () => {
@@ -442,7 +442,6 @@ describe('StandardBaseConverter fromDigitsDirect tests', () => {
 
 });
 
-
 describe('fromNumber tests', () => {
     it('converts number with variable precision', () => {
         // given
@@ -472,6 +471,24 @@ describe('fromNumber tests', () => {
         // then
         expect(result.valueInBase).toEqual(expected);
         expect(result.complement.toString()).toEqual(expectedComplement);
+    });
+
+});
+
+describe('fromString tests', () => {
+    it('should convert string with extra whitespace', () => {
+        // given
+        const input = '12  13  45  ';
+        const inputRadix = 64;
+        const outputRadix = 10;
+        const expected = new BigNumber(50029);
+
+        // when
+        const result = fromString(input, inputRadix, outputRadix)
+            .result;
+
+        // then
+        expect(result.valueInBase).toEqual(expected.toString());
     });
 
 });
