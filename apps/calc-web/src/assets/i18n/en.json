@@ -2,14 +2,30 @@
     "home": {
         "header": "Calc"
     },
+    "languageMenu": {
+        "choose": "Choose language"
+    },
     "baseConverter": {
         "title": "Base Converter",
-        "result": "Conversion result"
+        "result": "Conversion result",
+        "wrongBase": "Base must be between {{minBase}} and {{maxBase}}",
+        "wrongRepresentationStr": "Representation strings contains invalid digits for base {{base}}",
+        "inputNumber": "Input number",
+        "inputDecimalValue": "Input decimal value",
+        "inputComplement": "Input complement",
+        "inputBase": "Input base",
+        "outputBase": "Output base",
+        "swapBases": "Swap bases",
+        "precision": "Precision",
+        "convert": "Convert",
+        "showDecimalValue": "Show decimal value",
+        "showComplement": "Show complement"
     },
     "associatedBaseConverter": {
         "title": "Associated Base Converter",
         "result": "Conversion result",
-        "mappings": "Mappings"
+        "mappings": "Mappings",
+        "noOutputBase": "No output bases possible"
     },
     "floatConverter": {
         "title": "Float Converter",

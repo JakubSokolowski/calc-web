@@ -133,3 +133,13 @@
 .site-layout {
     height: 100vh;
 }
+
+.site-header {
+    position: fixed;
+    z-index: 1;
+    width: calc(100% - 100px);
+    background: unset;
+    display: flex;
+    flex-direction: row-reverse;
+    height: 20px
+}

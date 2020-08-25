@@ -25,7 +25,7 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
 
     return (
         <div>
-            <span>Output number</span>
+            <span>{t('baseConverter.inputNumber')}</span>
             <Input.Group compact style={{ marginBottom: '20px' }}>
                 <InputWithCopy
                     readOnly

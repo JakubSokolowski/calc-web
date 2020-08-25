@@ -14,6 +14,8 @@ import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
+import { useTranslation } from 'react-i18next';
+
 const { Option } = Select;
 
 interface P {
@@ -27,6 +29,7 @@ interface FormValues {
 }
 
 export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
+    const { t } = useTranslation();
     const [form] = useForm();
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
@@ -52,22 +55,27 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const checkBase = (_, base: number) => {
         if (!BaseDigits.isValidRadix(base)) {
-            return Promise.reject(`Base must be between ${BaseDigits.MIN_BASE} and ${BaseDigits.MAX_BASE}`);
+            return Promise.reject(
+                t(
+                    'baseConverter.wrongBase',
+                    { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
+                )
+            );
         }
         return Promise.resolve();
     };
 
     const getDecimal = useCallback(() => {
         try {
-            if(inputBase === 10) return inputValue;
+            if (inputBase === 10) return inputValue;
             return fromString(
                 inputValue,
                 inputBase,
                 10
-            ).result.decimalValue.toString()
-        } catch(e) {
+            ).result.decimalValue.toString();
+        } catch (e) {
             console.log(e);
-            return '0.0'
+            return '0.0';
         }
     }, [inputBase, inputValue]);
 
@@ -75,18 +83,23 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         try {
             return ComplementConverter.getComplement(
                 inputValue,
-                inputBase,
-            ).toString()
-        } catch(e) {
+                inputBase
+            ).toString();
+        } catch (e) {
             console.log(e);
-            return '0.0'
+            return '0.0';
         }
     }, [inputBase, inputValue]);
 
     const checkValueStr = (_, valueStr: string) => {
         const { inputBase } = form.getFieldsValue();
         if (!isValidString(valueStr, inputBase)) {
-            return Promise.reject(`Representation strings contains invalid digits for base ${inputBase}`);
+            return Promise.reject(
+                t(
+                    'baseConverter.wrongRepresentationStr',
+                    { base: inputBase }
+                )
+            );
         }
         return Promise.resolve();
     };
@@ -95,24 +108,24 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         const newInputBase = e.target.value;
         setInputBase(e.target.value);
         setPossibleOutputBases(BaseDigits.getAllPossibleBasesForAssociateConversion(newInputBase));
-        form.validateFields()
+        form.validateFields();
     };
 
     useEffect(() => {
-        form.setFieldsValue({outputBase: possibleOutputBases[0]});
+        form.setFieldsValue({ outputBase: possibleOutputBases[0] });
     }, [form, possibleOutputBases]);
 
     const label = (
-        <div style={{display: 'flex', 'flexDirection': 'row'}}>
-            <span>{'Input number'}</span>
-            <ConversionOptions style={{marginLeft: '100px'}}/>
+        <div style={{ display: 'flex', 'flexDirection': 'row' }}>
+            <span>{t('baseConverter.inputNumber')}</span>
+            <ConversionOptions style={{ marginLeft: '100px' }}/>
         </div>
     );
 
     const options = possibleOutputBases.map((base, index) => {
         return (
             <Option value={base} key={index}>{base}</Option>
-        )
+        );
     });
 
     return (
@@ -126,14 +139,14 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                     <InputWithCopy
                         onChange={(value) => {
                             setInputValue(value);
-                            form.validateFields()
+                            form.validateFields();
                         }}
                     />
                 </Form.Item>
                 {
                     showDecimalValue &&
                     <Form.Item
-                        label={'Input decimal value'}
+                        label={t('baseConverter.inputDecimalValue')}
                     >
                         <InputWithCopy readOnly value={getDecimal()}/>
                     </Form.Item>
@@ -142,7 +155,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                 {
                     showComplement &&
                     <Form.Item
-                        label={'Input complement'}
+                        label={t('baseConverter.inputComplement')}
                     >
                         <InputWithCopy readOnly value={getComplement()}/>
                     </Form.Item>
@@ -151,7 +164,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                     <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
                         <Form.Item
                             name={'inputBase'}
-                            label={'Input Base'}
+                            label={t('baseConverter.inputBase')}
                             style={{ width: '40%' }}
                             rules={[{ validator: checkBase }]}
                         >
@@ -163,20 +176,22 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         <div style={{ width: '20px' }}/>
                         <Form.Item
                             name={'outputBase'}
-                            label={'Output Base'}
+                            label={t('baseConverter.outputBase')}
                             style={{ width: '40%' }}
                         >
                             <Select
-                                placeholder="No output bases possible"
+                                placeholder={t('associatedBaseConverter.noOutputBase')}
                                 disabled={!options.length}
-                                style={{width: '100%'}}
+                                style={{ width: '100%' }}
                             >
                                 {options}
                             </Select>
                         </Form.Item>
                         <div style={{ width: '20px' }}/>
                         <div className="button-wrapper convert-button-wrapper">
-                            <Button className="inline-form-button" type="primary" htmlType="submit"> Convert </Button>
+                            <Button className="inline-form-button" type="primary" htmlType="submit">{
+                                t('baseConverter.convert')}
+                            </Button>
                         </div>
                     </Input.Group>
                 </Form.Item>
