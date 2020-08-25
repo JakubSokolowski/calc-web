@@ -6,12 +6,13 @@ import { HomeView } from './components/home-view/home-view';
 import 'antd/dist/antd.css';
 import './app.scss';
 import '../assets/i18n/i18n';
-import SiderMenu from './components/sider-menu/SiderMenu';
+import SiderMenu from './components/sider-menu/sider-menu';
 import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
 import { FloatConverterView } from './components/float-converter-view/float-converter-view';
 import { PositionalCalculatorView } from './components/positional-calculator/positional-calculator-view';
 import { MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons/lib';
 import { AssociatedBaseConverterView } from './components/associated-base-converter-view/associated-base-converter-view';
+import { LanguageMenu } from './components/language-menu/language-menu';
 
 const { Sider, Content, Header } = Layout;
 
@@ -32,14 +33,17 @@ export const App = () => {
                     <SiderMenu/>
                 </Sider>
                 <Layout className="site-layout">
-                    <Header style={{ position: 'fixed', zIndex: 1, width: '100%', background: 'unset', height: '20px'}}>
+                    <Header className='site-header' style={{}}>
+                       <div>
+                           <LanguageMenu/>
+                       </div>
                     </Header>
                     <Content
                         className="site-layout-background"
                         style={{
                             marginLeft: '24px',
                             marginRight: '0px',
-                            marginTop: '44px',
+                            marginTop: '64px',
                             overflow: 'initial',
                         }}
                     >

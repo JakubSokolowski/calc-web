@@ -5,9 +5,10 @@ import './base-converter-component.scss';
 import { useForm } from 'antd/es/form/util';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/ui';
-import {  useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
+import { useTranslation } from 'react-i18next';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -24,6 +25,8 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const [form] = useForm();
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
+    const { t } = useTranslation();
+
 
     const initialValues: FormValues = {
         inputStr: '123.45',
@@ -43,7 +46,12 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
     const checkBase = (_, base: number) => {
         if (!BaseDigits.isValidRadix(base)) {
-            return Promise.reject(`Base must be between ${BaseDigits.MIN_BASE} and ${BaseDigits.MAX_BASE}`);
+            return Promise.reject(
+                t(
+                    'baseConverter.wrongBase',
+                    { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
+                )
+            );
         }
         return Promise.resolve();
     };
@@ -51,7 +59,12 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const checkValueStr = (_, valueStr: string) => {
         const { inputBase } = form.getFieldsValue();
         if (!isValidString(valueStr, inputBase)) {
-            return Promise.reject(`Representation strings contains invalid digits for base ${inputBase}`);
+            return Promise.reject(
+                t(
+                    'baseConverter.wrongRepresentationStr',
+                    { base: inputBase }
+                )
+            );
         }
         return Promise.resolve();
     };
@@ -63,23 +76,23 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const label = (
-        <div style={{display: 'flex', 'flexDirection': 'row'}}>
-            <span>{'Input number'}</span>
-            <ConversionOptions style={{marginLeft: '100px'}}/>
+        <div style={{ display: 'flex', 'flexDirection': 'row' }}>
+            <span>{t('baseConverter.inputNumber')}</span>
+            <ConversionOptions style={{ marginLeft: '100px' }}/>
         </div>
     );
 
     const getDecimal = useCallback(() => {
         try {
-            if(inputBase === 10) return inputValue;
+            if (inputBase === 10) return inputValue;
             return fromString(
                 inputValue,
                 inputBase,
                 10
-            ).result.decimalValue.toString()
-        } catch(e) {
+            ).result.decimalValue.toString();
+        } catch (e) {
             console.log(e);
-            return '0.0'
+            return '0.0';
         }
     }, [inputBase, inputValue]);
 
@@ -87,11 +100,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         try {
             return ComplementConverter.getComplement(
                 inputValue,
-                inputBase,
-            ).toString()
-        } catch(e) {
+                inputBase
+            ).toString();
+        } catch (e) {
             console.log(e);
-            return '0.0'
+            return '0.0';
         }
     }, [inputBase, inputValue]);
 
@@ -107,14 +120,14 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     <InputWithCopy
                         onChange={(value) => {
                             setInputValue(value);
-                            form.validateFields()
+                            form.validateFields();
                         }}
                     />
                 </Form.Item>
                 {
                     showDecimalValue &&
                     <Form.Item
-                        label={'Input decimal value'}
+                        label={t('baseConverter.inputDecimalValue')}
                     >
                         <InputWithCopy readOnly value={getDecimal()}/>
                     </Form.Item>
@@ -123,7 +136,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 {
                     showComplement &&
                     <Form.Item
-                        label={'Input complement'}
+                        label={t('baseConverter.inputComplement')}
                     >
                         <InputWithCopy readOnly value={getComplement()}/>
                     </Form.Item>
@@ -132,7 +145,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
                         <Form.Item
                             name={'inputBase'}
-                            label={'Input Base'}
+                            label={t('baseConverter.inputBase')}
                             style={{ width: '25%' }}
                             rules={[{ validator: checkBase }]}
                         >
@@ -145,7 +158,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                             />
                         </Form.Item>
                         <div className="button-wrapper">
-                            <Tooltip title="Swap bases">
+                            <Tooltip title={t('baseConverter.swapBases')}>
                                 <Button
                                     onClick={swap}
                                     className="inline-form-button"
@@ -156,7 +169,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         </div>
                         <Form.Item
                             name={'outputBase'}
-                            label={'Output Base'}
+                            label={t('baseConverter.outputBase')}
                             style={{ width: '25%' }}
                             rules={[{ validator: checkBase }]}
                         >
@@ -165,13 +178,15 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         <div style={{ width: '20px' }}/>
                         <Form.Item
                             name={'precision'}
-                            label={'Precision'}
+                            label={t('baseConverter.precision')}
                             style={{ width: '25%' }}
                         >
                             <Input type="number"/>
                         </Form.Item>
                         <div className="button-wrapper convert-button-wrapper">
-                            <Button className="inline-form-button" type="primary" htmlType="submit"> Convert </Button>
+                            <Button className="inline-form-button" type="primary" htmlType="submit">
+                                {t('baseConverter.convert')}
+                            </Button>
                         </div>
                     </Input.Group>
                 </Form.Item>
