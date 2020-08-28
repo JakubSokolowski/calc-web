@@ -21,7 +21,7 @@
             ],
             "styles": ["apps/calc-web/src/styles.scss"],
             "scripts": [],
-            "webpackConfig": "@nrwl/react/plugins/webpack"
+            "webpackConfig": "apps/calc-web/webpack.config.js"
           },
           "configurations": {
             "production": {

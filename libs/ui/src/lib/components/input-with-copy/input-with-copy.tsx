@@ -1,11 +1,16 @@
 import React, { FC, useRef } from 'react';
-import { Button, Input, InputNumber, message } from 'antd';
-import { CopyOutlined } from '@ant-design/icons/lib';
 import { useTranslation } from 'react-i18next';
+import { IconButton, Input, InputProps, Snackbar } from '@material-ui/core';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
+import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
 export enum InputType {
     Text = 'text',
     Number = 'number'
+}
+
+function Alert(props: AlertProps) {
+    return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 interface P {
@@ -19,11 +24,23 @@ interface P {
 export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
+    const [open, setOpen] = React.useState(false);
+
+    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
 
     const copyToClipboard = () => {
-        textAreaRef.current.select();
+        if(textAreaRef.current) {
+            // console.log(textAreaRef.current.value);
+            textAreaRef.current.select();
+        }
         document.execCommand('copy');
-        message.success(t('common.copy'), 1.5);
+        setOpen(true);
     };
 
     const handleChange = (event) => {
@@ -39,31 +56,36 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnl
         }
     };
 
-    const props = {
+    const props: InputProps = {
         style: {
             flexGrow: 1
         },
-        ref: textAreaRef,
+        inputRef: textAreaRef,
         value: value as any,
         readOnly: readOnly,
         onChange: inputType === InputType.Number ? handleNumberChange : handleChange
     };
 
     return (
-        <span style={{ display: 'flex', 'flexDirection': 'row' }}>
-            {
-                inputType === InputType.Number
-                    ? <InputNumber {...props}/>
-                    : <Input {...props}/>
-            }
-            {
-                document.queryCommandSupported('copy') &&
-                <div style={{ paddingLeft: '5px' }}>
-                    <Button size={size || 'middle'} onClick={copyToClipboard}>
-                        <CopyOutlined/>
-                    </Button>
-                </div>
-            }
-        </span>
+        <>
+            <span style={{ display: 'flex', 'flexDirection': 'row' }}>
+                {
+                    inputType === InputType.Number
+                        ? <Input type={'number'} {...props}/>
+                        : <Input {...props}/>
+                }
+                {
+                    document.queryCommandSupported('copy') &&
+                    <div style={{ paddingLeft: '5px' }}>
+                        <IconButton onClick={copyToClipboard}>
+                            <FileCopyIcon/>
+                        </IconButton>
+                    </div>
+                }
+            </span>
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={2000} onClose={handleClose}>
+                <Alert severity="info" >{t('common.copy')}</Alert>
+            </Snackbar>
+        </>
     );
 };

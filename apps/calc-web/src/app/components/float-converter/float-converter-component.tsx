@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { Form } from 'antd';
 import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
-import { useTranslation } from 'react-i18next';
 import { InputType, InputWithCopy } from '@calc/ui';
 
 export const FloatConverterComponent: FC = () => {
@@ -12,7 +10,6 @@ export const FloatConverterComponent: FC = () => {
     const [exponent, setExponent] = useState(initialNum.exponent);
     const [mantissa, setMantissa] = useState(initialNum.mantissa);
     const [rawValue, setRawValue] = useState(0.0);
-    const { t } = useTranslation();
 
     useEffect(() => {
         const representationStr = sign + exponent + mantissa;
@@ -35,8 +32,6 @@ export const FloatConverterComponent: FC = () => {
         'display': 'flex' as 'flex',
         'flexDirection': 'row' as 'row'
     };
-
-    const formItemStyle = { marginBottom: '12px' };
 
     return (
         <div>
@@ -63,24 +58,11 @@ export const FloatConverterComponent: FC = () => {
                     onChange={setMantissa}
                 />
             </div>
-            <Form
-                labelCol={{ span: 5 }}
-                wrapperCol={{ span: 16 }}
-                layout="horizontal"
-                size={'small'}
-            >
-                <div style={{ width: '600px' }}>
-                    <Form.Item label={t('floatConverter.entered')} style={formItemStyle}>
-                        <InputWithCopy value={rawValue} onChange={handleChange} size={'small'} inputType={InputType.Number}/>
-                    </Form.Item>
-                    <Form.Item label={t('floatConverter.stored')} style={formItemStyle}>
-                        <InputWithCopy readOnly value={floatingNumber.value.toString()} size={'small'} inputType={InputType.Text}/>
-                    </Form.Item>
-                    <Form.Item label={t('floatConverter.binary')} style={formItemStyle}>
-                        <InputWithCopy readOnly value={floatingNumber.binary} size={'small'} inputType={InputType.Text}/>
-                    </Form.Item>
-                </div>
-            </Form>
+            <div style={{ width: '600px' }}>
+                <InputWithCopy value={rawValue} onChange={handleChange} size={'small'} inputType={InputType.Number}/>
+                <InputWithCopy readOnly value={floatingNumber.value.toString()} size={'small'} inputType={InputType.Text}/>
+                <InputWithCopy readOnly value={floatingNumber.binary} size={'small'} inputType={InputType.Text}/>
+            </div>
         </div>
     );
 };

@@ -3,7 +3,17 @@ import { buildIntegralConversionGrid, HoverGrid } from '@calc/grid';
 import React from 'react';
 import { fromNumber } from '@calc/calc-arithmetic';
 import HoverGridCell from '../hover-cell/hover-grid-cell';
-import { Popover } from 'antd';
+import { Tooltip } from '@material-ui/core';
+
+// for Material UI Tooltip. Remove after jest bump to 26.0
+document.createRange = () => ({
+    setStart: jest.fn(),
+    setEnd: jest.fn(),
+    commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document,
+    },
+} as any);
 
 describe('#HoverGrid', () => {
     let container: ReactWrapper;
@@ -76,7 +86,7 @@ describe('#HoverGrid', () => {
                 .simulate('mouseenter');
 
             // then
-            const popover = container.find(Popover);
+            const popover = container.find(Tooltip);
             expect(popover.length).toEqual(1);
             expect(groupBuilder).toHaveBeenCalled();
         });
@@ -100,7 +110,7 @@ describe('#HoverGrid', () => {
                 .simulate('mouseenter');
 
             // then
-            const popover = container.find(Popover);
+            const popover = container.find(Tooltip);
             expect(popover.length).toEqual(1);
             expect(groupBuilder).toHaveBeenCalled();
         });

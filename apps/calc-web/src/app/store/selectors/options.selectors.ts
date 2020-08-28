@@ -15,3 +15,8 @@ export const selectShowComplement = createSelector(
     optionsState,
     state => state.showComplement
 );
+
+export const selectAppTheme = createSelector(
+    optionsState,
+    state => state.theme
+);

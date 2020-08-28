@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Button } from 'antd';
+import { Button } from '@material-ui/core';
 
 interface P {
     onChange?: (value: string, index: number) => void;
@@ -14,7 +14,10 @@ export const BinaryButton: FC<P> = ({ onChange, value, index }) => {
 
     const style = {
         padding: '1px 6px',
+        margin: '2px',
+        border: '1px solid inherit',
         height: '20px',
+        minWidth: '10px',
         fontSize: '12px',
         ...colorStyle
     };

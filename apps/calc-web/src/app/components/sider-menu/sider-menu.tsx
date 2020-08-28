@@ -1,51 +1,77 @@
 import React from 'react';
-import { Menu } from 'antd';
 import { useHistory } from 'react-router-dom';
-import { UserOutlined } from '@ant-design/icons/lib';
-import SubMenu from 'antd/es/menu/SubMenu';
 import { useTranslation } from 'react-i18next';
+import {
+    Accordion,
+    AccordionSummary,
+    createStyles,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText, Theme, Typography
+} from '@material-ui/core';
+import MailIcon from '@material-ui/icons/Mail';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+            width: '100%',
+        },
+        heading: {
+            fontSize: theme.typography.pxToRem(15),
+            fontWeight: theme.typography.fontWeightRegular,
+        },
+    }),
+);
 
 export const SiderMenu = () => {
     const history = useHistory();
     const { t } = useTranslation();
+    const classes = useStyles();
 
     return (
-        <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
-            <SubMenu key="sub1" icon={<UserOutlined/>} title="Positional">
-                <Menu.Item
-                    key="pos-1"
-                    onClick={() => history.push('/base-converter')}
-                >
-                    {t('baseConverter.title')}
-                </Menu.Item>
-                <Menu.Item
-                    key="pos-2"
-                    onClick={() => history.push('/associated-base-converter')}
-                >
-                    {t('associatedBaseConverter.title')}
-                </Menu.Item>
-                <Menu.Item
-                    key="pos-3"
-                    onClick={() => history.push('/complement-converter')}
-                >
-                    {t('complementConverter.title')}
-                </Menu.Item>
-                <Menu.Item
-                    key="pos-4"
-                    onClick={() => history.push('/positional-calculator')}
-                >
-                    {t('positionalCalculator.title')}
-                </Menu.Item>
-            </SubMenu>
-            <SubMenu key="sub2" icon={<UserOutlined/>} title="Floating">
-                <Menu.Item
-                    key="float-1"
-                    onClick={() => history.push('/float-converter')}
-                >
-                    {t('floatConverter.title')}
-                </Menu.Item>
-            </SubMenu>
-        </Menu>
+        <div>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header">
+                    <Typography className={classes.heading}>Positional</Typography>
+                </AccordionSummary>
+                <List>
+                    <ListItem button key={'base-converter'} onClick={() => history.push('/base-converter')}>
+                        <ListItemText primary={t('baseConverter.title')} />
+                    </ListItem>
+                    <ListItem button key={'associated-base-converter'} onClick={() => history.push('/associated-base-converter')}>
+                        <ListItemText primary={t('associatedBaseConverter.title')} />
+                    </ListItem>
+                    <ListItem button key={'complement-converter'} onClick={() => history.push('/complement-converter')}>
+                        <ListItemText primary={t('complementConverter.title')} />
+                    </ListItem>
+                    <ListItem button key={'positional-converter'} onClick={() => history.push('/positional-calculator')}>
+                        <ListItemText primary={t('positionalCalculator.title')} />
+                    </ListItem>
+                </List>
+            </Accordion>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header">
+                    <Typography className={classes.heading}>Floating</Typography>
+                </AccordionSummary>
+                <List>
+                    <ListItem button key={'float-converter'} onClick={() => history.push('/float-converter')}>
+                        <ListItemIcon>
+                            <MailIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary={t('floatConverter.title')} />
+                    </ListItem>
+                </List>
+            </Accordion>
+        </div>
     );
 };
 

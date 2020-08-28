@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Button, Form, Input, Tooltip } from 'antd';
+import { Form } from 'antd';
 import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
 import './base-converter-component.scss';
 import { useForm } from 'antd/es/form/util';
@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
+import { Button, Card, IconButton, Input, Tooltip } from '@material-ui/core';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -110,7 +111,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
 
     return (
-        <div>
+        <Card style={{padding: '10px'}}>
             <Form layout={'vertical'} form={form} onFinish={onFinish} initialValues={initialValues}>
                 <Form.Item
                     name={'inputStr'}
@@ -141,56 +142,54 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         <InputWithCopy readOnly value={getComplement()}/>
                     </Form.Item>
                 }
-                <Form.Item className="action-row">
-                    <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                        <Form.Item
-                            name={'inputBase'}
-                            label={t('baseConverter.inputBase')}
-                            style={{ width: '25%' }}
-                            rules={[{ validator: checkBase }]}
-                        >
-                            <Input
-                                type="number"
-                                onChange={(e) => {
-                                    form.validateFields();
-                                    setInputBase(Number.parseInt(e.target.value));
-                                }}
-                            />
-                        </Form.Item>
-                        <div className="button-wrapper">
-                            <Tooltip title={t('baseConverter.swapBases')}>
-                                <Button
-                                    onClick={swap}
-                                    className="inline-form-button"
-                                    type="default"
-                                    icon={<SwapOutlined/>}
-                                />
-                            </Tooltip>
-                        </div>
-                        <Form.Item
-                            name={'outputBase'}
-                            label={t('baseConverter.outputBase')}
-                            style={{ width: '25%' }}
-                            rules={[{ validator: checkBase }]}
-                        >
-                            <Input type="number"/>
-                        </Form.Item>
-                        <div style={{ width: '20px' }}/>
-                        <Form.Item
-                            name={'precision'}
-                            label={t('baseConverter.precision')}
-                            style={{ width: '25%' }}
-                        >
-                            <Input type="number"/>
-                        </Form.Item>
-                        <div className="button-wrapper convert-button-wrapper">
-                            <Button className="inline-form-button" type="primary" htmlType="submit">
-                                {t('baseConverter.convert')}
-                            </Button>
-                        </div>
-                    </Input.Group>
-                </Form.Item>
+                <div className="action-row">
+                    <Form.Item
+                        name={'inputBase'}
+                        label={t('baseConverter.inputBase')}
+                        style={{ width: '25%' }}
+                        rules={[{ validator: checkBase }]}
+                    >
+                        <Input
+                            type="number"
+                            onChange={(e) => {
+                                form.validateFields();
+                                setInputBase(Number.parseInt(e.target.value));
+                            }}
+                        />
+                    </Form.Item>
+                    <div className="button-wrapper">
+                        <Tooltip title={t('baseConverter.swapBases')}>
+                            <IconButton
+                                onClick={swap}
+                                className="inline-form-button"
+                                >
+                                <SwapOutlined/>
+                            </IconButton>
+                        </Tooltip>
+                    </div>
+                    <Form.Item
+                        name={'outputBase'}
+                        label={t('baseConverter.outputBase')}
+                        style={{ width: '25%' }}
+                        rules={[{ validator: checkBase }]}
+                    >
+                        <Input type="number"/>
+                    </Form.Item>
+                    <div style={{ width: '20px' }}/>
+                    <Form.Item
+                        name={'precision'}
+                        label={t('baseConverter.precision')}
+                        style={{ width: '25%' }}
+                    >
+                        <Input type="number"/>
+                    </Form.Item>
+                    <div className="button-wrapper convert-button-wrapper">
+                        <Button variant={'contained'} className="inline-form-button" color="primary"  type="submit">
+                            {t('baseConverter.convert')}
+                        </Button>
+                    </div>
+                </div>
             </Form>
-        </div>
+        </Card>
     );
 };

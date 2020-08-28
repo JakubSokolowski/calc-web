@@ -1,20 +1,19 @@
 import React, { FC, useRef, useState } from 'react';
 import './hover-grid.scss';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
-import { Button, message, Popover, Typography } from 'antd';
 import { CopyOutlined } from '@ant-design/icons/lib';
-import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition, gridToAscii } from '../../core/grid-utils';
+import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition } from '../../core/grid-utils';
 import { CellCoords } from '../../models/cell-coords';
 import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
-import { copyToClipboard, NumberSubscript } from '@calc/ui';
+import { NumberSubscript } from '@calc/ui';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
-import { range } from '@calc/utils';
 import { AxisConfig } from '../../models/axis-config';
+import { Button, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
 
 interface P {
     values: GridCellConfig[][];
@@ -24,6 +23,14 @@ interface P {
     xAxis?: AxisConfig;
     title?: string;
 }
+
+const HtmlTooltip = withStyles((theme: Theme) => ({
+    tooltip: {
+        maxWidth: 220,
+        fontSize: theme.typography.pxToRem(12),
+        border: '1px solid #dadde9',
+    },
+}))(Tooltip);
 
 export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, xAxis }) => {
     const lookup = buildCellGroupLookup(groups);
@@ -103,11 +110,11 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
                     : hoveredGroup.contentBuilder(hoveredGroup.contentProps);
 
                 return (
-                    <Popover content={content} visible={true} key={`${x}-${y}`}>
+                    <HtmlTooltip title={content} open={true} key={`${x}-${y}`} arrow placement={'top'}>
                         <div>
                             <HoverGridCell {...cellProps} />
                         </div>
-                    </Popover>
+                    </HtmlTooltip>
                 );
             }
 
@@ -129,11 +136,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
         )
     }) : [];
 
-    const copyAscii = () => {
-        const ascii = gridToAscii({ values, groups, lines });
-        copyToClipboard(ascii);
-        message.info('Copied ascii to clipboard');
-    };
+
 
     const saveAsImage = async () => {
         if (gridRef) {

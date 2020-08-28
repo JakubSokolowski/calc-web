@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Button, Form, Input, Select } from 'antd';
+import { Form } from 'antd';
 import {
     BaseDigits,
     ComplementConverter,
@@ -15,8 +15,7 @@ import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-
-const { Option } = Select;
+import { Button, Input, MenuItem, Select, Card } from '@material-ui/core';
 
 interface P {
     onConversionChange?: (conversion: Conversion) => void;
@@ -124,78 +123,78 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const options = possibleOutputBases.map((base, index) => {
         return (
-            <Option value={base} key={index}>{base}</Option>
+            <MenuItem value={base} key={index}>{base}</MenuItem>
         );
     });
 
     return (
         <div>
-            <Form layout={'vertical'} initialValues={initialValues} form={form} onFinish={onFinish}>
-                <Form.Item
-                    name={'inputStr'}
-                    label={label}
-                    rules={[{ validator: checkValueStr }]}
-                >
-                    <InputWithCopy
-                        onChange={(value) => {
-                            setInputValue(value);
-                            form.validateFields();
-                        }}
-                    />
-                </Form.Item>
-                {
-                    showDecimalValue &&
-                    <Form.Item
-                        label={t('baseConverter.inputDecimalValue')}
-                    >
-                        <InputWithCopy readOnly value={getDecimal()}/>
-                    </Form.Item>
-                }
+           <Card style={{'padding': '10px'}}>
+               <Form layout={'vertical'} initialValues={initialValues} form={form} onFinish={onFinish}>
+                   <Form.Item
+                       name={'inputStr'}
+                       label={label}
+                       rules={[{ validator: checkValueStr }]}
+                   >
+                       <InputWithCopy
+                           onChange={(value) => {
+                               setInputValue(value);
+                               form.validateFields();
+                           }}
+                       />
+                   </Form.Item>
+                   {
+                       showDecimalValue &&
+                       <Form.Item
+                           label={t('baseConverter.inputDecimalValue')}
+                       >
+                           <InputWithCopy readOnly value={getDecimal()}/>
+                       </Form.Item>
+                   }
 
-                {
-                    showComplement &&
-                    <Form.Item
-                        label={t('baseConverter.inputComplement')}
-                    >
-                        <InputWithCopy readOnly value={getComplement()}/>
-                    </Form.Item>
-                }
-                <Form.Item className="action-row">
-                    <Input.Group style={{ display: 'flex', flexDirection: 'row' }}>
-                        <Form.Item
-                            name={'inputBase'}
-                            label={t('baseConverter.inputBase')}
-                            style={{ width: '40%' }}
-                            rules={[{ validator: checkBase }]}
-                        >
-                            <Input
-                                type="number"
-                                onChange={onInputBaseChange}
-                            />
-                        </Form.Item>
-                        <div style={{ width: '20px' }}/>
-                        <Form.Item
-                            name={'outputBase'}
-                            label={t('baseConverter.outputBase')}
-                            style={{ width: '40%' }}
-                        >
-                            <Select
-                                placeholder={t('associatedBaseConverter.noOutputBase')}
-                                disabled={!options.length}
-                                style={{ width: '100%' }}
-                            >
-                                {options}
-                            </Select>
-                        </Form.Item>
-                        <div style={{ width: '20px' }}/>
-                        <div className="button-wrapper convert-button-wrapper">
-                            <Button className="inline-form-button" type="primary" htmlType="submit">{
-                                t('baseConverter.convert')}
-                            </Button>
-                        </div>
-                    </Input.Group>
-                </Form.Item>
-            </Form>
+                   {
+                       showComplement &&
+                       <Form.Item
+                           label={t('baseConverter.inputComplement')}
+                       >
+                           <InputWithCopy readOnly value={getComplement()}/>
+                       </Form.Item>
+                   }
+                   <Form.Item className="action-row">
+                       <Form.Item
+                           name={'inputBase'}
+                           label={t('baseConverter.inputBase')}
+                           style={{ width: '40%' }}
+                           rules={[{ validator: checkBase }]}
+                       >
+                           <Input
+                               type="number"
+                               onChange={onInputBaseChange}
+                           />
+                       </Form.Item>
+                       <div style={{ width: '20px' }}/>
+                       <Form.Item
+                           name={'outputBase'}
+                           label={t('baseConverter.outputBase')}
+                           style={{ width: '40%' }}
+                       >
+                           <Select
+                               placeholder={t('associatedBaseConverter.noOutputBase')}
+                               disabled={!options.length}
+                               style={{ width: '100%' }}
+                           >
+                               {options}
+                           </Select>
+                       </Form.Item>
+                       <div style={{ width: '20px' }}/>
+                       <div className="button-wrapper convert-button-wrapper">
+                           <Button className="inline-form-button" color={'primary'} type={'submit'}>{
+                               t('baseConverter.convert')}
+                           </Button>
+                       </div>
+                   </Form.Item>
+               </Form>
+           </Card>
         </div>
     );
 };

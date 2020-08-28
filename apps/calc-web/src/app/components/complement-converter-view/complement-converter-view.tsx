@@ -1,17 +1,15 @@
 import React, { FC } from 'react';
-import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
-
-const { Title } = Typography;
+import { Typography } from '@material-ui/core';
 
 export const ComplementConverterView: FC = () => {
     const { t } = useTranslation();
 
     return (
         <div>
-            <Title>
+            <Typography  variant={'h4'}>
                 {t('complementConverter.title')}
-            </Title>
+            </Typography>
         </div>
     );
 };
