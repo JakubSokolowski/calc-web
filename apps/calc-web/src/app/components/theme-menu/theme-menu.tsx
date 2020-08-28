@@ -1,10 +1,15 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { availableThemes } from '../../../assets/i18n/i18n';
 import { Badge, Button, Popover } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAppTheme } from '../../store/selectors/options.selectors';
+import { AppTheme } from '@calc/ui';
+import { setTheme } from '../../store/actions/options.actions';
 
-export const LanguageMenu: FC = () => {
-    const { i18n, t } = useTranslation();
+export const ThemeMenu: FC = () => {
+    const { t } = useTranslation();
+    const dispatch = useDispatch();
+    const currentTheme = useSelector(selectAppTheme);
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -19,32 +24,34 @@ export const LanguageMenu: FC = () => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-    const handleClick = async (language) => {
-        if (language && i18n.language !== language) {
-            await i18n.changeLanguage(language);
+    const handleClick = async (theme) => {
+        if (theme && theme !== currentTheme) {
+            dispatch(setTheme(theme))
         }
     };
 
-    const options = availableThemes.map((language, index) => {
-        const isChosenLanguage = language === i18n.language;
+    const availableThemes = [AppTheme.Dark, AppTheme.Light];
+
+    const options = availableThemes.map((theme, index) => {
+        const isChosenTheme = theme === currentTheme;
         return (
             <div key={index}>
                 <Button
                     className="user-menu-button"
-                    data-language={language}
+                    data-theme={theme}
                     onClick={(async () => {
-                        await handleClick(language);
+                        await handleClick(theme);
                     })}
                 >
-                    {language}
+                    {theme}
                 </Button>
-                {isChosenLanguage && <Badge/>}
+                {isChosenTheme && <Badge/>}
             </div>
         );
     });
 
     return (
-        <div>
+        <div style={{marginRight: '10px'}}>
             <Popover
                 style={{ padding: '0px' }}
                 id={id}
@@ -65,7 +72,7 @@ export const LanguageMenu: FC = () => {
                 </div>
             </Popover>
             <Button aria-describedby={id} variant="contained" color="default" onClick={handlePopoverClick}>
-                {i18n.language}
+                {currentTheme}
             </Button>
         </div>
     );

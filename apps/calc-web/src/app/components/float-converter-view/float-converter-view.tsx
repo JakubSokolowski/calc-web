@@ -1,18 +1,17 @@
 import React, { FC } from 'react';
-import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { FloatConverterComponent } from '../float-converter/float-converter-component';
+import { Typography } from '@material-ui/core';
 
-const { Title} = Typography;
 
 export const FloatConverterView: FC = () => {
     const {t} = useTranslation();
 
     return (
         <div>
-            <Title>
+            <Typography variant={'h3'}>
                 {t('floatConverter.title')}
-            </Title>
+            </Typography>
             <FloatConverterComponent/>
         </div>
     );

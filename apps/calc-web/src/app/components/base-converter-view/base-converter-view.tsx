@@ -2,9 +2,8 @@ import React, { FC, useState } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
 import { BaseConverterComponent } from '../base-converter/base-converter-component';
 import { ConversionDetails } from '../conversion-details/conversion-details';
-import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
-const { Title } = Typography;
+import { Typography } from '@material-ui/core';
 
 export const BaseConverterView: FC = () => {
     const { t } = useTranslation();
@@ -20,15 +19,10 @@ export const BaseConverterView: FC = () => {
 
     return (
         <div>
-            <Title level={2}>
+            <Typography variant={'h4'} >
                 {t('baseConverter.title')}
-            </Title>
+            </Typography>
             <BaseConverterComponent onConversionChange={onChange}/>
-            {conversion &&
-                <Title level={3} style={{paddingTop: '20px'}}>
-                    {t('baseConverter.result')}
-                </Title>
-            }
             {conversion && <ConversionDetails conversion={conversion} precision={precision}/>}
         </div>
     );

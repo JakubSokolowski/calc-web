@@ -1,11 +1,9 @@
 import React, { FC } from 'react';
-import { Typography } from 'antd';
 import { useTranslation } from 'react-i18next';
 import { addPositionalNumbers, fromString, PositionResult } from '@calc/calc-arithmetic';
 import { AddAtPositionHoverContent } from './add-at-position-hover-content';
 import { buildAdditionGrid, HoverGrid } from '@calc/grid';
-
-const { Title } = Typography;
+import { Typography } from '@material-ui/core';
 
 export const PositionalCalculatorView: FC = () => {
     const { t } = useTranslation();
@@ -26,9 +24,9 @@ export const PositionalCalculatorView: FC = () => {
 
     return (
         <div>
-            <Title level={2}>
-                {t('positionalCalculator.title')}
-            </Title>
+           <Typography variant={'h3'}>
+               {t('positionalCalculator.title')}
+           </Typography>
             <HoverGrid {...grid} title={'Addition details'} groupBuilder={groupBuilder}/>
         </div>
     );

@@ -1,8 +1,8 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { DigitMapping } from '@calc/calc-arithmetic';
 import './digit-mappings-box.scss'
-import { Button } from 'antd';
 import { ArcherContainer, ArcherElement } from 'react-archer';
+import { Button } from '@material-ui/core';
 
 interface P {
     mapping: DigitMapping;
