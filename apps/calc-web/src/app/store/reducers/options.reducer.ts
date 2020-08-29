@@ -11,7 +11,7 @@ export interface OptionsState {
 export const optionsInitialState: OptionsState = {
     showComplement: true,
     showDecimalValue: true,
-    theme: AppTheme.Light
+    theme: AppTheme.Dark
 };
 
 export const optionsReducer = createReducer(

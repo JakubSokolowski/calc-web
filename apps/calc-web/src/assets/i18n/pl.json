@@ -1,6 +1,13 @@
 {
+    "appBar": {
+        "repo" : "Repozytorium na GitLab",
+        "toggleDark": "Przełącz na ciemny motyw",
+        "toggleLight": "Przełącz na jasny motyw"
+    },
     "home": {
-        "header": "Calc"
+        "header": "Calc",
+        "positional": "Pozycyjne",
+        "floating": "Zmiennoprzecinkowe"
     },
     "languageMenu": {
         "choose": "Wybierz język"
@@ -15,6 +22,11 @@
         "inputComplement": "Uzupełnienie wejścia",
         "inputBase": "Podstawa wejścia",
         "outputBase": "Podstawa wyniku",
+        "outputNumber": "Liczba wyjściowa",
+        "conversionToBase": "Kowersja do podstawy {{base}}",
+        "conversionToDecimal": "Konwersja to dziesiętnej",
+        "integralConversion": "Konwersja części całkowitej",
+        "floatingConversion": "Konwersja części ułamkowej",
         "swapBases": "Zamień podstawy",
         "precision": "Precyzja",
         "convert": "Przekonwertuj",
@@ -28,7 +40,7 @@
         "noOutputBase": "Brak opcji dla podstawy wyniku"
     },
     "floatConverter": {
-        "title": "Konwersja reprezentacji zmiennoprzecinkowych",
+        "title": "IEEE 754",
         "sign": "Znak",
         "exponent": "Wykładnik",
         "mantissa": "Mantysa",

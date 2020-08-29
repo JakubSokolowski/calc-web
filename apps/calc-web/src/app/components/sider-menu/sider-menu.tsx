@@ -38,7 +38,7 @@ export const SiderMenu = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header">
-                    <Typography className={classes.heading}>Positional</Typography>
+                    <Typography className={classes.heading}>{t('home.positional')}</Typography>
                 </AccordionSummary>
                 <List>
                     <ListItem button key={'base-converter'} onClick={() => history.push('/base-converter')}>
@@ -60,7 +60,7 @@ export const SiderMenu = () => {
                     expandIcon={<ExpandMoreIcon />}
                     aria-controls="panel1a-content"
                     id="panel1a-header">
-                    <Typography className={classes.heading}>Floating</Typography>
+                    <Typography className={classes.heading}>{t('home.floating')}</Typography>
                 </AccordionSummary>
                 <List>
                     <ListItem button key={'float-converter'} onClick={() => history.push('/float-converter')}>

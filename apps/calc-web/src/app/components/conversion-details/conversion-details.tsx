@@ -34,29 +34,29 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
             <Typography variant={'h4'} >
                 {t('baseConverter.result')}
             </Typography>
-            <Card style={{ 'padding': '10px' }}>
+            <Card style={{ 'padding': '20px' }}>
                 <div id="integral-conversion-details">
-                    <Typography>Output number</Typography>
                     <div style={{ marginBottom: '20px' }}>
                         <InputWithCopy
                             readOnly
+                            label={t('baseConverter.outputNumber')}
                             value={conversion.result.toString(precision)}
                         />
                     </div>
                     {
                         conversion.type === ConversionType.DIRECT ?
                             <div>
-                                <Typography>{`I. Conversion to base ${conversion.result.base}`}</Typography>
+                                <Typography>{`I. ${t('baseConverter.conversionToBase', {base: conversion.result.base})}`}</Typography>
                                 <ResultEquation conversion={conversion} firstStage={0} lastStage={0}/>
                             </div> :
                             <div>
                                 <div>
-                                    <Typography>I. Conversion to decimal</Typography>
+                                    <Typography>{`I. ${t('baseConverter.conversionToDecimal')}`}</Typography>
                                     <ConversionToDecimalDetails
                                         conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
                                 </div>
                                 <div style={{ paddingTop: '12px' }}>
-                                    <Typography>{`II. Conversion to base ${conversion.result.base}`}</Typography>
+                                    <Typography>{`II. ${t('baseConverter.conversionToBase', {base: conversion.result.base})}`}</Typography>
                                     <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
                                 </div>
                             </div>
@@ -66,7 +66,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                             integralHoverGrid &&
                             <HoverGrid
                                 {...integralHoverGrid}
-                                title={'Integral part conversion:'}
+                                title={t('baseConverter.integralConversion')}
                                 groupBuilder={integralHoverPopover}
                             />
                         }
@@ -75,7 +75,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                             fractionalHoverGrid &&
                             <HoverGrid
                                 {...fractionalHoverGrid}
-                                title={'Floating part conversion:'}
+                                title={t('baseConverter.floatingConversion')}
                                 groupBuilder={floatingHoverPopover}
                             />
                         }

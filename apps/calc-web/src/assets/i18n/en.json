@@ -1,6 +1,14 @@
 {
+    "appBar": {
+        "repo" : "GitLab repository",
+        "toggleDark": "Toggle dark theme",
+        "toggleLight": "Toggle light theme"
+    },
     "home": {
-        "header": "Calc"
+        "appName": "CALC",
+        "header": "Calc",
+        "positional": "Positional",
+        "floating": "Floating"
     },
     "languageMenu": {
         "choose": "Choose language"
@@ -15,6 +23,11 @@
         "inputComplement": "Input complement",
         "inputBase": "Input base",
         "outputBase": "Output base",
+        "outputNumber": "Output number",
+        "conversionToBase": "Conversion to base {{base}}",
+        "conversionToDecimal": "Conversion to decimal",
+        "integralConversion": "Integral conversion",
+        "floatingConversion": "Floating conversion",
         "swapBases": "Swap bases",
         "precision": "Precision",
         "convert": "Convert",
@@ -28,7 +41,7 @@
         "noOutputBase": "No output bases possible"
     },
     "floatConverter": {
-        "title": "Float Converter",
+        "title": "IEEE 754",
         "sign": "Sign",
         "exponent": "Exponent",
         "mantissa": "Mantissa",
