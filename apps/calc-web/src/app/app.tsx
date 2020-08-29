@@ -30,6 +30,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
+import { useDocs } from '@calc/docs';
 
 const drawerWidth = 240;
 
