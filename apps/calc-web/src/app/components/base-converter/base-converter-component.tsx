@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, Card, IconButton, Input, Tooltip } from '@material-ui/core';
+import { Button, Card, IconButton, TextField, Tooltip } from '@material-ui/core';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -76,13 +76,6 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         form.validateFields();
     };
 
-    const label = (
-        <div style={{ display: 'flex', 'flexDirection': 'row' }}>
-            <span>{t('baseConverter.inputNumber')}</span>
-            <ConversionOptions style={{ marginLeft: '100px' }}/>
-        </div>
-    );
-
     const getDecimal = useCallback(() => {
         try {
             if (inputBase === 10) return inputValue;
@@ -111,14 +104,15 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
 
     return (
-        <Card style={{padding: '10px'}}>
+        <Card style={{padding: '20px'}}>
+            <ConversionOptions style={{'paddingBottom': '20px'}}/>
             <Form layout={'vertical'} form={form} onFinish={onFinish} initialValues={initialValues}>
                 <Form.Item
                     name={'inputStr'}
-                    label={label}
                     rules={[{ validator: checkValueStr }]}
                 >
                     <InputWithCopy
+                        label={t('baseConverter.inputNumber')}
                         onChange={(value) => {
                             setInputValue(value);
                             form.validateFields();
@@ -127,30 +121,27 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 </Form.Item>
                 {
                     showDecimalValue &&
-                    <Form.Item
-                        label={t('baseConverter.inputDecimalValue')}
-                    >
-                        <InputWithCopy readOnly value={getDecimal()}/>
-                    </Form.Item>
+                        <InputWithCopy
+                            readOnly
+                            label={t('baseConverter.inputDecimalValue')}
+                            value={getDecimal()}
+                        />
                 }
-
+                <div style={{ height: '20px' }}/>
                 {
                     showComplement &&
-                    <Form.Item
-                        label={t('baseConverter.inputComplement')}
-                    >
-                        <InputWithCopy readOnly value={getComplement()}/>
-                    </Form.Item>
+                    <InputWithCopy label={t('baseConverter.inputComplement')} readOnly value={getComplement()}/>
                 }
                 <div className="action-row">
                     <Form.Item
                         name={'inputBase'}
-                        label={t('baseConverter.inputBase')}
                         style={{ width: '25%' }}
                         rules={[{ validator: checkBase }]}
                     >
-                        <Input
+                        <TextField
+                            variant={'outlined'}
                             type="number"
+                            label={t('baseConverter.inputBase')}
                             onChange={(e) => {
                                 form.validateFields();
                                 setInputBase(Number.parseInt(e.target.value));
@@ -169,25 +160,23 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     </div>
                     <Form.Item
                         name={'outputBase'}
-                        label={t('baseConverter.outputBase')}
                         style={{ width: '25%' }}
                         rules={[{ validator: checkBase }]}
                     >
-                        <Input type="number"/>
+                        <TextField variant={'outlined'} label={t('baseConverter.outputBase')} type="number"/>
                     </Form.Item>
                     <div style={{ width: '20px' }}/>
                     <Form.Item
                         name={'precision'}
-                        label={t('baseConverter.precision')}
                         style={{ width: '25%' }}
                     >
-                        <Input type="number"/>
+                        <TextField variant={'outlined'} label={t('baseConverter.precision')} type="number"/>
                     </Form.Item>
-                    <div className="button-wrapper convert-button-wrapper">
+                    <Form.Item>
                         <Button variant={'contained'} className="inline-form-button" color="primary"  type="submit">
                             {t('baseConverter.convert')}
                         </Button>
-                    </div>
+                    </Form.Item>
                 </div>
             </Form>
         </Card>

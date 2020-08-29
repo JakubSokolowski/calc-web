@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { availableThemes } from '../../../assets/i18n/i18n';
+import { availableThemes, getNativeName } from '../../../assets/i18n/i18n';
 import { Badge, Button, Popover } from '@material-ui/core';
-
+import TranslateIcon from '@material-ui/icons/Translate';
 export const LanguageMenu: FC = () => {
     const { i18n, t } = useTranslation();
 
@@ -23,22 +23,20 @@ export const LanguageMenu: FC = () => {
         if (language && i18n.language !== language) {
             await i18n.changeLanguage(language);
         }
+        handleClose();
     };
 
-    const options = availableThemes.map((language, index) => {
-        const isChosenLanguage = language === i18n.language;
+    const options = availableThemes.map((languageKey, index) => {
         return (
             <div key={index}>
                 <Button
-                    className="user-menu-button"
-                    data-language={language}
+                    data-language={languageKey}
                     onClick={(async () => {
-                        await handleClick(language);
+                        await handleClick(languageKey);
                     })}
                 >
-                    {language}
+                    {getNativeName(languageKey)}
                 </Button>
-                {isChosenLanguage && <Badge/>}
             </div>
         );
     });
@@ -60,12 +58,12 @@ export const LanguageMenu: FC = () => {
                     horizontal: 'center'
                 }}
                 title={t('languageMenu.choose')}>
-                <div style={{ marginLeft: '-10px' }}>
+                <div>
                     {options}
                 </div>
             </Popover>
-            <Button aria-describedby={id} variant="contained" color="default" onClick={handlePopoverClick}>
-                {i18n.language}
+            <Button startIcon={<TranslateIcon/>} aria-describedby={id} variant="text" color="default" onClick={handlePopoverClick}>
+                {getNativeName(i18n.language)}
             </Button>
         </div>
     );

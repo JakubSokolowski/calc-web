@@ -64,7 +64,7 @@
     "@nrwl/node": "9.3.0",
     "@nrwl/react": "9.3.0",
     "@nrwl/web": "9.3.0",
-    "@nrwl/workspace": "9.3.0",
+    "@nrwl/workspace": "10.1.0",
     "@testing-library/react": "9.4.0",
     "@types/bignumber.js": "^5.0.0",
     "@types/enzyme": "^3.10.5",

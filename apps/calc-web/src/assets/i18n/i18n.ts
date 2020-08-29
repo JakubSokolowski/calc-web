@@ -13,6 +13,13 @@ const resources = {
     }
 };
 
+export function getNativeName(languageKey: string): string {
+    return {
+        'en': 'English',
+        'pl': 'Polski'
+    }[languageKey];
+}
+
 export const availableThemes = Object.keys(resources);
 
 i18n

@@ -19,15 +19,17 @@ import {
     IconButton,
     Theme,
     ThemeProvider,
-    Toolbar
+    Toolbar, Typography
 } from '@material-ui/core';
-import { getTheme } from '@calc/ui';
+import { getTheme, GitlabIcon } from '@calc/ui';
 import { useSelector } from 'react-redux';
 import { selectAppTheme } from './store/selectors/options.selectors';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { useTranslation } from 'react-i18next';
+import { RepoLink } from './components/repo-link/repo-link';
 
 const drawerWidth = 240;
 
@@ -94,6 +96,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const App = () => {
     const theme = useSelector(selectAppTheme);
     const classes = useStyles();
+    const {t} = useTranslation();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -121,13 +124,15 @@ export const App = () => {
                                 color="inherit"
                                 aria-label="open drawer"
                                 onClick={handleDrawerOpen}
-                                edge="start"
+                                edge="end"
                                 className={clsx(classes.menuButton, open && classes.hide)}
                             >
                                 <MenuIcon/>
                             </IconButton>
-                            <ThemeMenu/>
+                            <div style={{ 'flexGrow': 1 }}/>
                             <LanguageMenu/>
+                            <ThemeMenu/>
+                            <RepoLink/>
                         </Toolbar>
                     </AppBar>
 
@@ -141,6 +146,10 @@ export const App = () => {
                         }}
                     >
                         <div className={classes.drawerHeader}>
+                            <Typography variant={'h4'}>
+                                {t('home.appName')}
+                            </Typography>
+                            <div style={{ flexGrow: 1 }}/>
                             <IconButton onClick={handleDrawerClose}>
                                 <ChevronLeftIcon/>
                             </IconButton>

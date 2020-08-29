@@ -1,6 +1,6 @@
-import React, { FC, useRef } from 'react';
+import React, { FC, ReactNode, SyntheticEvent, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, Input, InputProps, Snackbar } from '@material-ui/core';
+import { IconButton, Snackbar, TextField, TextFieldProps } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 
@@ -17,16 +17,17 @@ interface P {
     value?: string | number;
     onChange?: (value: string) => void;
     readOnly?: boolean;
+    label?: ReactNode;
     inputType?: InputType;
     size?: 'small' | 'middle' | 'large';
 }
 
-export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnly }) => {
+export const InputWithCopy: FC<P> = ({ onChange, value, size, label, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
 
-    const handleClose = (event?: React.SyntheticEvent, reason?: string) => {
+    const handleClose = (event?: SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -35,7 +36,7 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnl
     };
 
     const copyToClipboard = () => {
-        if(textAreaRef.current) {
+        if (textAreaRef.current) {
             // console.log(textAreaRef.current.value);
             textAreaRef.current.select();
         }
@@ -56,13 +57,17 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnl
         }
     };
 
-    const props: InputProps = {
+    const props: TextFieldProps = {
         style: {
             flexGrow: 1
         },
+        inputProps: {
+            'aria-readonly': readOnly
+        },
+        variant: 'outlined',
         inputRef: textAreaRef,
+        label,
         value: value as any,
-        readOnly: readOnly,
         onChange: inputType === InputType.Number ? handleNumberChange : handleChange
     };
 
@@ -71,8 +76,8 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnl
             <span style={{ display: 'flex', 'flexDirection': 'row' }}>
                 {
                     inputType === InputType.Number
-                        ? <Input type={'number'} {...props}/>
-                        : <Input {...props}/>
+                        ? <TextField type={'number'} {...props}/>
+                        : <TextField {...props}/>
                 }
                 {
                     document.queryCommandSupported('copy') &&
@@ -83,8 +88,9 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, inputType, readOnl
                     </div>
                 }
             </span>
-            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={2000} onClose={handleClose}>
-                <Alert severity="info" >{t('common.copy')}</Alert>
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={2000}
+                      onClose={handleClose}>
+                <Alert severity="info">{t('common.copy')}</Alert>
             </Snackbar>
         </>
     );
