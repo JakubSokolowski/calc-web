@@ -17,7 +17,12 @@
             "tsConfig": "apps/calc-web/tsconfig.app.json",
             "assets": [
               "apps/calc-web/src/favicon.ico",
-              "apps/calc-web/src/assets"
+              "apps/calc-web/src/assets",
+                {
+                    "input": "libs/docs/src/assets",
+                    "glob": "**/*",
+                    "output": "assets/docs"
+                }
             ],
             "styles": ["apps/calc-web/src/styles.scss"],
             "scripts": [],
@@ -217,6 +222,33 @@
           "options": {
             "jestConfig": "libs/ui/jest.config.js",
             "tsConfig": "libs/ui/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "docs": {
+      "root": "libs/docs",
+      "sourceRoot": "libs/docs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "tsConfig": [
+              "libs/docs/tsconfig.lib.json",
+              "libs/docs/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/docs/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/docs/jest.config.js",
+            "tsConfig": "libs/docs/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }
