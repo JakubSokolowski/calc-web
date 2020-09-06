@@ -2,6 +2,7 @@ import BigNumber from 'bignumber.js';
 import { BaseDigits } from '../positional/base-digits';
 import { Digits } from '../positional/representations';
 import { Digit } from '../models';
+import { replaceAll } from '@calc/utils';
 
 /**
  *  Splits the representation string into digits array
@@ -13,20 +14,6 @@ export function representationStrToStrArray(
     base: number
 ): string[] {
     return str.split(base <= 36 ? '' : ' ');
-}
-
-/**
- * Replaces all the occurrences of toReplace with replacement
- * @param str
- * @param toReplace
- * @param replacement
- */
-export function replaceAll(
-    str: string,
-    toReplace: string,
-    replacement: string
-): string {
-    return str.replace(new RegExp(toReplace, 'g'), replacement);
 }
 
 /**

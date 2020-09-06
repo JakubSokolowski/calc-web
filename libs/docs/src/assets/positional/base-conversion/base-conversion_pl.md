@@ -1,6 +1,5 @@
 # Konwersja podstaw
-
-## Konwersja części dziesiętnej
+## Konwersja części dziesętnej
 
 Powiedzmy że chcemy przekonwertować liczbę z bazy 10 na bazę 2. Libczę w danej bazie będziemy oznaczać przez wartość z dołu liczby, tak więc liczba 24 w podstawie 10 oznaczamy jako $24_{10}$. Konwersje z jednej podstawy na inną będziemy oznaczać jako $24_{10}=(?)_{2}$.   Z dowolnej liczby o podstawie 10, można otrzymać liczbę o dowolnej innej podstawie przez dzielenie tej liczby przez podstawę do której chcemy przekonwertować. Resztą z takiego dzielenia jest cyfra na pozycji, a wynikiem dzielenia jest wejście do kolejnego kroku. W czasie procesu dzielenia otrzymujemy kolejne cyfry wyniku "od końca".  Konwersja do podstawy 2 dla $24_{10}$ wygląda następująco: 
 
@@ -35,14 +34,14 @@ Konwersja ta odbywa się za pomocą mnożenia. Bierzemy ułamek w danej podstawi
 7. Powtarzamy to tak długo aż uzyskamy pożądaną dokładność, lub wykyryjemy powtarzające się rozszerzenie ( za każdym razem dostajemy taką sam wynik mnożenia), wtedy ułamek jest okresowy. W tym przykładzie, wynik konwersji z dokładnością do 5 miejsc po przecinku wyniesie $0.123_{10}=0.0011$.
 8. Algorytm kończy się również gdy otrzymamy wynik z zerową częścią ułamkową, np. kiedy chcemy przekonwertować $0.5_{10} = (?)_{2}$. W pierwszym kroku otrzymamy wtedy $0.5 * 2 = 1.0$, bierzemy 1 jako pierwszą cyfrę ułamka, do następnego kroku przechodz 0, a każde kolejne mnożenie też da 0.
 
-## Konwersja z dowolnej bazy na dowolną bazę
+# Konwersja z dowolnej bazy na dowolną bazę
 
 Konwersję z dowolnej na dowolną bazę przeprowadzamy w 2 krokach. Pierwszym krokiem jest konwersja do bazy 10. Można taką konwersję łatwo wykonać poprzez pomnożenie wartości każdej cyfry liczby przez $baza^{waga}$, gdzie wagą liczby jest pozycja cyfry, a następnie zsumowanie wszystkich rezultatów. Na przykładzie liczby $AFFB.C_{16}$:
 
 $$A * 16^3 + F*16^2 + F*16^1 + B*16^0 + C * 16^{-1} = 45051.75
 $$
 
-## Konwersja przez bazy skojarzone
+# Konwersja przez bazy skojarzone
 
 W specyficznych przypadkach można znacząco uprościć konwersję. Przypadki te to takie gdy baza do której konwertujemy jest n-tą potęgą bazy z której konwertujemy, albo na odwrót. Na przykład, można takiej metody użyć dla $(X)_{2} = (Y)_{8} = (Z)_{64}$.
 
