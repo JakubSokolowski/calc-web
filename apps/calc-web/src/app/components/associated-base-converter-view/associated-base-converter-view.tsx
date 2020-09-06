@@ -5,8 +5,6 @@ import { AssociatedBaseConverter } from '../associated-base-converter/associated
 import { AssociatedBaseConversionDetails } from '../associated-base-conversion-details/associated-base-conversion-details';
 import { Box, Tab, Tabs, Typography } from '@material-ui/core';
 import { a11yProps, TabPanel } from '@calc/ui';
-import { BaseConverterComponent } from '../base-converter/base-converter-component';
-import { ConversionDetails } from '../conversion-details/conversion-details';
 import { DocPage } from '@calc/docs';
 
 export const AssociatedBaseConverterView: FC = () => {

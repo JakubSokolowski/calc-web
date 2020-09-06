@@ -2,7 +2,9 @@ import { latinize } from './latinize';
 import { ContentsEntry } from '../models/contents-entry';
 
 
-export function extractHeadingIds(markdown: string): ContentsEntry[] {
+export function extractHeadingIds(markdown?: string): ContentsEntry[] {
+    if(!markdown) return [];
+
     const headingRegex =  /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm;
 
     return markdown.match(headingRegex).map((heading) => {

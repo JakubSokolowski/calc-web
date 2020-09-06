@@ -23,6 +23,18 @@ describe('#header-ids', () => {
 
             expect(result).toEqual(expected);
         });
+
+        it('should return an empty array when markdown is null', () => {
+            // given
+            const markdown = null;
+
+            // when
+            const result = extractHeadingIds(markdown);
+
+            // then
+            const expected: ContentsEntry[] = [];
+            expect(result).toEqual(expected);
+        });
     });
 
     describe('#getHeadingSlug', () => {
