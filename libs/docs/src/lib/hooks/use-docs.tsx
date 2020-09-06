@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
-export const useDocs = (path: string) => {
-    const [doc, setDoc] = useState(null);
+export const useDocs = (path: string): string | null => {
+    const [doc, setDoc] = useState<string>(null);
     const { i18n } = useTranslation();
 
     const fileName = path.split('/').pop();

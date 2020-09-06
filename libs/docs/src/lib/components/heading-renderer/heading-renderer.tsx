@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Typography } from '@material-ui/core';
-import { latinize } from '../../core/functions/latinize';
+import { getHeadingSlug } from '../../core/functions/heading-ids';
 
 interface HeadingProps {
     level: number;
@@ -16,10 +16,10 @@ export const HeadingRenderer: FC<HeadingProps> = ({level, children}) => {
 
     const arrayChildren = React.Children.toArray(children);
     const text = arrayChildren.reduce(flatten, '');
-    const slug = latinize(text.toLowerCase()).replace(/\W/g, '-');
+    const id = getHeadingSlug(text);
 
     return (
-        <Typography id={slug} variant={`h${level + 3}` as any}>
+        <Typography id={id} variant={`h${level + 3}` as any}>
             {children}
         </Typography>
     )
