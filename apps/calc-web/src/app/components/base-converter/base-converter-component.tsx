@@ -1,8 +1,12 @@
 import React, { FC, useCallback, useState } from 'react';
-import { Form } from 'antd';
-import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
+import {
+    BaseDigits,
+    ComplementConverter,
+    Conversion,
+    fromString,
+    isValidString
+} from '@calc/calc-arithmetic';
 import './base-converter-component.scss';
-import { useForm } from 'antd/es/form/util';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
@@ -10,6 +14,9 @@ import { selectShowComplement, selectShowDecimalValue } from '../../store/select
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, Card, IconButton, TextField, Tooltip } from '@material-ui/core';
+import { clean } from '@calc/utils';
+import { useFormik } from 'formik';
+import { FormErrors } from '../../core/models/form-errors';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -23,11 +30,9 @@ interface FormValues {
 }
 
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
-    const [form] = useForm();
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
     const { t } = useTranslation();
-
 
     const initialValues: FormValues = {
         inputStr: '123.45',
@@ -36,44 +41,54 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         precision: 10
     };
 
-    const [inputValue, setInputValue] = useState(initialValues.inputStr);
-    const [inputBase, setInputBase] = useState(initialValues.inputBase);
-
-    const onFinish = (values: FormValues) => {
+    const onSubmit = (values: FormValues) => {
         const { inputStr, inputBase, outputBase, precision } = values;
         const conversion = fromString(inputStr, inputBase, outputBase);
         onConversionChange(conversion, precision);
     };
 
-    const checkBase = (_, base: number) => {
+    const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidRadix(base)) {
-            return Promise.reject(
-                t(
-                    'baseConverter.wrongBase',
-                    { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
-                )
+            return t(
+                'baseConverter.wrongBase',
+                { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
             );
         }
-        return Promise.resolve();
     };
 
-    const checkValueStr = (_, valueStr: string) => {
-        const { inputBase } = form.getFieldsValue();
+    const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
         if (!isValidString(valueStr, inputBase)) {
-            return Promise.reject(
-                t(
-                    'baseConverter.wrongRepresentationStr',
-                    { base: inputBase }
-                )
+            return t(
+                'baseConverter.wrongRepresentationStr',
+                { base: inputBase }
             );
         }
-        return Promise.resolve();
     };
 
-    const swap = () => {
-        const { inputBase, outputBase } = form.getFieldsValue() as FormValues;
-        form.setFieldsValue({ inputBase: outputBase, outputBase: inputBase });
-        form.validateFields();
+    const validate = (values: FormValues) => {
+        const errors: FormErrors<FormValues> = {
+            inputBase: validateBase(values.inputBase),
+            outputBase: validateBase(values.outputBase),
+            inputStr: validateValueStr(values.inputStr, values.inputBase)
+        };
+
+        return clean(errors);
+    };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate,
+    });
+
+    const [inputValue] = useState(initialValues.inputStr);
+    const [inputBase] = useState(initialValues.inputBase);
+
+    const swap = async () => {
+        const { inputBase, outputBase } = formik.values;
+        formik.setFieldValue('inputBase', outputBase);
+        formik.setFieldValue('outputBase', inputBase);
+        await formik.validateForm();
     };
 
     const getDecimal = useCallback(() => {
@@ -106,79 +121,87 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     return (
         <Card style={{padding: '20px'}}>
             <ConversionOptions style={{'paddingBottom': '20px'}}/>
-            <Form layout={'vertical'} form={form} onFinish={onFinish} initialValues={initialValues}>
-                <Form.Item
+            <form onSubmit={formik.handleSubmit}>
+                <InputWithCopy
+                    style={{ 'paddingBottom': '20px' }}
                     name={'inputStr'}
-                    rules={[{ validator: checkValueStr }]}
-                >
-                    <InputWithCopy
-                        label={t('baseConverter.inputNumber')}
-                        onChange={(value) => {
-                            setInputValue(value);
-                            form.validateFields();
-                        }}
-                    />
-                </Form.Item>
+                    id={'inputStr'}
+                    label={t('baseConverter.inputNumber')}
+                    error={!!formik.errors.inputStr}
+                    helperText={formik.errors.inputStr}
+                    onChange={formik.handleChange}
+                    value={formik.values.inputStr}
+                />
+
                 {
                     showDecimalValue &&
-                        <InputWithCopy
-                            readOnly
-                            label={t('baseConverter.inputDecimalValue')}
-                            value={getDecimal()}
-                        />
+                    <InputWithCopy
+                        style={{ 'paddingBottom': '20px' }}
+                        label={t('baseConverter.inputDecimalValue')}
+                        readOnly
+                        value={getDecimal()}
+                    />
                 }
-                <div style={{ height: '20px' }}/>
+
                 {
                     showComplement &&
-                    <InputWithCopy label={t('baseConverter.inputComplement')} readOnly value={getComplement()}/>
+                    <InputWithCopy
+                        style={{ 'paddingBottom': '20px' }}
+                        label={t('baseConverter.inputComplement')}
+                        readOnly
+                        value={getComplement()}
+                    />
                 }
+
                 <div className="action-row">
-                    <Form.Item
+                    <TextField
+                        variant={'outlined'}
                         name={'inputBase'}
-                        style={{ width: '25%' }}
-                        rules={[{ validator: checkBase }]}
-                    >
-                        <TextField
-                            variant={'outlined'}
-                            type="number"
-                            label={t('baseConverter.inputBase')}
-                            onChange={(e) => {
-                                form.validateFields();
-                                setInputBase(Number.parseInt(e.target.value));
-                            }}
-                        />
-                    </Form.Item>
-                    <div className="button-wrapper">
-                        <Tooltip title={t('baseConverter.swapBases')}>
-                            <IconButton
-                                onClick={swap}
-                                className="inline-form-button"
-                                >
-                                <SwapOutlined/>
-                            </IconButton>
-                        </Tooltip>
-                    </div>
-                    <Form.Item
+                        id={'inputBase'}
+                        label={t('baseConverter.inputBase')}
+                        error={!!formik.errors.inputBase}
+                        helperText={formik.errors.inputBase}
+                        onChange={formik.handleChange}
+                        value={formik.values.inputBase}
+                        style={{ width: '20%' }}
+                    />
+                    <Tooltip title={t('baseConverter.swapBases')}>
+                        <IconButton
+                            onClick={swap}
+                            className="inline-form-button"
+                        >
+                            <SwapOutlined/>
+                        </IconButton>
+                    </Tooltip>
+                    <TextField
+                        variant={'outlined'}
                         name={'outputBase'}
-                        style={{ width: '25%' }}
-                        rules={[{ validator: checkBase }]}
-                    >
-                        <TextField variant={'outlined'} label={t('baseConverter.outputBase')} type="number"/>
-                    </Form.Item>
-                    <div style={{ width: '20px' }}/>
-                    <Form.Item
+                        id={'outputBase'}
+                        label={t('baseConverter.outputBase')}
+                        error={!!formik.errors.outputBase}
+                        helperText={formik.errors.outputBase}
+                        onChange={formik.handleChange}
+                        value={formik.values.outputBase}
+                        style={{ width: '20%' }}
+                    />
+                    <div style={{ 'width': '20px' }}/>
+                    <TextField
+                        variant={'outlined'}
                         name={'precision'}
-                        style={{ width: '25%' }}
-                    >
-                        <TextField variant={'outlined'} label={t('baseConverter.precision')} type="number"/>
-                    </Form.Item>
-                    <Form.Item>
-                        <Button variant={'contained'} className="inline-form-button" color="primary"  type="submit">
-                            {t('baseConverter.convert')}
-                        </Button>
-                    </Form.Item>
+                        id={'precision'}
+                        label={t('baseConverter.precision')}
+                        error={!!formik.errors.precision}
+                        helperText={formik.errors.precision}
+                        onChange={formik.handleChange}
+                        value={formik.values.precision}
+                        style={{ width: '10%' }}
+                    />
+                    <div style={{ 'width': '20px' }}/>
+                    <Button color={'secondary'} variant={'contained'} type={'submit'}>
+                        {t('baseConverter.convert')}
+                    </Button>
                 </div>
-            </Form>
+            </form>
         </Card>
     );
 };

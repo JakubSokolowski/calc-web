@@ -1,5 +1,4 @@
-import React, { FC, useCallback, useEffect, useState } from 'react';
-import { Form } from 'antd';
+import React, { FC, useCallback, useState } from 'react';
 import {
     BaseDigits,
     ComplementConverter,
@@ -9,13 +8,15 @@ import {
     isValidString
 } from '@calc/calc-arithmetic';
 import './associated-base-converter.scss';
-import { useForm } from 'antd/es/form/util';
 import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, Input, MenuItem, Select, Card } from '@material-ui/core';
+import { Button, Card, MenuItem, TextField } from '@material-ui/core';
+import { useFormik } from 'formik';
+import { clean } from '@calc/utils';
+import { FormErrors } from '../../core/models/form-errors';
 
 interface P {
     onConversionChange?: (conversion: Conversion) => void;
@@ -29,7 +30,7 @@ interface FormValues {
 
 export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
-    const [form] = useForm();
+
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
 
@@ -39,30 +40,53 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         outputBase: 2
     };
 
+    const onSubmit = (values: FormValues) => {
+        console.log('OnSubmit', values);
+        const { inputStr, inputBase, outputBase } = values;
+        const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+        onConversionChange(conversion);
+    };
+
+    const validateBase = (base: number): string | undefined => {
+        if (!BaseDigits.isValidRadix(base)) {
+            return t(
+                'baseConverter.wrongBase',
+                { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
+            );
+        }
+    };
+
+    const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
+        if (!isValidString(valueStr, inputBase)) {
+            return t(
+                'baseConverter.wrongRepresentationStr',
+                { base: inputBase }
+            );
+        }
+    };
+
+    const validate = (values: FormValues) => {
+        const errors: FormErrors<FormValues> = {
+            inputBase: validateBase(values.inputBase),
+            outputBase: validateBase(values.outputBase),
+            inputStr: validateValueStr(values.inputStr, values.inputBase)
+        };
+
+        return clean(errors);
+    };
+
+    const formik = useFormik({
+        initialValues,
+        onSubmit,
+        validate,
+    });
+
     const [inputValue, setInputValue] = useState(initialValues.inputStr);
     const [inputBase, setInputBase] = useState(initialValues.inputBase);
 
     const [possibleOutputBases, setPossibleOutputBases] = useState<number[]>(() => {
         return BaseDigits.getAllPossibleBasesForAssociateConversion(initialValues.inputBase);
     });
-
-    const onFinish = (values: FormValues) => {
-        const { inputStr, inputBase, outputBase } = values;
-        const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
-        onConversionChange(conversion);
-    };
-
-    const checkBase = (_, base: number) => {
-        if (!BaseDigits.isValidRadix(base)) {
-            return Promise.reject(
-                t(
-                    'baseConverter.wrongBase',
-                    { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
-                )
-            );
-        }
-        return Promise.resolve();
-    };
 
     const getDecimal = useCallback(() => {
         try {
@@ -73,7 +97,6 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                 10
             ).result.decimalValue.toString();
         } catch (e) {
-            console.log(e);
             return '0.0';
         }
     }, [inputBase, inputValue]);
@@ -85,41 +108,9 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                 inputBase
             ).toString();
         } catch (e) {
-            console.log(e);
             return '0.0';
         }
     }, [inputBase, inputValue]);
-
-    const checkValueStr = (_, valueStr: string) => {
-        const { inputBase } = form.getFieldsValue();
-        if (!isValidString(valueStr, inputBase)) {
-            return Promise.reject(
-                t(
-                    'baseConverter.wrongRepresentationStr',
-                    { base: inputBase }
-                )
-            );
-        }
-        return Promise.resolve();
-    };
-
-    const onInputBaseChange = (e) => {
-        const newInputBase = e.target.value;
-        setInputBase(e.target.value);
-        setPossibleOutputBases(BaseDigits.getAllPossibleBasesForAssociateConversion(newInputBase));
-        form.validateFields();
-    };
-
-    useEffect(() => {
-        form.setFieldsValue({ outputBase: possibleOutputBases[0] });
-    }, [form, possibleOutputBases]);
-
-    const label = (
-        <div style={{ display: 'flex', 'flexDirection': 'row' }}>
-            <span>{t('baseConverter.inputNumber')}</span>
-            <ConversionOptions style={{ marginLeft: '100px' }}/>
-        </div>
-    );
 
     const options = possibleOutputBases.map((base, index) => {
         return (
@@ -127,74 +118,88 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         );
     });
 
+    const handleInputBaseChange = e => {
+        const newInputBase = Number.parseInt(e.target.value);
+        setInputBase(newInputBase);
+        setPossibleOutputBases(BaseDigits.getAllPossibleBasesForAssociateConversion(newInputBase));
+        formik.handleChange(e);
+    };
+
+    const handleInputStrChange = e => {
+        setInputValue(e.target.value);
+        formik.handleChange(e);
+    };
+
     return (
         <div>
-           <Card style={{'padding': '10px'}}>
-               <Form layout={'vertical'} initialValues={initialValues} form={form} onFinish={onFinish}>
-                   <Form.Item
-                       name={'inputStr'}
-                       label={label}
-                       rules={[{ validator: checkValueStr }]}
-                   >
-                       <InputWithCopy
-                           onChange={(value) => {
-                               setInputValue(value);
-                               form.validateFields();
-                           }}
-                       />
-                   </Form.Item>
-                   {
-                       showDecimalValue &&
-                       <Form.Item
-                           label={t('baseConverter.inputDecimalValue')}
-                       >
-                           <InputWithCopy readOnly value={getDecimal()}/>
-                       </Form.Item>
-                   }
+            <Card style={{ 'padding': '20px' }}>
+                <ConversionOptions style={{ paddingBottom: '20px' }}/>
+                <form onSubmit={formik.handleSubmit}>
+                    <InputWithCopy
+                        style={{ 'paddingBottom': '20px' }}
+                        name={'inputStr'}
+                        id={'inputStr'}
+                        label={t('baseConverter.inputNumber')}
+                        error={!!formik.errors.inputStr}
+                        helperText={formik.errors.inputStr}
+                        onChange={handleInputStrChange}
+                        value={formik.values.inputStr}
+                    />
 
-                   {
-                       showComplement &&
-                       <Form.Item
-                           label={t('baseConverter.inputComplement')}
-                       >
-                           <InputWithCopy readOnly value={getComplement()}/>
-                       </Form.Item>
-                   }
-                   <Form.Item className="action-row">
-                       <Form.Item
-                           name={'inputBase'}
-                           label={t('baseConverter.inputBase')}
-                           style={{ width: '40%' }}
-                           rules={[{ validator: checkBase }]}
-                       >
-                           <Input
-                               type="number"
-                               onChange={onInputBaseChange}
-                           />
-                       </Form.Item>
-                       <div style={{ width: '20px' }}/>
-                       <Form.Item
-                           name={'outputBase'}
-                           label={t('baseConverter.outputBase')}
-                           style={{ width: '40%' }}
-                       >
-                           <Select
-                               placeholder={t('associatedBaseConverter.noOutputBase')}
-                               disabled={!options.length}
-                               style={{ width: '100%' }}
-                           >
-                               {options}
-                           </Select>
-                       </Form.Item>
-                       <div style={{ width: '20px' }}/>
-                       <div className="button-wrapper convert-button-wrapper">
-                           <Button className="inline-form-button" color={'primary'} type={'submit'}>{
-                               t('baseConverter.convert')}
-                           </Button>
-                       </div>
-                   </Form.Item>
-               </Form>
-           </Card>
+                    {
+                        showDecimalValue &&
+                        <InputWithCopy
+                            style={{ 'paddingBottom': '20px' }}
+                            label={t('baseConverter.inputDecimalValue')}
+                            readOnly
+                            value={getDecimal()}
+                        />
+                    }
+
+                    {
+                        showComplement &&
+                        <InputWithCopy
+                            style={{ 'paddingBottom': '20px' }}
+                            label={t('baseConverter.inputComplement')}
+                            readOnly
+                            value={getComplement()}
+                        />
+                    }
+
+                    <div className="action-row">
+                        <TextField
+                            variant={'outlined'}
+                            name={'inputBase'}
+                            id={'inputBase'}
+                            label={t('baseConverter.inputBase')}
+                            error={!!formik.errors.inputBase}
+                            helperText={formik.errors.inputBase}
+                            onChange={handleInputBaseChange}
+                            value={formik.values.inputBase}
+                            style={{ width: '20%' }}
+                        />
+                        <div style={{ 'width': '20px' }}/>
+                        <TextField
+                            select
+                            name={'outputBase'}
+                            id={'outputBase'}
+                            label={t('baseConverter.outputBase')}
+                            placeholder={t('associatedBaseConverter.noOutputBase')}
+                            disabled={!options.length}
+                            value={formik.values.outputBase}
+                            onChange={formik.handleChange}
+                            variant={'outlined'}
+                            style={{ width: '20%' }}
+                        >
+                            {options}
+                        </TextField>
+                        <div style={{ 'width': '20px' }}/>
+                        <Button color={'secondary'} variant={'contained'} type={'submit'}>
+                            {t('baseConverter.convert')}
+                        </Button>
+                    </div>
+                </form>
+            </Card>
         </div>
     );
 };
