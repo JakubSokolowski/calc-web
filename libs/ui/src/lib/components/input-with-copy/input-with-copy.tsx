@@ -1,4 +1,4 @@
-import React, { FC, ReactNode, SyntheticEvent, useRef } from 'react';
+import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Snackbar, TextField, TextFieldProps } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -15,14 +15,20 @@ function Alert(props: AlertProps) {
 
 interface P {
     value?: string | number;
-    onChange?: (value: string) => void;
+    id?: string;
+    name?: string;
+    onValueChange?: (value: string) => void;
+    onChange?: (event) => void;
     readOnly?: boolean;
     label?: ReactNode;
+    error?: boolean;
+    helperText?: string;
     inputType?: InputType;
+    style?: CSSProperties;
     size?: 'small' | 'middle' | 'large';
 }
 
-export const InputWithCopy: FC<P> = ({ onChange, value, size, label, inputType, readOnly }) => {
+export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
@@ -45,20 +51,27 @@ export const InputWithCopy: FC<P> = ({ onChange, value, size, label, inputType, 
     };
 
     const handleChange = (event) => {
-        if (onChange) {
+        if (onValueChange) {
             const value = event.target.value;
-            onChange(value);
+            onValueChange(value);
         }
+
+        if(onChange) onChange(event);
     };
 
     const handleNumberChange = (value) => {
-        if (onChange) {
-            onChange(value);
+        if (onValueChange) {
+            onValueChange(value);
         }
     };
 
     const props: TextFieldProps = {
+        error,
+        id,
+        name,
+        helperText,
         style: {
+            ...style,
             flexGrow: 1
         },
         inputProps: {
