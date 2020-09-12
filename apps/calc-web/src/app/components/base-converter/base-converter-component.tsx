@@ -1,12 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import {
-    BaseDigits,
-    ComplementConverter,
-    Conversion,
-    fromString,
-    isValidString
-} from '@calc/calc-arithmetic';
-import './base-converter-component.scss';
+import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
@@ -17,6 +10,7 @@ import { Button, Card, IconButton, TextField, Tooltip } from '@material-ui/core'
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
 import { FormErrors } from '../../core/models/form-errors';
+import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -33,6 +27,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
     const { t } = useTranslation();
+    const classes = useConverterStyles();
 
     const initialValues: FormValues = {
         inputStr: '123.45',
@@ -75,7 +70,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         return clean(errors);
     };
 
-    const formik = useFormik({
+    const form = useFormik({
         initialValues,
         onSubmit,
         validate,
@@ -85,10 +80,10 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const [inputBase] = useState(initialValues.inputBase);
 
     const swap = async () => {
-        const { inputBase, outputBase } = formik.values;
-        formik.setFieldValue('inputBase', outputBase);
-        formik.setFieldValue('outputBase', inputBase);
-        await formik.validateForm();
+        const { inputBase, outputBase } = form.values;
+        form.setFieldValue('inputBase', outputBase);
+        form.setFieldValue('outputBase', inputBase);
+        await form.validateForm();
     };
 
     const getDecimal = useCallback(() => {
@@ -119,24 +114,24 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
 
     return (
-        <Card style={{padding: '20px'}}>
-            <ConversionOptions style={{'paddingBottom': '20px'}}/>
-            <form onSubmit={formik.handleSubmit}>
+        <Card className={classes.card}>
+            <ConversionOptions/>
+            <form onSubmit={form.handleSubmit}>
                 <InputWithCopy
-                    style={{ 'paddingBottom': '20px' }}
+                    className={classes.input}
                     name={'inputStr'}
                     id={'inputStr'}
                     label={t('baseConverter.inputNumber')}
-                    error={!!formik.errors.inputStr}
-                    helperText={formik.errors.inputStr}
-                    onChange={formik.handleChange}
-                    value={formik.values.inputStr}
+                    error={!!form.errors.inputStr}
+                    helperText={form.errors.inputStr}
+                    onChange={form.handleChange}
+                    value={form.values.inputStr}
                 />
 
                 {
                     showDecimalValue &&
                     <InputWithCopy
-                        style={{ 'paddingBottom': '20px' }}
+                        className={classes.input}
                         label={t('baseConverter.inputDecimalValue')}
                         readOnly
                         value={getDecimal()}
@@ -146,57 +141,54 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 {
                     showComplement &&
                     <InputWithCopy
-                        style={{ 'paddingBottom': '20px' }}
+                        className={classes.input}
                         label={t('baseConverter.inputComplement')}
                         readOnly
                         value={getComplement()}
                     />
                 }
 
-                <div className="action-row">
+                <div className={classes.row}>
                     <TextField
+                        className={classes.inputBase}
                         variant={'outlined'}
                         name={'inputBase'}
                         id={'inputBase'}
                         label={t('baseConverter.inputBase')}
-                        error={!!formik.errors.inputBase}
-                        helperText={formik.errors.inputBase}
-                        onChange={formik.handleChange}
-                        value={formik.values.inputBase}
-                        style={{ width: '20%' }}
+                        error={!!form.errors.inputBase}
+                        helperText={form.errors.inputBase}
+                        onChange={form.handleChange}
+                        value={form.values.inputBase}
                     />
                     <Tooltip title={t('baseConverter.swapBases')}>
-                        <IconButton
-                            onClick={swap}
-                            className="inline-form-button"
-                        >
+                        <IconButton  onClick={swap}>
                             <SwapOutlined/>
                         </IconButton>
                     </Tooltip>
                     <TextField
+                        className={classes.outputBase}
                         variant={'outlined'}
                         name={'outputBase'}
                         id={'outputBase'}
                         label={t('baseConverter.outputBase')}
-                        error={!!formik.errors.outputBase}
-                        helperText={formik.errors.outputBase}
-                        onChange={formik.handleChange}
-                        value={formik.values.outputBase}
-                        style={{ width: '20%' }}
+                        error={!!form.errors.outputBase}
+                        helperText={form.errors.outputBase}
+                        onChange={form.handleChange}
+                        value={form.values.outputBase}
                     />
-                    <div style={{ 'width': '20px' }}/>
+                    <div className={classes.horizontalSpacer}/>
                     <TextField
+                        className={classes.precision}
                         variant={'outlined'}
                         name={'precision'}
                         id={'precision'}
                         label={t('baseConverter.precision')}
-                        error={!!formik.errors.precision}
-                        helperText={formik.errors.precision}
-                        onChange={formik.handleChange}
-                        value={formik.values.precision}
-                        style={{ width: '10%' }}
+                        error={!!form.errors.precision}
+                        helperText={form.errors.precision}
+                        onChange={form.handleChange}
+                        value={form.values.precision}
                     />
-                    <div style={{ 'width': '20px' }}/>
+                    <div className={classes.horizontalSpacer}/>
                     <Button color={'secondary'} variant={'contained'} type={'submit'}>
                         {t('baseConverter.convert')}
                     </Button>

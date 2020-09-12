@@ -1,15 +1,53 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { DigitMapping } from '@calc/calc-arithmetic';
-import './digit-mappings-box.scss'
 import { ArcherContainer, ArcherElement } from 'react-archer';
-import { Button } from '@material-ui/core';
+import { Button, createStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface P {
     mapping: DigitMapping;
 }
 
-export const DigitMappingBox: FC<P> = ({mapping}) => {
+export const useStyles = makeStyles((theme: Theme) => {
+    return createStyles(
+        {
+            digitBox: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minWidth: '12px',
+                minHeight: '20px',
+                padding: '1px 6px'
+            },
+            rootDigitsRow: {
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center',
+                paddingBottom: theme.spacing(2),
+            },
+            digitsRow: {
+                display: 'flex',
+                flexDirection: 'row',
+                justifyContent: 'center'
+            },
+            mappingsBox: {
+                display: 'flex',
+                justifyContent: 'center',
+                padding: '5px'
+            },
+            mappingsBoxBorder: {
+                display: 'flex',
+                justifyContent: 'center',
+                padding: '5px',
+                borderLeft: ' 1px solid #d9d9d9'
+            }
+        }
+    );
+});
+
+export const DigitMappingBox: FC<P> = ({ mapping }) => {
     const ref = useRef<ArcherContainer>(null);
+    const classes = useStyles();
 
     const targetDigitsSource = mapping.input.length < mapping.output.length
         ? mapping.output
@@ -24,11 +62,11 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
             <Button key={index} className="digit-box">
                 {digit.valueInBase}
             </Button>
-        )
+        );
     });
 
     useEffect(() => {
-        if(ref.current) {
+        if (ref.current) {
             ref.current.forceUpdate();
         }
     }, [mapping]);
@@ -50,19 +88,19 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
                             arrowLength: 0,
                             arrowThickness: 0
                         }
-                    },
+                    }
                 ]}
             >
                 <Button key={index} className="digit-box">
                     {digit.valueInBase}
                 </Button>
             </ArcherElement>
-        )
+        );
     });
 
     const boxClassName = mapping.output[0].position === -1
-        ? 'mappings-box-border'
-        : 'mappings-box';
+        ? classes.mappingsBoxBorder
+        : classes.mappingsBox;
 
     return (
         <div
@@ -71,19 +109,19 @@ export const DigitMappingBox: FC<P> = ({mapping}) => {
             <ArcherContainer noCurves ref={ref}>
                 <div
                     style={{
-                    display: 'flex',
-                    flexDirection:  mapping.input.length < mapping.output.length ? 'column' : 'column-reverse'
-                }}>
+                        display: 'flex',
+                        flexDirection: mapping.input.length < mapping.output.length ? 'column' : 'column-reverse'
+                    }}>
                     <ArcherElement id='root'>
-                        <div className="root-digits-row">
+                        <div className={classes.digitsRow}>
                             {rootDigits}
                         </div>
                     </ArcherElement>
-                    <div className="digits-row">
+                    <div className={classes.rootDigitsRow}>
                         {targetDigits}
                     </div>
                 </div>
             </ArcherContainer>
         </div>
-    )
+    );
 };

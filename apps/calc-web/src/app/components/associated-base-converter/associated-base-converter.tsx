@@ -7,7 +7,6 @@ import {
     fromString,
     isValidString
 } from '@calc/calc-arithmetic';
-import './associated-base-converter.scss';
 import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
@@ -17,6 +16,7 @@ import { Button, Card, MenuItem, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { clean } from '@calc/utils';
 import { FormErrors } from '../../core/models/form-errors';
+import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     onConversionChange?: (conversion: Conversion) => void;
@@ -33,6 +33,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
+    const classes = useConverterStyles();
 
     const initialValues: FormValues = {
         inputStr: 'FFAFAFFAF',
@@ -41,7 +42,6 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     };
 
     const onSubmit = (values: FormValues) => {
-        console.log('OnSubmit', values);
         const { inputStr, inputBase, outputBase } = values;
         const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
         onConversionChange(conversion);
@@ -75,11 +75,13 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         return clean(errors);
     };
 
-    const formik = useFormik({
-        initialValues,
-        onSubmit,
-        validate,
-    });
+    const form = useFormik(
+        {
+            initialValues,
+            onSubmit,
+            validate
+        }
+    );
 
     const [inputValue, setInputValue] = useState(initialValues.inputStr);
     const [inputBase, setInputBase] = useState(initialValues.inputBase);
@@ -122,34 +124,34 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         const newInputBase = Number.parseInt(e.target.value);
         setInputBase(newInputBase);
         setPossibleOutputBases(BaseDigits.getAllPossibleBasesForAssociateConversion(newInputBase));
-        formik.handleChange(e);
+        form.handleChange(e);
     };
 
     const handleInputStrChange = e => {
         setInputValue(e.target.value);
-        formik.handleChange(e);
+        form.handleChange(e);
     };
 
     return (
         <div>
-            <Card style={{ 'padding': '20px' }}>
-                <ConversionOptions style={{ paddingBottom: '20px' }}/>
-                <form onSubmit={formik.handleSubmit}>
+            <Card className={classes.card}>
+                <ConversionOptions/>
+                <form onSubmit={form.handleSubmit}>
                     <InputWithCopy
-                        style={{ 'paddingBottom': '20px' }}
+                        className={classes.input}
                         name={'inputStr'}
                         id={'inputStr'}
                         label={t('baseConverter.inputNumber')}
-                        error={!!formik.errors.inputStr}
-                        helperText={formik.errors.inputStr}
+                        error={!!form.errors.inputStr}
+                        helperText={form.errors.inputStr}
                         onChange={handleInputStrChange}
-                        value={formik.values.inputStr}
+                        value={form.values.inputStr}
                     />
 
                     {
                         showDecimalValue &&
                         <InputWithCopy
-                            style={{ 'paddingBottom': '20px' }}
+                            className={classes.input}
                             label={t('baseConverter.inputDecimalValue')}
                             readOnly
                             value={getDecimal()}
@@ -166,34 +168,34 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         />
                     }
 
-                    <div className="action-row">
+                    <div className={classes.row}>
                         <TextField
+                            className={classes.inputBase}
                             variant={'outlined'}
                             name={'inputBase'}
                             id={'inputBase'}
                             label={t('baseConverter.inputBase')}
-                            error={!!formik.errors.inputBase}
-                            helperText={formik.errors.inputBase}
+                            error={!!form.errors.inputBase}
+                            helperText={form.errors.inputBase}
                             onChange={handleInputBaseChange}
-                            value={formik.values.inputBase}
-                            style={{ width: '20%' }}
+                            value={form.values.inputBase}
                         />
-                        <div style={{ 'width': '20px' }}/>
+                        <div className={classes.horizontalSpacer}/>
                         <TextField
                             select
+                            className={classes.outputBase}
                             name={'outputBase'}
                             id={'outputBase'}
                             label={t('baseConverter.outputBase')}
                             placeholder={t('associatedBaseConverter.noOutputBase')}
                             disabled={!options.length}
-                            value={formik.values.outputBase}
-                            onChange={formik.handleChange}
+                            value={form.values.outputBase}
+                            onChange={form.handleChange}
                             variant={'outlined'}
-                            style={{ width: '20%' }}
                         >
                             {options}
                         </TextField>
-                        <div style={{ 'width': '20px' }}/>
+                        <div className={classes.horizontalSpacer}/>
                         <Button color={'secondary'} variant={'contained'} type={'submit'}>
                             {t('baseConverter.convert')}
                         </Button>

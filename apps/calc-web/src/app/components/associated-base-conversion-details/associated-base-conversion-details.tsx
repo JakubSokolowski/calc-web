@@ -1,10 +1,26 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { DigitMappingBox } from '../digit-mapping/digit-mapping-box';
-import './associated-base-conversion-details.scss';
 import { InputWithCopy, NumberSubscript } from '@calc/ui';
 import { useTranslation } from 'react-i18next';
-import { Card, Typography } from '@material-ui/core';
+import { Card, createStyles, Theme, Typography } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        card: {
+            padding: theme.spacing(3)
+        },
+        equation: {
+            paddingBottom: theme.spacing(2)
+        },
+        mappings: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        }
+    });
+});
 
 interface P {
     conversion: AssociatedBaseConversion;
@@ -15,6 +31,7 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     const [inputStr, inputBase] = conversion.input;
     const outputStr = conversion.result.valueInBase;
     const outputBase = conversion.result.base;
+    const classes = useStyles();
 
     const mappings = conversion.details.positionMappings.map((mapping, index) => {
         return (
@@ -23,13 +40,13 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     });
 
     return (
-        <Card style={{'padding': '10px'}}>
+        <Card className={classes.card}>
             <span>{t('baseConverter.inputNumber')}</span>
             <InputWithCopy
                 readOnly
                 value={conversion.result.valueInBase}
             />
-            <div className="equation-box">
+            <div className={classes.equation}>
                 <NumberSubscript value={inputStr} subscript={inputBase}/>
                 &nbsp;=&nbsp;
                 <NumberSubscript value={conversion.result.decimalValue.toString()} subscript={10}/>
@@ -40,7 +57,7 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
             <Typography>
                 {t('associatedBaseConverter.mappings')}
             </Typography>
-            <div className="mappings-row">
+            <div className={classes.mappings}>
                 {mappings}
             </div>
         </Card>

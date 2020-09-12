@@ -6,14 +6,17 @@ import { AssociatedBaseConversionDetails } from '../associated-base-conversion-d
 import { Box, Tab, Tabs, Typography } from '@material-ui/core';
 import { a11yProps, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
+import { useConverterStyles } from '../../core/styles/converter-styles';
+
 
 export const AssociatedBaseConverterView: FC = () => {
     const { t } = useTranslation();
-    const [conversion, setConv] = useState<Conversion>();
+    const [conversion, setConversion] = useState<Conversion>();
+    const classes = useConverterStyles();
 
-    const onChange = (newConversion: Conversion) => {
+    const onChange = (newConversion?: Conversion) => {
         if (newConversion) {
-            setConv(newConversion);
+            setConversion(newConversion);
         }
     };
 
@@ -25,29 +28,32 @@ export const AssociatedBaseConverterView: FC = () => {
 
     return (
         <div>
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+
+            <Tabs value={value} onChange={handleChange}>
                 <Tab label="Converter" {...a11yProps(0)} />
                 <Tab label="Theory" {...a11yProps(1)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <div style={{ height: '20px' }}/>
-                <Typography variant={'h3'}>
+                <div className={classes.verticalSpacer}/>
+                <Typography variant={'h4'} className={classes.title}>
                     {t('associatedBaseConverter.title')}
                 </Typography>
                 <AssociatedBaseConverter onConversionChange={onChange}/>
-                {conversion &&
-                <Typography variant={'h3'} style={{paddingTop: '20px'}}>
-                    {t('baseConverter.result')}
-                </Typography>
+                {
+                    conversion &&
+                    <Typography variant={'h4'} className={classes.title}>
+                        {t('baseConverter.result')}
+                    </Typography>
                 }
-                {conversion &&
-                <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
+                {
+                    conversion &&
+                    <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
                 }
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <div style={{ height: '20px' }}/>
+                <div className={classes.verticalSpacer}/>
                 <Box display={'flex'} alignItems={'center'} maxWidth={900} margin={'auto'}>
-                    <DocPage path={'positional/associated-base-conversion'}/>
+                    <DocPage path='positional/associated-base-conversion'/>
                 </Box>
             </TabPanel>
 

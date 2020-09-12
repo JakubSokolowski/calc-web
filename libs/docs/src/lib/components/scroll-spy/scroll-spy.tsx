@@ -1,8 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-
-import './scroll-spy.scss';
 import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import { createStyles, List, Theme } from '@material-ui/core';
 import { ContentsEntry } from '../../core/models/contents-entry';
 
 const SPY_INTERVAL = 100;
@@ -26,6 +24,14 @@ const useStyles = makeStyles((theme: Theme) =>
         normal: {
             color: theme.palette.text.primary,
             cursor: 'pointer'
+        },
+        container: {
+            listStyleType: 'none',
+            right: theme.spacing(2),
+            top: 64 + theme.spacing(1),
+            position: 'fixed',
+            display: 'block',
+            width: '250px'
         }
     }),
 );
@@ -80,10 +86,10 @@ export const ScrollSpy: FC<P> = ({entries}) => {
     };
 
     return (
-        <ul className='scroll-spy-container'>
+        <ul className={classes.container}>
             {items.map((item, k) => {
                 return (
-                    <li
+                    <List
                         style={{ paddingLeft: 2 + (item.inView ? 0 : 2) + item.level * 15}}
                         className={item.inView ? classes.active : classes.normal}
                         key={k}
@@ -92,7 +98,7 @@ export const ScrollSpy: FC<P> = ({entries}) => {
                         }}
                     >
                        {item.element.innerText}
-                    </li>
+                    </List>
                 );
             })}
         </ul>

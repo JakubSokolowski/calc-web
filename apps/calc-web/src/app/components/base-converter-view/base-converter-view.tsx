@@ -6,15 +6,17 @@ import { useTranslation } from 'react-i18next';
 import { Box, Tab, Tabs, Typography } from '@material-ui/core';
 import { a11yProps, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
+import { useConverterStyles } from '../../core/styles/converter-styles';
 
 export const BaseConverterView: FC = () => {
     const { t } = useTranslation();
-    const [conversion, setConv] = useState<Conversion>();
+    const [conversion, setConversion] = useState<Conversion>();
     const [precision, setPrecision] = useState(5);
+    const classes = useConverterStyles();
 
     const onChange = (newConversion: Conversion, precision: number) => {
         if (newConversion) {
-            setConv(newConversion);
+            setConversion(newConversion);
             setPrecision(precision);
         }
     };
@@ -27,20 +29,20 @@ export const BaseConverterView: FC = () => {
 
     return (
         <div>
-            <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+            <Tabs value={value} onChange={handleChange}>
                 <Tab label="Converter" {...a11yProps(0)} />
                 <Tab label="Theory" {...a11yProps(1)} />
             </Tabs>
             <TabPanel value={value} index={0}>
-                <div style={{ height: '20px' }}/>
-                <Typography variant={'h4'}>
+                <div className={classes.verticalSpacer}/>
+                <Typography variant={'h4'} className={classes.title}>
                     {t('baseConverter.title')}
                 </Typography>
                 <BaseConverterComponent onConversionChange={onChange}/>
                 {conversion && <ConversionDetails conversion={conversion} precision={precision}/>}
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <div style={{ height: '20px' }}/>
+                <div className={classes.verticalSpacer}/>
                 <Box display={'flex'} alignItems={'center'} maxWidth={900} margin={'auto'}>
                     <DocPage path={'positional/base-conversion'}/>
                 </Box>
