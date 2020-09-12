@@ -4,7 +4,7 @@ import { FloatingPartConversionInfo } from '@calc/grid';
 export const FractionalConversionRow: FC<FloatingPartConversionInfo> = ({ result, multiplier, base }) => {
     const [digit, rest] = result.split('.');
     return (
-        <div className="fractional-conversion-popover-content">
+        <div>
             <div>
                 {`${multiplier} * ${base} = `}
                 <span style={{ fontWeight: 'bold' }}>

@@ -1,8 +1,9 @@
 import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, Snackbar, TextField, TextFieldProps } from '@material-ui/core';
+import { createStyles, IconButton, Snackbar, TextField, TextFieldProps, Theme } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
 export enum InputType {
     Text = 'text',
@@ -25,13 +26,26 @@ interface P {
     helperText?: string;
     inputType?: InputType;
     style?: CSSProperties;
+    className?: string;
     size?: 'small' | 'middle' | 'large';
 }
 
-export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        row: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap'
+        }
+    });
+});
+
+
+export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
+    const classes = useStyles();
 
     const handleClose = (event?: SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
@@ -43,11 +57,10 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, value, id
 
     const copyToClipboard = () => {
         if (textAreaRef.current) {
-            // console.log(textAreaRef.current.value);
             textAreaRef.current.select();
+            document.execCommand('copy');
+            setOpen(true);
         }
-        document.execCommand('copy');
-        setOpen(true);
     };
 
     const handleChange = (event) => {
@@ -85,8 +98,8 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, value, id
     };
 
     return (
-        <>
-            <span style={{ display: 'flex', 'flexDirection': 'row' }}>
+        <div className={className}>
+            <span className={classes.row}>
                 {
                     inputType === InputType.Number
                         ? <TextField type={'number'} {...props}/>
@@ -105,6 +118,6 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, value, id
                       onClose={handleClose}>
                 <Alert severity="info">{t('common.copy')}</Alert>
             </Snackbar>
-        </>
+        </div>
     );
 };

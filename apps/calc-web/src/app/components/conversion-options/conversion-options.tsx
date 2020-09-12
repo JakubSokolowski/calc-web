@@ -3,20 +3,32 @@ import { setShowComplement, setShowDecimalValue } from '../../store/actions/opti
 import { useDispatch, useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { useTranslation } from 'react-i18next';
-import { FormControlLabel, FormGroup, Switch } from '@material-ui/core';
+import { createStyles, FormControlLabel, FormGroup, Switch, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 
 interface P {
     style?: CSSProperties;
 }
 
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        box: {
+            display: 'flex',
+            flexDirection: 'row',
+            paddingBottom: theme.spacing(2)
+        }
+    });
+});
+
 export const ConversionOptions: FC<P> = ({ style }) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
+    const classes = useStyles();
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
 
     return (
-        <div style={{ display: 'flex', 'flexDirection': 'row', ...style }}>
+        <div className={classes.box}>
             <FormGroup row>
                 <FormControlLabel
                     control={<Switch

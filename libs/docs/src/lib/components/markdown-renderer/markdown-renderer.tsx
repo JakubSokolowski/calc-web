@@ -1,8 +1,8 @@
 import React from 'react';
-import ReactMarkdown, { RemarkParseOptions } from 'react-markdown';
+import ReactMarkdown from 'react-markdown';
 import 'katex/dist/katex.min.css';
-import { InlineMath, BlockMath } from 'react-katex';
 import RemarkMathPlugin from 'remark-math';
+import { InlineMath, BlockMath } from 'react-katex';
 import { Typography } from '@material-ui/core';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
 

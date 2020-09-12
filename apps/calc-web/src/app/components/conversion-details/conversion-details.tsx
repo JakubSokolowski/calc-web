@@ -8,6 +8,7 @@ import { FractionalConversionRow } from './fractional-conversion-row/fractional-
 import { InputWithCopy } from '@calc/ui';
 import { Card, Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
+import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     conversion: Conversion;
@@ -16,8 +17,12 @@ interface P {
 
 export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
     const { t } = useTranslation();
+    const classes = useConverterStyles();
+
     const fractionalHoverGrid = conversion.result.fractionalPart.length > 0
-        ? buildFractionalConversionGrid(conversion, precision) : undefined;
+        ? buildFractionalConversionGrid(conversion, precision)
+        : undefined;
+
 
     const integralHoverGrid = buildIntegralConversionGrid(conversion);
 
@@ -30,38 +35,37 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
     };
 
     return (
-        <div style={{paddingTop: '20px'}}>
-            <Typography variant={'h4'} >
+        <div>
+            <Typography variant={'h4'} className={classes.title}>
                 {t('baseConverter.result')}
             </Typography>
-            <Card style={{ 'padding': '20px' }}>
+            <Card className={classes.card}>
                 <div id="integral-conversion-details">
-                    <div style={{ marginBottom: '20px' }}>
-                        <InputWithCopy
-                            readOnly
-                            label={t('baseConverter.outputNumber')}
-                            value={conversion.result.toString(precision)}
-                        />
-                    </div>
+                    <InputWithCopy
+                        readOnly
+                        className={classes.input}
+                        label={t('baseConverter.outputNumber')}
+                        value={conversion.result.toString(precision)}
+                    />
                     {
                         conversion.type === ConversionType.DIRECT ?
-                            <div>
-                                <Typography>{`I. ${t('baseConverter.conversionToBase', {base: conversion.result.base})}`}</Typography>
+                            <div className={classes.equation}>
+                                <Typography>{`I. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
                                 <ResultEquation conversion={conversion} firstStage={0} lastStage={0}/>
                             </div> :
                             <div>
-                                <div>
+                                <div className={classes.equation}>
                                     <Typography>{`I. ${t('baseConverter.conversionToDecimal')}`}</Typography>
                                     <ConversionToDecimalDetails
                                         conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
                                 </div>
-                                <div style={{ paddingTop: '12px' }}>
-                                    <Typography>{`II. ${t('baseConverter.conversionToBase', {base: conversion.result.base})}`}</Typography>
+                                <div className={classes.equation}>
+                                    <Typography>{`II. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
                                     <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
                                 </div>
                             </div>
                     }
-                    <div style={{ display: 'flex', flexDirection: 'row' }}>
+                    <div className={classes.row}>
                         {
                             integralHoverGrid &&
                             <HoverGrid
@@ -70,7 +74,7 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
                                 groupBuilder={integralHoverPopover}
                             />
                         }
-                        <div style={{ width: '20px' }}/>
+                        <div className={classes.horizontalSpacer}/>
                         {
                             fractionalHoverGrid &&
                             <HoverGrid
