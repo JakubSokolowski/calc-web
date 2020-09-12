@@ -7,7 +7,7 @@ import { ContentsEntry } from '../../core/models/contents-entry';
 
 const SPY_INTERVAL = 100;
 
-interface SpyItem extends ContentsEntry{
+interface SpyItem extends ContentsEntry {
     inView: boolean;
     element: HTMLElement;
 }
@@ -32,39 +32,35 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ScrollSpy: FC<P> = ({entries}) => {
     const [items, setItems] = useState<SpyItem[]>([]);
-    const [timer, setTimer] = useState<number>();
     const classes = useStyles();
 
     const offset= 20;
     const headerHeight = 64;
 
     useEffect(() => {
-        setTimer(window.setInterval(spy, SPY_INTERVAL));
+        const timer = window.setInterval(spy, SPY_INTERVAL);
         return () => window.clearInterval(timer);
-    }, []);
+    });
 
     const spy = () => {
         const items: SpyItem[] = entries
-            .map(entry => {
-                const element = document.getElementById(entry.id);
-                if (element) {
-                    return {
-                        ...entry,
-                        inView: isInView(element),
-                        element
-                    } as SpyItem;
-                } else {
-                    return;
-                }
-            })
-            .filter(item => item);
+            .reduce((all, entry) => {
+                const element =  document.getElementById(entry.id);
+                if(!element) return all;
+                const item: SpyItem = {
+                    inView: isInView(element),
+                    element,
+                    ...entry
+                };
+                return [...all, item]
+            }, []);
 
         const firstTrueItem = items.find(item => !!item && item.inView);
 
         if (!firstTrueItem) return;
 
         const update = items.map(item => {
-            return { ...item, inView: item === firstTrueItem } as SpyItem;
+            return { ...item, inView: item === firstTrueItem };
         });
 
         setItems(update);
