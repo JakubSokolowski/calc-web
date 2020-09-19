@@ -5,7 +5,9 @@ import HoverGridCell from './hover-grid-cell';
 
 describe('#HoverGridCell', () => {
     let container: ShallowWrapper;
-    const defaultClassName = '.default-cell';
+    const defaultClassName = '.makeStyles-defaultCell-1';
+    const defaultHoverClassName = '.makeStyles-hoverCell-2';
+
     const config: GridCellConfig = {
         content: 'Content',
     };
@@ -33,13 +35,12 @@ describe('#HoverGridCell', () => {
 
         it('should render with hover style when cell is hovered and preset is not defined', () => {
             // given
-            const defaultHoverStyle = '.hover-cell';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} hovered={true}/>
             );
 
             // when
-            const cell = container.find(defaultHoverStyle);
+            const cell = container.find(defaultHoverClassName);
 
             // then
             expect(cell).toHaveLength(1);
@@ -47,7 +48,6 @@ describe('#HoverGridCell', () => {
 
         it('should render with default hover style when cell is hovered and preset is defined but does not specify hover style', () => {
             // given
-            const defaultHoverStyle = '.hover-cell';
             const cellConfig: GridCellConfig = {
                 preset: {
                     default: 'some-cell-preset'
@@ -59,7 +59,7 @@ describe('#HoverGridCell', () => {
             );
 
             // when
-            const cell = container.find(defaultHoverStyle);
+            const cell = container.find(defaultHoverClassName);
 
             // then
             expect(cell).toHaveLength(1);
@@ -109,7 +109,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with vertical line when cell should display vertical line', () => {
             // given
-            const className = 'default-cell vertical-line';
+            const className = 'makeStyles-defaultCell-1 makeStyles-verticalLine-6';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} verticalLine={true}/>
             );
@@ -123,7 +123,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with horizontal line style when cell should display horizontal line', () => {
             // given
-            const className = 'default-cell horizontal-line';
+            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-5';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} horizontalLine={true}/>
             );
@@ -137,9 +137,9 @@ describe('#HoverGridCell', () => {
 
         it('should render with horizontal and vertical line style when cell should display both lines', () => {
             // given
-            const className = 'default-cell horizontal-line';
+            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-5 makeStyles-verticalLine-6';
             container = shallow(
-                <HoverGridCell config={config} x={x} y={y} horizontalLine={true}/>
+                <HoverGridCell config={config} x={x} y={y} horizontalLine={true} verticalLine={true}/>
             );
 
             // when

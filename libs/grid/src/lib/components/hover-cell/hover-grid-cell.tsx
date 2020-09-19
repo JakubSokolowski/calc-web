@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
-
-import './hover-grid-cell.scss';
 import { GridCellConfig } from '../../models/grid-cell-config';
+import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core';
 
 export interface GridCellEvent {
     x: number;
@@ -21,6 +21,48 @@ export interface HoverCellProps {
     key? : string;
 }
 
+export const useGridCellStyles = makeStyles((theme: Theme) => {
+    const baseCell = {
+        minWidth: '32px',
+        height: '32px',
+        minHeight: '32px',
+        padding: '4px',
+        textAlign: 'center' as any,
+        background: theme.palette.background.default,
+        border: `1px ${theme.palette.action.selected} dashed`,
+        color: theme.palette.text.disabled
+    };
+
+    return createStyles({
+        defaultCell: {
+            ...baseCell
+        },
+        hoverCell: {
+            ...baseCell,
+            background: theme.palette.action.focus,
+            border: 'none'
+        },
+        highlightedCell: {
+            ...baseCell,
+            background: theme.palette.primary.light,
+            color: theme.palette.getContrastText(theme.palette.primary.light)
+        },
+        highlightedCellHover: {
+            ...baseCell,
+            background: theme.palette.primary.light,
+            color: theme.palette.getContrastText(theme.palette.primary.light),
+            border: 'none'
+        },
+        horizontalLine: {
+            borderBottom: `1px solid ${theme.palette.action.active}`
+        },
+        verticalLine: {
+            borderRight: `1px solid ${theme.palette.action.active}`
+        }
+    });
+});
+
+
 const HoverGridCell: FC<HoverCellProps> = (
     {
         x,
@@ -34,6 +76,7 @@ const HoverGridCell: FC<HoverCellProps> = (
     }) => {
 
     const { content, preset } = config;
+    const classes = useGridCellStyles();
 
     const handleClick = () => {
         if (onClick) {
@@ -51,19 +94,19 @@ const HoverGridCell: FC<HoverCellProps> = (
 
     const getCellClassName = (): string => {
         if (hovered) return getHoveredCellClassName();
-        if(preset && preset.default) return preset.default;
-        return 'default-cell';
+        if(preset && preset.default) return classes[preset.default] || preset.default;
+        return classes.defaultCell;
     };
 
     const getHoveredCellClassName = (): string => {
-        if(preset && !!preset.hover) return preset.hover;
-        return 'hover-cell';
+        if(preset && !!preset.hover) return classes[preset.hover] || preset.hover;
+        return classes.hoverCell;
     };
 
     const getLineClassName = (): string[] => {
         const classNames = [];
-        if(horizontalLine) classNames.push('horizontal-line');
-        if(verticalLine) classNames.push('vertical-line');
+        if(horizontalLine) classNames.push(classes.horizontalLine);
+        if(verticalLine) classNames.push(classes.verticalLine);
 
         return classNames;
     };

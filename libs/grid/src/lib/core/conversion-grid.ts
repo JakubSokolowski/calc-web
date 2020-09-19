@@ -11,13 +11,13 @@ import { RowConversionOperation } from '../models/row-conversion-operation';
 import { FloatingPartConversionInfo } from '../models/floating-part-conversion-info';
 
 export const defaultCellPreset: GridCellDisplayPreset = {
-    default: 'default-cell',
-    hover: 'hover-cell'
+    default: 'defaultCell',
+    hover: 'hoverCell'
 };
 
 export const highlightedCellPreset: GridCellDisplayPreset = {
-    default: 'highlighted-cell',
-    hover: 'highlighted-cell-hover'
+    default: 'highlightedCell',
+    hover: 'highlightedCellHover'
 };
 
 export function buildFractionalConversionGrid(conversion: Conversion, precision = 5): HoverOperationGrid {

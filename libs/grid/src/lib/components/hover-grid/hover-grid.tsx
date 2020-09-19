@@ -1,5 +1,4 @@
 import React, { FC, useRef, useState } from 'react';
-import './hover-grid.scss';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
 import { CopyOutlined } from '@ant-design/icons/lib';
 import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition } from '../../core/grid-utils';
@@ -9,11 +8,12 @@ import { GridCellConfig } from '../../models/grid-cell-config';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
 import { NumberSubscript } from '@calc/ui';
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
-import { Button, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
+import { Button, createStyles, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 
 interface P {
     values: GridCellConfig[][];
@@ -28,15 +28,53 @@ const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
         maxWidth: 220,
         fontSize: theme.typography.pxToRem(12),
-        border: '1px solid #dadde9',
-    },
+        border: '1px solid #dadde9'
+    }
 }))(Tooltip);
+
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        gridRow: {
+            display: 'flex',
+            flexDirection: 'row'
+        },
+        gridWrapper: {
+            display: 'flex',
+            maxWidth: '45vw',
+            flexDirection: 'column',
+            alignItems: 'flex-start',
+            overflowX: 'auto'
+        },
+        cellBox: {
+            width: '100%',
+            maxHeight: '500px',
+            display: 'inline-block',
+        },
+        cellContent: {
+            width: 'auto',
+            height: 'auto'
+        },
+        indicesBox: {
+            display: 'flex',
+            flexDirection: 'row'
+        },
+        columnIndex: {
+            minWidth: '32px',
+            height: '32px',
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center'
+        }
+    });
+});
+
 
 export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, xAxis }) => {
     const lookup = buildCellGroupLookup(groups);
     const [hoverCell, setHoveredCell] = useState<CellCoords>();
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
     const gridRef = useRef(null);
+    const classes = useStyles();
 
     const handleClick = (event) => {
         console.log('Click Event', event);
@@ -122,7 +160,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
         });
 
         return (
-            <div className='hover-grid-row' key={y}>
+            <div className={classes.gridRow} key={y}>
                 {cells}
             </div>
         );
@@ -130,12 +168,11 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
 
     const xAxisIndices = xAxis ? xAxis.indices.map((value) => {
         return (
-            <div key={value} className="column-index">
+            <div key={value} className={classes.columnIndex}>
                 <NumberSubscript value={xAxis.prefix} subscript={value} noBraces/>
             </div>
-        )
+        );
     }) : [];
-
 
 
     const saveAsImage = async () => {
@@ -149,25 +186,25 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
     };
 
     return (
-        <div className="grid-wrapper">
+        <div className={classes.gridWrapper}>
             {
                 title &&
                 <div className='title'>
                     <Typography>{title}</Typography>
-                    <Button className='copy-image-button' size={'small'} onClick={saveAsImage}>
+                    <Button size={'small'} onClick={saveAsImage}>
                         <CopyOutlined/>
                     </Button>
                 </div>
             }
             {
                 xAxis &&
-                <div className="indices-box">
+                <div className={classes.indicesBox}>
                     {xAxisIndices}
                 </div>
             }
 
-            <div className='cell-box'>
-                <div className='cell-content' ref={gridRef}>
+            <div className={classes.cellBox}>
+                <div className={classes.cellContent} ref={gridRef}>
                     {rows}
                 </div>
             </div>
