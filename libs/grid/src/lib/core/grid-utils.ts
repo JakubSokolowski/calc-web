@@ -15,7 +15,7 @@ export function buildEmptyGrid(width: number, height: number): GridCellConfig[][
 
 function buildEmptyRow(width: number): GridCellConfig[] {
     const preset: GridCellDisplayPreset = {
-        default: 'default-cell'
+        default: 'defaultCell'
     };
 
     return [...Array(width).keys()].map(() => ({ content: '', preset }));

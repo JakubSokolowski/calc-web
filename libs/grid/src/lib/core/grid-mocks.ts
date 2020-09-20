@@ -219,43 +219,43 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
             {
                 content: '0.',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '3',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '0.',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '4',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -269,43 +269,43 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
             {
                 content: '0.',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '4',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '0.',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '9',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -319,43 +319,43 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
             {
                 content: '0.',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '9',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '1.',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '8',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '4',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -369,43 +369,43 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
             {
                 content: '0.',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '8',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '4',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '1.',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '8',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -419,43 +419,43 @@ export const fractionalConversionGridMock: HoverOperationGrid = {
             {
                 content: '0.',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '8',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '1.',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '3',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -473,51 +473,51 @@ export const fractionalConversionExactGridMock: Partial<HoverOperationGrid> = {
         [
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '0.'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '1'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '2'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '5'
             },
             {
                 content: '0.',
                 preset: {
-                    'default': 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    'default': 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '5',
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -533,37 +533,37 @@ export const fractionalConversionExactGridMock: Partial<HoverOperationGrid> = {
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '0.'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '2'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '5'
             },
             {
                 content: '0.',
                 preset: {
-                    'default': 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    'default': 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '5',
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -585,23 +585,23 @@ export const fractionalConversionExactGridMock: Partial<HoverOperationGrid> = {
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '0.'
             },
             {
                 preset: {
-                    'default': 'default-cell',
-                    hover: 'hover-cell'
+                    'default': 'defaultCell',
+                    hover: 'hoverCell'
                 },
                 content: '5'
             },
             {
                 content: '1.',
                 preset: {
-                    'default': 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    'default': 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
@@ -770,29 +770,29 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '4',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '1',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -801,8 +801,8 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '0',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             }
         ],
@@ -810,22 +810,22 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '1',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '2',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -837,8 +837,8 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '0',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             }
         ],
@@ -849,15 +849,15 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '6',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '3',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
@@ -869,8 +869,8 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '0',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             }
         ],
@@ -881,36 +881,36 @@ export const integralConversionGridMock: HoverOperationGrid = {
             {
                 content: '3',
                 preset: {
-                    default: 'default-cell',
-                    hover: 'hover-cell'
+                    default: 'defaultCell',
+                    hover: 'hoverCell'
                 }
             },
             {
                 content: '1',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: ' ',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: ' ',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             },
             {
                 content: '1',
                 preset: {
-                    default: 'highlighted-cell',
-                    hover: 'highlighted-cell-hover'
+                    default: 'highlightedCell',
+                    hover: 'highlightedCellHover'
                 }
             }
         ]
