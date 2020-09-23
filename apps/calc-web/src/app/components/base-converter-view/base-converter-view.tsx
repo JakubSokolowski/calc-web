@@ -50,3 +50,5 @@ export const BaseConverterView: FC = () => {
         </div>
     );
 };
+
+export default BaseConverterView;

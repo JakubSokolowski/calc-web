@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import clsx from 'clsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { BaseConverterView } from './components/base-converter-view/base-converter-view';
@@ -30,7 +30,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
-import { useDocs } from '@calc/docs';
+
+
+const bconv = lazy(() => import('./components/base-converter-view/base-converter-view'));
+const gameOfLife = lazy(() => import('./components/game-of-life/game-of-life'));
+
 
 const drawerWidth = 240;
 
@@ -162,14 +166,17 @@ export const App = () => {
                         [classes.contentShift]: open
                     })}>
                         <div className={classes.drawerHeader} />
-                        <Switch>
-                            <Route exact path="/" component={HomeView}/>
-                            <Route path="/base-converter" component={BaseConverterView}/>
-                            <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
-                            <Route path="/complement-converter" component={ComplementConverterView}/>
-                            <Route path="/float-converter" component={FloatConverterView}/>
-                            <Route path="/positional-calculator" component={PositionalCalculatorView}/>
-                        </Switch>
+                        <Suspense fallback={<div>Loading...</div>}>
+                            <Switch>
+                                <Route exact path="/" component={HomeView}/>
+                                <Route path="/base-converter" component={bconv}/>
+                                <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
+                                <Route path="/complement-converter" component={ComplementConverterView}/>
+                                <Route path="/float-converter" component={FloatConverterView}/>
+                                <Route path="/positional-calculator" component={PositionalCalculatorView}/>
+                                <Route path="/wasm" component={gameOfLife}/>
+                            </Switch>
+                        </Suspense>
                     </main>
                 </Router>
             </ThemeProvider>
