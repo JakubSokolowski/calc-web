@@ -17,6 +17,7 @@ setup:
     artifacts:
         paths:
             - libs/calc-rs/pkg
+            - public/
         expire_in: 1 week
     script:
         - rustup default nightly
@@ -58,9 +59,12 @@ build:
 
 pages:
     stage: deploy
+    artifacts:
+        paths:
+            - public
     script:
         - npm run build:prod
-        - cp -r dist/apps/calc-web public
+        - cp -r dist/apps/calc-web public/
     rules:
         -   if: $CI_COMMIT_BRANCH == "master"
 
