@@ -36,7 +36,6 @@ lint:
         - npm install
         - npm run ci:lint
     rules:
-        -   if: $CI_COMMIT_BRANCH == "master"
         -   if: $CI_MERGE_REQUEST_ID
 
 test:
@@ -48,41 +47,19 @@ test:
             - coverage/apps/
         expire_in: 1 week
     rules:
-        -   if: $CI_COMMIT_BRANCH == "master"
         -   if: $CI_MERGE_REQUEST_ID
 
-regular-build:
+build:
     stage: build
     script:
-        - npm install
         - npm run ci:build
     rules:
         -   if: $CI_MERGE_REQUEST_ID
 
-master-build:
-    stage: build
-    script:
-        - npm run all:build
-    rules:
-        -   if: $CI_COMMIT_BRANCH == "master"
-
-
-master-test:
-    stage: test
-    script:
-        - npm install
-        - npm run all:test
-    artifacts:
-        paths:
-            - coverage/
-        expire_in: 1 week
-    rules:
-        -   if: $CI_COMMIT_BRANCH == "master"
-
 pages:
     stage: deploy
     script:
-        - nx build calc-web --prod
+        - npm run build:prod
         - cp -r dist/apps/calc-web public
     rules:
         -   if: $CI_COMMIT_BRANCH == "master"
