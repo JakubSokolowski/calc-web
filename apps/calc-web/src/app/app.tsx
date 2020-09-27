@@ -117,7 +117,7 @@ export const App = () => {
         <div className={classes.root}>
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline/>
-                <Router>
+                <Router basename={'/calc'}>
                     <AppBar
                         position="fixed"
                         className={clsx(classes.appBar, {
