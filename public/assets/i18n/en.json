@@ -1,0 +1,61 @@
+{
+    "appBar": {
+        "repo" : "GitLab repository",
+        "toggleDark": "Toggle dark theme",
+        "toggleLight": "Toggle light theme"
+    },
+    "home": {
+        "appName": "CALC",
+        "header": "Calc",
+        "positional": "Positional",
+        "floating": "Floating"
+    },
+    "languageMenu": {
+        "choose": "Choose language"
+    },
+    "baseConverter": {
+        "title": "Base Converter",
+        "result": "Conversion result",
+        "wrongBase": "Base must be between {{minBase}} and {{maxBase}}",
+        "wrongRepresentationStr": "Representation strings contains invalid digits for base {{base}}",
+        "inputNumber": "Input number",
+        "inputDecimalValue": "Input decimal value",
+        "inputComplement": "Input complement",
+        "inputBase": "Input base",
+        "outputBase": "Output base",
+        "outputNumber": "Output number",
+        "conversionToBase": "Conversion to base {{base}}",
+        "conversionToDecimal": "Conversion to decimal",
+        "integralConversion": "Integral conversion",
+        "floatingConversion": "Floating conversion",
+        "swapBases": "Swap bases",
+        "precision": "Precision",
+        "convert": "Convert",
+        "showDecimalValue": "Show decimal value",
+        "showComplement": "Show complement"
+    },
+    "associatedBaseConverter": {
+        "title": "Associated Base Converter",
+        "result": "Conversion result",
+        "mappings": "Mappings",
+        "noOutputBase": "No output bases possible"
+    },
+    "floatConverter": {
+        "title": "IEEE 754",
+        "sign": "Sign",
+        "exponent": "Exponent",
+        "mantissa": "Mantissa",
+        "entered": "Entered value",
+        "stored": "Stored value",
+        "binary": "Float binary"
+    },
+    "complementConverter": {
+        "title": "Complement Converter"
+    },
+    "common": {
+        "copy": "Copied to clipboard!"
+    },
+    "positionalCalculator": {
+        "title": "Positional Calculator"
+    }
+}

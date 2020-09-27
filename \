@@ -1,0 +1,41 @@
+WASM PoC #67
+
+- add calc-rs library to project
+- add example rust code for game of life
+- change separators to LF
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Wed Sep 23 21:21:03 2020 +0200
+#
+# On branch dev-wasm-poc
+# Your branch is up to date with 'origin/dev-wasm-poc'.
+#
+# Changes to be committed:
+#	modified:   .gitlab-ci.yml
+#	modified:   apps/calc-web/src/app/app.tsx
+#	new file:   apps/calc-web/src/app/components/base-converter-view/base-converter-view.spec.tsx
+#	modified:   apps/calc-web/src/app/components/base-converter-view/base-converter-view.tsx
+#	new file:   apps/calc-web/src/app/components/game-of-life/game-of-life.tsx
+#	new file:   docker/ci-base.dockerfile
+#	new file:   docker/update-ci-image.sh
+#	new file:   libs/calc-rs/.appveyor.yml
+#	new file:   libs/calc-rs/.cargo-ok
+#	new file:   libs/calc-rs/.gitignore
+#	new file:   libs/calc-rs/.travis.yml
+#	new file:   libs/calc-rs/Cargo.toml
+#	new file:   libs/calc-rs/LICENSE_APACHE
+#	new file:   libs/calc-rs/LICENSE_MIT
+#	new file:   libs/calc-rs/README.md
+#	new file:   libs/calc-rs/jest.config.js
+#	new file:   libs/calc-rs/package.json
+#	new file:   libs/calc-rs/src/lib.rs
+#	new file:   libs/calc-rs/src/utils.rs
+#	new file:   libs/calc-rs/tests/web.rs
+#	modified:   nx.json
+#	modified:   package-lock.json
+#	modified:   package.json
+#	modified:   tsconfig.json
+#	modified:   workspace.json
+#

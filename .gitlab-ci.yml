@@ -1,53 +1,71 @@
-image: node:12
+image: jsokolowski/calc-ci
 
 cache:
+    key: ${CI_COMMIT_REF_SLUG}
     paths:
         - node_modules/
 
 stages:
+    - setup
     - lint
     - test
     - build
+    - deploy
+
+setup:
+    stage: setup
+    artifacts:
+        paths:
+            - libs/calc-rs/pkg
+        expire_in: 1 week
+    script:
+        - rustup default nightly
+        - rustc --version
+        - cargo --version
+        - firefox --version
+        - rustup default
+        - npm install
+        - npm run build-wasm
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+        -   if: $CI_MERGE_REQUEST_ID
 
 lint:
     stage: lint
     script:
         - npm install
         - npm run ci:lint
-    only:
-        - merge_request
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+        -   if: $CI_MERGE_REQUEST_ID
 
 test:
     stage: test
     script:
-        - npm install
         - npm run ci:test
-    only:
-        - merge_request
     artifacts:
         paths:
             - coverage/apps/
         expire_in: 1 week
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+        -   if: $CI_MERGE_REQUEST_ID
 
 regular-build:
     stage: build
     script:
         - npm install
         - npm run ci:build
-    only:
-        - merge_request
+    rules:
+        -   if: $CI_MERGE_REQUEST_ID
 
 master-build:
     stage: build
     script:
-        - npm install
         - npm run all:build
-    only:
-        - master
-    artifacts:
-        paths:
-            - dist/apps/
-        expire_in: 1 week
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+
 
 master-test:
     stage: test
@@ -58,6 +76,15 @@ master-test:
         paths:
             - coverage/
         expire_in: 1 week
-    only:
-        - master
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+
+pages:
+    stage: deploy
+    script:
+        - nx build calc-web --prod
+        - cp -r dist/apps/calc-web public
+    rules:
+        -   if: $CI_COMMIT_BRANCH == "master"
+
 

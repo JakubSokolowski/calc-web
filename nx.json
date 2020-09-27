@@ -20,7 +20,8 @@
   },
   "projects": {
     "calc-web": {
-      "tags": []
+      "tags": [],
+      "implicitDependencies": ["calc-rs"]
     },
     "calc-web-e2e": {
       "tags": [],
@@ -39,6 +40,9 @@
       "tags": []
     },
     "docs": {
+      "tags": []
+    },
+    "calc-rs": {
       "tags": []
     }
   }
