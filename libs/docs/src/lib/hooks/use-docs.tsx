@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 
-export const useDocs = (path: string): string | null => {
+export const useDocs = (path: string, deployUrl: string): string | null => {
     const [doc, setDoc] = useState<string>(null);
     const { i18n } = useTranslation();
 
     const fileName = path.split('/').pop();
-    const prefix = './assets/docs';
+    const prefix = `${deployUrl}/assets/docs`;
     const languageKeySuffix = i18n.language;
 
     const url = `${prefix}/${path}/${fileName}_${languageKeySuffix}.md`;

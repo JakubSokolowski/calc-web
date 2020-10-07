@@ -7,6 +7,7 @@ import { Box, Tab, Tabs, Typography } from '@material-ui/core';
 import { a11yProps, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
+import { environment } from '../../../environments/environment';
 
 
 export const AssociatedBaseConverterView: FC = () => {
@@ -53,7 +54,7 @@ export const AssociatedBaseConverterView: FC = () => {
             <TabPanel value={value} index={1}>
                 <div className={classes.verticalSpacer}/>
                 <Box display={'flex'} alignItems={'center'} maxWidth={900} margin={'auto'}>
-                    <DocPage path='positional/associated-base-conversion'/>
+                    <DocPage path='positional/associated-base-conversion' deployUrl={environment.deployUrl}/>
                 </Box>
             </TabPanel>
 

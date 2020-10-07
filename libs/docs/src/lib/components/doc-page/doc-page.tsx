@@ -8,6 +8,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export interface DocsProps {
     path: string;
+    deployUrl: string;
 }
 
 export const useStyles = makeStyles((theme: Theme) => {
@@ -26,9 +27,9 @@ export const useStyles = makeStyles((theme: Theme) => {
     );
 });
 
-export const DocPage: FC<DocsProps> = ({ path }) => {
-    const markdown = useDocs(path);
-    const imageUriPrefix = 'assets/docs/';
+export const DocPage: FC<DocsProps> = ({ path, deployUrl }) => {
+    const markdown = useDocs(path, deployUrl);
+    const imageUriPrefix = `${deployUrl}/assets/docs/`;
     const classes = useStyles();
 
     const ids = extractHeadingIds(markdown);
