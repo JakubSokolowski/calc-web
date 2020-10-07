@@ -29,6 +29,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
+import { environment } from '../environments/environment';
 
 
 const bconv = lazy(() => import('./components/base-converter-view/base-converter-view'));
@@ -115,7 +116,7 @@ export const App = () => {
         <div className={classes.root}>
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline/>
-                <Router basename={'/calc'}>
+                <Router basename={environment.deployUrl}>
                     <AppBar
                         position="fixed"
                         className={clsx(classes.appBar, {
