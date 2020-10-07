@@ -1,7 +1,5 @@
 import React, { lazy, Suspense } from 'react';
-import clsx from 'clsx';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { BaseConverterView } from './components/base-converter-view/base-converter-view';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
 import '../assets/i18n/i18n';
@@ -21,13 +19,14 @@ import {
     ThemeProvider,
     Toolbar, Typography
 } from '@material-ui/core';
-import { getTheme, GitlabIcon } from '@calc/ui';
+import { getTheme } from '@calc/ui';
 import { useSelector } from 'react-redux';
 import { selectAppTheme } from './store/selectors/options.selectors';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
 
@@ -74,7 +73,6 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             alignItems: 'center',
             padding: theme.spacing(0, 1),
-            // necessary for content to be below app bar
             ...theme.mixins.toolbar,
             justifyContent: 'flex-end'
         },

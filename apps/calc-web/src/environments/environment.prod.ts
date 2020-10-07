@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+    production: true,
+    deployUrl: 'https://gitgudorgetgot.gitlab.io/calc/'
 };
