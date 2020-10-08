@@ -57,5 +57,9 @@
     },
     "positionalCalculator": {
         "title": "Positional Calculator"
+    },
+    "sandbox": {
+        "title": "Sandbox",
+        "wasm": "Wasm Demo"
     }
 }
