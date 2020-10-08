@@ -71,6 +71,19 @@ export const SiderMenu = () => {
                     </ListItem>
                 </List>
             </Accordion>
+            <Accordion>
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header">
+                    <Typography className={classes.heading}>{t('sandbox.title')}</Typography>
+                </AccordionSummary>
+                <List>
+                    <ListItem button key={'wasm'} onClick={() => history.push('/wasm')}>
+                        <ListItemText primary={t('sandbox.wasm')} />
+                    </ListItem>
+                </List>
+            </Accordion>
         </div>
     );
 };

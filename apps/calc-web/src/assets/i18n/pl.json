@@ -56,5 +56,9 @@
     },
     "positionalCalculator": {
         "title": "Kalkulator liczb pozycyjnych"
+    },
+    "sandbox": {
+        "title": "Sandbox",
+        "wasm": "Wasm Demo"
     }
 }
