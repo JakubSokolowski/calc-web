@@ -6,3 +6,4 @@ export * from './lib/range';
 export * from './lib/intersect';
 export * from './lib/replace-all';
 export * from './lib/clean';
+export * from './lib/in-range';
