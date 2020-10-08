@@ -76,7 +76,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         validate,
     });
 
-    const [inputValue] = useState(initialValues.inputStr);
+    const [inputValue, setInputValue] = useState(initialValues.inputStr);
     const [inputBase] = useState(initialValues.inputBase);
 
     const swap = async () => {
@@ -112,6 +112,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         }
     }, [inputBase, inputValue]);
 
+    const handleInputStrChange = e => {
+        setInputValue(e.target.value);
+        form.handleChange(e);
+    };
+
 
     return (
         <Card className={classes.card}>
@@ -124,7 +129,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     label={t('baseConverter.inputNumber')}
                     error={!!form.errors.inputStr}
                     helperText={form.errors.inputStr}
-                    onChange={form.handleChange}
+                    onChange={handleInputStrChange}
                     value={form.values.inputStr}
                 />
 
