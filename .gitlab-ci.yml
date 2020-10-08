@@ -43,9 +43,11 @@ test:
     stage: test
     script:
         - npm run ci:test
+    after_script:
+        - bash <(curl -s https://codecov.io/bash)
     artifacts:
         paths:
-            - coverage/apps/
+            - coverage/
         expire_in: 1 week
     rules:
         -   if: $CI_MERGE_REQUEST_ID
@@ -62,9 +64,9 @@ pages:
     artifacts:
         paths:
             - public
+            - libs/calc-rs/pkg
     script:
-        - npm run build:wasm
-        - npm run build:prod
+        - npm run build:wasm && npm run build:prod
         - cp -r dist/apps/calc-web public/
     rules:
         -   if: $CI_COMMIT_BRANCH == "master"
