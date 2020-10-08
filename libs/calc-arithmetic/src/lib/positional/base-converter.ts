@@ -263,8 +263,8 @@ export class StandardBaseConverter implements BaseConverter {
     ): Conversion {
         const valueStr = digits.reduce((str, digit) => {
             return digit.position === -1
-                ? str.concat(`.${digit.valueInBase}`)
-                : str.concat(digit.valueInBase);
+                ? str.concat(`.${digit.representationInBase}`)
+                : str.concat(digit.representationInBase);
         }, isNegative ? '-' : '');
 
         const base = digits[0].base;

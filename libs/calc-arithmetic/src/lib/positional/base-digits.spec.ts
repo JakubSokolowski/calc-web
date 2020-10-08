@@ -2,19 +2,19 @@ import { BaseDigits } from './base-digits';
 
 describe('base-digits', () => {
     describe('#getDigit', () => {
-        describe('when radix is smaller than 36', () => {
+        describe('when base is smaller than 36', () => {
             it('returns proper digit for value 10 in hexadecimal', () => {
                 expect(BaseDigits.getDigit(10, 16)).toBe('A');
             });
 
-            it('throws error, if requested digit is greater than radix', () => {
+            it('throws error, if requested digit is greater than base', () => {
                 expect(() => {
                     BaseDigits.getDigit(16, 10);
                 }).toThrow();
             });
         });
 
-        describe('when radix is greater than 36', () => {
+        describe('when base is greater than 36', () => {
             it('returns proper digit for value 10 in base 64', () => {
                 expect(BaseDigits.getDigit(10, 64)).toBe('10');
             });
@@ -27,27 +27,37 @@ describe('base-digits', () => {
                 expect(BaseDigits.getDigit(63, 64)).toBe('63');
             });
 
-            it('throws error, if requested digit is equal to radix', () => {
+            it('throws error, if requested digit is equal to base', () => {
                 expect(() => {
                     BaseDigits.getDigit(64, 64);
                 }).toThrow();
             });
 
-            it('throws error, if requested digit is greater than radix', () => {
+            it('throws error, if requested digit is greater than base', () => {
                 expect(() => {
                     BaseDigits.getDigit(65, 64);
                 }).toThrow();
             });
 
-            it('returns proper digits after radix change from 10 to 64', () => {
+            it('returns proper digits after base change from 10 to 64', () => {
                 expect(BaseDigits.getDigit(9, 10)).toBe('9');
                 expect(BaseDigits.getDigit(63, 64)).toBe('63');
             });
 
-            it('throws when radix is invalid', () => {
+            it('throws when base is invalid', () => {
                 expect(() => {
                     BaseDigits.getDigit(10, 100);
                 }).toThrow();
+            });
+        });
+
+        describe('when the digit is a complement', () => {
+            it('should return proper complement digit whe value is 0', () => {
+                expect(BaseDigits.getDigit(0, 16, true)).toBe('(0)');
+            });
+
+            it('should return proper complement digit whe value is -1', () => {
+                expect(BaseDigits.getDigit(-1, 16, true)).toBe('(F)');
             });
         })
     });
@@ -65,11 +75,11 @@ describe('base-digits', () => {
             expect(BaseDigits.getValue('AAA', 10)).toBe(-1);
         });
 
-        it('returns undefined if requested value is equal to radix (not in object)', () => {
+        it('returns undefined if requested value is equal to base (not in object)', () => {
             expect(BaseDigits.getValue('10', 10)).toBe(-1);
         });
 
-        it('throws when radix is invalid', () => {
+        it('throws when base is invalid', () => {
             expect(() => {
                 BaseDigits.getValue('10', 100);
             }).toThrow();

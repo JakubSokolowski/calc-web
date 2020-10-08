@@ -16,7 +16,7 @@ export {
     buildFractionalConversionGrid,
     buildIntegralConversionGrid
 } from './lib/core/conversion-grid';
-export { buildAdditionGrid } from './lib/core/addition-gid';
+export { buildAdditionGrid } from './lib/core/addition-grid';
 export { HoverGrid } from './lib/components/hover-grid/hover-grid';
 export { RowConversionOperation } from './lib/models/row-conversion-operation';
 export { FloatingPartConversionInfo } from './lib/models/floating-part-conversion-info';

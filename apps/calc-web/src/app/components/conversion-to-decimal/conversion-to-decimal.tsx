@@ -12,7 +12,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     const digits = conversionStage.inputDigitList.map((digit, index, arr) => {
         return (
             <span key={index}>
-                {digit.valueInBase}*
+                {digit.representationInBase}*
                 {digit.base}
                 <sup>{digit.position}</sup>
                 {index !== arr.length -1 && ' + '}

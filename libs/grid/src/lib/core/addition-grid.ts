@@ -33,9 +33,9 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
 
     const resultRow: GridCellConfig[] = digitsToCellConfig(result.resultDigits);
     rows.push(padWithEmptyCells(resultRow, info.totalWidth + 1, 'Left'));
-    const groups = buildColumnGroups(rows, [undefined, ...result.positionResults.reverse()]);
+    const groups = buildColumnGroups(rows, [...result.positionResults.reverse().slice(1)]);
 
-    const xAxis: AxisConfig = buildAxis(result.resultDigits[0].position + 1, result.resultDigits.length + 1);
+    const xAxis: AxisConfig = buildAxis(result.resultDigits[0].position, result.resultDigits.length);
 
     return {
         values: rows,
@@ -69,12 +69,12 @@ function getUnderlineForCarries(carryRows: GridCellConfig[][]): GridLine {
 }
 
 function carriesToCellConfig(result: AdditionResult): GridCellConfig[][] {
-    const width = result.resultDigits.length + 1;
+    const width = result.resultDigits.length;
     const positionCarryLookup: Record<number, Digit[]> = {};
     const positionIndexLookup: Record<number, number> = {};
 
     result.resultDigits.forEach((posDigit, index) => {
-        positionIndexLookup[posDigit.position] = index + 1;
+        positionIndexLookup[posDigit.position] = index;
     });
 
     let mostCarriesPerPosition = 0;
@@ -101,8 +101,11 @@ function carriesToCellConfig(result: AdditionResult): GridCellConfig[][] {
         const numPosition = parseInt(strPosition);
         positionCarries.forEach((carry, carryIndex) => {
             const positionIndex = positionIndexLookup[numPosition];
-            emptyCarryGrid[carryIndex][positionIndex].content = carry.valueInBase;
-            emptyCarryGrid[carryIndex][positionIndex].preset = highlightedCellPreset;
+            if(positionIndex) {
+                emptyCarryGrid[carryIndex][positionIndex].content = carry.representationInBase;
+                emptyCarryGrid[carryIndex][positionIndex].preset = highlightedCellPreset;
+            }
+
         });
     });
 
@@ -135,7 +138,7 @@ function operandDigitsToCellConfig(digits: Digit[], info: DigitsInfo, base: numb
 
 function extractDelimiterInfo(result: AdditionResult): DigitsInfo {
     return {
-        totalWidth: result.resultDigits.length,
+        totalWidth: result.resultDigits.length -1,
         numIntegerPartDigits: result.numberResult.integerPart.length,
         numFractionalDigits: result.numberResult.fractionalPart.length
     };
@@ -165,8 +168,8 @@ export function padWithEmptyCellDigits(digits: Digit[], desiredWidth: number, ba
 function digitsToCellConfig(digits: Digit[]): GridCellConfig[] {
     return digits.map((digit) => {
         const celLValue = digit.position === 0
-            ? `${digit.valueInBase}.`
-            : digit.valueInBase;
+            ? `${digit.representationInBase}.`
+            : digit.representationInBase;
         return ({ content: celLValue });
     });
 }

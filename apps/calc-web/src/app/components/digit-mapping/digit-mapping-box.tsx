@@ -60,7 +60,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
     const rootDigits = rootDigitsSource.map((digit, index) => {
         return (
             <Button key={index} className="digit-box">
-                {digit.valueInBase}
+                {digit.representationInBase}
             </Button>
         );
     });
@@ -92,7 +92,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                 ]}
             >
                 <Button key={index} className="digit-box">
-                    {digit.valueInBase}
+                    {digit.representationInBase}
                 </Button>
             </ArcherElement>
         );

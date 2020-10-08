@@ -18,7 +18,7 @@ export function representationStrToStrArray(
 
 /**
  * Generates regex pattern that matches any number in positional system specified by base
- * @param base Base (radix) of a positional system, must in range <2-36>
+ * @param base Base (base) of a positional system, must in range <2-36>
  * @returns regex pattern string for given base
  */
 export function getRepresentationRegexPattern(base: number): string {
@@ -264,7 +264,7 @@ export function splitToDigitsList( num: BigNumber | number | string,  base = 10)
                 valueInDecimal: BaseDigits.getValue(digit, base),
                 base,
                 position: integerPart.length - 1 - index,
-                valueInBase: digit
+                representationInBase: digit
             }
         }),
         ...fractionalPart.map((digit, index) => {
@@ -272,7 +272,7 @@ export function splitToDigitsList( num: BigNumber | number | string,  base = 10)
                 valueInDecimal: BaseDigits.getValue(digit, base),
                 base,
                 position: -1 * (index + 1),
-                valueInBase: digit
+                representationInBase: digit
             }
         })
     ]

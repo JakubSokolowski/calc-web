@@ -7,3 +7,4 @@ export * from './lib/intersect';
 export * from './lib/replace-all';
 export * from './lib/clean';
 export * from './lib/in-range';
+export * from './lib/obj-array-equal';

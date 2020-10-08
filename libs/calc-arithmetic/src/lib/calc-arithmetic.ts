@@ -2,6 +2,7 @@ export {
     StandardBaseConverter,
     fromNumber,
     fromString,
+    fromStringDirect,
     Conversion,
     ConversionToArbitrary,
     ConversionToDecimal,

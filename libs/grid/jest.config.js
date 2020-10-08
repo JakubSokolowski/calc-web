@@ -5,6 +5,6 @@ module.exports = {
         '^.+\\.[tj]sx?$': 'ts-jest',
     },
     moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-    coverageDirectory: '../../coverage/libs/grid:',
+    coverageDirectory: '../../coverage/libs/grid',
     setupFilesAfterEnv: ['<rootDir>/src/jest.setup.js']
 };
