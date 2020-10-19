@@ -55,7 +55,7 @@ test:
 build:
     stage: build
     script:
-        - npm run ci:build
+        - npm run build:wasm && npm run build:prod
     rules:
         -   if: $CI_MERGE_REQUEST_ID
 
