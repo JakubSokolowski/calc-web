@@ -10,7 +10,7 @@ export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
     const operands = positionResult.operands.map((operand, index) => {
         return (
             <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
-                <NumberSubscript value={operand.valueInBase} subscript={''} noBraces={true}/>
+                <NumberSubscript value={operand.representationInBase} subscript={''} noBraces={true}/>
                 {index !== positionResult.operands.length -1 && '+'}
             </span>
         );
@@ -19,7 +19,7 @@ export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
     const carries = positionResult.carry.map((carry, index) => {
         return (
             <span key={index}>
-                <NumberSubscript value={carry.valueInBase} subscript={`C${carry.position}`}/>
+                <NumberSubscript value={carry.representationInBase} subscript={`C${carry.position}`}/>
                 {index !== positionResult.carry.length -1 && '+'}
             </span>
         );
@@ -46,7 +46,7 @@ export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
                />
                =
                <NumberSubscript
-                   value={positionResult.valueAtPosition.valueInBase}
+                   value={positionResult.valueAtPosition.representationInBase}
                    subscript={positionResult.valueAtPosition.base}
                />
                {carries.length > 0 && '+'}

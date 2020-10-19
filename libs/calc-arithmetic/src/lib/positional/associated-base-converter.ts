@@ -89,7 +89,7 @@ export function splitToSmallerBaseDigits(digit: Digit, outputBase: number): Digi
             base: outputBase,
             position: 0,
             valueInDecimal: 0,
-            valueInBase: BaseDigits.getDigit(0, outputBase)
+            representationInBase: BaseDigits.getDigit(0, outputBase)
         };
     });
 
@@ -165,7 +165,7 @@ export function reduceToGreaterBaseDigit(digits: Digit[], outputBase: number): D
         input: digits,
         output: [
             {
-                valueInBase: digitInOutputBase,
+                representationInBase: digitInOutputBase,
                 base: outputBase,
                 valueInDecimal: combinedDigitValue,
                 position: resultPosition

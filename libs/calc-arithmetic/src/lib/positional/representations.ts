@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from './base-digits';
-import { Digit } from '../models';
+import { Digit, Operand } from '../models';
 
 export class Digits {
     public digits: string[];
@@ -90,6 +90,19 @@ export class NumberComplement implements PositionalRepresentation {
             this.fractionalPart.toString().slice(0, precision)
         );
     }
+
+    public toDigitsList(): Operand[] {
+        const digits = toDigitList(this.integerPart, this.fractionalPart);
+        const extension: Operand = {
+            isComplementExtension: true,
+            position: digits[0].position + 1,
+            representationInBase: this.sign,
+            valueInDecimal: this.isNegative ? this.base -1 : 0,
+            base: this.base
+        };
+
+        return [extension, ...digits];
+    }
 }
 
 export class PositionalNumber extends NumberComplement {
@@ -117,28 +130,34 @@ export class PositionalNumber extends NumberComplement {
     }
 
     public toDigitsList(): Digit[] {
-        const integerPart: Digit[] = this.integerPart.digits.map((digit, index) => {
-            const position = (this.integerPart.digits.length - 1) - index;
-
-            return {
-                position,
-                base: this.base,
-                valueInBase: digit,
-                valueInDecimal: BaseDigits.getValue(digit, this.base)
-            }
-        });
-
-        const fractionalPart: Digit[] = this.fractionalPart.digits.map((digit, index) => {
-            const position = - 1 - index;
-
-            return {
-                position,
-                base: this.base,
-                valueInBase: digit,
-                valueInDecimal: BaseDigits.getValue(digit, this.base)
-            }
-        });
-
-        return [...integerPart, ...fractionalPart];
+        return toDigitList(this.integerPart, this.fractionalPart);
     }
+}
+
+
+function toDigitList(integerPart: Digits, fractionalPart: Digits): Operand[] {
+    const base = integerPart.base;
+    const integerPartDigits: Operand[] = integerPart.digits.map((digit, index) => {
+        const position = (integerPart.digits.length - 1) - index;
+
+        return {
+            position,
+            base,
+            representationInBase: digit,
+            valueInDecimal: BaseDigits.getValue(digit, base),
+        }
+    });
+
+    const fractionalPartDigits: Operand[] = fractionalPart.digits.map((digit, index) => {
+        const position = - 1 - index;
+
+        return {
+            position,
+            base,
+            representationInBase: digit,
+            valueInDecimal: BaseDigits.getValue(digit, base)
+        }
+    });
+
+    return [...integerPartDigits, ...fractionalPartDigits];
 }

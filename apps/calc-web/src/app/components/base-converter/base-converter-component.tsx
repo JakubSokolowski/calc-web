@@ -43,7 +43,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateBase = (base: number): string | undefined => {
-        if (!BaseDigits.isValidRadix(base)) {
+        if (!BaseDigits.isValidBase(base)) {
             return t(
                 'baseConverter.wrongBase',
                 { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
