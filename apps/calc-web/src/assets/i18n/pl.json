@@ -52,7 +52,9 @@
         "title": "Uzupełnienie liczb"
     },
     "common": {
-        "copy": "Skopiowano do schowka"
+        "copy": "Skopiowano do schowka",
+        "downloadResult": "Pobierz wynik jako .png",
+        "download": "Pobierz"
     },
     "positionalCalculator": {
         "title": "Kalkulator liczb pozycyjnych"

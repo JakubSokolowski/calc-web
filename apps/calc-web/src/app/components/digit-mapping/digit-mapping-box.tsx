@@ -17,7 +17,8 @@ export const useStyles = makeStyles((theme: Theme) => {
                 alignItems: 'center',
                 minWidth: '12px',
                 minHeight: '20px',
-                padding: '1px 6px'
+                padding: '1px 6px',
+                marginBottom: '20px'
             },
             rootDigitsRow: {
                 display: 'flex',
@@ -59,7 +60,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
 
     const rootDigits = rootDigitsSource.map((digit, index) => {
         return (
-            <Button key={index} className="digit-box">
+            <Button key={index} className={classes.digitBox}>
                 {digit.representationInBase}
             </Button>
         );
@@ -91,7 +92,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                     }
                 ]}
             >
-                <Button key={index} className="digit-box">
+                <Button key={index} className={classes.digitBox}>
                     {digit.representationInBase}
                 </Button>
             </ArcherElement>

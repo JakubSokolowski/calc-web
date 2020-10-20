@@ -1,6 +1,5 @@
 import React, { FC, useRef, useState } from 'react';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
-import { CopyOutlined } from '@ant-design/icons/lib';
 import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition } from '../../core/grid-utils';
 import { CellCoords } from '../../models/cell-coords';
 import { CellGroup } from '../../models/cell-group';
@@ -10,10 +9,12 @@ import { CellPosition } from '../../models/cell-position';
 import { NumberSubscript } from '@calc/ui';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
-import { Button, createStyles, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
+import { createStyles, IconButton, Paper, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import { useTranslation } from 'react-i18next';
 
 interface P {
     values: GridCellConfig[][];
@@ -48,7 +49,8 @@ const useStyles = makeStyles((theme: Theme) => {
         cellBox: {
             width: '100%',
             maxHeight: '500px',
-            display: 'inline-block',
+            overflowY: 'scroll',
+            display: 'inline-block'
         },
         cellContent: {
             width: 'auto',
@@ -64,6 +66,16 @@ const useStyles = makeStyles((theme: Theme) => {
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
+        },
+        title: {
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+            alignItems: 'center',
+            paddingBottom: theme.spacing(2)
+        },
+        spacer: {
+            flexGrow: 1
         }
     });
 });
@@ -75,6 +87,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
     const gridRef = useRef(null);
     const classes = useStyles();
+    const { t } = useTranslation();
 
     const handleClick = (event) => {
         console.log('Click Event', event);
@@ -189,12 +202,18 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
         <div className={classes.gridWrapper}>
             {
                 title &&
-                <div className='title'>
-                    <Typography>{title}</Typography>
-                    <Button size={'small'} onClick={saveAsImage}>
-                        <CopyOutlined/>
-                    </Button>
-                </div>
+                <Paper className={classes.title}>
+                    <Typography variant={'body1'}>{title}</Typography>
+                    <div className={classes.spacer}/>
+                    <Tooltip title={t('common.downloadResult')}>
+                        <IconButton
+                            color={'default'}
+                            size={'small'}
+                            onClick={saveAsImage}>
+                            <SaveAltIcon/>
+                        </IconButton>
+                    </Tooltip>
+                </Paper>
             }
             {
                 xAxis &&
