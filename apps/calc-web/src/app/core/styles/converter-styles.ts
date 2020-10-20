@@ -36,10 +36,10 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
             },
             horizontalSpacer: {
                 [theme.breakpoints.down('md')]: {
-                    width: theme.spacing(1)
+                    width: theme.spacing(3)
                 },
                 [theme.breakpoints.up('lg')]: {
-                    width: theme.spacing(2)
+                    width: theme.spacing(5)
                 }
             },
             verticalSpacer: {

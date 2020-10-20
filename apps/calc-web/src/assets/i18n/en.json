@@ -53,7 +53,9 @@
         "title": "Complement Converter"
     },
     "common": {
-        "copy": "Copied to clipboard!"
+        "copy": "Copied to clipboard!",
+        "downloadResult": "Download result as .png",
+        "download": "Download"
     },
     "positionalCalculator": {
         "title": "Positional Calculator"
