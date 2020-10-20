@@ -2,8 +2,8 @@ import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
 import { AdditionResult, Operand, PositionResult } from '../models';
-import { ComplementConverter } from '../calc-arithmetic';
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
+import { ComplementConverter } from './complement-converter';
 
 export const numAdditionalComplementExtensions = 3;
 

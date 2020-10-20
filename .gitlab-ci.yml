@@ -17,16 +17,12 @@ setup:
     artifacts:
         paths:
             - libs/calc-rs/pkg
-            - public/
         expire_in: 1 week
     script:
-        - rustup default nightly
         - rustc --version
         - cargo --version
         - firefox --version
-        - rustup default
         - npm install
-        - npm run build:wasm
     rules:
         -   if: $CI_COMMIT_BRANCH == "master"
         -   if: $CI_MERGE_REQUEST_ID
@@ -55,7 +51,7 @@ test:
 build:
     stage: build
     script:
-        - npm run build:wasm && npm run build:prod
+        - npm run ci:build
     rules:
         -   if: $CI_MERGE_REQUEST_ID
 
@@ -64,9 +60,8 @@ pages:
     artifacts:
         paths:
             - public
-            - libs/calc-rs/pkg
     script:
-        - npm run build:wasm && npm run build:prod
+        - npm run build:prod
         - cp -r dist/apps/calc-web public/
     rules:
         -   if: $CI_COMMIT_BRANCH == "master"
