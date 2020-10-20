@@ -33,7 +33,6 @@ import { environment } from '../environments/environment';
 
 
 const bconv = lazy(() => import('./components/base-converter-view/base-converter-view'));
-const gameOfLife = lazy(() => import('./components/game-of-life/game-of-life'));
 
 
 const drawerWidth = 240;
@@ -173,7 +172,6 @@ export const App = () => {
                                 <Route path="/complement-converter" component={ComplementConverterView}/>
                                 <Route path="/float-converter" component={FloatConverterView}/>
                                 <Route path="/positional-calculator" component={PositionalCalculatorView}/>
-                                <Route path="/wasm" component={gameOfLife}/>
                             </Switch>
                         </Suspense>
                     </main>
