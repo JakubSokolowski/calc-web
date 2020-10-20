@@ -7,21 +7,21 @@ export interface Digit {
     position: number;
 }
 
-export interface Operand extends Digit{
+export interface AdditionOperand extends Digit{
     isCarry?: boolean;
     carrySourcePosition?: number;
     isComplementExtension?: boolean;
 }
 
 export interface PositionResult {
-    valueAtPosition: Operand;
-    carry: Operand[];
-    operands: Operand[];
+    valueAtPosition: AdditionOperand;
+    carry: AdditionOperand[];
+    operands: AdditionOperand[];
 }
 
 export interface AdditionResult {
     positionResults: PositionResult[];
-    resultDigits: Operand[];
+    resultDigits: AdditionOperand[];
     numberResult?: PositionalNumber;
-    operands: Operand[][];
+    operands: AdditionOperand[][];
 }

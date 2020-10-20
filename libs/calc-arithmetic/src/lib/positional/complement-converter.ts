@@ -192,24 +192,22 @@ export class ComplementConverter {
      * @param base
      */
     public static complementStrToBaseStr(str: string, base: number) {
-        const noSignStr = str.substring(3);
-        let result = '';
-        if (this.isComplementStrNegative(str, base)) {
-            const digits = splitToDigits(noSignStr);
-            const baseDigits = this.computeComplement(
-                digits[0],
-                digits[1],
-                base
-            );
-            const delimiter = baseDigits[1].length === 0 ? '' : '.';
-            result =
-                '-' +
-                baseDigits[0].toString() +
-                delimiter +
-                baseDigits[1].toString();
-        } else {
-            result = noSignStr;
+        const noSignStr = base > 36 ? str.substr(4) : str.substring(3);
+
+        if(!this.isComplementStrNegative(str, base)) {
+            if(noSignStr.startsWith('.')) {
+                return `${BaseDigits.getDigit(0, base)}${noSignStr}`
+            }
+            return noSignStr
         }
-        return result;
+
+        const digits = splitToDigits(noSignStr.trim(), base);
+        const baseDigits = this.computeComplement(
+            digits[0],
+            digits[1],
+            base
+        );
+        const delimiter = baseDigits[1].length === 0 ? '' : '.';
+        return `-${baseDigits[0].toString()}${delimiter}${baseDigits[1].toString()}`;
     }
 }

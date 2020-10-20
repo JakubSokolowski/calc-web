@@ -1,7 +1,7 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionResult, Operand, PositionResult } from '../models';
+import { AdditionResult, AdditionOperand, PositionResult } from '../models';
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
 import { ComplementConverter } from './complement-converter';
 
@@ -20,10 +20,10 @@ export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
     return numbers.map((num) => num.base).every((numBase) => numBase === base);
 }
 
-export function addDigitsArrays(digits: Operand[][]): AdditionResult {
-    const carryLookup: Record<number, Operand[]> = {};
+export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
+    const carryLookup: Record<number, AdditionOperand[]> = {};
     const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(digits);
-    const digitsPositionLookup: Record<number, Operand>[] = buildLookup(digits, mostSignificantPosition);
+    const digitsPositionLookup: Record<number, AdditionOperand>[] = buildLookup(digits, mostSignificantPosition);
     const result: PositionResult[] = [];
     const base = digits[0][0].base;
 
@@ -33,7 +33,7 @@ export function addDigitsArrays(digits: Operand[][]): AdditionResult {
     let prev: PositionResult;
 
     while (currentPosition <= mostSignificant + numAdditionalComplementExtensions - 1) {
-        const allDigitsAtCurrentPosition: Operand[] = digitsPositionLookup
+        const allDigitsAtCurrentPosition: AdditionOperand[] = digitsPositionLookup
             .map((digits) => digits[currentPosition])
             .filter((digit) => !!digit);
 
@@ -83,7 +83,7 @@ export function addDigitsArrays(digits: Operand[][]): AdditionResult {
     };
 }
 
-export function findPositionRange(allDigits: Operand[][]): { mostSignificantPosition: number; leastSignificantPosition: number } {
+export function findPositionRange(allDigits: AdditionOperand[][]): { mostSignificantPosition: number; leastSignificantPosition: number } {
     const allMostSignificant = allDigits.map((digits) => digits[0].position);
     const allLeastSignificant = allDigits.map((digits) => digits[digits.length - 1].position);
 
@@ -93,23 +93,23 @@ export function findPositionRange(allDigits: Operand[][]): { mostSignificantPosi
     };
 }
 
-export function buildPositionalNumberFromDigits(resultDigits: Operand[]): PositionalNumber {
+export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[]): PositionalNumber {
     let complementStr = '';
     const base = resultDigits[0].base;
 
     resultDigits.forEach((digit) => {
         const firstFractionalPartDigitIndex = -1;
         if (digit.position === firstFractionalPartDigitIndex) complementStr += '.';
-        complementStr += digit.representationInBase;
+        complementStr += base > 36 ? digit.representationInBase + ' ' : digit.representationInBase;
     });
 
-    const representationStr = ComplementConverter.complementStrToBaseStr(complementStr, base);
+    const representationStr = ComplementConverter.complementStrToBaseStr(complementStr.trimRight(), base);
     return fromStringDirect(representationStr, base).result;
 }
 
-export function extractResultDigitsFromPositionResults(positionResults: PositionResult[]): Operand[] {
+export function extractResultDigitsFromPositionResults(positionResults: PositionResult[]): AdditionOperand[] {
     const digitsFromPositions = positionResults.map((res) => res.valueAtPosition);
-    const carryDigitsNotConsideredInResult: Operand[] = [];
+    const carryDigitsNotConsideredInResult: AdditionOperand[] = [];
 
     positionResults.forEach((result) => {
         const missingCarryDigits = result.carry.filter((dgt) => {
@@ -125,11 +125,11 @@ export function extractResultDigitsFromPositionResults(positionResults: Position
 }
 
 
-function buildLookup(digits: Operand[][], globalMostSignificantPosition: number): Record<number, Operand>[] {
+function buildLookup(digits: AdditionOperand[][], globalMostSignificantPosition: number): Record<number, AdditionOperand>[] {
     return digits.map((numberDigits) => toPositionDigitMap(numberDigits, globalMostSignificantPosition));
 }
 
-function toPositionDigitMap(digits: Operand[], globalMostSignificantPosition: number): Record<number, Operand> {
+function toPositionDigitMap(digits: AdditionOperand[], globalMostSignificantPosition: number): Record<number, AdditionOperand> {
     const mostSignificantDigit = digits[0];
     const numExtensions = getNumOfComplementExtensions(mostSignificantDigit, globalMostSignificantPosition);
     const extensions = generateComplementExtension(mostSignificantDigit, numExtensions);
@@ -142,21 +142,21 @@ function toPositionDigitMap(digits: Operand[], globalMostSignificantPosition: nu
 }
 
 
-function getNumOfComplementExtensions(digit: Operand, mostSignificantPosition: number): number {
+function getNumOfComplementExtensions(digit: AdditionOperand, mostSignificantPosition: number): number {
     const numMandatoryComplementExtensions = mostSignificantPosition - digit.position;
 
     return numAdditionalComplementExtensions + numMandatoryComplementExtensions;
 }
 
-function generateComplementExtension(digit: Operand, numExtensions: number): Operand[] {
-    return new Array<Operand>(numExtensions)
+function generateComplementExtension(digit: AdditionOperand, numExtensions: number): AdditionOperand[] {
+    return new Array<AdditionOperand>(numExtensions)
         .fill({ ...digit })
         .map((digit, index) => ({ ...digit, position: digit.position + index + 1 }))
         .reverse();
 }
 
 
-export function addDigitsAtPosition(digits: Operand[], position: number, globalBase: number): PositionResult {
+export function addDigitsAtPosition(digits: AdditionOperand[], position: number, globalBase: number): PositionResult {
     const base = digits[0] ? digits[0].base : globalBase;
 
     if (!digits.length) {
@@ -180,7 +180,7 @@ export function addDigitsAtPosition(digits: Operand[], position: number, globalB
     const valueInBase = BaseDigits.getDigit(decimalPositionValue, base);
     const decimalCarry = (decimalSum - decimalPositionValue) / base;
 
-    const valueAtPosition: Operand = {
+    const valueAtPosition: AdditionOperand = {
         base,
         representationInBase: valueInBase,
         valueInDecimal: decimalPositionValue,
@@ -196,7 +196,7 @@ export function addDigitsAtPosition(digits: Operand[], position: number, globalB
     };
 }
 
-function carryToDigits(decimalValue: number, base: number, startingPosition: number): Operand[] {
+function carryToDigits(decimalValue: number, base: number, startingPosition: number): AdditionOperand[] {
     const { result } = fromNumber(decimalValue, base);
 
     return result.toDigitsList()
@@ -208,6 +208,6 @@ function carryToDigits(decimalValue: number, base: number, startingPosition: num
         }));
 }
 
-function isNonZeroDigit(digit: Operand): boolean {
+function isNonZeroDigit(digit: AdditionOperand): boolean {
     return digit.valueInDecimal != 0;
 }

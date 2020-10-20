@@ -63,6 +63,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className
         }
     };
 
+
     const handleChange = (event) => {
         if (onValueChange) {
             const value = event.target.value;

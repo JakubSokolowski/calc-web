@@ -1,6 +1,6 @@
 import { PositionResult } from '@calc/calc-arithmetic';
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
-import { Operand } from '../models';
+import { AdditionOperand } from '../models';
 
 
 describe('complement-extension', () => {
@@ -458,7 +458,7 @@ describe('complement-extension', () => {
     describe('#mergeExtensionDigits', () => {
         it('should return proper digit array when there are some extension digits', () => {
             // given
-            const resultDigits: Operand[] = [
+            const resultDigits: AdditionOperand[] = [
                 {
                     position: 5,
                     base: 10,
@@ -502,7 +502,7 @@ describe('complement-extension', () => {
             const result = mergeExtensionDigits(resultDigits);
 
             // then
-            const expected: Operand[] = [
+            const expected: AdditionOperand[] = [
                 {
                     base: 10,
                     representationInBase: '(0)',
@@ -534,7 +534,7 @@ describe('complement-extension', () => {
 
         it('should return proper digit array for only zeroes', () => {
             // given
-            const resultDigits: Operand[] = [
+            const resultDigits: AdditionOperand[] = [
                 {
                     base: 10,
                     representationInBase: '0',
@@ -559,7 +559,7 @@ describe('complement-extension', () => {
             const result = mergeExtensionDigits(resultDigits);
 
             // then
-            const expected: Operand[] = [
+            const expected: AdditionOperand[] = [
                 {
                     base: 10,
                     representationInBase: '(0)',

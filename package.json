@@ -57,6 +57,7 @@
         "path": "^0.12.7",
         "react": "16.12.0",
         "react-archer": "^2.0.2",
+        "react-beautiful-dnd": "^13.0.0",
         "react-dom": "16.12.0",
         "react-i18next": "^11.4.0",
         "react-katex": "^2.0.2",

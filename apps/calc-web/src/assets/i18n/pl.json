@@ -57,7 +57,11 @@
         "download": "Pobierz"
     },
     "positionalCalculator": {
-        "title": "Kalkulator liczb pozycyjnych"
+        "title": "Kalkulator liczb pozycyjnych",
+        "operands": "Operandy",
+        "operand": "Operand",
+        "newOperand": "Nowy operand",
+        "calculate": "Oblicz"
     },
     "sandbox": {
         "title": "Sandbox",

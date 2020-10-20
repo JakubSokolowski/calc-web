@@ -58,7 +58,11 @@
         "download": "Download"
     },
     "positionalCalculator": {
-        "title": "Positional Calculator"
+        "title": "Positional Calculator",
+        "operands": "Operands",
+        "operand": "Operand",
+        "newOperand": "New operand",
+        "calculate": "Calculate"
     },
     "sandbox": {
         "title": "Sandbox",

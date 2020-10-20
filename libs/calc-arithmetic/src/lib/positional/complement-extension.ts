@@ -1,4 +1,4 @@
-import { Operand, PositionResult } from '../models';
+import { AdditionOperand, PositionResult } from '../models';
 import { objArrayEqual } from '@calc/utils';
 import { BaseDigits } from './base-digits';
 
@@ -29,7 +29,7 @@ function hasSingleCarryFromPreviousPosition(curr: PositionResult): boolean {
     return carryOperands[0].carrySourcePosition === curr.valueAtPosition.position -1
 }
 
-export function mergeExtensionDigits(resultDigits: Operand[]): Operand[] {
+export function mergeExtensionDigits(resultDigits: AdditionOperand[]): AdditionOperand[] {
     const [, extensionDigit, ...rest] = resultDigits;
     const firstDifferentIndex = rest.findIndex((digit) => {
         return digit.valueInDecimal != extensionDigit.valueInDecimal;
@@ -46,7 +46,7 @@ export function mergeExtensionDigits(resultDigits: Operand[]): Operand[] {
     return [mergedExtension, ...nonExtensionDigits]
 }
 
-function getMergedExtension(operand: Operand, position: number): Operand {
+function getMergedExtension(operand: AdditionOperand, position: number): AdditionOperand {
     const base = operand.base;
     const isZeroExtension = operand.valueInDecimal === 0;
     const representationValue = isZeroExtension ? 0 : -1;
@@ -61,11 +61,11 @@ function getMergedExtension(operand: Operand, position: number): Operand {
     };
 }
 
-function areAllOperandsEqual(aOperands: Operand[], bOperands: Operand[]): boolean {
+function areAllOperandsEqual(aOperands: AdditionOperand[], bOperands: AdditionOperand[]): boolean {
     return objArrayEqual(aOperands, bOperands, areOperandValuesEqual);
 }
 
-function areOperandValuesEqual(a: Operand, b: Operand): boolean {
+function areOperandValuesEqual(a: AdditionOperand, b: AdditionOperand): boolean {
     return a.valueInDecimal === b.valueInDecimal
         && a.representationInBase === b.representationInBase;
 }

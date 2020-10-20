@@ -1,5 +1,5 @@
 import { ComplementConverter, fromNumber } from '@calc/calc-arithmetic';
-import { Operand } from '../models';
+import { AdditionOperand } from '../models';
 
 describe('representation', () => {
     describe('PositionalNumber', () => {
@@ -8,7 +8,7 @@ describe('representation', () => {
                 // given
                 const { result } = fromNumber(123, 10);
 
-                const expected: Operand[] = [
+                const expected: AdditionOperand[] = [
                     {
                         valueInDecimal: 1,
                         representationInBase: '1',
@@ -40,7 +40,7 @@ describe('representation', () => {
             it('should correctly convert to list of digits when number has fractional part', () => {
                 // given
                 const { result } = fromNumber(123.45, 10);
-                const expected: Operand[] = [
+                const expected: AdditionOperand[] = [
                     {
                         valueInDecimal: 1,
                         representationInBase: '1',
@@ -94,7 +94,7 @@ describe('representation', () => {
                 const digits = complement.toDigitsList();
 
                 // then
-                const expected: Operand[] = [
+                const expected: AdditionOperand[] = [
                     {
                         isComplementExtension: true,
                         base: 16,
