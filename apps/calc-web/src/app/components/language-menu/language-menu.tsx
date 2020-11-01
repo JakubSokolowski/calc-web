@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { availableThemes, getNativeName } from '../../../assets/i18n/i18n';
-import { Badge, Button, Popover } from '@material-ui/core';
+import { Button, Popover } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 export const LanguageMenu: FC = () => {
     const { i18n, t } = useTranslation();

@@ -6,3 +6,5 @@ export { lightTheme } from './lib/themes/light';
 export { AppTheme, getTheme, availableThemes } from './lib/themes';
 export { GitlabIcon } from './lib/components/gitlab-icon/gitlab-icon';
 export { TabPanel, a11yProps } from './lib/components/tab-panel/tab-panel';
+export { ExtendedSelect } from './lib/components/extended-select/extended-select';
+export { ExtendedOption } from './lib/core/models/extended-option';

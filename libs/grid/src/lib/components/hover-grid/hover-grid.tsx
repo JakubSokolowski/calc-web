@@ -9,7 +9,7 @@ import { CellPosition } from '../../models/cell-position';
 import { NumberSubscript } from '@calc/ui';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
-import { createStyles, IconButton, Paper, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
+import { createStyles, IconButton, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
@@ -41,15 +41,12 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         gridWrapper: {
             display: 'flex',
-            maxWidth: '45vw',
             flexDirection: 'column',
-            alignItems: 'flex-start',
-            overflowX: 'auto'
+            alignItems: 'flex-start'
         },
         cellBox: {
             width: '100%',
             maxHeight: '500px',
-            overflowY: 'scroll',
             display: 'inline-block'
         },
         cellContent: {
@@ -61,8 +58,8 @@ const useStyles = makeStyles((theme: Theme) => {
             flexDirection: 'row'
         },
         columnIndex: {
-            minWidth: '32px',
-            height: '32px',
+            minWidth: '36px',
+            height: '36px',
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center'
@@ -70,12 +67,11 @@ const useStyles = makeStyles((theme: Theme) => {
         title: {
             display: 'flex',
             flexDirection: 'row',
-            width: '100%',
             alignItems: 'center',
             paddingBottom: theme.spacing(2)
         },
         spacer: {
-            flexGrow: 1
+            width: theme.spacing(2)
         }
     });
 });
@@ -202,7 +198,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
         <div className={classes.gridWrapper}>
             {
                 title &&
-                <Paper className={classes.title}>
+                <div className={classes.title}>
                     <Typography variant={'body1'}>{title}</Typography>
                     <div className={classes.spacer}/>
                     <Tooltip title={t('common.downloadResult')}>
@@ -213,7 +209,7 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
                             <SaveAltIcon/>
                         </IconButton>
                     </Tooltip>
-                </Paper>
+                </div>
             }
             {
                 xAxis &&

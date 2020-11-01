@@ -21,7 +21,8 @@ export {
 export {
     PositionResult,
     Digit,
-    AdditionResult
+    AdditionResult,
+    AdditionOperand
 } from './models'
 
 export {

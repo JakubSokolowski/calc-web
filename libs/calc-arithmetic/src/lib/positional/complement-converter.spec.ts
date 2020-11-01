@@ -242,6 +242,30 @@ describe('incrementNumber tests', () => {
 });
 
 describe('complementStrToBaseStr tests', () => {
+    it('converts 0 to its complement', () => {
+        // given
+        const input = '(0)0.0';
+        const base = 10;
+        const expected = '0.0';
+
+        // then
+        expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expected
+        );
+    });
+
+    it('converts extended 0 to its complement', () => {
+        // given
+        const input = '(0).0';
+        const base = 10;
+        const expected = '0.0';
+
+        // then
+        expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expected
+        );
+    });
+
     it('converts positive number complement to its base string', () => {
         // given
         const input = '(0)12345.123';
@@ -277,6 +301,32 @@ describe('complementStrToBaseStr tests', () => {
             expected
         );
     });
+
+    it('converts negative base64 number complement to its base string', () => {
+        // given
+        const input = '(63) 51';
+        const base = 64;
+        const expected = '-13';
+
+        // then
+        expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expected
+        );
+    });
+
+    describe('when base is greater than 36', () => {
+        it('converts positive number complement to its base string', () => {
+            // given
+            const input = '(00)00';
+            const base = 64;
+            const expected = '00';
+
+            // then
+            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+                expected
+            );
+        });
+    })
 });
 
 describe('hasValidComplementSign tests', () => {

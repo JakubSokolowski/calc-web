@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from './base-digits';
-import { Digit, Operand } from '../models';
+import { Digit, AdditionOperand } from '../models';
 
 export class Digits {
     public digits: string[];
@@ -91,9 +91,9 @@ export class NumberComplement implements PositionalRepresentation {
         );
     }
 
-    public toDigitsList(): Operand[] {
+    public toDigitsList(): AdditionOperand[] {
         const digits = toDigitList(this.integerPart, this.fractionalPart);
-        const extension: Operand = {
+        const extension: AdditionOperand = {
             isComplementExtension: true,
             position: digits[0].position + 1,
             representationInBase: this.sign,
@@ -135,9 +135,9 @@ export class PositionalNumber extends NumberComplement {
 }
 
 
-function toDigitList(integerPart: Digits, fractionalPart: Digits): Operand[] {
+function toDigitList(integerPart: Digits, fractionalPart: Digits): AdditionOperand[] {
     const base = integerPart.base;
-    const integerPartDigits: Operand[] = integerPart.digits.map((digit, index) => {
+    const integerPartDigits: AdditionOperand[] = integerPart.digits.map((digit, index) => {
         const position = (integerPart.digits.length - 1) - index;
 
         return {
@@ -148,7 +148,7 @@ function toDigitList(integerPart: Digits, fractionalPart: Digits): Operand[] {
         }
     });
 
-    const fractionalPartDigits: Operand[] = fractionalPart.digits.map((digit, index) => {
+    const fractionalPartDigits: AdditionOperand[] = fractionalPart.digits.map((digit, index) => {
         const position = - 1 - index;
 
         return {

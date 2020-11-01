@@ -1,0 +1,181 @@
+import React, { FC, useEffect, useState } from 'react';
+import { ExtendedSelect } from '@calc/ui';
+import { allOperations, Operation } from '../models/operation';
+import { additionAlgorithms, Algorithm, algorithmMap, AlgorithmType } from '../models/algorithm';
+import { BaseDigits, isValidString } from '@calc/calc-arithmetic';
+import { useTranslation } from 'react-i18next';
+import { FormErrors } from '../../../core/models/form-errors';
+import { clean } from '@calc/utils';
+import { useFormik } from 'formik';
+import { Button, Card, createStyles, TextField, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import { OperandList, ValidatedOperand } from '../operand-list/operand-list';
+
+interface FormValues {
+    base: number;
+    representation: string;
+    operands: string[];
+}
+
+interface P {
+    onSubmit: (base: number, representations: ValidatedOperand[]) => void;
+}
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        root: {
+          maxWidth: 700
+        },
+        base: {
+            maxWidth: 100
+        },
+        operand: {
+          width: '100%'
+        },
+        spacer: {
+            width: theme.spacing(1),
+        },
+        growSpacer: {
+            flexGrow: 1
+        },
+        operandsBox: {
+        },
+        addOperand: {
+            maxHeight: 40
+        },
+        options: {
+            padding: theme.spacing(2)
+        },
+        optionsRow: {
+            display: 'flex',
+            flexDirection: 'row',
+            width: '100%',
+        }
+    })
+);
+
+export const CalculatorOptions: FC<P> = ({ onSubmit }) => {
+    const classes = useStyles();
+    const { t } = useTranslation();
+    const [operation, setOperation] = useState<Operation>(allOperations[0]);
+    const [algorithm, setAlgorithm] = useState<Algorithm<AlgorithmType>>(additionAlgorithms[0]);
+    const [operands, setOperands] = useState<ValidatedOperand[]>([]);
+    const [canAddOperand] = useState(true);
+    const [canCalculate, setCanCalculate] = useState(false);
+
+    const initialValues: FormValues = {
+        base: 10,
+        representation: '0.0',
+        operands: []
+    };
+
+    const validateBase = (base: number): string | undefined => {
+        if (!BaseDigits.isValidBase(base)) {
+            return t(
+                'baseConverter.wrongBase',
+                { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
+            );
+        }
+    };
+
+    const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
+        if (!isValidString(valueStr, inputBase)) {
+            return t(
+                'baseConverter.wrongRepresentationStr',
+                { base: inputBase }
+            );
+        }
+    };
+
+    const handleAdd = () => {
+        const defaultStr = BaseDigits.getDigit(0, form.values.base);
+        setOperands((prev) => [...prev, {representation: defaultStr, valid: true}]);
+    };
+
+    const handleSubmit = (values: FormValues) => {
+        setOperands((prev) => [...prev, {representation: values.representation, valid: true}])
+    };
+
+    const validate = (values: FormValues) => {
+        const errors: FormErrors<FormValues> = {
+            base: validateBase(values.base),
+            representation: validateValueStr(values.representation, values.base)
+        };
+
+        return clean(errors);
+    };
+
+    const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
+
+    const getPossibleAlgorithms = (op: Operation) => {
+        return algorithmMap[op.type] || [];
+    };
+
+    const handleOperandChange = (newOperands: ValidatedOperand[]) => {
+        setOperands(newOperands)
+    };
+
+    const handleOperandSubmit = () => {
+        onSubmit(form.values.base, operands)
+    };
+
+    useEffect(() => {
+        const can = operands.every((op) => op.valid);
+        setCanCalculate(can);
+    }, [operands]);
+
+    return (
+        <div className={classes.root}>
+            <Card className={classes.options}>
+                <div className={classes.optionsRow}>
+                    <TextField
+                        className={classes.base}
+                        variant={'outlined'}
+                        size={'small'}
+                        name={'base'}
+                        id={'base'}
+                        label={t('baseConverter.inputBase')}
+                        error={!!form.errors.base}
+                        helperText={form.errors.base}
+                        onChange={form.handleChange}
+                        value={form.values.base}
+                    />
+                    <div className={classes.spacer}/>
+                    <ExtendedSelect
+                        value={operation}
+                        label={'Operation'}
+                        onChange={(value) => setOperation(value)}
+                        operations={allOperations}
+                    />
+                    <div className={classes.spacer}/>
+                    <ExtendedSelect
+                        value={algorithm}
+                        label={'Algorithm'}
+                        onChange={(value) => setAlgorithm(value)}
+                        operations={getPossibleAlgorithms(operation)}
+                    />
+                    <div className={classes.growSpacer}/>
+                    <Button
+                        onClick={() => handleOperandSubmit()}
+                        type={'submit'}
+                        color={'secondary'}
+                        variant={'contained'}
+                        className={classes.addOperand}
+                        disabled={!form.isValid || operands.length < 1 || !canCalculate}
+                    >
+                        {t('positionalCalculator.calculate')}
+                    </Button>
+                </div>
+                <div className={classes.operandsBox}>
+                    <OperandList
+                        operands={operands}
+                        onChange={handleOperandChange}
+                        inputBase={form.values.base}
+                        onAdd={handleAdd}
+                        canAdd={canAddOperand}
+                    />
+                </div>
+            </Card>
+        </div>
+    );
+};

@@ -1,20 +1,20 @@
 import { addDigitsArrays, addDigitsAtPosition, addPositionalNumbers } from './addition';
 import { fromNumber, PositionResult } from '@calc/calc-arithmetic';
-import { Operand } from '../models';
+import { AdditionOperand } from '../models';
 import { fromStringDirect } from './base-converter';
 
 describe('addition', () => {
     describe('#addDigitsAtPosition', () => {
         it('should return correct result for two decimal numbers', () => {
             // given
-            const x: Operand = {
+            const x: AdditionOperand = {
                 valueInDecimal: 4,
                 representationInBase: '4',
                 base: 10,
                 position: 0
             };
 
-            const y: Operand = {
+            const y: AdditionOperand = {
                 valueInDecimal: 2,
                 representationInBase: '2',
                 base: 10,
@@ -41,14 +41,14 @@ describe('addition', () => {
 
         it('should return correct result for two decimal numbers when the result produces a carry', () => {
             // given
-            const x: Operand = {
+            const x: AdditionOperand = {
                 valueInDecimal: 9,
                 representationInBase: '9',
                 base: 10,
                 position: 0
             };
 
-            const y: Operand = {
+            const y: AdditionOperand = {
                 valueInDecimal: 9,
                 representationInBase: '9',
                 base: 10,
@@ -85,7 +85,7 @@ describe('addition', () => {
             // given
             const numDigits = 14;
 
-            const digits: Operand[] = Array(numDigits).fill({
+            const digits: AdditionOperand[] = Array(numDigits).fill({
                 valueInDecimal: 9,
                 valueInBase: '9',
                 base: 10,
@@ -129,7 +129,7 @@ describe('addition', () => {
             // given
             const numDigits = 5;
 
-            const digits: Operand[] = Array(numDigits).fill({
+            const digits: AdditionOperand[] = Array(numDigits).fill({
                 valueInDecimal: 1,
                 valueInBase: '1',
                 base: 2,
@@ -166,7 +166,7 @@ describe('addition', () => {
     describe('#addDigits', () => {
         it('should add two digit arrays correctly', () => {
             // given
-            const x: Operand[] = [
+            const x: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -188,7 +188,7 @@ describe('addition', () => {
                 }
             ];
 
-            const y: Operand[] = [
+            const y: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -210,7 +210,7 @@ describe('addition', () => {
                 }
             ];
 
-            const expectedDigits: Operand[] = [
+            const expectedDigits: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -247,10 +247,10 @@ describe('addition', () => {
 
         it('should add two digit arrays correctly when numbers are hexadecimal', () => {
             // given
-            const a: Operand[] = fromStringDirect('1B49', 16).result.complement.toDigitsList();
-            const b: Operand[] = fromStringDirect('FF2B', 16).result.complement.toDigitsList();
+            const a: AdditionOperand[] = fromStringDirect('1B49', 16).result.complement.toDigitsList();
+            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).result.complement.toDigitsList();
 
-            const expectedDigits: Operand[] = [
+            const expectedDigits: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -300,12 +300,12 @@ describe('addition', () => {
 
         it('should add digit arrays correctly when numbers are binary', () => {
             // given
-            const a: Operand[] = fromNumber(11, 2).result.complement.toDigitsList();
-            const b: Operand[] = fromNumber(13, 2).result.complement.toDigitsList();
-            const c: Operand[] = fromNumber(9, 2).result.complement.toDigitsList();
-            const d: Operand[] = fromNumber(15, 2).result.complement.toDigitsList();
+            const a: AdditionOperand[] = fromNumber(11, 2).result.complement.toDigitsList();
+            const b: AdditionOperand[] = fromNumber(13, 2).result.complement.toDigitsList();
+            const c: AdditionOperand[] = fromNumber(9, 2).result.complement.toDigitsList();
+            const d: AdditionOperand[] = fromNumber(15, 2).result.complement.toDigitsList();
 
-            const expectedDigits: Operand[] = [
+            const expectedDigits: AdditionOperand[] = [
                 {
                     base: 2,
                     isComplementExtension: true,
@@ -360,7 +360,7 @@ describe('addition', () => {
 
         it('should add negative and positive number complement digit arrays correctly', () => {
             // given
-            const x: Operand[] = [
+            const x: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -387,7 +387,7 @@ describe('addition', () => {
                     position: 0
                 }
             ];
-            const y: Operand[] = [
+            const y: AdditionOperand[] = [
                 {
                     valueInDecimal: 9,
                     representationInBase: '(9)',
@@ -419,7 +419,7 @@ describe('addition', () => {
             const result = addDigitsArrays([x, y]);
 
             // then
-            const expectedDigits: Operand[] = [
+            const expectedDigits: AdditionOperand[] = [
                 {
                     valueInDecimal: 0,
                     representationInBase: '(0)',
@@ -451,7 +451,7 @@ describe('addition', () => {
 
         it('should add multiple negative numbers complements digit arrays correctly', () => {
             // given
-            const x: Operand[] = [
+            const x: AdditionOperand[] = [
                 {
                     valueInDecimal: 9,
                     representationInBase: '(9)',
@@ -479,7 +479,7 @@ describe('addition', () => {
                 }
             ];
 
-            const y: Operand[] = [
+            const y: AdditionOperand[] = [
                 {
                     valueInDecimal: 9,
                     representationInBase: '(9)',
@@ -507,7 +507,7 @@ describe('addition', () => {
                 }
             ];
 
-            const z: Operand[] = [
+            const z: AdditionOperand[] = [
                 {
                     valueInDecimal: 9,
                     representationInBase: '(9)',
@@ -535,7 +535,7 @@ describe('addition', () => {
                 }
             ];
 
-            const expectedDigits: Operand[] = [
+            const expectedDigits: AdditionOperand[] = [
                 {
                     base: 10,
                     isComplementExtension: true,

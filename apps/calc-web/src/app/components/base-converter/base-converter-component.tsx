@@ -132,7 +132,6 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     onChange={handleInputStrChange}
                     value={form.values.inputStr}
                 />
-
                 {
                     showDecimalValue &&
                     <InputWithCopy

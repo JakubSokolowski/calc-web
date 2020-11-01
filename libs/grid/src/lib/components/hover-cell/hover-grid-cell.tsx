@@ -23,9 +23,9 @@ export interface HoverCellProps {
 
 export const useGridCellStyles = makeStyles((theme: Theme) => {
     const baseCell = {
-        minWidth: '32px',
-        height: '32px',
-        minHeight: '32px',
+        minWidth: '36px',
+        height: '36px',
+        minHeight: '36px',
         padding: '4px',
         textAlign: 'center' as any,
         background: theme.palette.background.default,
