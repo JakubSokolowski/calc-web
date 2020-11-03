@@ -15,15 +15,16 @@ export {
 } from './positional/addition'
 
 export {
+    subtractPositionalNumbers,
+} from './positional/subtraction'
+
+export {
     convertUsingAssociatedBases
 } from './positional/associated-base-converter';
 
-export {
-    PositionResult,
-    Digit,
-    AdditionResult,
-    AdditionOperand
-} from './models'
+export * from './models'
+export * from './models/operation'
+export * from './models/operation-algorithm'
 
 export {
     NumberComplement,

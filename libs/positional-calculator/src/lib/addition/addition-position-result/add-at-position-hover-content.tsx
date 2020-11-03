@@ -1,12 +1,13 @@
 import React, { FC } from 'react';
-import { PositionResult } from '@calc/calc-arithmetic';
+import { AdditionPositionResult } from '@calc/calc-arithmetic';
 import { NumberSubscript } from '@calc/ui';
 
 interface P {
-    positionResult: PositionResult;
+    positionResult: AdditionPositionResult;
 }
 
 export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
+
     const operands = positionResult.operands.map((operand, index) => {
         return (
             <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>

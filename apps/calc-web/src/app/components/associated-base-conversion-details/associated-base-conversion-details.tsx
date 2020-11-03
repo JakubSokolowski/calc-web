@@ -3,7 +3,7 @@ import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { DigitMappingBox } from '../digit-mapping/digit-mapping-box';
 import { InputWithCopy, NumberSubscript } from '@calc/ui';
 import { useTranslation } from 'react-i18next';
-import { Card, createStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Theme, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -40,7 +40,7 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     });
 
     return (
-        <Card className={classes.card}>
+        <div>
             <span>{t('baseConverter.inputNumber')}</span>
             <InputWithCopy
                 readOnly
@@ -60,6 +60,6 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
             <div className={classes.mappings}>
                 {mappings}
             </div>
-        </Card>
+        </div>
     );
 };

@@ -1,8 +1,8 @@
-import { AdditionOperand, PositionResult } from '../models';
+import { AdditionOperand, AdditionPositionResult, Digit } from '../models';
 import { objArrayEqual } from '@calc/utils';
 import { BaseDigits } from './base-digits';
 
-export function hasInfiniteExtension(prev: PositionResult, curr: PositionResult, globalMostSignificantPosition: number): boolean {
+export function hasInfiniteExtension(prev: AdditionPositionResult, curr: AdditionPositionResult, globalMostSignificantPosition: number): boolean {
     if (curr.valueAtPosition.position <= globalMostSignificantPosition) return false;
 
     const resultsEqual = areOperandValuesEqual(prev.valueAtPosition, curr.valueAtPosition);
@@ -18,18 +18,18 @@ export function hasInfiniteExtension(prev: PositionResult, curr: PositionResult,
     return allOperandsEqual && singleCarryFromPrevPosition;
 }
 
-function getCarryOperands(curr: PositionResult) {
+function getCarryOperands(curr: AdditionPositionResult) {
     return curr.operands.filter(op => op.isCarry);
 }
 
-function hasSingleCarryFromPreviousPosition(curr: PositionResult): boolean {
+function hasSingleCarryFromPreviousPosition(curr: AdditionPositionResult): boolean {
     const carryOperands = curr.operands.filter(op => op.isCarry);
     if(carryOperands.length !== 1) return false;
 
     return carryOperands[0].carrySourcePosition === curr.valueAtPosition.position -1
 }
 
-export function mergeExtensionDigits(resultDigits: AdditionOperand[]): AdditionOperand[] {
+export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
     const [, extensionDigit, ...rest] = resultDigits;
     const firstDifferentIndex = rest.findIndex((digit) => {
         return digit.valueInDecimal != extensionDigit.valueInDecimal;
@@ -46,7 +46,7 @@ export function mergeExtensionDigits(resultDigits: AdditionOperand[]): AdditionO
     return [mergedExtension, ...nonExtensionDigits]
 }
 
-function getMergedExtension(operand: AdditionOperand, position: number): AdditionOperand {
+function getMergedExtension<T extends Digit>(operand: T, position: number): T {
     const base = operand.base;
     const isZeroExtension = operand.valueInDecimal === 0;
     const representationValue = isZeroExtension ? 0 : -1;

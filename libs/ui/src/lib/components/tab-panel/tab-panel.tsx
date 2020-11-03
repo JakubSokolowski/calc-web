@@ -6,6 +6,7 @@ interface TabPanelProps {
     dir?: string;
     index: any;
     value: any;
+    className?: string;
 }
 
 export function a11yProps(index: number | string) {

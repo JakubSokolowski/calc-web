@@ -7,6 +7,9 @@ import { CellCoords } from '../models/cell-coords';
 import { HoverOperationGrid } from '../models/hover-operation-grid';
 import { LineType } from '../models/line-type';
 import { GridLookup } from '../models/grid-lookup';
+import { BaseDigits, Digit, isSubtractionOperand, OperationResult, PositionResult } from '@calc/calc-arithmetic';
+import { GridLine } from '../..';
+import { LineDefinition } from '../models/grid-line';
 
 
 export function buildEmptyGrid(width: number, height: number): GridCellConfig[][] {
@@ -205,3 +208,103 @@ export function gridToAscii(grid: HoverOperationGrid): string {
     return ascii;
 }
 
+export interface DigitsInfo {
+    mostSignificantPosition: number;
+    totalWidth: number;
+    numOperands: number;
+    numIntegerPartDigits: number;
+    numFractionalDigits: number;
+}
+
+export function extractResultMeta(result: OperationResult<Digit, PositionResult<Digit>>): DigitsInfo {
+    const maxDigitsInRow = maxNumOfDigitsInRow(result);
+
+    return {
+        totalWidth: maxDigitsInRow + 1,
+        mostSignificantPosition: mostSignificantPosition(result),
+        numIntegerPartDigits: result.numberResult.integerPart.length,
+        numFractionalDigits: result.numberResult.fractionalPart.length,
+        numOperands: result.operands.length
+    };
+}
+
+function maxNumOfDigitsInRow(result: OperationResult<Digit, PositionResult<Digit>>): number {
+    const resultLength = result.resultDigits.length;
+    const maxOperandLength = Math.max(...result.operands.map((op) => op.length));
+
+    return Math.max(resultLength, maxOperandLength);
+}
+
+function mostSignificantPosition(result: OperationResult<Digit, PositionResult<Digit>>): number {
+    const resultMSP = result.resultDigits[0].position;
+    const operandMSP = Math.max(...result.operands.map((op) => op[0].position));
+
+    return Math.max(resultMSP, operandMSP);
+}
+
+export function digitsToCellConfig<T extends Digit>(digits: T[]): GridCellConfig[] {
+    return digits.map((digit) => {
+        const content = digit.representationInBase;
+        const cell: GridCellConfig = {
+            content
+        };
+
+        if (isSubtractionOperand(digit)) {
+            cell.preset = {
+                default: 'crossedOutCell',
+                hover: 'crossedOutHoverCell'
+            };
+        }
+
+        return cell;
+    });
+}
+
+export function padWithEmptyCells(cells: GridCellConfig[], desiredWidth: number, direction?: 'Left' | 'Right'): GridCellConfig[] {
+    if (desiredWidth <= cells.length) return cells;
+    const missingCellsCount = desiredWidth - cells.length;
+    const newEmptyCells: GridCellConfig[] = [...Array(missingCellsCount).keys()].map(() => ({ content: '' }));
+
+    return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];
+}
+
+export function operandDigitsToCellConfig<T extends Digit>(digits: T[], info: DigitsInfo, base: number): GridCellConfig[] {
+    const indexOfZeroPositionDigit = digits.findIndex((digit) => digit.position === 0);
+    if (indexOfZeroPositionDigit === -1) return [];
+
+    const integerPartDigits = digits.slice(0, indexOfZeroPositionDigit + 1);
+    const fractionalPartDigits = digits.slice(indexOfZeroPositionDigit + 1);
+
+    const paddedIntegerPartDigits = padWithZeroDigitCells(integerPartDigits, info.numIntegerPartDigits + 2, base, 'Left');
+    const paddedFractionalPartDigits = padWithZeroDigitCells(fractionalPartDigits, info.numFractionalDigits, base, 'Right');
+
+    return padWithEmptyCells([...paddedIntegerPartDigits, ...paddedFractionalPartDigits], info.totalWidth, 'Left');
+}
+
+export function padWithZeroDigitCells<T extends Digit>(digits: T[], desiredWidth: number, base: number, direction?: 'Left' | 'Right'): GridCellConfig[] {
+    const cells = digitsToCellConfig(digits);
+    if (desiredWidth <= digits.length) return cells;
+
+    const missingCellsCount = desiredWidth - digits.length;
+    const newEmptyCells: GridCellConfig[] = [...Array(missingCellsCount).keys()].map(() => {
+        const value = direction === 'Left' ? '' : BaseDigits.getDigit(0, base);
+        return ({ content: value });
+    });
+
+    return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];
+}
+
+export function getUnderline(carryRows: GridCellConfig[][]): GridLine {
+    const index = carryRows.length - 1;
+    const span: LineDefinition = {
+        from: index > 0
+            ? carryRows[index].findIndex((cell) => cell.content !== '')
+            : 0
+    };
+
+    return {
+        type: LineType.Horizontal,
+        index,
+        span
+    };
+}

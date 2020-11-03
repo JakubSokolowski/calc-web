@@ -1,5 +1,5 @@
 import { addDigitsArrays, addDigitsAtPosition, addPositionalNumbers } from './addition';
-import { fromNumber, PositionResult } from '@calc/calc-arithmetic';
+import { fromNumber, AdditionPositionResult } from '@calc/calc-arithmetic';
 import { AdditionOperand } from '../models';
 import { fromStringDirect } from './base-converter';
 
@@ -21,7 +21,7 @@ describe('addition', () => {
                 position: 0
             };
 
-            const expected: PositionResult = {
+            const expected: AdditionPositionResult = {
                 valueAtPosition: {
                     valueInDecimal: 6,
                     representationInBase: '6',
@@ -55,7 +55,7 @@ describe('addition', () => {
                 position: 0
             };
 
-            const expected: PositionResult = {
+            const expected: AdditionPositionResult = {
                 valueAtPosition: {
                     valueInDecimal: 8,
                     representationInBase: '8',
@@ -92,7 +92,7 @@ describe('addition', () => {
                 position: 0
             });
 
-            const expected: PositionResult = {
+            const expected: AdditionPositionResult = {
                 valueAtPosition: {
                     valueInDecimal: 6,
                     representationInBase: '6',
@@ -136,7 +136,7 @@ describe('addition', () => {
                 position: 0
             });
 
-            const expected: PositionResult = {
+            const expected: AdditionPositionResult = {
                 valueAtPosition: {
                     valueInDecimal: 1,
                     representationInBase: '1',

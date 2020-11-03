@@ -6,7 +6,7 @@ import { IntegralConversionRow } from './integral-conversion-row/integral-conver
 import { ConversionToDecimalDetails } from '../conversion-to-decimal/conversion-to-decimal';
 import { FractionalConversionRow } from './fractional-conversion-row/fractional-conversion-row';
 import { InputWithCopy } from '@calc/ui';
-import { Card, Typography } from '@material-ui/core';
+import { Typography } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 
@@ -35,57 +35,50 @@ export const ConversionDetails: FC<P> = ({ conversion, precision }) => {
     };
 
     return (
-        <div>
-            <Typography variant={'h4'} className={classes.title}>
-                {t('baseConverter.result')}
-            </Typography>
-            <Card className={classes.card}>
-                <div id="integral-conversion-details">
-                    <InputWithCopy
-                        readOnly
-                        className={classes.input}
-                        label={t('baseConverter.outputNumber')}
-                        value={conversion.result.toString(precision)}
-                    />
-                    {
-                        conversion.type === ConversionType.DIRECT ?
-                            <div className={classes.equation}>
-                                <Typography>{`I. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
-                                <ResultEquation conversion={conversion} firstStage={0} lastStage={0}/>
-                            </div> :
-                            <div>
-                                <div className={classes.equation}>
-                                    <Typography>{`I. ${t('baseConverter.conversionToDecimal')}`}</Typography>
-                                    <ConversionToDecimalDetails
-                                        conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
-                                </div>
-                                <div className={classes.equation}>
-                                    <Typography>{`II. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
-                                    <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
-                                </div>
-                            </div>
-                    }
-                    <div className={classes.row}>
-                        {
-                            integralHoverGrid &&
-                            <HoverGrid
-                                {...integralHoverGrid}
-                                title={t('baseConverter.integralConversion')}
-                                groupBuilder={integralHoverPopover}
-                            />
-                        }
-                        <div className={classes.horizontalSpacer}/>
-                        {
-                            fractionalHoverGrid &&
-                            <HoverGrid
-                                {...fractionalHoverGrid}
-                                title={t('baseConverter.floatingConversion')}
-                                groupBuilder={floatingHoverPopover}
-                            />
-                        }
+        <div id="integral-conversion-details">
+            <InputWithCopy
+                readOnly
+                className={classes.input}
+                label={t('baseConverter.outputNumber')}
+                value={conversion.result.toString(precision)}
+            />
+            {
+                conversion.type === ConversionType.DIRECT ?
+                    <div className={classes.equation}>
+                        <Typography>{`I. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
+                        <ResultEquation conversion={conversion} firstStage={0} lastStage={0}/>
+                    </div> :
+                    <div>
+                        <div className={classes.equation}>
+                            <Typography>{`I. ${t('baseConverter.conversionToDecimal')}`}</Typography>
+                            <ConversionToDecimalDetails
+                                conversionStage={conversion.getFirstStage() as ConversionToDecimal}/>
+                        </div>
+                        <div className={classes.equation}>
+                            <Typography>{`II. ${t('baseConverter.conversionToBase', { base: conversion.result.base })}`}</Typography>
+                            <ResultEquation conversion={conversion} firstStage={1} lastStage={1}/>
+                        </div>
                     </div>
-                </div>
-            </Card>
+            }
+            <div className={classes.row}>
+                {
+                    integralHoverGrid &&
+                    <HoverGrid
+                        {...integralHoverGrid}
+                        title={t('baseConverter.integralConversion')}
+                        groupBuilder={integralHoverPopover}
+                    />
+                }
+                <div className={classes.horizontalSpacer}/>
+                {
+                    fractionalHoverGrid &&
+                    <HoverGrid
+                        {...fractionalHoverGrid}
+                        title={t('baseConverter.floatingConversion')}
+                        groupBuilder={floatingHoverPopover}
+                    />
+                }
+            </div>
         </div>
     );
 };

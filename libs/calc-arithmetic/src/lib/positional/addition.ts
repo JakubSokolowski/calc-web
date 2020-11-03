@@ -1,18 +1,25 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionResult, AdditionOperand, PositionResult } from '../models';
-import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
+import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
+import { hasInfiniteExtension } from './complement-extension';
 import { ComplementConverter } from './complement-converter';
-
-export const numAdditionalComplementExtensions = 3;
+import {
+    buildLookup,
+    extractResultDigitsFromAddition,
+    findPositionRange,
+    NUM_ADDITIONAL_EXTENSIONS
+} from './operation-utils';
+import { OperationType } from '../models/operation';
+import { AdditionType } from '../models/operation-algorithm';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if (!areSameBaseNumbers(numbers)) {
         throw Error('Numbers to add must have same base');
     }
     const numbersAsDigits = numbers.map((number) => number.complement.toDigitsList());
-    return addDigitsArrays(numbersAsDigits);
+    const result = addDigitsArrays(numbersAsDigits);
+    return {...result, numberOperands: numbers};
 }
 
 export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
@@ -24,15 +31,15 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
     const carryLookup: Record<number, AdditionOperand[]> = {};
     const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(digits);
     const digitsPositionLookup: Record<number, AdditionOperand>[] = buildLookup(digits, mostSignificantPosition);
-    const result: PositionResult[] = [];
+    const result: AdditionPositionResult[] = [];
     const base = digits[0][0].base;
 
     let currentPosition = leastSignificantPosition;
     let mostSignificant = mostSignificantPosition;
 
-    let prev: PositionResult;
+    let prev: AdditionPositionResult;
 
-    while (currentPosition <= mostSignificant + numAdditionalComplementExtensions - 1) {
+    while (currentPosition <= mostSignificant + NUM_ADDITIONAL_EXTENSIONS - 1) {
         const allDigitsAtCurrentPosition: AdditionOperand[] = digitsPositionLookup
             .map((digits) => digits[currentPosition])
             .filter((digit) => !!digit);
@@ -72,24 +79,17 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
         prev = positionResult;
     }
 
-    const resultDigits = extractResultDigitsFromPositionResults(result);
+    const resultDigits = extractResultDigitsFromAddition(result);
     const numberResult = buildPositionalNumberFromDigits(resultDigits);
 
     return {
         positionResults: result,
         resultDigits,
         numberResult,
-        operands: digits
-    };
-}
-
-export function findPositionRange(allDigits: AdditionOperand[][]): { mostSignificantPosition: number; leastSignificantPosition: number } {
-    const allMostSignificant = allDigits.map((digits) => digits[0].position);
-    const allLeastSignificant = allDigits.map((digits) => digits[digits.length - 1].position);
-
-    return {
-        mostSignificantPosition: Math.max(...allMostSignificant),
-        leastSignificantPosition: Math.min(...allLeastSignificant)
+        operands: digits,
+        operation: OperationType.Addition,
+        algorithmType: AdditionType.Default,
+        numberOperands: []
     };
 }
 
@@ -107,56 +107,8 @@ export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[])
     return fromStringDirect(representationStr, base).result;
 }
 
-export function extractResultDigitsFromPositionResults(positionResults: PositionResult[]): AdditionOperand[] {
-    const digitsFromPositions = positionResults.map((res) => res.valueAtPosition);
-    const carryDigitsNotConsideredInResult: AdditionOperand[] = [];
 
-    positionResults.forEach((result) => {
-        const missingCarryDigits = result.carry.filter((dgt) => {
-            return !digitsFromPositions.find((posDgt) => dgt.position === posDgt.position);
-        });
-
-        carryDigitsNotConsideredInResult.push(...missingCarryDigits);
-    });
-
-    const withExtension = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
-
-    return mergeExtensionDigits(withExtension);
-}
-
-
-function buildLookup(digits: AdditionOperand[][], globalMostSignificantPosition: number): Record<number, AdditionOperand>[] {
-    return digits.map((numberDigits) => toPositionDigitMap(numberDigits, globalMostSignificantPosition));
-}
-
-function toPositionDigitMap(digits: AdditionOperand[], globalMostSignificantPosition: number): Record<number, AdditionOperand> {
-    const mostSignificantDigit = digits[0];
-    const numExtensions = getNumOfComplementExtensions(mostSignificantDigit, globalMostSignificantPosition);
-    const extensions = generateComplementExtension(mostSignificantDigit, numExtensions);
-    const digitsToMap = [...extensions, ...digits];
-
-    return digitsToMap.reduce((digitMap, digit) => {
-        digitMap[digit.position] = digit;
-        return digitMap;
-    }, {});
-}
-
-
-function getNumOfComplementExtensions(digit: AdditionOperand, mostSignificantPosition: number): number {
-    const numMandatoryComplementExtensions = mostSignificantPosition - digit.position;
-
-    return numAdditionalComplementExtensions + numMandatoryComplementExtensions;
-}
-
-function generateComplementExtension(digit: AdditionOperand, numExtensions: number): AdditionOperand[] {
-    return new Array<AdditionOperand>(numExtensions)
-        .fill({ ...digit })
-        .map((digit, index) => ({ ...digit, position: digit.position + index + 1 }))
-        .reverse();
-}
-
-
-export function addDigitsAtPosition(digits: AdditionOperand[], position: number, globalBase: number): PositionResult {
+export function addDigitsAtPosition(digits: AdditionOperand[], position: number, globalBase: number): AdditionPositionResult {
     const base = digits[0] ? digits[0].base : globalBase;
 
     if (!digits.length) {

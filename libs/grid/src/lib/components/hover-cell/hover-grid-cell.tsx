@@ -26,6 +26,8 @@ export const useGridCellStyles = makeStyles((theme: Theme) => {
         minWidth: '36px',
         height: '36px',
         minHeight: '36px',
+        maxWidth: '36px',
+        lineHeight: '25px',
         padding: '4px',
         textAlign: 'center' as any,
         background: theme.palette.background.default,
@@ -33,9 +35,34 @@ export const useGridCellStyles = makeStyles((theme: Theme) => {
         color: theme.palette.text.disabled
     };
 
+    const crossedCell = {
+        position: 'relative' as any,
+        textDecoration: 'strikethrough',
+        '&:before': {
+            position: 'absolute' as any,
+            content: '""',
+            left: 0,
+            top: '50%',
+            right: 0,
+            borderTop: '1px solid',
+            borderColor: theme.palette.primary,
+            transform: 'rotate(-45deg)'
+        }
+    };
+
     return createStyles({
         defaultCell: {
             ...baseCell
+        },
+        crossedOutCell: {
+            ...baseCell,
+            ...crossedCell
+        },
+        crossedOutHoverCell: {
+            ...baseCell,
+            ...crossedCell,
+            background: theme.palette.action.focus,
+            border: 'none'
         },
         hoverCell: {
             ...baseCell,

@@ -1,6 +1,6 @@
 import React, { FC, useRef, useState } from 'react';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
-import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition } from '../../core/grid-utils';
+import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition, padWithEmptyCells } from '../../core/grid-utils';
 import { CellCoords } from '../../models/cell-coords';
 import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
@@ -9,20 +9,20 @@ import { CellPosition } from '../../models/cell-position';
 import { NumberSubscript } from '@calc/ui';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
-import { createStyles, IconButton, Theme, Tooltip, Typography, withStyles } from '@material-ui/core';
+import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
 import { useTranslation } from 'react-i18next';
 
-interface P {
+export interface HoverGridProps {
     values: GridCellConfig[][];
     groups: CellGroup[];
     lines: GridLine[];
     groupBuilder?: any;
     xAxis?: AxisConfig;
     title?: string;
+    id?: string;
 }
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -55,7 +55,8 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         indicesBox: {
             display: 'flex',
-            flexDirection: 'row'
+            flexDirection: 'row',
+            width: 'auto'
         },
         columnIndex: {
             minWidth: '36px',
@@ -77,7 +78,15 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 
-export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, xAxis }) => {
+export const HoverGrid: FC<HoverGridProps> = (
+    {
+        values,
+        groups, lines,
+        groupBuilder,
+        title,
+        xAxis,
+        id
+    }) => {
     const lookup = buildCellGroupLookup(groups);
     const [hoverCell, setHoveredCell] = useState<CellCoords>();
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
@@ -175,51 +184,24 @@ export const HoverGrid: FC<P> = ({ values, groups, lines, groupBuilder, title, x
         );
     });
 
-    const xAxisIndices = xAxis ? xAxis.indices.map((value) => {
+    const xAxisIndices = xAxis ? xAxis.indices.map((value, index) => {
         return (
-            <div key={value} className={classes.columnIndex}>
+            <div key={`${value}-${index}`} className={classes.columnIndex}>
                 <NumberSubscript value={xAxis.prefix} subscript={value} noBraces/>
             </div>
         );
     }) : [];
 
-
-    const saveAsImage = async () => {
-        if (gridRef) {
-            await domtoimage
-                .toBlob(gridRef.current)
-                .then(function(blob) {
-                    saveAs(blob, 'result.png');
-                }).catch((error) => console.log(error));
-        }
-    };
-
     return (
-        <div className={classes.gridWrapper}>
-            {
-                title &&
-                <div className={classes.title}>
-                    <Typography variant={'body1'}>{title}</Typography>
-                    <div className={classes.spacer}/>
-                    <Tooltip title={t('common.downloadResult')}>
-                        <IconButton
-                            color={'default'}
-                            size={'small'}
-                            onClick={saveAsImage}>
-                            <SaveAltIcon/>
-                        </IconButton>
-                    </Tooltip>
-                </div>
-            }
+        <div className={classes.gridWrapper} id={id}>
             {
                 xAxis &&
                 <div className={classes.indicesBox}>
                     {xAxisIndices}
                 </div>
             }
-
             <div className={classes.cellBox}>
-                <div className={classes.cellContent} ref={gridRef}>
+                <div className={classes.cellContent} ref={gridRef} id={'fuk-u'}>
                     {rows}
                 </div>
             </div>
