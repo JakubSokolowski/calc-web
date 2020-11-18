@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, Card, IconButton, TextField, Tooltip } from '@material-ui/core';
+import { Button, IconButton, TextField, Tooltip } from '@material-ui/core';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
-import { FormErrors } from '../../core/models/form-errors';
+import { FormErrors } from '@calc/ui';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
@@ -119,7 +119,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
 
     return (
-        <Card className={classes.card}>
+        <div>
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
                 <InputWithCopy
@@ -198,6 +198,6 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     </Button>
                 </div>
             </form>
-        </Card>
+        </div>
     );
 };

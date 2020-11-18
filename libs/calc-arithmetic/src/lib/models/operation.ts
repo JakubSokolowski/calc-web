@@ -1,5 +1,3 @@
-import { ExtendedOption } from '@calc/ui';
-
 export enum OperationType {
     Addition = 'Addition',
     Subtraction = 'Subtraction',
@@ -8,7 +6,7 @@ export enum OperationType {
 }
 
 
-export interface Operation extends ExtendedOption{
+export interface Operation {
     type: OperationType;
     minOperands: number;
     maxOperands: number;
@@ -23,13 +21,6 @@ export const allOperations: Operation[] = [
     {
         type: OperationType.Subtraction,
         minOperands: 2,
-        maxOperands: 2,
-        disallowed: true,
-        disallowedReason: 'Not implemented'
-    },
-    {
-        type: OperationType.Multiplication,
-        maxOperands: 2,
-        minOperands: 2,
-    },
+        maxOperands: 2
+    }
 ];

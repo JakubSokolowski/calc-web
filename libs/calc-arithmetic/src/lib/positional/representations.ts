@@ -91,9 +91,9 @@ export class NumberComplement implements PositionalRepresentation {
         );
     }
 
-    public toDigitsList(): AdditionOperand[] {
+    public toDigitsList(): Digit[] {
         const digits = toDigitList(this.integerPart, this.fractionalPart);
-        const extension: AdditionOperand = {
+        const extension: Digit = {
             isComplementExtension: true,
             position: digits[0].position + 1,
             representationInBase: this.sign,
@@ -135,9 +135,9 @@ export class PositionalNumber extends NumberComplement {
 }
 
 
-function toDigitList(integerPart: Digits, fractionalPart: Digits): AdditionOperand[] {
+function toDigitList(integerPart: Digits, fractionalPart: Digits): Digit[] {
     const base = integerPart.base;
-    const integerPartDigits: AdditionOperand[] = integerPart.digits.map((digit, index) => {
+    const integerPartDigits: Digit[] = integerPart.digits.map((digit, index) => {
         const position = (integerPart.digits.length - 1) - index;
 
         return {
@@ -148,7 +148,7 @@ function toDigitList(integerPart: Digits, fractionalPart: Digits): AdditionOpera
         }
     });
 
-    const fractionalPartDigits: AdditionOperand[] = fractionalPart.digits.map((digit, index) => {
+    const fractionalPartDigits: Digit[] = fractionalPart.digits.map((digit, index) => {
         const position = - 1 - index;
 
         return {

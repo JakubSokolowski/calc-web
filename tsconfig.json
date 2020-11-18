@@ -19,11 +19,13 @@
     "baseUrl": ".",
     "paths": {
       "@calc/calc-arithmetic": ["libs/calc-arithmetic/src/index.ts"],
+      "@calc/env": ["environments/environment.ts"],
       "@calc/utils": ["libs/utils/src/index.ts"],
       "@calc/grid": ["libs/grid/src/index.ts"],
       "@calc/ui": ["libs/ui/src/index.ts"],
       "@calc/docs": ["libs/docs/src/index.ts"],
-      "@calc/calc-rs": ["libs/calc-rs/pkg"]
+      "@calc/calc-rs": ["libs/calc-rs/pkg"],
+      "@calc/positional-calculator": ["libs/positional-calculator/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

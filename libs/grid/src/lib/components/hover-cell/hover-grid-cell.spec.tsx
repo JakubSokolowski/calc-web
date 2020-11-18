@@ -6,7 +6,7 @@ import HoverGridCell from './hover-grid-cell';
 describe('#HoverGridCell', () => {
     let container: ShallowWrapper;
     const defaultClassName = '.makeStyles-defaultCell-1';
-    const defaultHoverClassName = '.makeStyles-hoverCell-2';
+    const defaultHoverClassName = '.makeStyles-hoverCell-4';
 
     const config: GridCellConfig = {
         content: 'Content',
@@ -109,7 +109,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with vertical line when cell should display vertical line', () => {
             // given
-            const className = 'makeStyles-defaultCell-1 makeStyles-verticalLine-6';
+            const className = 'makeStyles-defaultCell-1 makeStyles-verticalLine-8';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} verticalLine={true}/>
             );
@@ -123,7 +123,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with horizontal line style when cell should display horizontal line', () => {
             // given
-            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-5';
+            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-7';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} horizontalLine={true}/>
             );
@@ -137,7 +137,7 @@ describe('#HoverGridCell', () => {
 
         it('should render with horizontal and vertical line style when cell should display both lines', () => {
             // given
-            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-5 makeStyles-verticalLine-6';
+            const className = 'makeStyles-defaultCell-1 makeStyles-horizontalLine-7 makeStyles-verticalLine-8';
             container = shallow(
                 <HoverGridCell config={config} x={x} y={y} horizontalLine={true} verticalLine={true}/>
             );

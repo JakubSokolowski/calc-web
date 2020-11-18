@@ -12,10 +12,10 @@ import { useSelector } from 'react-redux';
 import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, Card, MenuItem, TextField } from '@material-ui/core';
+import { Button, MenuItem, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { clean } from '@calc/utils';
-import { FormErrors } from '../../core/models/form-errors';
+import { FormErrors } from '@calc/ui';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
@@ -134,74 +134,72 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     return (
         <div>
-            <Card className={classes.card}>
-                <ConversionOptions/>
-                <form onSubmit={form.handleSubmit}>
+            <ConversionOptions/>
+            <form onSubmit={form.handleSubmit}>
+                <InputWithCopy
+                    className={classes.input}
+                    name={'inputStr'}
+                    id={'inputStr'}
+                    label={t('baseConverter.inputNumber')}
+                    error={!!form.errors.inputStr}
+                    helperText={form.errors.inputStr}
+                    onChange={handleInputStrChange}
+                    value={form.values.inputStr}
+                />
+
+                {
+                    showDecimalValue &&
                     <InputWithCopy
                         className={classes.input}
-                        name={'inputStr'}
-                        id={'inputStr'}
-                        label={t('baseConverter.inputNumber')}
-                        error={!!form.errors.inputStr}
-                        helperText={form.errors.inputStr}
-                        onChange={handleInputStrChange}
-                        value={form.values.inputStr}
+                        label={t('baseConverter.inputDecimalValue')}
+                        readOnly
+                        value={getDecimal()}
                     />
+                }
 
-                    {
-                        showDecimalValue &&
-                        <InputWithCopy
-                            className={classes.input}
-                            label={t('baseConverter.inputDecimalValue')}
-                            readOnly
-                            value={getDecimal()}
-                        />
-                    }
+                {
+                    showComplement &&
+                    <InputWithCopy
+                        style={{ 'paddingBottom': '20px' }}
+                        label={t('baseConverter.inputComplement')}
+                        readOnly
+                        value={getComplement()}
+                    />
+                }
 
-                    {
-                        showComplement &&
-                        <InputWithCopy
-                            style={{ 'paddingBottom': '20px' }}
-                            label={t('baseConverter.inputComplement')}
-                            readOnly
-                            value={getComplement()}
-                        />
-                    }
-
-                    <div className={classes.row}>
-                        <TextField
-                            className={classes.inputBase}
-                            variant={'outlined'}
-                            name={'inputBase'}
-                            id={'inputBase'}
-                            label={t('baseConverter.inputBase')}
-                            error={!!form.errors.inputBase}
-                            helperText={form.errors.inputBase}
-                            onChange={handleInputBaseChange}
-                            value={form.values.inputBase}
-                        />
-                        <div className={classes.horizontalSpacer}/>
-                        <TextField
-                            select
-                            className={classes.outputBase}
-                            name={'outputBase'}
-                            id={'outputBase'}
-                            label={t('baseConverter.outputBase')}
-                            placeholder={t('associatedBaseConverter.noOutputBase')}
-                            disabled={!options.length}
-                            value={form.values.outputBase}
-                            onChange={form.handleChange}
-                            variant={'outlined'}
-                        >
-                            {options}
-                        </TextField>
-                        <div className={classes.horizontalSpacer}/>
-                        <Button color={'secondary'} variant={'contained'} type={'submit'}>
-                            {t('baseConverter.convert')}
-                        </Button>
-                    </div>
-                </form>
-            </Card>
+                <div className={classes.row}>
+                    <TextField
+                        className={classes.inputBase}
+                        variant={'outlined'}
+                        name={'inputBase'}
+                        id={'inputBase'}
+                        label={t('baseConverter.inputBase')}
+                        error={!!form.errors.inputBase}
+                        helperText={form.errors.inputBase}
+                        onChange={handleInputBaseChange}
+                        value={form.values.inputBase}
+                    />
+                    <div className={classes.horizontalSpacer}/>
+                    <TextField
+                        select
+                        className={classes.outputBase}
+                        name={'outputBase'}
+                        id={'outputBase'}
+                        label={t('baseConverter.outputBase')}
+                        placeholder={t('associatedBaseConverter.noOutputBase')}
+                        disabled={!options.length}
+                        value={form.values.outputBase}
+                        onChange={form.handleChange}
+                        variant={'outlined'}
+                    >
+                        {options}
+                    </TextField>
+                    <div className={classes.horizontalSpacer}/>
+                    <Button color={'secondary'} variant={'contained'} type={'submit'}>
+                        {t('baseConverter.convert')}
+                    </Button>
+                </div>
+            </form>
         </div>
     );
 };

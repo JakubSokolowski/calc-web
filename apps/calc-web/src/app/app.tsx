@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
@@ -6,7 +6,6 @@ import '../assets/i18n/i18n';
 import SiderMenu from './components/sider-menu/sider-menu';
 import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
 import { FloatConverterView } from './components/float-converter-view/float-converter-view';
-import { PositionalCalculatorView } from './components/positional-calculator/positional-calculator-view';
 import { AssociatedBaseConverterView } from './components/associated-base-converter-view/associated-base-converter-view';
 import { LanguageMenu } from './components/language-menu/language-menu';
 import {
@@ -17,7 +16,8 @@ import {
     IconButton,
     Theme,
     ThemeProvider,
-    Toolbar, Typography
+    Toolbar,
+    Typography
 } from '@material-ui/core';
 import { getTheme } from '@calc/ui';
 import { useSelector } from 'react-redux';
@@ -29,10 +29,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
-import { environment } from '../environments/environment';
-
-
-const bconv = lazy(() => import('./components/base-converter-view/base-converter-view'));
+import BaseConverterView from './components/base-converter-view/base-converter-view';
+import { environment } from '@calc/env';
+import { PositionalCalculatorView } from '@calc/positional-calculator';
 
 
 const drawerWidth = 240;
@@ -49,8 +48,6 @@ const useStyles = makeStyles((theme: Theme) =>
             })
         },
         appBarShift: {
-            width: `calc(100% - ${drawerWidth}px)`,
-            marginLeft: drawerWidth,
             transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen
@@ -82,16 +79,9 @@ const useStyles = makeStyles((theme: Theme) =>
             transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen
-            }),
-            marginLeft: -drawerWidth
+            })
         },
-        contentShift: {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen
-            }),
-            marginLeft: 0
-        }
+        contentShift: {}
     })
 );
 
@@ -99,7 +89,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const App = () => {
     const theme = useSelector(selectAppTheme);
     const classes = useStyles();
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
 
     const handleDrawerOpen = () => {
@@ -110,9 +100,28 @@ export const App = () => {
         setOpen(false);
     };
 
+    const toggleDrawer = (open) => (event) => {
+        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+            return
+        }
+        setOpen(open);
+    };
+
+    useEffect(() => {
+        const closeDrawerOnEscape = (event) => {
+            if (open && event.type === 'keydown' && (event.key === 'Escape')) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('keydown', closeDrawerOnEscape);
+
+        return () => document.removeEventListener('keydown', closeDrawerOnEscape)
+    }, [open]);
+
 
     return (
-        <div className={classes.root}>
+        <div className={classes.root} >
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline/>
                 <Router basename={environment.deployUrl}>
@@ -139,41 +148,44 @@ export const App = () => {
                         </Toolbar>
                     </AppBar>
 
-                    <Drawer
-                        className={classes.drawer}
-                        variant="persistent"
-                        anchor="left"
-                        open={open}
-                        classes={{
-                            paper: classes.drawerPaper
-                        }}
-                    >
-                        <div className={classes.drawerHeader}>
-                            <Typography variant={'h4'}>
-                                {t('home.appName')}
-                            </Typography>
-                            <div style={{ flexGrow: 1 }}/>
-                            <IconButton onClick={handleDrawerClose}>
-                                <ChevronLeftIcon/>
-                            </IconButton>
-                        </div>
-                        <SiderMenu/>
-                    </Drawer>
+                    <div  onKeyDown={toggleDrawer(false)}>
+                        <Drawer
+                            onBackdropClick={toggleDrawer(false)}
+                            className={classes.drawer}
+                            variant="temporary"
+                            anchor="left"
+                            open={open}
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                        >
+                            <div className={classes.drawerHeader}>
+                                <Typography variant={'h4'}>
+                                    {t('home.appName')}
+                                </Typography>
+                                <div style={{ flexGrow: 1 }}/>
+                                <IconButton onClick={handleDrawerClose}>
+                                    <ChevronLeftIcon/>
+                                </IconButton>
+                            </div>
+                            <SiderMenu/>
+                        </Drawer>
+                    </div>
 
-                    <main className={clsx(classes.content, {
-                        [classes.contentShift]: open
-                    })}>
-                        <div className={classes.drawerHeader} />
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <Switch>
-                                <Route exact path="/" component={HomeView}/>
-                                <Route path="/base-converter" component={bconv}/>
-                                <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
-                                <Route path="/complement-converter" component={ComplementConverterView}/>
-                                <Route path="/float-converter" component={FloatConverterView}/>
-                                <Route path="/positional-calculator" component={PositionalCalculatorView}/>
-                            </Switch>
-                        </Suspense>
+                    <main
+                        className={clsx(classes.content, {
+                            [classes.contentShift]: open
+                        })}
+                    >
+                        <div className={classes.drawerHeader}/>
+                        <Switch>
+                            <Route exact path="/" component={HomeView}/>
+                            <Route path="/base-converter" component={BaseConverterView}/>
+                            <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
+                            <Route path="/complement-converter" component={ComplementConverterView}/>
+                            <Route path="/float-converter" component={FloatConverterView}/>
+                            <Route path="/positional-calculator" component={PositionalCalculatorView}/>
+                        </Switch>
                     </main>
                 </Router>
             </ThemeProvider>

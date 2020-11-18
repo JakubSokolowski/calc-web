@@ -320,7 +320,7 @@ describe('addition-grid', () => {
                                 content: '2'
                             },
                             {
-                                content: '3.'
+                                content: '3'
                             },
                             {
                                 content: '3'
@@ -346,7 +346,7 @@ describe('addition-grid', () => {
                                 content: '2'
                             },
                             {
-                                content: '1.'
+                                content: '1'
                             },
                             {
                                 content: '1'
@@ -372,7 +372,7 @@ describe('addition-grid', () => {
                                 content: '4'
                             },
                             {
-                                content: '4.'
+                                content: '4'
                             },
                             {
                                 content: '4'

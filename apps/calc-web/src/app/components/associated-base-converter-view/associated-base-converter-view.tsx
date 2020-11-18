@@ -3,11 +3,10 @@ import { AssociatedBaseConversion, Conversion } from '@calc/calc-arithmetic';
 import { useTranslation } from 'react-i18next';
 import { AssociatedBaseConverter } from '../associated-base-converter/associated-base-converter';
 import { AssociatedBaseConversionDetails } from '../associated-base-conversion-details/associated-base-conversion-details';
-import { Box, Tab, Tabs, Typography } from '@material-ui/core';
-import { a11yProps, TabPanel } from '@calc/ui';
+import { Box, Tab, Tabs } from '@material-ui/core';
+import { a11yProps, Section, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
-import { environment } from '../../../environments/environment';
 
 
 export const AssociatedBaseConverterView: FC = () => {
@@ -28,33 +27,25 @@ export const AssociatedBaseConverterView: FC = () => {
     };
 
     return (
-        <div>
-
+        <div className={classes.root}>
             <Tabs value={value} onChange={handleChange}>
                 <Tab label="Converter" {...a11yProps(0)} />
                 <Tab label="Theory" {...a11yProps(1)} />
             </Tabs>
-            <TabPanel value={value} index={0}>
-                <div className={classes.verticalSpacer}/>
-                <Typography variant={'h4'} className={classes.title}>
-                    {t('associatedBaseConverter.title')}
-                </Typography>
-                <AssociatedBaseConverter onConversionChange={onChange}/>
+            <TabPanel className={classes.panel} value={value} index={0}>
+                <Section title={t('associatedBaseConverter.title')}>
+                    <AssociatedBaseConverter onConversionChange={onChange}/>
+                </Section>
                 {
                     conversion &&
-                    <Typography variant={'h4'} className={classes.title}>
-                        {t('baseConverter.result')}
-                    </Typography>
-                }
-                {
-                    conversion &&
-                    <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
+                        <Section title={t('baseConverter.result')}>
+                            <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
+                        </Section>
                 }
             </TabPanel>
-            <TabPanel value={value} index={1}>
-                <div className={classes.verticalSpacer}/>
-                <Box display={'flex'} alignItems={'center'} maxWidth={900} margin={'auto'}>
-                    <DocPage path='positional/associated-base-conversion' deployUrl={environment.deployUrl}/>
+            <TabPanel className={classes.panel} value={value} index={1}>
+                <Box display={'flex'} alignItems={'center'} maxWidth={760} margin={'auto'}>
+                    <DocPage path='positional/associated-base-conversion'/>
                 </Box>
             </TabPanel>
 

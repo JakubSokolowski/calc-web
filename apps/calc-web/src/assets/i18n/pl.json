@@ -20,7 +20,7 @@
         "inputNumber": "Liczba wejściowa",
         "inputDecimalValue": "Wartość dziesiętna wejścia",
         "inputComplement": "Uzupełnienie wejścia",
-        "inputBase": "Podstawa wejścia",
+        "inputBase": "Podstawa",
         "outputBase": "Podstawa wyniku",
         "outputNumber": "Liczba wyjściowa",
         "conversionToBase": "Kowersja do podstawy {{base}}",
@@ -60,7 +60,12 @@
         "title": "Kalkulator liczb pozycyjnych",
         "operands": "Operandy",
         "operand": "Operand",
+        "parameters": "Parametery działania",
+        "result": "Wynik",
+        "details": "Szczegóły",
+        "sanityCheck": "Upewnij się",
         "newOperand": "Nowy operand",
+        "downloadDetails": "Pobierz szczegóły jako .png",
         "calculate": "Oblicz"
     },
     "sandbox": {

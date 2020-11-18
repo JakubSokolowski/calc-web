@@ -1,4 +1,4 @@
-import { PositionResult } from '@calc/calc-arithmetic';
+import { AdditionPositionResult } from '@calc/calc-arithmetic';
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
 import { AdditionOperand } from '../models';
 
@@ -7,7 +7,7 @@ describe('complement-extension', () => {
     describe('#hasInfiniteExtension', () => {
         it('should return false when global most significant position is more significant than curr position', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 4,
@@ -18,7 +18,7 @@ describe('complement-extension', () => {
                 carry: []
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 6,
@@ -38,7 +38,7 @@ describe('complement-extension', () => {
 
         it('should return false when prev and curr position results are not equal', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 4,
@@ -49,7 +49,7 @@ describe('complement-extension', () => {
                 carry: []
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 6,
@@ -69,7 +69,7 @@ describe('complement-extension', () => {
 
         it('should return false when prev and curr have different operands', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 4,
@@ -106,7 +106,7 @@ describe('complement-extension', () => {
                 ]
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 4,
@@ -153,7 +153,7 @@ describe('complement-extension', () => {
 
         it('should return false when curr has some carry from non-previous position', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 2,
                     representationInBase: '1',
@@ -200,7 +200,7 @@ describe('complement-extension', () => {
                 ]
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 2,
                     representationInBase: '1',
@@ -256,7 +256,7 @@ describe('complement-extension', () => {
 
         it('should return false when curr has more than one carry', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 2,
                     representationInBase: '1',
@@ -303,7 +303,7 @@ describe('complement-extension', () => {
                 ]
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 2,
                     representationInBase: '1',
@@ -368,7 +368,7 @@ describe('complement-extension', () => {
 
         it('should return true when prev and curr have same operands, position results and curr has single carry from prev', () => {
             // given
-            const prev: PositionResult = {
+            const prev: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 9,
@@ -407,7 +407,7 @@ describe('complement-extension', () => {
                 ]
             };
 
-            const curr: PositionResult = {
+            const curr: AdditionPositionResult = {
                 valueAtPosition: {
                     base: 10,
                     valueInDecimal: 9,

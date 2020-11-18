@@ -4,6 +4,10 @@ import { createStyles, Theme } from '@material-ui/core';
 export const useConverterStyles = makeStyles((theme: Theme) => {
     return createStyles(
         {
+            root: {
+              maxWidth: 760,
+              margin: 'auto'
+            },
             card: {
                 padding: theme.spacing(3)
             },
@@ -56,6 +60,9 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
             },
             equation: {
                 paddingBottom: theme.spacing(2)
+            },
+            panel: {
+                paddingTop: theme.spacing(2),
             }
         }
     );

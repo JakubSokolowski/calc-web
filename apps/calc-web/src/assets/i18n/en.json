@@ -61,8 +61,15 @@
         "title": "Positional Calculator",
         "operands": "Operands",
         "operand": "Operand",
+        "parameters": "Operation parameters",
+        "result": "Result",
+        "details": "Details",
+        "sanityCheck": "Sanity Check",
         "newOperand": "New operand",
-        "calculate": "Calculate"
+        "calculate": "Calculate",
+        "additionDetails": "Addition Details",
+        "downloadDetails": "Download details as .png",
+        "subtractionDetails": "Subtraction Details"
     },
     "sandbox": {
         "title": "Sandbox",

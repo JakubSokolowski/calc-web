@@ -11,23 +11,23 @@ export enum SubtractionType {
 
 export type AlgorithmType = AdditionType | SubtractionType
 
-export interface Algorithm<T extends AlgorithmType> extends ExtendedOption {
+export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> extends ExtendedOption {
     type: T;
     allowedBases?: number[];
 }
 
-export type AlgorithmOperationMap = Record<OperationType, Algorithm<AlgorithmType>[]>
+export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>
 
-export const additionAlgorithms: Algorithm<AdditionType>[] = [
+export const additionAlgorithms: OperationAlgorithm<AdditionType>[] = [
     {
         type: AdditionType.Default
     }
 ];
 
-export const subtractionAlgorithms: Algorithm<SubtractionType>[] = [
+export const subtractionAlgorithms: OperationAlgorithm<SubtractionType>[] = [
     {
         type: SubtractionType.Default
-    }
+    },
 ];
 
 export const algorithmMap: AlgorithmOperationMap = {

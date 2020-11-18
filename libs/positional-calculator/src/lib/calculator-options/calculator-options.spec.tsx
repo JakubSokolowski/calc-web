@@ -5,10 +5,11 @@ import { CalculatorOptions } from './calculator-options';
 describe('CalculatorOptions', () => {
     let container;
     const onSubmit = jest.fn();
+    const onOperationChange = jest.fn();
 
     beforeEach(() => {
         container = shallow(
-            <CalculatorOptions onSubmit={onSubmit}/>
+            <CalculatorOptions onSubmit={onSubmit} onOperationChange={onOperationChange}/>
         );
     });
 
