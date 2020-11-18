@@ -29,9 +29,6 @@ interface P {
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
-        root: {
-          maxWidth: 700
-        },
         base: {
             maxWidth: 100
         },
@@ -137,7 +134,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     }, [operation]);
 
     return (
-        <div className={classes.root}>
+        <div>
             <div className={classes.optionsRow}>
                 <TextField
                     className={classes.base}

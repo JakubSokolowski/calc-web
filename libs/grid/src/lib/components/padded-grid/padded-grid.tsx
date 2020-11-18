@@ -13,7 +13,8 @@ const useStyles = makeStyles((theme: Theme) => {
         wrapper: {
             display: 'flex',
             flexDirection: 'row',
-            overflowX: 'auto'
+            overflowX: 'auto',
+            justifyContent: 'center'
         }
     })
 });
