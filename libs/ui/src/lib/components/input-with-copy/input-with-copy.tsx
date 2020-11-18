@@ -4,6 +4,7 @@ import { createStyles, IconButton, Snackbar, TextField, TextFieldProps, Theme } 
 import FileCopyIcon from '@material-ui/icons/FileCopy';
 import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
+import { copyToClipboard } from '../../core/functions/copy-to-clipboard';
 
 export enum InputType {
     Text = 'text',
@@ -23,11 +24,12 @@ interface P {
     readOnly?: boolean;
     label?: ReactNode;
     error?: boolean;
+    disabled?: boolean;
     helperText?: string;
     inputType?: InputType;
     style?: CSSProperties;
     className?: string;
-    size?: 'small' | 'middle' | 'large';
+    size?: 'small' | 'medium';
 }
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -35,13 +37,17 @@ const useStyles = makeStyles((theme: Theme) => {
         row: {
             display: 'flex',
             flexDirection: 'row',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            alignItems: 'center'
+        },
+        copyButton: {
+            paddingLeft: theme.spacing(1)
         }
     });
 });
 
 
-export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
+export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
@@ -55,10 +61,9 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className
         setOpen(false);
     };
 
-    const copyToClipboard = () => {
+    const handleCopyToClipboard = () => {
         if (textAreaRef.current) {
-            textAreaRef.current.select();
-            document.execCommand('copy');
+            copyToClipboard(textAreaRef.current.value);
             setOpen(true);
         }
     };
@@ -83,6 +88,8 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className
         error,
         id,
         name,
+        disabled,
+        size,
         helperText,
         style: {
             ...style,
@@ -107,15 +114,14 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, style, className
                         : <TextField {...props}/>
                 }
                 {
-                    document.queryCommandSupported('copy') &&
-                    <div style={{ paddingLeft: '5px' }}>
-                        <IconButton onClick={copyToClipboard}>
+                    <div className={classes.copyButton}>
+                        <IconButton size={size} onClick={handleCopyToClipboard}>
                             <FileCopyIcon/>
                         </IconButton>
                     </div>
                 }
             </span>
-            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={2000}
+            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={1500}
                       onClose={handleClose}>
                 <Alert severity="info">{t('common.copy')}</Alert>
             </Snackbar>

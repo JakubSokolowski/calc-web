@@ -22,7 +22,9 @@ import { calculate, GridResult, OperationParams } from '../core/calculate';
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            maxWidth: 760,
+            [theme.breakpoints.up('lg')]: {
+                maxWidth: 900,
+            },
             margin: 'auto'
         },
         options: {
@@ -106,7 +108,7 @@ export const PositionalCalculatorView: FC = () => {
                         </Section>
                         <Section title={t('positionalCalculator.details')}>
                             <PaddedGrid
-                                desiredWidth={20}
+                                desiredWidth={23}
                                 id={gridId}
                                 {...res.grid}
                                 groupBuilder={groupBuilder}

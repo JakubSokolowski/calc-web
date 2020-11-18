@@ -2,8 +2,22 @@ import React, { FC, useEffect, useState } from 'react';
 import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
 import { InputType, InputWithCopy } from '@calc/ui';
+import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core';
+
+
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        input: {
+            paddingTop: theme.spacing(2)
+        }
+    });
+});
 
 export const FloatConverterComponent: FC = () => {
+    const {t} = useTranslation();
+    const classes = useStyles();
     const initialNum = FloatConverter.ToSingle(0.0);
     const [floatingNumber, setFloatingNumber] = useState(initialNum);
     const [sign, setSign] = useState(initialNum.sign);
@@ -13,14 +27,18 @@ export const FloatConverterComponent: FC = () => {
 
     useEffect(() => {
         const representationStr = sign + exponent + mantissa;
-        setFloatingNumber(FloatConverter.ToSingle(representationStr));
+        const num = FloatConverter.ToSingle(representationStr);
+        setFloatingNumber(num);
+        setRawValue(FloatConverter.BinaryStringToSingle(num.binary))
     }, [exponent, mantissa, sign]);
 
-    const handleChange = (value) => {
+    const handleChange = (event) => {
+        const value = event.target.value;
         setRawValue(value);
         if (value && isValidString(value, 10)) {
             try {
-                const num = FloatConverter.ToSingle(value);
+                const intValue = parseFloat(value);
+                const num = FloatConverter.ToSingle(intValue);
                 setFloatingNumber(num);
             } catch (err) {
                 console.log(err);
@@ -58,10 +76,33 @@ export const FloatConverterComponent: FC = () => {
                     onChange={setMantissa}
                 />
             </div>
-            <div style={{ width: '600px' }}>
-                <InputWithCopy value={rawValue} onChange={handleChange} size={'small'} inputType={InputType.Number}/>
-                <InputWithCopy readOnly value={floatingNumber.value.toString()} size={'small'} inputType={InputType.Text}/>
-                <InputWithCopy readOnly value={floatingNumber.binary} size={'small'} inputType={InputType.Text}/>
+            <div >
+                <InputWithCopy
+                    className={classes.input}
+                    label={t('floatConverter.entered')}
+                    value={rawValue}
+                    onValueChange={handleChange}
+                    size={'small'}
+                    inputType={InputType.Number}
+                />
+                <InputWithCopy
+                    className={classes.input}
+                    label={t('floatConverter.stored')}
+                    disabled
+                    readOnly
+                    value={floatingNumber.value.toString()}
+                    size={'small'}
+                    inputType={InputType.Text}
+                />
+                <InputWithCopy
+                    className={classes.input}
+                    label={t('floatConverter.binary')}
+                    disabled
+                    readOnly
+                    value={floatingNumber.binary}
+                    size={'small'}
+                    inputType={InputType.Text
+                }/>
             </div>
         </div>
     );

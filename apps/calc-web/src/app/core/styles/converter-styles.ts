@@ -5,8 +5,10 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
     return createStyles(
         {
             root: {
-              maxWidth: 760,
-              margin: 'auto'
+                [theme.breakpoints.up('lg')]: {
+                    maxWidth: 900
+                },
+                margin: 'auto'
             },
             card: {
                 padding: theme.spacing(3)

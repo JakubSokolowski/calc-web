@@ -1,6 +1,8 @@
 import React, { FC } from 'react';
 import { ButtonRowComponent } from '../button-row/button-row';
 import { useTranslation } from 'react-i18next';
+import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core';
 
 export enum PartType {
     Sign = 'Sign',
@@ -16,6 +18,22 @@ interface P {
     onChange?: (value: string) => void;
 }
 
+
+const useStyles = makeStyles((theme: Theme) => {
+    return createStyles({
+        root: {
+           padding: theme.spacing(2)
+        },
+        info: {
+            textAlign: 'center',
+            height: '70px'
+        },
+        title: {
+            fontWeight: 'bold'
+        }
+    });
+});
+
 export const RepresentationPart: FC<P> = (
     {
         part,
@@ -25,6 +43,7 @@ export const RepresentationPart: FC<P> = (
         onChange
     }) => {
     const { t } = useTranslation();
+    const classes = useStyles();
 
     const title = {
         [PartType.Sign]: t('floatConverter.sign'),
@@ -37,9 +56,9 @@ export const RepresentationPart: FC<P> = (
     };
 
     return (
-        <div style={{ padding: '10px' }}>
-            <div style={{ textAlign: 'center' }}>
-                <div style={{ fontWeight: 'bold' }}>{title}</div>
+        <div className={classes.root}>
+            <div className={classes.info}>
+                <div className={classes.title}>{title}</div>
                 <div>
                     {
                         partType === PartType.Exponent
