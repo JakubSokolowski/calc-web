@@ -1,10 +1,5 @@
 image: jsokolowski/calc-ci
 
-cache:
-    key: ${CI_COMMIT_REF_SLUG}
-    paths:
-        - node_modules/
-
 stages:
     - setup
     - lint
@@ -12,12 +7,11 @@ stages:
     - build
     - deploy
 
+variables:
+    GIT_STRATEGY: clone
+
 setup:
     stage: setup
-    artifacts:
-        paths:
-            - libs/calc-rs/pkg
-        expire_in: 1 week
     script:
         - rustc --version
         - cargo --version
@@ -29,8 +23,9 @@ setup:
 
 lint:
     stage: lint
+    before_script:
+        - git fetch origin master
     script:
-        - npm install
         - npm run ci:lint
     rules:
         -   if: $CI_MERGE_REQUEST_ID

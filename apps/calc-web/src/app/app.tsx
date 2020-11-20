@@ -91,6 +91,7 @@ export const App = () => {
     const classes = useStyles();
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
+    console.log('Dummy affected change')
 
     const handleDrawerOpen = () => {
         setOpen(true);
