@@ -47,7 +47,7 @@ export const BaseConverterView: FC = () => {
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className={classes.verticalSpacer}/>
-                <Box display={'flex'} alignItems={'center'} maxWidth={900} margin={'auto'}>
+                <Box display={'flex'} alignItems={'center'} maxWidth={700} margin={'auto'}>
                     <DocPage path={'positional/base-conversion'}/>
                 </Box>
             </TabPanel>

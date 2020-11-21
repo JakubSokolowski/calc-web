@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme: Theme) =>
             },
             margin: 'auto'
         },
+        docs: {
+          maxWidth: 700,
+          margin: 'auto'
+        },
         options: {
             paddingTop: theme.spacing(2)
         },
@@ -125,7 +129,7 @@ export const PositionalCalculatorView: FC = () => {
                 }
             </TabPanel>
             <TabPanel className={classes.panel} value={currentTab} index={1}>
-                <Box className={classes.root}>
+                <Box className={classes.docs}>
                     <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`}/>
                 </Box>
             </TabPanel>
