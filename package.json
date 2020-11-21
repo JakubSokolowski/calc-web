@@ -20,7 +20,7 @@
         "affected:lint": "nx affected:lint",
         "affected:dep-graph": "nx affected:dep-graph",
         "affected": "nx affected",
-        "ci:lint": "nx affected:lint --all --exclude docs",
+        "ci:lint": "nx affected:lint --base=remotes/origin/master --exclude docs",
         "ci:test": "nx affected:test --all",
         "ci:build": "nx affected:build --all",
         "all:test": " nx affected:test --all",

@@ -1,0 +1,48 @@
+name: CI
+
+on:
+    push:
+        branches: [ master ]
+    pull_request:
+        branches: [ master ]
+
+    workflow_dispatch:
+
+jobs:
+    ci:
+        runs-on: ubuntu-latest
+        strategy:
+            matrix:
+                node-version: [12.x]
+        steps:
+            -   uses: actions/checkout@v2
+                with:
+                    fetch-depth: 0
+            -   name: Cache node_modules
+                uses: actions/cache@v2
+                env:
+                    cache-name: cache-node-modules
+                with:
+                    path: ~/.npm
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                    restore-keys: |
+                        ${{ runner.os }}-build-${{ env.cache-name }}-
+                        ${{ runner.os }}-build-
+                        ${{ runner.os }}-
+            -   name: Use Node.js ${{ matrix.node-version }}
+                uses: actions/setup-node@v1
+                with:
+                    node-version: ${{ matrix.node-version }}
+            -   name: Fetch target branch
+                run: git fetch origin ${{ github.event.pull_request.base.ref }}
+            -   name: Install packages
+                run: npm install
+            -   name: Affected Lint
+                shell: bash
+                run: npm run affected:lint -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+            -   name: Affected Test
+                shell: bash
+                run: npm run affected:test -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+            -   name: Affected Build
+                shell: bash
+                run: npm run affected:build -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}

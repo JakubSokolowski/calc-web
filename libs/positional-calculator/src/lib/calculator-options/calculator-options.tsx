@@ -120,6 +120,8 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
         setOperands(newOperands)
     };
 
+    console.log('LINT trigger');
+
     const handleOperandSubmit = () => {
         onSubmit(form.values.base, operands, operation, algorithm)
     };
