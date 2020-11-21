@@ -63,13 +63,13 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     const [operation, setOperation] = useState<Operation>(allOperations[1]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(subtractionAlgorithms[0]);
     const [operands, setOperands] = useState<ValidatedOperand[]>(
-        [{valid: true, representation: '25 15'}, {valid: true, representation: '19'}]
+        [{valid: true, representation: '10'}, {valid: true, representation: '9'}, {valid: true, representation: '2'}]
     );
     const [canAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
     const initialValues: FormValues = {
-        base: 64,
+        base: 10,
         representation: '0.0',
         operands: []
     };

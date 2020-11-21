@@ -5,7 +5,8 @@ import { buildAxis } from './axis-utils';
 import { getGridLines } from './grid-line-utils';
 import { HoverOperationGrid } from '../models/hover-operation-grid';
 import {
-    buildColumnGroups, buildEmptyGrid, DigitsInfo,
+    buildColumnGroups,
+    buildEmptyGrid,
     digitsToCellConfig,
     extractResultMeta,
     operandDigitsToCellConfig,

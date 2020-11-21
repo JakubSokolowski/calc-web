@@ -46,14 +46,14 @@ export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
     const [currentTab, setCurrentTab] = useState(0);
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
-
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setCurrentTab(newValue);
-    };
     const { t } = useTranslation();
     const [res, setRes] = useState<GridResult | undefined>();
     const [params, setParams] = useState<OperationParams<AlgorithmType>>();
     const gridId = 'calculator-grid';
+
+    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
+        setCurrentTab(newValue);
+    };
 
     const onSubmit = function <T extends AlgorithmType>(
         base: number,
