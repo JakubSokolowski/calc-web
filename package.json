@@ -7,7 +7,7 @@
         "start": "nx serve --with-deps",
         "build": "nx build --with-deps",
         "build:wasm": "nx build calc-rs",
-        "build:prod": "nx build --prod --deploy-url=calc-web/",
+        "build:prod": "nx build --prod --baseHref=calc-web/",
         "test": "nx test",
         "lint": "nx workspace-lint && nx lint",
         "lint:fix": "nx workspace-lint && nx lint --fix",
