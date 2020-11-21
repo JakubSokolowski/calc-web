@@ -21,7 +21,7 @@
   "projects": {
     "calc-web": {
       "tags": [],
-      "implicitDependencies": ["calc-rs"]
+      "implicitDependencies": []
     },
     "calc-web-e2e": {
       "tags": [],

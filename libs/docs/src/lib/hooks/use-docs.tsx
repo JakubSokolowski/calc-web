@@ -13,6 +13,7 @@ export const useDocs = (path: string): string | null => {
 
     const url = `${prefix}/${path}/${fileName}_${languageKeySuffix}.md`;
 
+
     useEffect(() => {
         fetch(url)
             .then((response) => response.text())

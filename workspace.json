@@ -259,27 +259,7 @@
       "sourceRoot": "libs/calc-rs/src",
       "projectType": "library",
       "schematics": {},
-      "architect": {
-        "build": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              "cargo check",
-              "cargo check --target wasm32-unknown-unknown",
-              "cargo check --target wasm32-unknown-unknown --no-default-features --features \"console_error_panic_hook wee_alloc\"",
-              "wasm-pack build --out-name index"
-            ],
-            "cwd": "libs/calc-rs"
-          }
-        },
-        "test": {
-          "builder": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": ["wasm-pack test --headless --firefox"],
-            "cwd": "libs/calc-rs"
-          }
-        }
-      }
+      "architect": {}
     },
     "positional-calculator": {
       "root": "libs/positional-calculator",

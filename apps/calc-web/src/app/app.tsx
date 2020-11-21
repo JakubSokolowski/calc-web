@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
 import '../assets/i18n/i18n';
@@ -124,7 +124,7 @@ export const App = () => {
         <div className={classes.root} >
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline/>
-                <Router basename={environment.deployUrl}>
+                <HashRouter basename='/'>
                     <AppBar
                         position="fixed"
                         className={clsx(classes.appBar, {
@@ -187,7 +187,7 @@ export const App = () => {
                             <Route path="/positional-calculator" component={PositionalCalculatorView}/>
                         </Switch>
                     </main>
-                </Router>
+                </HashRouter>
             </ThemeProvider>
         </div>
     );
