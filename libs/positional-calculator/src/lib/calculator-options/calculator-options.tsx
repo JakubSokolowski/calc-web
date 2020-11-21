@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(allOperations[1]);
+    const [operation, setOperation] = useState<Operation>(allOperations[0]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(subtractionAlgorithms[0]);
     const [operands, setOperands] = useState<ValidatedOperand[]>(
         [{valid: true, representation: '10'}, {valid: true, representation: '9'}, {valid: true, representation: '2'}]
