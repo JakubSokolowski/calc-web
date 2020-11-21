@@ -1,8 +1,9 @@
 import { SubtractionOperand, SubtractionPositionResult, SubtractionResult } from '../models';
-import { subtractDigitArrays, subtractDigitsAtPosition } from './subtraction';
+import { subtractDigitArrays, subtractDigitsAtPosition, subtractPositionalNumbers } from './subtraction';
+import { fromNumber } from '@calc/calc-arithmetic';
 
 describe('subtraction', () => {
-    describe('#addDigitsAtPosition', () => {
+    describe('#subtractDigitsAtPosition', () => {
         it('should return proper result when subtracting smaller number from greater', () => {
             // given
             const base = 10;
@@ -292,4 +293,35 @@ describe('subtraction', () => {
             });
         });
     });
+
+    describe('#subtractPositionalNumbers', () => {
+        describe('when subtracting multiple operands', () => {
+            it('should return result with proper borrow chain when borrow amount is greater than 1', () => {
+                // given
+                const x = fromNumber(10, 10).result;
+                const y = fromNumber(9, 10).result;
+                const z = fromNumber(2, 10).result;
+
+                // when
+                const result = subtractPositionalNumbers([x, y, z]);
+
+                // then
+                const expected: SubtractionOperand []= [
+                    {
+                        base: 10,
+                        position: 0,
+                        representationInBase: '0',
+                        valueInDecimal: 0
+                    },
+                    {
+                        base: 10,
+                        position: 0,
+                        representationInBase: '20',
+                        valueInDecimal: 20
+                    }
+                ];
+                expect(result.positionResults[0].operands[0].borrowChain).toEqual(expected);
+            })
+        })
+    })
 });

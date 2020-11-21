@@ -7,6 +7,7 @@ interface P {
 }
 
 export const SubtractAtPositionResult: FC<P> = ({positionResult}) => {
+    console.log(positionResult);
     const operands = positionResult.operands.map((operand, index) => {
         const rep = operand.borrowChain
             ? operand.borrowChain[operand.borrowChain.length -1]

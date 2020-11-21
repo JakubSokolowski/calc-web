@@ -151,7 +151,9 @@ function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<numb
     const beforeBorrow: Digit = { ...lookupMinuend[sourcePosition] };
     const valueBeforeBorrow = beforeBorrow.valueInDecimal;
 
-    const valueAfterBorrow = valueBeforeBorrow + (amount * Math.pow(base, amount));
+    const positionDifference = fromPosition - sourcePosition;
+
+    const valueAfterBorrow = valueBeforeBorrow + (amount * Math.pow(base, positionDifference));
     const representationAfterBorrow = fromNumber(valueAfterBorrow, base).result.toString();
 
     const afterBorrow: Digit = {
