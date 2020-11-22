@@ -176,6 +176,32 @@ describe('getComplement tests', () => {
         expect(actual.toString()).toEqual(expected);
         expect(actual.sign).toEqual(expectedSign);
     });
+
+    it('returns valid complement for positive number equal to base', () => {
+        // given
+        const input = '10';
+        const base = 10;
+
+        // when
+        const actual = ComplementConverter.getComplement(input, base);
+
+        // then
+        const expected = '(0)10';
+        expect(actual.toString()).toEqual(expected)
+    });
+
+    it('returns valid complement for negative number equal to -(base)', () => {
+        // given
+        const input = '-10';
+        const base = 10;
+
+        // when
+        const actual = ComplementConverter.getComplement(input, base);
+
+        // then
+        const expected = '(9)90';
+        expect(actual.toString()).toEqual(expected)
+    });
 });
 
 describe('isNegative tests', () => {
