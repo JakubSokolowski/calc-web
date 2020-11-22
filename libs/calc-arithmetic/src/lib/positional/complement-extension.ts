@@ -46,7 +46,7 @@ export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
     return [mergedExtension, ...nonExtensionDigits]
 }
 
-function getMergedExtension<T extends Digit>(operand: T, position: number): T {
+export function getMergedExtension<T extends Digit>(operand: T, position: number): T {
     const base = operand.base;
     const isZeroExtension = operand.valueInDecimal === 0;
     const representationValue = isZeroExtension ? 0 : -1;

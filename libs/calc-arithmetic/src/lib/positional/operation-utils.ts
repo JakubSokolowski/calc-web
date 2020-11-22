@@ -1,6 +1,6 @@
-import { AdditionOperand, AdditionPositionResult, Digit } from '@calc/calc-arithmetic';
+import { AdditionOperand, Digit } from '@calc/calc-arithmetic';
 import { mergeExtensionDigits } from './complement-extension';
-import { PositionResult, SubtractionOperand, SubtractionPositionResult } from '../models';
+import { SubtractionOperand, SubtractionPositionResult } from '../models';
 
 export const NUM_ADDITIONAL_EXTENSIONS = 3;
 
@@ -41,23 +41,6 @@ function generateComplementExtension(digit: AdditionOperand, numExtensions: numb
         .fill({ ...digit })
         .map((digit, index) => ({ ...digit, position: digit.position + index + 1 }))
         .reverse();
-}
-
-export function extractResultDigitsFromAddition(positionResults: AdditionPositionResult[]): AdditionOperand[] {
-    const digitsFromPositions = positionResults.map((res) => res.valueAtPosition);
-    const carryDigitsNotConsideredInResult: AdditionOperand[] = [];
-
-    positionResults.forEach((result) => {
-        const missingCarryDigits = result.carry.filter((dgt) => {
-            return !digitsFromPositions.find((posDgt) => dgt.position === posDgt.position);
-        });
-
-        carryDigitsNotConsideredInResult.push(...missingCarryDigits);
-    });
-
-    const withExtension = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
-
-    return mergeExtensionDigits(withExtension);
 }
 
 export function extractResultDigitsFromSubtraction(positionResults: SubtractionPositionResult[]): SubtractionOperand[] {

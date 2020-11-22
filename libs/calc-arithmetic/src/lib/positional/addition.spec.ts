@@ -1,4 +1,9 @@
-import { addDigitsArrays, addDigitsAtPosition, addPositionalNumbers } from './addition';
+import {
+    addDigitsArrays,
+    addDigitsAtPosition,
+    addPositionalNumbers,
+    extractResultDigitsFromAddition
+} from './addition';
 import { fromNumber, AdditionPositionResult } from '@calc/calc-arithmetic';
 import { AdditionOperand } from '../models';
 import { fromStringDirect } from './base-converter';
@@ -616,5 +621,175 @@ describe('addition', () => {
             const expected = fromNumber(6, 2).result.toDigitsList();
             expect(result).toEqual(expected);
         });
+
+        it('should add positive and negative numbers correctly', () => {
+            // given
+            const a = fromNumber(10, 10).result;
+            const b = fromNumber(-20, 10).result;
+
+            // when
+            const result = addPositionalNumbers([a, b]);
+
+            // then
+            const expected = fromNumber(-10, 10).result.toString();
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should add two positive numbers with fractional part correctly', () => {
+            // given
+            const a = fromNumber(10.1236, 10).result;
+            const b = fromNumber(0.0009, 10).result;
+
+            // when
+            const result = addPositionalNumbers([a, b]);
+
+            // then
+            const expected = fromNumber(10.1245, 10).result.toString();
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should add two positive and negative numbers with fractional part correctly', () => {
+            // given
+            const a = fromNumber(10.1236, 10).result;
+            const b = fromNumber(-0.0009, 10).result;
+
+            // when
+            const result = addPositionalNumbers([a, b]);
+
+            // then
+            const expected = fromNumber(10.1227, 10).result.toString();
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
     });
+
+    describe('#extractResultDigitsFromAddition', () => {
+        it('should extract proper digits for results that have digits that look like extension but are not', () => {
+            // given
+            const positionResults: AdditionPositionResult[] = [
+                {
+                    valueAtPosition: {
+                        base: 10,
+                        representationInBase: '0',
+                        valueInDecimal: 0,
+                        position: 0
+                    },
+                    carry: [],
+                    operands: [
+                        {
+                            position: 0,
+                            base: 10,
+                            representationInBase: '0',
+                            valueInDecimal: 0
+                        },
+                        {
+                            position: 0,
+                            base: 10,
+                            representationInBase: '0',
+                            valueInDecimal: 0
+                        }
+                    ]
+                },
+                {
+                    valueAtPosition: {
+                        base: 10,
+                        representationInBase: '9',
+                        valueInDecimal: 9,
+                        position: 1
+                    },
+                    carry: [],
+                    operands: [
+                        {
+                            position: 1,
+                            base: 10,
+                            representationInBase: '1',
+                            valueInDecimal: 1
+                        },
+                        {
+                            position: 1,
+                            base: 10,
+                            representationInBase: '8',
+                            valueInDecimal: 8
+                        }
+                    ]
+                },
+                {
+                    valueAtPosition: {
+                        base: 10,
+                        representationInBase: '9',
+                        valueInDecimal: 9,
+                        position: 2
+                    },
+                    carry: [],
+                    operands: [
+                        {
+                            isComplementExtension: true,
+                            position: 2,
+                            representationInBase: '(0)',
+                            valueInDecimal: 0,
+                            base: 10
+                        },
+                        {
+                            isComplementExtension: true,
+                            position: 2,
+                            representationInBase: '(9)',
+                            valueInDecimal: 9,
+                            base: 10
+                        }
+                    ]
+                },
+                {
+                    valueAtPosition: {
+                        base: 10,
+                        representationInBase: '9',
+                        valueInDecimal: 9,
+                        position: 3
+                    },
+                    carry: [],
+                    operands: [
+                        {
+                            isComplementExtension: true,
+                            position: 3,
+                            representationInBase: '(0)',
+                            valueInDecimal: 0,
+                            base: 10
+                        },
+                        {
+                            isComplementExtension: true,
+                            position: 3,
+                            representationInBase: '(9)',
+                            valueInDecimal: 9,
+                            base: 10
+                        }
+                    ]
+                }
+            ];
+
+            // when
+            const digits = extractResultDigitsFromAddition(positionResults);
+
+            // then
+            const expected: AdditionOperand[] = [
+                {
+                    base: 10,
+                    isComplementExtension: true,
+                    position: 2,
+                    representationInBase: '(9)',
+                    valueInDecimal: 9
+                },
+                {
+                    base: 10,
+                    position: 1,
+                    representationInBase: '9',
+                    valueInDecimal: 9
+                },
+                {
+                    base: 10,
+                    position: 0,
+                    representationInBase: '0',
+                    valueInDecimal: 0
+                }
+            ];
+            expect(digits).toEqual(expected);
+        })
+    })
 });

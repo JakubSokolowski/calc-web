@@ -1,15 +1,10 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
-import { hasInfiniteExtension } from './complement-extension';
+import { AdditionOperand, AdditionPositionResult, AdditionResult, Digit, PositionResult } from '../models';
+import { getMergedExtension, hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
 import { ComplementConverter } from './complement-converter';
-import {
-    buildLookup,
-    extractResultDigitsFromAddition,
-    findPositionRange,
-    NUM_ADDITIONAL_EXTENSIONS
-} from './operation-utils';
+import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
 
@@ -93,6 +88,65 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
     };
 }
 
+export function extractResultDigitsFromAddition(positionResults: AdditionPositionResult[]): AdditionOperand[] {
+    const digitsFromPositions: AdditionOperand[] = positionResults.map((res) => {
+        return {...res.valueAtPosition};
+    });
+    const carryDigitsNotConsideredInResult: AdditionOperand[] = [];
+
+    positionResults.forEach((result) => {
+        const missingCarryDigits = result.carry.filter((dgt) => {
+            return !digitsFromPositions.find((posDgt) => dgt.position === posDgt.position);
+        });
+
+        carryDigitsNotConsideredInResult.push(...missingCarryDigits);
+    });
+
+    const withExtension: AdditionOperand[] = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
+
+    return mergeExtensionDigitsForAddition(withExtension, positionResults);
+}
+
+export function mergeExtensionDigitsForAddition(resultDigits: AdditionOperand[], positionResults: AdditionPositionResult[]): AdditionOperand[] {
+    const [, extensionDigit, ...rest] = resultDigits;
+    const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
+
+    let startPositionIndex = firstDifferentIndex === -1
+        ? rest.length -1
+        : firstDifferentIndex;
+
+    const positionIndexBeforeStart = startPositionIndex -1;
+
+    const shouldStartFromPreviousPosition = startPositionIndex >= 1
+        && prevPositionGeneratedFromInitialDigits(startPositionIndex, rest, positionResults);
+
+    if(shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
+
+    const startPosition = rest[startPositionIndex].position;
+    const mergedExtension = getMergedExtension(extensionDigit, startPosition + 1);
+    const nonExtensionDigits = rest.slice(startPositionIndex);
+
+    return [mergedExtension, ...nonExtensionDigits]
+}
+
+function prevPositionGeneratedFromInitialDigits(index: number, digits: AdditionOperand[], positionResults: AdditionPositionResult[]): boolean {
+    const prevPosition = digits[index -1].position;
+    const prevPositionResult = positionResults.find((res) => res.valueAtPosition.position === prevPosition);
+
+    return positionGeneratedFromInitialDigits(prevPositionResult)
+}
+
+function positionGeneratedFromInitialDigits(positionResult: AdditionPositionResult): boolean {
+    return positionResult.operands.every((op) => !op.isComplementExtension);
+}
+
+export function findFirstNonRepeatingDigitIndex(resultDigits: AdditionOperand[]): number {
+    const [, extensionDigit, ...rest] = resultDigits;
+    return rest.findIndex((digit) => {
+        return digit.valueInDecimal != extensionDigit.valueInDecimal;
+    });
+}
+
 export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[]): PositionalNumber {
     let complementStr = '';
     const base = resultDigits[0].base;
@@ -163,3 +217,5 @@ function carryToDigits(decimalValue: number, base: number, startingPosition: num
 function isNonZeroDigit(digit: AdditionOperand): boolean {
     return digit.valueInDecimal != 0;
 }
+
+
