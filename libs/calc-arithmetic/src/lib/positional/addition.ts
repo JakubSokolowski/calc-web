@@ -1,8 +1,8 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionOperand, AdditionPositionResult, AdditionResult, Digit, PositionResult } from '../models';
-import { getMergedExtension, hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
+import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
+import { getMergedExtension, hasInfiniteExtension } from './complement-extension';
 import { ComplementConverter } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
@@ -14,7 +14,7 @@ export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResul
     }
     const numbersAsDigits = numbers.map((number) => number.complement.toDigitsList());
     const result = addDigitsArrays(numbersAsDigits);
-    return {...result, numberOperands: numbers};
+    return { ...result, numberOperands: numbers };
 }
 
 export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
@@ -44,6 +44,7 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
             ...allCarriesAtCurrentPosition.map((carry) => ({ ...carry, isCarry: true })),
             ...allDigitsAtCurrentPosition
         ];
+
 
         const positionResult = addDigitsAtPosition(digitsToAdd, currentPosition, base);
 
@@ -90,7 +91,7 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
 
 export function extractResultDigitsFromAddition(positionResults: AdditionPositionResult[]): AdditionOperand[] {
     const digitsFromPositions: AdditionOperand[] = positionResults.map((res) => {
-        return {...res.valueAtPosition};
+        return { ...res.valueAtPosition };
     });
     const carryDigitsNotConsideredInResult: AdditionOperand[] = [];
 
@@ -112,28 +113,28 @@ export function mergeExtensionDigitsForAddition(resultDigits: AdditionOperand[],
     const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
 
     let startPositionIndex = firstDifferentIndex === -1
-        ? rest.length -1
+        ? rest.length - 1
         : firstDifferentIndex;
 
-    const positionIndexBeforeStart = startPositionIndex -1;
+    const positionIndexBeforeStart = startPositionIndex - 1;
 
     const shouldStartFromPreviousPosition = startPositionIndex >= 1
         && prevPositionGeneratedFromInitialDigits(startPositionIndex, rest, positionResults);
 
-    if(shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
+    if (shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
 
     const startPosition = rest[startPositionIndex].position;
     const mergedExtension = getMergedExtension(extensionDigit, startPosition + 1);
     const nonExtensionDigits = rest.slice(startPositionIndex);
 
-    return [mergedExtension, ...nonExtensionDigits]
+    return [mergedExtension, ...nonExtensionDigits];
 }
 
 function prevPositionGeneratedFromInitialDigits(index: number, digits: AdditionOperand[], positionResults: AdditionPositionResult[]): boolean {
-    const prevPosition = digits[index -1].position;
+    const prevPosition = digits[index - 1].position;
     const prevPositionResult = positionResults.find((res) => res.valueAtPosition.position === prevPosition);
 
-    return positionGeneratedFromInitialDigits(prevPositionResult)
+    return positionGeneratedFromInitialDigits(prevPositionResult);
 }
 
 function positionGeneratedFromInitialDigits(positionResult: AdditionPositionResult): boolean {
@@ -153,7 +154,11 @@ export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[])
 
     resultDigits.forEach((digit) => {
         const firstFractionalPartDigitIndex = -1;
-        if (digit.position === firstFractionalPartDigitIndex) complementStr += '.';
+        if (digit.position === firstFractionalPartDigitIndex) {
+            if( base > 36)
+                complementStr = complementStr.slice(0, -1);
+            complementStr += '.'
+        }
         complementStr += base > 36 ? digit.representationInBase + ' ' : digit.representationInBase;
     });
 

@@ -8,7 +8,7 @@ import {
     isFloatingPointStr,
     isValidString,
     removeZeroDigits,
-    representationStrToStrArray,
+    representationStrToStrArray, serializeRepresentationStr,
     splitToDigits, splitToDigitsList,
     splitToPartsArr
 } from './conversion-helpers';
@@ -387,6 +387,31 @@ describe('conversion-helpers', () => {
             expect(arbitraryIntegralToDecimal(input, base)).toEqual(expected);
         });
 
+        it('converts positive number in base 64 to base 64', () => {
+            // given
+            const input = '32 18';
+            const base = 64;
+            const expected = new BigNumber(2066);
+
+            // when
+            expect(arbitraryIntegralToDecimal(input, base)).toEqual(expected);
+        });
+
+        it('converts negative number in base 64 to base 64', () => {
+            // given
+            const input = '-32 18';
+            const base = 64;
+            const expected = new BigNumber(-2066);
+
+            // when
+            const result = arbitraryIntegralToDecimal(input, base);
+            console.log(result);
+
+            // when
+            expect(result).toEqual(expected);
+        });
+
+
         it('throws error if repStr does match input base', () => {
             // given
             const input = 'FF8';
@@ -731,6 +756,20 @@ describe('conversion-helpers', () => {
                     valueInDecimal: 5
                 }
             ];
+            expect(result).toEqual(expected)
+        });
+    });
+
+    describe('serializeRepresentationStr tests', () => {
+        it('should replace invalid signs, delimiters and whitespace with valid', () => {
+            // given
+           const representation = '−12 45,34  56  ';
+
+            // when
+            const result = serializeRepresentationStr(representation);
+
+            // then
+            const expected = '-12 45.34 56';
             expect(result).toEqual(expected)
         });
     });

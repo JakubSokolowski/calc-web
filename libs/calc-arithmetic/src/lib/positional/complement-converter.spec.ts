@@ -1,4 +1,5 @@
 import { ComplementConverter } from './complement-converter';
+import { Digit } from '@calc/calc-arithmetic';
 
 describe('getPositiveComplement tests', () => {
     it('returns valid complement for positive number', () => {
@@ -202,6 +203,35 @@ describe('getComplement tests', () => {
         const expected = '(9)90';
         expect(actual.toString()).toEqual(expected)
     });
+});
+
+describe('toDigitsList tests', () => {
+   it('should return proper digit list for b64 number', () => {
+       // given
+       const input = '00';
+       const base = 64;
+
+       // when
+       const actual = ComplementConverter.getComplement(input, base).toDigitsList();
+
+       // then
+       const expected: Digit[] = [
+           {
+               base: 64,
+               isComplementExtension: true,
+               position: 1,
+               representationInBase: '(00)',
+               valueInDecimal: 0
+           },
+           {
+               base: 64,
+               position: 0,
+               representationInBase: '00',
+               valueInDecimal: 0
+           }
+       ];
+       expect(actual).toEqual(expected);
+   })
 });
 
 describe('isNegative tests', () => {
