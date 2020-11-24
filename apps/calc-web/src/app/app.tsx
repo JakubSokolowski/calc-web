@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, HashRouter, Route, Switch } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
 import '../assets/i18n/i18n';
@@ -31,7 +31,6 @@ import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
 import BaseConverterView from './components/base-converter-view/base-converter-view';
 import { PositionalCalculatorView } from '@calc/positional-calculator';
-import { optionsKey } from './core/functions/local-storage';
 import { loadOptions } from './store/actions/options.actions';
 import { useMountEffect } from './core/hooks/use-mount-effect';
 

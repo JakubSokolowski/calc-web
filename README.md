@@ -1,3 +1,3 @@
 # CALC
 
-[![codecov](https://codecov.io/gl/gitgudorgetgot/calc/branch/%5Cx6d6173746572/graph/badge.svg)](https://codecov.io/gl/gitgudorgetgot/calc)
+[![codecov](https://codecov.io/gh/JakubSokolowski/calc-web/branch/master/graph/badge.svg?token=HTGuzusDt7)](https://codecov.io/gh/JakubSokolowski/calc-web)
