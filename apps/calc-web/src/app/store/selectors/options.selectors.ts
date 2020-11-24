@@ -20,3 +20,9 @@ export const selectAppTheme = createSelector(
     optionsState,
     state => state.theme
 );
+
+export const selectAppLanguage = createSelector(
+    optionsState,
+    state => state.language
+);
+

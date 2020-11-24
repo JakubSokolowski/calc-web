@@ -1,6 +1,6 @@
 import { rootReducer, StoreState } from './reducers/root.reducer';
-import { optionsInitialState } from './reducers/options.reducer';
 import { createStore } from 'redux';
+import { optionsInitialState } from './models/options-state';
 
 
 const initialState: StoreState = {

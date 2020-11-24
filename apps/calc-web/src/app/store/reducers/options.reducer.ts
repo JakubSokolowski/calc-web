@@ -1,18 +1,6 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { setShowComplement, setShowDecimalValue, setTheme } from '../actions/options.actions';
-import { AppTheme } from '@calc/ui';
-
-export interface OptionsState {
-    showComplement: boolean;
-    showDecimalValue: boolean;
-    theme: AppTheme;
-}
-
-export const optionsInitialState: OptionsState = {
-    showComplement: true,
-    showDecimalValue: true,
-    theme: AppTheme.Dark
-};
+import { loadOptions, setLanguage, setShowComplement, setShowDecimalValue, setTheme } from '../actions/options.actions';
+import { optionsInitialState } from '../models/options-state';
 
 export const optionsReducer = createReducer(
     optionsInitialState,
@@ -25,6 +13,12 @@ export const optionsReducer = createReducer(
         },
         [setTheme.type]: (state, {payload}) => {
             return ({...state, theme: payload.theme})
+        },
+        [setLanguage.type]: (state, {payload}) => {
+            return ({...state, language: payload.language})
+        },
+        [loadOptions.type]: (state, {payload}) => {
+            return ({...payload.options})
         },
     }
 );

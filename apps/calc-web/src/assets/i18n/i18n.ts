@@ -4,30 +4,35 @@ import { initReactI18next } from 'react-i18next';
 import translationEN from './en.json';
 import translationPL from './pl.json';
 
+export enum Language {
+    pl = 'pl',
+    en = 'en'
+}
+
 const resources = {
-    en: {
+    [Language.en]: {
         translation: translationEN
     },
-    pl: {
+    [Language.pl]: {
         translation: translationPL
     }
 };
 
-export function getNativeName(languageKey: string): string {
+export function getNativeName(languageKey: Language): string {
     return {
-        'en': 'English',
-        'pl': 'Polski'
+        [Language.en]: 'English',
+        [Language.pl]: 'Polski'
     }[languageKey];
 }
 
-export const availableThemes = Object.keys(resources);
+export const availableLanguages = [Language.en, Language.pl];
 
 i18n
     .use(initReactI18next) // passes i18n down to react-i18next
     .init({
         resources,
-        lng: 'pl',
-        fallbackLng: 'en',
+        lng: Language.en,
+        fallbackLng: Language.pl,
         interpolation: {
             escapeValue: false
         }
