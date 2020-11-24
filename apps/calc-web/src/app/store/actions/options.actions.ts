@@ -2,6 +2,7 @@ import { createAction } from '@reduxjs/toolkit';
 import { AppTheme } from '@calc/ui';
 import { loadOptionsWithFallback, updateOptions } from '../../core/functions/local-storage';
 import { Language } from '../../../assets/i18n/i18n';
+import { getI18n } from 'react-i18next';
 
 export enum OptionsActionsType {
     SetShowComplement = '[Options] Set show complement',
@@ -47,6 +48,7 @@ export const loadOptions = createAction(
     OptionsActionsType.LoadOptions,
     () => {
         const options = loadOptionsWithFallback();
+        getI18n().changeLanguage(options.language).catch((err) => console.log(err));
         return ({ payload: { options } });
     }
 );
