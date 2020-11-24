@@ -1,13 +1,12 @@
-name: CI
+name: Master CI
 
 on:
-    pull_request:
-        branches: [ master ]
-
-    workflow_dispatch:
+    push:
+        branches:
+            - master
 
 jobs:
-    ci:
+    test-and-codecov:
         runs-on: ubuntu-latest
         strategy:
             matrix:
@@ -31,20 +30,32 @@ jobs:
                 uses: actions/setup-node@v1
                 with:
                     node-version: ${{ matrix.node-version }}
-            -   name: Fetch target branch
-                run: git fetch origin ${{ github.event.pull_request.base.ref }}
             -   name: Install packages
                 run: npm install
-            -   name: Affected Lint
-                shell: bash
-                run: npm run affected:lint -- --base=remotes/origin/${{ github.event.pull_request.base.ref }} --exclude docs
             -   name: Affected Test
                 shell: bash
-                run: npm run affected:test -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+                run: npm run affected:test -- -all
             -   name: Upload coverage to Codecov
                 uses: codecov/codecov-action@v1
                 with:
                     directory: ./coverage/
-            -   name: Affected Build
-                shell: bash
-                run: npm run affected:build -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+    build-and-deploy:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v2.3.1
+                with:
+                    persist-credentials: false
+
+            -   name: Install and Build
+                run: |
+                    npm install
+                    npm run build:prod
+
+            -   name: Deploy
+                uses: JamesIves/github-pages-deploy-action@3.7.1
+                with:
+                    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+                    BRANCH: gh-pages
+                    FOLDER: dist/apps/calc-web
+                    CLEAN: true
