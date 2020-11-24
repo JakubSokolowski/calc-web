@@ -4,7 +4,7 @@ import {
     addPositionalNumbers,
     extractResultDigitsFromAddition
 } from './addition';
-import { fromNumber, AdditionPositionResult } from '@calc/calc-arithmetic';
+import { AdditionPositionResult, fromNumber } from '@calc/calc-arithmetic';
 import { AdditionOperand } from '../models';
 import { fromStringDirect } from './base-converter';
 
@@ -582,83 +582,83 @@ describe('addition', () => {
         });
     });
 
+
     describe('#addPositionalNumbers', () => {
-        it('should add 2 decimal positional numbers correctly', () => {
-            // given
-            const a = fromNumber(5999, 10).result;
-            const b = fromNumber(5999, 10).result;
+        describe('when numbers are base 2', () => {
+            const base = 2;
 
-            // when
-            const result = addPositionalNumbers([a, b]).numberResult.toDigitsList();
+            test.each([
+                ['0', '0', '0'],
+                ['-1', '1', '0'],
+                ['111011', '101101', '1101000'],
+                ['-111', '-111', '-1110'],
+                ['100', '-10', '10'],
+                ['0.00101', '-11101', '-11100.11011'],
+                ['10010', '0.00110', '10010.00110'],
+                ['10010', '-0.00110', '10001.11010']
+            ])('addPositionalNumbers([%i, %i]) should return proper result', (a: string, b: string, expected: string) => {
+                // given
+                const numA = fromStringDirect(a, base).result;
+                const numB = fromStringDirect(b, base).result;
 
-            // then
-            const expected = fromNumber(11998, 10).result.toDigitsList();
-            expect(result).toEqual(expected);
+                // when
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
+
+                // then
+                const numExpected = fromStringDirect(expected, base).result.toDigitsList();
+                expect(result).toEqual(numExpected);
+            });
         });
 
-        it('should add 2 zeros correctly', () => {
-            // given
-            const a = fromNumber(0, 10).result;
-            const b = fromNumber(0, 10).result;
+        describe('when numbers are base 10', () => {
+            const base = 10;
 
-            // when
-            const result = addPositionalNumbers([a, b]).numberResult.toDigitsList();
+            test.each([
+                [0, 0, 0],
+                [-1, 1, 0],
+                [5999, 5999, 11998],
+                [-199, -123, -322],
+                [10, -20, -10],
+                [10, 0.0009, 10.0009],
+                [10.1236, 0.0009, 10.1245],
+                [10.1236, -0.0009, 10.1227],
+            ])('addPositionalNumbers([%i, %i]) should return proper result', (a, b, expected) => {
+                // given
+                const numA = fromNumber(a, base).result;
+                const numB = fromNumber(b, base).result;
 
-            // then
-            const expected = fromNumber(0, 10).result.toDigitsList();
-            expect(result).toEqual(expected);
+                // when
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
+
+                // then
+                const numExpected = fromNumber(expected, base).result.toDigitsList();
+                expect(result).toEqual(numExpected);
+            });
         });
 
-        it('should add binary numbers correctly', () => {
-            // given
-            const a = fromNumber(4, 2).result;
-            const b = fromNumber(2, 2).result;
+        describe('when numbers are base 64', () => {
+            const base = 64;
 
-            // when
-            const result = addPositionalNumbers([a, b]).numberResult.toDigitsList();
+            test.each([
+                ['00', '00', '00'],
+                ['-01', '01', '00'],
+                ['56 34 21', '11 08 19', '01 03 42 40'],
+                ['10', '-20', '-10'],
+                ['10', '-20', '-10'],
+                ['12 13.45', '44 32', '56 45.45'],
+                ['12 13.45', '-44 32', '-32 18.19'],
+            ])('addPositionalNumbers([%s, %s]) should return proper result', (a: string, b: string, expected: string) => {
+                // given
+                const numA = fromStringDirect(a, base).result;
+                const numB = fromStringDirect(b, base).result;
 
-            // then
-            const expected = fromNumber(6, 2).result.toDigitsList();
-            expect(result).toEqual(expected);
-        });
+                // when
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
 
-        it('should add positive and negative numbers correctly', () => {
-            // given
-            const a = fromNumber(10, 10).result;
-            const b = fromNumber(-20, 10).result;
-
-            // when
-            const result = addPositionalNumbers([a, b]);
-
-            // then
-            const expected = fromNumber(-10, 10).result.toString();
-            expect(result.numberResult.toString()).toEqual(expected);
-        });
-
-        it('should add two positive numbers with fractional part correctly', () => {
-            // given
-            const a = fromNumber(10.1236, 10).result;
-            const b = fromNumber(0.0009, 10).result;
-
-            // when
-            const result = addPositionalNumbers([a, b]);
-
-            // then
-            const expected = fromNumber(10.1245, 10).result.toString();
-            expect(result.numberResult.toString()).toEqual(expected);
-        });
-
-        it('should add two positive and negative numbers with fractional part correctly', () => {
-            // given
-            const a = fromNumber(10.1236, 10).result;
-            const b = fromNumber(-0.0009, 10).result;
-
-            // when
-            const result = addPositionalNumbers([a, b]);
-
-            // then
-            const expected = fromNumber(10.1227, 10).result.toString();
-            expect(result.numberResult.toString()).toEqual(expected);
+                // then
+                const numExpected = fromStringDirect(expected, base).result.toDigitsList();
+                expect(result).toEqual(numExpected);
+            });
         });
     });
 
@@ -790,6 +790,6 @@ describe('addition', () => {
                 }
             ];
             expect(digits).toEqual(expected);
-        })
-    })
+        });
+    });
 });

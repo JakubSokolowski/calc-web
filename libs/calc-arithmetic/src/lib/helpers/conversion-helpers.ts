@@ -97,17 +97,18 @@ export function arbitraryIntegralToDecimal(
     base: number
 ): BigNumber {
     if (isValidString(repStr, base)) {
+        let rep = repStr.trim();
         let result = new BigNumber(0);
         let multiplier = 1;
         // While converting, the numbers are assumed to be unsigned
         // Detect and remember if number was negative
-        if (repStr.charAt(0) === '-') {
-            repStr = repStr.substr(1);
+        if (rep.charAt(0) === '-') {
+            rep = rep.substr(1);
             multiplier = -1;
         }
         // Digits at positions in some representation are represented by multiple characters,
         // so it's necessary to convert valueString to list of strings
-        const strArr = representationStrToStrArray(repStr, base);
+        const strArr = representationStrToStrArray(rep, base);
         // The value at each position is calculated by taking the value of digit
         // and multiplying it by the base of number to the power of exponent
 
@@ -118,12 +119,10 @@ export function arbitraryIntegralToDecimal(
         // So the starting value of exponent is the count of elements in lis -1
         const exponent = strArr.length - 1;
         for (let i = 0; i <= exponent; i++) {
-            result = result.plus(
-                new BigNumber(
-                    BaseDigits.getValue(strArr[i], base) *
-                        Math.pow(base, exponent - i)
-                )
-            );
+            const expValue = Math.pow(base, exponent - i);
+            const digitValue = BaseDigits.getValue(strArr[i], base);
+            const toAdd = new BigNumber(digitValue * expValue);
+            result = result.plus(toAdd);
         }
         return result.multipliedBy(multiplier);
     }
@@ -256,7 +255,7 @@ export function splitToDigits(
     return [new Digits(result[0], base), new Digits(result[1], base)];
 }
 
-export function splitToDigitsList( num: BigNumber | number | string,  base = 10): Digit[] {
+export function splitToDigitsList(num: BigNumber | number | string, base = 10): Digit[] {
     const [integerPart, fractionalPart] = splitToPartsArr(num, base);
     return [
         ...integerPart.map((digit, index) => {
@@ -265,7 +264,7 @@ export function splitToDigitsList( num: BigNumber | number | string,  base = 10)
                 base,
                 position: integerPart.length - 1 - index,
                 representationInBase: digit
-            }
+            };
         }),
         ...fractionalPart.map((digit, index) => {
             return {
@@ -273,7 +272,16 @@ export function splitToDigitsList( num: BigNumber | number | string,  base = 10)
                 base,
                 position: -1 * (index + 1),
                 representationInBase: digit
-            }
+            };
         })
-    ]
+    ];
 }
+
+export function serializeRepresentationStr(representation: string): string {
+   return representation
+       .replace('−', '-')
+       .replace(',', '.')
+       .replace(/\s+/g, ' ')
+       .trim()
+}
+

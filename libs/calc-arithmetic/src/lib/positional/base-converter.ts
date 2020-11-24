@@ -5,7 +5,7 @@ import {
     decimalFractionToArbitrary,
     decimalIntegerToArbitrary,
     isFloatingPointStr,
-    isValidString,
+    isValidString, serializeRepresentationStr,
     splitToDigitsList,
     splitToPartsArr
 } from '../helpers/conversion-helpers';
@@ -33,7 +33,7 @@ export class Conversion {
 
     get inputNumDigits(): number {
         const [inputStr, base] = this.stages[0].input;
-        return  base >= 36 ? inputStr.split(' ').length : inputStr.length;
+        return base >= 36 ? inputStr.split(' ').length : inputStr.length;
     }
 
     public addStage(stage: ConversionStage): void {
@@ -46,7 +46,7 @@ export class Conversion {
     }
 
     public getLastStage(): ConversionStage {
-        return this.stages[this.stages.length -1];
+        return this.stages[this.stages.length - 1];
     }
 
     public getFirstStage(): ConversionStage {
@@ -139,6 +139,32 @@ export interface BaseConverter {
 }
 
 export class StandardBaseConverter implements BaseConverter {
+    private static getDecimalValue(valueStr: string, inputBase: number): BigNumber {
+        if (!isFloatingPointStr(valueStr)) {
+            return arbitraryIntegralToDecimal(valueStr, inputBase);
+        }
+
+        const [integerStr, fractionStr] = valueStr.split('.');
+
+        const integerPart = arbitraryIntegralToDecimal(
+            integerStr,
+            inputBase
+        );
+
+        let fractionalPart = arbitraryFractionToDecimal(
+            fractionStr,
+            inputBase
+        );
+
+        // Make the fractionalPart negative if the integer part is also negative
+        // This is needed when both parts are added together to create whole value
+        if (integerPart.isNegative()) {
+            fractionalPart = fractionalPart.negated();
+        }
+
+        return integerPart.plus(fractionalPart);
+    }
+
     public fromNumber(
         num: number | BigNumber,
         resultBase: number,
@@ -163,8 +189,10 @@ export class StandardBaseConverter implements BaseConverter {
             resultBase,
             precision
         );
-        const repStr =
-            integerPartDigits[0].toString() + '.' + fractionalPartDigits[0];
+        const repStr = fractionalPartDigits[0].length > 0
+            ? integerPartDigits[0].toString() + '.' + fractionalPartDigits[0]
+            : integerPartDigits[0].toString();
+
         const complement = ComplementConverter.getComplement(
             sign + repStr,
             resultBase
@@ -229,7 +257,7 @@ export class StandardBaseConverter implements BaseConverter {
 
     public fromStringDirect(
         valueStr: string,
-        inputBase: number,
+        inputBase: number
     ): Conversion {
         if (!isValidString(valueStr, inputBase)) {
             throw new Error(
@@ -259,7 +287,7 @@ export class StandardBaseConverter implements BaseConverter {
 
     public fromDigitsDirect(
         digits: Digit[],
-        isNegative? : boolean
+        isNegative?: boolean
     ): Conversion {
         const valueStr = digits.reduce((str, digit) => {
             return digit.position === -1
@@ -269,32 +297,7 @@ export class StandardBaseConverter implements BaseConverter {
 
         const base = digits[0].base;
 
-        return this.fromStringDirect(valueStr, base)
-    }
-
-
-    private static getDecimalValue(valueStr: string, inputBase: number): BigNumber {
-        if (!isFloatingPointStr(valueStr)) {
-            return arbitraryIntegralToDecimal(valueStr, inputBase);
-        }
-
-        const valueParts = valueStr.split('.');
-        const integerPart = arbitraryIntegralToDecimal(
-            valueParts[0],
-            inputBase
-        );
-        let fractionalPart = arbitraryFractionToDecimal(
-            valueParts[1],
-            inputBase
-        );
-
-        // Make the fractionalPart negative if the integer part is also negative
-        // This is needed when both parts are added together to create whole value
-        if (integerPart.isNegative()) {
-            fractionalPart = fractionalPart.negated();
-        }
-
-        return integerPart.plus(fractionalPart);
+        return this.fromStringDirect(valueStr, base);
     }
 }
 
@@ -314,22 +317,22 @@ export function fromString(
     precision = 30,
     converter: BaseConverter = new StandardBaseConverter()
 ): Conversion {
-    const valueStrWithoutExtraSpaces =  valueStr.replace(/\s+/g, ' ').trim();
-    return converter.fromString(valueStrWithoutExtraSpaces, inputBase, resultBase, precision);
+    const serializedStr = serializeRepresentationStr(valueStr);
+    return converter.fromString(serializedStr, inputBase, resultBase, precision);
 }
 
 export function fromStringDirect(
     valueStr: string,
-    inputBase: number,
+    inputBase: number
 ): Conversion {
     const converter = new StandardBaseConverter();
-    const valueStrWithoutExtraSpaces =  valueStr.replace(/\s+/g, ' ').trim();
-    return converter.fromStringDirect(valueStrWithoutExtraSpaces, inputBase);
+    const serializedStr = serializeRepresentationStr(valueStr);
+    return converter.fromStringDirect(serializedStr, inputBase);
 }
 
 export function fromDigits(
     digit: Digit[],
-    isNegative? : boolean,
+    isNegative?: boolean
 ): Conversion {
     const converter = new StandardBaseConverter();
     return converter.fromDigitsDirect(digit, isNegative);
