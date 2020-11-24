@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Section } from '@calc/ui';
 
