@@ -1,10 +1,16 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { availableThemes, getNativeName } from '../../../assets/i18n/i18n';
+import { availableLanguages, getNativeName, Language } from '../../../assets/i18n/i18n';
 import { Button, Popover } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAppLanguage } from '../../store/selectors/options.selectors';
+import { setLanguage } from '../../store/actions/options.actions';
+
 export const LanguageMenu: FC = () => {
     const { i18n, t } = useTranslation();
+    const selectedLanguage = useSelector(selectAppLanguage);
+    const dispatch = useDispatch();
 
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -19,14 +25,15 @@ export const LanguageMenu: FC = () => {
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
 
-    const handleClick = async (language) => {
+    const handleClick = async (language: Language) => {
         if (language && i18n.language !== language) {
             await i18n.changeLanguage(language);
+            dispatch(setLanguage(language));
         }
         handleClose();
     };
 
-    const options = availableThemes.map((languageKey, index) => {
+    const options = availableLanguages.map((languageKey, index) => {
         return (
             <div key={index}>
                 <Button
@@ -63,7 +70,7 @@ export const LanguageMenu: FC = () => {
                 </div>
             </Popover>
             <Button startIcon={<TranslateIcon/>} aria-describedby={id} variant="text" color="default" onClick={handlePopoverClick}>
-                {getNativeName(i18n.language)}
+                {getNativeName(selectedLanguage)}
             </Button>
         </div>
     );

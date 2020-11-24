@@ -20,7 +20,7 @@ import {
     Typography
 } from '@material-ui/core';
 import { getTheme } from '@calc/ui';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { selectAppTheme } from './store/selectors/options.selectors';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
 import { makeStyles } from '@material-ui/core/styles';
@@ -30,8 +30,10 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
 import BaseConverterView from './components/base-converter-view/base-converter-view';
-import { environment } from '@calc/env';
 import { PositionalCalculatorView } from '@calc/positional-calculator';
+import { optionsKey } from './core/functions/local-storage';
+import { loadOptions } from './store/actions/options.actions';
+import { useMountEffect } from './core/hooks/use-mount-effect';
 
 
 const drawerWidth = 240;
@@ -91,6 +93,7 @@ export const App = () => {
     const classes = useStyles();
     const { t } = useTranslation();
     const [open, setOpen] = React.useState(false);
+    const dispatch = useDispatch();
 
     const handleDrawerOpen = () => {
         setOpen(true);
@@ -119,6 +122,9 @@ export const App = () => {
         return () => document.removeEventListener('keydown', closeDrawerOnEscape)
     }, [open]);
 
+    useMountEffect(() => {
+        dispatch(loadOptions());
+    });
 
     return (
         <div className={classes.root} >
