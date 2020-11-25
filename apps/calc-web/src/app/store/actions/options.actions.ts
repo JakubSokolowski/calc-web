@@ -1,8 +1,8 @@
 import { createAction } from '@reduxjs/toolkit';
 import { AppTheme } from '@calc/ui';
 import { loadOptionsWithFallback, updateOptions } from '../../core/functions/local-storage';
-import { Language } from '../../../assets/i18n/i18n';
 import { getI18n } from 'react-i18next';
+import { Language } from '@calc/i18n';
 
 export enum OptionsActionsType {
     SetShowComplement = '[Options] Set show complement',

@@ -5,6 +5,7 @@
         "toggleLight": "Przełącz na jasny motyw"
     },
     "home": {
+        "appName": "CALC",
         "header": "Calc",
         "positional": "Pozycyjne",
         "floating": "Zmiennoprzecinkowe"
@@ -34,10 +35,10 @@
         "showComplement": "Pokaż uzupełnienie"
     },
     "associatedBaseConverter": {
-        "title": "Konwersja przez bazy skojarzone",
         "result": "Wynik konwersji",
         "mappings": "Odwzorowania",
-        "noOutputBase": "Brak opcji dla podstawy wyniku"
+        "noOutputBase": "Brak opcji dla podstawy wyniku",
+        "title": "Konwersja przez bazy skojarzone"
     },
     "floatConverter": {
         "title": "IEEE 754",
@@ -65,6 +66,8 @@
         "details": "Szczegóły",
         "sanityCheck": "Upewnij się",
         "newOperand": "Nowy operand",
+        "additionDetails": "Szczegóły dodawania",
+        "subtractionDetails": "Szczegóły odejmowania",
         "downloadDetails": "Pobierz szczegóły jako .png",
         "calculate": "Oblicz"
     },

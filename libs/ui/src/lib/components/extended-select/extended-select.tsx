@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, ReactNode } from 'react';
+import React, { ChangeEvent, ReactNode } from 'react';
 import { createStyles, IconButton, MenuItem, TextField, Theme, Tooltip } from '@material-ui/core';
 import HelpIcon from '@material-ui/icons/Help';
 import { makeStyles } from '@material-ui/core/styles';
