@@ -47,6 +47,9 @@
     },
     "positional-calculator": {
       "tags": []
+    },
+    "i18n": {
+      "tags": []
     }
   }
 }

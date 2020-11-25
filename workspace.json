@@ -271,8 +271,8 @@
           "builder": "@nrwl/linter:lint",
           "options": {
             "linter": "eslint",
-              "config": "libs/positional-calculator/.eslintrc",
-              "tsConfig": [
+            "config": "libs/positional-calculator/.eslintrc",
+            "tsConfig": [
               "libs/positional-calculator/tsconfig.lib.json",
               "libs/positional-calculator/tsconfig.spec.json"
             ],
@@ -287,6 +287,34 @@
           "options": {
             "jestConfig": "libs/positional-calculator/jest.config.js",
             "tsConfig": "libs/positional-calculator/tsconfig.spec.json",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "i18n": {
+      "root": "libs/i18n",
+      "sourceRoot": "libs/i18n/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/i18n/.eslintrc",
+            "tsConfig": [
+              "libs/i18n/tsconfig.lib.json",
+              "libs/i18n/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/i18n/**/*"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/i18n/jest.config.js",
+            "tsConfig": "libs/i18n/tsconfig.spec.json",
             "passWithNoTests": true
           }
         }

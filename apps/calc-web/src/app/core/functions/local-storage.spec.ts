@@ -1,6 +1,6 @@
 import { loadOptionsWithFallback, optionsKey, updateOptions } from './local-storage';
 import { optionsInitialState, OptionsState } from '../../store/models/options-state';
-import { Language } from '../../../assets/i18n/i18n';
+import { Language } from '@calc/i18n';
 
 describe('local-storage', () => {
     describe('#loadOptionsWithFallback', () => {

@@ -1,27 +1,12 @@
 import React, { cloneElement, FC, useState } from 'react';
-import { createStyles, List, ListItem, RootRef, TextField, Theme } from '@material-ui/core';
+import { createStyles, List, RootRef, Theme } from '@material-ui/core';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { makeStyles } from '@material-ui/core/styles';
-
-
-interface FormValues {
-    inputBase: number;
-}
-
 
 interface P {
     items?: any[];
 }
 
-// fake data generator
-const getItems = count =>
-    Array.from({ length: count }, (v, k) => k).map(k => ({
-        id: `item-${k}`,
-        primary: `item ${k}`,
-        secondary: k % 2 === 0 ? `Whatever for ${k}` : undefined
-    }));
-
-// a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);

@@ -1,5 +1,5 @@
 import { AppTheme } from '@calc/ui';
-import { Language } from '../../../assets/i18n/i18n';
+import { Language } from '@calc/i18n';
 
 export interface OptionsState {
     showComplement: boolean;

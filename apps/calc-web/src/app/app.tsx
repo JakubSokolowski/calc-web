@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
-import '../assets/i18n/i18n';
 import SiderMenu from './components/sider-menu/sider-menu';
 import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
 import { FloatConverterView } from './components/float-converter-view/float-converter-view';
@@ -33,7 +32,7 @@ import BaseConverterView from './components/base-converter-view/base-converter-v
 import { PositionalCalculatorView } from '@calc/positional-calculator';
 import { loadOptions } from './store/actions/options.actions';
 import { useMountEffect } from './core/hooks/use-mount-effect';
-
+import '@calc/i18n'
 
 const drawerWidth = 240;
 

@@ -1,8 +1,11 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 
-import translationEN from './en.json';
-import translationPL from './pl.json';
+import en from '../assets/en.json';
+import pl from '../assets/pl.json';
+
+export const translationEn = en;
+export const translationPl = pl;
 
 export enum Language {
     pl = 'pl',
@@ -11,10 +14,10 @@ export enum Language {
 
 const resources = {
     [Language.en]: {
-        translation: translationEN
+        translation: en
     },
     [Language.pl]: {
-        translation: translationPL
+        translation: pl
     }
 };
 
@@ -28,7 +31,7 @@ export function getNativeName(languageKey: Language): string {
 export const availableLanguages = [Language.en, Language.pl];
 
 i18n
-    .use(initReactI18next) // passes i18n down to react-i18next
+    .use(initReactI18next)
     .init({
         resources,
         lng: Language.en,

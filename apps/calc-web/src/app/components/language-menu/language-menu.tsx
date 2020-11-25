@@ -1,11 +1,11 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { availableLanguages, getNativeName, Language } from '../../../assets/i18n/i18n';
 import { Button, Popover } from '@material-ui/core';
 import TranslateIcon from '@material-ui/icons/Translate';
 import { useDispatch, useSelector } from 'react-redux';
 import { selectAppLanguage } from '../../store/selectors/options.selectors';
 import { setLanguage } from '../../store/actions/options.actions';
+import { availableLanguages, getNativeName, Language } from '@calc/i18n';
 
 export const LanguageMenu: FC = () => {
     const { i18n, t } = useTranslation();

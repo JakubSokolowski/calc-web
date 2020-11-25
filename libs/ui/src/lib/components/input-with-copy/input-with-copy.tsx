@@ -101,7 +101,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
         variant: 'outlined',
         inputRef: textAreaRef,
         label,
-        value: value as any,
+        value,
         onChange: inputType === InputType.Number ? handleNumberChange : handleChange
     };
 
