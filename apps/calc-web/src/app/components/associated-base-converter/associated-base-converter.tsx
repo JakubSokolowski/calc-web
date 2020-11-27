@@ -9,7 +9,6 @@ import {
 } from '@calc/calc-arithmetic';
 import { InputWithCopy } from '@calc/ui';
 import { useSelector } from 'react-redux';
-import { selectShowComplement, selectShowDecimalValue } from '../../store/selectors/options.selectors';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, MenuItem, TextField } from '@material-ui/core';
@@ -17,6 +16,7 @@ import { useFormik } from 'formik';
 import { clean } from '@calc/utils';
 import { FormErrors } from '@calc/ui';
 import { useConverterStyles } from '../../core/styles/converter-styles';
+import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 
 interface P {
     onConversionChange?: (conversion: Conversion) => void;
