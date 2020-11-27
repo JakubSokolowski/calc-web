@@ -1,4 +1,4 @@
-import { optionsInitialState, OptionsState } from '../../store/models/options-state';
+import { optionsInitialState, OptionsState } from '../store/models/options-state';
 
 export const optionsKey = 'calcOptions';
 

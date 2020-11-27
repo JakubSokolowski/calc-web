@@ -2,11 +2,10 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconButton, Tooltip } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAppTheme } from '../../store/selectors/options.selectors';
 import { AppTheme } from '@calc/ui';
-import { setTheme } from '../../store/actions/options.actions';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import { selectAppTheme, setTheme } from '@calc/core';
 
 export const ThemeMenu: FC = () => {
     const { t } = useTranslation();

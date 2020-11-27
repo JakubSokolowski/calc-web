@@ -20,7 +20,6 @@ import {
 } from '@material-ui/core';
 import { getTheme } from '@calc/ui';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectAppTheme } from './store/selectors/options.selectors';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
 import { makeStyles } from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
@@ -30,8 +29,8 @@ import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
 import BaseConverterView from './components/base-converter-view/base-converter-view';
 import { PositionalCalculatorView } from '@calc/positional-calculator';
-import { loadOptions } from './store/actions/options.actions';
 import { useMountEffect } from './core/hooks/use-mount-effect';
+import { loadOptions, selectAppTheme } from '@calc/core';
 import '@calc/i18n'
 
 const drawerWidth = 240;
