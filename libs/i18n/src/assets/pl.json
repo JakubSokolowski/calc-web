@@ -1,6 +1,6 @@
 {
     "appBar": {
-        "repo" : "Repozytorium na GitLab",
+        "repo" : "Repozytorium na GitHub",
         "toggleDark": "Przełącz na ciemny motyw",
         "toggleLight": "Przełącz na jasny motyw"
     },
