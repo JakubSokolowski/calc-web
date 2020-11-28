@@ -1,2 +1,2 @@
 
-export const repoUrl = 'https://gitlab.com/gitgudorgetgot/calc';
+export const repoUrl = 'https://github.com/JakubSokolowski/calc-web';
