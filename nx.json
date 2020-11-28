@@ -1,58 +1,71 @@
 {
-  "npmScope": "calc",
-  "implicitDependencies": {
-    "workspace.json": "*",
-    "package.json": {
-      "dependencies": "*",
-      "devDependencies": "*"
+    "npmScope": "calc",
+    "implicitDependencies": {
+        "workspace.json": "*",
+        "package.json": {
+            "dependencies": "*",
+            "devDependencies": "*"
+        },
+        "tsconfig.json": "*",
+        "tslint.json": "*",
+        "nx.json": "*"
     },
-    "tsconfig.json": "*",
-    "tslint.json": "*",
-    "nx.json": "*"
-  },
-  "tasksRunnerOptions": {
-    "default": {
-      "runner": "@nrwl/workspace/tasks-runners/default",
-      "options": {
-        "cacheableOperations": ["build", "lint", "test", "e2e"]
-      }
+    "tasksRunnerOptions": {
+        "default": {
+            "runner": "@nrwl/workspace/tasks-runners/default",
+            "options": {
+                "cacheableOperations": [
+                    "build",
+                    "lint",
+                    "test",
+                    "e2e"
+                ]
+            }
+        }
+    },
+    "projects": {
+        "calc-web": {
+            "tags": [],
+            "implicitDependencies": []
+        },
+        "calc-web-e2e": {
+            "tags": [],
+            "implicitDependencies": [
+                "calc-web"
+            ]
+        },
+        "calc-arithmetic": {
+            "tags": []
+        },
+        "utils": {
+            "tags": []
+        },
+        "grid": {
+            "tags": []
+        },
+        "ui": {
+            "tags": []
+        },
+        "docs": {
+            "tags": []
+        },
+        "calc-rs": {
+            "tags": []
+        },
+        "positional-calculator": {
+            "tags": []
+        },
+        "i18n": {
+            "tags": []
+        },
+        "core": {
+            "tags": []
+        },
+        "float-converter": {
+            "tags": []
+        },
+        "base-converter": {
+            "tags": []
+        }
     }
-  },
-  "projects": {
-    "calc-web": {
-      "tags": [],
-      "implicitDependencies": []
-    },
-    "calc-web-e2e": {
-      "tags": [],
-      "implicitDependencies": ["calc-web"]
-    },
-    "calc-arithmetic": {
-      "tags": []
-    },
-    "utils": {
-      "tags": []
-    },
-    "grid": {
-      "tags": []
-    },
-    "ui": {
-      "tags": []
-    },
-    "docs": {
-      "tags": []
-    },
-    "calc-rs": {
-      "tags": []
-    },
-    "positional-calculator": {
-      "tags": []
-    },
-    "i18n": {
-      "tags": []
-    },
-    "core": {
-      "tags": []
-    }
-  }
 }
