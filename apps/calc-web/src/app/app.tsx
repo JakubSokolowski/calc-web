@@ -3,9 +3,6 @@ import { HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
 import './app.scss';
 import SiderMenu from './components/sider-menu/sider-menu';
-import { ComplementConverterView } from './components/complement-converter-view/complement-converter-view';
-import { FloatConverterView } from './components/float-converter-view/float-converter-view';
-import { AssociatedBaseConverterView } from './components/associated-base-converter-view/associated-base-converter-view';
 import { LanguageMenu } from './components/language-menu/language-menu';
 import {
     AppBar,
@@ -27,11 +24,16 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
-import BaseConverterView from './components/base-converter-view/base-converter-view';
 import { PositionalCalculatorView } from '@calc/positional-calculator';
-import { useMountEffect } from './core/hooks/use-mount-effect';
+import { useMountEffect } from '@calc/utils';
 import { loadOptions, selectAppTheme } from '@calc/core';
+import { FloatConverterView } from '@calc/float-converter';
 import '@calc/i18n'
+import {
+    AssociatedBaseConverterView,
+    BaseConverterView,
+    ComplementConverterView
+} from '@calc/base-converter';
 
 const drawerWidth = 240;
 

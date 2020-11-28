@@ -9,8 +9,8 @@ import { Button, IconButton, TextField, Tooltip } from '@material-ui/core';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
 import { FormErrors } from '@calc/ui';
-import { useConverterStyles } from '../../core/styles/converter-styles';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
+import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;

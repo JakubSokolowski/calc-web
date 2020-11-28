@@ -1,8 +1,8 @@
 import React, { Suspense } from 'react';
 import { shallow } from 'enzyme';
-import BaseConverterView from './base-converter-view';
 import { Provider } from 'react-redux';
-import { store } from '../../store/configure-store';
+import { BaseConverterView } from '@calc/base-converter';
+import { store } from '@calc/core';
 
 
 describe('BaseConverterView', () => {
