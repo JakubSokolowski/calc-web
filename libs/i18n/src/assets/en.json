@@ -39,7 +39,7 @@
     "associatedBaseConverter": {
         "title": "Associated Base Converter",
         "result": "Conversion result",
-        "mappings": "Mappings",
+        "mappings": "Digit mappings",
         "noOutputBase": "No output bases possible"
     },
     "floatConverter": {

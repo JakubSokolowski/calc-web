@@ -1,4 +1,11 @@
-import { AssociatedBaseConversion, Conversion, fromDigits, fromNumber, fromString } from './base-converter';
+import {
+    AssociatedBaseConversion,
+    Conversion,
+    fromDigits,
+    fromNumber,
+    fromString,
+    fromStringDirect
+} from './base-converter';
 import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
@@ -18,7 +25,7 @@ export function convertUsingAssociatedBases(
         );
     }
 
-    const inputNum = fromString(valueStr, inputBase, inputBase).result;
+    const inputNum = fromStringDirect(valueStr, inputBase).result;
     const digits = inputNum.toDigitsList();
 
     const details = mapToAssociatedBaseDigits(digits, resultBase);
