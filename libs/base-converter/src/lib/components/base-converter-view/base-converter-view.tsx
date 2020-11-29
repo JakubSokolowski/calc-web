@@ -4,7 +4,7 @@ import { BaseConverterComponent } from '../base-converter/base-converter-compone
 import { ConversionDetails } from '../conversion-details/conversion-details';
 import { useTranslation } from 'react-i18next';
 import { Box, Tab, Tabs } from '@material-ui/core';
-import { a11yProps, Section, TabPanel } from '@calc/ui';
+import { a11yProps, Section, TabPanel } from '@calc/common-ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 import { ConversionResult } from '../conversion-result/conversion-result';

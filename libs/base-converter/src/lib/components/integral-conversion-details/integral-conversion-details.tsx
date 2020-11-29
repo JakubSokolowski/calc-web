@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
 import { buildIntegralConversionGrid, PaddedGrid } from '@calc/grid';
 import { IntegralConversionRow } from '../conversion-details/integral-conversion-row/integral-conversion-row';
-import { SaveAsImageButton } from '@calc/ui';
+import { SaveAsImageButton } from '@calc/common-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 import { useTranslation } from 'react-i18next';

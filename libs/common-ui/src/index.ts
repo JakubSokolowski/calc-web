@@ -10,6 +10,5 @@ export { TabPanel, a11yProps } from './lib/components/tab-panel/tab-panel';
 export { ExtendedSelect } from './lib/components/extended-select/extended-select';
 export { ExtendedOption } from './lib/core/models/extended-option';
 export { SaveAsImageButton } from './lib/components/save-as-image/save-as-image-button';
-export { PositionalNumberComponent } from './lib/components/positional-number/positional-number-component';
 export * from './lib/core/models/form-errors'
 export * from './lib/core/models/extended-option'

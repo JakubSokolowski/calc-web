@@ -1,4 +1,4 @@
-import { AppTheme } from '@calc/ui';
+import { AppTheme } from '@calc/common-ui';
 import { Language } from '@calc/i18n';
 
 export interface OptionsState {

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { ExtendedSelect, FormErrors } from '@calc/ui';
+import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
     algorithmMap,
     allOperations,

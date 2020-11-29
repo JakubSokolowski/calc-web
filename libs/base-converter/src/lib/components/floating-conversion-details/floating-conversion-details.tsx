@@ -5,7 +5,7 @@ import { FractionalConversionRow } from '../conversion-details/fractional-conver
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
-import { SaveAsImageButton } from '@calc/ui';
+import { SaveAsImageButton } from '@calc/common-ui';
 
 interface P {
     conversion: Conversion;

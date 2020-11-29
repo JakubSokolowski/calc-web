@@ -3,7 +3,7 @@ import { PositionalNumber } from '@calc/calc-arithmetic';
 import { InlineMath } from 'react-katex';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
-import { PositionalNumberComponent } from '@calc/ui';
+import { PositionalNumberComponent } from '@calc/positional-ui';
 
 interface P {
     operands: PositionalNumber[];

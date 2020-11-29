@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { Section } from '@calc/ui';
+import { Section } from '@calc/common-ui';
 
 export const useStyles = makeStyles((theme: Theme) => {
     return createStyles(

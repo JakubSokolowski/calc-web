@@ -3,7 +3,6 @@ import {
     Conversion,
     fromDigits,
     fromNumber,
-    fromString,
     fromStringDirect
 } from './base-converter';
 import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';

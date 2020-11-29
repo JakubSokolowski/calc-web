@@ -51,3 +51,4 @@ export {
 } from './positional/base-digits'
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
+export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';

@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from './base-digits';
-import { Digit, AdditionOperand } from '../models';
+import { Digit } from '../models';
 
 export class Digits {
     public digits: string[];

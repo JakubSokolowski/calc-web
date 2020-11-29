@@ -15,7 +15,7 @@ import {
     Toolbar,
     Typography
 } from '@material-ui/core';
-import { getTheme } from '@calc/ui';
+import { getTheme } from '@calc/common-ui';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
 import { makeStyles } from '@material-ui/core/styles';
