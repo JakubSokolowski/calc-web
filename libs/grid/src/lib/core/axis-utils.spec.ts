@@ -13,7 +13,7 @@ describe('axis-utils', () => {
 
             // then
             const expected: AxisConfig = {
-                indices: [ '2', '1', '0', '-1'],
+                indices: [ 2, 1, 0, -1],
                 prefix: 'n'
             };
 
@@ -31,7 +31,7 @@ describe('axis-utils', () => {
 
             // then
             const expected: AxisConfig = {
-                indices: [ '2', '1', '0', '-1'],
+                indices: [2, 1, 0, -1],
                 prefix: 'S'
             };
 

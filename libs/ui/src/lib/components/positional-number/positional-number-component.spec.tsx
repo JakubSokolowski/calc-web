@@ -9,6 +9,7 @@ describe('PositionalNumberComponent', () => {
     const a = fromNumber(10, 10).result;
     const b = fromNumber(5, 10).result;
     const {numberResult} = addPositionalNumbers([a, b]);
+
     beforeEach(() => {
         container = mount(
             <PositionalNumberComponent

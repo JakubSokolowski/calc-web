@@ -11,8 +11,6 @@ import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../co
 import { AxisConfig } from '../../models/axis-config';
 import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import domtoimage from 'dom-to-image';
-import { saveAs } from 'file-saver';
 import { useTranslation } from 'react-i18next';
 
 export interface HoverGridProps {
@@ -41,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         gridWrapper: {
             display: 'flex',
+            width: '100%',
             flexDirection: 'column',
             alignItems: 'flex-start'
         },

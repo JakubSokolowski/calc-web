@@ -142,7 +142,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
                     size={'small'}
                     name={'base'}
                     id={'base'}
-                    label={t('baseConverter.inputBase')}
+                    label={t('baseConverter.base')}
                     error={!!form.errors.base}
                     helperText={form.errors.base}
                     onChange={form.handleChange}
