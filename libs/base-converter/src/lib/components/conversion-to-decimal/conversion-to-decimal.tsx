@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { ConversionToDecimal } from '@calc/calc-arithmetic';
-import { PositionalNumberComponent } from '@calc/ui';
+import { PositionalNumberComponent } from '@calc/positional-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 import { InlineMath } from 'react-katex';

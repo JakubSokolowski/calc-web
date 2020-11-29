@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
 import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
-import { InputType, InputWithCopy } from '@calc/ui';
+import { InputType, InputWithCopy } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';

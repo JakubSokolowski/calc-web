@@ -1,69 +1,40 @@
 {
-    "compileOnSave": false,
-    "compilerOptions": {
-        "rootDir": ".",
-        "sourceMap": true,
-        "declaration": false,
-        "esModuleInterop": true,
-        "moduleResolution": "node",
-        "resolveJsonModule": true,
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "allowSyntheticDefaultImports": true,
-        "importHelpers": true,
-        "target": "es2015",
-        "module": "esnext",
-        "typeRoots": [
-            "node_modules/@types"
-        ],
-        "lib": [
-            "es2017",
-            "dom"
-        ],
-        "skipLibCheck": true,
-        "skipDefaultLibCheck": true,
-        "baseUrl": ".",
-        "paths": {
-            "@calc/calc-arithmetic": [
-                "libs/calc-arithmetic/src/index.ts"
-            ],
-            "@calc/env": [
-                "environments/environment.ts"
-            ],
-            "@calc/utils": [
-                "libs/utils/src/index.ts"
-            ],
-            "@calc/grid": [
-                "libs/grid/src/index.ts"
-            ],
-            "@calc/ui": [
-                "libs/ui/src/index.ts"
-            ],
-            "@calc/docs": [
-                "libs/docs/src/index.ts"
-            ],
-            "@calc/calc-rs": [
-                "libs/calc-rs/pkg"
-            ],
-            "@calc/positional-calculator": [
-                "libs/positional-calculator/src/index.ts"
-            ],
-            "@calc/i18n": [
-                "libs/i18n/src/index.ts"
-            ],
-            "@calc/core": [
-                "libs/core/src/index.ts"
-            ],
-            "@calc/float-converter": [
-                "libs/float-converter/src/index.ts"
-            ],
-            "@calc/base-converter": [
-                "libs/base-converter/src/index.ts"
-            ]
-        }
-    },
-    "exclude": [
-        "node_modules",
-        "tmp"
-    ]
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "esModuleInterop": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "typeRoots": ["node_modules/@types"],
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@calc/calc-arithmetic": ["libs/calc-arithmetic/src/index.ts"],
+      "@calc/env": ["environments/environment.ts"],
+      "@calc/utils": ["libs/utils/src/index.ts"],
+      "@calc/grid": ["libs/grid/src/index.ts"],
+      "@calc/common-ui": ["libs/common-ui/src/index.ts"],
+      "@calc/docs": ["libs/docs/src/index.ts"],
+      "@calc/calc-rs": ["libs/calc-rs/pkg"],
+      "@calc/positional-calculator": [
+        "libs/positional-calculator/src/index.ts"
+      ],
+      "@calc/i18n": ["libs/i18n/src/index.ts"],
+      "@calc/core": ["libs/core/src/index.ts"],
+      "@calc/float-converter": ["libs/float-converter/src/index.ts"],
+      "@calc/base-converter": ["libs/base-converter/src/index.ts"],
+      "@calc/positional-ui": ["libs/positional-ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
 }

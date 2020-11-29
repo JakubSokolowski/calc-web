@@ -6,7 +6,7 @@ import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
 import { GridLine } from '../../models/grid-line';
 import { CellPosition } from '../../models/cell-position';
-import { NumberSubscript } from '@calc/ui';
+import { NumberSubscript } from '@calc/common-ui';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
 import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';

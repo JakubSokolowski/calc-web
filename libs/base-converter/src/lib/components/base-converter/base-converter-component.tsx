@@ -1,14 +1,14 @@
 import React, { FC, useCallback, useState } from 'react';
 import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
 import { SwapOutlined } from '@ant-design/icons/lib';
-import { InputWithCopy } from '@calc/ui';
+import { InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, IconButton, TextField, Tooltip } from '@material-ui/core';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
-import { FormErrors } from '@calc/ui';
+import { FormErrors } from '@calc/common-ui';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 

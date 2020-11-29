@@ -11,7 +11,7 @@ import {
 import { PaddedGrid } from '@calc/grid';
 import { Box, createStyles, Tab, Tabs, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { a11yProps, SaveAsImageButton, Section, TabPanel } from '@calc/ui';
+import { a11yProps, SaveAsImageButton, Section, TabPanel } from '@calc/common-ui';
 import { DocPage } from '@calc/docs';
 import { ValidatedOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';

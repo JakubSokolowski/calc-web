@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FloatConverterComponent } from '../float-converter/float-converter-component';
-import { Section } from '@calc/ui';
+import { Section } from '@calc/common-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 

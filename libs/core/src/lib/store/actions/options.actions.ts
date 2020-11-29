@@ -1,5 +1,5 @@
 import { createAction } from '@reduxjs/toolkit';
-import { AppTheme } from '@calc/ui';
+import { AppTheme } from '@calc/common-ui';
 import { getI18n } from 'react-i18next';
 import { Language } from '@calc/i18n';
 import { loadOptionsWithFallback, updateOptions } from '../../functions/local-storage';

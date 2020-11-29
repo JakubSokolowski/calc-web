@@ -5,7 +5,7 @@ import { IntegralConversionRow } from './integral-conversion-row/integral-conver
 import { FractionalConversionRow } from './fractional-conversion-row/fractional-conversion-row';
 import { useTranslation } from 'react-i18next';
 import { useConverterStyles } from '../../core/styles/converter-styles';
-import { Section } from '@calc/ui';
+import { Section } from '@calc/common-ui';
 
 interface P {
     conversion: Conversion;

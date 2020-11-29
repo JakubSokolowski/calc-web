@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { AssociatedBaseConverter } from '../associated-base-converter/associated-base-converter';
 import { AssociatedBaseConversionDetails } from '../associated-base-conversion-details/associated-base-conversion-details';
 import { Box, Tab, Tabs } from '@material-ui/core';
-import { a11yProps, Section, TabPanel } from '@calc/ui';
+import { a11yProps, Section, TabPanel } from '@calc/common-ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 import { AssociatedBaseConversionResult } from '../associated-base-conversion-result/associated-base-conversion-result';

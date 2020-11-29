@@ -1,4 +1,3 @@
-import { ExtendedOption } from '@calc/ui';
 import { OperationType } from './operation';
 
 export enum AdditionType {
@@ -11,7 +10,7 @@ export enum SubtractionType {
 
 export type AlgorithmType = AdditionType | SubtractionType
 
-export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> extends ExtendedOption {
+export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
     allowedBases?: number[];
 }

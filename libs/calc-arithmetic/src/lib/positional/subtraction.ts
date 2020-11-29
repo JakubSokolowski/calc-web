@@ -6,7 +6,7 @@ import {
     findPositionRange,
     NUM_ADDITIONAL_EXTENSIONS
 } from './operation-utils';
-import { addDigitsArrays, areSameBaseNumbers, buildPositionalNumberFromDigits } from './addition';
+import { areSameBaseNumbers, buildPositionalNumberFromDigits } from './addition';
 import { OperationType } from '../models/operation';
 import { SubtractionType } from '../models/operation-algorithm';
 import { fromNumber } from './base-converter';
