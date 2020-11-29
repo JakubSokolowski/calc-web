@@ -28,17 +28,20 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
                     width: '100%'
                 },
                 [theme.breakpoints.up('md')]: {
-                    width: '70%'
+                    width: '100%'
                 }
             },
+            iconButton: {
+                width: '40px'
+            },
             inputBase: {
-                width: '20%'
+                width: '22%'
             },
             outputBase: {
-                width: '20%'
+                width: '22%'
             },
             precision: {
-                width:'10%'
+                width:'22%'
             },
             horizontalSpacer: {
                 [theme.breakpoints.down('md')]: {
@@ -48,12 +51,15 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
                     width: theme.spacing(5)
                 }
             },
+            growHorizontalSpacer: {
+              flexGrow: 1
+            },
             verticalSpacer: {
                 [theme.breakpoints.down('md')]: {
-                    width: theme.spacing(1)
+                    height: theme.spacing(2)
                 },
                 [theme.breakpoints.up('lg')]: {
-                    width: theme.spacing(2)
+                    height: theme.spacing(2)
                 }
             },
             title: {

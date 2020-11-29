@@ -75,7 +75,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
             onValueChange(value);
         }
 
-        if(onChange) onChange(event);
+        if (onChange) onChange(event);
     };
 
     const handleNumberChange = (value) => {
@@ -121,9 +121,13 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
                     </div>
                 }
             </span>
-            <Snackbar anchorOrigin={{ vertical: 'top', horizontal: 'right' }} open={open} autoHideDuration={1500}
-                      onClose={handleClose}>
-                <Alert severity="info">{t('common.copy')}</Alert>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={open}
+                autoHideDuration={1500}
+                onClose={handleClose}
+            >
+                    <Alert severity="info">{t('common.copy')}</Alert>
             </Snackbar>
         </div>
     );

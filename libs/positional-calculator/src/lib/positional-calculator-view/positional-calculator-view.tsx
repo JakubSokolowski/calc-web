@@ -112,7 +112,7 @@ export const PositionalCalculatorView: FC = () => {
                         </Section>
                         <Section title={t('positionalCalculator.details')}>
                             <PaddedGrid
-                                desiredWidth={23}
+                                desiredWidth={24}
                                 id={gridId}
                                 {...res.grid}
                                 groupBuilder={groupBuilder}

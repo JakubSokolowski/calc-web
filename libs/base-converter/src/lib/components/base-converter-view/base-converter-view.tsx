@@ -7,6 +7,9 @@ import { Box, Tab, Tabs } from '@material-ui/core';
 import { a11yProps, Section, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
+import { ConversionResult } from '../conversion-result/conversion-result';
+import { FloatingConversionDetails } from '../floating-conversion-details/floating-conversion-details';
+import { IntegralConversionDetails } from '../integral-conversion-details/integral-conversion-details';
 
 
 export const BaseConverterView: FC = () => {
@@ -41,9 +44,20 @@ export const BaseConverterView: FC = () => {
                 </Section>
                 {conversion &&
                     <Section title={t('baseConverter.result')}>
-                        <ConversionDetails conversion={conversion} precision={precision}/>
+                        <ConversionResult conversion={conversion}/>
                     </Section>
                 }
+                {conversion &&
+                <Section title={t('baseConverter.integralConversion')}>
+                    <IntegralConversionDetails conversion={conversion}/>
+                </Section>
+                }
+                { conversion && conversion.result.fractionalPart.length > 0 &&
+                    <Section title={t('baseConverter.floatingConversion')}>
+                       <FloatingConversionDetails conversion={conversion} precision={precision}/>
+                    </Section>
+                }
+
             </TabPanel>
             <TabPanel value={value} index={1}>
                 <div className={classes.verticalSpacer}/>

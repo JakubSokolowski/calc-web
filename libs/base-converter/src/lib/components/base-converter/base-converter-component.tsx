@@ -122,40 +122,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         <div>
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
-                <InputWithCopy
-                    className={classes.input}
-                    name={'inputStr'}
-                    id={'inputStr'}
-                    label={t('baseConverter.inputNumber')}
-                    error={!!form.errors.inputStr}
-                    helperText={form.errors.inputStr}
-                    onChange={handleInputStrChange}
-                    value={form.values.inputStr}
-                />
-                {
-                    showDecimalValue &&
-                    <InputWithCopy
-                        className={classes.input}
-                        label={t('baseConverter.inputDecimalValue')}
-                        readOnly
-                        value={getDecimal()}
-                    />
-                }
-
-                {
-                    showComplement &&
-                    <InputWithCopy
-                        className={classes.input}
-                        label={t('baseConverter.inputComplement')}
-                        readOnly
-                        value={getComplement()}
-                    />
-                }
-
                 <div className={classes.row}>
                     <TextField
                         className={classes.inputBase}
                         variant={'outlined'}
+                        size={'small'}
                         name={'inputBase'}
                         id={'inputBase'}
                         label={t('baseConverter.inputBase')}
@@ -165,12 +136,13 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         value={form.values.inputBase}
                     />
                     <Tooltip title={t('baseConverter.swapBases')}>
-                        <IconButton  onClick={swap}>
+                        <IconButton className={classes.iconButton} size={'small'} onClick={swap}>
                             <SwapOutlined/>
                         </IconButton>
                     </Tooltip>
                     <TextField
                         className={classes.outputBase}
+                        size={'small'}
                         variant={'outlined'}
                         name={'outputBase'}
                         id={'outputBase'}
@@ -183,6 +155,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     <div className={classes.horizontalSpacer}/>
                     <TextField
                         className={classes.precision}
+                        size={'small'}
                         variant={'outlined'}
                         name={'precision'}
                         id={'precision'}
@@ -192,11 +165,44 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         onChange={form.handleChange}
                         value={form.values.precision}
                     />
-                    <div className={classes.horizontalSpacer}/>
-                    <Button color={'secondary'} variant={'contained'} type={'submit'}>
+                    <div className={classes.growHorizontalSpacer}/>
+                    <Button size={'small'} color={'secondary'} variant={'contained'} type={'submit'}>
                         {t('baseConverter.convert')}
                     </Button>
                 </div>
+                <div className={classes.verticalSpacer}/>
+                <InputWithCopy
+                    className={classes.input}
+                    name={'inputStr'}
+                    id={'inputStr'}
+                    size={'small'}
+                    label={t('baseConverter.inputNumber')}
+                    error={!!form.errors.inputStr}
+                    helperText={form.errors.inputStr}
+                    onChange={handleInputStrChange}
+                    value={form.values.inputStr}
+                />
+                {
+                    showDecimalValue &&
+                    <InputWithCopy
+                        className={classes.input}
+                        label={t('baseConverter.inputDecimalValue')}
+                        size={'small'}
+                        readOnly
+                        value={getDecimal()}
+                    />
+                }
+
+                {
+                    showComplement &&
+                    <InputWithCopy
+                        className={classes.input}
+                        label={t('baseConverter.inputComplement')}
+                        size={'small'}
+                        readOnly
+                        value={getComplement()}
+                    />
+                }
             </form>
         </div>
     );

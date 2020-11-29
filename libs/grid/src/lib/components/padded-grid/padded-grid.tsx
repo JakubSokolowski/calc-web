@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { buildAxis } from '../../core/axis-utils';
+import { buildAxis, buildAxisContinuation } from '../../core/axis-utils';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HoverGrid, HoverGridProps } from '../hover-grid/hover-grid';
 import { buildEmptyGrid } from '../../core/grid-utils';
@@ -19,7 +19,7 @@ const useStyles = makeStyles((theme: Theme) => {
     })
 });
 
-export const PaddedGrid: FC<P> = ({desiredWidth, values, ...rest}) => {
+export const PaddedGrid: FC<P> = ({desiredWidth, values, xAxis, ...rest}) => {
     const classes = useStyles();
     const width = values[0] ? values[0].length : 0;
     const offset = desiredWidth - width;
@@ -27,12 +27,14 @@ export const PaddedGrid: FC<P> = ({desiredWidth, values, ...rest}) => {
     if(offset > 0) {
         const height = values.length;
         const paddingGrid = buildEmptyGrid(offset, height);
-        const ax = buildAxis(desiredWidth -1, offset);
+        const ax = xAxis ? buildAxisContinuation(xAxis, offset) : undefined;
 
         return (
             <div className={classes.wrapper}>
+                <div>
+                    <HoverGrid values={values} xAxis={xAxis} {...rest}/>
+                </div>
                 <HoverGrid values={paddingGrid} groups={[]} lines={[]} xAxis={ax}/>
-                <HoverGrid values={values} {...rest}/>
             </div>
         )
     }

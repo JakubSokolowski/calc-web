@@ -1,34 +1,54 @@
 import React, { FC } from 'react';
 import { ConversionToDecimal } from '@calc/calc-arithmetic';
-import { NumberSubscript } from '@calc/ui';
+import { PositionalNumberComponent } from '@calc/ui';
+import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core';
+import { InlineMath } from 'react-katex';
 
 interface P {
     conversionStage: ConversionToDecimal;
 }
 
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        row: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            alignItems: 'center'
+        },
+        operand: {
+            padding: '2px'
+        },
+        symbol: {
+            padding: '2px'
+        }
+    })
+);
+
+
 export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
+    const classes  = useStyles();
     const [inputStr, inputBase] = conversionStage.input;
 
     const digits = conversionStage.inputDigitList.map((digit, index, arr) => {
-        return (
-            <span key={index}>
-                {digit.representationInBase}*
-                {digit.base}
-                <sup>{digit.position}</sup>
-                {index !== arr.length -1 && ' + '}
-            </span>
-        )
+        const joinSymbol = index !== arr.length -1 ? ' + ' : '';
+        const mathStr = `(${digit.representationInBase} * ${digit.base}^{${digit.position}}) ${joinSymbol}`;
+
+        return <InlineMath key={index} math={mathStr}/>
     });
 
     return (
-        <div>
-            <div id="decimal-conversion-details" style={{ display: 'inline-block' }}>
-                <NumberSubscript value={inputStr} subscript={inputBase}/>
-                &nbsp;=&nbsp;
-                {digits}
-                &nbsp;=&nbsp;
-                <NumberSubscript value={conversionStage.result.valueInBase} subscript={conversionStage.result.base}/>
+        <div id="decimal-conversion-details" className={classes.row}>
+            <PositionalNumberComponent base={inputBase} representation={inputStr}/>
+            <div className={classes.symbol}>
+                <InlineMath math={'='}/>
             </div>
+            {digits}
+            <div className={classes.symbol}>
+                <InlineMath math={'='}/>
+            </div>
+            <PositionalNumberComponent base={conversionStage.result.base} representation={conversionStage.result.valueInBase}/>
         </div>
     );
 };

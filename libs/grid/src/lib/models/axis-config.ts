@@ -1,5 +1,5 @@
 
 export interface AxisConfig {
-    indices: string[];
+    indices: number[];
     prefix: string;
 }

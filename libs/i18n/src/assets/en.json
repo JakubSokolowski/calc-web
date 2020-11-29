@@ -16,12 +16,14 @@
     "baseConverter": {
         "title": "Base Converter",
         "result": "Conversion result",
+        "details": "Conversion details",
         "wrongBase": "Base must be between {{minBase}} and {{maxBase}}",
         "wrongRepresentationStr": "Representation strings contains invalid digits for base {{base}}",
         "inputNumber": "Input number",
         "inputDecimalValue": "Input decimal value",
         "inputComplement": "Input complement",
         "inputBase": "Input base",
+        "base": "Base",
         "outputBase": "Output base",
         "outputNumber": "Output number",
         "conversionToBase": "Conversion to base {{base}}",
@@ -55,6 +57,7 @@
     "common": {
         "copy": "Copied to clipboard!",
         "downloadResult": "Download result as .png",
+        "downloadDetails": "Download details as .png",
         "download": "Download"
     },
     "positionalCalculator": {

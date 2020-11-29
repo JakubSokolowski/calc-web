@@ -16,12 +16,14 @@
     "baseConverter": {
         "title": "Konwersja podstaw",
         "result": "Wynik konwersji",
+        "details": "Szczegóły konwersji",
         "wrongBase": "Podstawa musi być pomiędzy {{minBase}} i {{maxBase}}",
         "wrongRepresentationStr": "Reprezentacja zawiera niepoprawne cyfry dla bazy {{base}}",
         "inputNumber": "Liczba wejściowa",
         "inputDecimalValue": "Wartość dziesiętna wejścia",
         "inputComplement": "Uzupełnienie wejścia",
-        "inputBase": "Podstawa",
+        "inputBase": "Podstawa wejścia",
+        "base": "Podstawa",
         "outputBase": "Podstawa wyniku",
         "outputNumber": "Liczba wyjściowa",
         "conversionToBase": "Kowersja do podstawy {{base}}",
@@ -29,7 +31,7 @@
         "integralConversion": "Konwersja części całkowitej",
         "floatingConversion": "Konwersja części ułamkowej",
         "swapBases": "Zamień podstawy",
-        "precision": "Precyzja",
+        "precision": "Dokładność",
         "convert": "Przekonwertuj",
         "showDecimalValue": "Pokaż wartość dziesiętną",
         "showComplement": "Pokaż uzupełnienie"
@@ -55,6 +57,7 @@
     "common": {
         "copy": "Skopiowano do schowka",
         "downloadResult": "Pobierz wynik jako .png",
+        "downloadDetails": "Pobierz szegóły jako .png",
         "download": "Pobierz"
     },
     "positionalCalculator": {
