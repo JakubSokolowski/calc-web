@@ -19,7 +19,7 @@ import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
-    onConversionChange?: (conversion: Conversion) => void;
+    onConversionChange: (conversion: Conversion) => void;
 }
 
 interface FormValues {
@@ -139,6 +139,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                 <InputWithCopy
                     className={classes.input}
                     name={'inputStr'}
+                    size={'small'}
                     id={'inputStr'}
                     label={t('baseConverter.inputNumber')}
                     error={!!form.errors.inputStr}
@@ -153,6 +154,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         className={classes.input}
                         label={t('baseConverter.inputDecimalValue')}
                         readOnly
+                        size={'small'}
                         value={getDecimal()}
                     />
                 }
@@ -163,6 +165,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         style={{ 'paddingBottom': '20px' }}
                         label={t('baseConverter.inputComplement')}
                         readOnly
+                        size={'small'}
                         value={getComplement()}
                     />
                 }
@@ -173,6 +176,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         variant={'outlined'}
                         name={'inputBase'}
                         id={'inputBase'}
+                        size={'small'}
                         label={t('baseConverter.inputBase')}
                         error={!!form.errors.inputBase}
                         helperText={form.errors.inputBase}
@@ -185,6 +189,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         className={classes.outputBase}
                         name={'outputBase'}
                         id={'outputBase'}
+                        size={'small'}
                         label={t('baseConverter.outputBase')}
                         placeholder={t('associatedBaseConverter.noOutputBase')}
                         disabled={!options.length}
@@ -195,7 +200,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         {options}
                     </TextField>
                     <div className={classes.horizontalSpacer}/>
-                    <Button color={'secondary'} variant={'contained'} type={'submit'}>
+                    <Button color={'secondary'} variant={'contained'} type={'submit'} size={'small'}>
                         {t('baseConverter.convert')}
                     </Button>
                 </div>

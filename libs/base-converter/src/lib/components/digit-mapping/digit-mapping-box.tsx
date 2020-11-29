@@ -99,7 +99,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
         );
     });
 
-    const boxClassName = mapping.output[0].position === -1
+    const boxClassName = mapping.output[0] && mapping.output[0].position === -1
         ? classes.mappingsBoxBorder
         : classes.mappingsBox;
 

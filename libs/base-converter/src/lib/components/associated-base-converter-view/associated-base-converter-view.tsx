@@ -7,6 +7,7 @@ import { Box, Tab, Tabs } from '@material-ui/core';
 import { a11yProps, Section, TabPanel } from '@calc/ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
+import { AssociatedBaseConversionResult } from '../associated-base-conversion-result/associated-base-conversion-result';
 
 
 export const AssociatedBaseConverterView: FC = () => {
@@ -38,9 +39,15 @@ export const AssociatedBaseConverterView: FC = () => {
                 </Section>
                 {
                     conversion &&
-                        <Section title={t('baseConverter.result')}>
-                            <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
-                        </Section>
+                    <Section title={t('baseConverter.result')}>
+                        <AssociatedBaseConversionResult conversion={conversion.stages[0] as AssociatedBaseConversion}/>
+                    </Section>
+                }
+                {
+                    conversion &&
+                    <Section title={t('associatedBaseConverter.mappings')}>
+                        <AssociatedBaseConversionDetails conversion={conversion.stages[0] as AssociatedBaseConversion}/>
+                    </Section>
                 }
             </TabPanel>
             <TabPanel className={classes.panel} value={value} index={1}>
@@ -48,7 +55,6 @@ export const AssociatedBaseConverterView: FC = () => {
                     <DocPage path='positional/associated-base-conversion'/>
                 </Box>
             </TabPanel>
-
         </div>
     );
 };

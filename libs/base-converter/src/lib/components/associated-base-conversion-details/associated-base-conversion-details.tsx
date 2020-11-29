@@ -27,10 +27,6 @@ interface P {
 }
 
 export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
-    const { t } = useTranslation();
-    const [inputStr, inputBase] = conversion.input;
-    const outputStr = conversion.result.valueInBase;
-    const outputBase = conversion.result.base;
     const classes = useStyles();
 
     const mappings = conversion.details.positionMappings.map((mapping, index) => {
@@ -40,26 +36,8 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     });
 
     return (
-        <div>
-            <span>{t('baseConverter.inputNumber')}</span>
-            <InputWithCopy
-                readOnly
-                value={conversion.result.valueInBase}
-            />
-            <div className={classes.equation}>
-                <NumberSubscript value={inputStr} subscript={inputBase}/>
-                &nbsp;=&nbsp;
-                <NumberSubscript value={conversion.result.decimalValue.toString()} subscript={10}/>
-                &nbsp;=&nbsp;
-                <NumberSubscript value={outputStr} subscript={outputBase}/>
-            </div>
-
-            <Typography>
-                {t('associatedBaseConverter.mappings')}
-            </Typography>
-            <div className={classes.mappings}>
-                {mappings}
-            </div>
+        <div className={classes.mappings}>
+            {mappings}
         </div>
     );
 };

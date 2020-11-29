@@ -40,12 +40,13 @@ export const ConversionOptions: FC<P> = ({ style }) => {
                     label={t('baseConverter.showDecimalValue')}
                 />
                 <FormControlLabel
-                    control={<Switch
-                        color={'primary'}
-                        checked={showComplement}
-                        onChange={() => {
-                            dispatch(setShowComplement(!showComplement));
-                        }}
+                    control={
+                        <Switch
+                            color={'primary'}
+                            checked={showComplement}
+                            onChange={() => {
+                                dispatch(setShowComplement(!showComplement));
+                            }}
                     />}
                     label={t('baseConverter.showComplement')}
                 />
