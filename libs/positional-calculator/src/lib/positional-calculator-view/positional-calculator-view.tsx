@@ -18,6 +18,7 @@ import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
 import { OperationResultComponent } from '../operation-result/operation-result';
 import { calculate, GridResult, OperationParams } from '../core/calculate';
+import { OperationRenderer } from '../operation-renderer/operation-renderer';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -130,7 +131,7 @@ export const PositionalCalculatorView: FC = () => {
             </TabPanel>
             <TabPanel className={classes.panel} value={currentTab} index={1}>
                 <Box className={classes.docs}>
-                    <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`}/>
+                    <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`} operationRenderer={OperationRenderer}/>
                 </Box>
             </TabPanel>
         </div>

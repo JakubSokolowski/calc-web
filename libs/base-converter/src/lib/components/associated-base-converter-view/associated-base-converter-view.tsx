@@ -8,6 +8,7 @@ import { a11yProps, Section, TabPanel } from '@calc/common-ui';
 import { DocPage } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 import { AssociatedBaseConversionResult } from '../associated-base-conversion-result/associated-base-conversion-result';
+import { ConversionRenderer } from '../conversion-renderer/conversion-renderer';
 
 
 export const AssociatedBaseConverterView: FC = () => {
@@ -52,7 +53,7 @@ export const AssociatedBaseConverterView: FC = () => {
             </TabPanel>
             <TabPanel className={classes.panel} value={value} index={1}>
                 <Box display={'flex'} alignItems={'center'} maxWidth={760} margin={'auto'}>
-                    <DocPage path='positional/associated-base-conversion'/>
+                    <DocPage path='positional/associated-base-conversion' operationRenderer={ConversionRenderer}/>
                 </Box>
             </TabPanel>
         </div>

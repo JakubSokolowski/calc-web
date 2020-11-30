@@ -9,6 +9,8 @@ import { useTranslation } from 'react-i18next';
 
 interface P {
     conversion: Conversion;
+    showDownload?: boolean;
+    widthInCells?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -23,7 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const IntegralConversionDetails: FC<P> = ({ conversion }) => {
+export const IntegralConversionDetails: FC<P> = ({ conversion, showDownload = true, widthInCells = 24 }) => {
     const classes = useStyles();
     const { t } = useTranslation();
     const integralHoverGrid = buildIntegralConversionGrid(conversion);
@@ -37,17 +39,20 @@ export const IntegralConversionDetails: FC<P> = ({ conversion }) => {
     return (
         <div>
             <PaddedGrid
-                desiredWidth={24}
+                desiredWidth={widthInCells}
                 groupBuilder={integralHoverPopover}
                 id={gridId}
                 {...integralHoverGrid}
             />
-            <div className={classes.actionRow}>
-                <SaveAsImageButton
-                    tooltipTitle={t('positionalCalculator.downloadDetails')}
-                    elementId={gridId}
-                />
-            </div>
+            {
+                showDownload &&
+                <div className={classes.actionRow}>
+                    <SaveAsImageButton
+                        tooltipTitle={t('positionalCalculator.downloadDetails')}
+                        elementId={gridId}
+                    />
+                </div>
+            }
         </div>
     );
 };

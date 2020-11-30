@@ -9,6 +9,7 @@ import { environment } from '@calc/env';
 
 export interface DocsProps {
     path: string;
+    operationRenderer?: any;
 }
 
 export const useStyles = makeStyles((theme: Theme) => {
@@ -27,7 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     );
 });
 
-export const DocPage: FC<DocsProps> = ({ path }) => {
+export const DocPage: FC<DocsProps> = ({ path, operationRenderer }) => {
     const markdown = useDocs(path);
     const imageUriPrefix = `${environment.deployUrl}/assets/docs/`;
     const classes = useStyles();
@@ -40,6 +41,7 @@ export const DocPage: FC<DocsProps> = ({ path }) => {
                 !!ids.length && <ScrollSpy entries={ids}/>
             }
             <MarkdownRenderer
+                operationRenderer={operationRenderer}
                 source={markdown}
                 escapeHtml={false}
                 transformImageUri={(uri) => {

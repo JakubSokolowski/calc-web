@@ -10,6 +10,8 @@ import { SaveAsImageButton } from '@calc/common-ui';
 interface P {
     conversion: Conversion;
     precision: number;
+    showDownload?: boolean;
+    widthInCells?: number;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -22,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const FloatingConversionDetails: FC<P> = ({ conversion, precision }) => {
+export const FloatingConversionDetails: FC<P> = ({ conversion, precision, showDownload = true, widthInCells = 24 }) => {
     const classes = useStyles();
     const { t } = useTranslation();
     const fractionalHoverGrid =buildFractionalConversionGrid(conversion, precision);
@@ -36,18 +38,21 @@ export const FloatingConversionDetails: FC<P> = ({ conversion, precision }) => {
     return (
         <div>
             <PaddedGrid
-                desiredWidth={24}
+                desiredWidth={widthInCells}
                 groupBuilder={floatingHoverPopover}
                 id={gridId}
                 {...fractionalHoverGrid}
 
             />
-            <div className={classes.actionRow}>
-                <SaveAsImageButton
-                    tooltipTitle={t('positionalCalculator.downloadDetails')}
-                    elementId={gridId}
-                />
-            </div>
+            {
+                showDownload &&
+                <div className={classes.actionRow}>
+                    <SaveAsImageButton
+                        tooltipTitle={t('positionalCalculator.downloadDetails')}
+                        elementId={gridId}
+                    />
+                </div>
+            }
         </div>
     );
 };
