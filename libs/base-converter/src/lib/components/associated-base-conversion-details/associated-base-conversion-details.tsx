@@ -1,9 +1,7 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { DigitMappingBox } from '../digit-mapping/digit-mapping-box';
-import { InputWithCopy, NumberSubscript } from '@calc/common-ui';
-import { useTranslation } from 'react-i18next';
-import { createStyles, Theme, Typography } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme: Theme) => {

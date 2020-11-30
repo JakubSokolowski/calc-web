@@ -36,12 +36,8 @@ export function calculate<T extends AlgorithmType, D extends BaseOperationResult
             return handleAdd(params as OperationParams<AdditionType>);
         case OperationType.Subtraction:
             return handleSubtract(params as OperationParams<SubtractionType>);
-        case OperationType.Multiplication:
-            break;
-        case OperationType.Division:
-            break;
         default:
-            throw new Error('What?');
+            throw new Error(`Operation type: ${params.operation.type} not supported`);
     }
 }
 
@@ -57,7 +53,7 @@ function handleAdd(params: OperationParams<AdditionType>): GridResult<AdditionRe
             };
         }
         default:
-            throw 'XD';
+            throw new Error(`Addition algorithm type: ${params.algorithm.type} not supported`);
 
     }
 }
@@ -74,7 +70,7 @@ function handleSubtract(params: OperationParams<SubtractionType>): GridResult<Su
             };
         }
         default:
-            throw 'XD';
+            throw new Error(`Subtraction algorithm type: ${params.algorithm.type} not supported`);
     }
 }
 

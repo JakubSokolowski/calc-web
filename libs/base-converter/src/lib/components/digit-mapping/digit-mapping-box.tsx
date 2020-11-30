@@ -20,6 +20,15 @@ export const useStyles = makeStyles((theme: Theme) => {
                 padding: '1px 6px',
                 marginBottom: '20px'
             },
+            reversedDigitBox: {
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+                minWidth: '12px',
+                minHeight: '20px',
+                marginBottom: '-20px',
+                padding: '1px 6px'
+            },
             rootDigitsRow: {
                 display: 'flex',
                 flexDirection: 'row',
@@ -60,7 +69,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
 
     const rootDigits = rootDigitsSource.map((digit, index) => {
         return (
-            <Button key={index} className={classes.digitBox}>
+            <Button key={index} className={mapping.input.length >= mapping.output.length ? classes.reversedDigitBox : classes.digitBox}>
                 {digit.representationInBase}
             </Button>
         );
@@ -81,7 +90,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                     {
                         targetId: 'root',
                         targetAnchor: 'middle',
-                        sourceAnchor: 'top',
+                        sourceAnchor:  mapping.input.length < mapping.output.length ? 'top' : 'bottom',
                         style: {
                             strokeColor: '#d9d9d9',
                             strokeWidth: 2,
@@ -99,28 +108,35 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
         );
     });
 
-    const boxClassName = mapping.output[0] && mapping.output[0].position === -1
-        ? classes.mappingsBoxBorder
-        : classes.mappingsBox;
+    const target = (
+        <div className={classes.rootDigitsRow}>
+            {targetDigits}
+        </div>
+    );
+
+    const root = (
+        <ArcherElement id='root'>
+            <div className={classes.digitsRow}>
+                {rootDigits}
+            </div>
+        </ArcherElement>
+    );
+
+    const first = mapping.input.length < mapping.output.length ? root : target;
+    const second = mapping.input.length < mapping.output.length ? target: root;
 
     return (
         <div
-            className={boxClassName}
+            className={classes.mappingsBox}
         >
             <ArcherContainer noCurves ref={ref}>
                 <div
                     style={{
                         display: 'flex',
-                        flexDirection: mapping.input.length < mapping.output.length ? 'column' : 'column-reverse'
+                        flexDirection: 'column'
                     }}>
-                    <ArcherElement id='root'>
-                        <div className={classes.digitsRow}>
-                            {rootDigits}
-                        </div>
-                    </ArcherElement>
-                    <div className={classes.rootDigitsRow}>
-                        {targetDigits}
-                    </div>
+                    {first}
+                    {second}
                 </div>
             </ArcherContainer>
         </div>

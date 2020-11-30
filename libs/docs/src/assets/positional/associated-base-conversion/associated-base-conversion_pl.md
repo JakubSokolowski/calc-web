@@ -14,6 +14,23 @@ Przez zależności między potęgami, cyfrze w liczbie o mniejszej podstawie (A)
 
     Ostateczny wynik to 1646.6
 
+```calc
+{
+  "algorithm": "Associated",
+  "inputBase": 2,
+  "outputBase": 8,
+  "representation" : "1110100110.11"
+}
+```
+
 Przy konwersji z większej bazy na mniejszą odwracamy proces, każdej cyfrze wejścia przypisujemy n cyfr wyjścia i konwertujemy.
+```calc
+{
+  "algorithm": "Associated",
+  "inputBase": 8,
+  "outputBase": 2,
+  "representation" : "1646.6"
+}
+```
 
 Dlaczego jest to przydatne? Powiedzmy że chcemy przekonwertować liczbę z podstawy 64 na podstawę 2, gdybyśmy chcieli zrobić to normalnie musielibyśmy wielokrotnie podzielić daną liczbę przez 2, co zwiększa ryzyko błędu. Dzielenie jest najbardziej skomplikowaną operacją W takim przypadku jest lepiej użyć 2 razy baz skojarzonych: $64 \rightarrow 8 \rightarrow 2$. Omijamy wtedy dzielenie zupełnie.
