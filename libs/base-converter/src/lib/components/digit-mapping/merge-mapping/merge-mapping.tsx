@@ -17,17 +17,13 @@ export const useStyles = makeStyles((theme: Theme) => {
                 alignItems: 'center',
                 minWidth: '12px',
                 minHeight: '20px',
-                padding: '1px 6px',
-                marginBottom: '20px'
+                marginTop:'20px',
+                padding: '1px 6px'
             },
-            reversedDigitBox: {
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
+            rootBox: {
                 minWidth: '12px',
                 minHeight: '20px',
-                marginBottom: '-20px',
-                padding: '1px 6px'
+                padding: '1px 6px',
             },
             rootDigitsRow: {
                 display: 'flex',
@@ -40,7 +36,7 @@ export const useStyles = makeStyles((theme: Theme) => {
                 flexDirection: 'row',
                 justifyContent: 'center'
             },
-            mappingsBox: {
+            mergeMappingBox: {
                 display: 'flex',
                 justifyContent: 'center',
                 padding: '5px'
@@ -55,21 +51,16 @@ export const useStyles = makeStyles((theme: Theme) => {
     );
 });
 
-export const DigitMappingBox: FC<P> = ({ mapping }) => {
+export const MergeMapping: FC<P> = ({ mapping }) => {
     const ref = useRef<ArcherContainer>(null);
     const classes = useStyles();
 
-    const targetDigitsSource = mapping.input.length < mapping.output.length
-        ? mapping.output
-        : mapping.input;
-
-    const rootDigitsSource = mapping.input.length < mapping.output.length
-        ? mapping.input
-        : mapping.output;
+    const targetDigitsSource = mapping.input;
+    const rootDigitsSource = mapping.output;
 
     const rootDigits = rootDigitsSource.map((digit, index) => {
         return (
-            <Button key={index} className={mapping.input.length >= mapping.output.length ? classes.reversedDigitBox : classes.digitBox}>
+            <Button key={index} className={classes.digitBox}>
                 {digit.representationInBase}
             </Button>
         );
@@ -90,7 +81,7 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                     {
                         targetId: 'root',
                         targetAnchor: 'middle',
-                        sourceAnchor:  mapping.input.length < mapping.output.length ? 'top' : 'bottom',
+                        sourceAnchor:  'bottom',
                         style: {
                             strokeColor: '#d9d9d9',
                             strokeWidth: 2,
@@ -101,33 +92,16 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                     }
                 ]}
             >
-                <Button key={index} className={classes.digitBox}>
+                <Button key={index} className={classes.rootBox}>
                     {digit.representationInBase}
                 </Button>
             </ArcherElement>
         );
     });
 
-    const target = (
-        <div className={classes.rootDigitsRow}>
-            {targetDigits}
-        </div>
-    );
-
-    const root = (
-        <ArcherElement id='root'>
-            <div className={classes.digitsRow}>
-                {rootDigits}
-            </div>
-        </ArcherElement>
-    );
-
-    const first = mapping.input.length < mapping.output.length ? root : target;
-    const second = mapping.input.length < mapping.output.length ? target: root;
-
     return (
         <div
-            className={classes.mappingsBox}
+            className={classes.mergeMappingBox}
         >
             <ArcherContainer noCurves ref={ref}>
                 <div
@@ -135,8 +109,14 @@ export const DigitMappingBox: FC<P> = ({ mapping }) => {
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
-                    {first}
-                    {second}
+                    <div className={classes.rootDigitsRow}>
+                        {targetDigits}
+                    </div>
+                    <ArcherElement id='root'>
+                        <div className={classes.digitsRow}>
+                            {rootDigits}
+                        </div>
+                    </ArcherElement>
                 </div>
             </ArcherContainer>
         </div>

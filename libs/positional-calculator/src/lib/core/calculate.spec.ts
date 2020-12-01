@@ -8,12 +8,6 @@ import {
     OperationType, SubtractionType
 } from '@calc/calc-arithmetic';
 
-jest.mock('@calc/calc-arithmetic', () => {
-    return {
-        ...jest.requireActual('@calc/calc-arithmetic'),
-        handleAdd: jest.fn()
-    }
-});
 
 describe('calculate', () => {
     const base = 10;
