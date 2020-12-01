@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
-import { DigitMappingBox } from '../digit-mapping/digit-mapping-box';
+import { MergeMapping } from '../digit-mapping/merge-mapping/merge-mapping';
 import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { SplitMapping } from '../digit-mapping/split-mapping/split-mapping';
 
 const useStyles = makeStyles((theme: Theme) => {
     return createStyles({
@@ -27,9 +28,15 @@ interface P {
 export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     const classes = useStyles();
 
+    const isSplitMapping = conversion.details.positionMappings.some((mapping) => {
+        return mapping.input.length < mapping.output.length;
+    });
+
     const mappings = conversion.details.positionMappings.map((mapping, index) => {
         return (
-            <DigitMappingBox key={index} mapping={mapping}/>
+            isSplitMapping
+                ?   <SplitMapping key={index} mapping={mapping}/>
+                :   <MergeMapping key={index} mapping={mapping}/>
         );
     });
 

@@ -1,9 +1,9 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { DigitMappingBox } from './digit-mapping-box';
+import { MergeMapping } from './merge-mapping';
 import { DigitMapping } from '@calc/calc-arithmetic';
 
-describe('DigitMappingBox', () => {
+describe('MergeMapping', () => {
     let container;
 
     const mapping: DigitMapping = {
@@ -13,7 +13,7 @@ describe('DigitMappingBox', () => {
 
     beforeEach(() => {
         container = mount(
-            <DigitMappingBox mapping={mapping}/>
+            <MergeMapping mapping={mapping}/>
         );
     });
 
