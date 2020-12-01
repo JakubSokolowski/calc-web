@@ -55,6 +55,19 @@ describe('range', () => {
             // then
             expect(result).toEqual(expected)
         });
+
+        it('should return empty array if n is 0', () => {
+            // given
+            const start = 4;
+            const n = 0;
+            const expected = [];
+
+            // when
+            const result = nNext(start, n);
+
+            // then
+            expect(result).toEqual(expected)
+        });
     });
 
     describe('#nPrev', () => {
@@ -63,6 +76,19 @@ describe('range', () => {
             const start = 0;
             const n = 4;
             const expected = [-1, -2, -3, -4];
+
+            // when
+            const result = nPrev(start, n);
+
+            // then
+            expect(result).toEqual(expected)
+        });
+
+        it('should return empty array if n is 0', () => {
+            // given
+            const start = 4;
+            const n = 0;
+            const expected = [];
 
             // when
             const result = nPrev(start, n);
