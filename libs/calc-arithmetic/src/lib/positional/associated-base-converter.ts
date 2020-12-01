@@ -1,11 +1,5 @@
-import {
-    AssociatedBaseConversion,
-    Conversion,
-    fromDigits,
-    fromNumber,
-    fromStringDirect
-} from './base-converter';
-import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
+import { AssociatedBaseConversion, Conversion, fromDigits, fromNumber, fromStringDirect } from './base-converter';
+import { chunks, chunksFromEnd, logBase, nNext, nPrev, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
 import { DigitMapping } from '../models/digit-mapping';
@@ -49,7 +43,7 @@ export function mapToAssociatedBaseDigits(digits: Digit[], outputBase: number): 
         const mappings = digits.map((digit) => splitToSmallerBaseDigits(digit, outputBase));
         const strippedMappings = stripRedundantZeroDigits(mappings);
         return {
-            positionMappings: strippedMappings,
+            positionMappings: mappings,
             resultDigits: strippedMappings.reduce((arr, mapping) => {
                 return [...arr, ...mapping.output];
             }, [])
@@ -60,10 +54,16 @@ export function mapToAssociatedBaseDigits(digits: Digit[], outputBase: number): 
         const numDigitsPerPosition = Math.round(logBase(outputBase, inputBase));
 
         const reducedIntegerPart: DigitMapping[] = chunksFromEnd(integerPart, numDigitsPerPosition)
-            .map((chunk) => reduceToGreaterBaseDigit(chunk, outputBase));
+            .map((chunk) => {
+                const paddedChunk = padWithZeroDigits(chunk, numDigitsPerPosition, 'Left');
+                return reduceToGreaterBaseDigit(paddedChunk, outputBase);
+            });
 
         const reducedFractionalPart = chunks(fractionalPart, numDigitsPerPosition)
-            .map((chunk) => reduceToGreaterBaseDigit(chunk, outputBase));
+            .map((chunk) => {
+                const paddedChunk = padWithZeroDigits(chunk, numDigitsPerPosition, 'Right');
+                return reduceToGreaterBaseDigit(paddedChunk, outputBase);
+            });
 
         const mappings = [...reducedIntegerPart, ...reducedFractionalPart];
         const strippedMappings = stripRedundantZeroDigits(mappings);
@@ -74,6 +74,45 @@ export function mapToAssociatedBaseDigits(digits: Digit[], outputBase: number): 
                 return [...arr, ...mapping.output];
             }, [])
         };
+    }
+}
+
+function padWithZeroDigits(digits: Digit[], desiredWidth: number, direction: 'Left' | 'Right'): Digit[] {
+    if (digits.length === 0 || digits.length === desiredWidth) return digits;
+
+    const missingDigitsCount = desiredWidth - digits.length;
+    const base = digits[0].base;
+
+    const zeroDigit: Digit = {
+        base,
+        representationInBase: BaseDigits.getDigit(0, base),
+        valueInDecimal: 0,
+        position: -1
+    };
+
+    if (direction === 'Left') {
+        const positionStart = digits[0].position;
+        const positionsDescending = nNext(positionStart, missingDigitsCount).reverse();
+        const missingDigits: Digit[] = positionsDescending.map((position) => {
+            return {
+                ...zeroDigit,
+                position: position
+            };
+        });
+
+        return [...missingDigits, ...digits];
+    } else {
+        const positionStart = digits[digits.length -1].position;
+        const positionsDescending = nPrev(positionStart, missingDigitsCount);
+        const missingDigits: Digit[] = positionsDescending.map((position) => {
+            return {
+                ...zeroDigit,
+                position: position
+            };
+        });
+
+
+        return [...digits, ...missingDigits];
     }
 }
 
@@ -122,7 +161,7 @@ function getSmallerDigitsPositionInChunk(numDigitsPerPosition: number, greaterDi
 
 function stripRedundantZeroDigits(mappings: DigitMapping[]): DigitMapping[] {
     const result = [...mappings];
-    const lastMappingIndex = mappings.length -1;
+    const lastMappingIndex = mappings.length - 1;
     result[0] = removeZeroDigitsFromFirstMapping(result[0]);
     result[lastMappingIndex] = removeZeroDigitsFromLastMapping(result[lastMappingIndex]);
 
@@ -142,7 +181,7 @@ function removeZeroDigitsFromFirstMapping(mapping: DigitMapping): DigitMapping {
         output: areAllMappingDigitZeros
             ? output.slice(0, 1)
             : trimStartByPredicate(output, isZeroDigit)
-    }
+    };
 }
 
 function removeZeroDigitsFromLastMapping(mapping: DigitMapping): DigitMapping {
@@ -150,7 +189,7 @@ function removeZeroDigitsFromLastMapping(mapping: DigitMapping): DigitMapping {
     return {
         input,
         output: trimEndByPredicate(output, isZeroDigit)
-    }
+    };
 }
 
 export function reduceToGreaterBaseDigit(digits: Digit[], outputBase: number): DigitMapping {
