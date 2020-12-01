@@ -279,6 +279,106 @@ describe('associated-base-converter', () => {
                 const expected = '-110011.100101';
                 expect(result.result.valueInBase).toEqual(expected);
             })
+        });
+
+        describe('when converting to greater base', () => {
+            it('should convert positive number to greater base', () => {
+                // given
+                const inputStr = '110011';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '63';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert negative number to greater base', () => {
+                // given
+                const inputStr = '-110011';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '-63';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert positive fractional number to greater base', () => {
+                // given
+                const inputStr = '0.100101';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '0.45';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert negative fractional number to greater base', () => {
+                // given
+                const inputStr = '-0.100101';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '-0.45';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert positive number with fractional part to greater base', () => {
+                // given
+                const inputStr = '110011.100101';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '63.45';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert negative number with fractional part to greater base', () => {
+                // given
+                const inputStr = '-110011.100101';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '-63.45';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert positive number with groups that need to be extended to greater base', () => {
+                // given
+                const inputStr = '1110100110.11';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '1646.6';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
         })
     })
 });
