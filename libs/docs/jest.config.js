@@ -1,9 +1,10 @@
 module.exports = {
-  name: 'docs',
-  preset: '../../jest.config.js',
-  transform: {
-    '^.+\\.[tj]sx?$': 'ts-jest',
-  },
-  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-  coverageDirectory: '../../coverage/libs/docs',
+    name: 'docs',
+    preset: '../../jest.config.js',
+    transform: {
+        '^.+\\.[tj]sx?$': 'ts-jest'
+    },
+    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
+    coverageDirectory: '../../coverage/libs/docs',
+    setupFilesAfterEnv: ['<rootDir>/src/jest.setup.js']
 };

@@ -14,6 +14,8 @@ interface ExtendedMarkdownProps extends ReactMarkdownProps{
 
 export const MarkdownRenderer = (props: ExtendedMarkdownProps) => {
     const {operationRenderer, ...rest} = props;
+    const customRendererToken = 'calc';
+
     const newProps = {
         ...rest,
         plugins: [
@@ -28,7 +30,7 @@ export const MarkdownRenderer = (props: ExtendedMarkdownProps) => {
             math: (props) => <BlockMath math={props.value} />,
             inlineMath: (props) => <InlineMath math={props.value} />,
             code: ({ language, value }) => {
-                if (language === 'calc' && operationRenderer) {
+                if (language === customRendererToken && operationRenderer) {
                     const val = JSON.parse(value);
                     return operationRenderer(val);
                 }
