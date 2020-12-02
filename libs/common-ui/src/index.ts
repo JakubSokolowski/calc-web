@@ -10,5 +10,6 @@ export { TabPanel, a11yProps } from './lib/components/tab-panel/tab-panel';
 export { ExtendedSelect } from './lib/components/extended-select/extended-select';
 export { ExtendedOption } from './lib/core/models/extended-option';
 export { SaveAsImageButton } from './lib/components/save-as-image/save-as-image-button';
-export * from './lib/core/models/form-errors'
-export * from './lib/core/models/extended-option'
+export { NestedList, ListEntry } from './lib/components/nested-list/nested-list';
+export * from './lib/core/models/form-errors';
+export * from './lib/core/models/extended-option';

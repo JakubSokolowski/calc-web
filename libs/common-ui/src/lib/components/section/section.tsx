@@ -30,7 +30,7 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-const Accordion = withStyles({
+export const Accordion = withStyles({
     root: {
         marginBottom: '16px',
         '&:before': {
@@ -43,7 +43,7 @@ const Accordion = withStyles({
     expanded: {},
 })(MuiAccordion);
 
-const AccordionSummary = withStyles({
+export const AccordionSummary = withStyles({
     root: {
         marginBottom: -1,
         minHeight: 48,

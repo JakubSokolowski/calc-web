@@ -1,84 +1,56 @@
 import React from 'react';
-import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import {
-    Accordion,
-    AccordionSummary,
-    createStyles,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText, Theme, Typography
-} from '@material-ui/core';
-import MailIcon from '@material-ui/icons/Mail';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { ListEntry, NestedList } from '@calc/common-ui';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
-            width: '100%',
+            width: '100%'
         },
-        heading: {
-            fontSize: theme.typography.pxToRem(15),
-            fontWeight: theme.typography.fontWeightRegular,
-        },
-    }),
+        heading: {}
+    })
 );
 
 export const SiderMenu = () => {
-    const history = useHistory();
     const { t } = useTranslation();
-    const classes = useStyles();
+
+    const positionalItems: ListEntry[] = [
+        {
+            text: t('baseConverter.title'),
+            link: '/base-converter',
+            key: 'base-converter'
+        },
+        {
+            text: t('associatedBaseConverter.title'),
+            link: '/associated-base-converter',
+            key: 'associated-base-converter'
+        },
+        {
+            text: t('complementConverter.title'),
+            link: '/complement-converter',
+            key: 'complement-converter'
+        },
+        {
+            text: t('positionalCalculator.title'),
+            link: '/positional-calculator',
+            key: 'positional-calculator'
+        }
+    ];
+
+    const floatingItems: ListEntry[] = [
+        {
+            text: t('floatConverter.title'),
+            link: '/float-converter',
+            key: 'float-converter'
+        }
+    ];
 
     return (
         <div>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header">
-                    <Typography className={classes.heading}>{t('home.positional')}</Typography>
-                </AccordionSummary>
-                <List>
-                    <ListItem button key={'base-converter'} onClick={() => history.push('/base-converter')}>
-                        <ListItemText primary={t('baseConverter.title')} />
-                    </ListItem>
-                    <ListItem button key={'associated-base-converter'} onClick={() => history.push('/associated-base-converter')}>
-                        <ListItemText primary={t('associatedBaseConverter.title')} />
-                    </ListItem>
-                    <ListItem button key={'complement-converter'} onClick={() => history.push('/complement-converter')}>
-                        <ListItemText primary={t('complementConverter.title')} />
-                    </ListItem>
-                    <ListItem button key={'positional-converter'} onClick={() => history.push('/positional-calculator')}>
-                        <ListItemText primary={t('positionalCalculator.title')} />
-                    </ListItem>
-                </List>
-            </Accordion>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header">
-                    <Typography className={classes.heading}>{t('home.floating')}</Typography>
-                </AccordionSummary>
-                <List>
-                    <ListItem button key={'float-converter'} onClick={() => history.push('/float-converter')}>
-                        <ListItemIcon>
-                            <MailIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary={t('floatConverter.title')} />
-                    </ListItem>
-                </List>
-            </Accordion>
-            <Accordion>
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header">
-                    <Typography className={classes.heading}>{t('sandbox.title')}</Typography>
-                </AccordionSummary>
-            </Accordion>
+            <NestedList header={t('home.positional')} items={positionalItems}/>
+            <NestedList header={t('home.floating')} items={floatingItems}/>
         </div>
     );
 };
