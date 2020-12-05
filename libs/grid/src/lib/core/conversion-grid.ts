@@ -1,4 +1,4 @@
-import { Conversion, ConversionToArbitrary, ConversionType } from '@calc/calc-arithmetic';
+import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
 import { walk } from '@calc/utils';
 import { GridCellDisplayPreset } from '../models/grid-cell-display-preset';
 import { GridCellConfig } from '../models/grid-cell-config';
