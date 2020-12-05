@@ -1,4 +1,15 @@
-import { CellCoords, CellGroup, gridToAscii } from '@calc/grid';
+import {
+    CellConfig,
+    CellGroup,
+    DigitsInfo,
+    digitsToCellConfig,
+    extractResultMeta,
+    findGroupTriggeredByCell,
+    GridCellConfig,
+    gridToAscii,
+    operandDigitsToCellConfig,
+    padWithEmptyCells
+} from '@calc/grid';
 import {
     buildCellGroupLookup,
     buildColumnGroups,
@@ -7,7 +18,7 @@ import {
     getOutlierAtPosition,
     groupCellsInStraightLine
 } from './grid-utils';
-import { fromNumber } from '@calc/calc-arithmetic';
+import { addPositionalNumbers, fromNumber, subtractPositionalNumbers } from '@calc/calc-arithmetic';
 import { buildIntegralConversionGrid } from './conversion-grid';
 import { CellPosition } from '../models/cell-position';
 import { GridLookup } from '../models/grid-lookup';
@@ -16,10 +27,10 @@ describe('grid-utils', () => {
     describe('#groupCellsInStraightLine', () => {
         it('should return array of coordinates between two cells in a vertical line', () => {
             // given
-            const a: CellCoords = { x: 0, y: 0 };
-            const b: CellCoords = { x: 0, y: 3 };
+            const a: CellConfig = { x: 0, y: 0 };
+            const b: CellConfig = { x: 0, y: 3 };
 
-            const expectedCoords: CellCoords[] = [
+            const expectedCoords: CellConfig[] = [
                 { x: 0, y: 0 },
                 { x: 0, y: 1 },
                 { x: 0, y: 2 },
@@ -35,10 +46,10 @@ describe('grid-utils', () => {
 
         it('should return array of coordinates between two cells in a horizontal line', () => {
             // given
-            const a: CellCoords = { x: 3, y: 0 };
-            const b: CellCoords = { x: 0, y: 0 };
+            const a: CellConfig = { x: 3, y: 0 };
+            const b: CellConfig = { x: 0, y: 0 };
 
-            const expectedCoords: CellCoords[] = [
+            const expectedCoords: CellConfig[] = [
                 { x: 0, y: 0 },
                 { x: 1, y: 0 },
                 { x: 2, y: 0 },
@@ -187,7 +198,7 @@ describe('grid-utils', () => {
                 ]
             };
 
-            const expected: CellCoords = {
+            const expected: CellConfig = {
                 x: 2,
                 y: 0
             };
@@ -198,6 +209,87 @@ describe('grid-utils', () => {
             // then
             expect(result).toEqual(expected);
         });
+
+        it('should return the most top-left cell when position is TopLeft', () => {
+            // given
+            const position = CellPosition.TopLeft;
+            const group: CellGroup = {
+                cells: [
+                    { x: 0, y: 0 },
+                    { x: 1, y: 0 },
+                    { x: 0, y: 1 },
+                    { x: 1, y: 1 },
+                    { x: 2, y: 1 },
+                    { x: 2, y: 0 }
+                ]
+            };
+
+            const expected: CellConfig = {
+                x: 0,
+                y: 0
+            };
+
+            // when
+            const result = getOutlierAtPosition(group, position);
+
+            // then
+            expect(result).toEqual(expected);
+        });
+
+        it('should return the middle top-most cell when position is Top', () => {
+            // given
+            const position = CellPosition.Top;
+            const group: CellGroup = {
+                cells: [
+                    { x: 0, y: 0 },
+                    { x: 1, y: 0 },
+                    { x: 2, y: 0 },
+                    { x: 0, y: 1 },
+                    { x: 1, y: 1 },
+                    { x: 2, y: 1 },
+                    { x: 2, y: 0 }
+                ]
+            };
+
+            const expected: CellConfig = {
+                x: 1,
+                y: 0
+            };
+
+            // when
+            const result = getOutlierAtPosition(group, position);
+
+            // then
+            expect(result).toEqual(expected);
+        });
+
+        it('should return the most top-right cells when position is not yet', () => {
+            // given
+            const position = CellPosition.Bottom;
+            const group: CellGroup = {
+                cells: [
+                    { x: 0, y: 0 },
+                    { x: 1, y: 0 },
+                    { x: 2, y: 0 },
+                    { x: 0, y: 1 },
+                    { x: 1, y: 1 },
+                    { x: 2, y: 1 },
+                    { x: 2, y: 0 }
+                ]
+            };
+
+            const expected: CellConfig = {
+                x: 2,
+                y: 0
+            };
+
+            // when
+            const result = getOutlierAtPosition(group, position);
+
+            // then
+            expect(result).toEqual(expected);
+        });
+
     });
 
     describe('#gridToAscii', () => {
@@ -220,4 +312,276 @@ describe('grid-utils', () => {
             expect(result).toEqual(expected);
         });
     });
+
+    describe('#extractResultMeta', () => {
+        describe('when extracting from addition result', () => {
+            // given
+            const a = fromNumber(24, 10).result;
+            const b = fromNumber(496, 10).result;
+            const result = addPositionalNumbers([a, b]);
+
+            let meta: DigitsInfo;
+
+            beforeAll(() => {
+                // when
+                meta = extractResultMeta(result);
+            });
+
+            it('should return info about total width of grid need to fit all operands (with complement extension)', () => {
+                // then
+                const expected = 5;
+                expect(meta.totalWidth).toEqual(expected);
+            });
+
+
+            it('should return info about most significant position in operands/result digits  (with complement extension)', () => {
+                // then
+                const expected = 3;
+                expect(meta.mostSignificantPosition).toEqual(expected);
+            });
+
+
+            it('should return info about num of result integer/fractional parts digits', () => {
+                // then
+                const expectedInteger = 3;
+                const expectedFractional = 0;
+                expect(meta.numResultIntegerPartDigits).toEqual(expectedInteger);
+                expect(meta.numResultFractionalPartDigits).toEqual(expectedFractional);
+            });
+
+
+            it('should return info about num of operands', () => {
+                // then
+                const expected = 2;
+                expect(meta.numOperands).toEqual(expected);
+            });
+        });
+    });
+
+    describe('#digitsToCellConfig', () => {
+        describe('when building from addition result digits', () => {
+            it('should return cells with proper content', () => {
+                // given
+                const a = fromNumber(19, 10).result;
+                const b = fromNumber(10, 10).result;
+                const result = addPositionalNumbers([a, b]);
+                const digits = result.resultDigits;
+
+                // when
+                const cells = digitsToCellConfig(digits);
+
+                // then
+                const expected: GridCellConfig[] = [
+                    { content: '(0)' },
+                    { content: '2' },
+                    { content: '9' }
+                ];
+                expect(cells).toEqual(expected);
+            });
+        });
+
+        describe('when building from subtraction result digits', () => {
+            it('should return cells with proper content', () => {
+                // given
+                const a = fromNumber(19, 10).result;
+                const b = fromNumber(10, 10).result;
+                const result = subtractPositionalNumbers([a, b]);
+                const digits = result.resultDigits;
+
+                // when
+                const cells = digitsToCellConfig(digits);
+
+                // then
+                const expected: GridCellConfig[] = [
+                    { content: '(0)' },
+                    { content: '9' }
+                ];
+                expect(cells).toEqual(expected);
+            });
+        });
+
+        describe('when building from subtraction operands', () => {
+            it('should return cells with proper content and style preset', () => {
+                // given
+                const a = fromNumber(24, 10).result;
+                const b = fromNumber(19, 10).result;
+                const result = subtractPositionalNumbers([a, b]);
+                const digits = result.positionResults[0].operands;
+
+                // when
+                const cells = digitsToCellConfig(digits);
+
+                // then
+                const expected: GridCellConfig[] = [
+                    {
+                        content: '4',
+                        preset: {
+                            'default': 'crossedOutCell',
+                            hover: 'crossedOutHoverCell'
+                        }
+                    },
+                    {
+                        content: '9'
+                    }
+                ];
+                expect(cells).toEqual(expected);
+            });
+        });
+    });
+
+    describe('#padWithEmptyCells', () => {
+        it('should return initial cells if the width is already reached', () => {
+            // given
+            const direction = 'Left';
+            const desiredWidth = 2;
+            const cells: GridCellConfig [] = [
+                { content: '1' },
+                { content: '2' }
+            ];
+
+            // when
+            const result = padWithEmptyCells(cells, desiredWidth, direction);
+
+            // then
+            expect(result).toEqual(cells);
+        });
+
+        it('should pad cells left until desired width is reached when direction is Left', () => {
+            // given
+            const direction = 'Left';
+            const desiredWidth = 3;
+            const cells: GridCellConfig [] = [
+                { content: '1' }
+            ];
+
+            // when
+            const result = padWithEmptyCells(cells, desiredWidth, direction);
+
+            // then
+            const expected: GridCellConfig[] = [
+                { content: '' },
+                { content: '' },
+                { content: '1' }
+            ];
+            expect(result).toEqual(expected);
+        });
+
+        it('should pad cells right until desired width is reached when direction is Rigt', () => {
+            // given
+            const direction = 'Right';
+            const desiredWidth = 3;
+            const cells: GridCellConfig [] = [
+                { content: '1' }
+            ];
+
+            // when
+            const result = padWithEmptyCells(cells, desiredWidth, direction);
+
+            // then
+            const expected: GridCellConfig[] = [
+                { content: '1' },
+                { content: '' },
+                { content: '' }
+            ];
+            expect(result).toEqual(expected);
+        });
+    });
+
+    describe('#operandDigitsToCellConfig', () => {
+        it('should convert operands to cell config', () => {
+            // given
+            const base = 10;
+            const a = fromNumber(24.5, base).result;
+            const b = fromNumber(496, base).result;
+            const result = addPositionalNumbers([a, b]);
+            const operands = result.operands[0];
+            const info = extractResultMeta(result);
+
+            // when
+            const cells = operandDigitsToCellConfig(operands, info, base);
+
+            // then
+            const expected: GridCellConfig[] = [
+                { content: '' },
+                { content: '' },
+                { content: '(0)' },
+                { content: '2' },
+                { content: '4' },
+                { content: '5' }
+            ];
+            expect(cells).toEqual(expected);
+        });
+    });
+
+    describe('#findGrouTriggeredByCell', () => {
+        it('should return undefined when cell coords do not match any cell in any group', () => {
+            // given
+            const cell: CellConfig = {
+                x: 2,
+                y: 2
+            };
+
+            const groups: CellGroup[] = [
+                {
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }],
+                },
+                {
+                    cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
+                }
+            ];
+
+            // when
+            const result = findGroupTriggeredByCell(cell, groups);
+
+            // then
+            expect(result).toBeUndefined();
+        });
+
+        it('should return undefined when cell coords match some cell in some group, but that cell has but hover trigger is prevented for that cell', () => {
+            // given
+            const cell: CellConfig = {
+                x: 0,
+                y: 1
+            };
+
+            const groups: CellGroup[] = [
+                {
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0, preventGroupTrigger: true }, { y: 2, x: 0 }],
+                },
+                {
+                    cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
+                }
+            ];
+
+            // when
+            const result = findGroupTriggeredByCell(cell, groups);
+
+            // then
+            expect(result).toBeUndefined();
+        });
+
+
+        it('should return triggered group when coords match and trigger is not prevented', () => {
+            // given
+            const cell: CellConfig = {
+                x: 0,
+                y: 1
+            };
+
+            const groups: CellGroup[] = [
+                {
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }],
+                },
+                {
+                    cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
+                }
+            ];
+
+            // when
+            const result = findGroupTriggeredByCell(cell, groups);
+
+            // then
+            expect(result).toEqual(groups[0]);
+        });
+    })
 });

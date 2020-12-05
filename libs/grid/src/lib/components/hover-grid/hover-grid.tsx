@@ -1,7 +1,13 @@
 import React, { FC, useRef, useState } from 'react';
 import HoverGridCell, { GridCellEvent, HoverCellProps } from '../hover-cell/hover-grid-cell';
-import { buildCellGroupLookup, coordsEqual, getOutlierAtPosition, padWithEmptyCells } from '../../core/grid-utils';
-import { CellCoords } from '../../models/cell-coords';
+import {
+    buildCellGroupLookup,
+    coordsEqual,
+    findGroupTriggeredByCell,
+    getOutlierAtPosition,
+    padWithEmptyCells
+} from '../../core/grid-utils';
+import { CellConfig } from '../../models/cell-config';
 import { CellGroup } from '../../models/cell-group';
 import { GridCellConfig } from '../../models/grid-cell-config';
 import { GridLine } from '../../models/grid-line';
@@ -87,11 +93,10 @@ export const HoverGrid: FC<HoverGridProps> = (
         id
     }) => {
     const lookup = buildCellGroupLookup(groups);
-    const [hoverCell, setHoveredCell] = useState<CellCoords>();
+    const [hoverCell, setHoveredCell] = useState<CellConfig>();
     const [hoveredGroup, setHoveredGroup] = useState<CellGroup>();
     const gridRef = useRef(null);
     const classes = useStyles();
-    const { t } = useTranslation();
 
     const handleClick = (event) => {
         console.log('Click Event', event);
@@ -107,14 +112,15 @@ export const HoverGrid: FC<HoverGridProps> = (
                 && hoverCell.y === event.y;
 
             if (cellAlreadyHovered) return;
-
-            // find which group of cells
-            // need to hovered, and set first group
             setHoveredCell({ x, y });
-            const hoverGroupKey = `${x}-${y}`;
-            const group = lookup[hoverGroupKey];
 
-            if (group && group.length) setHoveredGroup(group[0]);
+            const hoverGroupKey = `${x}-${y}`;
+            const matchingGroups = lookup[hoverGroupKey];
+
+            if (matchingGroups && matchingGroups.length) {
+                const group = findGroupTriggeredByCell(event, groups);
+                if(group) setHoveredGroup(group);
+            }
         } else {
             setHoveredCell(undefined);
             setHoveredGroup(undefined);
@@ -129,7 +135,7 @@ export const HoverGrid: FC<HoverGridProps> = (
         });
     };
 
-    const getGroupPopoverAnchorCoords = (): CellCoords => {
+    const getGroupPopoverAnchorCoords = (): CellConfig => {
         if (!hoveredGroup) return { x: -1, y: -1 };
         const position = hoveredGroup.popoverPlacement || CellPosition.Top;
         return getOutlierAtPosition(hoveredGroup, position);

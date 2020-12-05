@@ -36,7 +36,7 @@ export function buildSubtractionGrid(result: SubtractionResult): HoverOperationG
 
     const groups = buildColumnGroups(values, [...result.positionResults.reverse()].slice(1));
     const xAxis = buildAxis(info.mostSignificantPosition + 1, info.totalWidth);
-    const lines = getGridLines({ ...info, numIntegerPartDigits: info.numIntegerPartDigits }, borrowRows);
+    const lines = getGridLines({ ...info, numResultIntegerPartDigits: info.numResultIntegerPartDigits }, borrowRows);
 
     return { values, lines, xAxis, groups };
 }

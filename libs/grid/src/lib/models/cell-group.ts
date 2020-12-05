@@ -1,8 +1,8 @@
-import { CellCoords } from './cell-coords';
+import { CellConfig } from './cell-config';
 import { CellPosition } from '../..';
 
 export interface CellGroup {
-  cells: CellCoords[];
+  cells: CellConfig[];
   contentProps?: any;
   contentBuilder?: any;
   popoverPlacement?: CellPosition;

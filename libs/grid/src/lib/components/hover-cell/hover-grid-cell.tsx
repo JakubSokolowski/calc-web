@@ -99,7 +99,7 @@ const HoverGridCell: FC<HoverCellProps> = (
         horizontalLine,
         verticalLine,
         onHover,
-        onClick
+        onClick,
     }) => {
 
     const { content, preset } = config;

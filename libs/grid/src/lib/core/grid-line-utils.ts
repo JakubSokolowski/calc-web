@@ -1,7 +1,7 @@
 import { GridLine, LineDefinition } from '../models/grid-line';
 import { LineType } from '../models/line-type';
 import { GridCellConfig } from '../models/grid-cell-config';
-import { DigitsInfo, getUnderline } from './grid-utils';
+import { DigitsInfo } from './grid-utils';
 
 function isInSpan(index: number, range?: LineDefinition) {
     if(!range) return true;
@@ -33,16 +33,31 @@ export function anyVerticalLineIntersects(x: number, y: number, lines: GridLine[
     });
 }
 
+export function getUnderline(carryRows: GridCellConfig[][]): GridLine {
+    const index = carryRows.length - 1;
+    const span: LineDefinition = {
+        from: index > 0
+            ? carryRows[index].findIndex((cell) => cell.content !== '')
+            : 0
+    };
+
+    return {
+        type: LineType.Horizontal,
+        index,
+        span
+    };
+}
+
 export function getGridLines(info: DigitsInfo, upperRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];
 
     const horizontalLineIndex = info.numOperands - 1 + upperRows.length;
     lines.push({ type: LineType.Horizontal, index: horizontalLineIndex });
 
-    const hasFractionalPart = info.numFractionalDigits > 0;
+    const hasFractionalPart = info.numResultFractionalPartDigits > 0;
 
     if (hasFractionalPart) {
-        const verticalLineIndex = info.totalWidth - info.numFractionalDigits -1;
+        const verticalLineIndex = info.totalWidth - info.numResultFractionalPartDigits -1;
         lines.push({ type: LineType.Vertical, index: verticalLineIndex });
     }
 
