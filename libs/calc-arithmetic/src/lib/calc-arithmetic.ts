@@ -22,6 +22,10 @@ export {
     convertUsingAssociatedBases
 } from './positional/associated-base-converter';
 
+export {
+    multiplyPositionalNumbers
+} from './positional/multiplication'
+
 export * from './models'
 export * from './models/operation'
 export * from './models/operation-algorithm'
@@ -44,6 +48,7 @@ export {
 
 export {
     isValidString,
+    digitsToStr
 } from './helpers/conversion-helpers'
 
 export {

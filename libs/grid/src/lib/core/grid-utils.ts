@@ -9,6 +9,7 @@ import { LineType } from '../models/line-type';
 import { GridLookup } from '../models/grid-lookup';
 import { BaseDigits, Digit, isSubtractionOperand, OperationResult, PositionResult } from '@calc/calc-arithmetic';
 import { GridCellEvent } from '../..';
+import { isFunction } from 'util';
 
 
 export function buildEmptyGrid(width: number, height: number): GridCellConfig[][] {
@@ -46,16 +47,16 @@ export function buildRowGroup(row: GridCellConfig[], rowIndex: number, contentPr
     };
 }
 
-export function buildColumnGroups(cells: GridCellConfig[][], contentProps?: any[], contentBuilder?: any): CellGroup[] {
+export function buildColumnGroups(cells: GridCellConfig[][], contentProps?: any[], yOffset = 0, contentBuilder?: any, preventTriggerPredicate?: PreventTriggerPredicate): CellGroup[] {
     if (!cells.length) return [];
 
     const groups: CellGroup[] = [];
 
     for (let x = 0; x < cells[0].length; x++) {
-        const start: CellConfig = { x, y: 0 };
-        const end: CellConfig = { x, y: cells.length - 1 };
+        const start: CellConfig = { x, y: yOffset };
+        const end: CellConfig = { x, y: cells.length - 1 + yOffset };
         const group: CellGroup = {
-            cells: groupCellsInStraightLine(start, end),
+            cells: groupCellsInStraightLine(start, end, preventTriggerPredicate),
             contentProps: (contentProps && contentProps[x]) ? contentProps[x] : '',
             contentBuilder: contentBuilder
         };
@@ -91,18 +92,39 @@ function getStartEndRowCoords(row: GridCellConfig[], rowIndex: number): [CellCon
     return [start, end];
 }
 
-export function groupCellsInStraightLine(a: CellConfig, b: CellConfig): CellConfig[] {
+export type PreventTriggerPredicate = (cell: CellConfig) => boolean;
+
+
+function isPredicate(value: any): value is PreventTriggerPredicate {
+    return isFunction(value);
+}
+
+export function groupCellsInStraightLine(a: CellConfig, b: CellConfig, preventGroupTrigger?: boolean | PreventTriggerPredicate): CellConfig[] {
     const horizontalLine = a.y === b.y;
     const verticalLine = a.x === b.x;
 
     if (horizontalLine) {
         const { start, range } = getCellRange(a.x, b.x);
-        return range.map((x) => ({ x: start + x, y: a.y }));
+        return range.map((x) => {
+            const coords: CellConfig = { x: start + x, y: a.y };
+            const shouldPrevent = isPredicate(preventGroupTrigger)
+                ? preventGroupTrigger(coords)
+                : preventGroupTrigger;
+
+            return ({ x: start + x, y: a.y, preventGroupTrigger: shouldPrevent });
+        });
     }
 
     if (verticalLine) {
         const { start, range } = getCellRange(a.y, b.y);
-        return range.map((y) => ({ y: start + y, x: a.x }));
+        return range.map((y) => {
+            const coords: CellConfig = { y: start + y, x: a.x };
+            const shouldPrevent = isPredicate(preventGroupTrigger)
+                ? preventGroupTrigger(coords)
+                : preventGroupTrigger;
+
+            return ({ y: start + y, x: a.x, preventGroupTrigger: shouldPrevent });
+        });
     }
 
     return [];
@@ -125,16 +147,17 @@ function getCellRange(a: number, b: number): CellRange {
 export function getOutlierAtPosition(cellGroup: CellGroup, position: CellPosition): CellConfig {
     if (!cellGroup.cells) return { x: -1, y: -1 };
 
-    switch(position) {
+    switch (position) {
         case CellPosition.TopLeft:
             return getTopLeftOutlier(cellGroup);
         case CellPosition.Top:
             return getTopMiddleOutlier(cellGroup);
         case CellPosition.TopRight:
             return getTopRightOutlier(cellGroup);
+        case CellPosition.Bottom:
+            return getBottomMiddleOutlier(cellGroup);
         case CellPosition.Right:
         case CellPosition.BottomRight:
-        case CellPosition.Bottom:
         case CellPosition.BottomLeft:
         case CellPosition.Left:
             return getTopRightOutlier(cellGroup);
@@ -148,6 +171,11 @@ function getTopMiddleOutlier(cellGroup: CellGroup): CellConfig {
 
 function getTopMostCells(cellGroup: CellGroup): CellConfig[] {
     return getOutliers(cellGroup, Math.min, 'y');
+}
+
+function getBottomMiddleOutlier(cellGroup: CellGroup): CellConfig {
+    const bottommost = getBottommostCells(cellGroup);
+    return bottommost[Math.floor((bottommost.length - 1) / 2)];
 }
 
 function getBottommostCells(cellGroup: CellGroup): CellConfig[] {
@@ -216,19 +244,21 @@ export function gridToAscii(grid: HoverOperationGrid): string {
     return ascii;
 }
 
-export interface DigitsInfo {
+export interface ResultMeta {
     mostSignificantPosition: number;
     totalWidth: number;
     numOperands: number;
+    fractionDesiredWidth: number;
     numResultIntegerPartDigits: number;
     numResultFractionalPartDigits: number;
 }
 
-export function extractResultMeta(result: OperationResult<Digit, PositionResult<Digit>>): DigitsInfo {
+export function extractResultMeta(result: OperationResult<Digit, PositionResult<Digit>>): ResultMeta {
     const maxDigitsInRow = maxNumOfDigitsInRow(result);
 
     return {
         totalWidth: maxDigitsInRow + 1,
+        fractionDesiredWidth: result.numberResult.fractionalPart.length,
         mostSignificantPosition: mostSignificantPosition(result),
         numResultIntegerPartDigits: result.numberResult.integerPart.length,
         numResultFractionalPartDigits: result.numberResult.fractionalPart.length,
@@ -276,27 +306,58 @@ export function padWithEmptyCells(cells: GridCellConfig[], desiredWidth: number,
     return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];
 }
 
-export function operandDigitsToCellConfig<T extends Digit>(digits: T[], info: DigitsInfo, base: number): GridCellConfig[] {
+export enum CellPaddingPolicy {
+    PadWithZeros = 'PadWithZeros',
+    PadWithEmptyCells = 'PadWithEmptyCells',
+}
+
+export function operandDigitsToCellConfig<T extends Digit>(digits: T[], info: ResultMeta, base: number, fractionPaddingPolicy: CellPaddingPolicy = CellPaddingPolicy.PadWithZeros): GridCellConfig[] {
     const indexOfZeroPositionDigit = digits.findIndex((digit) => digit.position === 0);
     if (indexOfZeroPositionDigit === -1) return [];
 
     const integerPartDigits = digits.slice(0, indexOfZeroPositionDigit + 1);
     const fractionalPartDigits = digits.slice(indexOfZeroPositionDigit + 1);
 
-    const paddedIntegerPartDigits = padWithZeroDigitCells(integerPartDigits, info.numResultIntegerPartDigits + 2, base, 'Left');
-    const paddedFractionalPartDigits = padWithZeroDigitCells(fractionalPartDigits, info.numResultFractionalPartDigits, base, 'Right');
+    const integerPaddingContent = '';
+    const fractionPaddingContent = getPaddingContentForPolicy(base, fractionPaddingPolicy);
+
+    const paddedIntegerPartDigits = padDigitsWithContent(integerPartDigits, info.numResultIntegerPartDigits + 2, integerPaddingContent, 'Left');
+    const paddedFractionalPartDigits = padDigitsWithContent(fractionalPartDigits, info.fractionDesiredWidth, fractionPaddingContent, 'Right');
 
     return padWithEmptyCells([...paddedIntegerPartDigits, ...paddedFractionalPartDigits], info.totalWidth, 'Left');
 }
 
-function padWithZeroDigitCells<T extends Digit>(digits: T[], desiredWidth: number, base: number, direction?: 'Left' | 'Right'): GridCellConfig[] {
+function getPaddingContentForPolicy(base: number, policy: CellPaddingPolicy): string {
+    switch (policy) {
+        case CellPaddingPolicy.PadWithZeros:
+            return BaseDigits.getDigit(0, base);
+        case CellPaddingPolicy.PadWithEmptyCells:
+            return '';
+    }
+}
+
+
+export function eraseContentEnd(cells: GridCellConfig[], count: number): GridCellConfig[] {
+    const totalLength = cells.length;
+    return cells.map((cell, index) => {
+        if (index + count >= totalLength) {
+            return {
+                ...cell,
+                content: ''
+            };
+        }
+        return cell;
+    });
+}
+
+
+export function padDigitsWithContent<T extends Digit>(digits: T[], desiredWidth: number, content: string, direction: 'Left' | 'Right'): GridCellConfig[] {
     const cells = digitsToCellConfig(digits);
     if (desiredWidth <= digits.length) return cells;
 
     const missingCellsCount = desiredWidth - digits.length;
     const newEmptyCells: GridCellConfig[] = [...Array(missingCellsCount).keys()].map(() => {
-        const value = direction === 'Left' ? '' : BaseDigits.getDigit(0, base);
-        return ({ content: value });
+        return ({ content });
     });
 
     return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];

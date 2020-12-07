@@ -1,7 +1,7 @@
 import { GridLine, LineDefinition } from '../models/grid-line';
 import { LineType } from '../models/line-type';
 import { GridCellConfig } from '../models/grid-cell-config';
-import { DigitsInfo } from './grid-utils';
+import { ResultMeta } from './grid-utils';
 
 function isInSpan(index: number, range?: LineDefinition) {
     if(!range) return true;
@@ -48,7 +48,7 @@ export function getUnderline(carryRows: GridCellConfig[][]): GridLine {
     };
 }
 
-export function getGridLines(info: DigitsInfo, upperRows: GridCellConfig[][]): GridLine[] {
+export function getGridLines(info: ResultMeta, upperRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];
 
     const horizontalLineIndex = info.numOperands - 1 + upperRows.length;

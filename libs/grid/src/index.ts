@@ -1,3 +1,4 @@
+export { buildAxis } from './lib/core/axis-utils';
 export * from './lib/components/hover-cell/hover-grid-cell';
 export * from './lib/components/hover-grid/hover-grid';
 export * from './lib/core/grid-utils';
@@ -7,7 +8,7 @@ export { CellGroup } from './lib/models/cell-group';
 export { GridCellDisplayPreset } from './lib/models/grid-cell-display-preset';
 export { GridCellConfig } from './lib/models/grid-cell-config';
 export { LineType } from './lib/models/line-type';
-export { GridLine } from './lib/models/grid-line';
+export { GridLine, LineDefinition } from './lib/models/grid-line';
 export { CellPosition } from './lib/models/cell-position';
 export {
     buildColumnGroups, gridToAscii, groupCellsInStraightLine, buildEmptyGrid, buildRowGroup

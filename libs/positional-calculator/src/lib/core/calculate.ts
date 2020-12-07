@@ -4,15 +4,19 @@ import {
     addPositionalNumbers,
     AlgorithmType,
     BaseOperationResult,
+    MultiplicationResult,
+    MultiplicationType,
     Operation,
     OperationAlgorithm,
     OperationType,
     PositionalNumber,
     SubtractionResult,
     SubtractionType,
-    subtractPositionalNumbers
+    subtractPositionalNumbers,
+    multiplyPositionalNumbers
 } from '@calc/calc-arithmetic';
 import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@calc/grid';
+import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';
 
 
 export interface OperationParams<T extends AlgorithmType> {
@@ -23,10 +27,10 @@ export interface OperationParams<T extends AlgorithmType> {
 }
 
 
-export interface GridResult<T extends BaseOperationResult = BaseOperationResult> {
+export interface GridResult<T = any> {
     result: PositionalNumber;
     grid: HoverOperationGrid;
-    operationResult?: BaseOperationResult;
+    operationResult?: any;
 }
 
 
@@ -36,6 +40,8 @@ export function calculate<T extends AlgorithmType, D extends BaseOperationResult
             return handleAdd(params as OperationParams<AdditionType>);
         case OperationType.Subtraction:
             return handleSubtract(params as OperationParams<SubtractionType>);
+        case OperationType.Multiplication:
+            return handleMultiply(params as OperationParams<MultiplicationType>);
         default:
             throw new Error(`Operation type: ${params.operation.type} not supported`);
     }
@@ -73,4 +79,21 @@ function handleSubtract(params: OperationParams<SubtractionType>): GridResult<Su
             throw new Error(`Subtraction algorithm type: ${params.algorithm.type} not supported`);
     }
 }
+
+function handleMultiply(params: OperationParams<MultiplicationType>): GridResult<MultiplicationResult> {
+    switch (params.algorithm.type) {
+        case MultiplicationType.Default: {
+            const result = multiplyPositionalNumbers(params.operands);
+            const grid = buildMultiplicationGrid(result);
+            return {
+                grid,
+                result: result.numberResult,
+                operationResult: result
+            };
+        }
+        default:
+            throw new Error(`Subtraction algorithm type: ${params.algorithm.type} not supported`);
+    }
+}
+
 

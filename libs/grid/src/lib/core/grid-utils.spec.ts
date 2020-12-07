@@ -1,14 +1,16 @@
 import {
     CellConfig,
     CellGroup,
-    DigitsInfo,
+    CellPaddingPolicy,
     digitsToCellConfig,
+    eraseContentEnd,
     extractResultMeta,
     findGroupTriggeredByCell,
     GridCellConfig,
     gridToAscii,
     operandDigitsToCellConfig,
-    padWithEmptyCells
+    padWithEmptyCells,
+    ResultMeta
 } from '@calc/grid';
 import {
     buildCellGroupLookup,
@@ -55,6 +57,20 @@ describe('grid-utils', () => {
                 { x: 2, y: 0 },
                 { x: 3, y: 0 }
             ];
+
+            // when
+            const result = groupCellsInStraightLine(a, b);
+
+            // then
+            expect(result).toEqual(expectedCoords);
+        });
+
+        it('should return an empty array if two cells have no common cords', () => {
+            // given
+            const a: CellConfig = { x: 3, y: 1 };
+            const b: CellConfig = { x: 4, y: 2 };
+
+            const expectedCoords: CellConfig[] = [];
 
             // when
             const result = groupCellsInStraightLine(a, b);
@@ -263,9 +279,37 @@ describe('grid-utils', () => {
             expect(result).toEqual(expected);
         });
 
-        it('should return the most top-right cells when position is not yet', () => {
+        it('should return the middle bottom-most cell when position is Bottom', () => {
             // given
             const position = CellPosition.Bottom;
+            const group: CellGroup = {
+                cells: [
+                    { x: 0, y: 0 },
+                    { x: 1, y: 0 },
+                    { x: 2, y: 0 },
+                    { x: 0, y: 1 },
+                    { x: 1, y: 1 },
+                    { x: 2, y: 1 },
+                    { x: 2, y: 0 }
+                ]
+            };
+
+            const expected: CellConfig = {
+                x: 1,
+                y: 1
+            };
+
+            // when
+            const result = getOutlierAtPosition(group, position);
+
+            // then
+            expect(result).toEqual(expected);
+        });
+
+
+        it('should return the most top-right cells when position is not yet implemented', () => {
+            // given
+            const position = CellPosition.BottomLeft;
             const group: CellGroup = {
                 cells: [
                     { x: 0, y: 0 },
@@ -320,7 +364,7 @@ describe('grid-utils', () => {
             const b = fromNumber(496, 10).result;
             const result = addPositionalNumbers([a, b]);
 
-            let meta: DigitsInfo;
+            let meta: ResultMeta;
 
             beforeAll(() => {
                 // when
@@ -406,7 +450,7 @@ describe('grid-utils', () => {
                 const a = fromNumber(24, 10).result;
                 const b = fromNumber(19, 10).result;
                 const result = subtractPositionalNumbers([a, b]);
-                const digits = result.positionResults[0].operands;
+                const digits = result.stepResults[0].operands;
 
                 // when
                 const cells = digitsToCellConfig(digits);
@@ -488,11 +532,11 @@ describe('grid-utils', () => {
     });
 
     describe('#operandDigitsToCellConfig', () => {
-        it('should convert operands to cell config', () => {
+        it('should convert operands to cell config and pad it with empty zeros when policy is not specified', () => {
             // given
             const base = 10;
             const a = fromNumber(24.5, base).result;
-            const b = fromNumber(496, base).result;
+            const b = fromNumber(496.92, base).result;
             const result = addPositionalNumbers([a, b]);
             const operands = result.operands[0];
             const info = extractResultMeta(result);
@@ -507,13 +551,39 @@ describe('grid-utils', () => {
                 { content: '(0)' },
                 { content: '2' },
                 { content: '4' },
-                { content: '5' }
+                { content: '5' },
+                { content: '0' }
+            ];
+            expect(cells).toEqual(expected);
+        });
+
+        it('should convert operands to cell config and pad it with empty cells when padding policy is PadWithEmptyCells', () => {
+            // given
+            const base = 10;
+            const a = fromNumber(24.5, base).result;
+            const b = fromNumber(496.92, base).result;
+            const result = addPositionalNumbers([a, b]);
+            const operands = result.operands[0];
+            const info = extractResultMeta(result);
+
+            // when
+            const cells = operandDigitsToCellConfig(operands, info, base, CellPaddingPolicy.PadWithEmptyCells);
+
+            // then
+            const expected: GridCellConfig[] = [
+                { content: '' },
+                { content: '' },
+                { content: '(0)' },
+                { content: '2' },
+                { content: '4' },
+                { content: '5' },
+                { content: '' }
             ];
             expect(cells).toEqual(expected);
         });
     });
 
-    describe('#findGrouTriggeredByCell', () => {
+    describe('#findGroupTriggeredByCell', () => {
         it('should return undefined when cell coords do not match any cell in any group', () => {
             // given
             const cell: CellConfig = {
@@ -523,7 +593,7 @@ describe('grid-utils', () => {
 
             const groups: CellGroup[] = [
                 {
-                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }],
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }]
                 },
                 {
                     cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
@@ -546,7 +616,7 @@ describe('grid-utils', () => {
 
             const groups: CellGroup[] = [
                 {
-                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0, preventGroupTrigger: true }, { y: 2, x: 0 }],
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0, preventGroupTrigger: true }, { y: 2, x: 0 }]
                 },
                 {
                     cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
@@ -570,7 +640,7 @@ describe('grid-utils', () => {
 
             const groups: CellGroup[] = [
                 {
-                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }],
+                    cells: [{ y: 0, x: 0 }, { y: 1, x: 0 }, { y: 2, x: 0 }]
                 },
                 {
                     cells: [{ y: 0, x: 1 }, { y: 1, x: 1 }, { y: 2, x: 1 }]
@@ -583,5 +653,38 @@ describe('grid-utils', () => {
             // then
             expect(result).toEqual(groups[0]);
         });
-    })
+    });
+
+    describe('#eraseContentEnd', () => {
+        it('should replace content with empty str for given numbers of cells starting from end', () => {
+            // given
+            const cells: GridCellConfig[] = [
+                { content: '' },
+                { content: '' },
+                { content: '(0)' },
+                { content: '2' },
+                { content: '4' },
+                { content: '5' },
+                { content: '0' }
+            ];
+
+            const count = 3;
+
+            // when
+            const result = eraseContentEnd(cells, count);
+
+            // then
+            const expected: GridCellConfig[] = [
+                { content: '' },
+                { content: '' },
+                { content: '(0)' },
+                { content: '2' },
+                { content: '' },
+                { content: '' },
+                { content: '' }
+            ];
+
+            expect(result).toEqual(expected);
+        });
+    });
 });

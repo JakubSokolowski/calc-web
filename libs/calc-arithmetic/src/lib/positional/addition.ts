@@ -79,7 +79,7 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
     const numberResult = buildPositionalNumberFromDigits(resultDigits);
 
     return {
-        positionResults: result,
+        stepResults: result,
         resultDigits,
         numberResult,
         operands: digits,

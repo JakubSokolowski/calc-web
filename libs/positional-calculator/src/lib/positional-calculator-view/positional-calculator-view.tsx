@@ -85,7 +85,8 @@ export const PositionalCalculatorView: FC = () => {
     const getTitle = () => {
         return {
             [OperationType.Addition]: 'positionalCalculator.additionDetails',
-            [OperationType.Subtraction]: 'positionalCalculator.subtractionDetails'
+            [OperationType.Subtraction]: 'positionalCalculator.subtractionDetails',
+            [OperationType.Multiplication]: 'positionalCalculator.multiplicationDetails'
         }[params.operation.type] || '';
     };
 

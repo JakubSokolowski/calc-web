@@ -8,3 +8,16 @@ export enum CellPosition {
   BottomLeft = 'BottomLeft',
   Left = 'Left'
 }
+
+export type PopoverPlacement = | 'bottom-end'
+    | 'bottom-start'
+    | 'bottom'
+    | 'left-end'
+    | 'left-start'
+    | 'left'
+    | 'right-end'
+    | 'right-start'
+    | 'right'
+    | 'top-end'
+    | 'top-start'
+    | 'top';

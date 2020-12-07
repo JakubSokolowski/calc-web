@@ -1,9 +1,10 @@
 import { AssociatedBaseConversion, Conversion, fromDigits, fromNumber, fromStringDirect } from './base-converter';
-import { chunks, chunksFromEnd, logBase, nNext, nPrev, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
+import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
 import { DigitMapping } from '../models/digit-mapping';
 import { AssociatedBaseConversionDetails } from '../models/associated-base-conversion-details';
+import { padWithZeroDigits } from './digits';
 
 export function convertUsingAssociatedBases(
     valueStr: string,
@@ -55,13 +56,13 @@ export function mapToAssociatedBaseDigits(digits: Digit[], outputBase: number): 
 
         const reducedIntegerPart: DigitMapping[] = chunksFromEnd(integerPart, numDigitsPerPosition)
             .map((chunk) => {
-                const paddedChunk = padWithZeroDigits(chunk, numDigitsPerPosition, 'Left');
+                const paddedChunk = padWithZeroDigits(chunk, inputBase, numDigitsPerPosition, 'Left');
                 return reduceToGreaterBaseDigit(paddedChunk, outputBase);
             });
 
         const reducedFractionalPart = chunks(fractionalPart, numDigitsPerPosition)
             .map((chunk) => {
-                const paddedChunk = padWithZeroDigits(chunk, numDigitsPerPosition, 'Right');
+                const paddedChunk = padWithZeroDigits(chunk, inputBase, numDigitsPerPosition, 'Right');
                 return reduceToGreaterBaseDigit(paddedChunk, outputBase);
             });
 
@@ -74,45 +75,6 @@ export function mapToAssociatedBaseDigits(digits: Digit[], outputBase: number): 
                 return [...arr, ...mapping.output];
             }, [])
         };
-    }
-}
-
-function padWithZeroDigits(digits: Digit[], desiredWidth: number, direction: 'Left' | 'Right'): Digit[] {
-    if (digits.length === 0 || digits.length === desiredWidth) return digits;
-
-    const missingDigitsCount = desiredWidth - digits.length;
-    const base = digits[0].base;
-
-    const zeroDigit: Digit = {
-        base,
-        representationInBase: BaseDigits.getDigit(0, base),
-        valueInDecimal: 0,
-        position: -1
-    };
-
-    if (direction === 'Left') {
-        const positionStart = digits[0].position;
-        const positionsDescending = nNext(positionStart, missingDigitsCount).reverse();
-        const missingDigits: Digit[] = positionsDescending.map((position) => {
-            return {
-                ...zeroDigit,
-                position: position
-            };
-        });
-
-        return [...missingDigits, ...digits];
-    } else {
-        const positionStart = digits[digits.length -1].position;
-        const positionsDescending = nPrev(positionStart, missingDigitsCount);
-        const missingDigits: Digit[] = positionsDescending.map((position) => {
-            return {
-                ...zeroDigit,
-                position: position
-            };
-        });
-
-
-        return [...digits, ...missingDigits];
     }
 }
 

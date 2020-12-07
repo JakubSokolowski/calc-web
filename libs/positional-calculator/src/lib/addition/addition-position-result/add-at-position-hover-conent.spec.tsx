@@ -9,7 +9,7 @@ describe('AddAtPositionHoverContent', () => {
     const a = fromNumber(10, 10).result;
     const b = fromNumber(5, 10).result;
     const result = addPositionalNumbers([a, b]);
-    const positionResult = result.positionResults[1];
+    const positionResult = result.stepResults[1];
 
     beforeEach(() => {
         container = mount(

@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { AdditionResult, OperationType, SubtractionResult } from '@calc/calc-arithmetic';
+import { AdditionResult, MultiplicationResult, OperationType, SubtractionResult } from '@calc/calc-arithmetic';
 import { AdditionResultComponent } from '../addition/addition-result/addition-result-component';
 import { SubtractionResultComponent } from '../subtraction/subtraction-result/subtraction-result-component';
+import { MultiplicationResultComponent } from '../multiplication/multiplication-result/multiplication-result.component';
 
 interface OperationResultProps {
-    result: AdditionResult | SubtractionResult;
+    result: AdditionResult | SubtractionResult | MultiplicationResult;
 }
 
 export const OperationResultComponent: FC<OperationResultProps>  = ({result}) => {
@@ -15,7 +16,7 @@ export const OperationResultComponent: FC<OperationResultProps>  = ({result}) =>
         case OperationType.Subtraction:
             return <SubtractionResultComponent result={result as SubtractionResult}/>;
         case OperationType.Multiplication:
-            break;
+            return <MultiplicationResultComponent result={result as MultiplicationResult}/>;
         case OperationType.Division:
             break;
 

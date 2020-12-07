@@ -8,7 +8,11 @@ export enum SubtractionType {
     Default = 'Default'
 }
 
-export type AlgorithmType = AdditionType | SubtractionType
+export enum MultiplicationType {
+    Default = 'Default'
+}
+
+export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
 
 export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
@@ -29,9 +33,16 @@ export const subtractionAlgorithms: OperationAlgorithm<SubtractionType>[] = [
     },
 ];
 
+export const multiplicationAlgorithms: OperationAlgorithm<MultiplicationType>[] = [
+    {
+        type: MultiplicationType.Default
+    },
+];
+
+
 export const algorithmMap: AlgorithmOperationMap = {
     [OperationType.Addition]: additionAlgorithms,
     [OperationType.Subtraction]: subtractionAlgorithms,
-    [OperationType.Multiplication]: [],
+    [OperationType.Multiplication]: multiplicationAlgorithms,
     [OperationType.Division]: [],
 };

@@ -3,7 +3,7 @@ import {
     arbitraryFractionToDecimal,
     arbitraryIntegralToDecimal,
     decimalFractionToArbitrary,
-    decimalIntegerToArbitrary,
+    decimalIntegerToArbitrary, digitsToStr,
     isFloatingPointStr,
     isValidString, serializeRepresentationStr,
     splitToDigitsList,
@@ -256,14 +256,20 @@ export class StandardBaseConverter implements BaseConverter {
     }
 
     public fromStringDirect(
-        valueStr: string,
+        inputStr: string,
         inputBase: number
     ): Conversion {
-        if (!isValidString(valueStr, inputBase)) {
-            throw new Error(
-                `The string ${valueStr} does not match the input base ${inputBase}`
-            );
+        let valueStr = inputStr;
+        if(ComplementConverter.isValidComplementStr(valueStr, inputBase)) {
+            valueStr = ComplementConverter.complementStrToBaseStr(valueStr, inputBase);
+        } else {
+            if (!isValidString(valueStr, inputBase)) {
+                throw new Error(
+                    `The string ${valueStr} does not match the input base ${inputBase}`
+                );
+            }
         }
+
         const conversion = new Conversion();
 
         const digits = splitToPartsArr(valueStr, inputBase);
@@ -289,11 +295,8 @@ export class StandardBaseConverter implements BaseConverter {
         digits: Digit[],
         isNegative?: boolean
     ): Conversion {
-        const valueStr = digits.reduce((str, digit) => {
-            return digit.position === -1
-                ? str.concat(`.${digit.representationInBase}`)
-                : str.concat(digit.representationInBase);
-        }, isNegative ? '-' : '');
+        const sign = isNegative ? '-' : '';
+        const valueStr = `${sign}${digitsToStr(digits)}`;
 
         const base = digits[0].base;
 
@@ -331,11 +334,11 @@ export function fromStringDirect(
 }
 
 export function fromDigits(
-    digit: Digit[],
+    digits: Digit[],
     isNegative?: boolean
 ): Conversion {
     const converter = new StandardBaseConverter();
-    return converter.fromDigitsDirect(digit, isNegative);
+    return converter.fromDigitsDirect(digits, isNegative);
 }
 
 

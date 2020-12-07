@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { buildAxis, buildAxisContinuation } from '../../core/axis-utils';
+import { buildAxisContinuation } from '../../core/axis-utils';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import { HoverGrid, HoverGridProps } from '../hover-grid/hover-grid';
 import { buildEmptyGrid } from '../../core/grid-utils';

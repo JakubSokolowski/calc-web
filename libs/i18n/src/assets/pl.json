@@ -71,6 +71,7 @@
         "newOperand": "Nowy operand",
         "additionDetails": "Szczegóły dodawania",
         "subtractionDetails": "Szczegóły odejmowania",
+        "multiplicationDetails": "Szczegóły mnożenia",
         "downloadDetails": "Pobierz szczegóły jako .png",
         "calculate": "Oblicz"
     },

@@ -3,13 +3,14 @@ import {
     arbitraryFractionToDecimal,
     arbitraryIntegralToDecimal,
     decimalFractionToArbitrary,
-    decimalIntegerToArbitrary,
+    decimalIntegerToArbitrary, digitsToStr,
     getRepresentationRegexPattern,
     isFloatingPointStr,
     isValidString,
     removeZeroDigits,
     representationStrToStrArray, serializeRepresentationStr,
-    splitToDigits, splitToDigitsList,
+    splitToDigits,
+    splitToDigitsList,
     splitToPartsArr
 } from './conversion-helpers';
 import { Digits } from '../positional/representations';
@@ -773,4 +774,81 @@ describe('conversion-helpers', () => {
             expect(result).toEqual(expected)
         });
     });
+
+    describe('#digitsToStr', () => {
+        describe('when base is less than 36', () => {
+            it('should convert to proper str when there are no fractional digits', () => {
+                // given
+                const base = 10;
+                const digits: Digit[] = [
+                    {representationInBase: '1', position: 3, valueInDecimal: 1, base },
+                    {representationInBase: '2', position: 2, valueInDecimal: 2, base },
+                    {representationInBase: '3', position: 1, valueInDecimal: 3, base },
+                    {representationInBase: '4', position: 0, valueInDecimal: 4, base }
+                ];
+
+                // when
+                const result = digitsToStr(digits);
+
+                // then
+                const expected = '1234';
+                expect(result).toEqual(expected);
+            });
+
+            it('should convert to proper str when there are some fractional digits', () => {
+                // given
+                const base = 10;
+                const digits: Digit[] = [
+                    {representationInBase: '1', position: 3, valueInDecimal: 1, base },
+                    {representationInBase: '2', position: 2, valueInDecimal: 2, base },
+                    {representationInBase: '3', position: 1, valueInDecimal: 3, base },
+                    {representationInBase: '4', position: 0, valueInDecimal: 4, base },
+                    {representationInBase: '5', position: -1, valueInDecimal: 4, base }
+                ];
+
+                // when
+                const result = digitsToStr(digits);
+
+                // then
+                const expected = '1234.5';
+                expect(result).toEqual(expected);
+            })
+        });
+
+        describe('when base is greater than 36', () => {
+            it('should convert to proper str when there are no fractional digits', () => {
+                // given
+                const base = 64;
+                const digits: Digit[] = [
+                    {representationInBase: '12', position: 2, valueInDecimal: 12, base },
+                    {representationInBase: '10', position: 1, valueInDecimal: 10, base },
+                    {representationInBase: '04', position: 0, valueInDecimal: 3, base }
+                ];
+
+                // when
+                const result = digitsToStr(digits);
+
+                // then
+                const expected = '12 10 04';
+                expect(result).toEqual(expected);
+            });
+
+            it('should convert to proper str when there are some fractional digits', () => {
+                // given
+                const base = 64;
+                const digits: Digit[] = [
+                    {representationInBase: '12', position: 1, valueInDecimal: 12, base },
+                    {representationInBase: '10', position: 0, valueInDecimal: 10, base },
+                    {representationInBase: '04', position: -1, valueInDecimal: 4, base }
+                ];
+
+                // when
+                const result = digitsToStr(digits);
+
+                // then
+                const expected = '12 10.04';
+                expect(result).toEqual(expected);
+            })
+        });
+    })
 });

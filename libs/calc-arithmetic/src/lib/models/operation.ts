@@ -22,5 +22,10 @@ export const allOperations: Operation[] = [
         type: OperationType.Subtraction,
         minOperands: 2,
         maxOperands: 2
+    },
+    {
+        type: OperationType.Multiplication,
+        minOperands: 2,
+        maxOperands: 2
     }
 ];

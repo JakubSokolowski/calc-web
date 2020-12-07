@@ -5,7 +5,6 @@ import {
     coordsEqual,
     findGroupTriggeredByCell,
     getOutlierAtPosition,
-    padWithEmptyCells
 } from '../../core/grid-utils';
 import { CellConfig } from '../../models/cell-config';
 import { CellGroup } from '../../models/cell-group';
@@ -17,7 +16,6 @@ import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../co
 import { AxisConfig } from '../../models/axis-config';
 import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { useTranslation } from 'react-i18next';
 
 export interface HoverGridProps {
     values: GridCellConfig[][];
@@ -137,7 +135,7 @@ export const HoverGrid: FC<HoverGridProps> = (
 
     const getGroupPopoverAnchorCoords = (): CellConfig => {
         if (!hoveredGroup) return { x: -1, y: -1 };
-        const position = hoveredGroup.popoverPlacement || CellPosition.Top;
+        const position = hoveredGroup.anchorPosition || CellPosition.Top;
         return getOutlierAtPosition(hoveredGroup, position);
     };
 
@@ -166,12 +164,12 @@ export const HoverGrid: FC<HoverGridProps> = (
             const canBuildPopoverContent = hasBuilder && !!hoveredGroup.contentProps;
 
             if (isCellGroupAnchor && canBuildPopoverContent) {
-                const content = groupBuilder
-                    ? groupBuilder(hoveredGroup.contentProps)
-                    : hoveredGroup.contentBuilder(hoveredGroup.contentProps);
+                const content = hoveredGroup.contentBuilder && hoveredGroup.contentProps
+                    ? hoveredGroup.contentBuilder(hoveredGroup.contentProps)
+                    : groupBuilder(hoveredGroup.contentProps);
 
                 return (
-                    <HtmlTooltip title={content} open={true} key={`${x}-${y}`} arrow placement={'top'}>
+                    <HtmlTooltip title={content} open={true} key={`${x}-${y}`} arrow placement={hoveredGroup.popoverPlacement || 'top'}>
                         <div>
                             <HoverGridCell {...cellProps} />
                         </div>
@@ -206,7 +204,7 @@ export const HoverGrid: FC<HoverGridProps> = (
                 </div>
             }
             <div className={classes.cellBox}>
-                <div className={classes.cellContent} ref={gridRef} id={'fuk-u'}>
+                <div className={classes.cellContent} ref={gridRef}>
                     {rows}
                 </div>
             </div>
