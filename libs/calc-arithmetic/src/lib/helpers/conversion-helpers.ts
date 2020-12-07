@@ -278,10 +278,22 @@ export function splitToDigitsList(num: BigNumber | number | string, base = 10): 
 }
 
 export function serializeRepresentationStr(representation: string): string {
-   return representation
-       .replace('−', '-')
-       .replace(',', '.')
-       .replace(/\s+/g, ' ')
-       .trim()
+    return representation
+        .replace('−', '-')
+        .replace(',', '.')
+        .replace(/\s+/g, ' ')
+        .trim();
 }
 
+export function digitsToStr<T extends Digit>(digits: T[]): string {
+    if (!digits.length) return '';
+    const base = digits[0].base;
+    const joinSymbol = base <= 36 ? '' : ' ';
+
+    const integerPart = digits.filter(d => d.position >= 0).map(d => d.representationInBase);
+    const fractionalPart = digits.filter(d => d.position < 0).map(d => d.representationInBase);
+
+    if(!fractionalPart.length) return integerPart.join(joinSymbol);
+    const separator = '.';
+    return `${integerPart.join(joinSymbol)}${separator}${fractionalPart.join(joinSymbol)}`;
+}

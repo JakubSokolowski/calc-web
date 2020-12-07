@@ -111,7 +111,7 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
 
     return {
         operands,
-        positionResults,
+        stepResults: positionResults,
         resultDigits,
         numberResult,
         operation: OperationType.Subtraction,

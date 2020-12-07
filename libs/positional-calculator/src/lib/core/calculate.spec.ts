@@ -2,7 +2,7 @@ import { calculate, OperationParams } from './calculate';
 import {
     AdditionType,
     AlgorithmType,
-    fromNumber,
+    fromNumber, MultiplicationType,
     Operation,
     OperationAlgorithm,
     OperationType, SubtractionType
@@ -134,6 +134,58 @@ describe('calculate', () => {
 
             const algorithm: OperationAlgorithm<SubtractionType> = {
                 type: 'NotSupported' as SubtractionType
+            };
+
+            const params: OperationParams<AlgorithmType> = {
+                ...baseParams,
+                operation: { ...operation },
+                algorithm: { ...algorithm }
+            };
+
+            // when
+            expect(() => {
+                calculate(params);
+            }).toThrow();
+        });
+    });
+
+    describe('when operation is multiplication', () => {
+        it('should return proper result when multiplication type is default', () => {
+            // given
+            const operation: Operation = {
+                maxOperands: 10,
+                minOperands: 2,
+                type: OperationType.Multiplication
+            };
+
+            const algorithm: OperationAlgorithm<MultiplicationType> = {
+                type: MultiplicationType.Default
+            };
+
+            const params: OperationParams<AlgorithmType> = {
+                ...baseParams,
+                operation: { ...operation },
+                algorithm: { ...algorithm }
+            };
+
+            // when
+            const {result} = calculate(params);
+
+            // then
+            const expected = '50';
+            expect(result.valueInBase).toEqual(expected);
+        });
+
+        it('should throw error when multiplication type is not supported', () => {
+            // given
+            const operation: Operation = {
+                maxOperands: 10,
+                minOperands: 2,
+                type: OperationType.Multiplication
+            };
+
+            const algorithm: OperationAlgorithm<MultiplicationType> = {
+                type: 'NotSupported' as MultiplicationType
             };
 
             const params: OperationParams<AlgorithmType> = {

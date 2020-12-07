@@ -31,7 +31,7 @@ export function buildAdditionGrid(result: AdditionResult): HoverOperationGrid {
 
     const rows: GridCellConfig[][] = [...carryRows, ...operandRows, resultRow];
 
-    const groups = buildColumnGroups(rows, [...result.positionResults.reverse()]);
+    const groups = buildColumnGroups(rows, [...result.stepResults.reverse()]);
     const lines = getGridLines(info, carryRows);
     const xAxis = buildAxis(info.mostSignificantPosition + 1, info.totalWidth);
 
@@ -54,7 +54,7 @@ function carriesToCellConfig(result: AdditionResult): GridCellConfig[][] {
 
     let mostCarriesPerPosition = 0;
 
-    result.positionResults.forEach((posResult) => {
+    result.stepResults.forEach((posResult) => {
         posResult.carry.forEach((carry) => {
             if (positionCarryLookup[carry.position]) {
                 positionCarryLookup[carry.position].push(carry);

@@ -72,7 +72,8 @@
         "calculate": "Calculate",
         "additionDetails": "Addition Details",
         "downloadDetails": "Download details as .png",
-        "subtractionDetails": "Subtraction Details"
+        "subtractionDetails": "Subtraction Details",
+        "multiplicationDetails": "Multiplication Details"
     },
     "sandbox": {
         "title": "Sandbox",

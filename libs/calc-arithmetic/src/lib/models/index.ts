@@ -15,8 +15,8 @@ export interface PositionResult<T extends Digit> {
     operands: T[];
 }
 
-export interface OperationResult <D extends Digit, T extends PositionResult<D>> {
-    positionResults: T[];
+export interface OperationResult<D extends Digit, T extends PositionResult<D>> {
+    stepResults: T[];
     resultDigits: D[];
     numberResult?: PositionalNumber;
     numberOperands: PositionalNumber[];
@@ -27,12 +27,12 @@ export interface OperationResult <D extends Digit, T extends PositionResult<D>> 
 
 export type BaseOperationResult = OperationResult<Digit, PositionResult<Digit>>;
 
-export interface AdditionOperand extends Digit{
+export interface AdditionOperand extends Digit {
     isCarry?: boolean;
     carrySourcePosition?: number;
 }
 
-export interface AdditionPositionResult extends PositionResult<AdditionOperand>{
+export interface AdditionPositionResult extends PositionResult<AdditionOperand> {
     carry: AdditionOperand[];
 }
 
@@ -49,16 +49,34 @@ export interface BorrowInfo {
     borrows: Borrow[];
 }
 
-export interface SubtractionOperand extends Digit{
+export interface SubtractionOperand extends Digit {
     borrowChain?: Digit[];
 }
 
-export interface SubtractionPositionResult extends PositionResult<SubtractionOperand>{
+export type MultiplicationOperand = AdditionOperand
+
+export interface SubtractionPositionResult extends PositionResult<SubtractionOperand> {
     borrow?: Borrow;
 }
 
+export interface MultiplicationPositionResult extends PositionResult<MultiplicationOperand> {
+    carry?: MultiplicationOperand;
+    shiftedPosition?: number;
+}
+
+export interface MultiplicationRowResult extends PositionResult<MultiplicationOperand> {
+    multiplicands: MultiplicationOperand[];
+    multiplier: MultiplicationOperand;
+    rowPositionResults: MultiplicationPositionResult[];
+    resultDigits: MultiplicationOperand[];
+}
 
 export type SubtractionResult = OperationResult<SubtractionOperand, SubtractionPositionResult>;
+
+export interface MultiplicationResult extends OperationResult<MultiplicationOperand, MultiplicationPositionResult> {
+    stepResults: MultiplicationRowResult[];
+    addition: AdditionResult;
+}
 
 
 export function isSubtractionOperand(obj: any): obj is SubtractionOperand {

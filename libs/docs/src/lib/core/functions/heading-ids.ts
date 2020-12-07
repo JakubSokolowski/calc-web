@@ -7,7 +7,10 @@ export function extractHeadingIds(markdown?: string): ContentsEntry[] {
 
     const headingRegex =  /^ *(#{1,6}) *([^\n]+?) *#* *(?:\n+|$)/gm;
 
-    return markdown.match(headingRegex).map((heading) => {
+    const matches = markdown.match(headingRegex);
+    if(!matches) return [];
+
+    return matches.map((heading) => {
         const withoutHashes = heading.replace(/#/g, '');
         const level = heading.split('#').length - 1;
 

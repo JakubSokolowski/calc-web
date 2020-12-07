@@ -14,7 +14,7 @@ export const getGroupBuilder = (result: AdditionResult | SubtractionResult ) => 
         case OperationType.Subtraction:
             return SubtractAtPositionResult;
         case OperationType.Multiplication:
-            break;
+            return AddAtPositionHoverContent;
         case OperationType.Division:
             break;
     }

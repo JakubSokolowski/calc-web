@@ -7,12 +7,13 @@ interface P {
 }
 
 export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
-
-    const operands = positionResult.operands.map((operand, index) => {
+    if(!positionResult || !positionResult.operands) return null;
+    const nonZeroOperands = positionResult.operands.filter((op) => op.valueInDecimal !== 0);
+    const operands = nonZeroOperands.map((operand, index) => {
         return (
             <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
                 <NumberSubscript value={operand.representationInBase} subscript={''} noBraces={true}/>
-                {index !== positionResult.operands.length -1 && '+'}
+                {index !== nonZeroOperands.length -1 && '+'}
             </span>
         );
     });

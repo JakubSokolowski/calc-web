@@ -320,7 +320,7 @@ describe('subtraction', () => {
                         valueInDecimal: 20
                     }
                 ];
-                expect(result.positionResults[0].operands[0].borrowChain).toEqual(expected);
+                expect(result.stepResults[0].operands[0].borrowChain).toEqual(expected);
             })
         })
     })

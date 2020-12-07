@@ -4,7 +4,7 @@ import {
     algorithmMap,
     allOperations,
     BaseDigits,
-    isValidString,
+    isValidString, multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
     OperationType, subtractionAlgorithms
@@ -60,16 +60,16 @@ const useStyles = makeStyles((theme: Theme) =>
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(allOperations[0]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(subtractionAlgorithms[0]);
+    const [operation, setOperation] = useState<Operation>(allOperations[2]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(multiplicationAlgorithms[0]);
     const [operands, setOperands] = useState<ValidatedOperand[]>(
-        [{valid: true, representation: '12 13.45'}, {valid: true, representation: '44 32'}]
+        [{valid: true, representation: '0.003'}, {valid: true, representation: '12.123'}]
     );
     const [canAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
     const initialValues: FormValues = {
-        base: 64,
+        base: 10,
         representation: '0.0',
         operands: []
     };

@@ -31,12 +31,18 @@ export class ComplementConverter {
      */
     public static isValidComplementStr(str: string, base: number): boolean {
         if (this.hasValidComplementSign(str, base)) {
-            const noSignComplementStr = str.split(')')[1];
-            return isValidString(noSignComplementStr, base);
+            const [, noSignComplementStr] = str.split(')');
+
+            const strToCheck = noSignComplementStr.startsWith('.')
+                ? noSignComplementStr.substring(1)
+                : noSignComplementStr;
+
+            return isValidString(strToCheck, base);
         } else {
             return false;
         }
     }
+
 
     /**
      * Checks whether given string starts with valid sign
@@ -192,19 +198,25 @@ export class ComplementConverter {
      * @param base
      */
     public static complementStrToBaseStr(str: string, base: number) {
-        const noSignStr = base > 36 ? str.substr(4) : str.substring(3);
+        let noSignStr = base > 36 ? str.substr(4) : str.substring(3);
 
-        if(!this.isComplementStrNegative(str, base)) {
-            if(noSignStr.startsWith('.')) {
-                return `${BaseDigits.getDigit(0, base)}${noSignStr}`
+        if (!this.isComplementStrNegative(str, base)) {
+            if (noSignStr.startsWith('.')) {
+                return `${BaseDigits.getDigit(0, base)}${noSignStr}`;
             }
-            return noSignStr
+            return noSignStr;
         }
 
-        const digits = splitToDigits(noSignStr.trim(), base);
+        const isShortenedComplement = noSignStr.startsWith('.');
+        if (isShortenedComplement) {
+            const zero = BaseDigits.getDigit(base - 1, base);
+            noSignStr = `${zero}${noSignStr}`;
+        }
+
+        const [integral, fractional] = splitToDigits(noSignStr.trim(), base);
         const baseDigits = this.computeComplement(
-            digits[0],
-            digits[1],
+            integral,
+            fractional,
             base
         );
         const delimiter = baseDigits[1].length === 0 ? '' : '.';
