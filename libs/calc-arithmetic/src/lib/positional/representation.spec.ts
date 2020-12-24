@@ -1,5 +1,6 @@
-import { ComplementConverter, fromNumber } from '@calc/calc-arithmetic';
+import { fromNumber } from '@calc/calc-arithmetic';
 import { AdditionOperand } from '../models';
+import { getComplement } from './complement-converter';
 
 describe('representation', () => {
     describe('PositionalNumber', () => {
@@ -88,7 +89,7 @@ describe('representation', () => {
                 // given
                 const complementStr = '1B49';
                 const base = 16;
-                const complement = ComplementConverter.getComplement(complementStr, base);
+                const complement = getComplement(complementStr, base);
 
                 // when
                 const digits = complement.toDigitsList();

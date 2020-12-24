@@ -9,10 +9,10 @@ import {
     splitToDigitsList,
     splitToPartsArr
 } from '../helpers/conversion-helpers';
-import { ComplementConverter } from './complement-converter';
 import { PositionalNumber } from './representations';
 import { Digit } from '../models';
-import { AssociatedBaseConversionDetails } from '../..';
+import { AssociatedBaseConversionDetails } from '../models/associated-base-conversion-details';
+import { complementStrToBaseStr, getComplement, isValidComplementStr } from './complement-converter';
 
 export enum ConversionType {
     DIRECT = 'direct',
@@ -193,10 +193,8 @@ export class StandardBaseConverter implements BaseConverter {
             ? integerPartDigits[0].toString() + '.' + fractionalPartDigits[0]
             : integerPartDigits[0].toString();
 
-        const complement = ComplementConverter.getComplement(
-            sign + repStr,
-            resultBase
-        );
+        const complement = getComplement(sign + repStr, resultBase);
+
         const result = new PositionalNumber(
             integerPartDigits[0],
             fractionalPartDigits[0],
@@ -231,10 +229,7 @@ export class StandardBaseConverter implements BaseConverter {
         const conversion = new Conversion();
         const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
 
-        const complement = ComplementConverter.getComplement(
-            decimalValue.toString(),
-            resultBase
-        );
+        const complement = getComplement(decimalValue.toString(), resultBase);
         // Split into two str arrays - integral part digits arr and
         // fractional part digits arr
         const digits = splitToPartsArr(decimalValue);
@@ -260,8 +255,8 @@ export class StandardBaseConverter implements BaseConverter {
         inputBase: number
     ): Conversion {
         let valueStr = inputStr;
-        if(ComplementConverter.isValidComplementStr(valueStr, inputBase)) {
-            valueStr = ComplementConverter.complementStrToBaseStr(valueStr, inputBase);
+        if(isValidComplementStr(valueStr, inputBase)) {
+            valueStr = complementStrToBaseStr(valueStr, inputBase);
         } else {
             if (!isValidString(valueStr, inputBase)) {
                 throw new Error(
@@ -274,7 +269,7 @@ export class StandardBaseConverter implements BaseConverter {
 
         const digits = splitToPartsArr(valueStr, inputBase);
         const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
-        const complement = ComplementConverter.getComplement(valueStr, inputBase);
+        const complement = getComplement(valueStr, inputBase);
 
         const inputInDecimal = new PositionalNumber(
             digits[0],

@@ -1,20 +1,19 @@
 import React, { FC, useCallback, useState } from 'react';
 import {
     BaseDigits,
-    ComplementConverter,
     Conversion,
     convertUsingAssociatedBases,
     fromString,
+    getComplement,
     isValidString
 } from '@calc/calc-arithmetic';
-import { InputWithCopy } from '@calc/common-ui';
+import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, MenuItem, TextField } from '@material-ui/core';
 import { useFormik } from 'formik';
 import { clean } from '@calc/utils';
-import { FormErrors } from '@calc/common-ui';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 
@@ -103,9 +102,9 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         }
     }, [inputBase, inputValue]);
 
-    const getComplement = useCallback(() => {
+    const complement = useCallback(() => {
         try {
-            return ComplementConverter.getComplement(
+            return getComplement(
                 inputValue,
                 inputBase
             ).toString();
@@ -166,7 +165,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         label={t('baseConverter.inputComplement')}
                         readOnly
                         size={'small'}
-                        value={getComplement()}
+                        value={complement()}
                     />
                 }
 
