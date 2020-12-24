@@ -1,5 +1,5 @@
 import React, { FC, useCallback, useState } from 'react';
-import { BaseDigits, ComplementConverter, Conversion, fromString, isValidString } from '@calc/calc-arithmetic';
+import { BaseDigits, Conversion, fromString, getComplement, isValidString } from '@calc/calc-arithmetic';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
@@ -100,12 +100,9 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         }
     }, [inputBase, inputValue]);
 
-    const getComplement = useCallback(() => {
+    const complement = useCallback(() => {
         try {
-            return ComplementConverter.getComplement(
-                inputValue,
-                inputBase
-            ).toString();
+            return getComplement(inputValue, inputBase).toString();
         } catch (e) {
             console.log(e);
             return '0.0';
@@ -200,7 +197,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         label={t('baseConverter.inputComplement')}
                         size={'small'}
                         readOnly
-                        value={getComplement()}
+                        value={complement()}
                     />
                 }
             </form>

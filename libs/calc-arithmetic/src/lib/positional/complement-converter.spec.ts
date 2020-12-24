@@ -1,4 +1,15 @@
-import { ComplementConverter } from './complement-converter';
+import {
+    complementStrToBaseStr,
+    getComplement,
+    getNegativeNumberComplement,
+    getPositiveNumberComplement,
+    hasDelimiter,
+    hasValidComplementSign,
+    incrementNumber,
+    isComplementStrNegative,
+    isNegative,
+    isValidComplementStr
+} from './complement-converter';
 import { Digit } from '@calc/calc-arithmetic';
 
 describe('complement-converter', () => {
@@ -11,7 +22,7 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const actual = ComplementConverter.getPositiveNumberComplement(
+            const actual = getPositiveNumberComplement(
                 input,
                 base
             );
@@ -29,7 +40,7 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const actual = ComplementConverter.getPositiveNumberComplement(
+            const actual = getPositiveNumberComplement(
                 input,
                 base
             );
@@ -47,7 +58,7 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const actual = ComplementConverter.getPositiveNumberComplement(
+            const actual = getPositiveNumberComplement(
                 input,
                 base
             );
@@ -67,7 +78,7 @@ describe('complement-converter', () => {
             const expectedSign = '(9)';
 
             // when
-            const actual = ComplementConverter.getNegativeNumberComplement(
+            const actual = getNegativeNumberComplement(
                 input,
                 base
             );
@@ -85,7 +96,7 @@ describe('complement-converter', () => {
             const expectedSign = '(9)';
 
             // when
-            const actual = ComplementConverter.getNegativeNumberComplement(
+            const actual = getNegativeNumberComplement(
                 input,
                 base
             );
@@ -103,7 +114,7 @@ describe('complement-converter', () => {
             const expectedSign = '(1)';
 
             // when
-            const actual = ComplementConverter.getNegativeNumberComplement(
+            const actual = getNegativeNumberComplement(
                 input,
                 base
             );
@@ -121,7 +132,7 @@ describe('complement-converter', () => {
             const expectedSign = '(9)';
 
             // when
-            const actual = ComplementConverter.getNegativeNumberComplement(
+            const actual = getNegativeNumberComplement(
                 input,
                 base
             );
@@ -141,7 +152,7 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const actual = ComplementConverter.getComplement(input, base);
+            const actual = getComplement(input, base);
 
             // then
             expect(actual.toString()).toEqual(expected);
@@ -156,7 +167,7 @@ describe('complement-converter', () => {
             const expectedSign = '(9)';
 
             // when
-            const actual = ComplementConverter.getComplement(input, base);
+            const actual = getComplement(input, base);
 
             // then
             expect(actual.toString()).toEqual(expected);
@@ -171,8 +182,8 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const complement = ComplementConverter.getComplement(input, base);
-            const actual = ComplementConverter.getComplement(complement);
+            const complement = getComplement(input, base);
+            const actual = getComplement(complement);
 
             // then
             expect(actual.toString()).toEqual(expected);
@@ -185,7 +196,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // when
-            const actual = ComplementConverter.getComplement(input, base);
+            const actual = getComplement(input, base);
 
             // then
             const expected = '(0)10';
@@ -198,7 +209,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // when
-            const actual = ComplementConverter.getComplement(input, base);
+            const actual = getComplement(input, base);
 
             // then
             const expected = '(9)90';
@@ -213,7 +224,7 @@ describe('complement-converter', () => {
             const base = 64;
 
             // when
-            const actual = ComplementConverter.getComplement(input, base).toDigitsList();
+            const actual = getComplement(input, base).toDigitsList();
 
             // then
             const expected: Digit[] = [
@@ -238,12 +249,12 @@ describe('complement-converter', () => {
     describe('isNegative tests', () => {
         it('returns true if toString() is negative', () => {
             const input = '-200.22';
-            expect(ComplementConverter.isNegative(input)).toBeTruthy();
+            expect(isNegative(input)).toBeTruthy();
         });
 
         it('returns false if toString() is positive', () => {
             const input = '200.22';
-            expect(ComplementConverter.isNegative(input)).toBeFalsy();
+            expect(isNegative(input)).toBeFalsy();
         });
     });
 
@@ -255,7 +266,7 @@ describe('complement-converter', () => {
             const expected = '789235'.split('');
 
             // then
-            expect(ComplementConverter.incrementNumber(input, base)).toEqual(
+            expect(incrementNumber(input, base)).toEqual(
                 expected
             );
         });
@@ -267,7 +278,7 @@ describe('complement-converter', () => {
             const expected = '789300'.split('');
 
             // then
-            expect(ComplementConverter.incrementNumber(input, base)).toEqual(
+            expect(incrementNumber(input, base)).toEqual(
                 expected
             );
         });
@@ -279,7 +290,7 @@ describe('complement-converter', () => {
             const expected = '10 48 29 42 23 45'.split(' ');
 
             // when
-            const actual = ComplementConverter.incrementNumber(input, base);
+            const actual = incrementNumber(input, base);
 
             // then
             expect(actual).toEqual(expected);
@@ -292,7 +303,7 @@ describe('complement-converter', () => {
             const expected = '10 48 30 00 00 00'.split(' ');
 
             // then
-            expect(ComplementConverter.incrementNumber(input, base)).toEqual(
+            expect(incrementNumber(input, base)).toEqual(
                 expected
             );
         });
@@ -306,7 +317,7 @@ describe('complement-converter', () => {
             const expected = '0.0';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -318,7 +329,7 @@ describe('complement-converter', () => {
             const expected = '0.0';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -330,7 +341,7 @@ describe('complement-converter', () => {
             const expected = '12345.123';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -342,7 +353,7 @@ describe('complement-converter', () => {
             const expected = '-23457';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -354,7 +365,7 @@ describe('complement-converter', () => {
             const expected = '-23456.88';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -366,7 +377,7 @@ describe('complement-converter', () => {
             const expected = '-13';
 
             // then
-            expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+            expect(complementStrToBaseStr(input, base)).toEqual(
                 expected
             );
         });
@@ -378,7 +389,7 @@ describe('complement-converter', () => {
             const expected = '0.1';
 
             // when
-            const result = ComplementConverter.complementStrToBaseStr(input, base);
+            const result = complementStrToBaseStr(input, base);
 
             // then
             expect(result).toEqual(expected);
@@ -391,7 +402,7 @@ describe('complement-converter', () => {
             const expected = '-0.9';
 
             // when
-            const result = ComplementConverter.complementStrToBaseStr(input, base);
+            const result = complementStrToBaseStr(input, base);
 
             // then
             expect(result).toEqual(expected);
@@ -405,7 +416,7 @@ describe('complement-converter', () => {
                 const expected = '00';
 
                 // then
-                expect(ComplementConverter.complementStrToBaseStr(input, base)).toEqual(
+                expect(complementStrToBaseStr(input, base)).toEqual(
                     expected
                 );
             });
@@ -419,9 +430,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeTruthy();
+            expect(hasValidComplementSign(input, base)).toBeTruthy();
         });
 
         it('returns true if string starts with valid negative complement sign', () => {
@@ -430,9 +439,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeTruthy();
+            expect(hasValidComplementSign(input, base)).toBeTruthy();
         });
 
         it('returns true if string starts with valid positive complement sign for base > 36', () => {
@@ -441,9 +448,7 @@ describe('complement-converter', () => {
             const base = 64;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeTruthy();
+            expect(hasValidComplementSign(input, base)).toBeTruthy();
         });
 
         it('returns true if string starts with valid negative complement sign for base > 36', () => {
@@ -452,9 +457,7 @@ describe('complement-converter', () => {
             const base = 64;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeTruthy();
+            expect(hasValidComplementSign(input, base)).toBeTruthy();
         });
 
         it('returns false if string starts with invalid sign', () => {
@@ -463,9 +466,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeFalsy();
+            expect(hasValidComplementSign(input, base)).toBeFalsy();
         });
 
         it('returns true for random string wiht valid sign', () => {
@@ -474,9 +475,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeTruthy();
+            expect(hasValidComplementSign(input, base)).toBeTruthy();
         });
 
         it('returns false if string has no complement sign', () => {
@@ -485,9 +484,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.hasValidComplementSign(input, base)
-            ).toBeFalsy();
+            expect(hasValidComplementSign(input, base)).toBeFalsy();
         });
     });
 
@@ -498,9 +495,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.isValidComplementStr(input, base)
-            ).toBeTruthy();
+            expect(isValidComplementStr(input, base)).toBeTruthy();
         });
 
         it('returns false for valid string with invalid sign', () => {
@@ -509,9 +504,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.isValidComplementStr(input, base)
-            ).toBeFalsy();
+            expect(isValidComplementStr(input, base)).toBeFalsy();
         });
 
         it('returns false for invalid string with valid sign', () => {
@@ -520,9 +513,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // then
-            expect(
-                ComplementConverter.isValidComplementStr(input, base)
-            ).toBeFalsy();
+            expect(isValidComplementStr(input, base)).toBeFalsy();
         });
 
         it('returns true for valid shortened negative fractional complement', () => {
@@ -531,7 +522,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // when
-            const result = ComplementConverter.isValidComplementStr(input, base);
+            const result = isValidComplementStr(input, base);
 
             // then
             expect(result).toBeTruthy();
@@ -543,7 +534,7 @@ describe('complement-converter', () => {
             const base = 10;
 
             // when
-            const result = ComplementConverter.isValidComplementStr(input, base);
+            const result = isValidComplementStr(input, base);
 
             // then
             expect(result).toBeTruthy();
@@ -557,8 +548,8 @@ describe('complement-converter', () => {
             const negative = '(9)12345.123';
 
             // then
-            expect(ComplementConverter.isComplementStrNegative(positive)).toBeFalsy();
-            expect(ComplementConverter.isComplementStrNegative(negative)).toBeTruthy();
+            expect(isComplementStrNegative(positive)).toBeFalsy();
+            expect(isComplementStrNegative(negative)).toBeTruthy();
         });
 
         it('detects negative sign in shortened negative complement str', () => {
@@ -567,7 +558,7 @@ describe('complement-converter', () => {
             const complement = '(9).1';
 
             // when
-            const result = ComplementConverter.isComplementStrNegative(complement, base);
+            const result = isComplementStrNegative(complement, base);
 
             // then
             expect(result).toBeTruthy();
@@ -579,7 +570,7 @@ describe('complement-converter', () => {
             const complement = '(1).1';
 
             // when
-            const result = ComplementConverter.isComplementStrNegative(complement, base);
+            const result = isComplementStrNegative(complement, base);
 
             // then
             expect(result).toBeFalsy();
@@ -594,10 +585,10 @@ describe('complement-converter', () => {
 
             // then
             expect(
-                ComplementConverter.isComplementStrNegative(positive, base)
+                isComplementStrNegative(positive, base)
             ).toBeFalsy();
             expect(
-                ComplementConverter.isComplementStrNegative(negative, base)
+                isComplementStrNegative(negative, base)
             ).toBeTruthy();
         });
     });
@@ -608,7 +599,7 @@ describe('complement-converter', () => {
             const input = '(0)12345.123';
 
             // then
-            expect(ComplementConverter.hasDelimiter(input)).toBeTruthy();
+            expect(hasDelimiter(input)).toBeTruthy();
         });
 
         it('Detects colon delimiter', () => {
@@ -616,7 +607,7 @@ describe('complement-converter', () => {
             const input = '(0)12345,123';
 
             // then
-            expect(ComplementConverter.hasDelimiter(input)).toBeTruthy();
+            expect(hasDelimiter(input)).toBeTruthy();
         });
 
         it('Returns false for string without delimiter', () => {
@@ -624,7 +615,7 @@ describe('complement-converter', () => {
             const input = '(0)12345123';
 
             // then
-            expect(ComplementConverter.hasDelimiter(input)).toBeFalsy();
+            expect(hasDelimiter(input)).toBeFalsy();
         });
 
         it('Detects negative sign in complement str for base > 36', () => {
@@ -635,10 +626,10 @@ describe('complement-converter', () => {
 
             // then
             expect(
-                ComplementConverter.isComplementStrNegative(positive, base)
+                isComplementStrNegative(positive, base)
             ).toBeFalsy();
             expect(
-                ComplementConverter.isComplementStrNegative(negative, base)
+                isComplementStrNegative(negative, base)
             ).toBeTruthy();
         });
     });

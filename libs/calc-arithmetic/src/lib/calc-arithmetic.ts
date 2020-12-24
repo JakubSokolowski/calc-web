@@ -36,7 +36,7 @@ export {
     Digits
 } from './positional/representations';
 
-export { ComplementConverter } from './positional/complement-converter';
+export { getComplement, complementStrToBaseStr, isValidComplementStr } from './positional/complement-converter';
 
 export {
     FloatConverter,

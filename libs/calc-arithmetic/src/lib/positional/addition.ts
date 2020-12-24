@@ -3,7 +3,7 @@ import { PositionalNumber } from './representations';
 import { fromNumber, fromStringDirect } from './base-converter';
 import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
 import { getMergedExtension, hasInfiniteExtension } from './complement-extension';
-import { ComplementConverter } from './complement-converter';
+import { complementStrToBaseStr } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
@@ -162,7 +162,7 @@ export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[])
         complementStr += base > 36 ? digit.representationInBase + ' ' : digit.representationInBase;
     });
 
-    const representationStr = ComplementConverter.complementStrToBaseStr(complementStr.trimRight(), base);
+    const representationStr = complementStrToBaseStr(complementStr.trimRight(), base);
     return fromStringDirect(representationStr, base).result;
 }
 
