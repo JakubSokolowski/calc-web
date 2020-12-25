@@ -330,7 +330,7 @@ export function operandDigitsToCellConfig<T extends Digit>(digits: T[], info: Re
 function getPaddingContentForPolicy(base: number, policy: CellPaddingPolicy): string {
     switch (policy) {
         case CellPaddingPolicy.PadWithZeros:
-            return BaseDigits.getDigit(0, base);
+            return BaseDigits.getRepresentation(0, base);
         case CellPaddingPolicy.PadWithEmptyCells:
             return '';
     }

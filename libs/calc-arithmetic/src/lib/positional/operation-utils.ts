@@ -1,4 +1,4 @@
-import { AdditionOperand, Digit } from '@calc/calc-arithmetic';
+import { AdditionOperand, Digit } from '../models';
 import { mergeExtensionDigits } from './complement-extension';
 import { SubtractionOperand, SubtractionPositionResult } from '../models';
 

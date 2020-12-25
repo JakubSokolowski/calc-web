@@ -35,7 +35,7 @@ export function getRepresentationRegexPattern(base: number): string {
         pattern = replaceAll(
             pattern,
             '#',
-            BaseDigits.getDigit(base - 1, base)[0]
+            BaseDigits.getRepresentation(base - 1, base)[0]
         );
     } else {
         // All characters that optionally start with -, are between 0 - 9 or A - last character of representation
@@ -44,7 +44,7 @@ export function getRepresentationRegexPattern(base: number): string {
         pattern = replaceAll(
             pattern,
             '#',
-            BaseDigits.getDigit(base - 1, base)[0]
+            BaseDigits.getRepresentation(base - 1, base)[0]
         );
     }
     return pattern;
@@ -142,7 +142,7 @@ export function decimalIntegerToArbitrary(
     base: number
 ): [Digits, string[]] {
     if (num.isZero()) {
-        return [new Digits([BaseDigits.getDigit(0, base)], base), []];
+        return [new Digits([BaseDigits.getRepresentation(0, base)], base), []];
     }
     const remainders: string[] = [];
     const resultDigits: string[] = [];
@@ -150,7 +150,7 @@ export function decimalIntegerToArbitrary(
     while (!currentNum.isZero()) {
         remainders.push(currentNum.toString());
         const remainder = currentNum.mod(base);
-        resultDigits.push(BaseDigits.getDigit(remainder.toNumber(), base));
+        resultDigits.push(BaseDigits.getRepresentation(remainder.toNumber(), base));
         currentNum = currentNum.dividedToIntegerBy(base);
     }
     return [new Digits(resultDigits.reverse(), base), remainders];
@@ -179,7 +179,7 @@ export function decimalFractionToArbitrary(
         fractions.push(num.toString());
         fractionPart = num.mod(1);
         wholePart = num.minus(fractionPart).toNumber();
-        result.push(BaseDigits.getDigit(wholePart, base));
+        result.push(BaseDigits.getRepresentation(wholePart, base));
     }
     result = removeZeroDigits(result);
     fractions = removeZeroDigits(fractions);

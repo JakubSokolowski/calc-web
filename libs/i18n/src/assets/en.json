@@ -52,7 +52,9 @@
         "binary": "Float binary"
     },
     "complementConverter": {
-        "title": "Complement Converter"
+        "title": "Complement Converter",
+        "result": "Complement",
+        "details": "Details"
     },
     "common": {
         "copy": "Copied to clipboard!",

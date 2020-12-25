@@ -96,7 +96,7 @@ export function splitToSmallerBaseDigits(digit: Digit, outputBase: number): Digi
             base: outputBase,
             position: 0,
             valueInDecimal: 0,
-            representationInBase: BaseDigits.getDigit(0, outputBase)
+            representationInBase: BaseDigits.getRepresentation(0, outputBase)
         };
     });
 
@@ -166,7 +166,7 @@ export function reduceToGreaterBaseDigit(digits: Digit[], outputBase: number): D
         .decimalValue
         .toNumber();
 
-    const digitInOutputBase = BaseDigits.getDigit(combinedDigitValue, outputBase);
+    const digitInOutputBase = BaseDigits.getRepresentation(combinedDigitValue, outputBase);
 
     return {
         input: digits,

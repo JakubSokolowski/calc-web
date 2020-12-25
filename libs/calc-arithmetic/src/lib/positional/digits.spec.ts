@@ -5,7 +5,8 @@ import {
     padWithZeroDigits,
     shiftLeft,
     shiftRight,
-    splitAtZeroPosition
+    splitAtZeroPosition,
+    strArrayToDigits
 } from './digits';
 import { fromStringDirect } from '@calc/calc-arithmetic';
 
@@ -533,6 +534,53 @@ describe('digits', () => {
 
             // then
             expect(result).toEqual(digit);
+        });
+    });
+
+    describe('#strArrayToDigits', () => {
+        it('should convert representations arrays to digits array', () => {
+            // given
+            const representations = ['1', '2', '3', '4', '5'];
+            const base = 10;
+            const startPosition = 3;
+
+            // when
+            const result = strArrayToDigits(representations, base, startPosition);
+
+            // then
+            const expected: Digit[] = [
+                {
+                    base: 10,
+                    position: 3,
+                    representationInBase: '1',
+                    valueInDecimal: 1
+                },
+                {
+                    base: 10,
+                    position: 2,
+                    representationInBase: '2',
+                    valueInDecimal: 2
+                },
+                {
+                    base: 10,
+                    position: 1,
+                    representationInBase: '3',
+                    valueInDecimal: 3
+                },
+                {
+                    base: 10,
+                    position: 0,
+                    representationInBase: '4',
+                    valueInDecimal: 4
+                },
+                {
+                    base: 10,
+                    position: -1,
+                    representationInBase: '5',
+                    valueInDecimal: 5
+                }
+            ];
+            expect(result).toEqual(expected);
         });
     });
 });

@@ -13,7 +13,7 @@ export function isComplementStrNegative(str: string, base = 10): boolean {
     // value in between parenthesis
     const signLength = base > 36 ? 2 : 1;
     const sign = str.substr(1, signLength);
-    return sign === BaseDigits.getDigit(base - 1, base);
+    return sign === BaseDigits.getRepresentation(base - 1, base);
 }
 
 /**
@@ -23,8 +23,8 @@ export function isComplementStrNegative(str: string, base = 10): boolean {
  * @param base
  */
 export function hasValidComplementSign(str: string, base: number): boolean {
-    const zeroDigit = BaseDigits.getDigit(0, base);
-    const maxDigit = BaseDigits.getDigit(base - 1, base);
+    const zeroDigit = BaseDigits.getRepresentation(0, base);
+    const maxDigit = BaseDigits.getRepresentation(base - 1, base);
     const regStr = '^(\\(*\\)|\\(#\\)).*'
         .replace('*', zeroDigit)
         .replace('#', maxDigit);
@@ -134,7 +134,7 @@ export function getPositiveNumberComplement(
  * @param base
  */
 export function getDigitComplement(digit: string, base: number): string {
-    return BaseDigits.getDigit(
+    return BaseDigits.getRepresentation(
         base - 1 - BaseDigits.getValue(digit, base),
         base
     );
@@ -146,16 +146,17 @@ export function getDigitComplement(digit: string, base: number): string {
  * @param base
  */
 export function incrementNumber(digits: string[], base: number): string[] {
+    const result: string[] = [...digits];
     for (let i = digits.length - 1; i >= 0; i--) {
         const val = BaseDigits.getValue(digits[i], base);
         if (val === base - 1) {
-            digits[i] = BaseDigits.getDigit(0, base);
+            result[i] = BaseDigits.getRepresentation(0, base);
         } else {
-            digits[i] = BaseDigits.getDigit(val + 1, base);
+            result[i] = BaseDigits.getRepresentation(val + 1, base);
             break;
         }
     }
-    return digits;
+    return result;
 }
 
 /**
@@ -169,22 +170,21 @@ export function computeComplement(
     integral: Digits,
     fractional: Digits,
     base: number
-): [Digits, Digits] {
-    let digits = integral.digits.concat(fractional.digits);
-    for (let i = 0; i < digits.length; i++) {
-        digits[i] = getDigitComplement(digits[i], base);
-    }
-    digits = incrementNumber(digits, base);
+): [Digits, Digits, string[]] {
+    const digits = integral.digits.concat(fractional.digits);
+    const afterSubtraction = digits.map(d => getDigitComplement(d, base));
+    const afterAddition = incrementNumber(afterSubtraction, base);
 
     return [
-        new Digits(digits.slice(0, integral.length), base),
+        new Digits(afterAddition.slice(0, integral.length), base),
         new Digits(
-            digits.slice(
+            afterAddition.slice(
                 integral.length,
                 integral.length + fractional.length
             ),
             base
-        )
+        ),
+        afterSubtraction
     ];
 }
 
@@ -199,14 +199,14 @@ export function complementStrToBaseStr(str: string, base: number) {
 
     if (!isComplementStrNegative(str, base)) {
         if (noSignStr.startsWith('.')) {
-            return `${BaseDigits.getDigit(0, base)}${noSignStr}`;
+            return `${BaseDigits.getRepresentation(0, base)}${noSignStr}`;
         }
         return noSignStr;
     }
 
     const isShortenedComplement = noSignStr.startsWith('.');
     if (isShortenedComplement) {
-        const zero = BaseDigits.getDigit(base - 1, base);
+        const zero = BaseDigits.getRepresentation(base - 1, base);
         noSignStr = `${zero}${noSignStr}`;
     }
 
@@ -219,3 +219,5 @@ export function complementStrToBaseStr(str: string, base: number) {
     const delimiter = baseDigits[1].length === 0 ? '' : '.';
     return `-${baseDigits[0].toString()}${delimiter}${baseDigits[1].toString()}`;
 }
+
+

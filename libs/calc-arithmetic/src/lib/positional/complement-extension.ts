@@ -50,7 +50,7 @@ export function getMergedExtension<T extends Digit>(operand: T, position: number
     const base = operand.base;
     const isZeroExtension = operand.valueInDecimal === 0;
     const representationValue = isZeroExtension ? 0 : -1;
-    const representationInBase = BaseDigits.getDigit(representationValue, base, true);
+    const representationInBase = BaseDigits.getRepresentation(representationValue, base, true);
 
     return {
         ...operand,
