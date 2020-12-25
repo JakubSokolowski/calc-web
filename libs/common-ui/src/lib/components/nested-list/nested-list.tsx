@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,6 +8,7 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
 import { Divider } from '@material-ui/core';
+import { ListEntry } from '../../core/models/list-entry';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -21,14 +22,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     })
 );
-
-export interface ListEntry {
-    text: string;
-    id?: string;
-    key: string;
-    link?: string;
-    icon?: ReactElement;
-}
 
 interface P {
     items: ListEntry[];
@@ -45,7 +38,7 @@ export const NestedList: FC<P> = ({ items, header }) => {
     };
 
     const entries = items.map((item) => {
-        const { link, text, icon, key } = item;
+        const { link, text, key } = item;
         return (
             <ListItem className={classes.nested} button key={key} onClick={() => history.push(link)}>
                 <ListItemText primary={text}/>

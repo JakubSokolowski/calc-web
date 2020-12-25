@@ -10,7 +10,7 @@ import {
     isNegative,
     isValidComplementStr
 } from './complement-converter';
-import { Digit } from '@calc/calc-arithmetic';
+import { Digit } from '../models';
 
 describe('complement-converter', () => {
     describe('getPositiveComplement tests', () => {
@@ -216,6 +216,7 @@ describe('complement-converter', () => {
             expect(actual.toString()).toEqual(expected);
         });
     });
+
 
     describe('toDigitsList tests', () => {
         it('should return proper digit list for b64 number', () => {

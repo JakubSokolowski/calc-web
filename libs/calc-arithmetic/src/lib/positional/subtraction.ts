@@ -28,7 +28,7 @@ export function subtractDigitsAtPosition(operands: SubtractionOperand[], positio
     if (!operands.length) {
         return {
             valueAtPosition: {
-                representationInBase: BaseDigits.getDigit(0, base),
+                representationInBase: BaseDigits.getRepresentation(0, base),
                 valueInDecimal: 0,
                 position: position,
                 base: globalBase
@@ -47,7 +47,7 @@ export function subtractDigitsAtPosition(operands: SubtractionOperand[], positio
 
     if (!needsToBorrow) {
         const decimalPositionValue = minuend.valueInDecimal - subtrahendsSum;
-        const valueInBase = BaseDigits.getDigit(decimalPositionValue, base);
+        const valueInBase = BaseDigits.getRepresentation(decimalPositionValue, base);
 
         return {
             operands,
@@ -64,7 +64,7 @@ export function subtractDigitsAtPosition(operands: SubtractionOperand[], positio
     const positionDifference = borrow.fromPosition - position;
     const newMinuend = minuend.valueInDecimal + (borrow.amount * Math.pow(base, positionDifference));
     const decimalPositionValue = newMinuend - subtrahendsSum;
-    const valueInBase = BaseDigits.getDigit(decimalPositionValue, base);
+    const valueInBase = BaseDigits.getRepresentation(decimalPositionValue, base);
 
     return {
         operands,

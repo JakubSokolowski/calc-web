@@ -36,7 +36,15 @@ export {
     Digits
 } from './positional/representations';
 
-export { getComplement, complementStrToBaseStr, isValidComplementStr } from './positional/complement-converter';
+export {
+    getComplement,
+    complementStrToBaseStr,
+    isValidComplementStr,
+} from './positional/complement-converter';
+
+export {
+    getComplementWithDetails
+} from './positional/complement-details'
 
 export {
     FloatConverter,
@@ -57,3 +65,4 @@ export {
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
 export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';
+export { ComplementConversionResult } from './models/complement';

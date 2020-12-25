@@ -174,7 +174,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
         return {
             carry: [],
             valueAtPosition: {
-                representationInBase: BaseDigits.getDigit(0, base),
+                representationInBase: BaseDigits.getRepresentation(0, base),
                 valueInDecimal: 0,
                 position: position,
                 base: globalBase
@@ -188,7 +188,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
     }, 0);
 
     const decimalPositionValue = decimalSum % base;
-    const valueInBase = BaseDigits.getDigit(decimalPositionValue, base);
+    const valueInBase = BaseDigits.getRepresentation(decimalPositionValue, base);
     const decimalCarry = (decimalSum - decimalPositionValue) / base;
 
     const valueAtPosition: AdditionOperand = {

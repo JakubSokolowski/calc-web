@@ -93,7 +93,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     };
 
     const handleAdd = () => {
-        const defaultStr = BaseDigits.getDigit(0, form.values.base);
+        const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
         setOperands((prev) => [...prev, {representation: defaultStr, valid: true}]);
     };
 

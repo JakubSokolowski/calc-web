@@ -52,7 +52,9 @@
         "binary": "Wartość binarna"
     },
     "complementConverter": {
-        "title": "Uzupełnienie liczb"
+        "title": "Uzupełnienie liczb",
+        "result": "Uzupełnienie",
+        "details": "Szczegóły"
     },
     "common": {
         "copy": "Skopiowano do schowka",

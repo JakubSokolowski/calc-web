@@ -9,7 +9,7 @@ export function padWithZeroDigits<T extends Digit>(digits: T[], base: number, de
 
     const zeroDigit = {
         base,
-        representationInBase: BaseDigits.getDigit(0, base),
+        representationInBase: BaseDigits.getRepresentation(0, base),
         valueInDecimal: 0,
         position: -1
     } as T;
@@ -102,7 +102,7 @@ function extendDigitsToFractionPoint<T extends Digit>(digits: T[]): T[] {
     const zeros: T[] = [...Array(numMissing)].map((_, index) => {
         return {
             base,
-            representationInBase: BaseDigits.getDigit(0, base),
+            representationInBase: BaseDigits.getRepresentation(0, base),
             valueInDecimal: 0,
             position: 0 - index
         } as T;
@@ -143,4 +143,15 @@ function applyPositionShift<T extends Digit>(digits: T[], shift: number): T[] {
         ...digit,
         position: digit.position + shift
     }));
+}
+
+export function strArrayToDigits(strDigits: string[], base: number, positionStart: number): Digit[] {
+    return strDigits.map((d, i) => {
+        return {
+            representationInBase: d,
+            valueInDecimal: BaseDigits.getValue(d, base),
+            position: positionStart - i,
+            base
+        };
+    });
 }

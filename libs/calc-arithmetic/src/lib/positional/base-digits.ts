@@ -1,4 +1,5 @@
 import { inRangeInclusive, logBase } from '@calc/utils';
+import { Digit } from '../models';
 
 /**
  * Handles conversions digit <-> value for positional systems of different bases
@@ -24,7 +25,7 @@ export class BaseDigits {
      * @param isComplement
      * @example getDigit(10, 16) will return 'A'
      */
-    public static getDigit(value: number, base: number, isComplement = false): string {
+    public static getRepresentation(value: number, base: number, isComplement = false): string {
         if (!this.isValidBase(base)) {
             throw new Error(`Base must be between ${this.MIN_BASE} and ${this.MAX_BASE}, but was "${base}"`);
         }
@@ -36,6 +37,15 @@ export class BaseDigits {
         throw new Error(
             `The value ${value} is not in range -1 - ${(base - 1).toString()}`
         );
+    }
+
+    public static getDigit(value: number, base: number, position = 0): Digit {
+        return {
+            position,
+            base,
+            valueInDecimal: value,
+            representationInBase: this.getRepresentation(value, base)
+        }
     }
 
     /**

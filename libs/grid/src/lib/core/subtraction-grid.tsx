@@ -41,7 +41,7 @@ export function buildSubtractionGrid(result: SubtractionResult): HoverOperationG
     return { values, lines, xAxis, groups };
 }
 
-function borrowsToCellConfig(result: SubtractionResult): GridCellConfig[][] {
+export function borrowsToCellConfig(result: SubtractionResult): GridCellConfig[][] {
     const width = result.resultDigits.length + 1;
     const positionBorrowLookup: Record<number, SubtractionOperand[]> = {};
     const positionIndexLookup: Record<number, number> = {};

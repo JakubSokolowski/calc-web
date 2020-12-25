@@ -66,7 +66,7 @@ export class NumberComplement implements PositionalRepresentation {
     get sign(): string {
         return (
             '(' +
-            BaseDigits.getDigit(
+            BaseDigits.getRepresentation(
                 this.isNegative ? this.base - 1 : 0,
                 this.base
             ) +

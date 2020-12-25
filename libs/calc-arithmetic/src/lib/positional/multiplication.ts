@@ -28,7 +28,7 @@ export function multiplyDigits(
     const decimalProductWithCarry = decimalProduct + (carry ? carry.valueInDecimal : 0);
 
     const decimalPositionValue = decimalProductWithCarry % base;
-    const representationInBase = BaseDigits.getDigit(decimalPositionValue, base);
+    const representationInBase = BaseDigits.getRepresentation(decimalPositionValue, base);
     const decimalCarry = (decimalProductWithCarry - decimalPositionValue) / base;
 
     const valueAtPosition: MultiplicationOperand = {
@@ -43,7 +43,7 @@ export function multiplyDigits(
 
     if (!decimalCarry) return { valueAtPosition, operands: operands, shiftedPosition };
 
-    const carryRep = BaseDigits.getDigit(decimalCarry, base);
+    const carryRep = BaseDigits.getRepresentation(decimalCarry, base);
 
     const nextPositionCarry: MultiplicationOperand = {
         position: position + 1,
