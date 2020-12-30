@@ -6,7 +6,7 @@ Wynik mnożenia nazywamy iloczynem (*en. product* - oznaczany przez $P$).
 ### Algorytm
 Mnożenie realizujemy w dwóch etapch - wytworzenie półproduktów poprzez pomnożenie poszczególnych cyfr mnożnej przez mnożnik oraz dodanie tych półproduktów.
 
-```calc
+```calc-operation
 {
   "operation": "Multiplication",
   "algorithm": "Default",
@@ -17,7 +17,7 @@ Mnożenie realizujemy w dwóch etapch - wytworzenie półproduktów poprzez pomn
 Cyfry mnożnej mnożymy przez kolejne pozycje mnożnika zaczynając od najmłodszej, a następnie wynik zapisujemy pod operandami,
  przesuwając każdy kolejny wynik o jedną pozycję w lewo. Następnie przesunięte wyniki dodajemy, 
  i dostosowujemy przecinek wynika - przesuwamy w lewo o sumę ilości cyfr ułamków mnożnej i mnożnika.
-```calc
+```calc-operation
 {
   "operation": "Multiplication",
   "algorithm": "Default",
@@ -32,7 +32,7 @@ Jeśli jakiś operand jest ujemny, znak wyniku jest uwzględniany dopiero po pom
 ### Różnice w implementacji
 Dla uproszczenia implementacji, cyfry części ułamkowej operandów są zawsze wyrównywane - jeśli mnożymy mnożną $76.12$ przez mnożnik $40$ 
 to dodane zostaną brakujące 0.
-```calc
+```calc-operation
 {
   "operation": "Multiplication",
   "algorithm": "Default",
@@ -41,7 +41,7 @@ to dodane zostaną brakujące 0.
 }
 ```
  Dodatkowo, mnożenia przez cyfrę zero również są pokazywane - nie ma pomijania pozycji podczas mnożenia i dopisywania zer do wyniku.
-```calc
+```calc-operation
 {
   "operation": "Multiplication",
   "algorithm": "Default",

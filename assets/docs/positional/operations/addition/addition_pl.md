@@ -10,7 +10,7 @@ $$
 $$
     S = A + B = ?
 $$
-```calc
+```calc-operation
 {
   "operation": "Addition",
   "algorithm": "Default",
@@ -50,7 +50,7 @@ $$
     A + B + C = ?
 $$
 
-```calc
+```calc-operation
 {
   "operation": "Addition",
   "algorithm": "Default",
@@ -66,7 +66,7 @@ W powyższym przypadku, pozycja suma na pozycji 1 wyniesie $1 + 1 + 1 + 1 = 4 = 
 W jeszcze innych przypadkach, dodawanie wielu liczb na pozycji może wytworzyć kilka przeniesień na różne pozycje,
  w poniższym przypadku pozycja 1 wytwarza 2 przeniesienia, na pozycję 3 i na pozycję 2.
 
-```calc
+```calc-operation
 {
   "operation": "Addition",
   "algorithm": "Default",
@@ -79,7 +79,7 @@ W jeszcze innych przypadkach, dodawanie wielu liczb na pozycji może wytworzyć 
 Dodawanie liczb ujemnych czyli odejmowanie można zrealizować za pomocą uzupełnienia liczby. Na przykład, żeby dodać $123$ i $-41$,
  należy obliczyć uzupełnie obu liczb i je dodać. Uzupełnienie $123$ to $(0)123$ a uzupełnienie $-41$ to $(9)59$. 
 
-```calc
+```calc-operation
 {
   "operation": "Addition",
   "algorithm": "Default",
