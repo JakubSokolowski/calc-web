@@ -10,7 +10,7 @@ Cyfrę negujemy przez odjęcie tej cyfry od największej cyfry możliwej w danej
  Po zanegowaniu liczby dodajemy do niej zwyczajnie 1 (z uwzględnieniem wszystkich przeniesień jakie z tego wynikną).
   Po dodaniu, bierzemy wszystkie cyfry które powstały po zanegowaniu i dodaniu i dopisujemy największą cyfrę w danej podstawie owiniętą w nawiasy: (np. dla podstawy 10 to (9)).
   Przykładowo, jeśli chcemy obliczyć uzupełnie dla $\overline{-24874612.97_{10}}=?$:
- ```calc
+ ```calc-cconv
  {
    "base": 10,
    "representation" : "-24874612.97"
@@ -20,10 +20,12 @@ Po zanegowaniu wszystkich pozycji otrzymujemy $75125387.02$, po dodaniu 1 $75125
 ### Skąd się to bierze?
 Załóżmy że chcemy wykonać działanie $15 -17$. 
 Wynik takiego działania to oczywiście -2, ale jeśli spróbujemy zastosować pozycyjne odejmowanie, dostatniemy dziwny wynik:
-```calc
+```calc-operation
 {
+  "operation": "Subtraction",
+  "algorithm": "Default",
   "base": 10,
-  "subtractionOperands": ["15", "17"]
+  "operands": ["15", "17"]
 }
 ```
 Na poniważ na pozycji 0 musieliśmy pożyczyć z pozycji 1, na pozycji 1 jest teraz 0 i nie można odjąć, 
@@ -38,16 +40,20 @@ Nie możemy pożyczyć z 0, więc musimy najpierw pożyczyć z następnej pozycj
 ### Do czego się to przydaje? 
 Uzupełnienie zapewnia spójny zapis dla ujemnych i dodatnih liczb, więc można stosować te same algorytmy dodawania, odejmowania czy mnożenia.
 Na przykład, jeśli chcielibyśmy dodać $981_{10}$ i $-456_{10}$ to nie było to wcześniej możliwe za pomocą dodawania, trzeba by było skorzystać z odejmowania. 
-```calc
+```calc-operation
 {
+  "operation": "Subtraction",
+  "algorithm": "Default",
   "base": 10,
-  "subtractionOperands": ["981", "456"]
+  "operands": ["981", "456"]
 }
 ```
 Jeśli zapiszemy te liczby jako ich uzupełnienia $(0)981, (9)544$, możemy je dodać:
-```calc
+```calc-operation
 {
+  "operation": "Addition",
+  "algorithm": "Default",
   "base": 10,
-  "additionOperands": ["981", "-456"]
+  "operands": ["981", "-456"]
 }
 ```

@@ -12,7 +12,7 @@ $Podstawa = Dzielnik = 2$
 
 Kiedy otrzymamy wynik dzielenia który jest mniejszy niż podstawa, algorytm się zatrzymuje.
 Wynik konwersji to $24_{10}=(11000)_{2}$. Można go odczytać następująco: cyfry wyniku zostały otrzymywane w odwrotnej kolejnośći (najmniej znaczące najpierw) więc żeby odczytać wynik trzeba iść górę. Ostatni wynik z dzielenia też należy do wyniku całkowitego → jest to pierwsza cyfra. Można łatwo zapamiętać kolejność wizualnie, zaczynająć od wyniku ostatniego dzielenia wziąć wszystko z prawej, a potem do góry.
-```calc
+```calc-bconv
 {
   "part": "Integral",
   "algorithm": "Default",
@@ -36,7 +36,7 @@ Konwersja ta odbywa się za pomocą mnożenia. Bierzemy ułamek w danej podstawi
 7. Powtarzamy to tak długo aż uzyskamy pożądaną dokładność, lub wykyryjemy powtarzające się rozszerzenie ( za każdym razem dostajemy taką sam wynik mnożenia), wtedy ułamek jest okresowy. W tym przykładzie, wynik konwersji z dokładnością do 5 miejsc po przecinku wyniesie $0.123_{10}=0.0011$.
 8. Algorytm kończy się również gdy otrzymamy wynik z zerową częścią ułamkową, np. kiedy chcemy przekonwertować $0.5_{10} = (?)_{2}$. W pierwszym kroku otrzymamy wtedy $0.5 * 2 = 1.0$, bierzemy 1 jako pierwszą cyfrę ułamka, do następnego kroku przechodz 0, a każde kolejne mnożenie też da 0.
 
-```calc
+```calc-bconv
 {
   "part": "Fractional",
   "algorithm": "Default",

@@ -12,7 +12,7 @@ import { PaddedGrid } from '@calc/grid';
 import { Box, createStyles, Tab, Tabs, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { a11yProps, SaveAsImageButton, Section, TabPanel } from '@calc/common-ui';
-import { DocPage } from '@calc/docs';
+import { DocPage, RendererMapping } from '@calc/docs';
 import { ValidatedOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
@@ -24,13 +24,13 @@ const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         root: {
             [theme.breakpoints.up('lg')]: {
-                maxWidth: 900,
+                maxWidth: 900
             },
             margin: 'auto'
         },
         docs: {
-          maxWidth: 700,
-          margin: 'auto'
+            maxWidth: 700,
+            margin: 'auto'
         },
         options: {
             paddingTop: theme.spacing(2)
@@ -46,6 +46,10 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
+
+const mapping: RendererMapping = {
+    'operation': OperationRenderer
+};
 
 export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
@@ -132,7 +136,8 @@ export const PositionalCalculatorView: FC = () => {
             </TabPanel>
             <TabPanel className={classes.panel} value={currentTab} index={1}>
                 <Box className={classes.docs}>
-                    <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`} operationRenderer={OperationRenderer}/>
+                    <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`}
+                             rendererMapping={mapping}/>
                 </Box>
             </TabPanel>
         </div>

@@ -7,13 +7,20 @@ import { Typography } from '@material-ui/core';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
 
 export type OperationRenderer = (params: Record<string, any>) => ReactElement;
+export type RendererMapping = Record<string, OperationRenderer>;
+
+interface CodeTagProps {
+    language: string;
+    value: string;
+}
+
 
 interface ExtendedMarkdownProps extends ReactMarkdownProps{
-    operationRenderer?: OperationRenderer
+    renderMapping?: RendererMapping;
 }
 
 export const MarkdownRenderer = (props: ExtendedMarkdownProps) => {
-    const {operationRenderer, ...rest} = props;
+    const {renderMapping, ...rest} = props;
     const customRendererToken = 'calc';
 
     const newProps = {
@@ -29,10 +36,22 @@ export const MarkdownRenderer = (props: ExtendedMarkdownProps) => {
             },
             math: (props) => <BlockMath math={props.value} />,
             inlineMath: (props) => <InlineMath math={props.value} />,
-            code: ({ language, value }) => {
-                if (language === customRendererToken && operationRenderer) {
-                    const val = JSON.parse(value);
-                    return operationRenderer(val);
+            code: (props: CodeTagProps) => {
+                const {language, value} = props;
+                if (language.includes(customRendererToken) && renderMapping) {
+                    const [, rendererToken] = language.split('-');
+                    const renderer = renderMapping[rendererToken];
+
+                    if(renderer) {
+                        const val = JSON.parse(value);
+                        return renderer(val);
+                    } else {
+                        return (
+                            <span className="renderer-token-error">
+                                {`Render token: ${rendererToken} not found in mapping`}
+                            </span>
+                        )
+                    }
                 }
                 const className = language && `language-${language}`;
                 const code = React.createElement('code', className ? { className: className } : null, value);

@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useDocs } from '../../hooks/use-docs';
 import { Box, createStyles, Theme } from '@material-ui/core';
-import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
+import { MarkdownRenderer, RendererMapping } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
 import { makeStyles } from '@material-ui/core/styles';
@@ -9,7 +9,7 @@ import { environment } from '@calc/env';
 
 export interface DocsProps {
     path: string;
-    operationRenderer?: any;
+    rendererMapping?: RendererMapping
 }
 
 export const useStyles = makeStyles((theme: Theme) => {
@@ -28,7 +28,7 @@ export const useStyles = makeStyles((theme: Theme) => {
     );
 });
 
-export const DocPage: FC<DocsProps> = ({ path, operationRenderer }) => {
+export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const markdown = useDocs(path);
     const imageUriPrefix = `${environment.deployUrl}/assets/docs/`;
     const classes = useStyles();
@@ -41,7 +41,7 @@ export const DocPage: FC<DocsProps> = ({ path, operationRenderer }) => {
                 !!ids.length && <ScrollSpy entries={ids}/>
             }
             <MarkdownRenderer
-                operationRenderer={operationRenderer}
+                renderMapping={rendererMapping}
                 source={markdown}
                 escapeHtml={false}
                 transformImageUri={(uri) => {
