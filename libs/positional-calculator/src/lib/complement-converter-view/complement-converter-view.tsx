@@ -10,7 +10,8 @@ import {
     ComplementDetailsRenderer,
     ComplementDetailsRendererParams
 } from './complement-details-renderer/complement-details-renderer';
-import { DocPage } from '@calc/docs';
+import { DocPage, RendererMapping } from '@calc/docs';
+import { OperationRenderer } from '../operation-renderer/operation-renderer';
 
 export const useStyles = makeStyles((theme: Theme) => {
     return createStyles(
@@ -32,6 +33,11 @@ export const useStyles = makeStyles((theme: Theme) => {
         }
     );
 });
+
+const mapping: RendererMapping = {
+    'cconv': ComplementDetailsRenderer,
+    'operation': OperationRenderer,
+};
 
 
 export const ComplementConverterView: FC = () => {
@@ -76,7 +82,7 @@ export const ComplementConverterView: FC = () => {
             <TabPanel value={tabIndex} index={1}>
                 <div className={classes.verticalSpacer}/>
                 <Box display={'flex'} alignItems={'center'} maxWidth={700} margin={'auto'}>
-                    <DocPage path={'positional/complement-conversion'} operationRenderer={ComplementDetailsRenderer}/>
+                    <DocPage rendererMapping={mapping} path={'positional/complement-conversion'} />
                 </Box>
             </TabPanel>
         </div>

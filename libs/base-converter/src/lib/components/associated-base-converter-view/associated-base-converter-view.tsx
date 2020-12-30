@@ -5,11 +5,14 @@ import { AssociatedBaseConverter } from '../associated-base-converter/associated
 import { AssociatedBaseConversionDetails } from '../associated-base-conversion-details/associated-base-conversion-details';
 import { Box, Tab, Tabs } from '@material-ui/core';
 import { a11yProps, Section, TabPanel } from '@calc/common-ui';
-import { DocPage } from '@calc/docs';
+import { DocPage, RendererMapping } from '@calc/docs';
 import { useConverterStyles } from '../../core/styles/converter-styles';
 import { AssociatedBaseConversionResult } from '../associated-base-conversion-result/associated-base-conversion-result';
 import { ConversionRenderer } from '../conversion-renderer/conversion-renderer';
 
+const mapping: RendererMapping = {
+    bconv: ConversionRenderer
+};
 
 export const AssociatedBaseConverterView: FC = () => {
     const { t } = useTranslation();
@@ -53,7 +56,7 @@ export const AssociatedBaseConverterView: FC = () => {
             </TabPanel>
             <TabPanel className={classes.panel} value={value} index={1}>
                 <Box display={'flex'} alignItems={'center'} maxWidth={760} margin={'auto'}>
-                    <DocPage path='positional/associated-base-conversion' operationRenderer={ConversionRenderer}/>
+                    <DocPage path='positional/associated-base-conversion' rendererMapping={mapping}/>
                 </Box>
             </TabPanel>
         </div>

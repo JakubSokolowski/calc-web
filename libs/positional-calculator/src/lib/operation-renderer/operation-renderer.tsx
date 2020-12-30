@@ -20,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => {
     });
 });
 
+
 export const OperationRenderer: FC<OperationTemplate<AlgorithmType>> = ({base, operands, operation, algorithm}) => {
     const classes = useStyles();
 
