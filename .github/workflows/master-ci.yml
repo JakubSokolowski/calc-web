@@ -51,8 +51,6 @@ jobs:
                 run: echo "NX_CALC_GIT_SHA=$GITHUB_SHA" >> $GITHUB_ENV
 
             -   name: Install and Build
-                env:
-                    NX_CALC_GIT_SHA: $GITHUB_SHA
                 run: |
                     echo NX_CALC_GIT_SHA: $NX_CALC_GIT_SHA
                     npm install
