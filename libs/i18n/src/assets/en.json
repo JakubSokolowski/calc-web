@@ -4,6 +4,10 @@
         "toggleDark": "Toggle dark theme",
         "toggleLight": "Toggle light theme"
     },
+    "about": {
+        "title": "Version, help and feedback",
+        "submitNewIssue": "Report bug"
+    },
     "home": {
         "appName": "CALC",
         "header": "Calc",

@@ -4,6 +4,10 @@
         "toggleDark": "Przełącz na ciemny motyw",
         "toggleLight": "Przełącz na jasny motyw"
     },
+    "about": {
+        "title": "Wersja i pomoc",
+        "submitNewIssue": "Zgłoś błąd"
+    },
     "home": {
         "appName": "CALC",
         "header": "Calc",

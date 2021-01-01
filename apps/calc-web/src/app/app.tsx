@@ -28,12 +28,11 @@ import { PositionalCalculatorView } from '@calc/positional-calculator';
 import { useMountEffect } from '@calc/utils';
 import { loadOptions, selectAppTheme } from '@calc/core';
 import { FloatConverterView } from '@calc/float-converter';
-import '@calc/i18n'
-import {
-    AssociatedBaseConverterView,
-    BaseConverterView,
-    ComplementConverterView
-} from '@calc/base-converter';
+import '@calc/i18n';
+import { AssociatedBaseConverterView, BaseConverterView, ComplementConverterView } from '@calc/base-converter';
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import HelpIcon from '@material-ui/icons/Help';
+import { About } from './components/about/about';
 
 const drawerWidth = 240;
 
@@ -104,7 +103,7 @@ export const App = () => {
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return
+            return;
         }
         setOpen(open);
     };
@@ -118,7 +117,7 @@ export const App = () => {
 
         document.addEventListener('keydown', closeDrawerOnEscape);
 
-        return () => document.removeEventListener('keydown', closeDrawerOnEscape)
+        return () => document.removeEventListener('keydown', closeDrawerOnEscape);
     }, [open]);
 
     useMountEffect(() => {
@@ -126,7 +125,7 @@ export const App = () => {
     });
 
     return (
-        <div className={classes.root} >
+        <div className={classes.root}>
             <ThemeProvider theme={getTheme(theme)}>
                 <CssBaseline/>
                 <HashRouter basename='/'>
@@ -153,7 +152,7 @@ export const App = () => {
                         </Toolbar>
                     </AppBar>
 
-                    <div  onKeyDown={toggleDrawer(false)}>
+                    <div onKeyDown={toggleDrawer(false)}>
                         <Drawer
                             onBackdropClick={toggleDrawer(false)}
                             className={classes.drawer}
@@ -183,14 +182,17 @@ export const App = () => {
                         })}
                     >
                         <div className={classes.drawerHeader}/>
-                        <Switch>
-                            <Route exact path="/" component={HomeView}/>
-                            <Route path="/base-converter" component={BaseConverterView}/>
-                            <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
-                            <Route path="/complement-converter" component={ComplementConverterView}/>
-                            <Route path="/float-converter" component={FloatConverterView}/>
-                            <Route path="/positional-calculator" component={PositionalCalculatorView}/>
-                        </Switch>
+                        <div>
+                            <About/>
+                            <Switch>
+                                <Route exact path="/" component={HomeView}/>
+                                <Route path="/base-converter" component={BaseConverterView}/>
+                                <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
+                                <Route path="/complement-converter" component={ComplementConverterView}/>
+                                <Route path="/float-converter" component={FloatConverterView}/>
+                                <Route path="/positional-calculator" component={PositionalCalculatorView}/>
+                            </Switch>
+                        </div>
                     </main>
                 </HashRouter>
             </ThemeProvider>

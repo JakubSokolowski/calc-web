@@ -44,6 +44,8 @@ jobs:
         steps:
             -   name: Checkout
                 uses: actions/checkout@v2.3.1
+                env:
+                    NX_CALC_GIT_SHA: $GITHUB_SHA
                 with:
                     persist-credentials: false
 
