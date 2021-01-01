@@ -47,10 +47,14 @@ jobs:
                 with:
                     persist-credentials: false
 
+            -   name: Set env
+                run: echo "NX_CALC_GIT_SHA=$GITHUB_SHA"
+
             -   name: Install and Build
                 env:
                     NX_CALC_GIT_SHA: $GITHUB_SHA
                 run: |
+                    echo NX_CALC_GIT_SHA: $NX_CALC_GIT_SHA
                     npm install
                     npm run build:prod
 
