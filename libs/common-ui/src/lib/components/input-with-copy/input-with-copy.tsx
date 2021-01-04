@@ -1,18 +1,14 @@
-import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef } from 'react';
+import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { createStyles, IconButton, Snackbar, TextField, TextFieldProps, Theme } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
-import MuiAlert, { AlertProps } from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { copyToClipboard } from '../../core/functions/copy-to-clipboard';
+import { Alert } from '../alert/alert';
 
 export enum InputType {
     Text = 'text',
     Number = 'number'
-}
-
-function Alert(props: AlertProps) {
-    return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 interface P {
@@ -50,7 +46,7 @@ const useStyles = makeStyles((theme: Theme) => {
 export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const classes = useStyles();
 
     const handleClose = (event?: SyntheticEvent, reason?: string) => {
@@ -127,7 +123,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
                 autoHideDuration={1500}
                 onClose={handleClose}
             >
-                    <Alert severity="info">{t('common.copy')}</Alert>
+                <Alert severity="info">{t('common.copy')}</Alert>
             </Snackbar>
         </div>
     );
