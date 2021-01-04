@@ -31,6 +31,14 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
                     width: '100%'
                 }
             },
+            link: {
+              display: 'flex'
+            },
+            linkIcon: {
+                marginRight: theme.spacing(0.5),
+                width: 20,
+                height: 20,
+            },
             iconButton: {
                 width: '40px'
             },

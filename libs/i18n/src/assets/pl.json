@@ -64,7 +64,8 @@
         "copy": "Skopiowano do schowka",
         "downloadResult": "Pobierz wynik jako .png",
         "downloadDetails": "Pobierz szegóły jako .png",
-        "download": "Pobierz"
+        "download": "Pobierz",
+        "theory": "Teoria"
     },
     "positionalCalculator": {
         "title": "Kalkulator liczb pozycyjnych",
@@ -84,5 +85,40 @@
     "sandbox": {
         "title": "Sandbox",
         "wasm": "Wasm Demo"
+    },
+    "routes": {
+        "home": "Strona główna",
+        "tools": {
+            "title": "Narzędzia",
+            "positional": {
+                "title": "Arytmetyka pozycyjna",
+                "base-converter": "Konwerter podstaw",
+                "associated-base-converter": "Bazy skojarzone",
+                "complement-converter": "Konwerter uzupełnień",
+                "positional-calculator": "Kalkulator pozycyjny"
+            },
+            "floating": {
+                "title": "Arytmetyka zmiennoprzecinkowa",
+                "float-converter": "Format IEEE 754"
+            }
+        },
+        "theory": {
+            "title": "Teoria",
+            "positional": {
+                "title": "Pozycyjne",
+                "complement-conversion": "Uzupełnienie liczby",
+                "base-conversion": "Konwersja podstaw",
+                "associated-base-conversion": "Bazy skojarzone",
+                "operations": {
+                    "title": "Działania",
+                    "addition": "Dodawanie",
+                    "multiplication": "Mnożenie",
+                    "subtraction": "Odejmowanie"
+                }
+            },
+            "floating": {
+                "title": "Zmiennoprzecinkowe"
+            }
+        }
     }
 }

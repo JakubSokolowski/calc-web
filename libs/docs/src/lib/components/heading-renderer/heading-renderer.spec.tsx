@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { ViewWrapper } from '@calc/common-ui';
+import { HeadingRenderer } from './heading-renderer';
 
-describe('ViewWrapper', () => {
+describe('HeadingRenderer', () => {
     let container;
 
     beforeEach(() => {
         container = shallow(
-            <ViewWrapper path='/tools/positional'/>
+            <HeadingRenderer level={1}/>
         );
     });
 

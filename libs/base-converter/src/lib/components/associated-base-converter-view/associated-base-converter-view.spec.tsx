@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { Provider } from 'react-redux';
 import { store } from '@calc/core';
-import { AssociatedBaseConverterView } from '@calc/base-converter';
+import { AssociatedBaseConverterView } from './associated-base-converter-view';
 
 describe('AssociatedBaseConverterView', () => {
     let container;

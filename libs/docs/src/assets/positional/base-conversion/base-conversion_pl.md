@@ -1,5 +1,5 @@
 # Konwersja podstaw
-## Konwersja części dziesętnej
+## Konwersja części dziesiętnej
 
 Powiedzmy że chcemy przekonwertować liczbę z bazy 10 na bazę 2. Libczę w danej bazie będziemy oznaczać przez wartość z dołu liczby, tak więc liczba 24 w podstawie 10 oznaczamy jako $24_{10}$. Konwersje z jednej podstawy na inną będziemy oznaczać jako $24_{10}=(?)_{2}$.   Z dowolnej liczby o podstawie 10, można otrzymać liczbę o dowolnej innej podstawie przez dzielenie tej liczby przez podstawę do której chcemy przekonwertować. Resztą z takiego dzielenia jest cyfra na pozycji, a wynikiem dzielenia jest wejście do kolejnego kroku. W czasie procesu dzielenia otrzymujemy kolejne cyfry wyniku "od końca".  Konwersja do podstawy 2 dla $24_{10}$ wygląda następująco: 
 

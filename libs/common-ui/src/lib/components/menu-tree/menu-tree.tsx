@@ -123,10 +123,10 @@ const useStyles = makeStyles(
 );
 
 interface P {
-    nodes: TreeNodeProps[]
+    nodes: TreeNodeProps[];
 }
 
-export default function MenuTree(props: P) {
+export function MenuTree(props: P) {
     const { nodes } = props;
     const classes = useStyles();
     const history = useHistory();

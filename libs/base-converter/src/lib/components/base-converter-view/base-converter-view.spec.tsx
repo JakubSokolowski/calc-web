@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { shallow } from 'enzyme';
 import { Provider } from 'react-redux';
-import { BaseConverterView } from '@calc/base-converter';
+import { BaseConverterView } from './base-converter-view';
 import { store } from '@calc/core';
 
 

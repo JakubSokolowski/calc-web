@@ -1,19 +1,16 @@
-import React, { ReactElement } from 'react';
+import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
 import 'katex/dist/katex.min.css';
 import RemarkMathPlugin from 'remark-math';
-import { InlineMath, BlockMath } from 'react-katex';
+import { BlockMath, InlineMath } from 'react-katex';
 import { Typography } from '@material-ui/core';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
-
-export type OperationRenderer = (params: Record<string, any>) => ReactElement;
-export type RendererMapping = Record<string, OperationRenderer>;
+import { RendererMapping } from '../../..';
 
 interface CodeTagProps {
     language: string;
     value: string;
 }
-
 
 interface ExtendedMarkdownProps extends ReactMarkdownProps{
     renderMapping?: RendererMapping;
