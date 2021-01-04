@@ -1,13 +1,13 @@
 import { shallow } from 'enzyme';
 import React from 'react';
-import { ViewWrapper } from '@calc/common-ui';
+import { PositionalTools } from './positional-tools';
 
-describe('ViewWrapper', () => {
+describe('PositionalTools', () => {
     let container;
 
     beforeEach(() => {
         container = shallow(
-            <ViewWrapper path='/tools/positional'/>
+            <PositionalTools />
         );
     });
 

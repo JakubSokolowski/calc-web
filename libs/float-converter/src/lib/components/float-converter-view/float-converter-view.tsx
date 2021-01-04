@@ -1,33 +1,16 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FloatConverterComponent } from '../float-converter/float-converter-component';
-import { Section } from '@calc/common-ui';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
-
-export const useStyles = makeStyles((theme: Theme) => {
-    return createStyles(
-        {
-            root: {
-                [theme.breakpoints.up('lg')]: {
-                    maxWidth: 900,
-                },
-                maxWidth: 900,
-                margin: 'auto'
-            }
-        }
-    )
-});
+import { Section, ViewWrapper } from '@calc/common-ui';
 
 export const FloatConverterView: FC = () => {
-    const {t} = useTranslation();
-    const classes = useStyles();
+    const { t } = useTranslation();
 
     return (
-        <div className={classes.root}>
+        <ViewWrapper path='/tools/floating/float-converter' theoryPath='/theory/floating'>
             <Section title={t('floatConverter.title')}>
                 <FloatConverterComponent/>
             </Section>
-        </div>
+        </ViewWrapper>
     );
 };

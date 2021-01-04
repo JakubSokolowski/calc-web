@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import MenuTree from './menu-tree';
+import { MenuTree } from '@calc/common-ui';
 
 describe('MenuTree', () => {
     let container;

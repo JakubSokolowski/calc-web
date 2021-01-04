@@ -64,7 +64,8 @@
         "copy": "Copied to clipboard!",
         "downloadResult": "Download result as .png",
         "downloadDetails": "Download details as .png",
-        "download": "Download"
+        "download": "Download",
+        "theory": "Theory"
     },
     "positionalCalculator": {
         "title": "Positional Calculator",
@@ -84,5 +85,40 @@
     "sandbox": {
         "title": "Sandbox",
         "wasm": "Wasm Demo"
+    },
+    "routes": {
+        "home": "Home",
+        "tools": {
+            "title": "Tools",
+            "positional": {
+                "title": "Positional arithmetic",
+                "base-converter": "Base converter",
+                "associated-base-converter": "Associated bases",
+                "complement-converter": "Complement converter",
+                "positional-calculator": "Positional Calculator"
+            },
+            "floating": {
+                "title": "Floating arithmetic",
+                "float-converter": "IEEE 754 format"
+            }
+        },
+        "theory": {
+            "title": "Theory",
+            "positional": {
+                "title": "Positional",
+                "complement-conversion": "Number complement",
+                "base-conversion": "Base conversion",
+                "associated-base-conversion": "Associated bases",
+                "operations": {
+                    "title": "Operations",
+                    "addition": "Addition",
+                    "multiplication": "Multiplication",
+                    "subtraction": "Subtraction"
+                }
+            },
+            "floating": {
+                "title": "Floating"
+            }
+        }
     }
 }

@@ -1,10 +1,19 @@
 import React, { FC } from 'react';
-import { createStyles, Divider, IconButton, Link, Popover, Theme, Tooltip } from '@material-ui/core';
+import {
+    ClickAwayListener,
+    createStyles,
+    Divider,
+    IconButton,
+    Link,
+    Paper,
+    Theme,
+    Tooltip
+} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import { useTranslation } from 'react-i18next';
 import { Version } from './version/version';
-
+import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
 
 const useStyles = makeStyles((theme: Theme) => {
     return createStyles({
@@ -27,7 +36,6 @@ const useStyles = makeStyles((theme: Theme) => {
 export const About: FC = () => {
     const classes = useStyles();
     const { t } = useTranslation();
-
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -49,30 +57,33 @@ export const About: FC = () => {
                     <HelpIcon fontSize={'large'}/>
                 </IconButton>
             </Tooltip>
-            <Popover
+            <Popper
+                transition
                 id={id}
                 open={open}
                 anchorEl={anchorEl}
-                onClose={handleClose}
-                anchorOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center'
-                }}
-                transformOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center'
+                placement={'top-start'}
+                popperOptions={{
+                    modifiers: {
+                        offset: {
+                            enabled: true,
+                            offset: '-75,10',
+                        },
+                    },
                 }}
             >
-                <div>
-                    <div className={classes.content}>
-                        <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
-                            {t('about.submitNewIssue')}
-                        </Link>
-                    </div>
-                    <Divider/>
-                    <Version/>
-                </div>
-            </Popover>
+                <ClickAwayListener onClickAway={() => handleClose()}>
+                    <Paper>
+                        <div className={classes.content}>
+                            <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
+                                {t('about.submitNewIssue')}
+                            </Link>
+                        </div>
+                        <Divider/>
+                        <Version/>
+                    </Paper>
+                </ClickAwayListener>
+            </Popper>
         </div>
     );
 };

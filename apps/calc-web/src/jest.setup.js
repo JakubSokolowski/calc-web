@@ -3,7 +3,6 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// for useTranslation
 jest.mock('react-i18next', () => ({
     ...jest.requireActual('react-i18next'),
     useTranslation: () => ({
@@ -14,6 +13,18 @@ jest.mock('react-i18next', () => ({
         }
     })
 }));
+
+
+jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
+    useRouteMatch: () => ({
+        path: '/tools/positional'
+    }),
+    useLocation: () => ({
+        pathname: '/tools/positional'
+    })
+}));
+
 
 class LocalStorageMock {
     constructor() {

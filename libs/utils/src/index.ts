@@ -9,4 +9,5 @@ export * from './lib/functions/clean';
 export * from './lib/functions/in-range';
 export * from './lib/functions/obj-array-equal';
 export * from './lib/functions/list-keys';
+export * from './lib/functions/deep-assign';
 export * from './lib/hooks/use-mount-effect';

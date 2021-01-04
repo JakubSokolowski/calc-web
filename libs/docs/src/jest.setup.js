@@ -3,7 +3,6 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// for useTranslation
 jest.mock('react-i18next', () => ({
     ...jest.requireActual('react-i18next'),
     useTranslation: () => ({
@@ -12,5 +11,12 @@ jest.mock('react-i18next', () => ({
             changeLanguage: jest.fn(),
             language: 'en'
         }
+    })
+}));
+
+jest.mock('react-router', () => ({
+    ...jest.requireActual('react-router'),
+    useLocation: () => ({
+        pathname: '/tools/positional'
     })
 }));

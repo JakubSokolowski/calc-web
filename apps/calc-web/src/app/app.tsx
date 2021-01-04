@@ -9,6 +9,7 @@ import {
     createStyles,
     CssBaseline,
     Drawer,
+    Hidden,
     IconButton,
     Theme,
     ThemeProvider,
@@ -24,17 +25,15 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
-import { PositionalCalculatorView } from '@calc/positional-calculator';
 import { useMountEffect } from '@calc/utils';
 import { loadOptions, selectAppTheme } from '@calc/core';
-import { FloatConverterView } from '@calc/float-converter';
 import '@calc/i18n';
-import { AssociatedBaseConverterView, BaseConverterView, ComplementConverterView } from '@calc/base-converter';
-import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import HelpIcon from '@material-ui/icons/Help';
 import { About } from './components/about/about';
+import { DocRoute, RendererMapping } from '@calc/docs';
+import { Tools } from './components/tools/tools';
+import { ComplementDetailsRenderer, ConversionRenderer, OperationRenderer } from '@calc/positional-calculator';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -54,14 +53,19 @@ const useStyles = makeStyles((theme: Theme) =>
             })
         },
         menuButton: {
-            marginRight: theme.spacing(2)
+            marginRight: theme.spacing(2),
+            [theme.breakpoints.up('sm')]: {
+                display: 'none'
+            }
         },
         hide: {
             display: 'none'
         },
         drawer: {
-            width: drawerWidth,
-            flexShrink: 0
+            [theme.breakpoints.up('sm')]: {
+                width: drawerWidth,
+                flexShrink: 0
+            }
         },
         drawerPaper: {
             width: drawerWidth
@@ -81,48 +85,76 @@ const useStyles = makeStyles((theme: Theme) =>
                 duration: theme.transitions.duration.leavingScreen
             })
         },
-        contentShift: {}
+        contentShift: {},
+        toolbar: theme.mixins.toolbar
     })
 );
+
+const rootMapping: RendererMapping = {
+    'cconv': ComplementDetailsRenderer,
+    'operation': OperationRenderer,
+    'bconv': ConversionRenderer
+};
 
 
 export const App = () => {
     const theme = useSelector(selectAppTheme);
     const classes = useStyles();
     const { t } = useTranslation();
-    const [open, setOpen] = React.useState(false);
+    const [mobileOpen, setMobileOpen] = React.useState(false);
     const dispatch = useDispatch();
 
     const handleDrawerOpen = () => {
-        setOpen(true);
+        setMobileOpen(true);
     };
 
     const handleDrawerClose = () => {
-        setOpen(false);
+        setMobileOpen(false);
     };
 
     const toggleDrawer = (open) => (event) => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
-        setOpen(open);
+        setMobileOpen(open);
     };
 
     useEffect(() => {
         const closeDrawerOnEscape = (event) => {
-            if (open && event.type === 'keydown' && (event.key === 'Escape')) {
-                setOpen(false);
+            if (mobileOpen && event.type === 'keydown' && (event.key === 'Escape')) {
+                setMobileOpen(false);
             }
         };
 
         document.addEventListener('keydown', closeDrawerOnEscape);
 
         return () => document.removeEventListener('keydown', closeDrawerOnEscape);
-    }, [open]);
+    }, [mobileOpen]);
 
     useMountEffect(() => {
         dispatch(loadOptions());
     });
+
+    const container = window !== undefined ? () => window.document.body : undefined;
+
+    const drawer = (
+        <>
+            <div className={classes.drawerHeader}>
+                <Typography variant={'h4'}>
+                    {t('home.appName')}
+                </Typography>
+                <div style={{ flexGrow: 1 }}/>
+                {
+                    mobileOpen &&
+                    <IconButton onClick={handleDrawerClose}>
+                        <ChevronLeftIcon/>
+                    </IconButton>
+                }
+            </div>
+            <SiderMenu/>
+        </>
+    );
+
 
     return (
         <div className={classes.root}>
@@ -132,7 +164,7 @@ export const App = () => {
                     <AppBar
                         position="fixed"
                         className={clsx(classes.appBar, {
-                            [classes.appBarShift]: open
+                            [classes.appBarShift]: mobileOpen
                         })}
                     >
                         <Toolbar>
@@ -141,7 +173,7 @@ export const App = () => {
                                 aria-label="open drawer"
                                 onClick={handleDrawerOpen}
                                 edge="end"
-                                className={clsx(classes.menuButton, open && classes.hide)}
+                                className={clsx(classes.menuButton, mobileOpen && classes.hide)}
                             >
                                 <MenuIcon/>
                             </IconButton>
@@ -152,33 +184,40 @@ export const App = () => {
                         </Toolbar>
                     </AppBar>
 
-                    <div onKeyDown={toggleDrawer(false)}>
-                        <Drawer
-                            onBackdropClick={toggleDrawer(false)}
-                            className={classes.drawer}
-                            variant="temporary"
-                            anchor="left"
-                            open={open}
-                            classes={{
-                                paper: classes.drawerPaper
-                            }}
-                        >
-                            <div className={classes.drawerHeader}>
-                                <Typography variant={'h4'}>
-                                    {t('home.appName')}
-                                </Typography>
-                                <div style={{ flexGrow: 1 }}/>
-                                <IconButton onClick={handleDrawerClose}>
-                                    <ChevronLeftIcon/>
-                                </IconButton>
-                            </div>
-                            <SiderMenu/>
-                        </Drawer>
-                    </div>
+                    <nav className={classes.drawer}>
+                        <Hidden smUp implementation="css">
+                            <Drawer
+                                container={container}
+                                variant="temporary"
+                                anchor={'left'}
+                                open={mobileOpen}
+                                onClose={toggleDrawer}
+                                classes={{
+                                    paper: classes.drawerPaper
+                                }}
+                                ModalProps={{
+                                    keepMounted: true
+                                }}
+                            >
+                                {drawer}
+                            </Drawer>
+                        </Hidden>
+                        <Hidden xsDown implementation="css">
+                            <Drawer
+                                classes={{
+                                    paper: classes.drawerPaper
+                                }}
+                                variant="permanent"
+                                open
+                            >
+                                {drawer}
+                            </Drawer>
+                        </Hidden>
+                    </nav>
 
                     <main
                         className={clsx(classes.content, {
-                            [classes.contentShift]: open
+                            [classes.contentShift]: mobileOpen
                         })}
                     >
                         <div className={classes.drawerHeader}/>
@@ -186,11 +225,8 @@ export const App = () => {
                             <About/>
                             <Switch>
                                 <Route exact path="/" component={HomeView}/>
-                                <Route path="/base-converter" component={BaseConverterView}/>
-                                <Route path="/associated-base-converter" component={AssociatedBaseConverterView}/>
-                                <Route path="/complement-converter" component={ComplementConverterView}/>
-                                <Route path="/float-converter" component={FloatConverterView}/>
-                                <Route path="/positional-calculator" component={PositionalCalculatorView}/>
+                                <Route path="/tools" component={Tools}/>
+                                <Route path="/theory" render={(props => <DocRoute {...props} mapping={rootMapping}/>)}/>
                             </Switch>
                         </div>
                     </main>

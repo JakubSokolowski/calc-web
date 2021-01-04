@@ -1,12 +1,12 @@
-import { mount } from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 import SiderMenu from './sider-menu';
 
 describe('SiderMenu', () => {
     let container;
-    
+
     beforeEach(() => {
-        container = mount(
+        container = shallow(
             <SiderMenu/>
         );
     });

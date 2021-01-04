@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, List, Theme } from '@material-ui/core';
 import { ContentsEntry } from '../../core/models/contents-entry';
+import { useHistory } from 'react-router-dom';
 
 const SPY_INTERVAL = 100;
 
@@ -38,6 +39,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ScrollSpy: FC<P> = ({entries}) => {
     const [items, setItems] = useState<SpyItem[]>([]);
+    const history = useHistory();
     const classes = useStyles();
 
     const offset= 20;
@@ -82,7 +84,7 @@ export const ScrollSpy: FC<P> = ({entries}) => {
 
     const scrollTo = (element: HTMLElement) => {
         const y = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-        window.scrollTo({top: y, behavior: 'smooth'});
+        window.scrollTo({top: y, behavior: 'auto'});
     };
 
     return (
@@ -94,6 +96,8 @@ export const ScrollSpy: FC<P> = ({entries}) => {
                         className={item.inView ? classes.active : classes.normal}
                         key={k}
                         onClick={() => {
+                            const search = `?h=${item.id}`;
+                            history.push({search});
                             scrollTo(item.element);
                         }}
                     >

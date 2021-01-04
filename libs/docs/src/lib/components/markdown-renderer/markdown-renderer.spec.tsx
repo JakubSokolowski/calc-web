@@ -1,8 +1,9 @@
 import React from 'react';
 import { mount } from 'enzyme';
-import { MarkdownRenderer, RendererMapping } from './markdown-renderer';
+import { MarkdownRenderer} from './markdown-renderer';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
 import { BlockMath, InlineMath } from 'react-katex';
+import { RendererMapping } from '@calc/docs';
 
 describe('MarkdownRenderer', () => {
     describe('heading renderer', () => {
@@ -24,7 +25,7 @@ describe('MarkdownRenderer', () => {
     describe('math renderer', () => {
         it('should render latex math if inline math is defined in markdown', () => {
             // given
-            const markdown = `$inline_{math}$`;
+            const markdown = '$inline_{math}$';
 
             // when
             const container = mount(
@@ -38,7 +39,7 @@ describe('MarkdownRenderer', () => {
 
         it('should render latex math if block math is defined in markdown', () => {
             // given
-            const markdown = `## \n $$\n A_{2} + B_{2} = 9 + 7 = 16 \n$$`;
+            const markdown = '## \n $$\n A_{2} + B_{2} = 9 + 7 = 16 \n$$';
 
             // when
             const container = mount(
@@ -58,7 +59,7 @@ describe('MarkdownRenderer', () => {
             const mapping: RendererMapping = {
                 'calc-custom': renderer
             };
-            const markdown = "```javascript\nconsole.log('xd')\n```";
+            const markdown = '```javascript\nconsole.log(\'xd\')\n```';
             const languageClassName = '.language-javascript';
 
             // when
@@ -74,7 +75,7 @@ describe('MarkdownRenderer', () => {
         it('should render normal code tag if custom renderer mapping is not defined', () => {
             // given
             const objStr = JSON.stringify({ prop: 'test'});
-            const markdown = "```calc-custom\n#\n```".replace('#', objStr);
+            const markdown = '```calc-custom\n#\n```'.replace('#', objStr);
 
             const languageClassName = '.language-calc-custom';
 
@@ -91,7 +92,7 @@ describe('MarkdownRenderer', () => {
         it('should render error when custom mapping is defined, but renderer token in markdown is not found in mapping', () => {
             // given
             const objStr = JSON.stringify({ prop: 'test'});
-            const markdown = "```calc-custom76\n#\n```".replace('#', objStr);
+            const markdown = '```calc-custom76\n#\n```'.replace('#', objStr);
             const renderer = jest.fn();
             const mapping: RendererMapping = {
                 'calc-custom': renderer
@@ -124,7 +125,7 @@ describe('MarkdownRenderer', () => {
             };
             const customObjProps = { prop: 'test'};
             const objStr = JSON.stringify(customObjProps);
-            const markdown = "```calc-custom\n#\n```".replace('#', objStr);
+            const markdown = '```calc-custom\n#\n```'.replace('#', objStr);
 
             // when
             const container = mount(

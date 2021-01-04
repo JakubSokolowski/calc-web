@@ -10,8 +10,9 @@ export { TabPanel, a11yProps } from './lib/components/tab-panel/tab-panel';
 export { ExtendedSelect } from './lib/components/extended-select/extended-select';
 export { ExtendedOption } from './lib/core/models/extended-option';
 export { SaveAsImageButton } from './lib/components/save-as-image/save-as-image-button';
-export { NestedList} from './lib/components/nested-list/nested-list';
 export { ViewWrapper } from './lib/components/view-wrapper/view-wrapper'
+export { Alert } from './lib/components/alert/alert'
+export { TreeNodeProps, MenuTree } from './lib/components/menu-tree/menu-tree'
 export * from './lib/core/models/form-errors';
 export * from './lib/core/models/extended-option';
 export { ListEntry } from './lib/core/models/list-entry';

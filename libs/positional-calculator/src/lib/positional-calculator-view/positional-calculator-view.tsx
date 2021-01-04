@@ -9,10 +9,10 @@ import {
     PositionalNumber
 } from '@calc/calc-arithmetic';
 import { PaddedGrid } from '@calc/grid';
-import { Box, createStyles, Tab, Tabs, Theme } from '@material-ui/core';
+import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { a11yProps, SaveAsImageButton, Section, TabPanel } from '@calc/common-ui';
-import { DocPage, RendererMapping } from '@calc/docs';
+import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
+import { RendererMapping } from '@calc/docs';
 import { ValidatedOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
@@ -32,9 +32,7 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: 700,
             margin: 'auto'
         },
-        options: {
-            paddingTop: theme.spacing(2)
-        },
+        options: {},
         actionRow: {
             paddingTop: theme.spacing(1),
             display: 'flex',
@@ -47,22 +45,13 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-const mapping: RendererMapping = {
-    'operation': OperationRenderer
-};
-
 export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
-    const [currentTab, setCurrentTab] = useState(0);
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
     const { t } = useTranslation();
     const [res, setRes] = useState<GridResult | undefined>();
     const [params, setParams] = useState<OperationParams<AlgorithmType>>();
     const gridId = 'calculator-grid';
-
-    const handleChange = (event: React.ChangeEvent<{}>, newValue: number) => {
-        setCurrentTab(newValue);
-    };
 
     const onSubmit = function <T extends AlgorithmType>(
         base: number,
@@ -97,49 +86,38 @@ export const PositionalCalculatorView: FC = () => {
     const groupBuilder = (positionResult: any) => {
         return getGroupBuilder(res.operationResult)({ positionResult });
     };
+    const theoryPath = operation ? `/theory/positional/operations/${operation.toLowerCase()}` : '/theory/positional/operations';
 
     return (
-        <div className={classes.root}>
-            <Tabs value={currentTab} onChange={handleChange}>
-                <Tab label="Converter" {...a11yProps(0)} />
-                <Tab label="Theory" {...a11yProps(1)} />
-            </Tabs>
-            <TabPanel className={classes.panel} value={currentTab} index={0}>
-                <Section title={t('positionalCalculator.parameters')}>
-                    <div className={classes.options}>
-                        <CalculatorOptions onSubmit={onSubmit} onOperationChange={setOperation}/>
-                    </div>
-                </Section>
-                {
-                    params && res &&
-                    <>
-                        <Section title={t('positionalCalculator.result')}>
-                            <OperationResultComponent result={res.operationResult}/>
-                        </Section>
-                        <Section title={t('positionalCalculator.details')}>
-                            <PaddedGrid
-                                desiredWidth={24}
-                                id={gridId}
-                                {...res.grid}
-                                groupBuilder={groupBuilder}
-                                title={t(getTitle())}
+        <ViewWrapper path={'/tools/positional/positional-calculator'} theoryPath={theoryPath}>
+            <Section title={t('positionalCalculator.parameters')}>
+                <div className={classes.options}>
+                    <CalculatorOptions onSubmit={onSubmit} onOperationChange={setOperation}/>
+                </div>
+            </Section>
+            {
+                params && res &&
+                <>
+                    <Section title={t('positionalCalculator.result')}>
+                        <OperationResultComponent result={res.operationResult}/>
+                    </Section>
+                    <Section title={t('positionalCalculator.details')}>
+                        <PaddedGrid
+                            desiredWidth={24}
+                            id={gridId}
+                            {...res.grid}
+                            groupBuilder={groupBuilder}
+                            title={t(getTitle())}
+                        />
+                        <div className={classes.actionRow}>
+                            <SaveAsImageButton
+                                tooltipTitle={t('positionalCalculator.downloadDetails')}
+                                elementId={gridId}
                             />
-                            <div className={classes.actionRow}>
-                                <SaveAsImageButton
-                                    tooltipTitle={t('positionalCalculator.downloadDetails')}
-                                    elementId={gridId}
-                                />
-                            </div>
-                        </Section>
-                    </>
-                }
-            </TabPanel>
-            <TabPanel className={classes.panel} value={currentTab} index={1}>
-                <Box className={classes.docs}>
-                    <DocPage path={`positional/operations/${operation.toString().toLowerCase()}`}
-                             rendererMapping={mapping}/>
-                </Box>
-            </TabPanel>
-        </div>
+                        </div>
+                    </Section>
+                </>
+            }
+        </ViewWrapper>
     );
 };
