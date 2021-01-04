@@ -7,7 +7,6 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import { useHistory } from 'react-router-dom';
-import { Divider } from '@material-ui/core';
 import { ListEntry } from '../../core/models/list-entry';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -25,7 +24,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface P {
     items: ListEntry[];
-    header: string;
+    header: ListEntry;
 }
 
 export const NestedList: FC<P> = ({ items, header }) => {
@@ -53,10 +52,13 @@ export const NestedList: FC<P> = ({ items, header }) => {
             className={classes.root}
         >
             <ListItem key='expand-nested' button onClick={handleClick}>
-                <ListItemText primary={header}/>
-                {open ? <ExpandLess/> : <ExpandMore/>}
+                <ListItemText primary={header.text}/>
+                {
+                    !!items.length ?
+                        <>{open ? <ExpandLess/> : <ExpandMore/>}</>
+                    : null
+                }
             </ListItem>
-            <Divider/>
             <Collapse in={open} timeout="auto">
                 <List component="div" disablePadding>
                     {entries}
