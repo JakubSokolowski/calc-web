@@ -1,0 +1,8 @@
+{
+    "extends": "../tsconfig.tools",
+    "compilerOptions": {
+        "rootDir": "../../../",
+        "types": ["node", "jest"]
+    },
+    "include": ["**/*.ts"]
+}
