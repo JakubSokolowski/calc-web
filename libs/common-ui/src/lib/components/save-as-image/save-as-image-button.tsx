@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
+import DomToImage from 'dom-to-image'
 import { IconButton, Tooltip } from '@material-ui/core';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
@@ -11,9 +11,8 @@ interface P {
 
 export const SaveAsImageButton: FC<P> = ({ elementId, tooltipTitle }) => {
     const saveAsImage = async () => {
-        await domtoimage
-            .toBlob(document.getElementById(elementId))
-            .then(function(blob) {
+        await DomToImage.toBlob(document.getElementById(elementId))
+            .then(blob => {
                 saveAs(blob, 'result.png');
             }).catch((error) => console.log(error));
     };
