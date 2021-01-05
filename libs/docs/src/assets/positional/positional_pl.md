@@ -1,1 +1,1 @@
-## Arytmetyka pozycyjna
+# Arytmetyka pozycyjna

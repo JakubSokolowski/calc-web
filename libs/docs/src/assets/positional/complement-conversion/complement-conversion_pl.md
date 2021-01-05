@@ -1,9 +1,9 @@
-## Uzupełnienia liczb
+# Uzupełnienia liczb
 Uzupełnienie liczby to sposób reprezentacji który umożliwia wykonywanie róznych działań na liczbach ujemnych i dodatnich. Oznaczamy je przez kreskę nad liczbą: $\overline{A}=(0)A$.
-### Liczby dodatnie
+## Liczby dodatnie
 Uzupełnienie liczby pozytywnej ta sama liczba z dopisanym $(0)$ z przodu np. $\overline{12}=(0)12$. (0) oznacza że wszystkie pozycje w lewo mają wartość 0.
 
-### Liczby ujemne
+## Liczby ujemne
 Uzupełnienie liczby ujemnej to w skrócie to liczba z zanegowanymi wszystkimi cyframi powiększona o 1.
 Cyfrę negujemy przez odjęcie tej cyfry od największej cyfry możliwej w danej podstawie,
  np. jeśli chcemy zanegować $6_{10}$, największą cyfrą w podstawie 10 jest 9, więc uzupełnieniem jest 3 $(9-6=3)$, dla $1_{2}$, negacją będzie 0 $(1-1=0)$.
@@ -17,7 +17,7 @@ Cyfrę negujemy przez odjęcie tej cyfry od największej cyfry możliwej w danej
  }
  ```
 Po zanegowaniu wszystkich pozycji otrzymujemy $75125387.02$, po dodaniu 1 $75125387.02$ a po zapisaniu z rozszerzeniem $(9)75125387.02$.
-### Skąd się to bierze?
+## Skąd się to bierze?
 Załóżmy że chcemy wykonać działanie $15 -17$. 
 Wynik takiego działania to oczywiście -2, ale jeśli spróbujemy zastosować pozycyjne odejmowanie, dostatniemy dziwny wynik:
 ```calc-operation
@@ -37,7 +37,7 @@ Nie możemy pożyczyć z 0, więc musimy najpierw pożyczyć z następnej pozycj
  Możemy oznaczyć taki ciąg jako $(9)8$ - taki sposób zapisu nazywany jest właśnie uzupełnienime liczby.
   
  Wartość takiego uzupełnienia to -2 $(15-17=-2)$.
-### Do czego się to przydaje? 
+## Do czego się to przydaje? 
 Uzupełnienie zapewnia spójny zapis dla ujemnych i dodatnih liczb, więc można stosować te same algorytmy dodawania, odejmowania czy mnożenia.
 Na przykład, jeśli chcielibyśmy dodać $981_{10}$ i $-456_{10}$ to nie było to wcześniej możliwe za pomocą dodawania, trzeba by było skorzystać z odejmowania. 
 ```calc-operation

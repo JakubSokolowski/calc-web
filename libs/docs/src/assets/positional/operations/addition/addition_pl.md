@@ -1,4 +1,4 @@
-## Dodawanie
+# Dodawanie
 
 Standardowy algorytm dodawania wielocyfrowych liczb - jaki jest każdy widzi. Na przykład, żeby dodać liczby w podstawie 10:
 $$
