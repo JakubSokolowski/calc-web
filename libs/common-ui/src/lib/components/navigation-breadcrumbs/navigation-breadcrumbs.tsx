@@ -4,6 +4,7 @@ import MenuBookIcon from '@material-ui/icons/MenuBook';
 import { makeStyles } from '@material-ui/core/styles';
 import { replaceAll } from '@calc/utils';
 import { useTranslation } from 'react-i18next';
+import { environment } from '@calc/env';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -35,6 +36,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
     const { t } = useTranslation();
     const classes = useStyles();
     const pathFragments = path.split('/').filter(r => !!r);
+    const deployPrefix = environment.deployUrl ? `/${environment.deployUrl}` : '';
 
     const subRoutesCombinations = pathFragments.map((_, index) => {
         const all = pathFragments.slice(0, index + 1);
@@ -48,6 +50,8 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
         const dotRoute = `${prefix}${replaceAll(s, '/', '.')}${suffix}`;
         const translation = t(dotRoute, { returnObjects: true }) as any;
 
+
+
         if (isLeaf) {
             return (
                 <Typography key={idx} color="textPrimary">
@@ -56,7 +60,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
             );
         } else {
             return (
-                <Link key={idx} color="inherit" href={`/#/${s}`}>
+                <Link key={idx} color="inherit" href={`/#${deployPrefix}/${s}`}>
                     {translation.title || translation}
                 </Link>
             );
@@ -73,7 +77,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
             {
                 theoryPath &&
                 <Breadcrumbs>
-                    <Link className={classes.link} color="inherit" href={`/#${theoryPath}`}>
+                    <Link className={classes.link} color="inherit" href={`/#${deployPrefix}${theoryPath}`}>
                         <MenuBookIcon className={classes.linkIcon}/>
                         {t('common.theory')}
                     </Link>
