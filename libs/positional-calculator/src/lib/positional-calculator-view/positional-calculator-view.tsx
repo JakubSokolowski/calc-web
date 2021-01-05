@@ -12,13 +12,11 @@ import { PaddedGrid } from '@calc/grid';
 import { createStyles, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
-import { RendererMapping } from '@calc/docs';
 import { ValidatedOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
 import { OperationResultComponent } from '../operation-result/operation-result';
 import { calculate, GridResult, OperationParams } from '../core/calculate';
-import { OperationRenderer } from '../operation-renderer/operation-renderer';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({

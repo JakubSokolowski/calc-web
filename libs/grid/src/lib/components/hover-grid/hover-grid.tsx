@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme: Theme) => {
         },
         cellBox: {
             width: '100%',
-            maxHeight: '500px',
+            maxHeight: '620px',
             display: 'inline-block'
         },
         cellContent: {
