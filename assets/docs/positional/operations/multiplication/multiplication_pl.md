@@ -1,4 +1,4 @@
-# Mnożenie
+## Mnożenie
 Operandy mnożenia to mnożna (*en. multiplicand* oznaczona jako $m$) i mnożnik (*en. multiplier* - oznaczana jako jako $M$ ) - mnożymy mnożną przez mnożnik.
 Wynik mnożenia nazywamy iloczynem (*en. product* - oznaczany przez $P$).
  Mnożenie dla różnych podstaw można zrealizować wieloma algorytmami, a dla liczb binarnych są jeszcze inne, specjalne algorytmy.
