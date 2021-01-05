@@ -32,7 +32,10 @@ const useStyles = makeStyles((theme: Theme) =>
             top: 64 + theme.spacing(1),
             position: 'fixed',
             display: 'block',
-            width: '250px'
+            width: '250px',
+            [theme.breakpoints.down('md')]: {
+                display: 'none'
+            }
         }
     }),
 );
