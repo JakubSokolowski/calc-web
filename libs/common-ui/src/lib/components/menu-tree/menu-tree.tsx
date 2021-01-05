@@ -172,7 +172,7 @@ export function MenuTree(props: P) {
                 {Array.isArray(node.childNodes) ? renderTree(node.childNodes) : null}
             </StyledTreeItem>
         ));
-    }, [nodes, expanded]);
+    }, [handleClick]);
 
 
     return (
