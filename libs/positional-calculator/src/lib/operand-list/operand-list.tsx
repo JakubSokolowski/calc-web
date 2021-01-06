@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { Button, createStyles, List, RootRef, Theme } from '@material-ui/core';
+import { Button, createStyles, List, RootRef, Theme, Tooltip } from '@material-ui/core';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
 import { makeStyles } from '@material-ui/core/styles';
 import { OperandInput } from '../operand-input/operand-input';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@material-ui/icons/Add';
+import { reorder } from '@calc/utils';
 
 export interface DndOperand {
     representation: string;
@@ -18,14 +19,6 @@ interface P {
     onChange: (operands: DndOperand[]) => void;
     onAdd: () => void;
     canAdd: boolean;
-}
-
-function reorder<T>(list: T[], startIndex: number, endIndex: number): T[] {
-    const result = Array.from(list);
-    const [removed] = result.splice(startIndex, 1);
-    result.splice(endIndex, 0, removed);
-
-    return result;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -126,15 +119,23 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
                     )}
                 </Droppable>
             </DragDropContext>
-            <Button
-                disabled={!canAdd}
-                onClick={() => onAdd()}
-                endIcon={<AddIcon/>}
-                variant={'outlined'}
-                className={classes.newOperand}
-            >
-                {t('positionalCalculator.newOperand')}
-            </Button>
+            {
+                <Tooltip title={canAdd ? t('positionalCalculator.maxOpReached') : ''}>
+                    <span>
+                         <Button
+                             data-testid={'new-operand'}
+                             disabled={!canAdd}
+                             onClick={() => onAdd()}
+                             endIcon={<AddIcon/>}
+                             variant={'outlined'}
+                             className={classes.newOperand}
+                         >
+                            {t('positionalCalculator.newOperand')}
+                        </Button>
+                    </span>
+                </Tooltip>
+            }
+
         </div>
     );
 };

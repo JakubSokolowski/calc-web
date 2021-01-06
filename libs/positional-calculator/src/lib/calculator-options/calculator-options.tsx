@@ -4,27 +4,29 @@ import {
     algorithmMap,
     allOperations,
     BaseDigits,
-    isValidString, multiplicationAlgorithms,
+    multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
     OperationType,
 } from '@calc/calc-arithmetic';
 import { useTranslation } from 'react-i18next';
-import { clean } from '@calc/utils';
+import { clean, inRangeInclusive } from '@calc/utils';
 import { useFormik } from 'formik';
-import { Button, createStyles, TextField, Theme } from '@material-ui/core';
+import { Button, createStyles, TextField, Theme, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { OperandList, DndOperand } from '../operand-list/operand-list';
 
 interface FormValues {
     base: number;
-    representation: string;
-    operands: string[];
 }
 
 interface P {
     onSubmit: (base: number, representations: DndOperand[], operation: Operation, algorithm: OperationAlgorithm) => void;
     onOperationChange: (operation: OperationType) => void;
+    defaultOperands?: DndOperand[];
+    defaultBase?: number;
+    defaultAlgorithm?: OperationAlgorithm;
+    defaultOperation?: Operation;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -57,22 +59,20 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
+export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(allOperations[2]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(multiplicationAlgorithms[0]);
+    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[0]);
+    const [errorMessage, setErrorMessage] = useState<string>('');
     const [operands, setOperands] = useState<DndOperand[]>(
+        defaultOperands ||
         [{valid: true, representation: '0.003', dndKey: '1'}, {valid: true, representation: '12.123', dndKey: '2'}]
     );
-    const [canAddOperand] = useState(true);
+    const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
-    const initialValues: FormValues = {
-        base: 10,
-        representation: '0.0',
-        operands: []
-    };
+    const initialValues: FormValues = { base: defaultBase || 10, };
 
     const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidBase(base)) {
@@ -83,34 +83,19 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
         }
     };
 
-    const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if (!isValidString(valueStr, inputBase)) {
-            return t(
-                'baseConverter.wrongRepresentationStr',
-                { base: inputBase }
-            );
-        }
-    };
-
-    const handleAdd = () => {
-        const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
-        setOperands((prev) => [...prev, {representation: defaultStr, valid: true, dndKey: `${Date.now()}`}]);
-    };
-
-    const handleSubmit = (values: FormValues) => {
-        setOperands((prev) => [...prev, {representation: values.representation, valid: true, dndKey: `${Date.now()}`}])
-    };
-
     const validate = (values: FormValues) => {
         const errors: FormErrors<FormValues> = {
             base: validateBase(values.base),
-            representation: validateValueStr(values.representation, values.base)
         };
 
         return clean(errors);
     };
 
-    const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
+    const handleSubmit = (form: FormValues) => {
+        onSubmit(form.base, operands, operation, algorithm)
+    };
+
+    const form = useFormik({ initialValues, validate, onSubmit: handleSubmit});
 
     const getPossibleAlgorithms = (op: Operation) => {
         return algorithmMap[op.type] || [];
@@ -120,18 +105,35 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
         setOperands(newOperands)
     };
 
-    const handleOperandSubmit = () => {
-        onSubmit(form.values.base, operands, operation, algorithm)
+    const handleAdd = () => {
+        const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
+        setOperands((prev) => [...prev, {representation: defaultStr, valid: true, dndKey: `${Date.now()}`}]);
     };
 
     useEffect(() => {
-        const can = operands.every((op) => op.valid);
-        setCanCalculate(can);
-    }, [operands]);
+        const everyOperandValid = operands.every((op) => op.valid);
+        let newMessage = '';
+        if(!everyOperandValid) newMessage = t('positionalCalculator.operandsNotValid');
+
+        const {minOperands, maxOperands} = operation;
+
+        const allowedNumOfOperands = inRangeInclusive(operands.length, minOperands, maxOperands);
+        if(!allowedNumOfOperands) newMessage = t('positionalCalculator.wrongOperandsNum', {minOperands, maxOperands});
+
+        const canCalculate = everyOperandValid && allowedNumOfOperands;
+        setErrorMessage(newMessage);
+        setCanCalculate(canCalculate);
+    }, [operands, operation, t]);
 
     useEffect(() => {
         onOperationChange(operation.type);
     }, [operation]);
+
+    useEffect(() => {
+        const canAdd = operation.maxOperands > operands.length;
+        setCanAddOperand(canAdd);
+    }, [operands, operation]);
+
 
     return (
         <div>
@@ -151,28 +153,33 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
                 <div className={classes.spacer}/>
                 <ExtendedSelect
                     value={operation}
-                    label={'Operation'}
+                    label={t('positionalCalculator.operation')}
                     onChange={(value) => setOperation(value)}
-                    operations={allOperations}
+                    options={allOperations}
                 />
                 <div className={classes.spacer}/>
                 <ExtendedSelect
                     value={algorithm}
-                    label={'Algorithm'}
+                    label={t('positionalCalculator.algorithm')}
                     onChange={(value) => setAlgorithm(value)}
-                    operations={getPossibleAlgorithms(operation)}
+                    options={getPossibleAlgorithms(operation)}
                 />
                 <div className={classes.growSpacer}/>
-                <Button
-                    onClick={() => handleOperandSubmit()}
-                    type={'submit'}
-                    color={'secondary'}
-                    variant={'contained'}
-                    className={classes.addOperand}
-                    disabled={!form.isValid || operands.length < 1 || !canCalculate}
-                >
-                    {t('positionalCalculator.calculate')}
-                </Button>
+                <Tooltip title={errorMessage}>
+                    <span>
+                         <Button
+                             data-testid="submit"
+                             onClick={() => handleSubmit(form.values)}
+                             color={'secondary'}
+                             variant={'contained'}
+                             className={classes.addOperand}
+                             disabled={!form.isValid || operands.length < 1 || !canCalculate}
+                         >
+                            {t('positionalCalculator.calculate')}
+                        </Button>
+                    </span>
+                </Tooltip>
+
             </div>
             <div className={classes.operandsBox}>
                 <OperandList
