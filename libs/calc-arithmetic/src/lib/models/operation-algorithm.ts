@@ -17,6 +17,7 @@ export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
 export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
     allowedBases?: number[];
+
 }
 
 export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>

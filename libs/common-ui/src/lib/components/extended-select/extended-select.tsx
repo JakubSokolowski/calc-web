@@ -9,7 +9,7 @@ interface P<T> {
     value: T;
     label: ReactNode;
     onChange: (operation: T) => void;
-    operations: T[];
+    options: T[];
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -34,16 +34,16 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { children?: ReactNode }) => {
-    const {operations, onChange, value, label} = props;
+    const {options, onChange, value, label} = props;
     const classes = useStyles();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
-        const operation = operations.find(o => o.type === value);
+        const operation = options.find(o => o.type === value);
         onChange(operation);
     };
 
-    const options = operations.map((option) => {
+    const items = options.map((option) => {
         return (
             <MenuItem key={option.type} value={option.type} disabled={option.disallowed}>
                 <div className={classes.item}>
@@ -80,7 +80,7 @@ export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { childre
             value={value.type}
             onChange={handleChange}
         >
-            {options}
+            {items}
         </TextField>
     );
 };

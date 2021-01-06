@@ -8,7 +8,7 @@ describe('ExtendedSelect', () => {
 
     beforeEach(() => {
         container = shallow(
-            <ExtendedSelect label={''} onChange={onChange} operations={[]} value={''}/>
+            <ExtendedSelect label={''} onChange={onChange} options={[]} value={''}/>
         );
     });
 

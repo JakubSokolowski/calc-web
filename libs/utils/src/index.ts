@@ -11,4 +11,5 @@ export * from './lib/functions/obj-array-equal';
 export * from './lib/functions/list-keys';
 export * from './lib/functions/deep-assign';
 export * from './lib/functions/test-uitls';
+export * from './lib/functions/reorder';
 export * from './lib/hooks/use-mount-effect';
