@@ -12,7 +12,6 @@ interface P extends ListItemProps {
     onRepresentationChange?: (representationStr: string, index: number, valid: boolean) => void;
 }
 
-
 export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, ...rest }) => {
     const { t } = useTranslation();
     const [representation, setRepresentation] = useState(representationStr);

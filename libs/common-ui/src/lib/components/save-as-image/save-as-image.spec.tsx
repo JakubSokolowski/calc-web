@@ -2,7 +2,8 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { SaveAsImageButton } from '@calc/common-ui';
 import { saveAs } from 'file-saver';
-import DomToImage from 'dom-to-image'
+import DomToImage from 'dom-to-image';
+import { tick } from '@calc/utils';
 import Mock = jest.Mock;
 
 jest.mock(
@@ -88,9 +89,3 @@ describe('SaveAsImageButton', () => {
         expect(consoleLogMock).toBeCalledWith(errorMessage);
     });
 });
-
-function tick() {
-    return new Promise(resolve => {
-        setTimeout(resolve, 0);
-    })
-}
