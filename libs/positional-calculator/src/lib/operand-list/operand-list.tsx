@@ -6,15 +6,16 @@ import { OperandInput } from '../operand-input/operand-input';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@material-ui/icons/Add';
 
-export interface ValidatedOperand {
+export interface DndOperand {
     representation: string;
     valid: boolean;
+    dndKey: string;
 }
 
 interface P {
     inputBase: number;
-    operands: ValidatedOperand[];
-    onChange: (operands: ValidatedOperand[]) => void;
+    operands: DndOperand[];
+    onChange: (operands: DndOperand[]) => void;
     onAdd: () => void;
     canAdd: boolean;
 }
@@ -62,13 +63,12 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
     const classes = useStyles();
     const { t } = useTranslation();
 
-
     const onDragEnd = (result: any) => {
         if (!result.destination) {
             return;
         }
 
-        const newItems: ValidatedOperand[] = reorder(
+        const newItems: DndOperand[] = reorder(
             operands,
             result.source.index,
             result.destination.index
@@ -86,13 +86,13 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
 
     const handleChange = (representationStr: string, index: number, isValid: boolean) => {
         const newOperands = [...operands];
-        newOperands[index] = { representation: representationStr, valid: isValid };
+        newOperands[index] = { ...newOperands[index], representation: representationStr, valid: isValid };
         onChange(newOperands);
     };
 
     const items = operands.map((item, index) => {
         return (
-            <Draggable key={index} draggableId={`${index}`} index={index}>
+            <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>
                 {(provided, snapshot) => (
                     <OperandInput
                         ContainerComponent="li"
@@ -111,7 +111,6 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             </Draggable>
         );
     });
-
 
     return (
         <div>

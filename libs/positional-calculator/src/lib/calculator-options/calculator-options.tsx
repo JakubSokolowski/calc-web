@@ -7,14 +7,14 @@ import {
     isValidString, multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
-    OperationType, subtractionAlgorithms
+    OperationType,
 } from '@calc/calc-arithmetic';
 import { useTranslation } from 'react-i18next';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, createStyles, TextField, Theme } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { OperandList, ValidatedOperand } from '../operand-list/operand-list';
+import { OperandList, DndOperand } from '../operand-list/operand-list';
 
 interface FormValues {
     base: number;
@@ -23,7 +23,7 @@ interface FormValues {
 }
 
 interface P {
-    onSubmit: (base: number, representations: ValidatedOperand[], operation: Operation, algorithm: OperationAlgorithm) => void;
+    onSubmit: (base: number, representations: DndOperand[], operation: Operation, algorithm: OperationAlgorithm) => void;
     onOperationChange: (operation: OperationType) => void;
 }
 
@@ -62,8 +62,8 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
     const { t } = useTranslation();
     const [operation, setOperation] = useState<Operation>(allOperations[2]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(multiplicationAlgorithms[0]);
-    const [operands, setOperands] = useState<ValidatedOperand[]>(
-        [{valid: true, representation: '0.003'}, {valid: true, representation: '12.123'}]
+    const [operands, setOperands] = useState<DndOperand[]>(
+        [{valid: true, representation: '0.003', dndKey: '1'}, {valid: true, representation: '12.123', dndKey: '2'}]
     );
     const [canAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
@@ -94,11 +94,11 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
 
     const handleAdd = () => {
         const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
-        setOperands((prev) => [...prev, {representation: defaultStr, valid: true}]);
+        setOperands((prev) => [...prev, {representation: defaultStr, valid: true, dndKey: `${Date.now()}`}]);
     };
 
     const handleSubmit = (values: FormValues) => {
-        setOperands((prev) => [...prev, {representation: values.representation, valid: true}])
+        setOperands((prev) => [...prev, {representation: values.representation, valid: true, dndKey: `${Date.now()}`}])
     };
 
     const validate = (values: FormValues) => {
@@ -116,7 +116,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange }) => {
         return algorithmMap[op.type] || [];
     };
 
-    const handleOperandChange = (newOperands: ValidatedOperand[]) => {
+    const handleOperandChange = (newOperands: DndOperand[]) => {
         setOperands(newOperands)
     };
 
