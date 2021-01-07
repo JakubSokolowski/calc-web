@@ -29,7 +29,7 @@ export interface HoverGridProps {
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
     tooltip: {
-        maxWidth: 220,
+        maxWidth: 300,
         fontSize: theme.typography.pxToRem(12),
         border: '1px solid #dadde9'
     }

@@ -179,6 +179,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
                 position: position,
                 base: globalBase
             },
+            decimalSum: 0,
             operands: []
         };
     }
@@ -198,12 +199,13 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
         position: position
     };
 
-    if (!decimalCarry) return { valueAtPosition, carry: [], operands: digits };
+    if (!decimalCarry) return { valueAtPosition, carry: [], operands: digits, decimalSum };
 
     return {
         valueAtPosition,
         carry: carryToDigits(decimalCarry, base, position),
-        operands: digits
+        operands: digits,
+        decimalSum
     };
 }
 

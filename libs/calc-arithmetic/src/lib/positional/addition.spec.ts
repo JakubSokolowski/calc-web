@@ -34,7 +34,8 @@ describe('addition', () => {
                     position: 0
                 },
                 carry: [],
-                operands: [x, y]
+                operands: [x, y],
+                decimalSum: 6
             };
 
             // when
@@ -76,7 +77,8 @@ describe('addition', () => {
                         carrySourcePosition: 0
                     }
                 ],
-                operands: [x, y]
+                operands: [x, y],
+                decimalSum: 18
             };
 
             // when
@@ -120,7 +122,8 @@ describe('addition', () => {
                         base: 10
                     }
                 ],
-                operands: [...digits]
+                operands: [...digits],
+                decimalSum: 126
             };
 
             // when
@@ -157,7 +160,8 @@ describe('addition', () => {
                         carrySourcePosition: 0
                     }
                 ],
-                operands: [...digits]
+                operands: [...digits],
+                decimalSum: 5
             };
 
             // when
@@ -687,7 +691,8 @@ describe('addition', () => {
                             representationInBase: '0',
                             valueInDecimal: 0
                         }
-                    ]
+                    ],
+                    decimalSum: 0
                 },
                 {
                     valueAtPosition: {
@@ -710,7 +715,8 @@ describe('addition', () => {
                             representationInBase: '8',
                             valueInDecimal: 8
                         }
-                    ]
+                    ],
+                    decimalSum: 0
                 },
                 {
                     valueAtPosition: {
@@ -735,7 +741,8 @@ describe('addition', () => {
                             valueInDecimal: 9,
                             base: 10
                         }
-                    ]
+                    ],
+                    decimalSum: 0
                 },
                 {
                     valueAtPosition: {
@@ -760,7 +767,8 @@ describe('addition', () => {
                             valueInDecimal: 9,
                             base: 10
                         }
-                    ]
+                    ],
+                    decimalSum: 0
                 }
             ];
 

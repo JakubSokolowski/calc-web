@@ -1,59 +1,57 @@
 import React, { FC } from 'react';
-import { AdditionPositionResult } from '@calc/calc-arithmetic';
-import { NumberSubscript } from '@calc/common-ui';
+import { AdditionOperand, AdditionPositionResult, fromNumber } from '@calc/calc-arithmetic';
+import { InlineMath } from 'react-katex';
 
 interface P {
     positionResult: AdditionPositionResult;
 }
 
-export const AddAtPositionHoverContent: FC<P> = ({positionResult}) => {
-    if(!positionResult || !positionResult.operands) return null;
-    const nonZeroOperands = positionResult.operands.filter((op) => op.valueInDecimal !== 0);
-    const operands = nonZeroOperands.map((operand, index) => {
-        return (
-            <span key={index} style={{fontWeight: operand.isCarry ? 'bold' : 'initial'}}>
-                <NumberSubscript value={operand.representationInBase} subscript={''} noBraces={true}/>
-                {index !== nonZeroOperands.length -1 && '+'}
-            </span>
-        );
-    });
+function operandsToLatexStr(operands: AdditionOperand[]): string {
+    return operands.reduce((joinedStr,operand, index) => {
+        const isNotLastOperand = index !== operands.length - 1;
 
-    const carries = positionResult.carry.map((carry, index) => {
-        return (
-            <span key={index}>
-                <NumberSubscript value={carry.representationInBase} subscript={`C${carry.position}`}/>
-                {index !== positionResult.carry.length -1 && '+'}
-            </span>
-        );
-    });
+        const operandStr = operand.isCarry
+            ? `${operand.representationInBase}_{C${operand.carrySourcePosition}}`
+            : operand.representationInBase;
+
+        const optionalPlus = `${isNotLastOperand ? '+' : ''}`;
+
+        return joinedStr.concat(operandStr).concat(optionalPlus);
+    }, '');
+}
+
+function carriesToLatexStr(carries: AdditionOperand[]): string {
+    return  carries.reduce((joinedStr, carry, index) => {
+        const isNotLastOperand = index !== carries.length - 1;
+        const carryStr = `C_{${carry.position}}=${carry.representationInBase}${isNotLastOperand ? ',' : ''}`;
+        return joinedStr.concat(carryStr);
+    }, '');
+}
+
+export const AddAtPositionHoverContent: FC<P> = ({ positionResult }) => {
+    if (!positionResult || !positionResult.operands) return null;
+
+    const posSum = fromNumber(positionResult.decimalSum, positionResult.operands[0].base).result.toString();
+
+    const nonZeroOperands = positionResult.operands.filter((op) => op.valueInDecimal !== 0);
+    const operandsStr = operandsToLatexStr(nonZeroOperands);
+
+    const carryStr = carriesToLatexStr(positionResult.carry);
+    const posResultStr = `S_{${positionResult.valueAtPosition.position}}=`;
+
+    const carryStrWithSign = positionResult.carry.length > 0 ? `${carryStr},\\;` : '';
 
     return (
-       <div>
-           {
-               operands.length > 1 && <div>
-                   <NumberSubscript
-                       value={'S'}
-                       subscript={positionResult.valueAtPosition.position}
-                       noBraces={true}
-                   />
-                   =
-                   {operands}
-               </div>
-           }
-           <div>
-               <NumberSubscript
-                   value={'S'}
-                   subscript={positionResult.valueAtPosition.position}
-                   noBraces={true}
-               />
-               =
-               <NumberSubscript
-                   value={positionResult.valueAtPosition.representationInBase}
-                   subscript={positionResult.valueAtPosition.base}
-               />
-               {carries.length > 0 && '+'}
-               {carries.length > 0 && carries}
-           </div>
-       </div>
-    )
+        <div>
+            {
+                nonZeroOperands.length > 1 &&
+                <div className="opSumRow">
+                    <InlineMath math={posResultStr + operandsStr + `=${posSum}`}/>
+                </div>
+            }
+            <div className="carryPosResultRow">
+                <InlineMath math={carryStrWithSign + posResultStr + positionResult.valueAtPosition.representationInBase}/>
+            </div>
+        </div>
+    );
 };

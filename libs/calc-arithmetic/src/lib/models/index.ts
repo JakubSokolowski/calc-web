@@ -34,6 +34,7 @@ export interface AdditionOperand extends Digit {
 
 export interface AdditionPositionResult extends PositionResult<AdditionOperand> {
     carry: AdditionOperand[];
+    decimalSum: number;
 }
 
 export type AdditionResult = OperationResult<AdditionOperand, AdditionPositionResult>;
