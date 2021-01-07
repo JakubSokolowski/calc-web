@@ -80,200 +80,205 @@ describe('addition-grid', () => {
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 0
+                                    x: 0,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 0
+                                    x: 0,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 0
+                                    x: 0,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 4
-                                },
                                 carry: [],
+                                decimalSum: 0,
                                 operands: [
                                     {
-                                        isComplementExtension: true,
-                                        position: 4,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    },
-                                    {
-                                        isComplementExtension: true,
-                                        position: 4,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            cells: [
-                                {
-                                    y: 0,
-                                    x: 1
-                                },
-                                {
-                                    y: 1,
-                                    x: 1
-                                },
-                                {
-                                    y: 2,
-                                    x: 1
-                                }
-                            ],
-                            contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 3
-                                },
-                                carry: [],
-                                operands: [
-                                    {
-                                        isComplementExtension: true,
-                                        position: 3,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    },
-                                    {
-                                        isComplementExtension: true,
-                                        position: 3,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            cells: [
-                                {
-                                    y: 0,
-                                    x: 2
-                                },
-                                {
-                                    y: 1,
-                                    x: 2
-                                },
-                                {
-                                    y: 2,
-                                    x: 2
-                                }
-                            ],
-                            contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 2
-                                },
-                                carry: [],
-                                operands: [
-                                    {
-                                        position: 2,
                                         base: 10,
+                                        isComplementExtension: true,
+                                        position: 4,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    },
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 4,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    }
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 4,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
+                            }
+                        },
+                        {
+                            cells: [
+                                {
+                                    x: 1,
+                                    y: 0
+                                },
+                                {
+                                    x: 1,
+                                    y: 1
+                                },
+                                {
+                                    x: 1,
+                                    y: 2
+                                }
+                            ],
+                            contentProps: {
+                                carry: [],
+                                decimalSum: 0,
+                                operands: [
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 3,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    },
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 3,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    }
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 3,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
+                            }
+                        },
+                        {
+                            cells: [
+                                {
+                                    x: 2,
+                                    y: 0
+                                },
+                                {
+                                    x: 2,
+                                    y: 1
+                                },
+                                {
+                                    x: 2,
+                                    y: 2
+                                }
+                            ],
+                            contentProps: {
+                                carry: [],
+                                decimalSum: 4,
+                                operands: [
+                                    {
+                                        base: 10,
+                                        position: 2,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     },
                                     {
+                                        base: 10,
                                         position: 2,
-                                        base: 10,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 2,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 3
+                                    x: 3,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 3
+                                    x: 3,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 3
+                                    x: 3,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 1
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
-                                        position: 1,
                                         base: 10,
+                                        position: 1,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     },
                                     {
-                                        position: 1,
                                         base: 10,
+                                        position: 1,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 1,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 4
+                                    x: 4,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 4
+                                    x: 4,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 4
+                                    x: 4,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 0
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
-                                        position: 0,
                                         base: 10,
+                                        position: 0,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     },
                                     {
-                                        position: 0,
                                         base: 10,
+                                        position: 0,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 0,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         }
                     ];
@@ -394,317 +399,325 @@ describe('addition-grid', () => {
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 0
+                                    x: 0,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 0
+                                    x: 0,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 0
+                                    x: 0,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 4
-                                },
                                 carry: [],
+                                decimalSum: 0,
                                 operands: [
                                     {
+                                        base: 10,
                                         isComplementExtension: true,
                                         position: 4,
                                         representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
+                                        valueInDecimal: 0
                                     },
                                     {
+                                        base: 10,
                                         isComplementExtension: true,
                                         position: 4,
                                         representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
+                                        valueInDecimal: 0
                                     }
-                                ]
-                            }
-                        },
-                        {
-                            cells: [
-                                {
-                                    y: 0,
-                                    x: 1
-                                },
-                                {
-                                    y: 1,
-                                    x: 1
-                                },
-                                {
-                                    y: 2,
-                                    x: 1
-                                }
-                            ],
-                            contentProps: {
+                                ],
                                 valueAtPosition: {
                                     base: 10,
+                                    position: 4,
                                     representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 3
+                                    valueInDecimal: 0
+                                }
+                            }
+                        },
+                        {
+                            cells: [
+                                {
+                                    x: 1,
+                                    y: 0
                                 },
+                                {
+                                    x: 1,
+                                    y: 1
+                                },
+                                {
+                                    x: 1,
+                                    y: 2
+                                }
+                            ],
+                            contentProps: {
                                 carry: [],
+                                decimalSum: 0,
                                 operands: [
                                     {
+                                        base: 10,
                                         isComplementExtension: true,
                                         position: 3,
                                         representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
+                                        valueInDecimal: 0
                                     },
                                     {
+                                        base: 10,
                                         isComplementExtension: true,
                                         position: 3,
                                         representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
+                                        valueInDecimal: 0
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 3,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 2
+                                    x: 2,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 2
+                                    x: 2,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 2
+                                    x: 2,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 2
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
+                                        base: 10,
                                         position: 2,
-                                        base: 10,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     },
                                     {
+                                        base: 10,
                                         position: 2,
-                                        base: 10,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 2,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 3
+                                    x: 3,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 3
+                                    x: 3,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 3
+                                    x: 3,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 1
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
+                                        base: 10,
                                         position: 1,
-                                        base: 10,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     },
                                     {
+                                        base: 10,
                                         position: 1,
-                                        base: 10,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 1,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 4
+                                    x: 4,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 4
+                                    x: 4,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 4
+                                    x: 4,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: 0
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
+                                        base: 10,
                                         position: 0,
-                                        base: 10,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     },
                                     {
+                                        base: 10,
                                         position: 0,
-                                        base: 10,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 0,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 5
+                                    x: 5,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 5
+                                    x: 5,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 5
+                                    x: 5,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: -1
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
-                                        position: -1,
                                         base: 10,
+                                        position: -1,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     },
                                     {
+                                        base: 10,
                                         position: -1,
-                                        base: 10,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: -1,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 6
+                                    x: 6,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 6
+                                    x: 6,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 6
+                                    x: 6,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: -2
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
-                                        position: -2,
                                         base: 10,
+                                        position: -2,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     },
                                     {
-                                        position: -2,
                                         base: 10,
+                                        position: -2,
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: -2,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         },
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 7
+                                    x: 7,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 7
+                                    x: 7,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 7
+                                    x: 7,
+                                    y: 2
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '4',
-                                    valueInDecimal: 4,
-                                    position: -3
-                                },
                                 carry: [],
+                                decimalSum: 4,
                                 operands: [
                                     {
-                                        position: -3,
                                         base: 10,
+                                        position: -3,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     },
                                     {
-                                        position: -3,
                                         base: 10,
+                                        position: -3,
                                         representationInBase: '3',
                                         valueInDecimal: 3
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: -3,
+                                    representationInBase: '4',
+                                    valueInDecimal: 4
+                                }
                             }
                         }
                     ];
@@ -747,7 +760,7 @@ describe('addition-grid', () => {
                             },
                             {
                                 content: (
-                                    <div>{'1'}<sub style={{fontSize: 8}}>{0}</sub></div>
+                                    <div>{'1'}<sub style={{ fontSize: 8 }}>{0}</sub></div>
                                 )
                             },
                             {
@@ -797,174 +810,177 @@ describe('addition-grid', () => {
                         {
                             cells: [
                                 {
-                                    y: 0,
-                                    x: 0
+                                    x: 0,
+                                    y: 0
                                 },
                                 {
-                                    y: 1,
-                                    x: 0
+                                    x: 0,
+                                    y: 1
                                 },
                                 {
-                                    y: 2,
-                                    x: 0
+                                    x: 0,
+                                    y: 2
                                 },
                                 {
-                                    y: 3,
-                                    x: 0
+                                    x: 0,
+                                    y: 3
                                 }
                             ],
                             contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 2
-                                },
                                 carry: [
                                     {
+                                        base: 10,
+                                        carrySourcePosition: 2,
                                         position: 3,
-                                        base: 10,
                                         representationInBase: '1',
-                                        valueInDecimal: 1,
-                                        carrySourcePosition: 2
+                                        valueInDecimal: 1
                                     }
                                 ],
+                                decimalSum: 10,
                                 operands: [
                                     {
-                                        position: 2,
                                         base: 10,
-                                        representationInBase: '1',
-                                        valueInDecimal: 1,
                                         carrySourcePosition: 1,
-                                        isCarry: true
-                                    },
-                                    {
-                                        isComplementExtension: true,
+                                        isCarry: true,
                                         position: 2,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    },
-                                    {
-                                        isComplementExtension: true,
-                                        position: 2,
-                                        representationInBase: '(9)',
-                                        valueInDecimal: 9,
-                                        base: 10
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            cells: [
-                                {
-                                    y: 0,
-                                    x: 1
-                                },
-                                {
-                                    y: 1,
-                                    x: 1
-                                },
-                                {
-                                    y: 2,
-                                    x: 1
-                                },
-                                {
-                                    y: 3,
-                                    x: 1
-                                }
-                            ],
-                            contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 1
-                                },
-                                carry: [
-                                    {
-                                        position: 2,
-                                        base: 10,
-                                        representationInBase: '1',
-                                        valueInDecimal: 1,
-                                        carrySourcePosition: 1
-                                    }
-                                ],
-                                operands: [
-                                    {
-                                        position: 1,
-                                        base: 10,
-                                        representationInBase: '1',
-                                        valueInDecimal: 1,
-                                        carrySourcePosition: 0,
-                                        isCarry: true
-                                    },
-                                    {
-                                        isComplementExtension: true,
-                                        position: 1,
-                                        representationInBase: '(0)',
-                                        valueInDecimal: 0,
-                                        base: 10
-                                    },
-                                    {
-                                        isComplementExtension: true,
-                                        position: 1,
-                                        representationInBase: '(9)',
-                                        valueInDecimal: 9,
-                                        base: 10
-                                    }
-                                ]
-                            }
-                        },
-                        {
-                            cells: [
-                                {
-                                    y: 0,
-                                    x: 2
-                                },
-                                {
-                                    y: 1,
-                                    x: 2
-                                },
-                                {
-                                    y: 2,
-                                    x: 2
-                                },
-                                {
-                                    y: 3,
-                                    x: 2
-                                }
-                            ],
-                            contentProps: {
-                                valueAtPosition: {
-                                    base: 10,
-                                    representationInBase: '0',
-                                    valueInDecimal: 0,
-                                    position: 0
-                                },
-                                carry: [
-                                    {
-                                        position: 1,
-                                        base: 10,
-                                        representationInBase: '1',
-                                        valueInDecimal: 1,
-                                        carrySourcePosition: 0
-                                    }
-                                ],
-                                operands: [
-                                    {
-                                        position: 0,
-                                        base: 10,
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     },
                                     {
-                                        position: 0,
                                         base: 10,
+                                        isComplementExtension: true,
+                                        position: 2,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    },
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 2,
+                                        representationInBase: '(9)',
+                                        valueInDecimal: 9
+                                    }
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 2,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
+                            }
+                        },
+                        {
+                            cells: [
+                                {
+                                    x: 1,
+                                    y: 0
+                                },
+                                {
+                                    x: 1,
+                                    y: 1
+                                },
+                                {
+                                    x: 1,
+                                    y: 2
+                                },
+                                {
+                                    x: 1,
+                                    y: 3
+                                }
+                            ],
+                            contentProps: {
+                                carry: [
+                                    {
+                                        base: 10,
+                                        carrySourcePosition: 1,
+                                        position: 2,
+                                        representationInBase: '1',
+                                        valueInDecimal: 1
+                                    }
+                                ],
+                                decimalSum: 10,
+                                operands: [
+                                    {
+                                        base: 10,
+                                        carrySourcePosition: 0,
+                                        isCarry: true,
+                                        position: 1,
+                                        representationInBase: '1',
+                                        valueInDecimal: 1
+                                    },
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 1,
+                                        representationInBase: '(0)',
+                                        valueInDecimal: 0
+                                    },
+                                    {
+                                        base: 10,
+                                        isComplementExtension: true,
+                                        position: 1,
+                                        representationInBase: '(9)',
+                                        valueInDecimal: 9
+                                    }
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 1,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
+                            }
+                        },
+                        {
+                            cells: [
+                                {
+                                    x: 2,
+                                    y: 0
+                                },
+                                {
+                                    x: 2,
+                                    y: 1
+                                },
+                                {
+                                    x: 2,
+                                    y: 2
+                                },
+                                {
+                                    x: 2,
+                                    y: 3
+                                }
+                            ],
+                            contentProps: {
+                                carry: [
+                                    {
+                                        base: 10,
+                                        carrySourcePosition: 0,
+                                        position: 1,
+                                        representationInBase: '1',
+                                        valueInDecimal: 1
+                                    }
+                                ],
+                                decimalSum: 10,
+                                operands: [
+                                    {
+                                        base: 10,
+                                        position: 0,
+                                        representationInBase: '1',
+                                        valueInDecimal: 1
+                                    },
+                                    {
+                                        base: 10,
+                                        position: 0,
                                         representationInBase: '9',
                                         valueInDecimal: 9
                                     }
-                                ]
+                                ],
+                                valueAtPosition: {
+                                    base: 10,
+                                    position: 0,
+                                    representationInBase: '0',
+                                    valueInDecimal: 0
+                                }
                             }
                         }
                     ];

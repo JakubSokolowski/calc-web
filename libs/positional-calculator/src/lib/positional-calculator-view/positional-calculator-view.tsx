@@ -30,7 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: 700,
             margin: 'auto'
         },
-        options: {},
+        options: {
+            paddingTop: theme.spacing(2),
+        },
         actionRow: {
             paddingTop: theme.spacing(1),
             display: 'flex',
