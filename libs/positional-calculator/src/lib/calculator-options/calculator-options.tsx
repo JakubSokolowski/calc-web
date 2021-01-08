@@ -64,6 +64,8 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[1]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || subtractionAlgorithms[0]);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [submitDisabled, setSubmitDisabled] = useState(false);
+
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
         [{valid: true, representation: '9876', dndKey: '1'}, {valid: true, representation: '7123', dndKey: '2'}]
@@ -133,11 +135,16 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         setCanAddOperand(canAdd);
     }, [operands, operation]);
 
+    useEffect(() => {
+        const disabled = !form.isValid || operands.length < 1 || !canCalculate;
+        setSubmitDisabled(disabled);
+    }, [form.isValid, operands, canCalculate]);
 
     return (
         <div>
             <div className={classes.optionsRow}>
                 <TextField
+                    data-testid={'base'}
                     className={classes.base}
                     variant={'outlined'}
                     size={'small'}
@@ -172,7 +179,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                              color={'secondary'}
                              variant={'contained'}
                              className={classes.addOperand}
-                             disabled={!form.isValid || operands.length < 1 || !canCalculate}
+                             disabled={submitDisabled}
                          >
                             {t('positionalCalculator.calculate')}
                         </Button>
