@@ -15,7 +15,8 @@ describe('complement-extension', () => {
                     position: 4
                 },
                 operands: [],
-                carry: []
+                carry: [],
+                decimalSum: 0
             };
 
             const curr: AdditionPositionResult = {
@@ -26,7 +27,8 @@ describe('complement-extension', () => {
                     position: 5
                 },
                 operands: [],
-                carry: []
+                carry: [],
+                decimalSum: 0
             };
 
             // when
@@ -46,7 +48,8 @@ describe('complement-extension', () => {
                     position: 0
                 },
                 operands: [],
-                carry: []
+                carry: [],
+                decimalSum: 0
             };
 
             const curr: AdditionPositionResult = {
@@ -57,7 +60,8 @@ describe('complement-extension', () => {
                     position: 1
                 },
                 operands: [],
-                carry: []
+                carry: [],
+                decimalSum: 0
             };
 
             // when
@@ -103,7 +107,8 @@ describe('complement-extension', () => {
                         representationInBase: '1',
                         position: 1
                     }
-                ]
+                ],
+                decimalSum: 14
             };
 
             const curr: AdditionPositionResult = {
@@ -141,7 +146,8 @@ describe('complement-extension', () => {
                         position: 1
                     }
                 ],
-                carry: []
+                carry: [],
+                decimalSum: 4
             };
 
             // when
@@ -197,7 +203,8 @@ describe('complement-extension', () => {
                         valueInDecimal: 0,
                         base: 2
                     }
-                ]
+                ],
+                decimalSum: 1
             };
 
             const curr: AdditionPositionResult = {
@@ -244,7 +251,8 @@ describe('complement-extension', () => {
                         valueInDecimal: 0,
                         base: 2
                     }
-                ]
+                ],
+                decimalSum: 1
             };
 
             // when
@@ -300,7 +308,8 @@ describe('complement-extension', () => {
                         valueInDecimal: 0,
                         base: 2
                     }
-                ]
+                ],
+                decimalSum: 1
             };
 
             const curr: AdditionPositionResult = {
@@ -356,7 +365,8 @@ describe('complement-extension', () => {
                         valueInDecimal: 0,
                         base: 2
                     }
-                ]
+                ],
+                decimalSum: 2
             };
 
             // when
@@ -404,7 +414,8 @@ describe('complement-extension', () => {
                         position: 4,
                         isCarry: true
                     }
-                ]
+                ],
+                decimalSum: 19
             };
 
             const curr: AdditionPositionResult = {
@@ -444,7 +455,8 @@ describe('complement-extension', () => {
                         position: 5,
                         isCarry: true
                     }
-                ]
+                ],
+                decimalSum: 19
             };
 
             // when

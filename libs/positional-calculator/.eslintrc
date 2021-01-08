@@ -7,7 +7,7 @@
     "no-caller": "warn",
     "no-cond-assign": ["warn", "except-parens"],
     "no-const-assign": "warn",
-    "no-control-regex": "warn",
+    "no-control-regex": 0,
     "no-delete-var": "warn",
     "no-dupe-args": "warn",
     "no-dupe-keys": "warn",
