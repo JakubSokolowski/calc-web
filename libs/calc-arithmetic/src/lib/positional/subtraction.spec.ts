@@ -77,6 +77,43 @@ describe('subtraction', () => {
             expect(result).toEqual(expected);
         });
 
+        it('should return proper result when subtracting max digit for base from min digit for base', () => {
+            // given
+            const base = 10;
+            const position = 0;
+            const minuend: SubtractionOperand = {
+                base,
+                position,
+                representationInBase: '0',
+                valueInDecimal: 0
+            };
+
+            const subtrahend: SubtractionOperand = {
+                base,
+                position,
+                representationInBase: '9',
+                valueInDecimal: 9
+            };
+
+            const operands = [minuend, subtrahend];
+
+            // when
+            const result = subtractDigitsAtPosition(operands, position, base);
+
+            // then
+            const expected: SubtractionPositionResult = {
+                valueAtPosition: {
+                    base,
+                    position,
+                    representationInBase: '1',
+                    valueInDecimal: 1
+                },
+                operands,
+                borrow: { amount: 1, fromPosition: 1, sourcePosition: 0 }
+            };
+            expect(result).toEqual(expected);
+        });
+
         it('should return proper result when subtracting multiple numbers position borrow from non subsequent position', () => {
             // given
             const base = 2;
@@ -295,6 +332,34 @@ describe('subtraction', () => {
     });
 
     describe('#subtractPositionalNumbers', () => {
+        describe('when subtracting two operands', () => {
+           it('should return proper result when subtrahend has fraction part and minuend does not', () => {
+               // given
+               const minuend = fromNumber(10, 10).result;
+               const subtrahend = fromNumber(1.1, 10).result;
+
+               // when
+               const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+               // then
+               const expected = '8.9';
+               expect(result.numberResult.toString()).toEqual(expected);
+           });
+
+            it('should return proper result for operands with fractional parts', () => {
+                // given
+                const minuend = fromNumber(98723.123, 10).result;
+                const subtrahend = fromNumber(7643.87543, 10).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '91079.24757';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
+        });
+
         describe('when subtracting multiple operands', () => {
             it('should return result with proper borrow chain when borrow amount is greater than 1', () => {
                 // given
@@ -321,7 +386,7 @@ describe('subtraction', () => {
                     }
                 ];
                 expect(result.stepResults[0].operands[0].borrowChain).toEqual(expected);
-            })
+            });
         })
     })
 });
