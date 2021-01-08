@@ -73,7 +73,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 0,
                                         base: 10
                                     }
-                                ]
+                                ],
+                                decimalSum: 0
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -118,7 +119,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 0,
                                         base: 10
                                     }
-                                ]
+                                ],
+                                decimalSum: 0
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -170,7 +172,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '8',
                                         valueInDecimal: 8
                                     }
-                                ]
+                                ],
+                                decimalSum: 9
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -229,7 +232,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '9',
                                         valueInDecimal: 9
                                     }
-                                ]
+                                ],
+                                decimalSum: 18
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -280,7 +284,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                decimalSum: 10
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -323,7 +328,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '0',
                                         valueInDecimal: 0
                                     }
-                                ]
+                                ],
+                                decimalSum: 1
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -922,7 +928,7 @@ describe('multiplication-grid', () => {
                                     representationInBase: '8',
                                     isCarry: true
                                 },
-                                shiftedPosition: 2
+                                shiftedPosition: 2,
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -974,23 +980,7 @@ describe('multiplication-grid', () => {
                     // then
                     const expected: CellGroup[] = [
                         {
-                            cells: [
-                                {
-                                    y: 2,
-                                    x: 0,
-                                    preventGroupTrigger: true
-                                },
-                                {
-                                    y: 3,
-                                    x: 0,
-                                    preventGroupTrigger: true
-                                },
-                                {
-                                    y: 4,
-                                    x: 0,
-                                    preventGroupTrigger: false
-                                }
-                            ],
+                            cells: [{ y: 2, x: 0, preventGroupTrigger: true }, { y: 3, x: 0, preventGroupTrigger: true }, { y: 4, x: 0, preventGroupTrigger: false }],
                             contentProps: {
                                 valueAtPosition: {
                                     base: 10,
@@ -1014,7 +1004,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 0,
                                         base: 10
                                     }
-                                ]
+                                ],
+                                decimalSum: 0
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1059,7 +1050,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 0,
                                         base: 10
                                     }
-                                ]
+                                ],
+                                decimalSum: 0
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1103,7 +1095,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                decimalSum: 1
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1146,7 +1139,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '1',
                                         valueInDecimal: 1
                                     }
-                                ]
+                                ],
+                                decimalSum: 2
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1189,7 +1183,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '5',
                                         valueInDecimal: 5
                                     }
-                                ]
+                                ],
+                                decimalSum: 6
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1232,7 +1227,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '2',
                                         valueInDecimal: 2
                                     }
-                                ]
+                                ],
+                                decimalSum: 7
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -1275,7 +1271,8 @@ describe('multiplication-grid', () => {
                                         representationInBase: '0',
                                         valueInDecimal: 0
                                     }
-                                ]
+                                ],
+                                decimalSum: 2
                             },
                             contentBuilder: expect.any(Function)
                         },

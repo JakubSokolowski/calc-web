@@ -18,7 +18,6 @@ describe('AddAtPositionHoverContent', () => {
     });
 
     it('should render', () => {
-        console.log(container.text());
         expect(container).toBeTruthy();
     });
 
