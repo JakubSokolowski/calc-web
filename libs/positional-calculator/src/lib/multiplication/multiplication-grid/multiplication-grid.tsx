@@ -85,19 +85,17 @@ function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCe
     lines.push({ type: LineType.Horizontal, index: resultIndex });
 
     const operandFractionDigitsMax = Math.max(info.numMultiplicandFractionalDigits, info.numMultiplierFractionalDigits);
-    const operandFractionDigitsSum = info.numMultiplicandFractionalDigits + info.numMultiplierFractionalDigits;
 
     if(operandFractionDigitsMax > 0) {
         const verticalLineIndex = info.totalWidth - operandFractionDigitsMax - 1;
         const span: LineDefinition = {from: 0, to: 1};
         lines.push({type: LineType.Vertical, index: verticalLineIndex, span});
-    }
 
-    if(operandFractionDigitsSum > 0) {
-        const resultSepIndex = info.totalWidth - operandFractionDigitsSum -1;
+        const resultSepIndex = info.totalWidth - operandFractionDigitsMax * 2 -1;
         const resultSepSpan: LineDefinition = {from: resultIndex + 1, to: resultIndex + 2};
         lines.push({type: LineType.Vertical, index: resultSepIndex, span: resultSepSpan});
     }
+
 
     return lines;
 }
