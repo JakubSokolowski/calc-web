@@ -98,9 +98,17 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
 
         if (positionResult.borrow) {
             const minuend = digitsPositionLookup[0];
-            const opMinuend = operands[0];
-            borrowFromPosition(base, positionResult.borrow, minuend, opMinuend);
-            borrowToSource(base, positionResult.borrow, minuend, opMinuend);
+            const minuendDigits = operands[0];
+            borrowFromPosition(base, positionResult.borrow, minuend, minuendDigits);
+            borrowToSource(base, positionResult.borrow, minuend, minuendDigits);
+
+            // after transforms, save proper borrow chain to position result
+            const positionResultMinuendDigit = positionResult.operands[0];
+            const digitAfterApplyingBorrow =  minuendDigits.find((d) => d.position === currentPosition);
+
+            if(digitAfterApplyingBorrow) {
+                positionResultMinuendDigit.borrowChain = digitAfterApplyingBorrow.borrowChain
+            }
         }
 
         positionResults.push(positionResult);
@@ -121,10 +129,10 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
     };
 }
 
-function borrowFromPosition(base: number, borrow: Borrow, lookupMinuend: Record<number, SubtractionOperand>, opMinuend: SubtractionOperand[]) {
+function borrowFromPosition(base: number, borrow: Borrow, minuendLookup: Record<number, SubtractionOperand>, minuendDigits: SubtractionOperand[]): void {
     const { fromPosition, amount } = borrow;
 
-    const beforeBorrow: Digit = { ...lookupMinuend[fromPosition] };
+    const beforeBorrow: Digit = { ...minuendLookup[fromPosition] };
     const valueBeforeBorrow = beforeBorrow.valueInDecimal;
 
     const valueAfterBorrow = valueBeforeBorrow - amount;
@@ -135,18 +143,18 @@ function borrowFromPosition(base: number, borrow: Borrow, lookupMinuend: Record<
         representationInBase: representationAfterBorrow
     };
 
-    const positionIdx = opMinuend.findIndex((d) => d.position === fromPosition);
+    const positionIdx = minuendDigits.findIndex((d) => d.position === fromPosition);
     if (positionIdx >= 0) {
-        if (opMinuend[positionIdx].borrowChain) {
-            opMinuend[positionIdx].borrowChain.push(afterBorrow);
+        if (minuendDigits[positionIdx].borrowChain) {
+            minuendDigits[positionIdx].borrowChain.push(afterBorrow);
         } else {
-            opMinuend[positionIdx].borrowChain = [beforeBorrow, afterBorrow];
+            minuendDigits[positionIdx].borrowChain = [beforeBorrow, afterBorrow];
         }
     }
-    lookupMinuend[fromPosition] = { ...afterBorrow };
+    minuendLookup[fromPosition] = { ...afterBorrow };
 }
 
-function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<number, SubtractionOperand>, opMinuend: SubtractionOperand[]) {
+function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<number, SubtractionOperand>, opMinuend: SubtractionOperand[]): void {
     const { sourcePosition, amount, fromPosition } = borrow;
 
     const beforeBorrow: Digit = { ...lookupMinuend[sourcePosition] };
@@ -164,6 +172,7 @@ function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<numb
     };
 
     const positionIdx = opMinuend.findIndex((d) => d.position === sourcePosition);
+
     if (positionIdx >= 0) {
         if (opMinuend[positionIdx].borrowChain) {
             opMinuend[positionIdx].borrowChain.push(afterBorrow);
@@ -171,6 +180,7 @@ function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<numb
             opMinuend[positionIdx].borrowChain = [beforeBorrow, afterBorrow];
         }
     }
+
     lookupMinuend[sourcePosition] = { ...afterBorrow };
 }
 
