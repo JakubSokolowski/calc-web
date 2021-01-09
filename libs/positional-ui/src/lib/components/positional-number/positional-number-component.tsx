@@ -9,6 +9,7 @@ interface P {
     representation: string;
     tooltipBase?: number;
     className?: string;
+    showAsComplement?: boolean;
 }
 
 function formatWithLatexSpaces(rep: string): string {
@@ -16,11 +17,11 @@ function formatWithLatexSpaces(rep: string): string {
     return replaceAll(rep, ' ', hardSpace)
 }
 
-export const PositionalNumberComponent: FC<P>  = ({base, representation, tooltipBase, className}) => {
+export const PositionalNumberComponent: FC<P>  = ({base, representation, tooltipBase, showAsComplement, className}) => {
 
     const formattedRepresentation = formatWithLatexSpaces(representation);
 
-    if(tooltipBase) {
+    if(tooltipBase && !showAsComplement) {
         const tooltipRes = fromString(representation, base, tooltipBase).result;
         const formattedTooltipRes = formatWithLatexSpaces(tooltipRes.valueInBase);
 

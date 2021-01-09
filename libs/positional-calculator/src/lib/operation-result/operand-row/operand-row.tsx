@@ -10,6 +10,7 @@ interface P {
     result: PositionalNumber;
     joinSymbol: string;
     tooltipBase: number;
+    showAsComplement?: boolean;
 }
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -17,7 +18,8 @@ const useStyles = makeStyles((theme: Theme) =>
         row: {
             display: 'flex',
             flexDirection: 'row',
-            flexWrap: 'wrap'
+            flexWrap: 'wrap',
+            paddingTop: theme.spacing(0.5)
         },
         operand: {
             padding: '2px'
@@ -28,7 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result }) => {
+export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, showAsComplement }) => {
     const classes = useStyles();
     const operandsWithSymbols = [];
 
@@ -37,9 +39,10 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result })
             <PositionalNumberComponent
                 className={classes.operand}
                 base={op.base}
-                representation={op.valueInBase}
+                representation={showAsComplement ? op.complement.toString() : op.valueInBase}
                 tooltipBase={tooltipBase}
                 key={index}
+                showAsComplement={showAsComplement}
             />
         );
 
@@ -59,8 +62,9 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result })
         <PositionalNumberComponent
             className={classes.operand}
             base={result.base}
-            representation={result.valueInBase}
+            representation={showAsComplement ? result.complement.toString() : result.valueInBase}
             tooltipBase={tooltipBase}
+            showAsComplement={showAsComplement}
         />
     );
 
@@ -75,6 +79,17 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result })
             {operandsWithSymbols}
             {equalSign}
             {res}
+            {
+                showAsComplement && <div className="non-complement-result">
+                    {equalSign}
+                    <PositionalNumberComponent
+                        className={classes.operand}
+                        base={result.base}
+                        representation={result.valueInBase}
+                        tooltipBase={tooltipBase}
+                    />
+                </div>
+            }
         </div>
     );
 };

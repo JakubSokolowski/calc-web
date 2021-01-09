@@ -1,16 +1,32 @@
 import React, { FC } from 'react';
-import { ComplementConversionResult } from '@calc/calc-arithmetic';
+import { PositionalNumber } from '@calc/calc-arithmetic';
 import { InlineMath } from 'react-katex';
+import { makeStyles } from '@material-ui/core/styles';
+import { createStyles, Theme } from '@material-ui/core';
 
 interface P {
-    result: ComplementConversionResult;
+    number: PositionalNumber;
 }
 
-export const ComplementResult: FC<P> = ({ result }) => {
-    const num = `${result.inputNumber.toString()}_{${result.inputNumber.base}}`;
-    const math = `\\overline{${num}}=${result.inputNumber.complement.toString()}`;
+
+const useStyles = makeStyles((theme: Theme) =>
+    createStyles({
+        row: {
+            display: 'flex',
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+            paddingTop: theme.spacing(0.5)
+        }
+    })
+);
+
+export const ComplementResult: FC<P> = ({ number }) => {
+    const classes = useStyles();
+
+    const num = `${number.toString()}_{${number.base}}`;
+    const math = `\\overline{${num}}=${number.complement.toString()}`;
     return (
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div className={classes.row}>
             <InlineMath math={math}/>
         </div>
     );

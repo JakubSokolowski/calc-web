@@ -5,11 +5,11 @@ import { getComplementWithDetails } from '@calc/calc-arithmetic';
 
 describe('ComplementConverterInput', () => {
     let container;
-    const result = getComplementWithDetails('1234', 10);
+    const number = getComplementWithDetails('1234', 10).inputNumber;
 
     beforeEach(() => {
         container = mount(
-            <ComplementResult result={result}/>
+            <ComplementResult number={number}/>
         );
     });
 
