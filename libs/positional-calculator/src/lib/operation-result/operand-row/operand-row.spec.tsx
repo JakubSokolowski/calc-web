@@ -24,4 +24,22 @@ describe('OperandRow', () => {
     it('should render', () => {
         expect(container).toBeTruthy();
     });
+
+    it('should render complements when showComplement is true', () => {
+        // when
+        container = mount(
+            <OperandRow
+                result={result.numberResult}
+                operands={result.numberOperands}
+                joinSymbol={'-'}
+                tooltipBase={10}
+                showAsComplement
+            />
+        );
+
+        // then
+        const complementRow = container.find('.non-complement-result');
+
+        expect(complementRow.length).toEqual(1);
+    });
 });

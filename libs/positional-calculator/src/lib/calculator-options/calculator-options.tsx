@@ -1,12 +1,13 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
+    additionAlgorithms,
     algorithmMap,
     allOperations,
     BaseDigits, multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
-    OperationType, subtractionAlgorithms
+    OperationType
 } from '@calc/calc-arithmetic';
 import { useTranslation } from 'react-i18next';
 import { clean, inRangeInclusive } from '@calc/utils';
@@ -61,14 +62,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[0]);
+    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[0]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || additionAlgorithms[0]);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
-        [{valid: true, representation: '12', dndKey: '1'}, {valid: true, representation: '0.0', dndKey: '2'}]
+        [{valid: true, representation: '76', dndKey: '1'}, {valid: true, representation: '-48', dndKey: '2'}]
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);

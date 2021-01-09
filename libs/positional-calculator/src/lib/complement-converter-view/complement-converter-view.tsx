@@ -53,7 +53,7 @@ export const ComplementConverterView: FC = () => {
                 </Section>
                 {result &&
                 <Section title={t('complementConverter.result')}>
-                    <ComplementResult result={result}/>
+                    <ComplementResult number={result.inputNumber}/>
                 </Section>
                 }
                 {result && result.inputNumber.isNegative &&
