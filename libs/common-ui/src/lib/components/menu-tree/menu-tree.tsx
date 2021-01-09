@@ -133,7 +133,7 @@ export function MenuTree(props: P) {
     const { pathname } = useLocation();
     const [expanded, setExpanded] = useState([]);
 
-    const handleClick = (node: TreeNodeProps) => {
+    const handleClick = useCallback((node: TreeNodeProps) => {
         if (node.path) {
             history.push(node.path);
         }
@@ -144,7 +144,7 @@ export function MenuTree(props: P) {
         } else {
             setExpanded((prev) => [...prev, node.path]);
         }
-    };
+    }, [expanded, history]);
 
     useMountEffect(() => {
         if (!expanded.find(id => id === pathname)) {
