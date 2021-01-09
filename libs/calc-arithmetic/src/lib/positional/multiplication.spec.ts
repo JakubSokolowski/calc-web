@@ -490,6 +490,20 @@ describe('multiplication', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        it('should multiply number by 0.0', () => {
+            // given
+            const base = 10;
+            const multiplicand = fromStringDirect('12', base).result;
+            const multiplier = fromStringDirect('0.0', base).result;
+
+            // when
+            const result = multiplyPositionalNumbers([multiplicand, multiplier]);
+
+            // then
+            const expected = '0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
         it('should multiply number by 0.1', () => {
             // given
             const base = 10;

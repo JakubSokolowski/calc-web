@@ -3,7 +3,7 @@ import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
     algorithmMap,
     allOperations,
-    BaseDigits,
+    BaseDigits, multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
     OperationType, subtractionAlgorithms
@@ -61,14 +61,14 @@ const useStyles = makeStyles((theme: Theme) =>
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[1]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || subtractionAlgorithms[0]);
+    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[0]);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
-        [{valid: true, representation: '10', dndKey: '1'}, {valid: true, representation: '1.1', dndKey: '2'}]
+        [{valid: true, representation: '12', dndKey: '1'}, {valid: true, representation: '0.0', dndKey: '2'}]
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
