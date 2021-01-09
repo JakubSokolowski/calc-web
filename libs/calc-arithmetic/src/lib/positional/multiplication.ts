@@ -138,7 +138,7 @@ function adjustForMultiplierFraction(additionResult: AdditionResult, multiplierR
     if (numFractionDigits < 1) return additionResult;
 
     const shiftedDigits = shiftRight(additionResult.resultDigits, numFractionDigits);
-    const trimmedDigits = trimEndByPredicate(shiftedDigits, (digit) => digit.valueInDecimal ===0);
+    const trimmedDigits = trimEndByPredicate(shiftedDigits, (digit) => digit.position < -1 && digit.valueInDecimal === 0);
     const shiftedNum = fromDigits(trimmedDigits, additionResult.numberResult.isNegative).result;
 
     return {

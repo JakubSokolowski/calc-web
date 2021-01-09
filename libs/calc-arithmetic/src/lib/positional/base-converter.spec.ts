@@ -274,6 +274,36 @@ describe('base-converter', () => {
     describe('StandardBaseConverter fromStringDirect tests', () => {
         const BaseConverter = new StandardBaseConverter();
 
+        it('converts 0', () => {
+            // given
+            const input = '0';
+            const inputBase = 10;
+            const expectedValue = new BigNumber(0);
+
+            // when
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
+            const result = conv.result;
+
+            // then
+            expect(result.valueInBase).toEqual(input);
+            expect(result.decimalValue).toEqual(expectedValue);
+        });
+
+        it('converts floating 0.0', () => {
+            // given
+            const input = '0.0';
+            const inputBase = 10;
+            const expectedValue = new BigNumber(0.0);
+
+            // when
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
+            const result = conv.result;
+
+            // then
+            expect(result.valueInBase).toEqual(input);
+            expect(result.decimalValue).toEqual(expectedValue);
+        });
+
         it('converts positive base 2 integer', () => {
             // given
             const input = '11001';
