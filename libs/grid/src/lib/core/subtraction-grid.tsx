@@ -50,27 +50,30 @@ export function borrowsToCellConfig(result: SubtractionResult): GridCellConfig[]
         positionIndexLookup[posDigit.position] = index + 1;
     });
 
-    let mostCarriesPerPosition = 0;
+    let mostBorrowsPerPosition = 0;
 
-    result.operands[0].forEach((posResult, index) => {
-        if (posResult.borrowChain) {
-            posResult.borrowChain.slice(1).forEach((borrow) => {
+    const [minuend] = result.operands;
+
+    minuend.forEach((minuendDigit) => {
+        if (minuendDigit.borrowChain) {
+            const [, ...borrows] = minuendDigit.borrowChain;
+            borrows.forEach((borrow) => {
                 if (positionBorrowLookup[borrow.position]) {
                     positionBorrowLookup[borrow.position].push(borrow);
                 } else {
                     positionBorrowLookup[borrow.position] = [borrow];
                 }
 
-                const numCarries = positionBorrowLookup[borrow.position].length;
+                const numBorrows = positionBorrowLookup[borrow.position].length;
 
-                if (mostCarriesPerPosition < numCarries) {
-                    mostCarriesPerPosition = numCarries;
+                if (mostBorrowsPerPosition < numBorrows) {
+                    mostBorrowsPerPosition = numBorrows;
                 }
             });
         }
     });
 
-    const emptyCarryGrid = buildEmptyGrid(width, mostCarriesPerPosition);
+    const emptyCarryGrid = buildEmptyGrid(width, mostBorrowsPerPosition);
 
     Object.entries(positionBorrowLookup).forEach(([strPosition, positionBorrows]) => {
         const numPosition = parseInt(strPosition);
