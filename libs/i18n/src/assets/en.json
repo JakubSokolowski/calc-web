@@ -87,6 +87,20 @@
         "subtractionDetails": "Subtraction Details",
         "multiplicationDetails": "Multiplication Details"
     },
+    "operations": {
+        "addition": {
+            "title": "Addition",
+            "default": "Default"
+        },
+        "subtraction": {
+            "title": "Subtraction",
+            "default": "Default"
+        },
+        "multiplication": {
+            "title": "Multiplication",
+            "default": "Default"
+        }
+    },
     "sandbox": {
         "title": "Sandbox",
         "wasm": "Wasm Demo"

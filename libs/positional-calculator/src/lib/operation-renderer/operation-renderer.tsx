@@ -30,12 +30,14 @@ export const OperationRenderer: FC<OperationTemplate<AlgorithmType>> = ({base, o
 
     const opParams: OperationParams<AlgorithmType> = {
         algorithm: {
-            type: algorithm
+            type: algorithm,
+            tKey: ''
         },
         operation: {
             type: operation,
             minOperands: 0,
-            maxOperands: 10
+            maxOperands: 10,
+            tKey: ''
         },
         operands: nums,
         base

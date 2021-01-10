@@ -91,6 +91,20 @@
         "title": "Sandbox",
         "wasm": "Wasm Demo"
     },
+    "operations": {
+        "addition": {
+            "title": "Dodawanie",
+            "default": "Domyślny"
+        },
+        "subtraction": {
+            "title": "Odejmowanie",
+            "default": "Domyślny"
+        },
+        "multiplication": {
+            "title": "Mnożenie",
+            "default": "Domyślny"
+        }
+    },
     "routes": {
         "home": "Strona główna",
         "tools": {

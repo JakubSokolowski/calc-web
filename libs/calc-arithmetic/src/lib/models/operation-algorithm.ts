@@ -16,6 +16,7 @@ export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
 
 export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
+    tKey: string;
     allowedBases?: number[];
 
 }
@@ -24,19 +25,22 @@ export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>
 
 export const additionAlgorithms: OperationAlgorithm<AdditionType>[] = [
     {
-        type: AdditionType.Default
+        type: AdditionType.Default,
+        tKey: 'operations.addition.default'
     }
 ];
 
 export const subtractionAlgorithms: OperationAlgorithm<SubtractionType>[] = [
     {
-        type: SubtractionType.Default
+        type: SubtractionType.Default,
+        tKey: 'operations.subtraction.default'
     },
 ];
 
 export const multiplicationAlgorithms: OperationAlgorithm<MultiplicationType>[] = [
     {
-        type: MultiplicationType.Default
+        type: MultiplicationType.Default,
+        tKey: 'operations.multiplication.default'
     },
 ];
 
