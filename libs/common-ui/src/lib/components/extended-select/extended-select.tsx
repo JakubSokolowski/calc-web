@@ -3,6 +3,7 @@ import { createStyles, IconButton, MenuItem, TextField, Theme, Tooltip } from '@
 import HelpIcon from '@material-ui/icons/Help';
 import { makeStyles } from '@material-ui/core/styles';
 import { ExtendedOption } from '../../core/models/extended-option';
+import { useTranslation } from 'react-i18next';
 
 
 interface P<T> {
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { children?: ReactNode }) => {
+    const {t} = useTranslation();
     const {options, onChange, value, label} = props;
     const classes = useStyles();
 
@@ -48,7 +50,7 @@ export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { childre
             <MenuItem key={option.type} value={option.type} disabled={option.disallowed}>
                 <div className={classes.item}>
                     <div>
-                        {option.type}
+                        {t(option.tKey)}
                     </div>
                     <div className={classes.spacer}/>
                     {

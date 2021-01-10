@@ -406,7 +406,6 @@ describe('conversion-helpers', () => {
 
             // when
             const result = arbitraryIntegralToDecimal(input, base);
-            console.log(result);
 
             // when
             expect(result).toEqual(expected);

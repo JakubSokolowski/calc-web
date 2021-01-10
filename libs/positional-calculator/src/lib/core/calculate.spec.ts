@@ -17,12 +17,14 @@ describe('calculate', () => {
         operation: {
             type: OperationType.Addition,
             maxOperands: 10,
-            minOperands: 1
+            minOperands: 1,
+            tKey: 'operations.addition.title'
         },
         base: 10,
         operands: [...operands],
         algorithm: {
-            type: AdditionType.Default
+            type: AdditionType.Default,
+            tKey: 'operations.addition.default'
         }
     };
 
@@ -32,7 +34,8 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: 'SomeType' as OperationType
+                type: 'SomeType' as OperationType,
+                tKey: ''
             };
 
             const params = { ...baseParams, operation: { ...operation } } as OperationParams<AlgorithmType>;
@@ -51,11 +54,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Addition
+                type: OperationType.Addition,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<AdditionType> = {
-                type: AdditionType.Default
+                type: AdditionType.Default,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
@@ -77,11 +82,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Addition
+                type: OperationType.Addition,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<AdditionType> = {
-                type: 'NotSupported' as AdditionType
+                type: 'NotSupported' as AdditionType,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
@@ -103,11 +110,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Subtraction
+                type: OperationType.Subtraction,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<SubtractionType> = {
-                type: SubtractionType.Default
+                type: SubtractionType.Default,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
@@ -129,11 +138,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Subtraction
+                type: OperationType.Subtraction,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<SubtractionType> = {
-                type: 'NotSupported' as SubtractionType
+                type: 'NotSupported' as SubtractionType,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
@@ -155,11 +166,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Multiplication
+                type: OperationType.Multiplication,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<MultiplicationType> = {
-                type: MultiplicationType.Default
+                type: MultiplicationType.Default,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
@@ -181,11 +194,13 @@ describe('calculate', () => {
             const operation: Operation = {
                 maxOperands: 10,
                 minOperands: 2,
-                type: OperationType.Multiplication
+                type: OperationType.Multiplication,
+                tKey: ''
             };
 
             const algorithm: OperationAlgorithm<MultiplicationType> = {
-                type: 'NotSupported' as MultiplicationType
+                type: 'NotSupported' as MultiplicationType,
+                tKey: ''
             };
 
             const params: OperationParams<AlgorithmType> = {
