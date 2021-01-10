@@ -29,6 +29,8 @@ import { flatten } from 'lodash';
 import { MultiplyRowDetails } from '../multiply-row-result/multiply-row-result';
 import { MultiplyPositionDetails } from '../multiply-position-result/multiply-position-details';
 
+export type MultiplicationCellProps = MultiplicationRowResult | MultiplicationPositionResult | AdditionPositionResult;
+
 export function buildMultiplicationGrid(result: MultiplicationResult): HoverOperationGrid {
     const base = result.resultDigits[0].base;
     const info = extractMultiplicationResultMeta(result);
@@ -95,7 +97,6 @@ function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCe
         const resultSepSpan: LineDefinition = {from: resultIndex + 1, to: resultIndex + 2};
         lines.push({type: LineType.Vertical, index: resultSepIndex, span: resultSepSpan});
     }
-
 
     return lines;
 }

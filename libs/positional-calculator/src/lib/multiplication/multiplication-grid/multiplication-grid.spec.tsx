@@ -1,7 +1,13 @@
 import React from 'react';
 import { CellGroup, CellPosition, GridCellConfig, GridLine, HoverOperationGrid, LineType } from '@calc/grid';
-import { fromStringDirect, multiplyPositionalNumbers } from '@calc/calc-arithmetic';
-import { buildMultiplicationGrid } from './multiplication-grid';
+import {
+    AdditionPositionResult,
+    fromStringDirect,
+    MultiplicationPositionResult,
+    MultiplicationRowResult,
+    multiplyPositionalNumbers
+} from '@calc/calc-arithmetic';
+import { buildMultiplicationGrid, MultiplicationCellProps } from './multiplication-grid';
 
 describe('multiplication-grid', () => {
     describe('#buildMultiplicationGrid', () => {
@@ -31,7 +37,7 @@ describe('multiplication-grid', () => {
 
                 it('should return proper hover groups with position addition info', () => {
                     // then
-                    const expected: CellGroup[] = [
+                    const expected: CellGroup<MultiplicationCellProps>[] = [
                         {
                             cells: [
                                 {
@@ -416,8 +422,9 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 9
                                     }
                                 ],
-                                valueAtPosition: {},
+                                valueAtPosition: {} as any,
                                 operands: [],
+                                decimalProduct: 0,
                                 multiplier: {
                                     position: 0,
                                     base: 10,
@@ -454,7 +461,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '8',
                                             isCarry: true
                                         },
-                                        shiftedPosition: 0
+                                        shiftedPosition: 0,
+                                        decimalProduct: 81
                                     },
                                     {
                                         valueAtPosition: {
@@ -493,7 +501,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '8',
                                             isCarry: true
                                         },
-                                        shiftedPosition: 1
+                                        shiftedPosition: 1,
+                                        decimalProduct: 89
                                     }
                                 ],
                                 resultDigits: [
@@ -604,7 +613,7 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 9
                                     }
                                 ],
-                                valueAtPosition: {},
+                                valueAtPosition: {} as any,
                                 operands: [],
                                 multiplier: {
                                     position: 1,
@@ -642,7 +651,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '8',
                                             isCarry: true
                                         },
-                                        shiftedPosition: 1
+                                        shiftedPosition: 1,
+                                        decimalProduct: 81,
                                     },
                                     {
                                         valueAtPosition: {
@@ -671,7 +681,7 @@ describe('multiplication-grid', () => {
                                                 valueInDecimal: 8,
                                                 representationInBase: '8',
                                                 isCarry: true
-                                            }
+                                            },
                                         ],
                                         carry: {
                                             position: 2,
@@ -681,7 +691,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '8',
                                             isCarry: true
                                         },
-                                        shiftedPosition: 2
+                                        shiftedPosition: 2,
+                                        decimalProduct: 89
                                     }
                                 ],
                                 resultDigits: [
@@ -705,7 +716,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 1,
                                         position: 0
                                     }
-                                ]
+                                ],
+                                decimalProduct: 0
                             },
                             contentBuilder: expect.any(Function)
                         },
@@ -756,7 +768,8 @@ describe('multiplication-grid', () => {
                                     representationInBase: '8',
                                     isCarry: true
                                 },
-                                shiftedPosition: 0
+                                shiftedPosition: 0,
+                                decimalProduct: 81
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -816,7 +829,8 @@ describe('multiplication-grid', () => {
                                     representationInBase: '8',
                                     isCarry: true
                                 },
-                                shiftedPosition: 1
+                                shiftedPosition: 1,
+                                decimalProduct: 89
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -868,7 +882,8 @@ describe('multiplication-grid', () => {
                                     representationInBase: '8',
                                     isCarry: true
                                 },
-                                shiftedPosition: 1
+                                shiftedPosition: 1,
+                                decimalProduct: 81
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -929,6 +944,7 @@ describe('multiplication-grid', () => {
                                     isCarry: true
                                 },
                                 shiftedPosition: 2,
+                                decimalProduct: 89
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -978,7 +994,7 @@ describe('multiplication-grid', () => {
 
                 it('should return proper hover groups with position addition info', () => {
                     // then
-                    const expected: CellGroup[] = [
+                    const expected: CellGroup<MultiplicationCellProps>[] = [
                         {
                             cells: [{ y: 2, x: 0, preventGroupTrigger: true }, { y: 3, x: 0, preventGroupTrigger: true }, { y: 4, x: 0, preventGroupTrigger: false }],
                             contentProps: {
@@ -1376,7 +1392,7 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 8
                                     }
                                 ],
-                                valueAtPosition: {},
+                                valueAtPosition: {} as any,
                                 operands: [],
                                 multiplier: {
                                     position: -1,
@@ -1384,6 +1400,7 @@ describe('multiplication-grid', () => {
                                     representationInBase: '9',
                                     valueInDecimal: 9
                                 },
+                                decimalProduct: 0,
                                 rowPositionResults: [
                                     {
                                         valueAtPosition: {
@@ -1414,7 +1431,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '7',
                                             isCarry: true
                                         },
-                                        shiftedPosition: -2
+                                        shiftedPosition: -2,
+                                        decimalProduct: 72
                                     },
                                     {
                                         valueAtPosition: {
@@ -1453,7 +1471,8 @@ describe('multiplication-grid', () => {
                                             representationInBase: '2',
                                             isCarry: true
                                         },
-                                        shiftedPosition: -1
+                                        shiftedPosition: -1,
+                                        decimalProduct: 25
                                     },
                                     {
                                         valueAtPosition: {
@@ -1492,6 +1511,7 @@ describe('multiplication-grid', () => {
                                             representationInBase: '1',
                                             isCarry: true
                                         },
+                                        decimalProduct: 11,
                                         shiftedPosition: 0
                                     }
                                 ],
@@ -1624,7 +1644,8 @@ describe('multiplication-grid', () => {
                                         valueInDecimal: 8
                                     }
                                 ],
-                                valueAtPosition: {},
+                                decimalProduct: 0,
+                                valueAtPosition: {} as any,
                                 operands: [],
                                 multiplier: {
                                     position: 0,
@@ -1662,6 +1683,7 @@ describe('multiplication-grid', () => {
                                             representationInBase: '7',
                                             isCarry: true
                                         },
+                                        decimalProduct: 72,
                                         shiftedPosition: -1
                                     },
                                     {
@@ -1701,6 +1723,7 @@ describe('multiplication-grid', () => {
                                             representationInBase: '2',
                                             isCarry: true
                                         },
+                                        decimalProduct: 25,
                                         shiftedPosition: 0
                                     },
                                     {
@@ -1732,6 +1755,7 @@ describe('multiplication-grid', () => {
                                                 isCarry: true
                                             }
                                         ],
+                                        decimalProduct: 11,
                                         carry: {
                                             position: 2,
                                             carrySourcePosition: 1,
@@ -1821,7 +1845,8 @@ describe('multiplication-grid', () => {
                                     representationInBase: '7',
                                     isCarry: true
                                 },
-                                shiftedPosition: -2
+                                shiftedPosition: -2,
+                                decimalProduct: 72,
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -1881,6 +1906,7 @@ describe('multiplication-grid', () => {
                                     representationInBase: '2',
                                     isCarry: true
                                 },
+                                decimalProduct: 25,
                                 shiftedPosition: -1
                             },
                             popoverPlacement: 'bottom',
@@ -1933,6 +1959,7 @@ describe('multiplication-grid', () => {
                                         isCarry: true
                                     }
                                 ],
+                                decimalProduct: 11,
                                 carry: {
                                     position: 2,
                                     carrySourcePosition: 1,
@@ -1993,7 +2020,8 @@ describe('multiplication-grid', () => {
                                     representationInBase: '7',
                                     isCarry: true
                                 },
-                                shiftedPosition: -1
+                                shiftedPosition: -1,
+                                decimalProduct: 72,
                             },
                             popoverPlacement: 'bottom',
                             contentBuilder: expect.any(Function)
@@ -2053,6 +2081,7 @@ describe('multiplication-grid', () => {
                                     representationInBase: '2',
                                     isCarry: true
                                 },
+                                decimalProduct: 25,
                                 shiftedPosition: 0
                             },
                             popoverPlacement: 'bottom',
@@ -2113,6 +2142,7 @@ describe('multiplication-grid', () => {
                                     representationInBase: '1',
                                     isCarry: true
                                 },
+                                decimalProduct: 11,
                                 shiftedPosition: 1
                             },
                             popoverPlacement: 'bottom',

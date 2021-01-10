@@ -80,7 +80,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
             {equalSign}
             {res}
             {
-                showAsComplement && <div className="non-complement-result">
+                showAsComplement && <span style={{display: 'inline-flex'}} className="non-complement-result">
                     {equalSign}
                     <PositionalNumberComponent
                         className={classes.operand}
@@ -88,7 +88,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
                         representation={result.valueInBase}
                         tooltipBase={tooltipBase}
                     />
-                </div>
+                </span>
             }
         </div>
     );
