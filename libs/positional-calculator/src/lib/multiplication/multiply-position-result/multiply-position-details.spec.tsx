@@ -6,10 +6,10 @@ import { MultiplyPositionDetails } from './multiply-position-details';
 describe('MultiplyPositionDetails', () => {
     let container;
 
-    const a = fromNumber(10, 10).result;
-    const b = fromNumber(5, 10).result;
+    const a = fromNumber(76, 10).result;
+    const b = fromNumber(9, 10).result;
     const res = multiplyPositionalNumbers([a, b]);
-    const rowRes = res.stepResults[0].rowPositionResults[0];
+    const rowRes = res.stepResults[0].rowPositionResults[1];
 
     beforeEach(() => {
         container = mount(

@@ -36,7 +36,8 @@ describe('multiplication', () => {
                     representationInBase: '6'
                 },
                 shiftedPosition: 0,
-                operands: [multiplicand, multiplier]
+                operands: [multiplicand, multiplier],
+                decimalProduct: 6
             };
             expect(result).toEqual(expected);
         });
@@ -80,7 +81,8 @@ describe('multiplication', () => {
                     carrySourcePosition: 0,
                     representationInBase: '1',
                     valueInDecimal: 1
-                }
+                },
+                decimalProduct: 12
             };
             expect(result).toEqual(expected);
         });
@@ -110,7 +112,7 @@ describe('multiplication', () => {
                 position: position,
                 carrySourcePosition: position - 1,
                 representationInBase: '6',
-                valueInDecimal: 6
+                valueInDecimal: 6,
             };
 
             // when
@@ -154,7 +156,8 @@ describe('multiplication', () => {
                     position: 1,
                     representationInBase: '8',
                     valueInDecimal: 8
-                }
+                },
+                decimalProduct: 18
             };
             expect(result).toEqual(expected);
         });
@@ -190,7 +193,8 @@ describe('multiplication', () => {
                     representationInBase: '6'
                 },
                 shiftedPosition: 3,
-                operands: [multiplicand, multiplier]
+                operands: [multiplicand, multiplier],
+                decimalProduct: 6
             };
             expect(result).toEqual(expected);
         });

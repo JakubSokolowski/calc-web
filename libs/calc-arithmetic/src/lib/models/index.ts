@@ -61,6 +61,7 @@ export interface SubtractionPositionResult extends PositionResult<SubtractionOpe
 }
 
 export interface MultiplicationPositionResult extends PositionResult<MultiplicationOperand> {
+    decimalProduct: number;
     carry?: MultiplicationOperand;
     shiftedPosition?: number;
 }
@@ -70,6 +71,7 @@ export interface MultiplicationRowResult extends PositionResult<MultiplicationOp
     multiplier: MultiplicationOperand;
     rowPositionResults: MultiplicationPositionResult[];
     resultDigits: MultiplicationOperand[];
+    decimalProduct: number;
 }
 
 export type SubtractionResult = OperationResult<SubtractionOperand, SubtractionPositionResult>;

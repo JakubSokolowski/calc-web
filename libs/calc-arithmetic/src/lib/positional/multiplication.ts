@@ -18,7 +18,7 @@ import { trimEndByPredicate } from '@calc/utils';
 export function multiplyDigits(
     multiplicand: MultiplicationOperand,
     multiplier: MultiplicationOperand,
-    carry?: MultiplicationOperand
+    carry?: MultiplicationOperand,
 ): MultiplicationPositionResult {
     const base = multiplicand.base;
     const position = multiplicand.position;
@@ -35,13 +35,13 @@ export function multiplyDigits(
         base,
         representationInBase: representationInBase,
         valueInDecimal: decimalPositionValue,
-        position: position
+        position: position,
     };
 
     const operands = [multiplicand, multiplier];
     if (carry) operands.push(carry);
 
-    if (!decimalCarry) return { valueAtPosition, operands: operands, shiftedPosition };
+    if (!decimalCarry) return { valueAtPosition, operands: operands, shiftedPosition, decimalProduct: decimalProductWithCarry };
 
     const carryRep = BaseDigits.getRepresentation(decimalCarry, base);
 
@@ -56,9 +56,10 @@ export function multiplyDigits(
 
     return {
         valueAtPosition,
-        operands: operands,
+        operands,
         carry: nextPositionCarry,
-        shiftedPosition
+        shiftedPosition,
+        decimalProduct: decimalProductWithCarry
     };
 }
 
@@ -86,7 +87,8 @@ export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplie
         operands: [],
         multiplier,
         rowPositionResults: positionResults,
-        resultDigits
+        resultDigits,
+        decimalProduct: 0
     };
 }
 
