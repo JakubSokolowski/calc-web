@@ -5,10 +5,9 @@ import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
 import { makeStyles } from '@material-ui/core/styles';
-import { environment } from '@calc/env';
 import { useLocation } from 'react-router-dom';
-import { NavigationBreadcrumbs } from '../../../../../common-ui/src/lib/components/navigation-breadcrumbs/navigation-breadcrumbs';
 import { RendererMapping } from '../../..';
+import { NavigationBreadcrumbs } from '@calc/common-ui';
 
 export interface DocsProps {
     path: string;
@@ -18,7 +17,6 @@ export interface DocsProps {
 function useQuery() {
     return new URLSearchParams(useLocation().search);
 }
-
 
 export const useStyles = makeStyles((theme: Theme) => {
     return createStyles(
@@ -45,7 +43,6 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const [docPath, setDocPath] = useState(path);
     const markdown = useDocs(docPath);
     const { pathname } = useLocation();
-    const imageUriPrefix = `${environment.deployUrl}/assets/theory/`;
     const classes = useStyles();
     const query = useQuery();
     const ids = extractHeadingIds(markdown);
@@ -58,7 +55,7 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     useEffect(() => {
         const header = query.get('h');
         if (header) {
-            const element = document.getElementById(query.get('h'));
+            const element = document.getElementById(header);
             if (element) scrollTo(element);
         }
     }, [query]);
@@ -80,9 +77,6 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
                 renderMapping={rendererMapping}
                 source={markdown}
                 escapeHtml={false}
-                transformImageUri={(uri) => {
-                    return imageUriPrefix + docPath + '/' + uri;
-                }}
             />
         </Box>
     );
