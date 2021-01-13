@@ -391,7 +391,7 @@ describe('multiplication', () => {
             const multiplier: MultiplicationOperand[] = fromNumber(99, base).result.toDigitsList();
 
             // when
-            const result = multiplyDigitRows(multiplicand, multiplier);
+            const result = multiplyDigitRows(multiplicand, multiplier, false);
 
             // then
             const expected: MultiplicationOperand[] = [
@@ -449,6 +449,34 @@ describe('multiplication', () => {
 
             // then
             const expected = '98901';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should multiply two negative numbers', () => {
+            // given
+            const base = 10;
+            const multiplicand = fromNumber(-999, base).result;
+            const multiplier = fromNumber(-99, base).result;
+
+            // when
+            const result = multiplyPositionalNumbers([multiplicand, multiplier]);
+
+            // then
+            const expected = '98901';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should multiply positive and negative numbers', () => {
+            // given
+            const base = 10;
+            const multiplicand = fromNumber(999, base).result;
+            const multiplier = fromNumber(-99, base).result;
+
+            // when
+            const result = multiplyPositionalNumbers([multiplicand, multiplier]);
+
+            // then
+            const expected = '-98901';
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
