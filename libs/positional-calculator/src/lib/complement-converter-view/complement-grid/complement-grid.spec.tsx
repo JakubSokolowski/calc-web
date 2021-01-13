@@ -63,5 +63,42 @@ describe('#buildComplementGrid', () => {
                 expect(grid.values).toEqual(expected);
             });
         });
+
+        describe('when building grid for complements  complement', () => {
+            let grid: HoverOperationGrid;
+
+            beforeEach(() => {
+                // when
+                const complement = getComplementWithDetails('(9)812.74', 10);
+                grid = buildComplementGrid(complement);
+            });
+
+            it('should return proper grid values', () => {
+                // then
+                const expected: GridCellConfig[][] = [
+                    [{ content: '' }, { content: '' }, { content: '9' }, { content: '9' }, { content: '9' }, { content: '9' }, { content: '9' }],
+                    [{ content: '-' }, { content: '' }, { content: '8' }, { content: '1' }, { content: '2' }, { content: '7' }, { content: '4' }],
+                    [{ content: '' }, { content: '' }, { content: '1' }, { content: '8' }, { content: '7' }, { content: '2' }, { content: '5' }],
+                    [{ content: '+' }, { content: '' }, { content: '' }, { content: '' }, { content: '' }, { content: '' }, { content: '1' }],
+                    [{ content: '' }, { content: '' }, { content: '1' }, { content: '8' }, { content: '7' }, { content: '2' }, { content: '6' }]
+                ];
+                expect(grid.values).toEqual(expected);
+            });
+
+            it('should return proper line config with horizontal line separating subtraction, addition and result', () => {
+                // then
+                const expected: GridLine[] = [
+                    {
+                        index: 1,
+                        type: LineType.Horizontal
+                    },
+                    {
+                        index: 3,
+                        type: LineType.Horizontal
+                    }
+                ];
+                expect(grid.lines).toEqual(expected);
+            });
+        });
     });
 });

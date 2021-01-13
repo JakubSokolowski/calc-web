@@ -1,6 +1,6 @@
 import BigNumber from 'bignumber.js';
 import { fromNumber, fromString, StandardBaseConverter } from './base-converter';
-import { Digit } from '@calc/calc-arithmetic';
+import { Digit, PositionalSourceType } from '@calc/calc-arithmetic';
 
 describe('base-converter', () => {
     describe('StandardBaseConverter fromNumber tests', () => {
@@ -480,8 +480,50 @@ describe('base-converter', () => {
             expect(result.valueInBase).toEqual(expectedValueInBase);
             expect(result.decimalValue).toEqual(expectedValue);
             expect(result.complement.toString()).toEqual(expectedComplement);
-        })
+        });
 
+        it('converts negative complement string', () => {
+            // given
+            const input = '(9)12.8';
+            const inputbase = 10;
+            const expectedValue = new BigNumber(-87.2);
+            const expectedComplement = '(9)12.8';
+            const expectedValueInBase = '-87.2';
+
+            // when
+            const result = BaseConverter.fromStringDirect(input, inputbase)
+                .result;
+
+            // then
+            expect(result.isNegative).toEqual(true);
+            expect(result.valueInBase).toEqual(expectedValueInBase);
+            expect(result.decimalValue).toEqual(expectedValue);
+            expect(result.complement.toString()).toEqual(expectedComplement);
+        });
+
+        it('should set sourceType to ComplementStr when input is complement str', () => {
+            // given
+            const input = '(F)FF.8';
+            const inputbase = 16;
+
+            // when
+            const result = BaseConverter.fromStringDirect(input, inputbase).result;
+
+            // then
+            expect(result.sourceType).toEqual(PositionalSourceType.ComplementStr);
+        });
+
+        it('should set sourceType to RepresentationStr when input is representation str', () => {
+            // given
+            const input = 'FF.8';
+            const inputbase = 16;
+
+            // when
+            const result = BaseConverter.fromStringDirect(input, inputbase).result;
+
+            // then
+            expect(result.sourceType).toEqual(PositionalSourceType.RepresentationStr);
+        });
     });
 
     describe('StandardBaseConverter fromDigitsDirect tests', () => {
@@ -566,6 +608,22 @@ describe('base-converter', () => {
             expect(result.complement.toString()).toEqual(expectedComplement);
         });
 
+        it('sets inputType to Number', () => {
+            // given
+            const input = new BigNumber(25.5);
+            const base = 2;
+            const expected = '11001.1';
+            const expectedComplement = '(0)11001.1';
+
+            // when
+            const result = fromNumber(input, base).result;
+
+            // then
+            expect(result.valueInBase).toEqual(expected);
+            expect(result.sourceType).toEqual(PositionalSourceType.Number);
+            expect(result.complement.toString()).toEqual(expectedComplement);
+        });
+
     });
 
     describe('fromString tests', () => {
@@ -599,6 +657,37 @@ describe('base-converter', () => {
             expect(result.valueInBase).toEqual(expected.toString());
         });
 
+        it('should convert representation str and set input type to RepresentationStr', () => {
+            // given
+            const input = '11010';
+            const inputBase = 2;
+            const outputBase = 10;
+            const expected = new BigNumber(26);
+
+            // when
+            const result = fromString(input, inputBase, outputBase)
+                .result;
+
+            // then
+            expect(result.valueInBase).toEqual(expected.toString());
+            expect(result.sourceType).toEqual(PositionalSourceType.RepresentationStr);
+        });
+
+        it('should convert complement str and set input type to ComplementStr', () => {
+            // given
+            const input = '(0)11010';
+            const inputBase = 2;
+            const outputBase = 10;
+            const expected = new BigNumber(26);
+
+            // when
+            const result = fromString(input, inputBase, outputBase)
+                .result;
+
+            // then
+            expect(result.valueInBase).toEqual(expected.toString());
+            expect(result.sourceType).toEqual(PositionalSourceType.ComplementStr);
+        });
     });
 
 });

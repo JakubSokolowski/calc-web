@@ -1,19 +1,22 @@
 import { fromDigits, fromStringDirect } from './base-converter';
-import { computeComplement } from './complement-converter';
+import { computeComplement, isValidComplementStr, stripComplementExtension } from './complement-converter';
 import { PositionalNumber } from './representations';
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
 import { ComplementConversionResult } from '../models/complement';
 import { strArrayToDigits } from './digits';
+import { splitToDigits, splitToDigitsList } from '../helpers/conversion-helpers';
 
 export function getComplementWithDetails(representation: string, base: number): ComplementConversionResult {
     const input = fromStringDirect(representation, base).result;
+    if (isValidComplementStr(representation, base)) return getComplementsComplement(input);
     if (input.isNegative) {
         return getNegativeNumberComplementWithDetails(input);
     } else {
         return getPositiveNumberComplementWithDetails(input);
     }
 }
+
 
 function getPositiveNumberComplementWithDetails(value: PositionalNumber): ComplementConversionResult {
     return {
@@ -25,6 +28,31 @@ function getPositiveNumberComplementWithDetails(value: PositionalNumber): Comple
         complementDigits: value.complement.toDigitsList().filter(d => !d.isComplementExtension)
     };
 }
+
+function getComplementsComplement(value: PositionalNumber): ComplementConversionResult {
+    const noExtensionStr = stripComplementExtension(value.complement.toString(), value.base);
+    const [integerPart, fractionPart] = splitToDigits(noExtensionStr);
+    const [, , afterSubStrArr, afterAdditionStrArr] = computeComplement(integerPart, fractionPart, value.base);
+
+    const inputDigits = splitToDigitsList(noExtensionStr);
+    const msp = inputDigits[0].position;
+
+    const afterSubtraction = strArrayToDigits(afterSubStrArr, value.base, msp);
+    const complementDigits = strArrayToDigits(afterAdditionStrArr, value.base, msp);
+
+    const one = BaseDigits.getDigit(1, value.base, inputDigits[inputDigits.length - 1].position);
+    const minuendDigits = getMaxForPositions(value.base, msp, inputDigits.length).toDigitsList();
+
+    return {
+        inputDigits,
+        complementDigits,
+        inputNumber: value,
+        afterSubtraction,
+        minuendDigits,
+        one
+    };
+}
+
 
 function getNegativeNumberComplementWithDetails(value: PositionalNumber): ComplementConversionResult {
     const [, , afterSubStrArr] = computeComplement(value.integerPart, value.fractionalPart, value.base);

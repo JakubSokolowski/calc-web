@@ -2,7 +2,10 @@ import React, { FC, useEffect, useState } from 'react';
 import { IconButton, ListItem, ListItemProps, ListItemSecondaryAction, TextField } from '@material-ui/core';
 import CloseIcon from '@material-ui/icons/Close';
 import { useTranslation } from 'react-i18next';
-import { BaseDigits, isValidString } from '@calc/calc-arithmetic';
+import {
+    BaseDigits,
+    isValidComplementOrRepresentationStr,
+} from '@calc/calc-arithmetic';
 
 interface P extends ListItemProps {
     representationStr: string;
@@ -20,7 +23,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
     useEffect(() => {
         if(!BaseDigits.isValidBase(base)) return;
         const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-            if (!isValidString(valueStr, inputBase)) {
+            if (!isValidComplementOrRepresentationStr(valueStr, inputBase)) {
                 return t(
                     'baseConverter.wrongRepresentationStr',
                     { base: inputBase }

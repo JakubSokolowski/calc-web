@@ -1,5 +1,11 @@
 import React, { FC, useCallback, useState } from 'react';
-import { BaseDigits, Conversion, fromString, getComplement, isValidString } from '@calc/calc-arithmetic';
+import {
+    BaseDigits,
+    Conversion,
+    fromString,
+    getComplement,
+    isValidString
+} from '@calc/calc-arithmetic';
 import { SwapOutlined } from '@ant-design/icons/lib';
 import { InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';

@@ -57,6 +57,18 @@ export function isValidComplementStr(str: string, base: number): boolean {
     }
 }
 
+
+/**
+ * Check whether given string can be used to represent complement of
+ * a number.
+ * @param str
+ * @param base
+ */
+export function isValidComplementOrRepresentationStr(str: string, base: number): boolean {
+    return isValidComplementStr(str, base) || isValidString(str, base);
+}
+
+
 /**
  * Checks whether string has delimiter (is floating point string).
  * Accepts delimiters '.' and ','
@@ -170,7 +182,7 @@ export function computeComplement(
     integral: Digits,
     fractional: Digits,
     base: number
-): [Digits, Digits, string[]] {
+): [Digits, Digits, string[], string[]] {
     const digits = integral.digits.concat(fractional.digits);
     const afterSubtraction = digits.map(d => getDigitComplement(d, base));
     const afterAddition = incrementNumber(afterSubtraction, base);
@@ -184,7 +196,8 @@ export function computeComplement(
             ),
             base
         ),
-        afterSubtraction
+        afterSubtraction,
+        afterAddition
     ];
 }
 
@@ -218,6 +231,16 @@ export function complementStrToBaseStr(str: string, base: number) {
     );
     const delimiter = baseDigits[1].length === 0 ? '' : '.';
     return `-${baseDigits[0].toString()}${delimiter}${baseDigits[1].toString()}`;
+}
+
+export function stripComplementExtension(str: string, base: number): string {
+    const numCharsForExtension = base > 36 ? 4 : 3;
+    const noSignStr = str.substr(numCharsForExtension);
+    const isShortenedComplement = noSignStr.startsWith('.');
+
+    if(!isShortenedComplement) return noSignStr.trim();
+    const zero = BaseDigits.getRepresentation(0, base);
+    return `${zero}${noSignStr}`;
 }
 
 
