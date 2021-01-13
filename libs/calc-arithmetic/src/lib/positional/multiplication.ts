@@ -107,7 +107,7 @@ export function extractResultDigitsFromMultiplicationRow(positionResults: Multip
     return [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
 }
 
-export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
+export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[], resultNegative: boolean): MultiplicationResult {
     const positionAscending = [...multiplierRow].reverse();
 
     const rowResults: MultiplicationRowResult[] = positionAscending.map((multiplier) => {
@@ -121,11 +121,12 @@ export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], mult
 
     const sum = addPositionalNumbers(resultNumbers);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
+    const resultWithProperSign = fromDigits(adjustedSum.numberResult.toDigitsList(), resultNegative).result;
 
     return {
         operands: [multiplicandRow, multiplierRow],
         resultDigits: adjustedSum.resultDigits,
-        numberResult: adjustedSum.numberResult,
+        numberResult: resultWithProperSign,
         numberOperands: [],
         addition: adjustedSum,
         stepResults: rowResults,
@@ -151,9 +152,10 @@ function adjustForMultiplierFraction(additionResult: AdditionResult, multiplierR
 }
 
 export function multiplyPositionalNumbers(numbers: PositionalNumber[]): MultiplicationResult {
-    const [multiplicand, multiplier] = numbers.map(d => d.toDigitsList());
-    const [alMultiplicand, alMultiplier] = alignFractions([multiplicand, multiplier]);
-    const result = multiplyDigitRows(alMultiplicand, alMultiplier);
+    const [multiplicand, multiplier] = numbers;
+    const [alMultiplicand, alMultiplier] = alignFractions([multiplicand.toDigitsList(), multiplier.toDigitsList()]);
+    const resultNegative = multiplicand.isNegative !== multiplier.isNegative;
+    const result = multiplyDigitRows(alMultiplicand, alMultiplier, resultNegative);
 
     return {
         ...result,
