@@ -105,24 +105,41 @@ export class NumberComplement implements PositionalRepresentation {
     }
 }
 
+export enum PositionalSourceType {
+    Number= 'number',
+    RepresentationStr = 'representationStr',
+    ComplementStr = 'complementStr'
+}
+
 export class PositionalNumber extends NumberComplement {
     public complement: NumberComplement;
     public decimalValue: BigNumber;
+    public source: PositionalSourceType;
 
     constructor(
         integral: Digits | string[],
         fractional: Digits | string[],
         base: number,
         decimalValue: BigNumber,
-        complement: NumberComplement
+        complement: NumberComplement,
+        inputType: PositionalSourceType
     ) {
         super(integral, fractional, base, decimalValue.isNegative());
         this.decimalValue = decimalValue;
         this.complement = complement;
+        this.source = inputType;
     }
 
     get valueInBase(): string {
         return this.toString();
+    }
+
+    public get sourceType(): PositionalSourceType {
+        return this.source;
+    }
+
+    public set sourceType(input: PositionalSourceType) {
+        this.source = input;
     }
 
     public get sign(): string {

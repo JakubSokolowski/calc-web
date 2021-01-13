@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseDigits, isValidString } from '@calc/calc-arithmetic';
+import { BaseDigits, isValidComplementOrRepresentationStr, isValidString } from '@calc/calc-arithmetic';
 import { FormErrors } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { Button, createStyles, TextField, Theme } from '@material-ui/core';
@@ -59,7 +59,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     const classes = useStyles();
 
     const initialValues: FormValues = {
-        inputStr: '-123.45',
+        inputStr: '(9)123.45',
         inputBase: 10
     };
 
@@ -78,7 +78,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if (!isValidString(valueStr, inputBase)) {
+        if (!isValidComplementOrRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
                 { base: inputBase }

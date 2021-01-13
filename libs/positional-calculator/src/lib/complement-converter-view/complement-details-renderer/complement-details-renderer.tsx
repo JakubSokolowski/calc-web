@@ -23,7 +23,6 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             flexDirection: 'row-reverse'
         }
-
     })
 );
 
@@ -60,7 +59,7 @@ export const ComplementDetailsRenderer = (params: ComplementDetailsRendererParam
 
     return (
         <div>
-            <PaddedGrid desiredWidth={19} values={grid.values} groups={grid.groups} lines={grid.lines} id={gridId}/>
+            <PaddedGrid desiredWidth={24} values={grid.values} groups={grid.groups} lines={grid.lines} id={gridId}/>
             {
                 showDownload &&
                 <div className={classes.actionRow}>

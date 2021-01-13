@@ -3,13 +3,15 @@ import {
     arbitraryFractionToDecimal,
     arbitraryIntegralToDecimal,
     decimalFractionToArbitrary,
-    decimalIntegerToArbitrary, digitsToStr,
+    decimalIntegerToArbitrary,
+    digitsToStr,
     isFloatingPointStr,
-    isValidString, serializeRepresentationStr,
+    isValidString,
+    serializeRepresentationStr,
     splitToDigitsList,
     splitToPartsArr
 } from '../helpers/conversion-helpers';
-import { PositionalNumber } from './representations';
+import { PositionalNumber, PositionalSourceType } from './representations';
 import { Digit } from '../models';
 import { AssociatedBaseConversionDetails } from '../models/associated-base-conversion-details';
 import { complementStrToBaseStr, getComplement, isValidComplementStr } from './complement-converter';
@@ -168,7 +170,7 @@ export class StandardBaseConverter implements BaseConverter {
     public fromNumber(
         num: number | BigNumber,
         resultBase: number,
-        precision = 30
+        precision = 30,
     ): Conversion {
         let decimalValue: BigNumber = new BigNumber(0);
         if (typeof num === 'number') {
@@ -200,7 +202,8 @@ export class StandardBaseConverter implements BaseConverter {
             fractionalPartDigits[0],
             resultBase,
             decimalValue,
-            complement
+            complement,
+            PositionalSourceType.Number
         );
         const conversion = new Conversion();
         conversion.addStage(
@@ -215,15 +218,23 @@ export class StandardBaseConverter implements BaseConverter {
     }
 
     public fromString(
-        valueStr: string,
+        inputStr: string,
         inputBase: number,
         resultBase: number,
         precision = 30
     ): Conversion {
-        if (!isValidString(valueStr, inputBase)) {
-            throw new Error(
-                `The string ${valueStr} does not match the input base ${inputBase}`
-            );
+        let valueStr = inputStr;
+        let inputSourceType = PositionalSourceType.RepresentationStr;
+
+        if(isValidComplementStr(valueStr, inputBase)) {
+            valueStr = complementStrToBaseStr(valueStr, inputBase);
+            inputSourceType = PositionalSourceType.ComplementStr;
+        } else {
+            if (!isValidString(valueStr, inputBase)) {
+                throw new Error(
+                    `The string ${valueStr} does not match the input base ${inputBase}`
+                );
+            }
         }
 
         const conversion = new Conversion();
@@ -238,15 +249,16 @@ export class StandardBaseConverter implements BaseConverter {
             digits[1],
             10,
             decimalValue,
-            complement
+            complement,
+            inputSourceType
         );
 
-        conversion.addStage(
-            new ConversionToDecimal([valueStr, inputBase], inputInDecimal)
-        );
-        conversion.concatConversion(
-            this.fromNumber(inputInDecimal.decimalValue, resultBase)
-        );
+        conversion.addStage(new ConversionToDecimal([valueStr, inputBase], inputInDecimal));
+
+        const toTargetBase = this.fromNumber(inputInDecimal.decimalValue, resultBase);
+        toTargetBase.result.sourceType = inputSourceType;
+        conversion.concatConversion(toTargetBase);
+
         return conversion;
     }
 
@@ -255,8 +267,11 @@ export class StandardBaseConverter implements BaseConverter {
         inputBase: number
     ): Conversion {
         let valueStr = inputStr;
+        let inputType = PositionalSourceType.RepresentationStr;
+
         if(isValidComplementStr(valueStr, inputBase)) {
             valueStr = complementStrToBaseStr(valueStr, inputBase);
+            inputType = PositionalSourceType.ComplementStr;
         } else {
             if (!isValidString(valueStr, inputBase)) {
                 throw new Error(
@@ -276,7 +291,8 @@ export class StandardBaseConverter implements BaseConverter {
             digits[1],
             inputBase,
             decimalValue,
-            complement
+            complement,
+            inputType
         );
 
         conversion.addStage(

@@ -33,13 +33,15 @@ export * from './models/operation-algorithm'
 export {
     NumberComplement,
     PositionalNumber,
-    Digits
+    Digits,
+    PositionalSourceType
 } from './positional/representations';
 
 export {
     getComplement,
     complementStrToBaseStr,
     isValidComplementStr,
+    isValidComplementOrRepresentationStr
 } from './positional/complement-converter';
 
 export {

@@ -7,8 +7,8 @@ import {
     hasValidComplementSign,
     incrementNumber,
     isComplementStrNegative,
-    isNegative,
-    isValidComplementStr
+    isNegative, isValidComplementOrRepresentationStr,
+    isValidComplementStr, stripComplementExtension
 } from './complement-converter';
 import { Digit } from '../models';
 
@@ -542,6 +542,44 @@ describe('complement-converter', () => {
         });
     });
 
+    describe('isValidComplementOrRepresentationStr tests', () => {
+        it('returns true for valid complement string', () => {
+            // given
+            const input = '(0)12345.123';
+            const base = 10;
+
+            // then
+            expect(isValidComplementOrRepresentationStr(input, base)).toBeTruthy();
+        });
+
+        it('returns false for invalid complement str', () => {
+            // given
+            const input = '9)AAFFDD.CCC';
+            const base = 10;
+
+            // then
+            expect(isValidComplementOrRepresentationStr(input, base)).toBeFalsy();
+        });
+
+        it('returns true for valid representation str', () => {
+            // given
+            const input = '12345.123';
+            const base = 10;
+
+            // then
+            expect(isValidComplementOrRepresentationStr(input, base)).toBeTruthy();
+        });
+
+        it('returns true false invalid representation str', () => {
+            // given
+            const input = '12345.12 3';
+            const base = 10;
+
+            // then
+            expect(isValidComplementOrRepresentationStr(input, base)).toBeFalsy();
+        });
+    });
+
     describe('isComplementStrNegative tests', () => {
         it('Detects negative sign in complement str', () => {
             // given
@@ -635,4 +673,58 @@ describe('complement-converter', () => {
         });
     });
 
+
+    describe('$stripComplementExtension', () => {
+        it('should remove complement extension from positive str', () => {
+            // given
+            const input = '(0)12345.123';
+            const base = 10;
+
+            // when
+            const result = stripComplementExtension(input, base);
+
+            // then
+            const expected = '12345.123';
+            expect(result).toEqual(expected);
+        });
+
+        it('should remove complement extension from positive str', () => {
+            // given
+            const input = '(9)12345.123';
+            const base = 10;
+
+            // when
+            const result = stripComplementExtension(input, base);
+
+            // then
+            const expected = '12345.123';
+            expect(result).toEqual(expected);
+        });
+
+        it('should remove complement extension from b64 str', () => {
+            // given
+            const input = '(64) 43 12';
+            const base = 64;
+
+            // when
+            const result = stripComplementExtension(input, base);
+
+            // then
+            const expected = '43 12';
+            expect(result).toEqual(expected);
+        });
+
+        it('should remove complement extension from shortened complement str', () => {
+            // given
+            const input = '(0).123';
+            const base = 10;
+
+            // when
+            const result = stripComplementExtension(input, base);
+
+            // then
+            const expected = '0.123';
+            expect(result).toEqual(expected);
+        });
+    });
 });
