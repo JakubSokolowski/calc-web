@@ -110,8 +110,8 @@ interface MultiplicationResultMeta extends ResultMeta {
 function extractMultiplicationResultMeta(result: MultiplicationResult): MultiplicationResultMeta {
     const [multiplicand, multiplier] = result.numberOperands;
 
-    const numMultiplicandFractionalDigits = multiplicand.fractionalPart.length;
-    const numMultiplierFractionalDigits = multiplier.fractionalPart.length;
+    const numMultiplicandFractionalDigits = multiplicand.numFractionPartDigits();
+    const numMultiplierFractionalDigits = multiplier.numFractionPartDigits();
 
     const maxOperandsFractionDigits = Math.max(numMultiplicandFractionalDigits, numMultiplierFractionalDigits);
 

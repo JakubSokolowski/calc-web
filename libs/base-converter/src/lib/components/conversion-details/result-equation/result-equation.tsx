@@ -41,7 +41,7 @@ export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => 
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>
             </div>
-            <PositionalNumberComponent base={output.result.base} representation={output.result.toString()}/>
+            <PositionalNumberComponent base={output.result.base()} representation={output.result.toString()}/>
         </div>
     );
 };

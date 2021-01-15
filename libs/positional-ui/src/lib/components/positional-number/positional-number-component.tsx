@@ -29,7 +29,7 @@ export const PositionalNumberComponent: FC<P>  = ({base, representation, tooltip
             <Tooltip
                 title={
                     <React.Fragment>
-                        <PositionalNumberComponent base={tooltipRes.base} representation={formattedTooltipRes}/>
+                        <PositionalNumberComponent base={tooltipRes.base()} representation={formattedTooltipRes}/>
                     </React.Fragment>
                 }
                 placement={'top-end'}

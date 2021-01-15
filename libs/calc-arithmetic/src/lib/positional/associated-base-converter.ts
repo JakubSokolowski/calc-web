@@ -23,7 +23,7 @@ export function convertUsingAssociatedBases(
     const digits = inputNum.toDigitsList();
 
     const details = mapToAssociatedBaseDigits(digits, resultBase);
-    const num = fromDigits(details.resultDigits, inputNum.isNegative).result;
+    const num = fromDigits(details.resultDigits, inputNum.isNegative()).result;
     const conv = new Conversion();
 
     conv.addStage(

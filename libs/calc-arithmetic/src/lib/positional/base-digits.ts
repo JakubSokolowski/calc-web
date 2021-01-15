@@ -39,12 +39,13 @@ export class BaseDigits {
         );
     }
 
-    public static getDigit(value: number, base: number, position = 0): Digit {
+    public static getDigit(value: number, base: number, position = 0, isComplement?: boolean): Digit {
         return {
             position,
             base,
             valueInDecimal: value,
-            representationInBase: this.getRepresentation(value, base)
+            isComplementExtension: isComplement,
+            representationInBase: this.getRepresentation(value, base, isComplement)
         }
     }
 
@@ -52,6 +53,7 @@ export class BaseDigits {
      * Returns value of specified digit.
      * @param digit must be number or uppercase letter
      * @param base
+     * @param isComplement
      * @example getValue('A', 16) will return 10
      */
     public static getValue(digit: string, base: number, isComplement = false): number {
@@ -113,7 +115,7 @@ export class BaseDigits {
     }
 
     private static getComplementDigitForBase(value: number, base: number): string {
-        if (value === -1) return `(${this.getDigitForBase(base - 1, base)})`;
+        if (value === -1 || value === base -1) return `(${this.getDigitForBase(base - 1, base)})`;
         if (value === 0) return `(${this.getDigitForBase(value, base)})`;
         return this.getDigitForBase(value, base);
     }

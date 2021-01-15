@@ -31,11 +31,10 @@ export * from './models/operation'
 export * from './models/operation-algorithm'
 
 export {
-    NumberComplement,
     PositionalNumber,
-    Digits,
     PositionalSourceType
-} from './positional/representations';
+} from './positional/positional-number';
+
 
 export {
     getComplement,

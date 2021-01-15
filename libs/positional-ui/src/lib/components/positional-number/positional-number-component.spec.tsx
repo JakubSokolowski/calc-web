@@ -14,7 +14,7 @@ describe('PositionalNumberComponent', () => {
     beforeEach(() => {
         container = mount(
             <PositionalNumberComponent
-             base={numberResult.base}
+             base={numberResult.base()}
              representation={numberResult.valueInBase}
             />
         );
@@ -28,7 +28,7 @@ describe('PositionalNumberComponent', () => {
        // when
         container = mount(
             <PositionalNumberComponent
-                base={numberResult.base}
+                base={numberResult.base()}
                 representation={numberResult.valueInBase}
                 tooltipBase={10}
                 showAsComplement={false}
@@ -44,7 +44,7 @@ describe('PositionalNumberComponent', () => {
         // when
         container = mount(
             <PositionalNumberComponent
-                base={numberResult.base}
+                base={numberResult.base()}
                 representation={numberResult.valueInBase}
             />
         );
@@ -58,7 +58,7 @@ describe('PositionalNumberComponent', () => {
         // when
         container = mount(
             <PositionalNumberComponent
-                base={numberResult.base}
+                base={numberResult.base()}
                 representation={numberResult.valueInBase}
                 tooltipBase={10}
                 showAsComplement={true}

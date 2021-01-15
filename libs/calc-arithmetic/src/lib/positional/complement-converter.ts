@@ -1,6 +1,7 @@
-import { isValidString, splitToDigits } from '../helpers/conversion-helpers';
+import { digitsToStr, isValidString, splitToDigitsList } from '../helpers/conversion-helpers';
 import { BaseDigits } from './base-digits';
-import { Digits, NumberComplement } from './representations';
+import { Digit } from '../models';
+import { NumberComplement } from './number-complement';
 
 
 /**
@@ -88,56 +89,64 @@ export function getComplement(
     value: string | NumberComplement,
     base = 10
 ): NumberComplement {
-    let val = '';
+    let digits: Digit[];
+    let negative: boolean;
+
     if (value instanceof NumberComplement) {
-        val = value.noSignValue();
-        base = value.base;
+        digits = value.asDigits();
+        negative = value.isNegative();
     }
+
     if (typeof value === 'string') {
-        val = value;
+        digits = splitToDigitsList(value, base);
+        negative = isNegative(value)
     }
-    if (isNegative(val)) {
-        return getNegativeNumberComplement(val, base);
+
+    if (negative) {
+        return getNegativeNumberComplement(digits);
     } else {
-        return getPositiveNumberComplement(val, base);
+        return getPositiveNumberComplement(digits);
     }
 }
 
 /**
  * Computes complement of a negative number
- * @param repStr
+ * @param digits
  * @param base
  */
 export function getNegativeNumberComplement(
-    repStr: string,
-    base: number
+    digits: Digit[],
 ): NumberComplement {
-    const repParts = splitToDigits(repStr.substr(1), base);
-    const complementDigits = computeComplement(
-        repParts[0],
-        repParts[1],
-        base
-    );
-    return new NumberComplement(
-        complementDigits[0],
-        complementDigits[1],
-        base,
-        true
-    );
+    const base = digits[0].base;
+    const extension = getExtensionDigit(base, true, digits[0].position + 1);
+    const [, afterAdditionDigits] = computeComplement(digits);
+    const complementDigits = [extension, ...afterAdditionDigits];
+    return new NumberComplement(complementDigits);
 }
+
 
 /**
  * Computes complement of a positive number
- * @param valueStr
- * @param base
+ * @param digits
  */
 export function getPositiveNumberComplement(
-    valueStr: string,
-    base: number
+    digits: Digit[]
 ): NumberComplement {
-    const digits = splitToDigits(valueStr, base);
-    return new NumberComplement(digits[0], digits[1], base, false);
+    const base = digits[0].base;
+    const extension = getExtensionDigit(base, false, digits[0].position + 1);
+    const complementDigits = [extension, ...digits];
+    return new NumberComplement(complementDigits);
 }
+
+function getExtensionDigit(base: number, isNegative: boolean, position: number): Digit {
+    const value = isNegative ? base - 1 : 0;
+    const digit = BaseDigits.getDigit(value, base, position, true);
+    return {
+        ...digit,
+        isComplementExtension: true
+    };
+}
+
 
 /**
  * Returns complement of a single in some positional system specified by
@@ -145,11 +154,13 @@ export function getPositiveNumberComplement(
  * @param digit
  * @param base
  */
-export function getDigitComplement(digit: string, base: number): string {
-    return BaseDigits.getRepresentation(
-        base - 1 - BaseDigits.getValue(digit, base),
-        base
-    );
+export function getDigitComplement(digit: Digit): Digit {
+    const valueInDecimal = digit.base - 1 - digit.valueInDecimal;
+    return {
+        ...digit,
+        valueInDecimal,
+        representationInBase: BaseDigits.getRepresentation(valueInDecimal, digit.base)
+    };
 }
 
 /**
@@ -157,48 +168,49 @@ export function getDigitComplement(digit: string, base: number): string {
  * @param digits
  * @param base
  */
-export function incrementNumber(digits: string[], base: number): string[] {
-    const result: string[] = [...digits];
+export function incrementNumber(digits: Digit[]): Digit[] {
+    const result: Digit[] = [...digits];
+    const base = digits[0].base;
     for (let i = digits.length - 1; i >= 0; i--) {
-        const val = BaseDigits.getValue(digits[i], base);
-        if (val === base - 1) {
-            result[i] = BaseDigits.getRepresentation(0, base);
+        if (digits[i].valueInDecimal === base - 1) {
+            result[i] = BaseDigits.getDigit(0, base, digits[i].position);
         } else {
-            result[i] = BaseDigits.getRepresentation(val + 1, base);
+            result[i] = BaseDigits.getDigit(digits[i].valueInDecimal + 1, base, digits[i].position);
             break;
         }
     }
     return result;
 }
 
+
 /**
  * Computes a complement of a number represented by its integral and fractional
  * parts digits
- * @param integral
- * @param fractional
- * @param base
+ * @param digits
  */
 export function computeComplement(
-    integral: Digits,
-    fractional: Digits,
-    base: number
-): [Digits, Digits, string[], string[]] {
-    const digits = integral.digits.concat(fractional.digits);
-    const afterSubtraction = digits.map(d => getDigitComplement(d, base));
-    const afterAddition = incrementNumber(afterSubtraction, base);
+    digits: Digit[]
+): [ Digit[], Digit[]] {
+    const afterNegation = digits.map(d => getDigitComplement(d));
+    const complement = incrementNumber(afterNegation);
 
     return [
-        new Digits(afterAddition.slice(0, integral.length), base),
-        new Digits(
-            afterAddition.slice(
-                integral.length,
-                integral.length + fractional.length
-            ),
-            base
-        ),
-        afterSubtraction,
-        afterAddition
+        afterNegation,
+        complement
     ];
+}
+
+/**
+ * Computes a complement of a number represented by its integral and fractional
+ * parts digits
+ * @param digits
+ */
+export function computeComplementWithDetails(
+    digits: Digit[]
+): [Digit[], Digit[]] {
+    const afterNegation = digits.map(d => getDigitComplement(d));
+    const afterAddition = incrementNumber(afterNegation);
+    return [afterNegation, afterAddition];
 }
 
 /**
@@ -207,7 +219,7 @@ export function computeComplement(
  * @param str
  * @param base
  */
-export function complementStrToBaseStr(str: string, base: number) {
+export function complementStrToBaseStr(str: string, base: number): string {
     let noSignStr = base > 36 ? str.substr(4) : str.substring(3);
 
     if (!isComplementStrNegative(str, base)) {
@@ -223,14 +235,10 @@ export function complementStrToBaseStr(str: string, base: number) {
         noSignStr = `${zero}${noSignStr}`;
     }
 
-    const [integral, fractional] = splitToDigits(noSignStr.trim(), base);
-    const baseDigits = computeComplement(
-        integral,
-        fractional,
-        base
-    );
-    const delimiter = baseDigits[1].length === 0 ? '' : '.';
-    return `-${baseDigits[0].toString()}${delimiter}${baseDigits[1].toString()}`;
+    const digits = splitToDigitsList(noSignStr.trim(), base);
+    const [, complementDigits] = computeComplement(digits);
+
+    return `-${digitsToStr(complementDigits)}`;
 }
 
 export function stripComplementExtension(str: string, base: number): string {
@@ -238,7 +246,7 @@ export function stripComplementExtension(str: string, base: number): string {
     const noSignStr = str.substr(numCharsForExtension);
     const isShortenedComplement = noSignStr.startsWith('.');
 
-    if(!isShortenedComplement) return noSignStr.trim();
+    if (!isShortenedComplement) return noSignStr.trim();
     const zero = BaseDigits.getRepresentation(0, base);
     return `${zero}${noSignStr}`;
 }

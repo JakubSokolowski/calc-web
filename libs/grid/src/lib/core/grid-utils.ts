@@ -258,10 +258,10 @@ export function extractResultMeta(result: OperationResult<Digit, PositionResult<
 
     return {
         totalWidth: maxDigitsInRow + 1,
-        fractionDesiredWidth: result.numberResult.fractionalPart.length,
+        fractionDesiredWidth: result.numberResult.numFractionPartDigits(),
         mostSignificantPosition: mostSignificantPosition(result),
-        numResultIntegerPartDigits: result.numberResult.integerPart.length,
-        numResultFractionalPartDigits: result.numberResult.fractionalPart.length,
+        numResultIntegerPartDigits: result.numberResult.numIntegerPartDigits(),
+        numResultFractionalPartDigits: result.numberResult.numFractionPartDigits(),
         numOperands: result.operands.length
     };
 }

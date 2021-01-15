@@ -1,4 +1,4 @@
-import { Digit } from '@calc/calc-arithmetic';
+import { Digit } from '../models';
 import {
     convertUsingAssociatedBases,
     mapToAssociatedBaseDigits,

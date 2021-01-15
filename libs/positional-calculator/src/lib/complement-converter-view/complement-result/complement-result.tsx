@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ComplementResult: FC<P> = ({ number }) => {
     const classes = useStyles();
 
-    const num = `${number.toString()}_{${number.base}}`;
+    const num = `${number.toString()}_{${number.base()}}`;
     const complement = number.complement.toString();
 
     const math: string = number.sourceType === PositionalSourceType.ComplementStr

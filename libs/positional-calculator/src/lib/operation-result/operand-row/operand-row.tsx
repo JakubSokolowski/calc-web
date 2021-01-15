@@ -38,7 +38,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
         const num = (
             <PositionalNumberComponent
                 className={classes.operand}
-                base={op.base}
+                base={op.base()}
                 representation={showAsComplement ? op.complement.toString() : op.valueInBase}
                 tooltipBase={tooltipBase}
                 key={index}
@@ -61,7 +61,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
     const res = (
         <PositionalNumberComponent
             className={classes.operand}
-            base={result.base}
+            base={result.base()}
             representation={showAsComplement ? result.complement.toString() : result.valueInBase}
             tooltipBase={tooltipBase}
             showAsComplement={showAsComplement}
@@ -84,7 +84,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
                     {equalSign}
                     <PositionalNumberComponent
                         className={classes.operand}
-                        base={result.base}
+                        base={result.base()}
                         representation={result.valueInBase}
                         tooltipBase={tooltipBase}
                     />

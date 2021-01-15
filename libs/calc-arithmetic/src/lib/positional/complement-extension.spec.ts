@@ -1,6 +1,5 @@
-import { AdditionPositionResult } from '@calc/calc-arithmetic';
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
-import { AdditionOperand } from '../models';
+import { AdditionOperand, AdditionPositionResult } from '../models';
 
 
 describe('complement-extension', () => {
