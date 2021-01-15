@@ -59,7 +59,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     const classes = useStyles();
 
     const initialValues: FormValues = {
-        inputStr: '(9)123.45',
+        inputStr: '-123.45',
         inputBase: 10
     };
 

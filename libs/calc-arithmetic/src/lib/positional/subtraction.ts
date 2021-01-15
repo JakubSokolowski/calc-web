@@ -10,7 +10,7 @@ import { areSameBaseNumbers, buildPositionalNumberFromDigits } from './addition'
 import { OperationType } from '../models/operation';
 import { SubtractionType } from '../models/operation-algorithm';
 import { fromNumber } from './base-converter';
-import { PositionalNumber } from './representations';
+import { PositionalNumber } from './positional-number';
 import { alignFractions } from './digits';
 
 
@@ -18,7 +18,7 @@ export function subtractPositionalNumbers(numbers: PositionalNumber[]): Subtract
     if (!areSameBaseNumbers(numbers)) {
         throw Error('Numbers to add must have same base');
     }
-    const numbersAsDigits = alignFractions( numbers.map((number) => number.complement.toDigitsList()));
+    const numbersAsDigits = alignFractions( numbers.map((number) => number.complement.asDigits()));
     const result = subtractDigitArrays(numbersAsDigits);
     return {...result, numberOperands: numbers};
 }

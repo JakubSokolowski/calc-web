@@ -4,9 +4,8 @@ import {
     addPositionalNumbers,
     extractResultDigitsFromAddition
 } from './addition';
-import { AdditionPositionResult, fromNumber } from '@calc/calc-arithmetic';
-import { AdditionOperand } from '../models';
-import { fromStringDirect } from './base-converter';
+import { AdditionOperand, AdditionPositionResult } from '../models';
+import { fromNumber, fromStringDirect } from './base-converter';
 
 describe('addition', () => {
     describe('#addDigitsAtPosition', () => {
@@ -256,8 +255,8 @@ describe('addition', () => {
 
         it('should add two digit arrays correctly when numbers are hexadecimal', () => {
             // given
-            const a: AdditionOperand[] = fromStringDirect('1B49', 16).result.complement.toDigitsList();
-            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).result.complement.toDigitsList();
+            const a: AdditionOperand[] = fromStringDirect('1B49', 16).result.complement.asDigits();
+            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).result.complement.asDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {
@@ -309,10 +308,10 @@ describe('addition', () => {
 
         it('should add digit arrays correctly when numbers are binary', () => {
             // given
-            const a: AdditionOperand[] = fromNumber(11, 2).result.complement.toDigitsList();
-            const b: AdditionOperand[] = fromNumber(13, 2).result.complement.toDigitsList();
-            const c: AdditionOperand[] = fromNumber(9, 2).result.complement.toDigitsList();
-            const d: AdditionOperand[] = fromNumber(15, 2).result.complement.toDigitsList();
+            const a: AdditionOperand[] = fromNumber(11, 2).result.complement.asDigits();
+            const b: AdditionOperand[] = fromNumber(13, 2).result.complement.asDigits();
+            const c: AdditionOperand[] = fromNumber(9, 2).result.complement.asDigits();
+            const d: AdditionOperand[] = fromNumber(15, 2).result.complement.asDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {

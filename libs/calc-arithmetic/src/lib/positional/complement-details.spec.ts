@@ -1,6 +1,6 @@
 import { getComplementWithDetails } from './complement-details';
 import { Digit } from '../models';
-import { ComplementConversionResult } from '@calc/calc-arithmetic';
+import { ComplementConversionResult } from '../models/complement';
 
 describe('complement-details', () => {
     describe('#getComplementWithDetails', () => {

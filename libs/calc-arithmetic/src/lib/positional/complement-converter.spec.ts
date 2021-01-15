@@ -7,10 +7,12 @@ import {
     hasValidComplementSign,
     incrementNumber,
     isComplementStrNegative,
-    isNegative, isValidComplementOrRepresentationStr,
-    isValidComplementStr, stripComplementExtension
+    isNegative,
+    isValidComplementOrRepresentationStr,
+    isValidComplementStr,
+    stripComplementExtension
 } from './complement-converter';
-import { Digit } from '../models';
+import { splitToDigitsList } from '../helpers/conversion-helpers';
 
 describe('complement-converter', () => {
     describe('getPositiveComplement tests', () => {
@@ -19,17 +21,15 @@ describe('complement-converter', () => {
             const input = '200';
             const base = 10;
             const expected = '(0)200';
-            const expectedSign = '(0)';
+            const expectedExtension = '(0)';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getPositiveNumberComplement(
-                input,
-                base
-            );
+            const actual = getPositiveNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedExtension);
         });
 
         it('returns valid complement for positive number with 0 floating part', () => {
@@ -39,15 +39,14 @@ describe('complement-converter', () => {
             const expected = '(0)200.0';
             const expectedSign = '(0)';
 
+            const inputDigits = splitToDigitsList(input, base);
+
             // when
-            const actual = getPositiveNumberComplement(
-                input,
-                base
-            );
+            const actual = getPositiveNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for positive floating number', () => {
@@ -57,15 +56,14 @@ describe('complement-converter', () => {
             const expected = '(0)200.73';
             const expectedSign = '(0)';
 
+            const inputDigits = splitToDigitsList(input, base);
+
             // when
-            const actual = getPositiveNumberComplement(
-                input,
-                base
-            );
+            const actual = getPositiveNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
     });
 
@@ -76,16 +74,14 @@ describe('complement-converter', () => {
             const base = 10;
             const expected = '(9)800';
             const expectedSign = '(9)';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getNegativeNumberComplement(
-                input,
-                base
-            );
+            const actual = getNegativeNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for base 10 negative number with 0 floating part', () => {
@@ -94,16 +90,14 @@ describe('complement-converter', () => {
             const base = 10;
             const expected = '(9)800.0';
             const expectedSign = '(9)';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getNegativeNumberComplement(
-                input,
-                base
-            );
+            const actual = getNegativeNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for base 10 negative floating number', () => {
@@ -112,16 +106,14 @@ describe('complement-converter', () => {
             const base = 2;
             const expected = '(1)00110.1';
             const expectedSign = '(1)';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getNegativeNumberComplement(
-                input,
-                base
-            );
+            const actual = getNegativeNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for base 2 negative floating number', () => {
@@ -130,16 +122,14 @@ describe('complement-converter', () => {
             const base = 10;
             const expected = '(9)799.27';
             const expectedSign = '(9)';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getNegativeNumberComplement(
-                input,
-                base
-            );
+            const actual = getNegativeNumberComplement(inputDigits);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
     });
 
@@ -156,7 +146,7 @@ describe('complement-converter', () => {
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for negative number', () => {
@@ -171,7 +161,7 @@ describe('complement-converter', () => {
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for another complement', () => {
@@ -182,12 +172,11 @@ describe('complement-converter', () => {
             const expectedSign = '(0)';
 
             // when
-            const complement = getComplement(input, base);
-            const actual = getComplement(complement);
+            const actual = getComplement(input, base);
 
             // then
             expect(actual.toString()).toEqual(expected);
-            expect(actual.sign).toEqual(expectedSign);
+            expect(actual.extensionStr()).toEqual(expectedSign);
         });
 
         it('returns valid complement for positive number equal to base', () => {
@@ -217,33 +206,65 @@ describe('complement-converter', () => {
         });
     });
 
-
-    describe('toDigitsList tests', () => {
-        it('should return proper digit list for b64 number', () => {
+    describe('incrementNumber tests', () => {
+        it('increments number when base is < 36 and there is no propagation', () => {
             // given
-            const input = '00';
-            const base = 64;
+            const base = 10;
+            const input = '789235';
+            const expected = '789236';
+            const inputDigits = splitToDigitsList(input, base);
 
             // when
-            const actual = getComplement(input, base).toDigitsList();
+            const result = incrementNumber(inputDigits);
 
             // then
-            const expected: Digit[] = [
-                {
-                    base: 64,
-                    isComplementExtension: true,
-                    position: 1,
-                    representationInBase: '(00)',
-                    valueInDecimal: 0
-                },
-                {
-                    base: 64,
-                    position: 0,
-                    representationInBase: '00',
-                    valueInDecimal: 0
-                }
-            ];
-            expect(actual).toEqual(expected);
+            const expectedDigits = splitToDigitsList(expected, base);
+            expect(result).toEqual(expectedDigits);
+        });
+
+        it('increments number when base is < 36 and with propagation', () => {
+            // given
+            const base = 10;
+            const input = '789299';
+            const expected = '789300';
+            const inputDigits = splitToDigitsList(input, base);
+
+            // when
+            const result = incrementNumber(inputDigits);
+
+            // then
+            const expectedDigits = splitToDigitsList(expected, base);
+            expect(result).toEqual(expectedDigits);
+        });
+
+        it('increments number when base is > 36 and there is no propagation', () => {
+            // given
+            const base = 64;
+            const input = '10 48 29 42 23 44';
+            const expected = '10 48 29 42 23 45';
+            const inputDigits = splitToDigitsList(input, base);
+
+            // when
+            const result = incrementNumber(inputDigits);
+
+            // then
+            const expectedDigits = splitToDigitsList(expected, base);
+            expect(result).toEqual(expectedDigits);
+        });
+
+        it('increments number when base is > 36 and with propagation', () => {
+            // given
+            const base = 64;
+            const input = '10 48 30 63 63 63';
+            const expected = '10 48 31 00 00 00';
+            const inputDigits = splitToDigitsList(input, base);
+
+            // when
+            const result = incrementNumber(inputDigits);
+
+            // then
+            const expectedDigits = splitToDigitsList(expected, base);
+            expect(result).toEqual(expectedDigits);
         });
     });
 
@@ -256,57 +277,6 @@ describe('complement-converter', () => {
         it('returns false if toString() is positive', () => {
             const input = '200.22';
             expect(isNegative(input)).toBeFalsy();
-        });
-    });
-
-    describe('incrementNumber tests', () => {
-        it('increments number when base is < 36 and there is no propagation', () => {
-            // given
-            const input = ['7', '8', '9', '2', '3', '4'];
-            const base = 10;
-            const expected = '789235'.split('');
-
-            // then
-            expect(incrementNumber(input, base)).toEqual(
-                expected
-            );
-        });
-
-        it('increments number when base is < 36 and with propagation', () => {
-            // given
-            const input = ['7', '8', '9', '2', '9', '9'];
-            const base = 10;
-            const expected = '789300'.split('');
-
-            // then
-            expect(incrementNumber(input, base)).toEqual(
-                expected
-            );
-        });
-
-        it('increments number when base is > 36 and there is no propagation', () => {
-            // given
-            const input = ['10', '48', '29', '42', '23', '44'];
-            const base = 64;
-            const expected = '10 48 29 42 23 45'.split(' ');
-
-            // when
-            const actual = incrementNumber(input, base);
-
-            // then
-            expect(actual).toEqual(expected);
-        });
-
-        it('increments number when base is > 36 and with propagation', () => {
-            // given
-            const input = ['10', '48', '29', '63', '63', '63'];
-            const base = 64;
-            const expected = '10 48 30 00 00 00'.split(' ');
-
-            // then
-            expect(incrementNumber(input, base)).toEqual(
-                expected
-            );
         });
     });
 
@@ -672,7 +642,6 @@ describe('complement-converter', () => {
             ).toBeTruthy();
         });
     });
-
 
     describe('$stripComplementExtension', () => {
         it('should remove complement extension from positive str', () => {

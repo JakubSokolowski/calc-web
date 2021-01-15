@@ -3,18 +3,18 @@ import {
     arbitraryFractionToDecimal,
     arbitraryIntegralToDecimal,
     decimalFractionToArbitrary,
-    decimalIntegerToArbitrary, digitsToStr,
+    decimalIntegerToArbitrary,
+    digitsToStr,
     getRepresentationRegexPattern,
     isFloatingPointStr,
     isValidString,
     removeZeroDigits,
-    representationStrToStrArray, serializeRepresentationStr,
-    splitToDigits,
+    representationStrToStrArray,
+    serializeRepresentationStr,
     splitToDigitsList,
     splitToPartsArr
 } from './conversion-helpers';
-import { Digits } from '../positional/representations';
-import { Digit } from '@calc/calc-arithmetic';
+import { Digit } from '../models';
 
 describe('conversion-helpers', () => {
     describe('#removeZeroDigits', () => {
@@ -210,110 +210,110 @@ describe('conversion-helpers', () => {
         });
     });
 
-    describe('decimalIntegralToArbitrary tests', () => {
-        it('returns correct pattern for 0 in base 2', () => {
+    describe('decimalIntegerToArbitrary tests', () => {
+        it('returns correct result when converting from 0 in base 2', () => {
             // given
             const input = new BigNumber(0);
             const base = 2;
-            const expected = '0'.split('');
+            const expected = splitToDigitsList('0', base);
             const expectedDivisors: string[] = [];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for 25 in base 2', () => {
+        it('returns correct result for 25 in base 2', () => {
             // given
             const input = new BigNumber(25);
             const base = 2;
-            const expected = '11001'.split('');
+            const expected = splitToDigitsList('11001', base);
             const expectedDivisors: string[] = ['25', '12', '6', '3', '1'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for -25 in base 2', () => {
+        it('returns correct result when converting from -25 in base 2', () => {
             // given
             const input = new BigNumber(-25);
             const base = 2;
-            const expected = '11001'.split('');
+            const expected = splitToDigitsList('11001', base);
             const expectedDivisors: string[] = ['25', '12', '6', '3', '1'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for 255 in base 16', () => {
+        it('returns correct result when converting from 255 in base 16', () => {
             // given
             const input = new BigNumber(255);
             const base = 16;
-            const expected = 'FF'.split('');
+            const expected = splitToDigitsList('FF', base);
             const expectedDivisors: string[] = ['255', '15'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for -255 in base 16', () => {
+        it('returns correct result when converting from -255 in base 16', () => {
             // given
             const input = new BigNumber(-255);
             const base = 16;
-            const expected = 'FF'.split('');
+            const expected = splitToDigitsList('FF', base);
             const expectedDivisors = ['255', '15'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for 100 in base 64', () => {
+        it('returns correct result when converting from 100 in base 64', () => {
             // given
             const input = new BigNumber(100);
             const base = 64;
-            const expected = '01 36'.split(' ');
+            const expected = splitToDigitsList('01 36', base);
             const expectedDivisors = ['100', '1'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
 
-        it('returns correct pattern for -100 in base 64', () => {
+        it('returns correct result when converting from -100 in base 64', () => {
             // given
             const input = new BigNumber(-100);
             const base = 64;
-            const expected = '01 36'.split(' ');
+            const expected = splitToDigitsList('01 36', base);
             const expectedDivisors = ['100', '1'];
 
             // when
-            const result = decimalIntegerToArbitrary(input, base);
+            const [result, divisors] = decimalIntegerToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedDivisors);
+            expect(result).toEqual(expected);
+            expect(divisors).toEqual(expectedDivisors);
         });
     });
 
@@ -429,37 +429,37 @@ describe('conversion-helpers', () => {
             // given
             const input = new BigNumber(0);
             const base = 2;
-            const expected: string[] = [];
+            const expected: Digit[] = [];
             const expectedFractions: string[] = [];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
 
         it('converts decimal fraction to exact binary', () => {
             // given
             const input = new BigNumber(0.75);
             const base = 2;
-            const expected = '11'.split('');
+            const expected = splitToDigitsList('0.11', base).slice(1);
             const expectedFractions: string[] = ['0.75', '1.5', '0.5', '1'];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
 
         it('converts decimal fraction to base 2 with 30 digits precision', () => {
             // given
             const input = new BigNumber(0.3);
             const base = 2;
-            const expected = '010011001100110011001100110011'.split('');
+            const expected = splitToDigitsList('0.010011001100110011001100110011', base).slice(1);
 
             const expectedFractions: string[] = [
                 '0.3', '0.6', '0.6', '1.2', '0.2', '0.4',
@@ -475,33 +475,33 @@ describe('conversion-helpers', () => {
             ];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
 
         it('converts decimal fraction to exact base 16', () => {
             // given
             const input = new BigNumber(0.5);
             const base = 16;
-            const expected = '8'.split('');
+            const expected = splitToDigitsList('0.8', base).slice(1);
             const expectedFractions: string[] = ['0.5', '8'];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
 
         it('converts decimal fraction to base 16 with 30 digits precision', () => {
             // given
             const input = new BigNumber(0.3);
             const base = 16;
-            const expected = '4CCCCCCCCCCCCCCCCCCCCCCCCCCCCC'.split('');
+            const expected = splitToDigitsList('0.4CCCCCCCCCCCCCCCCCCCCCCCCCCCCC', base).slice(1);
             const expectedFractions: string[] = [
                 '0.3', '4.8', '0.8', '12.8', '0.8', '12.8',
                 '0.8', '12.8', '0.8', '12.8', '0.8', '12.8',
@@ -516,34 +516,35 @@ describe('conversion-helpers', () => {
             ];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
 
         it('converts decimal fraction to exact base 64', () => {
             // given
             const input = new BigNumber(0.5);
             const base = 64;
-            const expected = '32'.split(' ');
+            const expected = splitToDigitsList('0.32', base).slice(1);
             const expectedFractions: string[] = ['0.5', '32'];
 
             // when
-            const result = decimalFractionToArbitrary(input, base);
+            const [result, fractions] = decimalFractionToArbitrary(input, base);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
+
         it('converts decimal fraction to base 64 with 15 digits precision', () => {
             // given
             const input = new BigNumber(0.3);
             const base = 64;
-            const expected = '19 12 51 12 51 12 51 12 51 12 51 12 51 12 51'.split(
-                ' '
-            );
+            const precision = 15;
+            const expected = splitToDigitsList('00.19 12 51 12 51 12 51 12 51 12 51 12 51 12 51', 64).slice(1);
+
             const expectedFractions: string[] = [
                 '0.3', '19.2', '0.2', '12.8',
                 '0.8', '51.2', '0.2', '12.8',
@@ -556,11 +557,11 @@ describe('conversion-helpers', () => {
             ];
 
             // when
-            const result = decimalFractionToArbitrary(input, base, 15);
+            const [result, fractions] = decimalFractionToArbitrary(input, base, precision);
 
             // then
-            expect(result[0].digits).toEqual(expected);
-            expect(result[1]).toEqual(expectedFractions);
+            expect(result).toEqual(expected);
+            expect(fractions).toEqual(expectedFractions);
         });
     });
 
@@ -657,68 +658,6 @@ describe('conversion-helpers', () => {
 
             // when
             const result = splitToPartsArr(num);
-
-            // then
-            expect(result[0]).toEqual(expectedIntegral);
-            expect(result[1]).toEqual(expectedFractional);
-        });
-    });
-
-    describe('splitToDigits tests', () => {
-        it('Splits floating number to list of its digit parts', () => {
-            // given
-            const num = new BigNumber(25.5);
-            const base = 10;
-            const expectedIntegral = new Digits(['2', '5'], base);
-            const expectedFractional = new Digits(['5'], base);
-
-            // when
-            const result = splitToDigits(num);
-
-            // then
-            expect(result[0]).toEqual(expectedIntegral);
-            expect(result[1]).toEqual(expectedFractional);
-        });
-
-        it('Splits number string to list of its digit parts', () => {
-            // given
-            const num = '25.5';
-            const base = 10;
-            const expectedIntegral = new Digits(['2', '5'], base);
-            const expectedFractional = new Digits(['5'], base);
-
-            // when
-            const result = splitToDigits(num);
-
-            // then
-            expect(result[0]).toEqual(expectedIntegral);
-            expect(result[1]).toEqual(expectedFractional);
-        });
-
-        it('Splits number string to list of its digit parts for base > 36', () => {
-            // given
-            const num = '12 45 23.52';
-            const base = 64;
-            const expectedIntegral = new Digits(['12', '45', '23'], base);
-            const expectedFractional = new Digits(['52'], base);
-
-            // when
-            const result = splitToDigits(num, base);
-
-            // then
-            expect(result[0]).toEqual(expectedIntegral);
-            expect(result[1]).toEqual(expectedFractional);
-        });
-
-        it('Splits number string to list of its digit parts', () => {
-            // given
-            const num = 25.5;
-            const base = 10;
-            const expectedIntegral = new Digits(['2', '5'], base);
-            const expectedFractional = new Digits(['5'], base);
-
-            // when
-            const result = splitToDigits(num);
 
             // then
             expect(result[0]).toEqual(expectedIntegral);

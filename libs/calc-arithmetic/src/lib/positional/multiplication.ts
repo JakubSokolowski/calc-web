@@ -10,7 +10,7 @@ import {
 import { BaseDigits } from './base-digits';
 import { addPositionalNumbers } from './addition';
 import { MultiplicationType } from '../models/operation-algorithm';
-import { PositionalNumber } from './representations';
+import { PositionalNumber } from './positional-number';
 import { OperationType } from '../models/operation';
 import { alignFractions, shiftLeft, shiftRight } from './digits';
 import { trimEndByPredicate } from '@calc/utils';
@@ -142,7 +142,7 @@ function adjustForMultiplierFraction(additionResult: AdditionResult, multiplierR
 
     const shiftedDigits = shiftRight(additionResult.resultDigits, numFractionDigits);
     const trimmedDigits = trimEndByPredicate(shiftedDigits, (digit) => digit.position < -1 && digit.valueInDecimal === 0);
-    const shiftedNum = fromDigits(trimmedDigits, additionResult.numberResult.isNegative).result;
+    const shiftedNum = fromDigits(trimmedDigits, additionResult.numberResult.isNegative()).result;
 
     return {
         ...additionResult,
@@ -154,7 +154,7 @@ function adjustForMultiplierFraction(additionResult: AdditionResult, multiplierR
 export function multiplyPositionalNumbers(numbers: PositionalNumber[]): MultiplicationResult {
     const [multiplicand, multiplier] = numbers;
     const [alMultiplicand, alMultiplier] = alignFractions([multiplicand.toDigitsList(), multiplier.toDigitsList()]);
-    const resultNegative = multiplicand.isNegative !== multiplier.isNegative;
+    const resultNegative = multiplicand.isNegative() !== multiplier.isNegative();
     const result = multiplyDigitRows(alMultiplicand, alMultiplier, resultNegative);
 
     return {

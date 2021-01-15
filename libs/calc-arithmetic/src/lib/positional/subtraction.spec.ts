@@ -1,6 +1,6 @@
 import { SubtractionOperand, SubtractionPositionResult, SubtractionResult } from '../models';
 import { subtractDigitArrays, subtractDigitsAtPosition, subtractPositionalNumbers } from './subtraction';
-import { fromNumber } from '@calc/calc-arithmetic';
+import { fromNumber } from './base-converter';
 
 describe('subtraction', () => {
     describe('#subtractDigitsAtPosition', () => {

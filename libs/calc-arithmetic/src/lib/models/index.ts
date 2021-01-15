@@ -1,4 +1,4 @@
-import { PositionalNumber } from '../positional/representations';
+import { PositionalNumber } from '../positional/positional-number';
 import { OperationType } from './operation';
 import { AlgorithmType } from './operation-algorithm';
 

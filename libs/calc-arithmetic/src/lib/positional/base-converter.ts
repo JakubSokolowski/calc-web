@@ -9,9 +9,8 @@ import {
     isValidString,
     serializeRepresentationStr,
     splitToDigitsList,
-    splitToPartsArr
 } from '../helpers/conversion-helpers';
-import { PositionalNumber, PositionalSourceType } from './representations';
+import { PositionalNumber, PositionalSourceType } from './positional-number';
 import { Digit } from '../models';
 import { AssociatedBaseConversionDetails } from '../models/associated-base-conversion-details';
 import { complementStrToBaseStr, getComplement, isValidComplementStr } from './complement-converter';
@@ -29,14 +28,6 @@ export class Conversion {
         return this.stages[this.stages.length - 1].result;
     }
 
-    get resultNumDigits(): number {
-        return this.result.integerPart.length + this.result.fractionalPart.length;
-    }
-
-    get inputNumDigits(): number {
-        const [inputStr, base] = this.stages[0].input;
-        return base >= 36 ? inputStr.split(' ').length : inputStr.length;
-    }
 
     public addStage(stage: ConversionStage): void {
         this.stages.push(stage);
@@ -182,25 +173,24 @@ export class StandardBaseConverter implements BaseConverter {
         const sign = decimalValue.isNegative() ? '-' : '';
         const fractionalPart = decimalValue.mod(1);
         const integerPart = decimalValue.minus(fractionalPart);
-        const integerPartDigits = decimalIntegerToArbitrary(
+        const [integerDigits, integerSteps] = decimalIntegerToArbitrary(
             integerPart,
             resultBase
         );
-        const fractionalPartDigits = decimalFractionToArbitrary(
+        const [fractionDigits, fractionSteps] = decimalFractionToArbitrary(
             fractionalPart,
             resultBase,
             precision
         );
-        const repStr = fractionalPartDigits[0].length > 0
-            ? integerPartDigits[0].toString() + '.' + fractionalPartDigits[0]
-            : integerPartDigits[0].toString();
+
+        const allDigits = [...integerDigits, ...fractionDigits];
+        const repStr = digitsToStr(allDigits);
+
 
         const complement = getComplement(sign + repStr, resultBase);
 
         const result = new PositionalNumber(
-            integerPartDigits[0],
-            fractionalPartDigits[0],
-            resultBase,
+            allDigits,
             decimalValue,
             complement,
             PositionalSourceType.Number
@@ -210,8 +200,8 @@ export class StandardBaseConverter implements BaseConverter {
             new ConversionToArbitrary(
                 [num.toString(), 10],
                 result,
-                integerPartDigits[1],
-                fractionalPartDigits[1]
+                integerSteps,
+                fractionSteps
             )
         );
         return conversion;
@@ -243,11 +233,9 @@ export class StandardBaseConverter implements BaseConverter {
         const complement = getComplement(decimalValue.toString(), resultBase);
         // Split into two str arrays - integral part digits arr and
         // fractional part digits arr
-        const digits = splitToPartsArr(decimalValue);
+        const digits = splitToDigitsList(decimalValue, 10);
         const inputInDecimal = new PositionalNumber(
-            digits[0],
-            digits[1],
-            10,
+            digits,
             decimalValue,
             complement,
             inputSourceType
@@ -255,7 +243,7 @@ export class StandardBaseConverter implements BaseConverter {
 
         conversion.addStage(new ConversionToDecimal([valueStr, inputBase], inputInDecimal));
 
-        const toTargetBase = this.fromNumber(inputInDecimal.decimalValue, resultBase);
+        const toTargetBase = this.fromNumber(inputInDecimal.decimalValue, resultBase, precision);
         toTargetBase.result.sourceType = inputSourceType;
         conversion.concatConversion(toTargetBase);
 
@@ -282,14 +270,12 @@ export class StandardBaseConverter implements BaseConverter {
 
         const conversion = new Conversion();
 
-        const digits = splitToPartsArr(valueStr, inputBase);
+        const digits = splitToDigitsList(valueStr, inputBase);
         const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
         const complement = getComplement(valueStr, inputBase);
 
         const inputInDecimal = new PositionalNumber(
-            digits[0],
-            digits[1],
-            inputBase,
+            digits,
             decimalValue,
             complement,
             inputType

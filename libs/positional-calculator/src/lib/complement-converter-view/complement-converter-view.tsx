@@ -56,7 +56,7 @@ export const ComplementConverterView: FC = () => {
                     <ComplementResult number={result.inputNumber}/>
                 </Section>
                 }
-                {result && result.inputNumber.isNegative &&
+                {result && result.inputNumber.isNegative() &&
                 <Section title={t('complementConverter.details')}>
                     <ComplementDetailsRenderer showDownload {...params}/>
                 </Section>

@@ -35,7 +35,7 @@ export const BaseConverterView: FC = () => {
                 <IntegralConversionDetails conversion={conversion}/>
             </Section>
             }
-            {conversion && conversion.result.fractionalPart.length > 0 &&
+            {conversion && conversion.result.numFractionPartDigits() > 0 &&
             <Section title={t('baseConverter.floatingConversion')}>
                 <FloatingConversionDetails conversion={conversion} precision={precision}/>
             </Section>

@@ -69,7 +69,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
-        [{valid: true, representation: '76', dndKey: '1'}, {valid: true, representation: '-48', dndKey: '2'}]
+        [{valid: true, representation: '1', dndKey: '1'}, {valid: true, representation: '-1', dndKey: '2'}]
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);

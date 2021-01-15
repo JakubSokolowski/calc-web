@@ -1,10 +1,7 @@
 import React from 'react';
 import { CellGroup, CellPosition, GridCellConfig, GridLine, HoverOperationGrid, LineType } from '@calc/grid';
 import {
-    AdditionPositionResult,
     fromStringDirect,
-    MultiplicationPositionResult,
-    MultiplicationRowResult,
     multiplyPositionalNumbers
 } from '@calc/calc-arithmetic';
 import { buildMultiplicationGrid, MultiplicationCellProps } from './multiplication-grid';

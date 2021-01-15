@@ -1,8 +1,8 @@
 import BigNumber from 'bignumber.js';
 import { BaseDigits } from '../positional/base-digits';
-import { Digits } from '../positional/representations';
 import { Digit } from '../models';
 import { replaceAll } from '@calc/utils';
+import { strArrayToDigits } from '../positional/digits';
 
 /**
  *  Splits the representation string into digits array
@@ -140,9 +140,9 @@ export function arbitraryIntegralToDecimal(
 export function decimalIntegerToArbitrary(
     num: BigNumber,
     base: number
-): [Digits, string[]] {
+): [Digit[], string[]] {
     if (num.isZero()) {
-        return [new Digits([BaseDigits.getRepresentation(0, base)], base), []];
+        return [[BaseDigits.getDigit(0, base, 0)], []];
     }
     const remainders: string[] = [];
     const resultDigits: string[] = [];
@@ -153,16 +153,19 @@ export function decimalIntegerToArbitrary(
         resultDigits.push(BaseDigits.getRepresentation(remainder.toNumber(), base));
         currentNum = currentNum.dividedToIntegerBy(base);
     }
-    return [new Digits(resultDigits.reverse(), base), remainders];
+
+    const digits = strArrayToDigits(resultDigits.reverse(), base, resultDigits.length -1);
+
+    return [digits, remainders];
 }
 
 export function decimalFractionToArbitrary(
     fraction: BigNumber,
     base: number,
     precision = 30
-): [Digits, string[]] {
+): [Digit[], string[]] {
     if (fraction.isZero()) {
-        return [new Digits([], base), []];
+        return [[], []];
     }
     if (fraction.isNegative()) {
         fraction = fraction.negated();
@@ -183,7 +186,7 @@ export function decimalFractionToArbitrary(
     }
     result = removeZeroDigits(result);
     fractions = removeZeroDigits(fractions);
-    return [new Digits(result, base), fractions];
+    return [strArrayToDigits(result, base, -1), fractions];
 }
 
 /**
@@ -247,15 +250,8 @@ export function splitToPartsArr(
     return [integerPart, fractionalPart];
 }
 
-export function splitToDigits(
-    num: BigNumber | number | string,
-    base = 10
-): [Digits, Digits] {
-    const result = splitToPartsArr(num, base);
-    return [new Digits(result[0], base), new Digits(result[1], base)];
-}
 
-export function splitToDigitsList(num: BigNumber | number | string, base = 10): Digit[] {
+export function splitToDigitsList(num: BigNumber | number | string, base: number): Digit[] {
     const [integerPart, fractionalPart] = splitToPartsArr(num, base);
     return [
         ...integerPart.map((digit, index) => {
@@ -294,6 +290,7 @@ export function digitsToStr<T extends Digit>(digits: T[]): string {
     const fractionalPart = digits.filter(d => d.position < 0).map(d => d.representationInBase);
 
     if(!fractionalPart.length) return integerPart.join(joinSymbol);
+    if(!integerPart.length) return fractionalPart.join(joinSymbol)
     const separator = '.';
     return `${integerPart.join(joinSymbol)}${separator}${fractionalPart.join(joinSymbol)}`;
 }

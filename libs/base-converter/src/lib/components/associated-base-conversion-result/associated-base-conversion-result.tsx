@@ -28,7 +28,7 @@ export const AssociatedBaseConversionResult: FC<P> = ({ conversion }) => {
 
     const [inputStr, inputBase] = conversion.input;
     const outputStr = conversion.result.valueInBase;
-    const outputBase = conversion.result.base;
+    const outputBase = conversion.result.base();
 
     return (
         <div className={classes.row}>

@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js';
 import { fromNumber, fromString, StandardBaseConverter } from './base-converter';
-import { Digit, PositionalSourceType } from '@calc/calc-arithmetic';
+import { PositionalSourceType } from './positional-number';
+import { Digit } from '../models';
 
 describe('base-converter', () => {
     describe('StandardBaseConverter fromNumber tests', () => {
@@ -252,7 +253,7 @@ describe('base-converter', () => {
                 // then
                 expect(firstStage.input).toEqual(expectedInput);
                 expect(firstStage.result.valueInBase).toEqual(input);
-                expect(firstStage.result.base).toEqual(inputbase);
+                expect(firstStage.result.base()).toEqual(inputbase);
             });
 
             it('should generate second conversion stage base 10 number to target base', () => {
@@ -265,7 +266,7 @@ describe('base-converter', () => {
                 // then
                 expect(secondStage.input).toEqual(expectedInput);
                 expect(secondStage.result.valueInBase).toEqual(valueInBase);
-                expect(secondStage.result.base).toEqual(outputbase);
+                expect(secondStage.result.base()).toEqual(outputbase);
             });
         });
 
@@ -495,7 +496,7 @@ describe('base-converter', () => {
                 .result;
 
             // then
-            expect(result.isNegative).toEqual(true);
+            expect(result.isNegative()).toEqual(true);
             expect(result.valueInBase).toEqual(expectedValueInBase);
             expect(result.decimalValue).toEqual(expectedValue);
             expect(result.complement.toString()).toEqual(expectedComplement);

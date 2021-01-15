@@ -19,57 +19,9 @@ describe('addition-grid', () => {
                 it('should return proper grid values', () => {
                     // then
                     const expected: GridCellConfig[][] = [
-                        [
-                            {
-                                content: ''
-                            },
-                            {
-                                content: '(0)'
-                            },
-                            {
-                                content: '1'
-                            },
-                            {
-                                content: '2'
-                            },
-                            {
-                                content: '3'
-                            }
-                        ],
-                        [
-                            {
-                                content: '+'
-                            },
-                            {
-                                content: '(0)'
-                            },
-                            {
-                                content: '3'
-                            },
-                            {
-                                content: '2'
-                            },
-                            {
-                                content: '1'
-                            }
-                        ],
-                        [
-                            {
-                                content: ''
-                            },
-                            {
-                                content: '(0)'
-                            },
-                            {
-                                content: '4'
-                            },
-                            {
-                                content: '4'
-                            },
-                            {
-                                content: '4'
-                            }
-                        ]
+                        [{ content: '' }, { content: '(0)' }, { content: '1' }, { content: '2' }, { content: '3' }],
+                        [{ content: '+' }, { content: '(0)' }, { content: '3' }, { content: '2' }, { content: '1' }],
+                        [{ content: '' }, { content: '(0)' }, { content: '4' }, { content: '4' }, { content: '4' }]
                     ];
                     expect(grid.values).toEqual(expected);
                 });

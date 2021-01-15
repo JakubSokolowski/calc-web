@@ -1,4 +1,4 @@
-import { Conversion, ConversionToArbitrary } from '@calc/calc-arithmetic';
+import { Conversion, ConversionToArbitrary, Digit } from '@calc/calc-arithmetic';
 import { walk } from '@calc/utils';
 import { GridCellDisplayPreset } from '../models/grid-cell-display-preset';
 import { GridCellConfig } from '../models/grid-cell-config';
@@ -45,7 +45,7 @@ export function buildFractionalConversionGrid(conversion: Conversion, precision 
 
         const multiplicandCells = buildMultiplicandCells(leftMultiplicand, multiplicandMaxLength + 1);
         const multiplicationResultCells = buildMultiplicationResultCells(rightResult, resultMaxLength);
-        const baseCell = { content: conversion.result.base.toString() };
+        const baseCell = { content: conversion.result.base().toString() };
 
         const newRow: GridCellConfig[] = [
             ...multiplicandCells,
@@ -54,7 +54,7 @@ export function buildFractionalConversionGrid(conversion: Conversion, precision 
         ];
 
         const propContent: FloatingPartConversionInfo = {
-            base: conversion.result.base.toString(),
+            base: conversion.result.base().toString(),
             multiplier: leftMultiplicand,
             result: rightResult
         };
@@ -109,7 +109,7 @@ function buildMultiplicationResultCells(rightResult: string, desiredLength: numb
 
 export function buildIntegralConversionGrid(conversion: Conversion): HoverOperationGrid {
     const firstStage = extractConversionToArbitrary(conversion);
-    const reversedResultDigits = [...firstStage.result.integerPart.digits].reverse();
+    const reversedResultDigits: Digit[] = [...firstStage.result.integerPartDigits()].reverse();
     const rows: GridCellConfig[][] = [];
 
     let initialEmptyCellOffset = [[], []];
@@ -141,9 +141,9 @@ export function buildIntegralConversionGrid(conversion: Conversion): HoverOperat
         }
 
         const propContent: RowConversionOperation = {
-            base: firstStage.result.base.toString(),
+            base: firstStage.result.base().toString(),
             dividend: value,
-            remainder: reversedResultDigits[index],
+            remainder: reversedResultDigits[index].representationInBase,
             result: divisors[index + 1]
         };
 
@@ -152,7 +152,7 @@ export function buildIntegralConversionGrid(conversion: Conversion): HoverOperat
             ...left,
             ...right,
             ...rightEmptyCells,
-            { content: reversedResultDigits[index], preset: highlightedCellPreset }
+            { content: reversedResultDigits[index].representationInBase, preset: highlightedCellPreset }
         ];
 
         rowGroups.push(buildRowGroup(newRow, index, propContent));

@@ -1,5 +1,5 @@
 import { BaseDigits } from './base-digits';
-import { PositionalNumber } from './representations';
+import { PositionalNumber } from './positional-number';
 import { fromNumber, fromStringDirect } from './base-converter';
 import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
 import { getMergedExtension, hasInfiniteExtension } from './complement-extension';
@@ -7,12 +7,13 @@ import { complementStrToBaseStr } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
+import { digitsToStr } from '../helpers/conversion-helpers';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if (!areSameBaseNumbers(numbers)) {
         throw Error('Numbers to add must have same base');
     }
-    const numbersAsDigits = numbers.map((number) => number.complement.toDigitsList());
+    const numbersAsDigits = numbers.map((number) => number.complement.asDigits());
     const result = addDigitsArrays(numbersAsDigits);
     return { ...result, numberOperands: numbers };
 }

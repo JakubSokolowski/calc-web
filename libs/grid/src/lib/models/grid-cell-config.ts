@@ -1,6 +1,7 @@
 import { GridCellDisplayPreset } from './grid-cell-display-preset';
+import { ReactElement, ReactText } from 'react';
 
 export interface GridCellConfig {
-  content: any;
+  content: ReactText | ReactElement;
   preset?: GridCellDisplayPreset;
 }

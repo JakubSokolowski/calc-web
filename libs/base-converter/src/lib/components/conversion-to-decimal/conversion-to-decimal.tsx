@@ -48,7 +48,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>
             </div>
-            <PositionalNumberComponent base={conversionStage.result.base} representation={conversionStage.result.valueInBase}/>
+            <PositionalNumberComponent base={conversionStage.result.base()} representation={conversionStage.result.valueInBase}/>
         </div>
     );
 };

@@ -1,7 +1,8 @@
 import { BaseDigits } from './base-digits';
+import { Digit } from '@calc/calc-arithmetic';
 
 describe('base-digits', () => {
-    describe('#getDigit', () => {
+    describe('#getRepresentation', () => {
         describe('when base is smaller than 36', () => {
             it('returns proper digit for value 10 in hexadecimal', () => {
                 expect(BaseDigits.getRepresentation(10, 16)).toBe('A');
@@ -83,6 +84,29 @@ describe('base-digits', () => {
             expect(() => {
                 BaseDigits.getValue('10', 100);
             }).toThrow();
+        });
+    });
+
+    describe('#getDigit', () => {
+        it('returns proper digit for negative complement extension', () => {
+            // given
+            const base = 10;
+            const valueInDecimal = 9;
+            const position = 1;
+            const isComplementExtension = true;
+
+            // when
+            const result = BaseDigits.getDigit(valueInDecimal, base, position, isComplementExtension);
+
+            // then
+            const expected : Digit = {
+                base,
+                representationInBase: '(9)',
+                position,
+                isComplementExtension,
+                valueInDecimal
+            };
+            expect(result).toEqual(expected);
         });
     });
 

@@ -44,7 +44,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
     const onSubmit = (values: FormValues) => {
         const { inputStr, inputBase, outputBase, precision } = values;
-        const conversion = fromString(inputStr, inputBase, outputBase);
+        const conversion = fromString(inputStr, inputBase, outputBase, precision);
         onConversionChange(conversion, precision);
     };
 
