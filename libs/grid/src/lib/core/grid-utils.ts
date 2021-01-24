@@ -9,7 +9,7 @@ import { LineType } from '../models/line-type';
 import { GridLookup } from '../models/grid-lookup';
 import { BaseDigits, Digit, isSubtractionOperand, OperationResult, PositionResult } from '@calc/calc-arithmetic';
 import { GridCellEvent } from '../..';
-import { isFunction } from 'util';
+import { isFunction, isString } from 'util';
 
 
 export function buildEmptyGrid(width: number, height: number): GridCellConfig[][] {
@@ -284,7 +284,7 @@ export function digitsToCellConfig<T extends Digit>(digits: T[]): GridCellConfig
     return digits.map((digit) => {
         const content = digit.representationInBase;
         const cell: GridCellConfig = {
-            content
+            content: content
         };
 
         if (isSubtractionOperand(digit)) {
@@ -309,6 +309,7 @@ export function padWithEmptyCells(cells: GridCellConfig[], desiredWidth: number,
 export enum CellPaddingPolicy {
     PadWithZeros = 'PadWithZeros',
     PadWithEmptyCells = 'PadWithEmptyCells',
+    PadWithComplementExtension = 'PadWithComplementExtension'
 }
 
 export function operandDigitsToCellConfig<T extends Digit>(digits: T[], info: ResultMeta, base: number, fractionPaddingPolicy: CellPaddingPolicy = CellPaddingPolicy.PadWithZeros): GridCellConfig[] {
@@ -336,7 +337,6 @@ function getPaddingContentForPolicy(base: number, policy: CellPaddingPolicy): st
     }
 }
 
-
 export function eraseContentEnd(cells: GridCellConfig[], count: number): GridCellConfig[] {
     const totalLength = cells.length;
     return cells.map((cell, index) => {
@@ -351,13 +351,15 @@ export function eraseContentEnd(cells: GridCellConfig[], count: number): GridCel
 }
 
 
-export function padDigitsWithContent<T extends Digit>(digits: T[], desiredWidth: number, content: string, direction: 'Left' | 'Right'): GridCellConfig[] {
+export type PaddingGenerator = <T extends Digit>(digits: T[], index: number, desiredWidth: number) => string;
+
+export function padDigitsWithContent<T extends Digit>(digits: T[], desiredWidth: number, padding: string | PaddingGenerator, direction: 'Left' | 'Right'): GridCellConfig[] {
     const cells = digitsToCellConfig(digits);
     if (desiredWidth <= digits.length) return cells;
 
     const missingCellsCount = desiredWidth - digits.length;
-    const newEmptyCells: GridCellConfig[] = [...Array(missingCellsCount).keys()].map(() => {
-        return ({ content });
+    const newEmptyCells: GridCellConfig[] = [...Array(missingCellsCount).keys()].map((index) => {
+        return ({ content: isString(padding) ? padding : padding(digits, index, desiredWidth) });
     });
 
     return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];

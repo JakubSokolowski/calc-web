@@ -36,8 +36,8 @@ function getNumOfComplementExtensions(digit: AdditionOperand, mostSignificantPos
     return NUM_ADDITIONAL_EXTENSIONS + numMandatoryComplementExtensions;
 }
 
-function generateComplementExtension(digit: AdditionOperand, numExtensions: number): AdditionOperand[] {
-    return new Array<AdditionOperand>(numExtensions)
+export function generateComplementExtension<T extends Digit>(digit: T, numExtensions: number): T[] {
+    return new Array<T>(numExtensions)
         .fill({ ...digit })
         .map((digit, index) => ({ ...digit, position: digit.position + index + 1 }))
         .reverse();

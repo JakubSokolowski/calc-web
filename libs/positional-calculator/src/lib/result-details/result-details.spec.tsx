@@ -3,7 +3,7 @@ import React from 'react';
 import {
     addPositionalNumbers,
     fromNumber,
-    multiplyPositionalNumbers,
+    multiplyDefault,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
 import { ResultDetails } from './result-details';
@@ -68,7 +68,7 @@ describe('ResultDetails', () => {
             // given
             const a = fromNumber(41, 10).result;
             const b = fromNumber(19, 10).result;
-            const result = multiplyPositionalNumbers([a, b]);
+            const result = multiplyDefault([a, b]);
 
            // then
             expect(() => {

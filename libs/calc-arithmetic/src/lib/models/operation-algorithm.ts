@@ -9,7 +9,8 @@ export enum SubtractionType {
 }
 
 export enum MultiplicationType {
-    Default = 'Default'
+    Default = 'Default',
+    WithExtension = 'WithExtension'
 }
 
 export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
@@ -41,6 +42,10 @@ export const multiplicationAlgorithms: OperationAlgorithm<MultiplicationType>[] 
     {
         type: MultiplicationType.Default,
         tKey: 'operations.multiplication.default'
+    },
+    {
+        type: MultiplicationType.WithExtension,
+        tKey: 'operations.multiplication.withExtension'
     },
 ];
 

@@ -40,13 +40,13 @@ export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
         : firstDifferentIndex;
 
     const startPosition = rest[startPositionIndex].position;
-    const mergedExtension = getMergedExtension(extensionDigit, startPosition + 1);
+    const mergedExtension = getComplementExtension(extensionDigit, startPosition + 1);
     const nonExtensionDigits = rest.slice(firstDifferentIndex);
 
     return [mergedExtension, ...nonExtensionDigits]
 }
 
-export function getMergedExtension<T extends Digit>(operand: T, position: number): T {
+export function getComplementExtension<T extends Digit>(operand: T, position: number): T {
     const base = operand.base;
     const isZeroExtension = operand.valueInDecimal === 0;
     const representationValue = isZeroExtension ? 0 : -1;
@@ -70,3 +70,21 @@ function areOperandValuesEqual(a: AdditionOperand, b: AdditionOperand): boolean 
         && a.representationInBase === b.representationInBase;
 }
 
+export function extendComplement<T extends Digit>(digits: T[], numPositions: number): T[] {
+    if (numPositions <= 0) return digits;
+
+    const [digitToExtend, ...rest] = digits;
+    const extensions = new Array<T>(numPositions)
+        .fill({
+            ...digitToExtend,
+            isComplementExtension: false,
+            representationInBase: BaseDigits.getRepresentation(digitToExtend.valueInDecimal, digitToExtend.base)
+        })
+        .map((digit, index) => ({ ...digit, position: digit.position + index }))
+        .reverse();
+
+    extensions[0].representationInBase = BaseDigits.getRepresentation(extensions[0].valueInDecimal, digitToExtend.base, true);
+    extensions[0].isComplementExtension = true;
+
+    return [...extensions, ...rest];
+}

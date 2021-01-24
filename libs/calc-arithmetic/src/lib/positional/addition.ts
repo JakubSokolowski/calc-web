@@ -1,13 +1,12 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './positional-number';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
-import { getMergedExtension, hasInfiniteExtension } from './complement-extension';
+import { AdditionOperand, AdditionPositionResult, AdditionResult, Digit, PositionResult } from '../models';
+import { getComplementExtension, hasInfiniteExtension } from './complement-extension';
 import { complementStrToBaseStr } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
-import { digitsToStr } from '../helpers/conversion-helpers';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if (!areSameBaseNumbers(numbers)) {
@@ -106,10 +105,10 @@ export function extractResultDigitsFromAddition(positionResults: AdditionPositio
 
     const withExtension: AdditionOperand[] = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
 
-    return mergeExtensionDigitsForAddition(withExtension, positionResults);
+    return mergeAdditionExtensionDigit(withExtension, positionResults);
 }
 
-export function mergeExtensionDigitsForAddition(resultDigits: AdditionOperand[], positionResults: AdditionPositionResult[]): AdditionOperand[] {
+export function mergeAdditionExtensionDigit<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
     const [, extensionDigit, ...rest] = resultDigits;
     const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
 
@@ -125,24 +124,24 @@ export function mergeExtensionDigitsForAddition(resultDigits: AdditionOperand[],
     if (shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
 
     const startPosition = rest[startPositionIndex].position;
-    const mergedExtension = getMergedExtension(extensionDigit, startPosition + 1);
+    const mergedExtension = getComplementExtension(extensionDigit, startPosition + 1);
     const nonExtensionDigits = rest.slice(startPositionIndex);
 
     return [mergedExtension, ...nonExtensionDigits];
 }
 
-function prevPositionGeneratedFromInitialDigits(index: number, digits: AdditionOperand[], positionResults: AdditionPositionResult[]): boolean {
+function prevPositionGeneratedFromInitialDigits<T extends Digit>(index: number, digits: AdditionOperand[], positionResults: PositionResult<T>[]): boolean {
     const prevPosition = digits[index - 1].position;
     const prevPositionResult = positionResults.find((res) => res.valueAtPosition.position === prevPosition);
 
     return positionGeneratedFromInitialDigits(prevPositionResult);
 }
 
-function positionGeneratedFromInitialDigits(positionResult: AdditionPositionResult): boolean {
+function positionGeneratedFromInitialDigits<T extends Digit>(positionResult: PositionResult<T>): boolean {
     return positionResult.operands.every((op) => !op.isComplementExtension);
 }
 
-export function findFirstNonRepeatingDigitIndex(resultDigits: AdditionOperand[]): number {
+export function findFirstNonRepeatingDigitIndex<T extends Digit>(resultDigits: T[]): number {
     const [, extensionDigit, ...rest] = resultDigits;
     return rest.findIndex((digit) => {
         return digit.valueInDecimal != extensionDigit.valueInDecimal;
@@ -225,5 +224,3 @@ function carryToDigits(decimalValue: number, base: number, startingPosition: num
 function isNonZeroDigit(digit: AdditionOperand): boolean {
     return digit.valueInDecimal != 0;
 }
-
-

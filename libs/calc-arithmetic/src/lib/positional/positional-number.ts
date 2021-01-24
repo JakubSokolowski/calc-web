@@ -49,7 +49,7 @@ export class PositionalNumber extends NumberComplement {
         return this.decimalValue.isNegative();
     }
 
-    toString(withExtension = true): string {
-        return `${this.sign}${super.toString(withExtension)}`;
+    toString(): string {
+        return `${this.sign}${super.toString()}`;
     }
 }

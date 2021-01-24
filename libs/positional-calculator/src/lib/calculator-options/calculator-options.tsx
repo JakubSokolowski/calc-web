@@ -1,7 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
-    additionAlgorithms,
     algorithmMap,
     allOperations,
     BaseDigits, multiplicationAlgorithms,
@@ -62,19 +61,19 @@ const useStyles = makeStyles((theme: Theme) =>
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const classes = useStyles();
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[0]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || additionAlgorithms[0]);
+    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
-        [{valid: true, representation: '1', dndKey: '1'}, {valid: true, representation: '-1', dndKey: '2'}]
+        [{valid: true, representation: '(0)3156', dndKey: '1'}, {valid: true, representation: '(7)6423', dndKey: '2'}]
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
-    const initialValues: FormValues = { base: defaultBase || 10, };
+    const initialValues: FormValues = { base: defaultBase || 8, };
 
     const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidBase(base)) {
@@ -125,7 +124,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         const canCalculate = everyOperandValid && allowedNumOfOperands;
         setErrorMessage(newMessage);
         setCanCalculate(canCalculate);
-    }, [operands, operation, t]);
+    }, [operands, operation, t, form.values.base]);
 
     useEffect(() => {
         onOperationChange(operation.type);

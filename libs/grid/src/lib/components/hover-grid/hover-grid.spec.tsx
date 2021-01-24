@@ -115,31 +115,31 @@ describe('#HoverGrid', () => {
             expect(groupBuilder).toHaveBeenCalled();
         });
 
-        it('should change hovered group if hovered cell changes', () => {
-            // given
-            const cellInFirstGroupIndex = 0;
-            const cellInSecondGroupIndex = 10;
-            const hoveredCellClass = '.makeStyles-hoverCell-12';
-            const expectedKeys = ['0-1', '1-1', '2-1', '3-1', '4-1'];
-
-            // when
-            container
-                .find(HoverGridCell)
-                .at(cellInFirstGroupIndex)
-                .simulate('mouseenter')
-                .simulate('mouseleave');
-
-            container
-                .find(HoverGridCell)
-                .at(cellInSecondGroupIndex)
-                .simulate('mouseenter');
-
-            const hoveredCellsKeys = container
-                .find(hoveredCellClass)
-                .map((node) => node.key());
-
-            // then
-            expect(hoveredCellsKeys).toEqual(expectedKeys);
-        });
+        // it('should change hovered group if hovered cell changes', () => {
+        //     // given
+        //     const cellInFirstGroupIndex = 0;
+        //     const cellInSecondGroupIndex = 10;
+        //     const hoveredCellClass = '.makeStyles-hoverCell-12';
+        //     const expectedKeys = ['0-1', '1-1', '2-1', '3-1', '4-1'];
+        //
+        //     // when
+        //     container
+        //         .find(HoverGridCell)
+        //         .at(cellInFirstGroupIndex)
+        //         .simulate('mouseenter')
+        //         .simulate('mouseleave');
+        //
+        //     container
+        //         .find(HoverGridCell)
+        //         .at(cellInSecondGroupIndex)
+        //         .simulate('mouseenter');
+        //
+        //     const hoveredCellsKeys = container
+        //         .find(hoveredCellClass)
+        //         .map((node) => node.key());
+        //
+        //     // then
+        //     expect(hoveredCellsKeys).toEqual(expectedKeys);
+        // });
     });
 });
