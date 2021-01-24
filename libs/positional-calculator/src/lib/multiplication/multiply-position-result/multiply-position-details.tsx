@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { InlineMath } from 'react-katex';
 import { fromNumber, MultiplicationPositionResult } from '@calc/calc-arithmetic';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     result: MultiplicationPositionResult;

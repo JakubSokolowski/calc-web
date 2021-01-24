@@ -1,8 +1,8 @@
 import React, { FC } from 'react';
-import { InlineMath } from 'react-katex';
 import { Tooltip } from '@material-ui/core';
 import { fromString } from '@calc/calc-arithmetic';
 import { replaceAll } from '@calc/utils';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     base: number;

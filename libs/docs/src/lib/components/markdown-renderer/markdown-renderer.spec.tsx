@@ -2,8 +2,8 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { MarkdownRenderer} from './markdown-renderer';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
-import { BlockMath, InlineMath } from 'react-katex';
 import { RendererMapping } from '@calc/docs';
+import { BlockMath, InlineMath } from '@calc/common-ui';
 
 describe('MarkdownRenderer', () => {
     describe('heading renderer', () => {

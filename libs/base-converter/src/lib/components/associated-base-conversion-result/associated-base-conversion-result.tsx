@@ -3,7 +3,7 @@ import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
-import { InlineMath } from 'react-katex';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     conversion: AssociatedBaseConversion;

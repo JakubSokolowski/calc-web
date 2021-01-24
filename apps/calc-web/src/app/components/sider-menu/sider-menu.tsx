@@ -3,13 +3,13 @@ import { useTranslation } from 'react-i18next';
 import HomeIcon from '@material-ui/icons/Home';
 import BuildIcon from '@material-ui/icons/Build';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
-import { MenuTree, TreeNodeProps } from '@calc/common-ui';
+import { MenuTree, TreeNode } from '@calc/common-ui';
 
 
 export const SiderMenu = () => {
     const { t } = useTranslation();
 
-    const nodes: TreeNodeProps[] = [
+    const nodes: TreeNode[] = [
         {
             labelText: t('routes.home'),
             path: '/',

@@ -82,10 +82,9 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
     return {
         lines,
         groups,
-        values
+        values,
     }
 }
-
 
 function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCellConfig[][], addOperandRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];
@@ -93,6 +92,8 @@ function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCe
     if(info.hasMultiplicandComplement) {
         const complementSeparatorIndex = 0;
         lines.push({ type: LineType.Horizontal, index: complementSeparatorIndex });
+
+        lines.push({ type: LineType.Vertical, index: info.totalWidth  -1});
     }
 
     const offset = info.hasMultiplicandComplement ? 1 : 0;

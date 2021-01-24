@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import { InlineMath } from 'react-katex';
 
 interface P {
     value: string;

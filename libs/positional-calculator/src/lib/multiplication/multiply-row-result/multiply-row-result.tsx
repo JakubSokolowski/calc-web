@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { digitsToStr, MultiplicationRowResult } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
-import { InlineMath } from 'react-katex';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     result: MultiplicationRowResult;
