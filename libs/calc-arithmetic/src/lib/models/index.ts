@@ -79,6 +79,7 @@ export type SubtractionResult = OperationResult<SubtractionOperand, SubtractionP
 export interface MultiplicationResult extends OperationResult<MultiplicationOperand, MultiplicationPositionResult> {
     stepResults: MultiplicationRowResult[];
     addition: AdditionResult;
+    multiplicandComplement?: PositionalNumber;
 }
 
 

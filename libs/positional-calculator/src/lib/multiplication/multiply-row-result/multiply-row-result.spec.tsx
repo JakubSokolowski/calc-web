@@ -1,6 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { fromNumber, multiplyPositionalNumbers } from '@calc/calc-arithmetic';
+import { fromNumber, multiplyDefault } from '@calc/calc-arithmetic';
 import { MultiplyRowDetails } from './multiply-row-result';
 
 describe('MultiplyRowDetails', () => {
@@ -8,7 +8,7 @@ describe('MultiplyRowDetails', () => {
 
     const a = fromNumber(10, 10).result;
     const b = fromNumber(5, 10).result;
-    const res = multiplyPositionalNumbers([a, b]);
+    const res = multiplyDefault([a, b]);
     const rowRes = res.stepResults[0];
 
     beforeEach(() => {

@@ -1,5 +1,5 @@
 import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
-import { AdditionOperand, AdditionPositionResult } from '../models';
+import { AdditionOperand, AdditionPositionResult, Digit } from '../models';
 
 
 describe('complement-extension', () => {
@@ -459,7 +459,7 @@ describe('complement-extension', () => {
             };
 
             // when
-            const result = hasInfiniteExtension(prev, curr,3 );
+            const result = hasInfiniteExtension(prev, curr, 3);
 
             // then
             expect(result).toBeTruthy();
@@ -543,6 +543,28 @@ describe('complement-extension', () => {
             expect(result).toEqual(expected);
         });
 
+        it('should merge leading zeros into extension', () => {
+            // given
+            const digits: Digit[] = [
+                { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 3, isComplementExtension: true },
+                { base: 8, representationInBase: '0', valueInDecimal: 0, position: 2 },
+                { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 },
+            ];
+
+            // when
+            const result = mergeExtensionDigits(digits);
+
+            // then
+            const expected: Digit[] = [
+                { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 2, isComplementExtension: true },
+                { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 },
+            ];
+
+            expect(result).toEqual(expected);
+        });
+
         it('should return proper digit array for only zeroes', () => {
             // given
             const resultDigits: AdditionOperand[] = [
@@ -586,6 +608,6 @@ describe('complement-extension', () => {
                 }
             ];
             expect(result).toEqual(expected);
-        })
+        });
     });
 });

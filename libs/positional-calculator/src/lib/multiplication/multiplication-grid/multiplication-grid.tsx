@@ -1,5 +1,6 @@
 import {
     AdditionPositionResult,
+    AlgorithmType,
     MultiplicationOperand,
     MultiplicationPositionResult,
     MultiplicationResult,
@@ -29,11 +30,15 @@ import { flatten } from 'lodash';
 import { MultiplyRowDetails } from '../multiply-row-result/multiply-row-result';
 import { MultiplyPositionDetails } from '../multiply-position-result/multiply-position-details';
 
-export type MultiplicationCellProps = MultiplicationRowResult | MultiplicationPositionResult | AdditionPositionResult;
-
 export function buildMultiplicationGrid(result: MultiplicationResult): HoverOperationGrid {
     const base = result.resultDigits[0].base;
     const info = extractMultiplicationResultMeta(result);
+
+    const yOffset = info.hasMultiplicandComplement ? 1 : 0;
+
+    const multiplicandComplementRow = result.multiplicandComplement
+        ? operandDigitsToCellConfig(result.multiplicandComplement.complement.asDigits(), info, base)
+        : [];
 
     const operandRows: GridCellConfig[][] = result.operands.map((operandDigits: MultiplicationOperand[], index) => {
         const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
@@ -56,23 +61,28 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
     const additionGroups = buildColumnGroups(
         [...additionOperandRows, resultRow],
         [...result.addition.stepResults].reverse(),
-        2,
+        2 + yOffset,
         (value: AdditionPositionResult) => <AddAtPositionHoverContent positionResult={value}/>,
-        cell => cell.y < 2 + additionOperandRows.length
+        cell => cell.y < 2 + yOffset + additionOperandRows.length
     );
 
     const digitMultiplicationGroups = result.stepResults.map((result, rowIndex) => {
         return buildDigitMultiplicationGroups([...result.rowPositionResults], rowIndex, info);
     });
 
-    const values = [...operandRows, ...additionOperandRows, resultRow];
-    const lines = getGridLines(info, operandRows, additionOperandRows);
+    let values = [...operandRows, ...additionOperandRows, resultRow];
+    let groups = [...additionGroups, ...multiplicationGroups, ...flatten(digitMultiplicationGroups)];
 
+    if(multiplicandComplementRow.length) {
+        values = [multiplicandComplementRow, ...values];
+        groups = [...groups, buildMultiplicandComplementGroup(info)];
+    }
+    const lines = getGridLines(info, operandRows, additionOperandRows);
 
     return {
         lines,
-        groups: [...additionGroups, ...multiplicationGroups, ...flatten(digitMultiplicationGroups)],
-        values: values
+        groups,
+        values
     }
 }
 
@@ -80,17 +90,25 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
 function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCellConfig[][], addOperandRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];
 
-    const multiplicationSeparatorIndex = initialOperandRows.length -1;
+    if(info.hasMultiplicandComplement) {
+        const complementSeparatorIndex = 0;
+        lines.push({ type: LineType.Horizontal, index: complementSeparatorIndex });
+    }
+
+    const offset = info.hasMultiplicandComplement ? 1 : 0;
+
+
+    const multiplicationSeparatorIndex = initialOperandRows.length -1 + offset;
     lines.push({ type: LineType.Horizontal, index: multiplicationSeparatorIndex });
 
-    const resultIndex = initialOperandRows.length + addOperandRows.length -1;
+    const resultIndex = initialOperandRows.length + addOperandRows.length -1 + offset;
     lines.push({ type: LineType.Horizontal, index: resultIndex });
 
     const operandFractionDigitsMax = Math.max(info.numMultiplicandFractionalDigits, info.numMultiplierFractionalDigits);
 
     if(operandFractionDigitsMax > 0) {
         const verticalLineIndex = info.totalWidth - operandFractionDigitsMax - 1;
-        const span: LineDefinition = {from: 0, to: 1};
+        const span: LineDefinition = {from: 0, to: 1 + offset};
         lines.push({type: LineType.Vertical, index: verticalLineIndex, span});
 
         const resultSepIndex = info.totalWidth - operandFractionDigitsMax * 2 -1;
@@ -105,6 +123,9 @@ interface MultiplicationResultMeta extends ResultMeta {
     numMultiplicandFractionalDigits: number;
     numMultiplierFractionalDigits: number;
     maxOperandsFractionDigits: number;
+    algorithmType: AlgorithmType;
+    hasMultiplicandComplement: boolean;
+    totalHeight: number;
 }
 
 function extractMultiplicationResultMeta(result: MultiplicationResult): MultiplicationResultMeta {
@@ -122,9 +143,18 @@ function extractMultiplicationResultMeta(result: MultiplicationResult): Multipli
         numMultiplicandFractionalDigits,
         numMultiplierFractionalDigits,
         maxOperandsFractionDigits,
+        algorithmType: result.algorithmType,
+        totalHeight: getTotalHeight(result),
+        hasMultiplicandComplement: !!result.multiplicandComplement
     }
 }
 
+function getTotalHeight(result: MultiplicationResult): number {
+    const multiplicandComplementOffset = result.multiplicandComplement ? 1 : 0;
+    const operandsOffset = result.numberOperands.length;
+    const multiplicationRowsOffset = result.stepResults.length;
+    return multiplicandComplementOffset + operandsOffset + multiplicationRowsOffset;
+}
 
 function getTotalWidth(result: MultiplicationResult): number {
     const resultLength = result.resultDigits.length;
@@ -134,9 +164,8 @@ function getTotalWidth(result: MultiplicationResult): number {
 
 function getMinOperandsSpan(operands: MultiplicationOperand[][]): number {
     const [multiplicand, multiplier] = operands;
-    return multiplicand.length + multiplier.length;
+    return multiplicand.length + multiplier.length -1;
 }
-
 
 function buildRowMultiplicationGroups(stepResults: MultiplicationRowResult[], info: MultiplicationResultMeta): CellGroup[] {
     return stepResults.map((res, index) => {
@@ -145,14 +174,15 @@ function buildRowMultiplicationGroups(stepResults: MultiplicationRowResult[], in
 }
 
 function buildRowMultiplicationGroup(result: MultiplicationRowResult, index: number, info: MultiplicationResultMeta): CellGroup {
-    const trigger: CellConfig = { x: info.totalWidth - index - 1, y: 1 };
+    const yOffset = info.hasMultiplicandComplement ? 1 : 0;
+    const trigger: CellConfig = { x: info.totalWidth - index - 1, y: 1 + yOffset };
 
-    const multiplicandRowStart: CellConfig = { x: 0, y: 0 };
-    const multiplicandRowEnd: CellConfig = { x: info.totalWidth -1, y: 0 };
+    const multiplicandRowStart: CellConfig = { x: 0, y: 0 + yOffset };
+    const multiplicandRowEnd: CellConfig = { x: info.totalWidth -1, y: 0 + yOffset };
     const multiplicandRow = groupCellsInStraightLine(multiplicandRowStart, multiplicandRowEnd, true);
 
-    const resultRowStart: CellConfig = { x: 0, y: index + 2 };
-    const resultRowEnd: CellConfig = { x: info.totalWidth -1, y: index + 2 };
+    const resultRowStart: CellConfig = { x: 0, y: index + 2 + yOffset };
+    const resultRowEnd: CellConfig = { x: info.totalWidth -1, y: index + 2 + yOffset };
     const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd, true);
 
     return {
@@ -163,27 +193,29 @@ function buildRowMultiplicationGroup(result: MultiplicationRowResult, index: num
     }
 }
 
-function buildDigitMultiplicationGroups(stepResults: MultiplicationPositionResult[], rowIndex: number, info: ResultMeta): CellGroup[] {
+function buildDigitMultiplicationGroups(stepResults: MultiplicationPositionResult[], rowIndex: number, info: MultiplicationResultMeta): CellGroup[] {
     return stepResults.map((res, positionIndex) => {
         return buildDigitMultiplicationGroup(res, rowIndex, positionIndex, info)
     });
 }
 
-function buildDigitMultiplicationGroup(stepResult: MultiplicationPositionResult, rowIndex: number, positionIndex: number, info: ResultMeta): CellGroup {
+function buildDigitMultiplicationGroup(stepResult: MultiplicationPositionResult, rowIndex: number, positionIndex: number, info: MultiplicationResultMeta): CellGroup {
+    const offset = info.hasMultiplicandComplement ? 1 : 0;
+
     const trigger: CellConfig = {
         x: info.totalWidth - 1 - positionIndex - rowIndex,
-        y: rowIndex + 2
+        y: rowIndex + 2 + offset
     };
 
     const multiplier: CellConfig = {
         x: info.totalWidth - 1 - rowIndex,
-        y: 1,
+        y: 1 + offset,
         preventGroupTrigger: true
     };
 
     const multiplicand: CellConfig = {
         x: info.totalWidth - 1 - positionIndex,
-        y: 0,
+        y: 0 + offset,
         preventGroupTrigger: true
     };
 
@@ -193,6 +225,22 @@ function buildDigitMultiplicationGroup(stepResult: MultiplicationPositionResult,
         contentProps: stepResult,
         contentBuilder:  (result: MultiplicationPositionResult) => <MultiplyPositionDetails result={result}/>,
         popoverPlacement: 'bottom'
+    }
+}
+
+function buildMultiplicandComplementGroup(info: MultiplicationResultMeta): CellGroup {
+    const complementRowStart: CellConfig = { x: 0, y: 0 };
+    const complementRowEnd: CellConfig = { x: info.totalWidth -1, y: 0 };
+    const multiplicandRow = groupCellsInStraightLine(complementRowStart, complementRowEnd);
+
+
+    const resultRowStart: CellConfig = { x: 0, y: info.totalHeight };
+    const resultRowEnd: CellConfig = { x: info.totalWidth -1, y: info.totalHeight };
+    const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd);
+
+    return {
+        anchorPosition: CellPosition.Top,
+        cells: [...multiplicandRow, ...resultRow]
     }
 }
 
