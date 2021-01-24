@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { PositionalNumber } from '@calc/calc-arithmetic';
-import { InlineMath } from 'react-katex';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
 import { PositionalNumberComponent } from '@calc/positional-ui';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     operands: PositionalNumber[];

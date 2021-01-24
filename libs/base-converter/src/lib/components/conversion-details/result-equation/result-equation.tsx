@@ -1,9 +1,9 @@
 import React, { FC } from 'react';
 import { Conversion } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
-import { InlineMath } from 'react-katex';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
+import { InlineMath } from '@calc/common-ui';
 
 interface P {
     conversion: Conversion;

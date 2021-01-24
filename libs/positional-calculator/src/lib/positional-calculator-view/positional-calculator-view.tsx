@@ -72,7 +72,6 @@ export const PositionalCalculatorView: FC = () => {
 
         setParams(params);
         const res = calculate(params);
-        console.log(res);
         setRes(res);
     };
 

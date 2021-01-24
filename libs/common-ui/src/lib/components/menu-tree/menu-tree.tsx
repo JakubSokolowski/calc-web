@@ -1,13 +1,13 @@
 import React, { useCallback, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
-import TreeItem, { TreeItemProps } from '@material-ui/lab/TreeItem';
+import TreeItem from '@material-ui/lab/TreeItem';
 import Typography from '@material-ui/core/Typography';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useMountEffect } from '@calc/utils';
+import { TreeNode } from '../../core/models/tree-node';
 
 declare module 'csstype' {
     interface Properties {
@@ -15,17 +15,6 @@ declare module 'csstype' {
         '--tree-view-bg-color'?: string;
     }
 }
-
-export type TreeNodeProps = Omit<TreeItemProps, 'nodeId'> & {
-    bgColor?: string;
-    color?: string;
-    labelIcon?: React.ElementType<SvgIconProps>;
-    labelInfo?: string;
-    labelText: string;
-    path?: string;
-    childNodes?: TreeNodeProps[];
-};
-
 
 const useTreeItemStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -77,7 +66,7 @@ const useTreeItemStyles = makeStyles((theme: Theme) =>
     })
 );
 
-function StyledTreeItem(props: TreeNodeProps) {
+function StyledTreeItem(props: TreeNode) {
     const classes = useTreeItemStyles();
     const { labelText, labelIcon: LabelIcon, labelInfo, color, bgColor, ...other } = props;
 
@@ -123,7 +112,7 @@ const useStyles = makeStyles(
 );
 
 interface P {
-    nodes: TreeNodeProps[];
+    nodes: TreeNode[];
 }
 
 export function MenuTree(props: P) {
@@ -133,7 +122,7 @@ export function MenuTree(props: P) {
     const { pathname } = useLocation();
     const [expanded, setExpanded] = useState([]);
 
-    const handleClick = useCallback((node: TreeNodeProps) => {
+    const handleClick = useCallback((node: TreeNode) => {
         if (node.path) {
             history.push(node.path);
         }
@@ -160,7 +149,7 @@ export function MenuTree(props: P) {
     });
 
 
-    const renderTree = useCallback((nodes: TreeNodeProps[]) => {
+    const renderTree = useCallback((nodes: TreeNode[]) => {
         return nodes.map((node, idx) => (
             <StyledTreeItem
                 key={idx}
