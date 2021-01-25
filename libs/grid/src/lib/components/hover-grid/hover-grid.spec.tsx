@@ -1,9 +1,10 @@
 import { mount, ReactWrapper } from 'enzyme';
-import { buildIntegralConversionGrid, HoverGrid } from '@calc/grid';
+import { buildIntegralConversionGrid, GridLabel, HoverGrid } from '@calc/grid';
 import React from 'react';
 import { fromNumber } from '@calc/calc-arithmetic';
 import HoverGridCell from '../hover-cell/hover-grid-cell';
 import { Tooltip } from '@material-ui/core';
+import { OperandLabel } from '../operand-label/operand-label';
 
 // for Material UI Tooltip. Remove after jest bump to 26.0
 document.createRange = () => ({
@@ -142,4 +143,20 @@ describe('#HoverGrid', () => {
         //     expect(hoveredCellsKeys).toEqual(expectedKeys);
         // });
     });
+
+    it('should display grid label when label is defined', () => {
+        // given
+        const labelConfig: GridLabel = {
+            labels: ['1', '2']
+        };
+
+        // when
+        container = mount(
+            <HoverGrid values={values} groups={groups} lines={lines} label={labelConfig}/>
+        );
+
+        // then
+        const opLabel = container.find(OperandLabel).at(0);
+        expect(opLabel.length).toEqual(1);
+    })
 });

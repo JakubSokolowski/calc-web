@@ -16,6 +16,8 @@ import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../co
 import { AxisConfig } from '../../models/axis-config';
 import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
+import { GridLabel } from '../../..';
+import { OperandLabel } from '../operand-label/operand-label';
 
 export interface HoverGridProps {
     values: GridCellConfig[][];
@@ -25,6 +27,7 @@ export interface HoverGridProps {
     xAxis?: AxisConfig;
     title?: string;
     id?: string;
+    label?: GridLabel;
 }
 
 const HtmlTooltip = withStyles((theme: Theme) => ({
@@ -50,7 +53,8 @@ const useStyles = makeStyles((theme: Theme) => {
         cellBox: {
             width: '100%',
             maxHeight: '620px',
-            display: 'inline-block'
+            display: 'flex',
+            flexDirection: 'row'
         },
         cellContent: {
             width: 'auto',
@@ -87,6 +91,7 @@ export const HoverGrid: FC<HoverGridProps> = (
         groups, lines,
         groupBuilder,
         title,
+        label,
         xAxis,
         id
     }) => {
@@ -203,9 +208,15 @@ export const HoverGrid: FC<HoverGridProps> = (
                     {xAxisIndices}
                 </div>
             }
-            <div className={classes.cellBox}>
-                <div className={classes.cellContent} ref={gridRef}>
-                    {rows}
+            <div>
+                <div className={classes.cellBox}>
+                    <div className={classes.cellContent} ref={gridRef}>
+                        {rows}
+                    </div>
+                    {
+                        label &&
+                        <OperandLabel labelConfig={label}/>
+                    }
                 </div>
             </div>
         </div>
