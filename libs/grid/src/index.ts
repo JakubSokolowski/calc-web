@@ -24,4 +24,5 @@ export { PaddedGrid } from './lib/components/padded-grid/padded-grid';
 export { RowConversionOperation } from './lib/models/row-conversion-operation';
 export { FloatingPartConversionInfo } from './lib/models/floating-part-conversion-info';
 export { GridLookup } from './lib/models/grid-lookup';
+export { GridLabel } from './lib/models/grid-label';
 export { getUnderline } from './lib/core/grid-line-utils';

@@ -19,9 +19,12 @@ const useStyles = makeStyles((theme: Theme) => {
     })
 });
 
-export const PaddedGrid: FC<P> = ({desiredWidth, values, xAxis, ...rest}) => {
+export const PaddedGrid: FC<P> = ({desiredWidth, values, xAxis,label,...rest}) => {
     const classes = useStyles();
-    const width = values[0] ? values[0].length : 0;
+    const spaceForLabel = label ? 1 : 0;
+    const width = values[0]
+        ? values[0].length + spaceForLabel
+        : 0;
     const offset = desiredWidth - width;
 
     if(offset > 0) {
@@ -32,7 +35,7 @@ export const PaddedGrid: FC<P> = ({desiredWidth, values, xAxis, ...rest}) => {
         return (
             <div className={classes.wrapper}>
                 <div>
-                    <HoverGrid values={values} xAxis={xAxis} {...rest}/>
+                    <HoverGrid values={values} xAxis={xAxis} label={label} {...rest}/>
                 </div>
                 <HoverGrid values={paddingGrid} groups={[]} lines={[]} xAxis={ax}/>
             </div>
@@ -41,7 +44,7 @@ export const PaddedGrid: FC<P> = ({desiredWidth, values, xAxis, ...rest}) => {
 
     return (
         <div className={classes.wrapper}>
-            <HoverGrid values={values} {...rest}/>
+            <HoverGrid values={values} label={label} {...rest}/>
         </div>
     )
 };
