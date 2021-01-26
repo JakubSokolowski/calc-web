@@ -30,9 +30,14 @@ function hasSingleCarryFromPreviousPosition(curr: AdditionPositionResult): boole
 }
 
 export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
-    const [, extensionDigit, ...rest] = resultDigits;
+    if(resultDigits.length < 2) return resultDigits;
+
+    const [extension, firstNonExtension, ...rest] = resultDigits;
+    const hasDigitsToMerge = extension.valueInDecimal === firstNonExtension.valueInDecimal;
+    if(!hasDigitsToMerge) return resultDigits;
+
     const firstDifferentIndex = rest.findIndex((digit) => {
-        return digit.valueInDecimal != extensionDigit.valueInDecimal;
+        return digit.valueInDecimal != firstNonExtension.valueInDecimal;
     });
 
     const startPositionIndex = firstDifferentIndex === -1
@@ -40,7 +45,7 @@ export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
         : firstDifferentIndex;
 
     const startPosition = rest[startPositionIndex].position;
-    const mergedExtension = getComplementExtension(extensionDigit, startPosition + 1);
+    const mergedExtension = getComplementExtension(firstNonExtension, startPosition + 1);
     const nonExtensionDigits = rest.slice(firstDifferentIndex);
 
     return [mergedExtension, ...nonExtensionDigits]

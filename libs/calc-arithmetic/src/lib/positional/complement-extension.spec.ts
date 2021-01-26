@@ -1,4 +1,4 @@
-import { hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
+import { extendComplement, hasInfiniteExtension, mergeExtensionDigits } from './complement-extension';
 import { AdditionOperand, AdditionPositionResult, Digit } from '../models';
 
 
@@ -467,44 +467,20 @@ describe('complement-extension', () => {
     });
 
     describe('#mergeExtensionDigits', () => {
-        it('should return proper digit array when there are some extension digits', () => {
+        it('should return initial digit array when array num of digits in array is less than 3', () => {
             // given
-            const resultDigits: AdditionOperand[] = [
-                {
-                    position: 5,
-                    base: 10,
-                    representationInBase: '1',
-                    valueInDecimal: 1,
-                    carrySourcePosition: 4
-                },
+            const resultDigits: Digit[] = [
                 {
                     base: 10,
-                    representationInBase: '0',
+                    representationInBase: '(0)',
                     valueInDecimal: 0,
-                    position: 4
-                },
-                {
-                    base: 10,
-                    representationInBase: '0',
-                    valueInDecimal: 0,
-                    position: 3
+                    position: 1,
+                    isComplementExtension: true
                 },
                 {
                     base: 10,
                     representationInBase: '1',
                     valueInDecimal: 1,
-                    position: 2
-                },
-                {
-                    base: 10,
-                    representationInBase: '9',
-                    valueInDecimal: 9,
-                    position: 1
-                },
-                {
-                    base: 10,
-                    representationInBase: '4',
-                    valueInDecimal: 4,
                     position: 0
                 }
             ];
@@ -513,13 +489,19 @@ describe('complement-extension', () => {
             const result = mergeExtensionDigits(resultDigits);
 
             // then
-            const expected: AdditionOperand[] = [
+            const expected: Digit[] = [...resultDigits];
+            expect(result).toEqual(expected);
+        });
+
+        it('should return initial digit array when there is only one extension digit', () => {
+            // given
+            const resultDigits: Digit[] = [
                 {
                     base: 10,
                     representationInBase: '(0)',
-                    isComplementExtension: true,
                     valueInDecimal: 0,
-                    position: 3
+                    position: 3,
+                    isComplementExtension: true
                 },
                 {
                     base: 10,
@@ -529,17 +511,23 @@ describe('complement-extension', () => {
                 },
                 {
                     base: 10,
-                    representationInBase: '9',
-                    valueInDecimal: 9,
+                    representationInBase: '5',
+                    valueInDecimal: 5,
                     position: 1
                 },
                 {
                     base: 10,
-                    representationInBase: '4',
-                    valueInDecimal: 4,
+                    representationInBase: '6',
+                    valueInDecimal: 6,
                     position: 0
                 }
             ];
+
+            // when
+            const result = mergeExtensionDigits(resultDigits);
+
+            // then
+            const expected: Digit[] = [...resultDigits];
             expect(result).toEqual(expected);
         });
 
@@ -549,7 +537,7 @@ describe('complement-extension', () => {
                 { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 3, isComplementExtension: true },
                 { base: 8, representationInBase: '0', valueInDecimal: 0, position: 2 },
                 { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
-                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 }
             ];
 
             // when
@@ -559,7 +547,7 @@ describe('complement-extension', () => {
             const expected: Digit[] = [
                 { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 2, isComplementExtension: true },
                 { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
-                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 }
             ];
 
             expect(result).toEqual(expected);
@@ -607,6 +595,32 @@ describe('complement-extension', () => {
                     position: 0
                 }
             ];
+            expect(result).toEqual(expected);
+        });
+    });
+
+    describe('#extendComplement', () => {
+        it('should return digit array with complement extended to number of positions', () => {
+            // given
+            const digits: Digit[] = [
+                { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 2, isComplementExtension: true },
+                { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 }
+            ];
+
+            // when
+            const numPositions = 3;
+            const result = extendComplement(digits, numPositions);
+
+            // then
+            const expected: Digit[] = [
+                { base: 8, representationInBase: '(0)', valueInDecimal: 0, position: 4, isComplementExtension: true },
+                { base: 8, representationInBase: '0', valueInDecimal: 0, position: 3, isComplementExtension: false },
+                { base: 8, representationInBase: '0', valueInDecimal: 0, position: 2, isComplementExtension: false },
+                { base: 8, representationInBase: '2', valueInDecimal: 2, position: 1 },
+                { base: 8, representationInBase: '3', valueInDecimal: 3, position: 0 }
+            ];
+
             expect(result).toEqual(expected);
         });
     });
