@@ -204,6 +204,38 @@ describe('complement-converter', () => {
             const expected = '(9)90';
             expect(actual.toString()).toEqual(expected);
         });
+
+        it('returns valid complement for already computed positive complement', () => {
+            // given
+            const input = '78';
+            const base = 10;
+
+            // when
+            const first = getComplement(input, base);
+            const second = getComplement(first, base);
+
+            // then
+            const expectedFirst = '(0)78';
+            const expectedSecond = '(9)22';
+            expect(first.toString()).toEqual(expectedFirst);
+            expect(second.toString()).toEqual(expectedSecond);
+        });
+
+        it('returns valid complement for already computed negative complement', () => {
+            // given
+            const input = '-78';
+            const base = 10;
+
+            // when
+            const first = getComplement(input, base);
+            const second = getComplement(first, base);
+
+            // then
+            const expectedFirst = '(9)22';
+            const expectedSecond = '(0)78';
+            expect(first.toString()).toEqual(expectedFirst);
+            expect(second.toString()).toEqual(expectedSecond);
+        });
     });
 
     describe('incrementNumber tests', () => {

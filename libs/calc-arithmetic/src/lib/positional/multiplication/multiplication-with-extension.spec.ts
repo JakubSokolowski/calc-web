@@ -65,7 +65,7 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
-        it('should multiply positive by negative and positive', () => {
+        it('should multiply positive and negative in base 8', () => {
             // given
             const base = 8;
             const multiplicand = fromStringDirect('(0)3156', base).result;
@@ -79,6 +79,21 @@ describe('multiply-with-extensions', () => {
             const expectedComplement = '(7)3230052';
             expect(result.numberResult.toString()).toEqual(expected);
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
+
+        it('should multiply two negative numbers', () => {
+            // given
+            const base = 10;
+            const multiplicand = fromStringDirect('(9)22', base).result;
+            const multiplier = fromStringDirect('(9)12', base).result;
+
+            // when
+            const result = multiplyWithExtensions([multiplicand, multiplier]);
+
+            // then
+            const expected = '6864';
+            expect(result.numberResult.toString()).toEqual(expected);
         });
     });
 });

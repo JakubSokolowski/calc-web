@@ -89,18 +89,12 @@ export function getComplement(
     value: string | NumberComplement,
     base = 10
 ): NumberComplement {
-    let digits: Digit[];
-    let negative: boolean;
-
     if (value instanceof NumberComplement) {
-        digits = value.asDigits();
-        negative = value.isNegative();
+        return getComplementsComplement(value);
     }
 
-    if (typeof value === 'string') {
-        digits = splitToDigitsList(value, base);
-        negative = isNegative(value)
-    }
+    const digits = splitToDigitsList(value, base);
+    const negative = isNegative(value);
 
     if (negative) {
         return getNegativeNumberComplement(digits);
@@ -123,6 +117,20 @@ export function getNegativeNumberComplement(
     const complementDigits = [extension, ...afterAdditionDigits];
     return new NumberComplement(complementDigits);
 }
+
+/**
+ * Computes complement of a another complement
+ * @param complement
+ */
+function getComplementsComplement(
+    complement: NumberComplement,
+): NumberComplement {
+    const [, digits] = computeComplement(complement.asDigits(false));
+    const extension = getExtensionDigit(complement.base(), !complement.isNegative(), digits[0].position + 1);
+    const complementDigits = [extension, ...digits];
+    return new NumberComplement(complementDigits);
+}
+
 
 
 /**
