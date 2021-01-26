@@ -68,12 +68,12 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands ||
-        [{valid: true, representation: '(0)3156', dndKey: '1'}, {valid: true, representation: '(7)6423', dndKey: '2'}]
+        [{valid: true, representation: '(9)22', dndKey: '1'}, {valid: true, representation: '(9)12', dndKey: '2'}]
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
-    const initialValues: FormValues = { base: defaultBase || 8, };
+    const initialValues: FormValues = { base: defaultBase || 10, };
 
     const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidBase(base)) {

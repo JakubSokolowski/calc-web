@@ -1,6 +1,6 @@
 import { alignFractions, shiftLeft } from '../digits';
 import { fromDigits } from '../base-converter';
-import { getNegativeNumberComplement } from '../complement-converter';
+import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
 import { PositionalNumber } from '../positional-number';
 import {
@@ -15,6 +15,7 @@ import { MultiplicationType } from '../../models/operation-algorithm';
 import { adjustForMultiplierFraction, extractResultDigitsFromMultiplicationRow, multiplyDigits } from './common';
 import { extendComplement, mergeExtensionDigits } from '../complement-extension';
 import { trimStartByPredicate } from '@calc/utils';
+import { NumberComplement } from '../number-complement';
 
 export function multiplyWithExtensions(numbers: PositionalNumber[]): MultiplicationResult {
     const [multiplicand, multiplier] = numbers;
@@ -110,7 +111,7 @@ function multiplyDigitRows(
     let multiplicandComplement: PositionalNumber;
 
     if (isDigitNegativeComplement(lastMultiplier)) {
-        const complement = getNegativeNumberComplement(multiplicandDigits.filter(d => !d.isComplementExtension));
+        const complement = getComplement(new NumberComplement(multiplicandDigits));
         const numPositionsToShift = rowResultDigits.length;
         const shifted = shiftLeft(complement.asDigits(), numPositionsToShift);
         rowResultDigits.push(shifted);
