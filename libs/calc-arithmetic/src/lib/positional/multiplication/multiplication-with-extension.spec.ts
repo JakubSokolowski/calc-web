@@ -81,7 +81,6 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
 
-
         it('should multiply two negative numbers', () => {
             // given
             const base = 10;
@@ -94,6 +93,22 @@ describe('multiply-with-extensions', () => {
             // then
             const expected = '6864';
             expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should follow associative property of multiplication', () => {
+            // given
+            const base = 10;
+            const x = fromStringDirect('-88', base).result;
+            const y = fromStringDirect('78', base).result;
+
+            // when
+            const xy = multiplyWithExtensions([x, y]);
+            const yx = multiplyWithExtensions([y, x]);
+
+            // then
+            const expected = '-6864';
+            expect(xy.numberResult.toString()).toEqual(expected);
+            expect(yx.numberResult.toString()).toEqual(expected);
         });
     });
 });
