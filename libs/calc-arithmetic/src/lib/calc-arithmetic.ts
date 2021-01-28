@@ -3,6 +3,7 @@ export {
     fromNumber,
     fromString,
     fromStringDirect,
+    fromDigits,
     Conversion,
     ConversionToArbitrary,
     ConversionToDecimal,

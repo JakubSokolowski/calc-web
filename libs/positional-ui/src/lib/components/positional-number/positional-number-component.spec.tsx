@@ -14,8 +14,7 @@ describe('PositionalNumberComponent', () => {
     beforeEach(() => {
         container = mount(
             <PositionalNumberComponent
-             base={numberResult.base()}
-             representation={numberResult.valueInBase}
+                input={numberResult}
             />
         );
     });
@@ -24,14 +23,11 @@ describe('PositionalNumberComponent', () => {
         expect(container).toBeTruthy();
     });
 
-    it('should render tooltip when tooltipBase is specified and showAsComplement is false', () => {
+    it('should render tooltip when showAdditionalInfo is not specified', () => {
        // when
         container = mount(
             <PositionalNumberComponent
-                base={numberResult.base()}
-                representation={numberResult.valueInBase}
-                tooltipBase={10}
-                showAsComplement={false}
+                input={numberResult}
             />
         );
 
@@ -40,28 +36,12 @@ describe('PositionalNumberComponent', () => {
         expect(tooltip.length).toEqual(1);
     });
 
-    it('should not render tooltip when tooltipBase is not specified', () => {
+    it('should not render tooltip when showAdditionalInfo is false', () => {
         // when
         container = mount(
             <PositionalNumberComponent
-                base={numberResult.base()}
-                representation={numberResult.valueInBase}
-            />
-        );
-
-        // then
-        const tooltip = container.find(Tooltip);
-        expect(tooltip.length).toEqual(0);
-    });
-
-    it('should not render tooltip on hover when tooltipBase is specified but showAsComplement is true', () => {
-        // when
-        container = mount(
-            <PositionalNumberComponent
-                base={numberResult.base()}
-                representation={numberResult.valueInBase}
-                tooltipBase={10}
-                showAsComplement={true}
+                input={numberResult}
+                showAdditionalInfo={false}
             />
         );
 

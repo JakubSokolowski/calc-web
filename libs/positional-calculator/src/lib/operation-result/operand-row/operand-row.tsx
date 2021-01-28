@@ -2,14 +2,14 @@ import React, { FC } from 'react';
 import { PositionalNumber } from '@calc/calc-arithmetic';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
-import { PositionalNumberComponent } from '@calc/positional-ui';
+import { DisplayBase, PositionalNumberComponent } from '@calc/positional-ui';
 import { InlineMath } from '@calc/common-ui';
 
 interface P {
     operands: PositionalNumber[];
     result: PositionalNumber;
     joinSymbol: string;
-    tooltipBase: number;
+    tooltipBases?: DisplayBase[];
     showAsComplement?: boolean;
 }
 
@@ -30,19 +30,17 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, showAsComplement }) => {
+export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBases, result, showAsComplement }) => {
     const classes = useStyles();
     const operandsWithSymbols = [];
 
     operands.forEach((op, index) => {
         const num = (
             <PositionalNumberComponent
+                input={op}
                 className={classes.operand}
-                base={op.base()}
-                representation={showAsComplement ? op.complement.toString() : op.valueInBase}
-                tooltipBase={tooltipBase}
                 key={index}
-                showAsComplement={showAsComplement}
+                additionalBases={tooltipBases}
             />
         );
 
@@ -61,10 +59,7 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
     const res = (
         <PositionalNumberComponent
             className={classes.operand}
-            base={result.base()}
-            representation={showAsComplement ? result.complement.toString() : result.valueInBase}
-            tooltipBase={tooltipBase}
-            showAsComplement={showAsComplement}
+            input={result}
         />
     );
 
@@ -83,10 +78,9 @@ export const OperandRow: FC<P> = ({ operands, joinSymbol, tooltipBase, result, s
                 showAsComplement && <span style={{display: 'inline-flex'}} className="non-complement-result">
                     {equalSign}
                     <PositionalNumberComponent
+                        input={result}
                         className={classes.operand}
-                        base={result.base()}
-                        representation={result.valueInBase}
-                        tooltipBase={tooltipBase}
+                        additionalBases={tooltipBases}
                     />
                 </span>
             }
