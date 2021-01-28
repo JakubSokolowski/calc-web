@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { ConversionToDecimal } from '@calc/calc-arithmetic';
+import { ConversionToDecimal, fromStringDirect } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
@@ -30,6 +30,7 @@ const useStyles = makeStyles((theme: Theme) =>
 export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     const classes  = useStyles();
     const [inputStr, inputBase] = conversionStage.input;
+    const inputNumber = fromStringDirect(inputStr, inputBase).result;
 
     const digits = conversionStage.inputDigitList.map((digit, index, arr) => {
         const joinSymbol = index !== arr.length -1 ? ' + ' : '';
@@ -40,7 +41,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
 
     return (
         <div id="decimal-conversion-details" className={classes.row}>
-            <PositionalNumberComponent base={inputBase} representation={inputStr}/>
+            <PositionalNumberComponent  input={inputNumber}/>
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>
             </div>
@@ -48,7 +49,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>
             </div>
-            <PositionalNumberComponent base={conversionStage.result.base()} representation={conversionStage.result.valueInBase}/>
+            <PositionalNumberComponent input={conversionStage.result} />
         </div>
     );
 };

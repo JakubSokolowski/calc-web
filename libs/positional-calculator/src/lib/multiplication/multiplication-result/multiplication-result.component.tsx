@@ -7,14 +7,12 @@ interface P {
 }
 
 export const MultiplicationResultComponent: FC<P> = ({ result }) => {
-    const tooltipBase = 10;
     const additionSign = '*';
 
     return (
         <OperandRow
             operands={result.numberOperands}
             joinSymbol={additionSign}
-            tooltipBase={tooltipBase}
             result={result.numberResult}
         />
     );

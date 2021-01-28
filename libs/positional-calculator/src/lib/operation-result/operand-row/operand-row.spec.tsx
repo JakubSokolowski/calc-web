@@ -16,7 +16,6 @@ describe('OperandRow', () => {
                 result={result.numberResult}
                 operands={result.numberOperands}
                 joinSymbol={'-'}
-                tooltipBase={10}
             />
         );
     });
@@ -32,7 +31,6 @@ describe('OperandRow', () => {
                 result={result.numberResult}
                 operands={result.numberOperands}
                 joinSymbol={'-'}
-                tooltipBase={10}
                 showAsComplement
             />
         );

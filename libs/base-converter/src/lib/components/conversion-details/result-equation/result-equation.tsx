@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Conversion } from '@calc/calc-arithmetic';
+import { Conversion, fromStringDirect } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
 import { makeStyles } from '@material-ui/core/styles';
 import { createStyles, Theme } from '@material-ui/core';
@@ -34,14 +34,15 @@ export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => 
 
     const output = conversion.getStage(lastStage);
     const [inputRep, inputBase] = conversion.getStage(firstStage).input;
+    const inputNumber = fromStringDirect(inputRep, inputBase).result;
 
     return (
         <div className={classes.row}>
-            <PositionalNumberComponent base={inputBase} representation={inputRep} tooltipBase={inputBase === 10 ? undefined : 10}/>
+            <PositionalNumberComponent input={inputNumber}/>
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>
             </div>
-            <PositionalNumberComponent base={output.result.base()} representation={output.result.toString()}/>
+            <PositionalNumberComponent input={output.result}/>
         </div>
     );
 };

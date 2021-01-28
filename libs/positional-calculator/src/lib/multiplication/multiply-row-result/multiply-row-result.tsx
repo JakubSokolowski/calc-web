@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { digitsToStr, MultiplicationRowResult } from '@calc/calc-arithmetic';
+import { fromDigits, fromStringDirect, MultiplicationRowResult } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
 import { InlineMath } from '@calc/common-ui';
 
@@ -8,18 +8,17 @@ interface P {
 }
 
 export const MultiplyRowDetails: FC<P> = ({ result }) => {
-    const base = result.resultDigits[0].base;
-    const multiplicandStr = digitsToStr(result.multiplicands);
-    const multiplierStr = result.multiplier.representationInBase;
-    const resultStr = digitsToStr(result.resultDigits);
+    const multiplicand = fromDigits(result.multiplicands).result;
+    const multiplier = fromStringDirect(result.multiplier.representationInBase, result.multiplier.base).result;
+    const resultNumber = fromDigits(result.resultDigits).result;
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>
-            <PositionalNumberComponent base={base} representation={multiplicandStr}/>
+            <PositionalNumberComponent input={multiplicand}/>
             <InlineMath math={'*'}/>
-            <PositionalNumberComponent base={base} representation={multiplierStr}/>
+            <PositionalNumberComponent input={multiplier}/>
             <InlineMath math={'='}/>
-            <PositionalNumberComponent base={base} representation={resultStr}/>
+            <PositionalNumberComponent input={resultNumber}/>
         </div>
     );
 };

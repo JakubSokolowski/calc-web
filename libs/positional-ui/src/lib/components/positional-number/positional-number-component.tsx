@@ -1,15 +1,16 @@
 import React, { FC } from 'react';
 import { Tooltip } from '@material-ui/core';
-import { fromString } from '@calc/calc-arithmetic';
 import { replaceAll } from '@calc/utils';
 import { InlineMath } from '@calc/common-ui';
+import { AdditionalInfo } from '../additional-info/additional-info';
+import { PositionalNumber } from '@calc/calc-arithmetic';
+import { DisplayBase } from '../../models';
 
 interface P {
-    base: number;
-    representation: string;
-    tooltipBase?: number;
+    input: PositionalNumber;
+    showAdditionalInfo?: boolean;
+    additionalBases?: DisplayBase[];
     className?: string;
-    showAsComplement?: boolean;
 }
 
 function formatWithLatexSpaces(rep: string): string {
@@ -17,21 +18,15 @@ function formatWithLatexSpaces(rep: string): string {
     return replaceAll(rep, ' ', hardSpace)
 }
 
-export const PositionalNumberComponent: FC<P>  = ({base, representation, tooltipBase, showAsComplement, className}) => {
+export const PositionalNumberComponent: FC<P>  = ({input, showAdditionalInfo = true, additionalBases, className}) => {
+    const formattedRepresentation = formatWithLatexSpaces(input.toString());
+    const base = input.base();
 
-    const formattedRepresentation = formatWithLatexSpaces(representation);
-
-    if(tooltipBase && !showAsComplement) {
-        const tooltipRes = fromString(representation, base, tooltipBase).result;
-        const formattedTooltipRes = formatWithLatexSpaces(tooltipRes.valueInBase);
-
+    if(showAdditionalInfo) {
         return (
             <Tooltip
-                title={
-                    <React.Fragment>
-                        <PositionalNumberComponent base={tooltipRes.base()} representation={formattedTooltipRes}/>
-                    </React.Fragment>
-                }
+                interactive
+                title={<AdditionalInfo input={input} additionalBases={additionalBases}/>}
                 placement={'top-end'}
                 arrow
             >
@@ -44,7 +39,7 @@ export const PositionalNumberComponent: FC<P>  = ({base, representation, tooltip
 
     return (
         <div className={className}>
-            <InlineMath math={`${formattedRepresentation}_{${base}}`}/>
+            <InlineMath math={`${formattedRepresentation}_{${input.base()}}`}/>
         </div>
     )
 };

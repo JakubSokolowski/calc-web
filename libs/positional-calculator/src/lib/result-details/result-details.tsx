@@ -27,7 +27,6 @@ export const ResultDetails: FC<P> = ({ result }) => {
             <OperandRow
                 operands={result.numberOperands}
                 joinSymbol={sign}
-                tooltipBase={tooltipBase}
                 result={result.numberResult}
             />
         </div>
@@ -46,7 +45,6 @@ export const ResultDetails: FC<P> = ({ result }) => {
             <OperandRow
                 operands={result.numberOperands}
                 joinSymbol={sign}
-                tooltipBase={tooltipBase}
                 result={result.numberResult}
                 showAsComplement
             />
