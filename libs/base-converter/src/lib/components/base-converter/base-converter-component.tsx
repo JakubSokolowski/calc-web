@@ -36,7 +36,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const classes = useConverterStyles();
 
     const initialValues: FormValues = {
-        inputStr: '123.45',
+        inputStr: '',
         inputBase: 10,
         outputBase: 2,
         precision: 10
@@ -67,11 +67,20 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const validate = (values: FormValues) => {
+        const inputBase = validateBase(values.inputBase);
+        const outputBase = validateBase(values.outputBase);
+
+        const inputStr = (inputBase || outputBase)
+            ? undefined
+            : validateValueStr(values.inputStr, values.inputBase);
+
         const errors: FormErrors<FormValues> = {
-            inputBase: validateBase(values.inputBase),
-            outputBase: validateBase(values.outputBase),
-            inputStr: validateValueStr(values.inputStr, values.inputBase)
+            inputBase,
+            outputBase,
+            inputStr
         };
+
+        console.log(errors);
 
         return clean(errors);
     };
@@ -79,11 +88,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const form = useFormik({
         initialValues,
         onSubmit,
-        validate,
+        validate
     });
 
     const [inputValue, setInputValue] = useState(initialValues.inputStr);
-    const [inputBase] = useState(initialValues.inputBase);
+    const [inputBase, setInputBase] = useState(initialValues.inputBase);
 
     const swap = async () => {
         const { inputBase, outputBase } = form.values;
@@ -120,6 +129,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         form.handleChange(e);
     };
 
+    const handleInputBaseChange = e => {
+        setInputBase(e.target.value);
+        form.handleChange(e)
+    };
+
 
     return (
         <div>
@@ -127,6 +141,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
             <form onSubmit={form.handleSubmit}>
                 <div className={classes.row}>
                     <TextField
+                        data-test="bconv-input-base"
                         className={classes.inputBase}
                         variant={'outlined'}
                         size={'small'}
@@ -135,7 +150,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         label={t('baseConverter.inputBase')}
                         error={!!form.errors.inputBase}
                         helperText={form.errors.inputBase}
-                        onChange={form.handleChange}
+                        onChange={handleInputBaseChange}
                         value={form.values.inputBase}
                     />
                     <Tooltip title={t('baseConverter.swapBases')}>
@@ -144,6 +159,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         </IconButton>
                     </Tooltip>
                     <TextField
+                        data-test="bconv-output-base"
                         className={classes.outputBase}
                         size={'small'}
                         variant={'outlined'}
@@ -157,6 +173,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     />
                     <div className={classes.horizontalSpacer}/>
                     <TextField
+                        data-test="bconv-precision"
                         className={classes.precision}
                         size={'small'}
                         variant={'outlined'}
@@ -169,12 +186,20 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         value={form.values.precision}
                     />
                     <div className={classes.growHorizontalSpacer}/>
-                    <Button size={'small'} color={'secondary'} variant={'contained'} type={'submit'}>
+                    <Button data-test="bconv-convert"
+                            size={'small'}
+                            color={'secondary'}
+                            variant={'contained'}
+                            type={'submit'}
+                            className={classes.convertButton}
+                            disabled={!form.isValid}
+                    >
                         {t('baseConverter.convert')}
                     </Button>
                 </div>
                 <div className={classes.verticalSpacer}/>
                 <InputWithCopy
+                    data-test="bconv-input-str"
                     className={classes.input}
                     name={'inputStr'}
                     id={'inputStr'}
@@ -188,6 +213,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 {
                     showDecimalValue &&
                     <InputWithCopy
+                        dataTest="bconv-decimal-value"
                         className={classes.input}
                         label={t('baseConverter.inputDecimalValue')}
                         size={'small'}
@@ -199,6 +225,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 {
                     showComplement &&
                     <InputWithCopy
+                        dataTest="bconv-complement"
                         className={classes.input}
                         label={t('baseConverter.inputComplement')}
                         size={'small'}

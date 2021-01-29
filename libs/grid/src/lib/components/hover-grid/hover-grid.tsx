@@ -26,7 +26,7 @@ export interface HoverGridProps {
     groupBuilder?: any;
     xAxis?: AxisConfig;
     title?: string;
-    id?: string;
+    id: string;
     label?: GridLabel;
 }
 
@@ -156,6 +156,7 @@ export const HoverGrid: FC<HoverGridProps> = (
                 onClick: handleClick,
                 onHover: handleHover,
                 hovered: shouldHover,
+                gridId: id,
                 key: `${x}-${y}`,
                 x,
                 y,
@@ -174,9 +175,9 @@ export const HoverGrid: FC<HoverGridProps> = (
                     : groupBuilder(hoveredGroup.contentProps);
 
                 return (
-                    <HtmlTooltip title={content} open={true} key={`${x}-${y}`} arrow placement={hoveredGroup.popoverPlacement || 'top'}>
+                    <HtmlTooltip data-test={`${id}-tooltip`} title={content} open={true} key={`${x}-${y}`} arrow placement={hoveredGroup.popoverPlacement || 'top'}>
                         <div>
-                            <HoverGridCell {...cellProps} />
+                            <HoverGridCell {...cellProps}  />
                         </div>
                     </HtmlTooltip>
                 );

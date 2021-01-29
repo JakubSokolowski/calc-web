@@ -40,7 +40,7 @@ export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     });
 
     return (
-        <div id="decimal-conversion-details" className={classes.row}>
+        <div data-test="conversion-to-decimal" className={classes.row}>
             <PositionalNumberComponent  input={inputNumber}/>
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>

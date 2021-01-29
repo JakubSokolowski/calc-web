@@ -11,6 +11,9 @@ export const ThemeMenu: FC = () => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const currentTheme = useSelector(selectAppTheme);
+    const buttonId = currentTheme === AppTheme.Light
+        ? 'toggle-dark-theme'
+        : 'toggle-light-theme';
 
     const toggleTheme = () => {
         const theme = currentTheme === AppTheme.Light ? AppTheme.Dark : AppTheme.Light;
@@ -19,8 +22,12 @@ export const ThemeMenu: FC = () => {
 
     return (
         <Tooltip title={currentTheme === AppTheme.Light ? t('appBar.toggleDark') : t('appBar.toggleLight')}>
-            <IconButton color="default" onClick={toggleTheme}>
-                {currentTheme === AppTheme.Light ? <Brightness4Icon/> : <Brightness7Icon/>}
+            <IconButton color="default" onClick={toggleTheme} id={buttonId}>
+                {
+                    currentTheme === AppTheme.Light
+                    ? <Brightness4Icon/>
+                    : <Brightness7Icon/>
+                }
             </IconButton>
         </Tooltip>
     );

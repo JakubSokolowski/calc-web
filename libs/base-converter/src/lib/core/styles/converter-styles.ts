@@ -79,6 +79,9 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
             },
             panel: {
                 paddingTop: theme.spacing(2),
+            },
+            convertButton: {
+                maxHeight: '40px'
             }
         }
     );

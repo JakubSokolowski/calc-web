@@ -31,6 +31,7 @@ export const ConversionOptions: FC<P> = ({ style }) => {
             <FormGroup row>
                 <FormControlLabel
                     control={<Switch
+                        data-test={`show-decimal-value-${showDecimalValue ? 'on' : 'off'}`}
                         color={'primary'}
                         checked={showDecimalValue}
                         onChange={() => {
@@ -42,6 +43,7 @@ export const ConversionOptions: FC<P> = ({ style }) => {
                 <FormControlLabel
                     control={
                         <Switch
+                            data-test={`show-complement-${showComplement ? 'on' : 'off'}`}
                             color={'primary'}
                             checked={showComplement}
                             onChange={() => {

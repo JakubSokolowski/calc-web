@@ -19,6 +19,7 @@ export interface HoverCellProps {
     onClick?: (event: GridCellEvent) => void;
     onHover?: (event: GridCellEvent) => void;
     key? : string;
+    gridId?: string;
 }
 
 export const useGridCellStyles = makeStyles((theme: Theme) => {
@@ -100,6 +101,7 @@ const HoverGridCell: FC<HoverCellProps> = (
         verticalLine,
         onHover,
         onClick,
+        gridId
     }) => {
 
     const { content, preset } = config;
@@ -145,6 +147,7 @@ const HoverGridCell: FC<HoverCellProps> = (
 
     return (
         <div
+            data-test={`${gridId}-${x}-${y}`}
             className={getClassNames()}
             onClick={handleClick}
             key={`${content}-${y}`}

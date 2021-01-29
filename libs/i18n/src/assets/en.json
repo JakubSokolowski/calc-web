@@ -6,10 +6,11 @@
     },
     "about": {
         "title": "Version, help and feedback",
-        "submitNewIssue": "Report bug"
+        "submitNewIssue": "Report a bug"
     },
     "home": {
         "appName": "CALC",
+        "appNameExpanded": "Computer Arithmetic Learning Calculator",
         "header": "Calc",
         "positional": "Positional",
         "floating": "Floating"

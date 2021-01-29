@@ -76,7 +76,7 @@ function StyledTreeItem(props: TreeNode) {
             label={
                 <div className={classes.labelRoot}>
                     {LabelIcon && <LabelIcon color="inherit" className={classes.labelIcon}/>}
-                    <Typography variant="body2" className={classes.labelText}>
+                    <Typography data-test="menu-tree-label" variant="body2" className={classes.labelText}>
                         {labelText}
                     </Typography>
                     <Typography variant="caption" color="inherit">

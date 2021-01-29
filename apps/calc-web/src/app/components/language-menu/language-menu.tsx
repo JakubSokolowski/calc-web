@@ -22,7 +22,7 @@ export const LanguageMenu: FC = () => {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const popoverId = open ? 'simple-popover' : undefined;
 
     const handleClick = async (language: Language) => {
         if (language && i18n.language !== language) {
@@ -36,6 +36,7 @@ export const LanguageMenu: FC = () => {
         return (
             <div key={index}>
                 <Button
+                    data-test={`language-${languageKey}`}
                     data-language={languageKey}
                     onClick={(async () => {
                         await handleClick(languageKey);
@@ -51,7 +52,7 @@ export const LanguageMenu: FC = () => {
         <div>
             <Popover
                 style={{ padding: '0px' }}
-                id={id}
+                id={popoverId}
                 open={open}
                 anchorEl={anchorEl}
                 onClose={handleClose}
@@ -68,7 +69,14 @@ export const LanguageMenu: FC = () => {
                     {options}
                 </div>
             </Popover>
-            <Button startIcon={<TranslateIcon/>} aria-describedby={id} variant="text" color="default" onClick={handlePopoverClick}>
+            <Button
+                data-test="change-language"
+                startIcon={<TranslateIcon/>}
+                aria-describedby={popoverId}
+                variant="text"
+                color="default"
+                onClick={handlePopoverClick}
+            >
                 {getNativeName(selectedLanguage)}
             </Button>
         </div>

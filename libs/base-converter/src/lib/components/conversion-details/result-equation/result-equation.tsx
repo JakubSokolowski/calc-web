@@ -37,7 +37,7 @@ export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => 
     const inputNumber = fromStringDirect(inputRep, inputBase).result;
 
     return (
-        <div className={classes.row}>
+        <div className={classes.row} data-test='result-equation'>
             <PositionalNumberComponent input={inputNumber}/>
             <div className={classes.symbol}>
                 <InlineMath math={'='}/>

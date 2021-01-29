@@ -11,7 +11,7 @@ describe('#PaddedGrid', () => {
 
     beforeEach(() => {
         container = shallow(
-            <PaddedGrid desiredWidth={20} values={values} groups={groups} lines={lines}/>
+            <PaddedGrid id='test-grid' desiredWidth={20} values={values} groups={groups} lines={lines}/>
         );
     });
 
@@ -22,7 +22,7 @@ describe('#PaddedGrid', () => {
     it('should render additional grid for padding when desired width is greater than grid width', () => {
         // when
         container = shallow(
-            <PaddedGrid desiredWidth={20} values={values} groups={groups} lines={lines}/>
+            <PaddedGrid id='test-grid' desiredWidth={20} values={values} groups={groups} lines={lines}/>
         );
 
         // then
@@ -33,7 +33,7 @@ describe('#PaddedGrid', () => {
     it('should not render additional grid ofr padding when desired width is smaller or equal to grid width', () => {
         // when
         container = shallow(
-            <PaddedGrid desiredWidth={5} values={values} groups={groups} lines={lines}/>
+            <PaddedGrid id='test-grid' desiredWidth={5} values={values} groups={groups} lines={lines}/>
         );
 
         // then
