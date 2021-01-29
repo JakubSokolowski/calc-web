@@ -26,6 +26,7 @@ interface P {
     style?: CSSProperties;
     className?: string;
     size?: 'small' | 'medium';
+    dataTest?: string;
 }
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -43,7 +44,7 @@ const useStyles = makeStyles((theme: Theme) => {
 });
 
 
-export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly }) => {
+export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly, dataTest }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
@@ -98,7 +99,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
         inputRef: textAreaRef,
         label,
         value,
-        onChange: inputType === InputType.Number ? handleNumberChange : handleChange
+        onChange: inputType === InputType.Number ? handleNumberChange : handleChange,
     };
 
     return (
@@ -106,8 +107,8 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
             <span className={classes.row}>
                 {
                     inputType === InputType.Number
-                        ? <TextField type={'number'} {...props}/>
-                        : <TextField {...props}/>
+                        ? <TextField type={'number'} {...props} data-test={dataTest}/>
+                        : <TextField {...props} data-test={dataTest}/>
                 }
                 {
                     <div className={classes.copyButton}>

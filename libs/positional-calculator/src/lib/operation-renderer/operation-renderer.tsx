@@ -52,6 +52,7 @@ export const OperationRenderer: FC<OperationTemplate<AlgorithmType>> = ({base, o
     return (
         <div className={classes.wrapper}>
             <PaddedGrid
+                id={`${Date.now()}`}
                 desiredWidth={19}
                 {...res.grid}
                 groupBuilder={groupBuilder}

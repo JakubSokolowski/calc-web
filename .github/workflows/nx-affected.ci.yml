@@ -48,3 +48,12 @@ jobs:
             -   name: Affected Build
                 shell: bash
                 run: npm run affected:build -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+            -   name: Affected E2E
+                shell: bash
+                run: npm run affected:e2e -- --base=remotes/origin/${{ github.event.pull_request.base.ref }}
+            -   name: Archive test results
+                uses: actions/upload-artifact@v2
+                with:
+                    name: test-results
+                    path: |
+                        dist/cypress/apps/calc-web-e2e/

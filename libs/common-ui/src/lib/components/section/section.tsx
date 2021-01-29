@@ -68,7 +68,7 @@ export const Section: FC<SectionProps> = ({ title, children }) => {
                 className={classes.summary}
                 expandIcon={<ExpandMoreIcon/>}
             >
-                <Typography className={classes.heading}>
+                <Typography data-test="section-title" className={classes.heading}>
                     {title}
                 </Typography>
             </AccordionSummary>

@@ -24,7 +24,7 @@ describe('#HoverGrid', () => {
 
     beforeEach(() => {
         container = mount(
-            <HoverGrid values={values} groups={groups} lines={lines}/>
+            <HoverGrid id="test-grid" values={values} groups={groups} lines={lines}/>
         );
     });
 
@@ -46,7 +46,7 @@ describe('#HoverGrid', () => {
     describe('hovering cells', () => {
         beforeEach(() => {
             container = mount(
-                <HoverGrid values={values} groups={groups} lines={lines}/>
+                <HoverGrid id="test-grid" values={values} groups={groups} lines={lines}/>
             );
         });
 
@@ -77,7 +77,7 @@ describe('#HoverGrid', () => {
             const groupBuilder = jest.fn();
 
             container = mount(
-                <HoverGrid values={values} groups={groups} lines={lines} groupBuilder={groupBuilder}/>
+                <HoverGrid id="test-grid" values={values} groups={groups} lines={lines} groupBuilder={groupBuilder}/>
             );
 
             // when
@@ -101,7 +101,7 @@ describe('#HoverGrid', () => {
             customGroups[0].contentBuilder = groupBuilder;
 
             container = mount(
-                <HoverGrid values={values} groups={customGroups} lines={lines}/>
+                <HoverGrid id="test-grid" values={values} groups={customGroups} lines={lines}/>
             );
 
             // when
@@ -152,7 +152,7 @@ describe('#HoverGrid', () => {
 
         // when
         container = mount(
-            <HoverGrid values={values} groups={groups} lines={lines} label={labelConfig}/>
+            <HoverGrid id="test-grid" values={values} groups={groups} lines={lines} label={labelConfig}/>
         );
 
         // then

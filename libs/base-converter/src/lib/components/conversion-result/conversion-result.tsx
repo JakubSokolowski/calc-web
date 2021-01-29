@@ -12,7 +12,7 @@ export const ConversionResult: FC<P> = ({conversion}) => {
     const classes = useConverterStyles();
 
     return (
-        <div>
+        <div data-test="bconv-result">
             {
                 conversion.type === ConversionType.DIRECT ?
                     <div className={classes.equation}>

@@ -1,12 +1,45 @@
 {
-  "fileServerFolder": ".",
-  "fixturesFolder": "./src/fixtures",
-  "integrationFolder": "./src/integration",
-  "modifyObstructiveCode": false,
-  "pluginsFile": "./src/plugins/index",
-  "supportFile": "./src/support/index.ts",
-  "video": true,
-  "videosFolder": "../../dist/cypress/apps/calc-web-e2e/videos",
-  "screenshotsFolder": "../../dist/cypress/apps/calc-web-e2e/screenshots",
-  "chromeWebSecurity": false
+    "fileServerFolder": ".",
+    "fixturesFolder": "./src/fixtures",
+    "integrationFolder": "./src/integration",
+    "modifyObstructiveCode": false,
+    "pluginsFile": "./src/plugins/index",
+    "supportFile": "./src/support/index.ts",
+    "video": true,
+    "videosFolder": "../../dist/cypress/apps/calc-web-e2e/videos",
+    "screenshotsFolder": "../../dist/cypress/apps/calc-web-e2e/screenshots",
+    "chromeWebSecurity": false,
+    "viewportHeight": 900,
+    "viewportWidth": 1300,
+    "ignoreTestFiles": [
+        "**/__snapshots__/*",
+        "**/__image_snapshots__/*"
+    ],
+    "env": {
+        "cypress-plugin-snapshots": {
+            "autoCleanUp": false,
+            "autopassNewSnapshots": true,
+            "diffLines": 3,
+            "excludeFields": [],
+            "ignoreExtraArrayItems": false,
+            "ignoreExtraFields": false,
+            "normalizeJson": true,
+            "prettier": true,
+            "imageConfig": {
+                "createDiffImage": true,
+                "resizeDevicePixelRatio": true,
+                "threshold": 0.01,
+                "thresholdType": "percent"
+            },
+            "screenshotConfig": {
+                "blackout": [],
+                "capture": "fullPage",
+                "clip": null,
+                "disableTimersAndAnimations": true,
+                "log": false,
+                "scale": false,
+                "timeout": 30000
+            }
+        }
+    }
 }

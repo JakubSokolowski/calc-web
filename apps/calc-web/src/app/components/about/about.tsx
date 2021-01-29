@@ -52,8 +52,8 @@ export const About: FC = () => {
 
     return (
         <div>
-            <Tooltip className={classes.tooltip} title={t('about.title')} aria-describedby={id} placement={'left'}>
-                <IconButton className={classes.icon} onClick={handleClick}>
+            <Tooltip data-test="help-button-tooltip"  className={classes.tooltip} title={t('about.title')} aria-describedby={id} placement={'left'}>
+                <IconButton data-test='help-button' className={classes.icon} onClick={handleClick}>
                     <HelpIcon fontSize={'large'}/>
                 </IconButton>
             </Tooltip>
@@ -74,7 +74,7 @@ export const About: FC = () => {
             >
                 <ClickAwayListener onClickAway={() => handleClose()}>
                     <Paper>
-                        <div className={classes.content}>
+                        <div data-test="bug-report" className={classes.content}>
                             <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
                                 {t('about.submitNewIssue')}
                             </Link>

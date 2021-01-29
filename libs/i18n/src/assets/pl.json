@@ -10,6 +10,7 @@
     },
     "home": {
         "appName": "CALC",
+        "appNameExpanded": "Computer Arithmetic Learning Calculator",
         "header": "Calc",
         "positional": "Pozycyjne",
         "floating": "Zmiennoprzecinkowe"

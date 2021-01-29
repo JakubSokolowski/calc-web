@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+# Diff and actual snapshots
+*.diff.png
+*.actual.png
