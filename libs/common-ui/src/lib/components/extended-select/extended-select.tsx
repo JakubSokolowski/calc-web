@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { children?: ReactNode }) => {
     const {t} = useTranslation();
-    const {options, onChange, value, label} = props;
+    const {options, onChange, value, label, ...rest} = props;
     const classes = useStyles();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -81,6 +81,7 @@ export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { childre
             label={label}
             value={value.type}
             onChange={handleChange}
+            {...rest}
         >
             {items}
         </TextField>

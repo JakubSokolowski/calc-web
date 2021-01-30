@@ -1,7 +1,8 @@
 import { mount } from 'enzyme';
 import React from 'react';
 import { AdditionType, AlgorithmType, OperationType } from '@calc/calc-arithmetic';
-import { OperationRenderer, OperationTemplate } from './operation-renderer';
+import { OperationRenderer} from './operation-renderer';
+import { OperationTemplate } from '../core/models/operation-template';
 
 describe('OperationRenderer', () => {
     let container;

@@ -3,6 +3,7 @@
     "fixturesFolder": "./src/fixtures",
     "integrationFolder": "./src/integration",
     "modifyObstructiveCode": false,
+    "experimentalStudio": true,
     "pluginsFile": "./src/plugins/index",
     "supportFile": "./src/support/index.ts",
     "video": true,

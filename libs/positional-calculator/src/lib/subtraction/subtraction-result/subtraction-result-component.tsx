@@ -8,6 +8,10 @@ interface P {
 
 export const SubtractionResultComponent: FC<P> = ({ result }) => {
     return (
-        <ResultDetails result={result}/>
+        <ResultDetails
+            data-result={result.numberResult.toString()}
+            data-test="subtraction-result"
+            result={result}
+        />
     );
 };

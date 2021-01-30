@@ -13,9 +13,10 @@ interface P extends ListItemProps {
     index: number;
     onRemove: (index: number) => void;
     onRepresentationChange?: (representationStr: string, index: number, valid: boolean) => void;
+    dataTest?: string;
 }
 
-export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, ...rest }) => {
+export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, ...rest }) => {
     const { t } = useTranslation();
     const [representation, setRepresentation] = useState(representationStr);
     const [error, setError] = useState<string | undefined>();
@@ -39,6 +40,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
     return (
         <ListItem disableGutters={true} {...rest as any}>
             <TextField
+                data-test={dataTest || 'operand-input'}
                 label={<div>X<sub>{index}</sub></div>}
                 size={'small'}
                 error={!!error}
