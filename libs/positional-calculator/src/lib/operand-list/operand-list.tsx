@@ -88,6 +88,7 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>
                 {(provided, snapshot) => (
                     <OperandInput
+                        dataTest={`operand-input-${index}`}
                         ContainerComponent="li"
                         ContainerProps={{ ref: provided.innerRef }}
                         {...provided.draggableProps}
@@ -120,9 +121,10 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
                 </Droppable>
             </DragDropContext>
             {
-                <Tooltip title={canAdd ? t('positionalCalculator.maxOpReached') : ''}>
+                <Tooltip title={canAdd ? '' : t('positionalCalculator.maxOpReached')}>
                     <span>
                          <Button
+                             data-test="add-operand-btn"
                              data-testid={'new-operand'}
                              disabled={!canAdd}
                              onClick={() => onAdd()}

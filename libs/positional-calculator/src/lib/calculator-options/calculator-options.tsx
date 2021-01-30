@@ -67,8 +67,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [submitDisabled, setSubmitDisabled] = useState(false);
 
     const [operands, setOperands] = useState<DndOperand[]>(
-        defaultOperands ||
-        [{valid: true, representation: '78', dndKey: '1'}, {valid: true, representation: '-88', dndKey: '2'}]
+        defaultOperands || []
     );
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
@@ -158,6 +157,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                 />
                 <div className={classes.spacer}/>
                 <ExtendedSelect
+                    data-test='operation-select'
                     value={operation}
                     label={t('positionalCalculator.operation')}
                     onChange={(value) => setOperation(value)}
@@ -166,6 +166,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                 <div className={classes.spacer}/>
                 <ExtendedSelect
                     value={algorithm}
+                    data-test='algorithm-select'
                     label={t('positionalCalculator.algorithm')}
                     onChange={(value) => setAlgorithm(value)}
                     options={getPossibleAlgorithms(operation)}
@@ -175,6 +176,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     <span>
                          <Button
                              data-testid="submit"
+                             data-test="calculate"
                              onClick={() => handleSubmit(form.values)}
                              color={'secondary'}
                              variant={'contained'}

@@ -1,16 +1,10 @@
-import { AlgorithmType, fromStringDirect, OperationType, PositionalNumber } from '@calc/calc-arithmetic';
+import { AlgorithmType, fromStringDirect, PositionalNumber } from '@calc/calc-arithmetic';
 import React, { FC } from 'react';
 import { calculate, OperationParams } from '../core/calculate';
 import { PaddedGrid } from '@calc/grid';
 import { getGroupBuilder } from '../core/operation-group-builer';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-
-export interface OperationTemplate<T extends AlgorithmType> {
-    base: number;
-    operands: string[];
-    operation: OperationType;
-    algorithm: AlgorithmType;
-}
+import { OperationTemplate } from '../..';
 
 const useStyles = makeStyles((theme: Theme) => {
     return createStyles({

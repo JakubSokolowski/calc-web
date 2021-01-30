@@ -111,7 +111,7 @@ describe('Base converter conversion', () => {
         const outputBase = 2;
 
         cy.baseConverterInput(inputStr, inputBase, outputBase);
-        getConversionResult().toMatchImageSnapshot();
-        getIntegralConversionGrid().toMatchImageSnapshot();
+        getConversionResult().toMatchSnapshot();
+        getIntegralConversionGrid().toMatchSnapshot({});
     });
 });

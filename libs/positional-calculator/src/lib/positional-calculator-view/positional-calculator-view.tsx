@@ -51,7 +51,7 @@ export const PositionalCalculatorView: FC = () => {
     const { t } = useTranslation();
     const [res, setRes] = useState<GridResult | undefined>();
     const [params, setParams] = useState<OperationParams<AlgorithmType>>();
-    const gridId = 'calculator-grid';
+    const gridId = 'operation-grid';
 
     const onSubmit = function <T extends AlgorithmType>(
         base: number,
@@ -103,9 +103,9 @@ export const PositionalCalculatorView: FC = () => {
                     </Section>
                     <Section title={t('positionalCalculator.details')}>
                         <PaddedGrid
+                            {...res.grid}
                             desiredWidth={24}
                             id={gridId}
-                            {...res.grid}
                             groupBuilder={groupBuilder}
                             title={t(getTitle())}
                         />

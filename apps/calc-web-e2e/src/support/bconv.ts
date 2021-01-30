@@ -15,3 +15,4 @@ export const getConversionToDecimal = () => cy.getByDataTest('conversion-to-deci
 export const getResultEquation = () => cy.getByDataTest('result-equation');
 export const getConversionResult = () => cy.getByDataTest('bconv-result');
 export const getIntegralConversionGrid = () => cy.get('#integral-conversion-grid');
+

@@ -18,7 +18,7 @@ function getOperationSign(operation: OperationType) {
     }
 }
 
-export const ResultDetails: FC<P> = ({ result }) => {
+export const ResultDetails: FC<P> = ({ result, children, ...rest }) => {
     const tooltipBase = 10;
     const sign = getOperationSign(result.operation);
 
@@ -40,7 +40,7 @@ export const ResultDetails: FC<P> = ({ result }) => {
     });
 
     return (
-        <div>
+        <div {...rest}>
             <div className='complements-row'>{complements}</div>
             <OperandRow
                 operands={result.numberOperands}
