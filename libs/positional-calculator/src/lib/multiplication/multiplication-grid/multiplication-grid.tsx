@@ -129,14 +129,17 @@ function getLabelForOperands(info: MultiplicationResultMeta): GridLabel | undefi
     const labels = Array(info.totalHeight + 2).fill('');
 
     const multiplicandLabelStr = 'M';
+    const multiplierLabelStr = 'm';
     const complementLabelStr = `\\overline{${multiplicandLabelStr}}`;
 
     const multiplicandComplementIndex = 0;
     const multiplicandIndex = 1;
+    const multiplierIndex = 2;
     const addedComplementIndex = labels.length - 2;
 
     labels[multiplicandComplementIndex] = complementLabelStr;
     labels[multiplicandIndex] = multiplicandLabelStr;
+    labels[multiplierIndex] = multiplierLabelStr;
     labels[addedComplementIndex] = complementLabelStr;
 
     return { labels };
