@@ -10,6 +10,8 @@
     "videosFolder": "../../dist/cypress/apps/calc-web-e2e/videos",
     "screenshotsFolder": "../../dist/cypress/apps/calc-web-e2e/screenshots",
     "chromeWebSecurity": false,
+    "trashAssetsBeforeRuns": false,
+    "downloadsFolder": "downloads",
     "viewportHeight": 900,
     "viewportWidth": 1300,
     "ignoreTestFiles": [

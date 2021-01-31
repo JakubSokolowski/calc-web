@@ -3,8 +3,10 @@ import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-ari
 import {
     getMultiplicationResult,
     getOperationGrid,
+    getOperationGridSaveButton,
     operationReturnsProperResult
 } from '../../support/positional-calculator';
+import { validateImage } from '../../support/image';
 
 describe('Default multiplication', () => {
     beforeEach(() => {
@@ -140,5 +142,20 @@ describe('Multiplication with extension', () => {
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+    });
+
+    // #111
+    it('should multiply numbers and download result grid as image', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)3156', '(7)6423'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base: 8
+        };
+        const expected = '-4547726';
+
+        operationReturnsProperResult(config, expected);
+        getOperationGridSaveButton().click();
+        validateImage('result.png');
     });
 });

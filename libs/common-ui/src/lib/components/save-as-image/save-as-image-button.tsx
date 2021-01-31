@@ -11,7 +11,8 @@ interface P {
 
 export const SaveAsImageButton: FC<P> = ({ elementId, tooltipTitle }) => {
     const saveAsImage = async () => {
-        await DomToImage.toBlob(document.getElementById(elementId))
+        const element = document.getElementById(elementId);
+        await DomToImage.toBlob(element)
             .then(blob => {
                 saveAs(blob, 'result.png');
             }).catch((error) => console.log(error));
@@ -20,6 +21,7 @@ export const SaveAsImageButton: FC<P> = ({ elementId, tooltipTitle }) => {
     return (
         <Tooltip title={tooltipTitle}>
             <IconButton
+                data-test={`${elementId}-save`}
                 color={'default'}
                 size={'small'}
                 onClick={saveAsImage}>

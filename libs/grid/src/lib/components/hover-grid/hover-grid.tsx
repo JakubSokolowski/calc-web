@@ -202,7 +202,7 @@ export const HoverGrid: FC<HoverGridProps> = (
     }) : [];
 
     return (
-        <div className={classes.gridWrapper} id={id}>
+        <div className={classes.gridWrapper}>
             {
                 xAxis &&
                 <div className={classes.indicesBox}>
@@ -211,7 +211,7 @@ export const HoverGrid: FC<HoverGridProps> = (
             }
             <div>
                 <div className={classes.cellBox}>
-                    <div className={classes.cellContent} ref={gridRef}>
+                    <div className={classes.cellContent} ref={gridRef} id={id}>
                         {rows}
                     </div>
                     {
