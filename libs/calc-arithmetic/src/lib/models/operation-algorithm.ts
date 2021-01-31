@@ -19,7 +19,6 @@ export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
     tKey: string;
     allowedBases?: number[];
-
 }
 
 export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>

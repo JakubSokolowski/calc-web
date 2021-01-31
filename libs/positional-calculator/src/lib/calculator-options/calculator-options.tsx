@@ -63,6 +63,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const { t } = useTranslation();
     const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
+    const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [submitDisabled, setSubmitDisabled] = useState(false);
 
@@ -97,9 +98,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit});
 
-    const getPossibleAlgorithms = (op: Operation) => {
-        return algorithmMap[op.type] || [];
-    };
+
 
     const handleOperandChange = (newOperands: DndOperand[]) => {
         setOperands(newOperands)
@@ -127,6 +126,15 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     useEffect(() => {
         onOperationChange(operation.type);
+    }, [operation]);
+
+    useEffect(() => {
+        const getPossibleAlgorithms = (op: Operation) => {
+            return algorithmMap[op.type] || [];
+        };
+        const algorithms = getPossibleAlgorithms(operation);
+        setOperationAlgorithms(algorithms);
+        if(algorithms.length) setAlgorithm(algorithms[0]);
     }, [operation]);
 
     useEffect(() => {
@@ -169,7 +177,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     data-test='algorithm-select'
                     label={t('positionalCalculator.algorithm')}
                     onChange={(value) => setAlgorithm(value)}
-                    options={getPossibleAlgorithms(operation)}
+                    options={operationAlgorithms}
                 />
                 <div className={classes.growSpacer}/>
                 <Tooltip title={errorMessage}>
