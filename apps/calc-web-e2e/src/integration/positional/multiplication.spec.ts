@@ -81,6 +81,37 @@ describe('Multiplication with extension', () => {
         getOperationGrid().toMatchSnapshot();
     });
 
+    // BUG #119
+    it('should multiply number by 0', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['123', '0'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base: 10
+        };
+        const expected = '0';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
+    it('should multiply 0 by number', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['0', '9'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base: 10
+        };
+        const expected = '0';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
     it('should multiply two numbers in base 8', () => {
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['-33', '723'],

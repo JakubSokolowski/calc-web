@@ -155,3 +155,8 @@ export function strArrayToDigits(strDigits: string[], base: number, positionStar
         };
     });
 }
+
+export function isZeroDigit<T extends Digit>(digit: T): boolean{
+    return digit.valueInDecimal === 0;
+}
+

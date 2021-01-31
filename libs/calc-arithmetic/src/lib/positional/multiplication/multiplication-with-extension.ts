@@ -1,4 +1,4 @@
-import { alignFractions, shiftLeft } from '../digits';
+import { alignFractions, isZeroDigit, shiftLeft } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
@@ -120,7 +120,7 @@ function multiplyDigitRows(
 
     const sum = addDigitsArrays(rowResultDigits);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
-    const trimmedLeadingZeros = trimStartByPredicate(adjustedSum.numberResult.asDigits(), (digit) => digit.valueInDecimal === 0);
+    const trimmedLeadingZeros = trimSumDigits(adjustedSum.numberResult.asDigits());
     const resultWithProperSign = fromDigits(trimmedLeadingZeros, resultNegative).result;
 
     return {
@@ -135,6 +135,14 @@ function multiplyDigitRows(
         multiplicandComplement
     };
 }
+
+function trimSumDigits(digits: Digit[]) {
+    const onlyZeros = digits.every(isZeroDigit);
+    return onlyZeros
+        ? digits
+        : trimStartByPredicate(digits, isZeroDigit);
+}
+
 
 function isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {
     return lastDigit.valueInDecimal === lastDigit.base - 1;

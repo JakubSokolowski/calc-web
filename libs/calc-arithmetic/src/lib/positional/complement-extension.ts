@@ -1,6 +1,7 @@
 import { AdditionOperand, AdditionPositionResult, Digit } from '../models';
 import { objArrayEqual } from '@calc/utils';
 import { BaseDigits } from './base-digits';
+import { isZeroDigit } from './digits';
 
 export function hasInfiniteExtension(prev: AdditionPositionResult, curr: AdditionPositionResult, globalMostSignificantPosition: number): boolean {
     if (curr.valueAtPosition.position <= globalMostSignificantPosition) return false;
@@ -30,7 +31,7 @@ function hasSingleCarryFromPreviousPosition(curr: AdditionPositionResult): boole
 }
 
 export function mergeExtensionDigits<T extends Digit>(resultDigits: T[]): T[] {
-    if(resultDigits.length < 2) return resultDigits;
+    if(resultDigits.length < 3) return resultDigits;
 
     const [extension, firstNonExtension, ...rest] = resultDigits;
     const hasDigitsToMerge = extension.valueInDecimal === firstNonExtension.valueInDecimal;

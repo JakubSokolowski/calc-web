@@ -110,5 +110,33 @@ describe('multiply-with-extensions', () => {
             expect(xy.numberResult.toString()).toEqual(expected);
             expect(yx.numberResult.toString()).toEqual(expected);
         });
+
+        it('should multiply by 0', () => {
+            // given
+            const base = 10;
+            const x = fromStringDirect('123', base).result;
+            const y = fromStringDirect('0', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '0';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should multiply 0 by number', () => {
+            // given
+            const base = 10;
+            const x = fromStringDirect('0', base).result;
+            const y = fromStringDirect('123', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '00';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
     });
 });
