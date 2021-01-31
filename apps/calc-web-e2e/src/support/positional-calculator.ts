@@ -33,6 +33,7 @@ export const getSubtractionResult = () => cy.getByDataTest('subtraction-result')
 export const getMultiplicationResult = () => cy.getByDataTest('multiplication-result');
 
 export const getOperationGrid = () => cy.get('#operation-grid');
+export const getOperationGridSaveButton = () => cy.getByDataTest('operation-grid-save');
 
 
 export const calculatePositional = (config: OperationTemplate<AlgorithmType>) => {
