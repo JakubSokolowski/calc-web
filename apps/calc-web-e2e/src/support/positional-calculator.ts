@@ -51,3 +51,7 @@ export const operationReturnsProperResult = (config: OperationTemplate<Algorithm
     hasProperResult(result);
 };
 
+export const getCellByCoords = (x: number, y: number) => {
+    return cy.getByDataTest(`operation-grid-${x}-${y}`)
+};
+

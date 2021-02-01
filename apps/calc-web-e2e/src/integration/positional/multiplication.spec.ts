@@ -1,12 +1,11 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
+    getCellByCoords,
     getMultiplicationResult,
     getOperationGrid,
-    getOperationGridSaveButton,
     operationReturnsProperResult
 } from '../../support/positional-calculator';
-import { validateImage } from '../../support/image';
 
 describe('Default multiplication', () => {
     beforeEach(() => {
@@ -28,6 +27,15 @@ describe('Default multiplication', () => {
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(5, 4).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=4');
+
+        getCellByCoords(2, 4).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{3}=6');
     });
 
     it('should multiply two negative numbers', () => {
@@ -144,18 +152,24 @@ describe('Multiplication with extension', () => {
         getOperationGrid().toMatchSnapshot();
     });
 
-    // #111
-    it('should multiply numbers and download result grid as image', () => {
+    // BUG #125
+    it('should not display any empty columns and should display popover with position result on cell hover', () => {
         const config: OperationTemplate<AlgorithmType> = {
-            operands: ['(0)3156', '(7)6423'],
+            operands: ['12', '8'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.WithExtension,
-            base: 8
+            base: 10
         };
-        const expected = '-4547726';
+        const expected = '96';
 
         operationReturnsProperResult(config, expected);
-        getOperationGridSaveButton().click();
-        validateImage('result.png');
+
+        // desired grid has width of 4 so this cell should not exist
+        getCellByCoords(4, 0).should('not.exist');
+
+        // should display popover with proper content
+        getCellByCoords(3, 3).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=6')
     });
 });

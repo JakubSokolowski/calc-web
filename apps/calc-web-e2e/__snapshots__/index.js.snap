@@ -6458,18 +6458,16 @@ exports[`Multiplication with extension > should multiply number by 0 #0`] = `
 exports[`Multiplication with extension > should multiply number by 0 #1`] = `
 <div class="makeStyles-cellContent-93" id="operation-grid">
   <div class="makeStyles-gridRow-90">
-    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98">
       (0)
     </div>
-    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98">
       1
     </div>
-    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
       2
     </div>
-    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98">
       3
     </div>
   </div>
@@ -6487,19 +6485,11 @@ exports[`Multiplication with extension > should multiply number by 0 #1`] = `
     <div
       data-test="operation-grid-2-1"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-3-1"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-4-1"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       (0)
     </div>
     <div
-      data-test="operation-grid-5-1"
+      data-test="operation-grid-3-1"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       0
@@ -6519,19 +6509,11 @@ exports[`Multiplication with extension > should multiply number by 0 #1`] = `
     <div
       data-test="operation-grid-2-2"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-3-2"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-4-2"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       (0)
     </div>
     <div
-      data-test="operation-grid-5-2"
+      data-test="operation-grid-3-2"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       0
@@ -6540,12 +6522,10 @@ exports[`Multiplication with extension > should multiply number by 0 #1`] = `
   <div class="makeStyles-gridRow-90">
     <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
     <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
       (0)
     </div>
-    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
       0
     </div>
   </div>
@@ -6734,11 +6714,10 @@ exports[`Multiplication with extension > should multiply 0 by number #1`] = `
 <div class="makeStyles-cellContent-93" id="operation-grid">
   <div class="makeStyles-gridRow-90">
     <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98">
       (0)
     </div>
-    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
       0
     </div>
   </div>
@@ -6752,15 +6731,11 @@ exports[`Multiplication with extension > should multiply 0 by number #1`] = `
     <div
       data-test="operation-grid-1-1"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-2-1"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       (0)
     </div>
     <div
-      data-test="operation-grid-3-1"
+      data-test="operation-grid-2-1"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       9
@@ -6776,15 +6751,11 @@ exports[`Multiplication with extension > should multiply 0 by number #1`] = `
     <div
       data-test="operation-grid-1-2"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
-    ></div>
-    <div
-      data-test="operation-grid-2-2"
-      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       (0)
     </div>
     <div
-      data-test="operation-grid-3-2"
+      data-test="operation-grid-2-2"
       class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
     >
       0
@@ -6792,11 +6763,10 @@ exports[`Multiplication with extension > should multiply 0 by number #1`] = `
   </div>
   <div class="makeStyles-gridRow-90">
     <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
-    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
       (0)
     </div>
-    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
       0
     </div>
   </div>
