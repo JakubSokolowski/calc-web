@@ -42,7 +42,7 @@ export const AddAtPositionHoverContent: FC<P> = ({ positionResult }) => {
     const carryStrWithSign = positionResult.carry.length > 0 ? `${carryStr},\\;` : '';
 
     return (
-        <div>
+        <div data-test="add-at-position">
             {
                 nonZeroOperands.length > 1 &&
                 <div className="opSumRow">

@@ -189,7 +189,10 @@ function getTotalWidth(result: MultiplicationResult): number {
 }
 
 function getMinOperandsSpan(operands: MultiplicationOperand[][]): number {
-    const [multiplicand, multiplier] = operands;
+    const [multiplicand, multiplier] = operands.map((row) => {
+        return row.filter(d => !d.isComplementExtension);
+    });
+
     return multiplicand.length + multiplier.length - 1;
 }
 
