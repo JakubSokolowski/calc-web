@@ -5,11 +5,21 @@ export const getByDataResult = (result: string) => cy.get(`[data-result="${resul
 
 export const hasProperResult = (result: string) => getByDataResult(result);
 
+export const getAddOperandButton = () => cy.getByDataTest('add-operand-btn');
+
+export const getOperandListInput = (index: number) => {
+    return cy.get(`[data-test=operand-input-${index}] > .MuiInputBase-root > .MuiInputBase-input`);
+};
+
 export const addOperand = (representation: string, index = 0) => {
-    cy.getByDataTest('add-operand-btn').click();
-    cy.get(`[data-test=operand-input-${index}] > .MuiInputBase-root > .MuiInputBase-input`)
+    getAddOperandButton().click();
+    getOperandListInput(index)
         .clear()
         .type(representation);
+};
+
+export const addOperands = (operands: string[]) => {
+    operands.forEach(addOperand);
 };
 
 export const selectOperation = (operation: string) => {
