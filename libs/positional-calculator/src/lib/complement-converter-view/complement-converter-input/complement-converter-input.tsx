@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { BaseDigits, isValidComplementOrRepresentationStr, isValidString } from '@calc/calc-arithmetic';
+import { BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
 import { FormErrors } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { Button, createStyles, TextField, Theme } from '@material-ui/core';

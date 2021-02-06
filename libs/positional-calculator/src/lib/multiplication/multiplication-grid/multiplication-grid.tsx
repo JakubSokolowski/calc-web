@@ -58,14 +58,7 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
 
     const resultDigitsCells = digitsToCellConfig(result.resultDigits);
     const resultRow: GridCellConfig[] = padWithEmptyCells(resultDigitsCells, operandRows[0].length, 'Left');
-
-    const additionGroups = buildColumnGroups(
-        [...additionOperandRows, resultRow],
-        [...result.addition.stepResults].reverse(),
-        2 + yOffset,
-        (value: AdditionPositionResult) => <AddAtPositionHoverContent positionResult={value}/>,
-        cell => cell.y < 2 + yOffset + additionOperandRows.length
-    );
+    const additionGroups = buildAdditionGroups(result.addition.stepResults, info, additionOperandRows, resultRow, yOffset);
 
     const digitMultiplicationGroups = result.stepResults.map((result, rowIndex) => {
         return buildDigitMultiplicationGroups([...result.rowPositionResults], rowIndex, info);
@@ -88,6 +81,28 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
         label: labels
     };
 }
+
+function buildAdditionGroups(stepResults: AdditionPositionResult[], info: MultiplicationResultMeta, additionOperandRows: GridCellConfig[][], resultRow: GridCellConfig[], yOffset: number) {
+    const results = [...stepResults];
+
+    // This fixes some cases when there is more addition position results than
+    // addition columns, the results are stacked from left to right and
+    // these will leave one addition column without result on hover, so to fix
+    // this, remove the additional results
+    if (results.length > info.totalWidth) {
+        const diff = results.length - info.totalWidth;
+        results.splice(-diff);
+    }
+
+    return buildColumnGroups(
+        [...additionOperandRows, resultRow],
+        [...results].reverse(),
+        2 + yOffset,
+        (value: AdditionPositionResult) => <AddAtPositionHoverContent positionResult={value}/>,
+        cell => cell.y < 2 + yOffset + additionOperandRows.length
+    );
+}
+
 
 function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCellConfig[][], addOperandRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];

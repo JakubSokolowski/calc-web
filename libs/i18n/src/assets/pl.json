@@ -104,7 +104,8 @@
         "multiplication": {
             "title": "Mnożenie",
             "default": "Domyślny",
-            "withExtension": "Z rozszerzeniem"
+            "withExtension": "Z rozszerzeniem",
+            "withoutExtension": "Bez rozszerzenia"
         }
     },
     "routes": {

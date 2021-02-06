@@ -100,7 +100,8 @@
         "multiplication": {
             "title": "Multiplication",
             "default": "Default",
-            "withExtension": "With extension"
+            "withExtension": "With extension",
+            "withoutExtension": "Without extension"
         }
     },
     "sandbox": {

@@ -14,7 +14,7 @@ import {
     SubtractionType,
     subtractPositionalNumbers,
     multiplyDefault,
-    multiplyWithExtensions
+    multiplyWithExtensions, multiplyWithoutExtension
 } from '@calc/calc-arithmetic';
 import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@calc/grid';
 import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';
@@ -94,6 +94,15 @@ function handleMultiply(params: OperationParams<MultiplicationType>): GridResult
         }
         case MultiplicationType.WithExtension: {
             const result = multiplyWithExtensions(params.operands);
+            const grid = buildMultiplicationGrid(result);
+            return {
+                grid,
+                result: result.numberResult,
+                operationResult: result
+            };
+        }
+        case MultiplicationType.WithoutExtension: {
+            const result = multiplyWithoutExtension(params.operands);
             const grid = buildMultiplicationGrid(result);
             return {
                 grid,

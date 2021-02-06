@@ -1,7 +1,6 @@
 import { AdditionOperand, AdditionPositionResult, Digit } from '../models';
 import { objArrayEqual } from '@calc/utils';
 import { BaseDigits } from './base-digits';
-import { isZeroDigit } from './digits';
 
 export function hasInfiniteExtension(prev: AdditionPositionResult, curr: AdditionPositionResult, globalMostSignificantPosition: number): boolean {
     if (curr.valueAtPosition.position <= globalMostSignificantPosition) return false;
