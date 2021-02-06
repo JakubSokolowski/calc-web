@@ -82,7 +82,7 @@ function extendComplementsToPosition(complements: MultiplicationOperand[][], max
     });
 }
 
-function shiftAndExtend(rowDigits: MultiplicationRowResult[]) {
+export function shiftAndExtend(rowDigits: MultiplicationRowResult[]) {
     const globalMostSignificant = Math.max(...rowDigits.map(r => r.resultDigits[0].position));
     const maxPositionAfterExtend = globalMostSignificant + rowDigits.length - 1;
 
@@ -136,7 +136,7 @@ function multiplyDigitRows(
     };
 }
 
-function trimSumDigits(digits: Digit[]) {
+export function trimSumDigits(digits: Digit[]) {
     const onlyZeros = digits.every(isZeroDigit);
     return onlyZeros
         ? digits
@@ -148,7 +148,7 @@ function isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {
     return lastDigit.valueInDecimal === lastDigit.base - 1;
 }
 
-function extractResultDigitsFromMultiplicationWithExtensionRow(positionResults: MultiplicationPositionResult[]): MultiplicationOperand[] {
+export function extractResultDigitsFromMultiplicationWithExtensionRow(positionResults: MultiplicationPositionResult[]): MultiplicationOperand[] {
     const withExtension = extractResultDigitsFromMultiplicationRow(positionResults);
     return mergeAdditionExtensionDigit(withExtension, positionResults);
 }

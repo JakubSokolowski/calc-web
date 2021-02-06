@@ -24,12 +24,16 @@ export {
 } from './positional/associated-base-converter';
 
 export {
-    multiplyDefault
-} from './positional/multiplication/multiplication'
+    multiplyDefault,
+} from './positional/multiplication/multiplication';
 
 export {
     multiplyWithExtensions
-} from './positional/multiplication/multiplication-with-extension'
+} from './positional/multiplication/multiplication-with-extension';
+
+export {
+    multiplyWithoutExtension
+} from './positional/multiplication/multiplication-without-extension'
 
 export * from './models'
 export * from './models/operation'

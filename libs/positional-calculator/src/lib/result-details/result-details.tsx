@@ -19,7 +19,6 @@ function getOperationSign(operation: OperationType) {
 }
 
 export const ResultDetails: FC<P> = ({ result, children, ...rest }) => {
-    const tooltipBase = 10;
     const sign = getOperationSign(result.operation);
 
     const resultRow = (

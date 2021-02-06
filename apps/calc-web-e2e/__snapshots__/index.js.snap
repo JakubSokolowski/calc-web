@@ -6772,3 +6772,3536 @@ exports[`Multiplication with extension > should multiply 0 by number #1`] = `
   </div>
 </div>
 `;
+
+exports[`Multiplication without extension > should multiply two numbers #0`] = `
+<div data-test="multiplication-result" data-result="6109635">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>325</mn
+                  ><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-3255_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord">2</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>187</mn
+                  ><msub><mn>7</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-1877_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">1</span
+              ><span class="mord">8</span><span class="mord">7</span
+              ><span class="mord"
+                ><span class="mord">7</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>610963</mn><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >6109635_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">6</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">9</span
+              ><span class="mord">6</span><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply two numbers #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-1-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-5-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-8-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-1" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-5-1" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-6-1" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-7-1" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-5-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-7-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-8-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-7-3" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-4"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-7-5" class="makeStyles-defaultCell-98"></div>
+    <div
+      data-test="operation-grid-8-5"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-2-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-3-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-4-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-5-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-6-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-7-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-8-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-7" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-7" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply two negative numbers #0`] = `
+<div data-test="multiplication-result" data-result="6109635">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>325</mn
+                  ><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-3255_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord">2</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>187</mn
+                  ><msub><mn>7</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-1877_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">1</span
+              ><span class="mord">8</span><span class="mord">7</span
+              ><span class="mord"
+                ><span class="mord">7</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>610963</mn><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >6109635_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">6</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">9</span
+              ><span class="mord">6</span><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply two negative numbers #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-1-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-5-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-8-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-1" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-5-1" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-6-1" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-7-1" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-5-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-7-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-8-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-7-3" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-4"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-7-5" class="makeStyles-defaultCell-98"></div>
+    <div
+      data-test="operation-grid-8-5"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-2-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-3-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-4-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-5-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-6-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-7-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-8-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-7" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-7" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply negative and positive numbers #0`] = `
+<div data-test="multiplication-result" data-result="-30501">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>3</mn><msub><mn>3</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-33_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>72</mn><msub><mn>3</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >723_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">7</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>3050</mn
+                  ><msub><mn>1</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-30501_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord">0</span><span class="mord">5</span
+              ><span class="mord">0</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply negative and positive numbers #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-0" class="makeStyles-defaultCell-98">
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-6-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98"></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (7)
+    </div>
+    <div
+      data-test="operation-grid-2-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-3-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-4-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-5-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-6-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply two negative numbers in base 8 #0`] = `
+<div data-test="multiplication-result" data-result="6109635">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>325</mn
+                  ><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-3255_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord">2</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>187</mn
+                  ><msub><mn>7</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-1877_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">1</span
+              ><span class="mord">8</span><span class="mord">7</span
+              ><span class="mord"
+                ><span class="mord">7</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>610963</mn><msub><mn>5</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >6109635_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">6</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">9</span
+              ><span class="mord">6</span><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply two negative numbers in base 8 #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-1-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-5-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-8-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-1" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-5-1" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-6-1" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-7-1" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-5-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-7-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-8-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-7-3" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-4"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      (9)
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-7-5" class="makeStyles-defaultCell-98"></div>
+    <div
+      data-test="operation-grid-8-5"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-2-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-3-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-4-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-5-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-6-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-7-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-8-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-7" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-7" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-98">
+      9
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      5
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply negative number by positive #0`] = `
+<div data-test="multiplication-result" data-result="-30501">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>3</mn><msub><mn>3</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-33_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>72</mn><msub><mn>3</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >723_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">7</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>3050</mn
+                  ><msub><mn>1</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-30501_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">3</span
+              ><span class="mord">0</span><span class="mord">5</span
+              ><span class="mord">0</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply negative number by positive #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-6-0" class="makeStyles-defaultCell-98">
+      5
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-6-2" class="makeStyles-defaultCell-98">
+      7
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98"></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (7)
+    </div>
+    <div
+      data-test="operation-grid-2-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-3-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-4-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-5-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-6-4"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply positive number by negative #0`] = `
+<div data-test="multiplication-result" data-result="-4547726">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>315</mn><msub><mn>6</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >3156_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">1</span
+              ><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">6</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>135</mn><msub><mn>5</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-1355_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">1</span
+              ><span class="mord">3</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">5</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>454772</mn
+                  ><msub><mn>6</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-4547726_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">4</span
+              ><span class="mord">5</span><span class="mord">4</span
+              ><span class="mord">7</span><span class="mord">7</span
+              ><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">6</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply positive number by negative #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-1-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (7)
+    </div>
+    <div
+      data-test="operation-grid-5-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-7-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-8-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      2
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-1" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-5-1" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-6-1" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-7-1" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      6
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-5-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-7-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-8-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-7-3" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      2
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div
+      data-test="operation-grid-8-4"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      6
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      7
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-5" class="makeStyles-defaultCell-98"></div>
+    <div
+      data-test="operation-grid-8-5"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-2-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-3-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-4-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-5-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-6-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-7-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-8-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-7" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-7" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div
+      data-test="operation-grid-8-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply 0 by number #0`] = `
+<div data-test="multiplication-result" data-result="0">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><msub><mn>0</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >0_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord"
+                ><span class="mord">0</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><msub><mn>9</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >9_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord"
+                ><span class="mord">9</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><msub><mn>0</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >0_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord"
+                ><span class="mord">0</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply 0 by number #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      9
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply number by 0 #0`] = `
+<div data-test="multiplication-result" data-result="0">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>12</mn><msub><mn>3</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >123_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><msub><mn>0</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >0_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord"
+                ><span class="mord">0</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><msub><mn>0</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >0_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord"
+                ><span class="mord">0</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply number by 0 #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-98">
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply numbers with fraction part #0`] = `
+<div data-test="multiplication-result" data-result="-455.7">
+  <div class="makeStyles-row-86">
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>31.1</mn><msub><mn>2</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >31.12_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">1</span
+              ><span class="mord">.</span><span class="mord">1</span
+              ><span class="mord"
+                ><span class="mord">2</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>∗</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >*</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.46528em;vertical-align:0em;"
+              ></span
+              ><span class="mord">∗</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>1</mn><msub><mn>4</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-14_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">1</span
+              ><span class="mord"
+                ><span class="mord">4</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-87">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>455.</mn
+                  ><msub><mn>7</mn><mn>8</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-455.7_{8}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">4</span
+              ><span class="mord">5</span><span class="mord">5</span
+              ><span class="mord">.</span
+              ><span class="mord"
+                ><span class="mord">7</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">8</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Multiplication without extension > should multiply numbers with fraction part #1`] = `
+<div class="makeStyles-cellContent-93" id="operation-grid">
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-1-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      (7)
+    </div>
+    <div
+      data-test="operation-grid-5-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-7-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-8-0"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      6
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-4-1" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-5-1" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      1
+    </div>
+    <div data-test="operation-grid-7-1" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      2
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      *
+    </div>
+    <div
+      data-test="operation-grid-1-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-2-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-3-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-4-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-5-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-7-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-2"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    >
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-3" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-3" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      0
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-4"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-5" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-5" class="makeStyles-defaultCell-98">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-98">
+      4
+    </div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-98">
+      5
+    </div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-5" class="makeStyles-defaultCell-98"></div>
+    <div
+      data-test="operation-grid-8-5"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div
+      data-test="operation-grid-0-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      +
+    </div>
+    <div
+      data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-2-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-3-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-4-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      5
+    </div>
+    <div
+      data-test="operation-grid-5-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-6-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-7-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104"
+    ></div>
+    <div
+      data-test="operation-grid-8-6"
+      class="makeStyles-defaultCell-98 makeStyles-horizontalLine-104 makeStyles-verticalLine-105"
+    ></div>
+  </div>
+  <div class="makeStyles-gridRow-90">
+    <div data-test="operation-grid-0-7" class="makeStyles-defaultCell-98"></div>
+    <div data-test="operation-grid-1-7" class="makeStyles-defaultCell-98">
+      (7)
+    </div>
+    <div data-test="operation-grid-2-7" class="makeStyles-defaultCell-98">
+      3
+    </div>
+    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-98">
+      2
+    </div>
+    <div
+      data-test="operation-grid-4-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      2
+    </div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-98">
+      1
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-98">
+      0
+    </div>
+    <div
+      data-test="operation-grid-8-7"
+      class="makeStyles-defaultCell-98 makeStyles-verticalLine-105"
+    >
+      0
+    </div>
+  </div>
+</div>
+`;

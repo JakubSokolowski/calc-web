@@ -170,6 +170,120 @@ describe('Multiplication with extension', () => {
         // should display popover with proper content
         getCellByCoords(3, 3).trigger('mouseover')
             .getByDataTest('add-at-position')
-            .contains('S_{0}=6')
+            .contains('S_{0}=6');
+    });
+});
+
+describe('Multiplication without extension', () => {
+    beforeEach(() => {
+        cy.fixCypressSpec(__filename);
+        cy.clearLocalStorage();
+        cy.visit('#/tools/positional/positional-calculator');
+    });
+
+    it('should multiply two negative numbers', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(9)6745', '(9)8123'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 10
+        };
+        const expected = '6109635';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display popover with proper content
+        getCellByCoords(8, 7).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=5');
+    });
+
+    it('should multiply number by 0', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['123', '0'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 10
+        };
+        const expected = '0';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
+    it('should multiply 0 by number', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['0', '9'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 10
+        };
+        const expected = '0';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
+
+    it('should multiply positive number by negative', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)3156', '(7)6423'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 8
+        };
+        const expected = '-4547726';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display popover with proper content
+        getCellByCoords(8, 7).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=2');
+    });
+
+    it('should multiply negative number by positive', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(7)45', '(0)723'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 8
+        };
+        const expected = '-30501';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display popover with proper content
+        getCellByCoords(6, 5).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=7');
+    });
+
+    it('should multiply numbers with fraction part', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)31.12', '(7)64'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 8
+        };
+        const expected = '-455.7';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
     });
 });
