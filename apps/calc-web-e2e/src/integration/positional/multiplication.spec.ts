@@ -247,7 +247,7 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content
-        getCellByCoords(8, 7).trigger('mouseover')
+        getCellByCoords(9, 7).trigger('mouseover')
             .getByDataTest('add-at-position')
             .contains('S_{0}=2');
     });

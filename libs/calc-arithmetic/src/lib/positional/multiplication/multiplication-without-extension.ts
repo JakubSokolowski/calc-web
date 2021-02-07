@@ -51,7 +51,7 @@ function multiplyDigitRows(
         return multiplyRowByDigit(multiplicandRow, multiplier);
     });
 
-    const rowResultDigits = shiftAndExtend(rowResults);
+    const digitsToShift = rowResults.map(r => r.resultDigits);
 
     let multiplicandComplement: PositionalNumber;
 
@@ -66,14 +66,14 @@ function multiplyDigitRows(
 
         const complement = getComplement(new NumberComplement(multiplicandDigits));
         const lastDigits = multiplyRowByDigit(complement.asDigits(), absDigit).resultDigits;
-        const numPositionsToShift = rowResultDigits.length;
-        const shifted = shiftLeft(lastDigits, numPositionsToShift);
 
-        rowResultDigits.push(shifted);
+        digitsToShift.push(lastDigits);
         multiplicandComplement = fromDigits(complement.asDigits()).result;
     }
 
-    const sum = addDigitsArrays(rowResultDigits);
+    const shifted = shiftAndExtend(digitsToShift);
+
+    const sum = addDigitsArrays(shifted);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
     const trimmedLeadingZeros = trimSumDigits(adjustedSum.numberResult.asDigits());
     const resultWithProperSign = fromDigits(trimmedLeadingZeros, resultNegative).result;
