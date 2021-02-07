@@ -4,6 +4,7 @@ import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
 import { PositionalNumber } from '../positional-number';
 import {
+    AdditionOperand,
     Digit,
     MultiplicationOperand,
     MultiplicationPositionResult,
@@ -73,7 +74,7 @@ function extendComplementToPosition<T extends Digit>(complement: T[], numRows: n
     return extendComplement(complement, numPositionsToExtend);
 }
 
-function extendComplementsToPosition(complements: MultiplicationOperand[][], maxPositionAfterExtend: number) {
+function extendComplementsToPosition<T extends Digit>(complements: T[][], maxPositionAfterExtend: number) {
     const merged = complements.map(mergeExtensionDigits);
     const numRows = complements.length;
 
@@ -82,12 +83,12 @@ function extendComplementsToPosition(complements: MultiplicationOperand[][], max
     });
 }
 
-export function shiftAndExtend(rowDigits: MultiplicationRowResult[]) {
-    const globalMostSignificant = Math.max(...rowDigits.map(r => r.resultDigits[0].position));
-    const maxPositionAfterExtend = globalMostSignificant + rowDigits.length - 1;
+export function shiftAndExtend<T extends Digit>(operands: T[][]) {
+    const globalMostSignificant = Math.max(...operands.map(r => r[0].position));
+    const maxPositionAfterExtend = globalMostSignificant + operands.length - 1;
 
-    const shiftedRows = rowDigits.map((result, index) => {
-        return shiftLeft(result.resultDigits, index);
+    const shiftedRows = operands.map((opRow, index) => {
+        return shiftLeft(opRow, index);
     });
 
     return extendComplementsToPosition(shiftedRows, maxPositionAfterExtend);
@@ -106,7 +107,7 @@ function multiplyDigitRows(
         return multiplyRowByDigit(multiplicandRow, multiplier);
     });
 
-    const rowResultDigits = shiftAndExtend(rowResults);
+    const rowResultDigits = shiftAndExtend(rowResults.map(res => res.resultDigits));
 
     let multiplicandComplement: PositionalNumber;
 
