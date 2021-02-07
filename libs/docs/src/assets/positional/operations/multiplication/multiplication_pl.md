@@ -3,7 +3,6 @@ Operandy mnożenia to mnożna (*en. multiplicand* oznaczona jako $M$) i mnożnik
 Wynik mnożenia nazywamy iloczynem (*en. product* - oznaczany przez $P$).
  Mnożenie dla różnych podstaw można zrealizować wieloma algorytmami, a dla liczb binarnych są jeszcze inne, specjalne algorytmy.
 ## Mnożenie "szkolne"
-### Algorytm
 Mnożenie realizujemy w dwóch etapch - wytworzenie półproduktów poprzez pomnożenie poszczególnych cyfr mnożnej przez mnożnik oraz dodanie tych półproduktów.
 
 ```calc-operation
@@ -43,7 +42,6 @@ to dodane zostaną brakujące 0.
  Dodatkowo, mnożenia przez cyfrę zero również są pokazywane - nie ma pomijania pozycji podczas mnożenia i dopisywania zer do wyniku.
 ## Mnożenie odtwarzające
 Algorytm ten (znany również pod nazwą "mnożenia z rozszerzeniem mnożnika"), w odróżnieniu od zwykłego, operuje wyłącznie na uzupełnieniach liczb.
-### Algorytm
 Algorytm wykonujemy w kilku krokach:
 
 1. Lewostronne rozszerzenie uzupełnienia mnożnej $M$ o kilka pozycji. Dla pewności można rozszerzyć o ilość cyfr mnożnika $m$, 
@@ -55,7 +53,7 @@ rozszerzenia) na wszystkich cyfrach mnożnika poza cyfrą rozszerzenia,
 
 4. Jeśli cyfrą rozszerzenia jest -1 (największa cyfra w danym systemie, np. dla $X_{10}$ to $9$) to powinniśmy dodać również uzupełnienie
 mnożnej $\overline{M}$ przesunięte o ilość cyfr mnożnika (nie licząc cyfry rozszerzenia), jeśli jest 0, nic więcej nie robimy
-### Dodatni mnożnik
+### Odtwarzające - dodatni mnożnik
 Przykład z cyfrą rozszerzenia 0 dla $X_{10}$:
 
 $$
@@ -71,7 +69,7 @@ $$
 }
 ```
 
-### Ujemny mnożnik
+### Odtwarzające - ujemny mnożnik
 Przykład z cyfrą rozszerzenia -1 dla $X_{10}$, te same operandy tylko w innej kolejności, 
 ponieważ mnożnik jest ujemny trzeba dodać uzupełnienie mnożnej żeby wynik był ten sam.
 
@@ -105,3 +103,57 @@ $$
 }
 ```
 ## Mnożenie nieodtwarzające
+Zwany również mnożeniem bez rozszerzania mnożnika. Algorytm wykonujemy w kilku krokach:
+
+1. Lewostronne rozszerzenie uzupełnienia mnożnej $M$ o kilka pozycji. Dla pewności można rozszerzyć o ilość cyfr mnożnika $m$
+
+2. Wykonywanie normalnego mnożenia (jakby to był system naturalny ale z uwzględnieniem nieskończonego
+rozszerzenia) na wszystkich cyfrach mnożnika poza cyfrą rozszerzenia
+
+3. W ostatnim kroku dodajemy mnożną pomnożoną przez wartość ostatniej cyfry mnożnika, przesuniętą o jeden mniej niż ilość cyfr mnożnika.
+   Wartość cyfry w systemie uzupełnieniowym będzie ujemna - np. W U10 wartość cyfry 7 to $-(10 - 7)=-3$, więc dodajemy -3 * mnożna  ($-3M$) 
+   czyli 3 * uzupełnienie mnożnej $(3 \overline{M})$.
+   
+### Nieodtwarzające - dodatni mnożnik
+Ten sam przykład co dla mnożenia z rozszerzeniem, z cyfrą rozszerzenia 0 dla $X_{10}$:
+
+$$
+    M*m = (9)6745 * (0)8123 = (9)73559635
+$$
+
+Mnożnik jest uzupełnieniem dodatnie liczby, więc wartością cyfry mnożnika jest ta cyfra. 
+Tutaj ostatnią cyfrą jest 8, więc tak jak w przypadku normalnego mnożenia, dodajemy 8 razy mnożnik.
+
+```calc-operation
+{
+  "operation": "Multiplication",
+  "algorithm": "WithoutExtension",
+  "base": 10,
+  "operands": ["(9)6745", "(0)8123"]
+}
+```
+### Nieodtwarzające - ujemny mnożnik
+Ten sam przykład z odwrotną kolejnością operandów:
+
+$$
+    M*m = (0)8123 * (9)6745 = (9)73559635
+$$
+
+Mnożnik jest uzupełnieniem ujemnej liczby, więc wartością cyfry mnożnika jest:
+
+$$
+ -(podstawa - cyfra) = -(10 - 6) = -4
+$$
+
+Należy więc dodać 4 * uzupełnienie mnożnej:
+$$ 
+    4*\overline{M} = 4 * (9)1877 = (9)67508
+$$
+```calc-operation
+{
+  "operation": "Multiplication",
+  "algorithm": "WithoutExtension",
+  "base": 10,
+  "operands": [ "(0)8123", "(9)6745"]
+}
+```
