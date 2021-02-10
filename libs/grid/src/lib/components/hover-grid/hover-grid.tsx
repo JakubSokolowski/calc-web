@@ -19,6 +19,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { GridLabel } from '../../..';
 import { OperandLabel } from '../operand-label/operand-label';
 
+
+function isCellConfig(value: any): value is CellConfig {
+    if(!value) return false;
+    return !!value.x && !!value.y;
+}
+
+
 export interface HoverGridProps {
     values: GridCellConfig[][];
     groups: CellGroup[];
@@ -140,6 +147,7 @@ export const HoverGrid: FC<HoverGridProps> = (
 
     const getGroupPopoverAnchorCoords = (): CellConfig => {
         if (!hoveredGroup) return { x: -1, y: -1 };
+        if(isCellConfig(hoveredGroup.anchorPosition)) return hoveredGroup.anchorPosition;
         const position = hoveredGroup.anchorPosition || CellPosition.Top;
         return getOutlierAtPosition(hoveredGroup, position);
     };

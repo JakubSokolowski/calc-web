@@ -54,6 +54,7 @@ function multiplyDigitRows(
     const digitsToShift = rowResults.map(r => r.resultDigits);
 
     let multiplicandComplement: PositionalNumber;
+    let lastMultiplierDigit: MultiplicationOperand;
 
     if (multiplierNegative) {
         const actualMultiplierValue = -(lastMultiplier.base - lastMultiplier.valueInDecimal);
@@ -68,7 +69,11 @@ function multiplyDigitRows(
         const lastDigits = multiplyRowByDigit(complement.asDigits(), absDigit).resultDigits;
 
         digitsToShift.push(lastDigits);
+
         multiplicandComplement = fromDigits(complement.asDigits()).result;
+        lastMultiplierDigit = lastMultiplier;
+    } else {
+        lastMultiplierDigit = positionsAscending[0];
     }
 
     const shifted = shiftAndExtend(digitsToShift);
@@ -87,6 +92,7 @@ function multiplyDigitRows(
         stepResults: rowResults,
         operation: OperationType.Multiplication,
         algorithmType: MultiplicationType.WithoutExtension,
-        multiplicandComplement
+        multiplicandComplement,
+        lastMultiplierDigit
     };
 }

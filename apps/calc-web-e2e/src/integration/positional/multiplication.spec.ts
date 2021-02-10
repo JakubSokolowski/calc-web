@@ -172,6 +172,39 @@ describe('Multiplication with extension', () => {
             .getByDataTest('add-at-position')
             .contains('S_{0}=6');
     });
+
+
+    it('should show proper information on last multiplier digit tooltip when multiplier is negative', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['12', '-8'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base: 10
+        };
+        const expected = '-96';
+
+        operationReturnsProperResult(config, expected);
+
+        // should display popover with proper content
+        getCellByCoords(2, 2).trigger('mouseover')
+            .getByDataTest('correction-with-extension-negative')
+    });
+
+    it('should show proper information on last multiplier digit tooltip when multiplier is positive', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['12', '8'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base: 10
+        };
+        const expected = '96';
+
+        operationReturnsProperResult(config, expected);
+
+        // should display popover with proper content
+        getCellByCoords(2, 1).trigger('mouseover')
+            .getByDataTest('correction-with-extension-positive')
+    });
 });
 
 describe('Multiplication without extension', () => {
@@ -231,7 +264,6 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
     });
 
-
     it('should multiply positive number by negative', () => {
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['(0)3156', '(7)6423'],
@@ -285,5 +317,37 @@ describe('Multiplication without extension', () => {
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+    });
+
+    it('should show proper information on last multiplier digit tooltip when multiplier is positive', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['12', '8'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 10
+        };
+        const expected = '96';
+
+        operationReturnsProperResult(config, expected);
+
+        // should display popover with proper content
+        getCellByCoords(3, 1).trigger('mouseover')
+            .getByDataTest('correction-without-extension-positive')
+    });
+
+    it('should show proper information on last multiplier digit tooltip when multiplier is negative', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['12', '-89'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base: 10
+        };
+        const expected = '-1068';
+
+        operationReturnsProperResult(config, expected);
+
+        // should display popover with proper content
+        getCellByCoords(4, 2).trigger('mouseover')
+            .getByDataTest('correction-without-extension-negative')
     });
 });

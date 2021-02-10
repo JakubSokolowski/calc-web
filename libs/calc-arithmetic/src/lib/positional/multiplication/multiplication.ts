@@ -69,6 +69,7 @@ export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], mult
         stepResults: rowResults,
         operation: OperationType.Multiplication,
         algorithmType: MultiplicationType.Default,
+        lastMultiplierDigit: multiplicandRow[0]
     };
 }
 

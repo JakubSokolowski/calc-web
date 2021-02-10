@@ -133,7 +133,8 @@ function multiplyDigitRows(
         stepResults: rowResults,
         operation: OperationType.Multiplication,
         algorithmType: MultiplicationType.WithExtension,
-        multiplicandComplement
+        multiplicandComplement,
+        lastMultiplierDigit: lastMultiplier
     };
 }
 
