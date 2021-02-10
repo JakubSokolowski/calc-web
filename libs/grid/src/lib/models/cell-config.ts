@@ -3,3 +3,4 @@ export interface CellConfig {
   y: number;
   preventGroupTrigger?: boolean;
 }
+

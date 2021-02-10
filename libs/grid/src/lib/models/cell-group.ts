@@ -6,6 +6,6 @@ export interface CellGroup<T = any> {
   cells: CellConfig[];
   contentProps?: T;
   contentBuilder?: any;
-  anchorPosition?: CellPosition;
+  anchorPosition?: CellPosition | CellConfig;
   popoverPlacement?: PopoverPlacement;
 }

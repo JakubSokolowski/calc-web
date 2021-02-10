@@ -1,10 +1,10 @@
 import {
     AdditionPositionResult,
-    AlgorithmType,
     MultiplicationOperand,
     MultiplicationPositionResult,
     MultiplicationResult,
-    MultiplicationRowResult
+    MultiplicationRowResult,
+    MultiplicationType
 } from '@calc/calc-arithmetic';
 import {
     buildColumnGroups,
@@ -30,6 +30,7 @@ import React from 'react';
 import { flatten } from 'lodash';
 import { MultiplyRowDetails } from '../multiply-row-result/multiply-row-result';
 import { MultiplyPositionDetails } from '../multiply-position-result/multiply-position-details';
+import { MultiplicationCorrectionDetails } from '../correction-details/multiplication-correction-details';
 
 export function buildMultiplicationGrid(result: MultiplicationResult): HoverOperationGrid {
     const base = result.resultDigits[0].base;
@@ -69,10 +70,14 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
 
     if (multiplicandComplementRow.length) {
         values = [multiplicandComplementRow, ...values];
-        groups = [...groups, buildMultiplicandComplementGroup(info)];
     }
+
+    if(info.algorithmType !== MultiplicationType.Default) {
+        groups = [...groups, buildMultiplicandComplementGroup(info, result.lastMultiplierDigit)];
+    }
+
     const lines = getGridLines(info, operandRows, additionOperandRows);
-    const labels = getLabelForOperands(info);
+    const labels = getLabelForOperands(info, result);
 
     return {
         lines,
@@ -107,15 +112,15 @@ function buildAdditionGroups(stepResults: AdditionPositionResult[], info: Multip
 function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCellConfig[][], addOperandRows: GridCellConfig[][]): GridLine[] {
     const lines: GridLine[] = [];
 
+    const labelSeparatorLine: GridLine = { type: LineType.Vertical, index: info.totalWidth - 1 };
+    lines.push(labelSeparatorLine);
+
     if (info.hasMultiplicandComplement) {
         const complementSeparatorIndex = 0;
         lines.push({ type: LineType.Horizontal, index: complementSeparatorIndex });
-
-        lines.push({ type: LineType.Vertical, index: info.totalWidth - 1 });
     }
 
     const offset = info.hasMultiplicandComplement ? 1 : 0;
-
 
     const multiplicationSeparatorIndex = initialOperandRows.length - 1 + offset;
     lines.push({ type: LineType.Horizontal, index: multiplicationSeparatorIndex });
@@ -138,33 +143,52 @@ function getGridLines(info: MultiplicationResultMeta, initialOperandRows: GridCe
     return lines;
 }
 
-function getLabelForOperands(info: MultiplicationResultMeta): GridLabel | undefined {
-    if (!info.hasMultiplicandComplement) return;
+function getLabelForOperands(info: MultiplicationResultMeta, result: MultiplicationResult): GridLabel | undefined {
+    const multiplicandLabelStr = 'M';
+    const multiplierLabelStr = 'm';
+
+    if (!info.hasMultiplicandComplement) {
+        const labels = Array(info.totalHeight + 1).fill('');
+
+        const multiplicandIndex = 0;
+        const multiplierIndex = 1;
+        labels[multiplicandIndex] = multiplicandLabelStr;
+        labels[multiplierIndex] = multiplierLabelStr;
+        return {labels};
+    }
 
     const labels = Array(info.totalHeight + 2).fill('');
 
-    const multiplicandLabelStr = 'M';
-    const multiplierLabelStr = 'm';
     const complementLabelStr = `\\overline{${multiplicandLabelStr}}`;
+    const correctionLabelMultiplier = getMultiplierForCorrectionLabel(result);
 
     const multiplicandComplementIndex = 0;
     const multiplicandIndex = 1;
     const multiplierIndex = 2;
-    const addedComplementIndex = labels.length - 2;
+    const correctionIndex = labels.length - 2;
 
     labels[multiplicandComplementIndex] = complementLabelStr;
     labels[multiplicandIndex] = multiplicandLabelStr;
     labels[multiplierIndex] = multiplierLabelStr;
-    labels[addedComplementIndex] = complementLabelStr;
+    labels[correctionIndex] = correctionLabelMultiplier + complementLabelStr;
 
     return { labels };
 }
 
+function getMultiplierForCorrectionLabel(result: MultiplicationResult): string {
+    if(result.algorithmType === MultiplicationType.WithoutExtension && result.lastMultiplierDigit) {
+        const {base, valueInDecimal} = result.lastMultiplierDigit;
+        return Math.abs(-(base - valueInDecimal)).toString();
+    }
+    return ''
+}
+
 interface MultiplicationResultMeta extends ResultMeta {
     numMultiplicandFractionalDigits: number;
+    numMultiplierDigits: number;
     numMultiplierFractionalDigits: number;
     maxOperandsFractionDigits: number;
-    algorithmType: AlgorithmType;
+    algorithmType: MultiplicationType;
     hasMultiplicandComplement: boolean;
     totalHeight: number;
 }
@@ -179,12 +203,13 @@ function extractMultiplicationResultMeta(result: MultiplicationResult): Multipli
 
     return {
         ...extractResultMeta(result),
+        numMultiplierDigits: multiplier.numDigits(),
         fractionDesiredWidth: maxOperandsFractionDigits,
         totalWidth: getTotalWidth(result),
         numMultiplicandFractionalDigits,
         numMultiplierFractionalDigits,
         maxOperandsFractionDigits,
-        algorithmType: result.algorithmType,
+        algorithmType: result.algorithmType as MultiplicationType,
         totalHeight: getTotalHeight(result),
         hasMultiplicandComplement: !!result.multiplicandComplement
     };
@@ -272,20 +297,54 @@ function buildDigitMultiplicationGroup(stepResult: MultiplicationPositionResult,
     };
 }
 
-function buildMultiplicandComplementGroup(info: MultiplicationResultMeta): CellGroup {
-    const complementRowStart: CellConfig = { x: 0, y: 0 };
-    const complementRowEnd: CellConfig = { x: info.totalWidth - 1, y: 0 };
-    const multiplicandRow = groupCellsInStraightLine(complementRowStart, complementRowEnd);
+function buildMultiplicandComplementGroup(info: MultiplicationResultMeta, lastMultiplierDigit?: MultiplicationOperand): CellGroup {
+    const algOffset = info.algorithmType === MultiplicationType.WithExtension
+        ? 1
+        : 0;
 
-
-    const resultRowStart: CellConfig = { x: 0, y: info.totalHeight };
-    const resultRowEnd: CellConfig = { x: info.totalWidth - 1, y: info.totalHeight };
-    const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd);
-
-    return {
-        anchorPosition: CellPosition.Top,
-        cells: [...multiplicandRow, ...resultRow]
+    const lastMultiplierCell: CellConfig = {
+        x: info.totalWidth - info.numMultiplierDigits - algOffset,
+        y: info.hasMultiplicandComplement ? 2 : 1
     };
+
+    if (!info.hasMultiplicandComplement) {
+        return {
+            anchorPosition: lastMultiplierCell,
+            cells: [lastMultiplierCell],
+            contentBuilder: () => (
+                <MultiplicationCorrectionDetails
+                    multiplierNegative={false}
+                    multiplicationType={info.algorithmType}
+                    lastMultiplierDigit={lastMultiplierDigit}
+                />),
+            contentProps: {}
+        };
+    }
+
+    if (info.hasMultiplicandComplement && lastMultiplierDigit) {
+        const complementRowStart: CellConfig = { x: 0, y: 0 };
+        const complementRowEnd: CellConfig = { x: info.totalWidth - 1, y: 0 };
+        const multiplicandRow = groupCellsInStraightLine(complementRowStart, complementRowEnd);
+
+
+        const resultRowStart: CellConfig = { x: 0, y: info.totalHeight };
+        const resultRowEnd: CellConfig = { x: info.totalWidth - 1, y: info.totalHeight };
+        const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd);
+
+        return {
+            anchorPosition: lastMultiplierCell,
+            cells: [...multiplicandRow, ...resultRow, lastMultiplierCell],
+            contentBuilder: () => (
+                <MultiplicationCorrectionDetails
+                    multiplierNegative={true}
+                    multiplicationType={info.algorithmType}
+                    lastMultiplierDigit={lastMultiplierDigit}
+                />
+            ),
+            contentProps: {}
+        };
+    }
+
 }
 
 

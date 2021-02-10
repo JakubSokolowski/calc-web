@@ -80,6 +80,7 @@ export interface MultiplicationResult extends OperationResult<MultiplicationOper
     stepResults: MultiplicationRowResult[];
     addition: AdditionResult;
     multiplicandComplement?: PositionalNumber;
+    lastMultiplierDigit?: MultiplicationOperand;
 }
 
 

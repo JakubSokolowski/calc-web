@@ -86,7 +86,13 @@
         "additionDetails": "Addition Details",
         "downloadDetails": "Download details as .png",
         "subtractionDetails": "Subtraction Details",
-        "multiplicationDetails": "Multiplication Details"
+        "multiplicationDetails": "Multiplication Details",
+        "extensionDigitNegative": "Extension digit value is -1",
+        "addMultiplicandComplement": "Add multiplicand complement",
+        "extensionDigitPositive": "Extension digit value is 0",
+        "lastDigitPositive": "Most significant digit value is {{value}}, add",
+        "lastDigitNegative": "Most significant digit is {{value}}",
+        "nothingToDo": "Nothing to do"
     },
     "operations": {
         "addition": {

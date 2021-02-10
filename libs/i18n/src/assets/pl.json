@@ -86,7 +86,13 @@
         "subtractionDetails": "Szczegóły odejmowania",
         "multiplicationDetails": "Szczegóły mnożenia",
         "downloadDetails": "Pobierz szczegóły jako .png",
-        "calculate": "Oblicz"
+        "calculate": "Oblicz",
+        "extensionDigitNegative": "Wartość cyfry rozszerzenia to -1",
+        "addMultiplicandComplement": "Dodaj rozszerzenie mnożnej",
+        "extensionDigitPositive": "Wartość cyfry rozszerzenia to 0",
+        "lastDigitPositive": "Najbardziej znacząca pozycja ma wartość {{value}}, dodaj",
+        "lastDigitNegative": "Najbardziej znacząca pozycja ma wartość {{value}}",
+        "nothingToDo": "Nic do zrobienia"
     },
     "sandbox": {
         "title": "Sandbox",

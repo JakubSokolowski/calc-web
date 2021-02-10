@@ -6380,7 +6380,10 @@ Array [
     "popoverPlacement": "bottom",
   },
   Object {
-    "anchorPosition": "Top",
+    "anchorPosition": Object {
+      "x": 7,
+      "y": 2,
+    },
     "cells": Array [
       Object {
         "preventGroupTrigger": undefined,
@@ -6482,7 +6485,13 @@ Array [
         "x": 9,
         "y": 7,
       },
+      Object {
+        "x": 7,
+        "y": 2,
+      },
     ],
+    "contentBuilder": [Function],
+    "contentProps": Object {},
   },
 ]
 `;
@@ -11083,7 +11092,10 @@ Array [
     "popoverPlacement": "bottom",
   },
   Object {
-    "anchorPosition": "Top",
+    "anchorPosition": Object {
+      "x": 5,
+      "y": 2,
+    },
     "cells": Array [
       Object {
         "preventGroupTrigger": undefined,
@@ -11185,7 +11197,13 @@ Array [
         "x": 9,
         "y": 7,
       },
+      Object {
+        "x": 5,
+        "y": 2,
+      },
     ],
+    "contentBuilder": [Function],
+    "contentProps": Object {},
   },
 ]
 `;

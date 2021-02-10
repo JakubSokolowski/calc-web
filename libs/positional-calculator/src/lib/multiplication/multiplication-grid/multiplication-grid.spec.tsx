@@ -38,6 +38,10 @@ describe('multiplication-grid', () => {
                     // then
                     const expected: GridLine[] = [
                         {
+                            index: 5,
+                            type: LineType.Vertical
+                        },
+                        {
                             index: 1,
                             type: LineType.Horizontal
                         },
@@ -82,6 +86,10 @@ describe('multiplication-grid', () => {
                     'and vertical lines separating integer and fraction parts', () => {
                     // then
                     const expected: GridLine[] = [
+                        {
+                            index: 6,
+                            type: LineType.Vertical
+                        },
                         {
                             index: 1,
                             type: LineType.Horizontal
