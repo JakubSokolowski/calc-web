@@ -66,7 +66,8 @@ export {
 
 export {
     isValidString,
-    digitsToStr
+    digitsToStr,
+    splitToDigitsList
 } from './helpers/conversion-helpers'
 
 export {

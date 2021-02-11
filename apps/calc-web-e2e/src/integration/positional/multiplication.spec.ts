@@ -3,7 +3,7 @@ import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-ari
 import {
     getCellByCoords,
     getMultiplicationResult,
-    getOperationGrid,
+    getOperationGrid, gridHasProperResultRow,
     operationReturnsProperResult
 } from '../../support/positional-calculator';
 
@@ -15,11 +15,12 @@ describe('Default multiplication', () => {
     });
 
     it('should multiply two positive numbers', () => {
+        const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['78', '88'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.Default,
-            base: 10
+            base
         };
         const expected = '6864';
 
@@ -36,14 +37,17 @@ describe('Default multiplication', () => {
         getCellByCoords(2, 4).trigger('mouseover')
             .getByDataTest('add-at-position')
             .contains('S_{3}=6');
+
+        gridHasProperResultRow(expected, base, 5, 4);
     });
 
     it('should multiply two negative numbers', () => {
+        const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['-78', '-88'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.Default,
-            base: 10
+            base
         };
         const expected = '6864';
 
@@ -51,14 +55,17 @@ describe('Default multiplication', () => {
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expected, base, 5, 4);
     });
 
     it('should multiply negative and positive numbers', () => {
+        const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['-78', '-88'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.Default,
-            base: 10
+            base
         };
         const expected = '6864';
 
@@ -66,6 +73,8 @@ describe('Default multiplication', () => {
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expected, base, 5, 4);
     });
 });
 
@@ -77,18 +86,22 @@ describe('Multiplication with extension', () => {
     });
 
     it('should multiply two numbers', () => {
+        const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['78', '-88'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.WithExtension,
-            base: 10
+            base
         };
         const expected = '-6864';
+        const expectedComplement = '(9)3136';
 
         operationReturnsProperResult(config, expected);
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expectedComplement, base, 5, 6);
     });
 
     // BUG #119
@@ -123,18 +136,22 @@ describe('Multiplication with extension', () => {
     });
 
     it('should multiply two numbers in base 8', () => {
+        const base = 8;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['-33', '723'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.WithExtension,
-            base: 8
+            base
         };
         const expected = '-30501';
+        const expectedComplement = '(7)47277';
 
         operationReturnsProperResult(config, expected);
 
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expectedComplement, base, 6, 5);
     });
 
     it('should multiply numbers entered as complements in base 8', () => {
