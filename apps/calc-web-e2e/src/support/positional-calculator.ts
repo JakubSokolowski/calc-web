@@ -1,5 +1,5 @@
 import { OperationTemplate } from '@calc/positional-calculator';
-import { AlgorithmType } from '@calc/calc-arithmetic';
+import { AlgorithmType, splitToDigitsList } from '@calc/calc-arithmetic';
 
 export const getByDataResult = (result: string) => cy.get(`[data-result="${result}"]`);
 
@@ -33,7 +33,7 @@ export const selectAlgorithm = (algorithm: string) => {
 };
 
 export const setOperationBase = (base: number) => {
-    cy.get('#base').clear().type(`${base}`)
+    cy.get('#base').clear().type(`${base}`);
 };
 
 export const getCalculateButton = () => cy.getByDataTest('calculate');
@@ -47,7 +47,7 @@ export const getOperationGridSaveButton = () => cy.getByDataTest('operation-grid
 
 
 export const calculatePositional = (config: OperationTemplate<AlgorithmType>) => {
-    const {algorithm, base, operands, operation} = config;
+    const { algorithm, base, operands, operation } = config;
     setOperationBase(base);
     selectAlgorithm(algorithm);
     selectOperation(operation);
@@ -61,7 +61,22 @@ export const operationReturnsProperResult = (config: OperationTemplate<Algorithm
     hasProperResult(result);
 };
 
+export const gridHasProperResultRow = (representation: string, base: number, bottomRightX: number, bottomRightY: number) => {
+    const stripped = representation
+        .replace('.', '')
+        .replace('(', '')
+        .replace(')', '');
+
+    const asDigits = splitToDigitsList(stripped, base);
+    const positionsAscending = asDigits.reverse();
+
+    positionsAscending.forEach((d, index) => {
+        getCellByCoords(bottomRightX - index, bottomRightY)
+            .contains(d.representationInBase);
+    });
+};
+
 export const getCellByCoords = (x: number, y: number) => {
-    return cy.getByDataTest(`operation-grid-${x}-${y}`)
+    return cy.getByDataTest(`operation-grid-${x}-${y}`);
 };
 

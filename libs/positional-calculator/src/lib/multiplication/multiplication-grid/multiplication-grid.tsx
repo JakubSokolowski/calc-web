@@ -42,23 +42,12 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
         ? operandDigitsToCellConfig(result.multiplicandComplement.complement.asDigits(), info, base)
         : [];
 
-    const operandRows: GridCellConfig[][] = result.operands.map((operandDigits: MultiplicationOperand[], index) => {
-        const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
-        if (index === result.operands.length - 1) cells[0].content = '*';
-        return cells;
-    });
-
+    const operandRows: GridCellConfig[][] = buildOperandsRows(result, info, base);
     const multiplicationGroups = buildRowMultiplicationGroups(result.stepResults, info);
-
-    const additionOperandRows: GridCellConfig[][] = result.addition.operands.map((operandDigits: MultiplicationOperand[], index) => {
-        const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
-        const erased = eraseContentEnd(cells, index);
-        if (index === result.addition.operands.length - 1) erased[0].content = '+';
-        return erased;
-    });
-
+    const additionOperandRows: GridCellConfig[][] = buildAdditionOperandsRows(result, info, base);
     const resultDigitsCells = digitsToCellConfig(result.resultDigits);
     const resultRow: GridCellConfig[] = padWithEmptyCells(resultDigitsCells, operandRows[0].length, 'Left');
+
     const additionGroups = buildAdditionGroups(result.addition.stepResults, info, additionOperandRows, resultRow, yOffset);
 
     const digitMultiplicationGroups = result.stepResults.map((result, rowIndex) => {
@@ -85,6 +74,24 @@ export function buildMultiplicationGrid(result: MultiplicationResult): HoverOper
         values,
         label: labels
     };
+}
+
+
+function buildOperandsRows(result: MultiplicationResult, info: MultiplicationResultMeta, base: number) {
+    return result.operands.map((operandDigits: MultiplicationOperand[], index) => {
+        const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
+        if (index === result.operands.length - 1) cells[0].content = '*';
+        return cells;
+    });
+}
+
+function buildAdditionOperandsRows(result: MultiplicationResult, info: MultiplicationResultMeta, base: number) {
+    return result.addition.operands.map((operandDigits: MultiplicationOperand[], index) => {
+        const cells: GridCellConfig[] = operandDigitsToCellConfig(operandDigits, info, base);
+        const erased = eraseContentEnd(cells, index);
+        if (index === result.addition.operands.length - 1) erased[0].content = '+';
+        return erased;
+    });
 }
 
 function buildAdditionGroups(stepResults: AdditionPositionResult[], info: MultiplicationResultMeta, additionOperandRows: GridCellConfig[][], resultRow: GridCellConfig[], yOffset: number) {
