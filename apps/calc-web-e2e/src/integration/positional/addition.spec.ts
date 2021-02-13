@@ -70,7 +70,7 @@ describe('Addition', () => {
     });
 
     // STUD_REQ_5_3
-    it.only('should show proper position details and carries', () => {
+    it('should show proper position details and carries', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['987', '6354'],
@@ -145,4 +145,23 @@ describe('Addition', () => {
         getAdditionResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
     });
+
+
+    // BUG #140
+    it('should not crash when addition position results has only zero operands', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands:  ['111', '111', '111', '110', '110'],
+            operation: OperationType.Addition,
+            algorithm: AdditionType.Default,
+            base: 2
+        };
+
+        const expected = '100001';
+
+        operationReturnsProperResult(config, expected);
+
+        getCellByCoords(0, 0).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{7}=0');
+    })
 });
