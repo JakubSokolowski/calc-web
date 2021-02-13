@@ -106,7 +106,6 @@ describe('Addition', () => {
         gridHasProperResultRow(expected, base, 5, 3);
     });
 
-
     // STUD_REQ_5_4
     it('should add multiple binary numbers together', () => {
         const config: OperationTemplate<AlgorithmType> = {

@@ -31,7 +31,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
                 );
             }
         };
-        const err = validateValueStr(representation, base);
+        const err = !!validateValueStr(representation, base);
         setError(validateValueStr(representation, base));
         onRepresentationChange(representation, index, !err)
     }, [base, representation]);

@@ -76,7 +76,6 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
         onChange(newArr);
     };
 
-
     const handleChange = (representationStr: string, index: number, isValid: boolean) => {
         const newOperands = [...operands];
         newOperands[index] = { ...newOperands[index], representation: representationStr, valid: isValid };
@@ -88,6 +87,7 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>
                 {(provided, snapshot) => (
                     <OperandInput
+                        inputKey={item.dndKey}
                         dataTest={`operand-input-${index}`}
                         ContainerComponent="li"
                         ContainerProps={{ ref: provided.innerRef }}
