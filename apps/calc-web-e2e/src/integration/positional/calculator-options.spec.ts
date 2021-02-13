@@ -81,4 +81,19 @@ describe('Calculator options', () => {
         getAddOperandButton().trigger('mouseover', { force: true });
         getCommonTooltip().contains(message);
     });
+
+    // BUG #145
+    it('should enable calculation when base was changed to match operands', () => {
+        const base = 2;
+        const operands = ['(1)010101', '(0)1101'];
+
+        // Default base is 10, enter operands
+        selectOperation('Multiplication');
+        addOperands(operands);
+        getCalculateButton().should('be.disabled');
+
+        // Update base to match operands
+        setOperationBase(base);
+        getCalculateButton().should('be.enabled');
+    });
 });

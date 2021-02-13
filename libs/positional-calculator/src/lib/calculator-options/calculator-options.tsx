@@ -3,7 +3,7 @@ import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
     algorithmMap,
     allOperations,
-    BaseDigits, multiplicationAlgorithms,
+    BaseDigits, isValidComplementOrRepresentationStr, multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
     OperationType
@@ -98,10 +98,14 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit});
 
-
-
     const handleOperandChange = (newOperands: DndOperand[]) => {
-        setOperands(newOperands)
+        const ops: DndOperand[] = newOperands.map((op: DndOperand) => {
+            return {
+                ...op,
+                valid: isValidComplementOrRepresentationStr(op.representation, form.values.base)
+            }
+        });
+        setOperands(ops);
     };
 
     const handleAdd = () => {
@@ -143,7 +147,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     }, [operands, operation]);
 
     useEffect(() => {
-        const disabled = !form.isValid || operands.length < 1 || !canCalculate;
+        const disabled = operands.length < 1 || !canCalculate;
         setSubmitDisabled(disabled);
     }, [form.isValid, operands, canCalculate]);
 
