@@ -13920,3 +13920,3160 @@ exports[`Addition > should show proper position details and carries #1`] = `
   </div>
 </div>
 `;
+
+exports[`Subtraction > should subtract two decimal numbers, larger from smaller #0`] = `
+<div data-result="-64776" data-test="subtraction-result">
+  <div class="complements-row">
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mn>1412</mn><msub><mn>3</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn
+                  ><mo stretchy="false">)</mo><mn>14123</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{14123_{10}}=(0)14123</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">1</span><span class="mord">4</span
+                          ><span class="mord">1</span><span class="mord">2</span
+                          ><span class="mord"
+                            ><span class="mord">3</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">0</span
+              ><span class="mclose">)</span><span class="mord">1</span
+              ><span class="mord">4</span><span class="mord">1</span
+              ><span class="mord">2</span><span class="mord">3</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mn>7889</mn><msub><mn>9</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn
+                  ><mo stretchy="false">)</mo><mn>78899</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{78899_{10}}=(0)78899</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">7</span><span class="mord">8</span
+                          ><span class="mord">8</span><span class="mord">9</span
+                          ><span class="mord"
+                            ><span class="mord">9</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">0</span
+              ><span class="mclose">)</span><span class="mord">7</span
+              ><span class="mord">8</span><span class="mord">8</span
+              ><span class="mord">9</span><span class="mord">9</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+  </div>
+  <div class="makeStyles-row-87">
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>1412</mn><msub><mn>3</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >14123_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>−</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >-</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.66666em;vertical-align:-0.08333em;"
+              ></span
+              ><span class="mord">−</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>7889</mn><msub><mn>9</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >78899_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">7</span><span class="mord">8</span
+              ><span class="mord">8</span><span class="mord">9</span
+              ><span class="mord"
+                ><span class="mord">9</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>6477</mn
+                  ><msub><mn>6</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-64776_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">6</span
+              ><span class="mord">4</span><span class="mord">7</span
+              ><span class="mord">7</span
+              ><span class="mord"
+                ><span class="mord">6</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <span class="non-complement-result" style="display: inline-flex;"
+      ><div class="makeStyles-symbol-89">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mo>=</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >=</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.36687em;vertical-align:0em;"
+                ></span
+                ><span class="mrel">=</span></span
+              ></span
+            ></span
+          ></span
+        >
+      </div>
+      <div class="makeStyles-operand-88">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mo>−</mo><mn>6477</mn
+                    ><msub><mn>6</mn><mn>10</mn></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >-64776_{10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.79444em;vertical-align:-0.15em;"
+                ></span
+                ><span class="mord">−</span><span class="mord">6</span
+                ><span class="mord">4</span><span class="mord">7</span
+                ><span class="mord">7</span
+                ><span class="mord"
+                  ><span class="mord">6</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span
+                          class="vlist"
+                          style="height:0.30110799999999993em;"
+                          ><span
+                            style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                            ><span class="pstrut" style="height:2.7em;"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">1</span
+                                ><span class="mord mtight">0</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height:0.15em;"
+                          ><span></span></span></span></span></span></span></span></span></span
+        ></span></div
+    ></span>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should subtract two decimal numbers, larger from smaller #1`] = `
+<div class="makeStyles-cellContent-94" id="operation-grid">
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-99">
+      9
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-99">
+      11
+    </div>
+    <div data-test="operation-grid-6-0" class="makeStyles-defaultCell-99"></div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-99"></div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      -1
+    </div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      13
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-crossedOutCell-100">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-crossedOutCell-100">
+      2
+    </div>
+    <div data-test="operation-grid-6-2" class="makeStyles-crossedOutCell-100">
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div
+      data-test="operation-grid-0-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      -
+    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-3-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-4-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-5-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-6-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-99">
+      (9)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-99">
+      3
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-99">
+      5
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div data-test="operation-grid-6-4" class="makeStyles-defaultCell-99">
+      4
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should subtract two positive decimal numbers, smaller from larger #0`] = `
+<div data-result="198" data-test="subtraction-result">
+  <div class="complements-row">
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mn>32</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn
+                  ><mo stretchy="false">)</mo><mn>321</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{321_{10}}=(0)321</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">3</span><span class="mord">2</span
+                          ><span class="mord"
+                            ><span class="mord">1</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">0</span
+              ><span class="mclose">)</span><span class="mord">3</span
+              ><span class="mord">2</span><span class="mord">1</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mn>12</mn><msub><mn>3</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>0</mn
+                  ><mo stretchy="false">)</mo><mn>123</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{123_{10}}=(0)123</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">1</span><span class="mord">2</span
+                          ><span class="mord"
+                            ><span class="mord">3</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">0</span
+              ><span class="mclose">)</span><span class="mord">1</span
+              ><span class="mord">2</span><span class="mord">3</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+  </div>
+  <div class="makeStyles-row-87">
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>32</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >321_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>−</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >-</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.66666em;vertical-align:-0.08333em;"
+              ></span
+              ><span class="mord">−</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>12</mn><msub><mn>3</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >123_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord"
+                ><span class="mord">3</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>19</mn><msub><mn>8</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >198_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">9</span
+              ><span class="mord"
+                ><span class="mord">8</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <span class="non-complement-result" style="display: inline-flex;"
+      ><div class="makeStyles-symbol-89">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mo>=</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >=</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.36687em;vertical-align:0em;"
+                ></span
+                ><span class="mrel">=</span></span
+              ></span
+            ></span
+          ></span
+        >
+      </div>
+      <div class="makeStyles-operand-88">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>19</mn><msub><mn>8</mn><mn>10</mn></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >198_{10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.79444em;vertical-align:-0.15em;"
+                ></span
+                ><span class="mord">1</span><span class="mord">9</span
+                ><span class="mord"
+                  ><span class="mord">8</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span
+                          class="vlist"
+                          style="height:0.30110799999999993em;"
+                          ><span
+                            style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                            ><span class="pstrut" style="height:2.7em;"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">1</span
+                                ><span class="mord mtight">0</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height:0.15em;"
+                          ><span></span></span></span></span></span></span></span></span></span
+        ></span></div
+    ></span>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should subtract two positive decimal numbers, smaller from larger #1`] = `
+<div class="makeStyles-cellContent-94" id="operation-grid">
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-99">
+      11
+    </div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-99"></div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-99"></div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      11
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-defaultCell-99">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-crossedOutCell-100">
+      3
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-crossedOutCell-100">
+      2
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div
+      data-test="operation-grid-0-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      -
+    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      (0)
+    </div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-3-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-4-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-99">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-99">
+      1
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-99">
+      9
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-99">
+      8
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should subtract two decimal numbers, entered as complement #0`] = `
+<div data-result="35223.682" data-test="subtraction-result">
+  <div class="complements-row">
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo stretchy="false">(</mo><mn>0</mn
+                      ><mo stretchy="false">)</mo><mn>14123.451</mn></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mn>14123.45</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{ (0)14123.451 }=14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1.2000000000000002em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.9500000000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mopen">(</span
+                          ><span class="mord">0</span
+                          ><span class="mclose">)</span
+                          ><span class="mord">1</span><span class="mord">4</span
+                          ><span class="mord">1</span><span class="mord">2</span
+                          ><span class="mord">3</span><span class="mord">.</span
+                          ><span class="mord">4</span><span class="mord">5</span
+                          ><span class="mord">1</span></span
+                        ></span
+                      ><span style="top:-3.87em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.25em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo stretchy="false">(</mo><mn>9</mn
+                      ><mo stretchy="false">)</mo><mn>78899.769</mn></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo>−</mo><mn>21100.23</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{ (9)78899.769 }=-21100.231_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1.2000000000000002em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.9500000000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mopen">(</span
+                          ><span class="mord">9</span
+                          ><span class="mclose">)</span
+                          ><span class="mord">7</span><span class="mord">8</span
+                          ><span class="mord">8</span><span class="mord">9</span
+                          ><span class="mord">9</span><span class="mord">.</span
+                          ><span class="mord">7</span><span class="mord">6</span
+                          ><span class="mord">9</span></span
+                        ></span
+                      ><span style="top:-3.87em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.25em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">2</span
+              ><span class="mord">1</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">0</span
+              ><span class="mord">.</span><span class="mord">2</span
+              ><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+  </div>
+  <div class="makeStyles-row-87">
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>14123.45</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>−</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >-</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.66666em;vertical-align:-0.08333em;"
+              ></span
+              ><span class="mord">−</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>21100.23</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-21100.231_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">2</span
+              ><span class="mord">1</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">0</span
+              ><span class="mord">.</span><span class="mord">2</span
+              ><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >35223.682_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">5</span
+              ><span class="mord">2</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">6</span><span class="mord">8</span
+              ><span class="mord"
+                ><span class="mord">2</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <span class="non-complement-result" style="display: inline-flex;"
+      ><div class="makeStyles-symbol-89">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mo>=</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >=</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.36687em;vertical-align:0em;"
+                ></span
+                ><span class="mrel">=</span></span
+              ></span
+            ></span
+          ></span
+        >
+      </div>
+      <div class="makeStyles-operand-88">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >35223.682_{10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.79444em;vertical-align:-0.15em;"
+                ></span
+                ><span class="mord">3</span><span class="mord">5</span
+                ><span class="mord">2</span><span class="mord">2</span
+                ><span class="mord">3</span><span class="mord">.</span
+                ><span class="mord">6</span><span class="mord">8</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span
+                          class="vlist"
+                          style="height:0.30110799999999993em;"
+                          ><span
+                            style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                            ><span class="pstrut" style="height:2.7em;"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">1</span
+                                ><span class="mord mtight">0</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height:0.15em;"
+                          ><span></span></span></span></span></span></span></span></span></span
+        ></span></div
+    ></span>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should subtract two decimal numbers, entered as complement #1`] = `
+<div class="makeStyles-cellContent-94" id="operation-grid">
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-99">
+      9
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-99">
+      11
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      12
+    </div>
+    <div data-test="operation-grid-7-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-8-0" class="makeStyles-defaultCell-99">
+      14
+    </div>
+    <div data-test="operation-grid-9-0" class="makeStyles-defaultCell-99"></div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-99"></div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      -1
+    </div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-9-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      11
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-crossedOutCell-100">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-crossedOutCell-100">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-crossedOutCell-100 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-8-2" class="makeStyles-crossedOutCell-100">
+      5
+    </div>
+    <div data-test="operation-grid-9-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div
+      data-test="operation-grid-0-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      -
+    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      (9)
+    </div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-3-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-4-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-5-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-6-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-7-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-9-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-99">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-99">
+      3
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-99">
+      5
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-4"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-99">
+      6
+    </div>
+    <div data-test="operation-grid-8-4" class="makeStyles-defaultCell-99">
+      8
+    </div>
+    <div data-test="operation-grid-9-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should convert signed negative number to complement and then subtract #0`] = `
+<div data-result="35223.682" data-test="subtraction-result">
+  <div class="complements-row">
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo stretchy="false">(</mo><mn>0</mn
+                      ><mo stretchy="false">)</mo><mn>14123.451</mn></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mn>14123.45</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{ (0)14123.451 }=14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1.2000000000000002em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.9500000000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mopen">(</span
+                          ><span class="mord">0</span
+                          ><span class="mclose">)</span
+                          ><span class="mord">1</span><span class="mord">4</span
+                          ><span class="mord">1</span><span class="mord">2</span
+                          ><span class="mord">3</span><span class="mord">.</span
+                          ><span class="mord">4</span><span class="mord">5</span
+                          ><span class="mord">1</span></span
+                        ></span
+                      ><span style="top:-3.87em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.25em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo>−</mo><mn>21100.23</mn
+                      ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>9</mn
+                  ><mo stretchy="false">)</mo><mn>78899.769</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{-21100.231_{10}}=(9)78899.769</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">−</span><span class="mord">2</span
+                          ><span class="mord">1</span><span class="mord">1</span
+                          ><span class="mord">0</span><span class="mord">0</span
+                          ><span class="mord">.</span><span class="mord">2</span
+                          ><span class="mord">3</span
+                          ><span class="mord"
+                            ><span class="mord">1</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">9</span
+              ><span class="mclose">)</span><span class="mord">7</span
+              ><span class="mord">8</span><span class="mord">8</span
+              ><span class="mord">9</span><span class="mord">9</span
+              ><span class="mord">.</span><span class="mord">7</span
+              ><span class="mord">6</span><span class="mord">9</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+  </div>
+  <div class="makeStyles-row-87">
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>14123.45</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>−</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >-</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.66666em;vertical-align:-0.08333em;"
+              ></span
+              ><span class="mord">−</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>21100.23</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-21100.231_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">2</span
+              ><span class="mord">1</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">0</span
+              ><span class="mord">.</span><span class="mord">2</span
+              ><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >35223.682_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">5</span
+              ><span class="mord">2</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">6</span><span class="mord">8</span
+              ><span class="mord"
+                ><span class="mord">2</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <span class="non-complement-result" style="display: inline-flex;"
+      ><div class="makeStyles-symbol-89">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mo>=</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >=</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.36687em;vertical-align:0em;"
+                ></span
+                ><span class="mrel">=</span></span
+              ></span
+            ></span
+          ></span
+        >
+      </div>
+      <div class="makeStyles-operand-88">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >35223.682_{10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.79444em;vertical-align:-0.15em;"
+                ></span
+                ><span class="mord">3</span><span class="mord">5</span
+                ><span class="mord">2</span><span class="mord">2</span
+                ><span class="mord">3</span><span class="mord">.</span
+                ><span class="mord">6</span><span class="mord">8</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span
+                          class="vlist"
+                          style="height:0.30110799999999993em;"
+                          ><span
+                            style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                            ><span class="pstrut" style="height:2.7em;"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">1</span
+                                ><span class="mord mtight">0</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height:0.15em;"
+                          ><span></span></span></span></span></span></span></span></span></span
+        ></span></div
+    ></span>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should convert signed negative number to complement and then subtract #1`] = `
+<div class="makeStyles-cellContent-94" id="operation-grid">
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-99">
+      9
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-99">
+      11
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      12
+    </div>
+    <div data-test="operation-grid-7-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-8-0" class="makeStyles-defaultCell-99">
+      14
+    </div>
+    <div data-test="operation-grid-9-0" class="makeStyles-defaultCell-99"></div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-99"></div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      -1
+    </div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-9-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      11
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-crossedOutCell-100">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-crossedOutCell-100">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-crossedOutCell-100 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-8-2" class="makeStyles-crossedOutCell-100">
+      5
+    </div>
+    <div data-test="operation-grid-9-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div
+      data-test="operation-grid-0-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      -
+    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      (9)
+    </div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-3-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-4-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-5-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-6-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-7-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-9-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-99">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-99">
+      3
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-99">
+      5
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-4"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-99">
+      6
+    </div>
+    <div data-test="operation-grid-8-4" class="makeStyles-defaultCell-99">
+      8
+    </div>
+    <div data-test="operation-grid-9-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should display proper borrow chain for positions #0`] = `
+<div data-result="35223.682" data-test="subtraction-result">
+  <div class="complements-row">
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo stretchy="false">(</mo><mn>0</mn
+                      ><mo stretchy="false">)</mo><mn>14123.451</mn></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mn>14123.45</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{ (0)14123.451 }=14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1.2000000000000002em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.9500000000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mopen">(</span
+                          ><span class="mord">0</span
+                          ><span class="mclose">)</span
+                          ><span class="mord">1</span><span class="mord">4</span
+                          ><span class="mord">1</span><span class="mord">2</span
+                          ><span class="mord">3</span><span class="mord">.</span
+                          ><span class="mord">4</span><span class="mord">5</span
+                          ><span class="mord">1</span></span
+                        ></span
+                      ><span style="top:-3.87em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.25em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-row-86">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mover accent="true"
+                    ><mrow
+                      ><mo>−</mo><mn>21100.23</mn
+                      ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                    ><mo stretchy="true">‾</mo></mover
+                  ><mo>=</mo><mo stretchy="false">(</mo><mn>9</mn
+                  ><mo stretchy="false">)</mo><mn>78899.769</mn></mrow
+                ><annotation encoding="application/x-tex"
+                  >\\overline{-21100.231_{10}}=(9)78899.769</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.9944400000000001em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord overline"
+                ><span class="vlist-t vlist-t2"
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.8444400000000001em;"
+                      ><span style="top:-3em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span class="mord"
+                          ><span class="mord">−</span><span class="mord">2</span
+                          ><span class="mord">1</span><span class="mord">1</span
+                          ><span class="mord">0</span><span class="mord">0</span
+                          ><span class="mord">.</span><span class="mord">2</span
+                          ><span class="mord">3</span
+                          ><span class="mord"
+                            ><span class="mord">1</span
+                            ><span class="msupsub"
+                              ><span class="vlist-t vlist-t2"
+                                ><span class="vlist-r"
+                                  ><span
+                                    class="vlist"
+                                    style="height:0.30110799999999993em;"
+                                    ><span
+                                      style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                                      ><span
+                                        class="pstrut"
+                                        style="height:2.7em;"
+                                      ></span
+                                      ><span
+                                        class="sizing reset-size6 size3 mtight"
+                                        ><span class="mord mtight"
+                                          ><span class="mord mtight">1</span
+                                          ><span class="mord mtight"
+                                            >0</span
+                                          ></span
+                                        ></span
+                                      ></span
+                                    ></span
+                                  ><span class="vlist-s">​</span></span
+                                ><span class="vlist-r"
+                                  ><span class="vlist" style="height:0.15em;"
+                                    ><span></span></span></span></span></span></span></span></span
+                      ><span style="top:-3.76444em;"
+                        ><span class="pstrut" style="height:3em;"></span
+                        ><span
+                          class="overline-line"
+                          style="border-bottom-width:0.04em;"
+                        ></span></span></span
+                    ><span class="vlist-s">​</span></span
+                  ><span class="vlist-r"
+                    ><span class="vlist" style="height:0.15em;"
+                      ><span></span></span></span></span></span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span
+              ><span class="mrel">=</span
+              ><span
+                class="mspace"
+                style="margin-right:0.2777777777777778em;"
+              ></span></span
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mopen">(</span><span class="mord">9</span
+              ><span class="mclose">)</span><span class="mord">7</span
+              ><span class="mord">8</span><span class="mord">8</span
+              ><span class="mord">9</span><span class="mord">9</span
+              ><span class="mord">.</span><span class="mord">7</span
+              ><span class="mord">6</span><span class="mord">9</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+  </div>
+  <div class="makeStyles-row-87">
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>14123.45</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >14123.451_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">4</span
+              ><span class="mord">1</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">4</span><span class="mord">5</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>−</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >-</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.66666em;vertical-align:-0.08333em;"
+              ></span
+              ><span class="mord">−</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mo>−</mo><mn>21100.23</mn
+                  ><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >-21100.231_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">−</span><span class="mord">2</span
+              ><span class="mord">1</span><span class="mord">1</span
+              ><span class="mord">0</span><span class="mord">0</span
+              ><span class="mord">.</span><span class="mord">2</span
+              ><span class="mord">3</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <div class="makeStyles-symbol-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
+    </div>
+    <div class="makeStyles-operand-88">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >35223.682_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">3</span><span class="mord">5</span
+              ><span class="mord">2</span><span class="mord">2</span
+              ><span class="mord">3</span><span class="mord">.</span
+              ><span class="mord">6</span><span class="mord">8</span
+              ><span class="mord"
+                ><span class="mord">2</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
+    </div>
+    <span class="non-complement-result" style="display: inline-flex;"
+      ><div class="makeStyles-symbol-89">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow><mo>=</mo></mrow
+                  ><annotation encoding="application/x-tex"
+                    >=</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.36687em;vertical-align:0em;"
+                ></span
+                ><span class="mrel">=</span></span
+              ></span
+            ></span
+          ></span
+        >
+      </div>
+      <div class="makeStyles-operand-88">
+        <span
+          ><span class="katex"
+            ><span class="katex-mathml"
+              ><math xmlns="http://www.w3.org/1998/Math/MathML"
+                ><semantics
+                  ><mrow
+                    ><mn>35223.68</mn><msub><mn>2</mn><mn>10</mn></msub></mrow
+                  ><annotation encoding="application/x-tex"
+                    >35223.682_{10}</annotation
+                  ></semantics
+                ></math
+              ></span
+            ><span class="katex-html" aria-hidden="true"
+              ><span class="base"
+                ><span
+                  class="strut"
+                  style="height:0.79444em;vertical-align:-0.15em;"
+                ></span
+                ><span class="mord">3</span><span class="mord">5</span
+                ><span class="mord">2</span><span class="mord">2</span
+                ><span class="mord">3</span><span class="mord">.</span
+                ><span class="mord">6</span><span class="mord">8</span
+                ><span class="mord"
+                  ><span class="mord">2</span
+                  ><span class="msupsub"
+                    ><span class="vlist-t vlist-t2"
+                      ><span class="vlist-r"
+                        ><span
+                          class="vlist"
+                          style="height:0.30110799999999993em;"
+                          ><span
+                            style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                            ><span class="pstrut" style="height:2.7em;"></span
+                            ><span class="sizing reset-size6 size3 mtight"
+                              ><span class="mord mtight"
+                                ><span class="mord mtight">1</span
+                                ><span class="mord mtight">0</span></span
+                              ></span
+                            ></span
+                          ></span
+                        ><span class="vlist-s">​</span></span
+                      ><span class="vlist-r"
+                        ><span class="vlist" style="height:0.15em;"
+                          ><span></span></span></span></span></span></span></span></span></span
+        ></span></div
+    ></span>
+  </div>
+</div>
+`;
+
+exports[`Subtraction > should display proper borrow chain for positions #1`] = `
+<div class="makeStyles-cellContent-94" id="operation-grid">
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-0" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-0" class="makeStyles-defaultCell-99">
+      9
+    </div>
+    <div data-test="operation-grid-2-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-3-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-4-0" class="makeStyles-defaultCell-99">
+      10
+    </div>
+    <div data-test="operation-grid-5-0" class="makeStyles-defaultCell-99">
+      11
+    </div>
+    <div
+      data-test="operation-grid-6-0"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      12
+    </div>
+    <div data-test="operation-grid-7-0" class="makeStyles-defaultCell-99">
+      13
+    </div>
+    <div data-test="operation-grid-8-0" class="makeStyles-defaultCell-99">
+      14
+    </div>
+    <div data-test="operation-grid-9-0" class="makeStyles-defaultCell-99"></div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-1" class="makeStyles-defaultCell-99"></div>
+    <div
+      data-test="operation-grid-1-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      -1
+    </div>
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-3-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-4-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      0
+    </div>
+    <div
+      data-test="operation-grid-5-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      1
+    </div>
+    <div
+      data-test="operation-grid-6-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      2
+    </div>
+    <div
+      data-test="operation-grid-7-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      3
+    </div>
+    <div
+      data-test="operation-grid-8-1"
+      class="makeStyles-crossedOutCell-100 makeStyles-horizontalLine-105"
+    >
+      4
+    </div>
+    <div
+      data-test="operation-grid-9-1"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      11
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-2" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-2" class="makeStyles-crossedOutCell-100">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-3-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-4-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-5-2" class="makeStyles-crossedOutCell-100">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-2"
+      class="makeStyles-crossedOutCell-100 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-2" class="makeStyles-crossedOutCell-100">
+      4
+    </div>
+    <div data-test="operation-grid-8-2" class="makeStyles-crossedOutCell-100">
+      5
+    </div>
+    <div data-test="operation-grid-9-2" class="makeStyles-crossedOutCell-100">
+      1
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div
+      data-test="operation-grid-0-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      -
+    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      (9)
+    </div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-3-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-4-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      8
+    </div>
+    <div
+      data-test="operation-grid-5-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-6-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105 makeStyles-verticalLine-106"
+    >
+      9
+    </div>
+    <div
+      data-test="operation-grid-7-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      7
+    </div>
+    <div
+      data-test="operation-grid-8-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      6
+    </div>
+    <div
+      data-test="operation-grid-9-3"
+      class="makeStyles-defaultCell-99 makeStyles-horizontalLine-105"
+    >
+      9
+    </div>
+  </div>
+  <div class="makeStyles-gridRow-91">
+    <div data-test="operation-grid-0-4" class="makeStyles-defaultCell-99"></div>
+    <div data-test="operation-grid-1-4" class="makeStyles-defaultCell-99">
+      (0)
+    </div>
+    <div data-test="operation-grid-2-4" class="makeStyles-defaultCell-99">
+      3
+    </div>
+    <div data-test="operation-grid-3-4" class="makeStyles-defaultCell-99">
+      5
+    </div>
+    <div data-test="operation-grid-4-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div data-test="operation-grid-5-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+    <div
+      data-test="operation-grid-6-4"
+      class="makeStyles-defaultCell-99 makeStyles-verticalLine-106"
+    >
+      3
+    </div>
+    <div data-test="operation-grid-7-4" class="makeStyles-defaultCell-99">
+      6
+    </div>
+    <div data-test="operation-grid-8-4" class="makeStyles-defaultCell-99">
+      8
+    </div>
+    <div data-test="operation-grid-9-4" class="makeStyles-defaultCell-99">
+      2
+    </div>
+  </div>
+</div>
+`;

@@ -1,6 +1,8 @@
 import {
-    getAdditionResult, getCellByCoords,
-    getOperationGrid, gridHasProperResultRow,
+    getAdditionResult,
+    getCellByCoords,
+    getOperationGrid,
+    gridHasProperResultRow,
     operationReturnsProperResult
 } from '../../support/positional-calculator';
 import { OperationTemplate } from '@calc/positional-calculator';
@@ -150,7 +152,7 @@ describe('Addition', () => {
     // BUG #140
     it('should not crash when addition position results has only zero operands', () => {
         const config: OperationTemplate<AlgorithmType> = {
-            operands:  ['111', '111', '111', '110', '110'],
+            operands: ['111', '111', '111', '110', '110'],
             operation: OperationType.Addition,
             algorithm: AdditionType.Default,
             base: 2
@@ -163,5 +165,5 @@ describe('Addition', () => {
         getCellByCoords(0, 0).trigger('mouseover')
             .getByDataTest('add-at-position')
             .contains('S_{7}=0');
-    })
+    });
 });

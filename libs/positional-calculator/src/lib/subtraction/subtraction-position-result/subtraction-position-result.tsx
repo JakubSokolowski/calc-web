@@ -29,7 +29,7 @@ export const SubtractAtPositionResult: FC<P> = ({positionResult}) => {
     const positionDifferenceResult = `${positionResult.valueAtPosition.representationInBase}`;
 
     return (
-        <div>
+        <div data-test="subtract-at-position">
             {
                 positionResult.operands.length > 1 &&
                 <div className="opDiffRow">
