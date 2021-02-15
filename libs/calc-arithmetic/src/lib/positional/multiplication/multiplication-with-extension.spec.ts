@@ -138,5 +138,21 @@ describe('multiply-with-extensions', () => {
             const expected = '00';
             expect(result.numberResult.toString()).toEqual(expected);
         });
+
+        it('should multiply U2 numbers', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('(1)01011', base).result;
+            const y = fromStringDirect('(1)000110', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '10011000010';
+            const expectedComplement = '(0)10011000010';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
     });
 });

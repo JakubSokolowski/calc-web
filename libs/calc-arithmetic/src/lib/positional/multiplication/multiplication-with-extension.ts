@@ -4,7 +4,6 @@ import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
 import { PositionalNumber } from '../positional-number';
 import {
-    AdditionOperand,
     Digit,
     MultiplicationOperand,
     MultiplicationPositionResult,
@@ -84,14 +83,23 @@ function extendComplementsToPosition<T extends Digit>(complements: T[][], maxPos
 }
 
 export function shiftAndExtend<T extends Digit>(operands: T[][]) {
-    const globalMostSignificant = Math.max(...operands.map(r => r[0].position));
-    const maxPositionAfterExtend = globalMostSignificant + operands.length - 1;
+    const merged = operands.map(ops => mergeExtensionDigits(ops));
 
-    const shiftedRows = operands.map((opRow, index) => {
+    const firstNonZero = merged.map(r => {
+        if(r[0].valueInDecimal === 0) {
+            return r[1].position
+        }
+        return r[0].position;
+    });
+
+    const globalMostSignificant = Math.max(...firstNonZero);
+    const maxPositionAfterExtend = globalMostSignificant + merged.length;
+
+    const shiftedRows = merged.map((opRow, index) => {
         return shiftLeft(opRow, index);
     });
 
-    return extendComplementsToPosition(shiftedRows, maxPositionAfterExtend);
+    return extendComplementsToPosition(shiftedRows, maxPositionAfterExtend)
 }
 
 function multiplyDigitRows(
@@ -107,19 +115,19 @@ function multiplyDigitRows(
         return multiplyRowByDigit(multiplicandRow, multiplier);
     });
 
-    const rowResultDigits = shiftAndExtend(rowResults.map(res => res.resultDigits));
+    const digitsToShift = rowResults.map(res => res.resultDigits);
 
     let multiplicandComplement: PositionalNumber;
 
     if (isDigitNegativeComplement(lastMultiplier)) {
         const complement = getComplement(new NumberComplement(multiplicandDigits));
-        const numPositionsToShift = rowResultDigits.length;
-        const shifted = shiftLeft(complement.asDigits(), numPositionsToShift);
-        rowResultDigits.push(shifted);
+        digitsToShift.push(complement.asDigits());
         multiplicandComplement = fromDigits(complement.asDigits()).result;
     }
 
-    const sum = addDigitsArrays(rowResultDigits);
+    const shifted = shiftAndExtend(digitsToShift);
+    const positionCap = getPositionCap(multiplicandRow, multiplierRow);
+    const sum = addDigitsArrays(shifted, positionCap);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
     const trimmedLeadingZeros = trimSumDigits(adjustedSum.numberResult.asDigits());
     const resultWithProperSign = fromDigits(trimmedLeadingZeros, resultNegative).result;
@@ -143,6 +151,15 @@ export function trimSumDigits(digits: Digit[]) {
     return onlyZeros
         ? digits
         : trimStartByPredicate(digits, isZeroDigit);
+}
+
+
+function getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]):  number {
+    const lastMultiplicandPosition = multiplicandRow[multiplicandRow.length - 1].position;
+    const lastMultiplierPosition = multiplierRow[multiplierRow.length - 1].position;
+    const minPosition = Math.min(lastMultiplicandPosition, lastMultiplierPosition);
+
+    return minPosition + multiplicandRow.length + multiplierRow.length;
 }
 
 

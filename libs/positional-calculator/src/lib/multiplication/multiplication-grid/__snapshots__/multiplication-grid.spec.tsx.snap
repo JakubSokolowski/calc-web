@@ -6492,6 +6492,7 @@ Array [
     ],
     "contentBuilder": [Function],
     "contentProps": Object {},
+    "popoverPlacement": "bottom",
   },
 ]
 `;
@@ -11204,6 +11205,7 @@ Array [
     ],
     "contentBuilder": [Function],
     "contentProps": Object {},
+    "popoverPlacement": "bottom",
   },
 ]
 `;
