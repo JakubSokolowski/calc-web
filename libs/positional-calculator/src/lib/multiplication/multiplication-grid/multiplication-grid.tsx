@@ -333,7 +333,6 @@ function buildMultiplicandComplementGroup(info: MultiplicationResultMeta, lastMu
         const complementRowEnd: CellConfig = { x: info.totalWidth - 1, y: 0 };
         const multiplicandRow = groupCellsInStraightLine(complementRowStart, complementRowEnd);
 
-
         const resultRowStart: CellConfig = { x: 0, y: info.totalHeight };
         const resultRowEnd: CellConfig = { x: info.totalWidth - 1, y: info.totalHeight };
         const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd);
@@ -348,7 +347,8 @@ function buildMultiplicandComplementGroup(info: MultiplicationResultMeta, lastMu
                     lastMultiplierDigit={lastMultiplierDigit}
                 />
             ),
-            contentProps: {}
+            contentProps: {},
+            popoverPlacement: 'bottom'
         };
     }
 

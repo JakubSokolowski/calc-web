@@ -22,7 +22,7 @@ export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
     return numbers.map((num) => num.base).every((numBase) => numBase === base);
 }
 
-export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
+export function addDigitsArrays(digits: AdditionOperand[][], positionCap?: number): AdditionResult {
     const carryLookup: Record<number, AdditionOperand[]> = {};
     const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(digits);
     const digitsPositionLookup: Record<number, AdditionOperand>[] = buildLookup(digits, mostSignificantPosition);
@@ -75,7 +75,7 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
         prev = positionResult;
     }
 
-    const resultDigits = extractResultDigitsFromAddition(result);
+    const resultDigits = extractResultDigitsFromAddition(result, positionCap);
     const numberResult = buildPositionalNumberFromDigits(resultDigits);
 
     return {
@@ -89,7 +89,7 @@ export function addDigitsArrays(digits: AdditionOperand[][]): AdditionResult {
     };
 }
 
-export function extractResultDigitsFromAddition(positionResults: AdditionPositionResult[]): AdditionOperand[] {
+export function extractResultDigitsFromAddition(positionResults: AdditionPositionResult[], positionCap?: number): AdditionOperand[] {
     const digitsFromPositions: AdditionOperand[] = positionResults.map((res) => {
         return { ...res.valueAtPosition };
     });
@@ -103,7 +103,12 @@ export function extractResultDigitsFromAddition(positionResults: AdditionPositio
         carryDigitsNotConsideredInResult.push(...missingCarryDigits);
     });
 
-    const withExtension: AdditionOperand[] = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
+    const withExtension: AdditionOperand[] = [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()]
+        .filter(d => {
+            if(!positionCap) return true;
+            return d.position < positionCap;
+        });
+
 
     return mergeAdditionExtensionDigit(withExtension, positionResults);
 }

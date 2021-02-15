@@ -87,7 +87,6 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>
                 {(provided, snapshot) => (
                     <OperandInput
-                        inputKey={item.dndKey}
                         dataTest={`operand-input-${index}`}
                         ContainerComponent="li"
                         ContainerProps={{ ref: provided.innerRef }}

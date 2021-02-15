@@ -76,6 +76,34 @@ describe('Default multiplication', () => {
 
         gridHasProperResultRow(expected, base, 5, 4);
     });
+
+    it('should multiply two U2 numbers', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(1)01011', '(1)000110'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '10011000010';
+        const expectedComplement = '(0)10011000010';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(12, 8).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=0');
+
+        getCellByCoords(2, 8).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{10}=1');
+
+        gridHasProperResultRow(expectedComplement, base, 12, 8);
+    });
 });
 
 describe('Multiplication with extension', () => {
@@ -203,7 +231,7 @@ describe('Multiplication with extension', () => {
         operationReturnsProperResult(config, expected);
 
         // should display popover with proper content
-        getCellByCoords(2, 2).trigger('mouseover')
+        getCellByCoords(3, 2).trigger('mouseover')
             .getByDataTest('correction-with-extension-negative')
     });
 
@@ -221,6 +249,34 @@ describe('Multiplication with extension', () => {
         // should display popover with proper content
         getCellByCoords(2, 1).trigger('mouseover')
             .getByDataTest('correction-with-extension-positive')
+    });
+
+    it('should multiply two U2 numbers', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(1)01011', '(1)000110'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base
+        };
+        const expected = '10011000010';
+        const expectedComplement = '(0)10011000010';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(12, 10).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=0');
+
+        getCellByCoords(2, 10).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{10}=1');
+
+        gridHasProperResultRow(expectedComplement, base, 12, 10);
     });
 });
 
@@ -296,7 +352,7 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content
-        getCellByCoords(9, 7).trigger('mouseover')
+        getCellByCoords(8, 7).trigger('mouseover')
             .getByDataTest('add-at-position')
             .contains('S_{0}=2');
     });
