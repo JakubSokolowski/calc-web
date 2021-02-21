@@ -3,317 +3,7 @@
 exports[`multiplication-grid #buildMultiplicationGrid for default multiplication when multiplying two positive numbers with fractional part of same length should return proper hover groups with position addition info 1`] = `
 Array [
   Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 0,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 5,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 5,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 5,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 1,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 4,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 4,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 4,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 2,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 1,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 3,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 3,
-        "representationInBase": "1",
-        "valueInDecimal": 1,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 3,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 2,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 10,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 2,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 4,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 6,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": 1,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 10,
-          "position": 1,
-          "representationInBase": "5",
-          "valueInDecimal": 5,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 1,
-        "representationInBase": "6",
-        "valueInDecimal": 6,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 5,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": 0,
-          "representationInBase": "5",
-          "valueInDecimal": 5,
-        },
-        Object {
-          "base": 10,
-          "position": 0,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 0,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 6,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 2,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": -1,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 10,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": -1,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
+    "cells": Array [],
   },
   Object {
     "anchorPosition": "TopRight",
@@ -822,6 +512,354 @@ Array [
     },
   },
   Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 5,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 5,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 5,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 4,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 4,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 4,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 1,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 3,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 3,
+        "representationInBase": "1",
+        "valueInDecimal": 1,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 2,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 10,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 2,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 6,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": 1,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 10,
+          "position": 1,
+          "representationInBase": "5",
+          "valueInDecimal": 5,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 1,
+        "representationInBase": "6",
+        "valueInDecimal": 6,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": 0,
+          "representationInBase": "5",
+          "valueInDecimal": 5,
+        },
+        Object {
+          "base": 10,
+          "position": 0,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 0,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 2,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": -1,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 10,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": -1,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
     "anchorPosition": "Bottom",
     "cells": Array [
       Object {
@@ -1177,305 +1215,7 @@ Array [
 exports[`multiplication-grid #buildMultiplicationGrid for default multiplication when multiplying two positive numbers without fractional part should return proper hover groups with position addition info 1`] = `
 Array [
   Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 0,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 5,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 5,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 5,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 1,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 4,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 4,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 4,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 2,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 9,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "carrySourcePosition": 2,
-          "isCarry": true,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 10,
-          "isComplementExtension": true,
-          "position": 3,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 10,
-          "position": 3,
-          "representationInBase": "8",
-          "valueInDecimal": 8,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 3,
-        "representationInBase": "9",
-        "valueInDecimal": 9,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 3,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 10,
-          "carrySourcePosition": 2,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 18,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "carrySourcePosition": 1,
-          "isCarry": true,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 10,
-          "position": 2,
-          "representationInBase": "8",
-          "valueInDecimal": 8,
-        },
-        Object {
-          "base": 10,
-          "position": 2,
-          "representationInBase": "9",
-          "valueInDecimal": 9,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 2,
-        "representationInBase": "8",
-        "valueInDecimal": 8,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 4,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 10,
-          "carrySourcePosition": 1,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 10,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": 1,
-          "representationInBase": "9",
-          "valueInDecimal": 9,
-        },
-        Object {
-          "base": 10,
-          "position": 1,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 1,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 2,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 5,
-        "y": 4,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 1,
-      "operands": Array [
-        Object {
-          "base": 10,
-          "position": 0,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 10,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 10,
-        "position": 0,
-        "representationInBase": "1",
-        "valueInDecimal": 1,
-      },
-    },
+    "cells": Array [],
   },
   Object {
     "anchorPosition": "TopRight",
@@ -1860,6 +1600,337 @@ Array [
     },
   },
   Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 5,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 5,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 5,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 4,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 4,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 4,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 9,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "carrySourcePosition": 2,
+          "isCarry": true,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 10,
+          "isComplementExtension": true,
+          "position": 3,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 10,
+          "position": 3,
+          "representationInBase": "8",
+          "valueInDecimal": 8,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 3,
+        "representationInBase": "9",
+        "valueInDecimal": 9,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 10,
+          "carrySourcePosition": 2,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 18,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "carrySourcePosition": 1,
+          "isCarry": true,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 10,
+          "position": 2,
+          "representationInBase": "8",
+          "valueInDecimal": 8,
+        },
+        Object {
+          "base": 10,
+          "position": 2,
+          "representationInBase": "9",
+          "valueInDecimal": 9,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 2,
+        "representationInBase": "8",
+        "valueInDecimal": 8,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 10,
+          "carrySourcePosition": 1,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 10,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": 1,
+          "representationInBase": "9",
+          "valueInDecimal": 9,
+        },
+        Object {
+          "base": 10,
+          "position": 1,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 1,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 2,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 5,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 1,
+      "operands": Array [
+        Object {
+          "base": 10,
+          "position": 0,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 10,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 10,
+        "position": 0,
+        "representationInBase": "1",
+        "valueInDecimal": 1,
+      },
+    },
+  },
+  Object {
     "anchorPosition": "Bottom",
     "cells": Array [
       Object {
@@ -2093,864 +2164,119 @@ Array [
 exports[`multiplication-grid #buildMultiplicationGrid for multiplication with extension when multiplying positive and negative numbers with fractional part should return proper hover groups with position addition info 1`] = `
 Array [
   Object {
+    "anchorPosition": Object {
+      "x": 7,
+      "y": 2,
+    },
     "cells": Array [
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 3,
+        "x": 7,
+        "y": 2,
       },
       Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 0,
-        "y": 4,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 5,
+        "preventGroupTrigger": undefined,
+        "x": 1,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 6,
+        "preventGroupTrigger": undefined,
+        "x": 2,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
+        "x": 3,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 4,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 5,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 6,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 7,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 8,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 9,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
         "x": 0,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 0,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 7,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 7,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 7,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 7,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 7,
-          "representationInBase": "(7)",
-          "valueInDecimal": 7,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 7,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 1,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 1,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 6,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 6,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 6,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 6,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 6,
-          "representationInBase": "(7)",
-          "valueInDecimal": 7,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 6,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 2,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 2,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 4,
-          "isCarry": true,
-          "position": 5,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 5,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 5,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 5,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 5,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 5,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 5,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 3,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 3,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 4,
-          "position": 5,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 11,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 3,
-          "isCarry": true,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 4,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 4,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 4,
-        "representationInBase": "3",
-        "valueInDecimal": 3,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 4,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 4,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 3,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "decimalSum": 18,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 2,
-          "isCarry": true,
-          "position": 3,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 3,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 3,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 3,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 5,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 5,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 2,
-          "position": 3,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "decimalSum": 18,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 1,
-          "isCarry": true,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "7",
-          "valueInDecimal": 7,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": undefined,
-          "position": 2,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 2,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 6,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 6,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 1,
-          "position": 2,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 9,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "5",
-          "valueInDecimal": 5,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 1,
-        "representationInBase": "1",
-        "valueInDecimal": 1,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 7,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 7,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 0,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 8,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 8,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": -1,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 9,
         "y": 7,
       },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 9,
-        "y": 8,
-      },
     ],
     "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 0,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": -2,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
+    "contentProps": Object {},
+    "popoverPlacement": "bottom",
   },
   Object {
     "anchorPosition": "TopRight",
@@ -4667,6 +3993,916 @@ Array [
     },
   },
   Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 7,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 7,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 7,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 7,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 7,
+          "representationInBase": "(7)",
+          "valueInDecimal": 7,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 7,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 6,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 6,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 6,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 6,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 6,
+          "representationInBase": "(7)",
+          "valueInDecimal": 7,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 6,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 4,
+          "isCarry": true,
+          "position": 5,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 5,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 5,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 5,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 5,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 5,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 5,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 4,
+          "position": 5,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 11,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 3,
+          "isCarry": true,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 4,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 4,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 4,
+        "representationInBase": "3",
+        "valueInDecimal": 3,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 3,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "decimalSum": 18,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 2,
+          "isCarry": true,
+          "position": 3,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 3,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 3,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 3,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 2,
+          "position": 3,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "decimalSum": 18,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 1,
+          "isCarry": true,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "7",
+          "valueInDecimal": 7,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": undefined,
+          "position": 2,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 2,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 1,
+          "position": 2,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 9,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "5",
+          "valueInDecimal": 5,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 1,
+        "representationInBase": "1",
+        "valueInDecimal": 1,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 7,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 7,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 0,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 8,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 8,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": -1,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 9,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 9,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 0,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "position": -2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": -2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": -2,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
     "anchorPosition": "Bottom",
     "cells": Array [
       Object {
@@ -6379,993 +6615,125 @@ Array [
     },
     "popoverPlacement": "bottom",
   },
-  Object {
-    "anchorPosition": Object {
-      "x": 7,
-      "y": 2,
-    },
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 0,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 1,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 2,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 3,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 4,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 5,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 6,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 7,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 8,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 9,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 0,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 1,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 2,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 3,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 4,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 5,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 6,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 7,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 8,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 9,
-        "y": 7,
-      },
-      Object {
-        "x": 7,
-        "y": 2,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {},
-    "popoverPlacement": "bottom",
-  },
 ]
 `;
 
 exports[`multiplication-grid #buildMultiplicationGrid for multiplication with extension when multiplying positive and negative numbers without fractional part should return proper hover groups with position addition info 1`] = `
 Array [
   Object {
+    "anchorPosition": Object {
+      "x": 5,
+      "y": 2,
+    },
     "cells": Array [
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 3,
+        "x": 5,
+        "y": 2,
       },
       Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 0,
-        "y": 4,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 5,
+        "preventGroupTrigger": undefined,
+        "x": 1,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
-        "x": 0,
-        "y": 6,
+        "preventGroupTrigger": undefined,
+        "x": 2,
+        "y": 0,
       },
       Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
+        "x": 3,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 4,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 5,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 6,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 7,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 8,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
+        "x": 9,
+        "y": 0,
+      },
+      Object {
+        "preventGroupTrigger": undefined,
         "x": 0,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 0,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 9,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 9,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 9,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 9,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 9,
-          "representationInBase": "(7)",
-          "valueInDecimal": 7,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 9,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 1,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 1,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 1,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 8,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 8,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 8,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 8,
-          "representationInBase": "(0)",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": true,
-          "position": 8,
-          "representationInBase": "(7)",
-          "valueInDecimal": 7,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 8,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 2,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 2,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 2,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 7,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 6,
-          "isCarry": true,
-          "position": 7,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 7,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 7,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 7,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 7,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 7,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 7,
-        "representationInBase": "7",
-        "valueInDecimal": 7,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 3,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 3,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 3,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 6,
-          "position": 7,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 11,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 5,
-          "isCarry": true,
-          "position": 6,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 6,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 6,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 6,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 6,
-          "representationInBase": "3",
-          "valueInDecimal": 3,
-        },
-        Object {
-          "base": 8,
-          "position": 6,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 6,
-        "representationInBase": "3",
-        "valueInDecimal": 3,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 4,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 4,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 4,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 5,
-          "position": 6,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 10,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 4,
-          "isCarry": true,
-          "position": 5,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 5,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": false,
-          "position": 5,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 5,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 5,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 5,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 5,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 5,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 5,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 5,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 4,
-          "position": 5,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "decimalSum": 19,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 3,
-          "isCarry": true,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "6",
-          "valueInDecimal": 6,
-        },
-        Object {
-          "base": 8,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "isComplementExtension": undefined,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 4,
-        "representationInBase": "3",
-        "valueInDecimal": 3,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 6,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 6,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 6,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 3,
-          "position": 4,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-      ],
-      "decimalSum": 16,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 2,
-          "isCarry": true,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "3",
-          "valueInDecimal": 3,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "7",
-          "valueInDecimal": 7,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 3,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 3,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 7,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 7,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 7,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [
-        Object {
-          "base": 8,
-          "carrySourcePosition": 2,
-          "position": 3,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-      ],
-      "decimalSum": 8,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "5",
-          "valueInDecimal": 5,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "3",
-          "valueInDecimal": 3,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 2,
-        "representationInBase": "0",
-        "valueInDecimal": 0,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 8,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 8,
         "y": 7,
       },
       Object {
-        "preventGroupTrigger": false,
-        "x": 8,
-        "y": 8,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 5,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "1",
-          "valueInDecimal": 1,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "4",
-          "valueInDecimal": 4,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 1,
-        "representationInBase": "5",
-        "valueInDecimal": 5,
-      },
-    },
-  },
-  Object {
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 3,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 4,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 5,
-      },
-      Object {
-        "preventGroupTrigger": true,
-        "x": 9,
-        "y": 6,
-      },
-      Object {
-        "preventGroupTrigger": true,
+        "preventGroupTrigger": undefined,
         "x": 9,
         "y": 7,
       },
-      Object {
-        "preventGroupTrigger": false,
-        "x": 9,
-        "y": 8,
-      },
     ],
     "contentBuilder": [Function],
-    "contentProps": Object {
-      "carry": Array [],
-      "decimalSum": 2,
-      "operands": Array [
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "2",
-          "valueInDecimal": 2,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": 0,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-      ],
-      "valueAtPosition": Object {
-        "base": 8,
-        "position": 0,
-        "representationInBase": "2",
-        "valueInDecimal": 2,
-      },
-    },
+    "contentProps": Object {},
+    "popoverPlacement": "bottom",
   },
   Object {
     "anchorPosition": "TopRight",
@@ -9252,6 +8620,924 @@ Array [
     },
   },
   Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 0,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 0,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 9,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 9,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 9,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 9,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 9,
+          "representationInBase": "(7)",
+          "valueInDecimal": 7,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 9,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 1,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 1,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 8,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 8,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 8,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 8,
+          "representationInBase": "(0)",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": true,
+          "position": 8,
+          "representationInBase": "(7)",
+          "valueInDecimal": 7,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 8,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 2,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 2,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 7,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 6,
+          "isCarry": true,
+          "position": 7,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 7,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 7,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 7,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 7,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 7,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 7,
+        "representationInBase": "7",
+        "valueInDecimal": 7,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 3,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 3,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 6,
+          "position": 7,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 11,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 5,
+          "isCarry": true,
+          "position": 6,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 6,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 6,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 6,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 6,
+          "representationInBase": "3",
+          "valueInDecimal": 3,
+        },
+        Object {
+          "base": 8,
+          "position": 6,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 6,
+        "representationInBase": "3",
+        "valueInDecimal": 3,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 4,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 4,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 5,
+          "position": 6,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 10,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 4,
+          "isCarry": true,
+          "position": 5,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 5,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": false,
+          "position": 5,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 5,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 5,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 5,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 5,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 5,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 5,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 4,
+          "position": 5,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "decimalSum": 19,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 3,
+          "isCarry": true,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "6",
+          "valueInDecimal": 6,
+        },
+        Object {
+          "base": 8,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "isComplementExtension": undefined,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 4,
+        "representationInBase": "3",
+        "valueInDecimal": 3,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 6,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 6,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 3,
+          "position": 4,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+      ],
+      "decimalSum": 16,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 2,
+          "isCarry": true,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "3",
+          "valueInDecimal": 3,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "7",
+          "valueInDecimal": 7,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 3,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 3,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 7,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 7,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 7,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [
+        Object {
+          "base": 8,
+          "carrySourcePosition": 2,
+          "position": 3,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+      ],
+      "decimalSum": 8,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "5",
+          "valueInDecimal": 5,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "3",
+          "valueInDecimal": 3,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 2,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 2,
+        "representationInBase": "0",
+        "valueInDecimal": 0,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 8,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 8,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 8,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 5,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "1",
+          "valueInDecimal": 1,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "4",
+          "valueInDecimal": 4,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 1,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 1,
+        "representationInBase": "5",
+        "valueInDecimal": 5,
+      },
+    },
+  },
+  Object {
+    "cells": Array [
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 3,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 4,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 5,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 6,
+      },
+      Object {
+        "preventGroupTrigger": true,
+        "x": 9,
+        "y": 7,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 9,
+        "y": 8,
+      },
+      Object {
+        "preventGroupTrigger": false,
+        "x": 9,
+        "y": 9,
+      },
+    ],
+    "contentBuilder": [Function],
+    "contentProps": Object {
+      "carry": Array [],
+      "decimalSum": 2,
+      "operands": Array [
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "2",
+          "valueInDecimal": 2,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+        Object {
+          "base": 8,
+          "position": 0,
+          "representationInBase": "0",
+          "valueInDecimal": 0,
+        },
+      ],
+      "valueAtPosition": Object {
+        "base": 8,
+        "position": 0,
+        "representationInBase": "2",
+        "valueInDecimal": 2,
+      },
+    },
+  },
+  Object {
     "anchorPosition": "Bottom",
     "cells": Array [
       Object {
@@ -11090,121 +11376,6 @@ Array [
         "valueInDecimal": 0,
       },
     },
-    "popoverPlacement": "bottom",
-  },
-  Object {
-    "anchorPosition": Object {
-      "x": 5,
-      "y": 2,
-    },
-    "cells": Array [
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 0,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 1,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 2,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 3,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 4,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 5,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 6,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 7,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 8,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 9,
-        "y": 0,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 0,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 1,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 2,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 3,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 4,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 5,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 6,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 7,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 8,
-        "y": 7,
-      },
-      Object {
-        "preventGroupTrigger": undefined,
-        "x": 9,
-        "y": 7,
-      },
-      Object {
-        "x": 5,
-        "y": 2,
-      },
-    ],
-    "contentBuilder": [Function],
-    "contentProps": Object {},
     "popoverPlacement": "bottom",
   },
 ]
