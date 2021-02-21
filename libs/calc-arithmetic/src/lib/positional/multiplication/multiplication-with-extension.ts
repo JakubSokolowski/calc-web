@@ -1,4 +1,4 @@
-import { alignFractions, isZeroDigit, shiftLeft } from '../digits';
+import { alignFractions, isZeroDigit, leastSignificantPosition, mostSignificantPosition, shiftLeft } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
@@ -82,14 +82,20 @@ function extendComplementsToPosition<T extends Digit>(complements: T[][], maxPos
     });
 }
 
+function someNegativeOperands<T extends Digit>(operands: T[][]) {
+    return operands.some(row => row[0].isComplementExtension && row[0].valueInDecimal > 0);
+}
+
 export function shiftAndExtend<T extends Digit>(operands: T[][]) {
     const merged = operands.map(ops => mergeExtensionDigits(ops));
 
-    const firstNonZero = merged.map(r => {
-        if(r[0].valueInDecimal === 0) {
-            return r[1].position
+    const someNegative = someNegativeOperands(operands);
+
+    const firstNonZero = merged.map(digits => {
+        if (someNegative && digits[0].valueInDecimal === 0) {
+            return digits[1].position;
         }
-        return r[0].position;
+        return mostSignificantPosition(digits);
     });
 
     const globalMostSignificant = Math.max(...firstNonZero);
@@ -99,7 +105,7 @@ export function shiftAndExtend<T extends Digit>(operands: T[][]) {
         return shiftLeft(opRow, index);
     });
 
-    return extendComplementsToPosition(shiftedRows, maxPositionAfterExtend)
+    return extendComplementsToPosition(shiftedRows, maxPositionAfterExtend);
 }
 
 function multiplyDigitRows(
@@ -153,15 +159,13 @@ export function trimSumDigits(digits: Digit[]) {
         : trimStartByPredicate(digits, isZeroDigit);
 }
 
+function getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): number {
+    const multiplicandLSP = leastSignificantPosition(multiplicandRow);
+    const multiplierLSP = leastSignificantPosition(multiplierRow);
+    const globalLSP = Math.min(multiplicandLSP, multiplierLSP);
 
-function getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]):  number {
-    const lastMultiplicandPosition = multiplicandRow[multiplicandRow.length - 1].position;
-    const lastMultiplierPosition = multiplierRow[multiplierRow.length - 1].position;
-    const minPosition = Math.min(lastMultiplicandPosition, lastMultiplierPosition);
-
-    return minPosition + multiplicandRow.length + multiplierRow.length;
+    return globalLSP + multiplicandRow.length + multiplierRow.length;
 }
-
 
 function isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {
     return lastDigit.valueInDecimal === lastDigit.base - 1;
