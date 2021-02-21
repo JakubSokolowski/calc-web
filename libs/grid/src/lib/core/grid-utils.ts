@@ -50,6 +50,8 @@ export function buildRowGroup(row: GridCellConfig[], rowIndex: number, contentPr
 export function buildColumnGroups(cells: GridCellConfig[][], contentProps?: any[], yOffset = 0, contentBuilder?: any, preventTriggerPredicate?: PreventTriggerPredicate): CellGroup[] {
     if (!cells.length) return [];
 
+    console.log('startY')
+
     const groups: CellGroup[] = [];
 
     for (let x = 0; x < cells[0].length; x++) {
@@ -65,6 +67,34 @@ export function buildColumnGroups(cells: GridCellConfig[][], contentProps?: any[
 
     return groups;
 }
+
+export interface GridSpan {
+    startX: number;
+    endX: number;
+    startY: number;
+    endY: number;
+}
+
+export function buildColumnGroupsCoords(span: GridSpan, contentProps?: any[], yOffset = 0, contentBuilder?: any, preventTriggerPredicate?: PreventTriggerPredicate): CellGroup[] {
+    const {startX, endX, startY, endY} = span;
+    if (startX >= endX) return [];
+
+    const groups: CellGroup[] = [];
+
+    for (let x = startX; x < endX; x++) {
+        const start: CellConfig = { x, y: startY + yOffset };
+        const end: CellConfig = { x, y: endY + yOffset };
+        const group: CellGroup = {
+            cells: groupCellsInStraightLine(start, end, preventTriggerPredicate),
+            contentProps: (contentProps && contentProps[x]) ? contentProps[x] : '',
+            contentBuilder: contentBuilder
+        };
+        groups.push(group);
+    }
+
+    return groups;
+}
+
 
 export function buildCellGroupLookup(groups: CellGroup[]): GridLookup {
     const sortedGroups = groups.sort((a, b) => {
