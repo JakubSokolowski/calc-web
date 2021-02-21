@@ -56,15 +56,23 @@ export function shiftRight<T extends Digit>(digits: T[], numPositions: number): 
 }
 
 export function alignFractions<T extends Digit>(operands: T[][]): T[][] {
-    const lsp = leastSignificantPosition(operands);
+    const lsp = globalLeastSignificantPosition(operands);
     return operands.map(d => extendFractionToPosition(d, lsp));
 }
 
-function leastSignificantPosition<T extends Digit>(operands: T[][]): number {
+function globalLeastSignificantPosition<T extends Digit>(operands: T[][]): number {
     return operands.reduce((lsp, opDigits) => {
-        const localLsp = opDigits[opDigits.length - 1].position;
+        const localLsp = leastSignificantPosition(opDigits);
         return localLsp < lsp ? localLsp : lsp;
     }, 0);
+}
+
+export function mostSignificantPosition<T extends Digit>(digits: T[]): number {
+    return digits[0].position;
+}
+
+export function leastSignificantPosition<T extends Digit>(digit: T[]): number {
+    return digit[digit.length - 1].position;
 }
 
 export function extendFractionToPosition<T extends Digit>(digits: T[], position: number): T[] {
