@@ -1,41 +1,8 @@
-import { MultiplicationOperand } from '../../models';
 import { fromNumber, fromStringDirect } from '../base-converter';
-import { multiplyRowByDigit, multiplyWithExtensions } from './multiplication-with-extension';
+import { multiplyWithExtensions } from './multiplication-with-extension';
 
 
 describe('multiply-with-extensions', () => {
-    describe('#multiplyRowByDigit', () => {
-        it('should multiply row of digits by digit', () => {
-            // given
-            const base = 10;
-            const digits: MultiplicationOperand[] = fromStringDirect('-3255', base)
-                .result
-                .complement
-                .asDigits();
-
-            const multiplier: MultiplicationOperand = {
-                position: 0,
-                base,
-                valueInDecimal: 3,
-                representationInBase: '3'
-            };
-
-            // when
-            const result = multiplyRowByDigit(digits, multiplier);
-
-            // then
-            const expected: MultiplicationOperand[] = [
-                { base: 10, isComplementExtension: true, position: 5, representationInBase: '(9)', valueInDecimal: 9 },
-                { base: 10, position: 4, representationInBase: '9', valueInDecimal: 9 },
-                { base: 10, position: 3, representationInBase: '0', valueInDecimal: 0 },
-                { base: 10, position: 2, representationInBase: '2', valueInDecimal: 2 },
-                { base: 10, position: 1, representationInBase: '3', valueInDecimal: 3 },
-                { base: 10, position: 0, representationInBase: '5', valueInDecimal: 5 }
-            ];
-            expect(result.resultDigits).toEqual(expected);
-        });
-    });
-
     describe('#multiplyWithExtension', () => {
         it('should multiply two positive numbers', () => {
             // given

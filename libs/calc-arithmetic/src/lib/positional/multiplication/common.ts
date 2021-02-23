@@ -3,6 +3,7 @@ import { AdditionOperand, AdditionResult, MultiplicationOperand, MultiplicationP
 import { shiftRight } from '../digits';
 import { trimEndByPredicate } from '@calc/utils';
 import { fromDigits } from '../base-converter';
+import { PositionalNumber } from '@calc/calc-arithmetic';
 
 export function multiplyDigits(
     multiplicand: MultiplicationOperand,
@@ -86,4 +87,29 @@ export function extractResultDigitsFromMultiplicationRow(positionResults: Multip
     });
 
     return [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
+}
+
+
+
+export class Multiplication {
+    protected readonly multiplicand: PositionalNumber;
+    protected readonly multiplier: PositionalNumber;
+
+    constructor(numbers: PositionalNumber[]) {
+        const [multiplicand, multiplier] = numbers;
+        this.multiplicand = multiplicand;
+        this.multiplier = multiplier;
+    }
+
+    multiplyDigits(multiplicand: MultiplicationOperand, multiplier: MultiplicationOperand, carry?: MultiplicationOperand) {
+        return multiplyDigits(multiplicand, multiplier, carry);
+    }
+
+    protected extractResultDigitsFromMultiplicationRow(positionResults: MultiplicationPositionResult[]): MultiplicationOperand[] {
+        return extractResultDigitsFromMultiplicationRow(positionResults);
+    }
+
+    protected adjustForMultiplierFraction(additionResult: AdditionResult, multiplierRow: MultiplicationOperand[]): AdditionResult {
+        return adjustForMultiplierFraction(additionResult, multiplierRow);
+    }
 }
