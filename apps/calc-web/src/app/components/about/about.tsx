@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import HelpIcon from '@material-ui/icons/Help';
 import { useTranslation } from 'react-i18next';
 import { Version } from './version/version';
-import Popper, { PopperPlacementType } from '@material-ui/core/Popper';
+import Popper from '@material-ui/core/Popper';
 
 const useStyles = makeStyles((theme: Theme) => {
     return createStyles({
