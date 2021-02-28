@@ -147,7 +147,13 @@
                 "operations": {
                     "title": "Działania",
                     "addition": "Dodawanie",
-                    "multiplication": "Mnożenie",
+                    "multiplication": {
+                        "title": "Mnożenie",
+                        "with-extension": "Z rozszerzeniem",
+                        "with-extension-u2": "Z rozszerzeniem (U2)",
+                        "without-extension": "Bez rozszerzenia",
+                        "without-extension-u2": "Bez rozszerzenia (U2)"
+                    },
                     "subtraction": "Odejmowanie"
                 }
             },

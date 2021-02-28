@@ -147,7 +147,13 @@
                 "operations": {
                     "title": "Operations",
                     "addition": "Addition",
-                    "multiplication": "Multiplication",
+                    "multiplication": {
+                        "title": "Multiplication",
+                        "with-extension": "With extension",
+                        "with-extension-u2": "With extension U2",
+                        "without-extension": "Without extension",
+                        "without-extension-u2": "Without extension"
+                    },
                     "subtraction": "Subtraction"
                 }
             },
