@@ -14,7 +14,8 @@ import {
     SubtractionType,
     subtractPositionalNumbers,
     multiplyDefault,
-    multiplyWithExtensions, multiplyWithoutExtension
+    multiplyWithExtensions,
+    multiplyWithoutExtension
 } from '@calc/calc-arithmetic';
 import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@calc/grid';
 import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';

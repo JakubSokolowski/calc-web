@@ -4,7 +4,7 @@ export * from './lib/components/hover-grid/hover-grid';
 export * from './lib/core/grid-utils';
 export * from './lib/models/hover-operation-grid';
 export { CellConfig } from './lib/models/cell-config';
-export { CellGroup } from './lib/models/cell-group';
+export { CellGroup, AnchorPosition } from './lib/models/cell-group';
 export { GridCellDisplayPreset } from './lib/models/grid-cell-display-preset';
 export { GridCellConfig } from './lib/models/grid-cell-config';
 export { LineType } from './lib/models/line-type';

@@ -90,7 +90,6 @@ export function extractResultDigitsFromMultiplicationRow(positionResults: Multip
 }
 
 
-
 export class Multiplication {
     protected readonly multiplicand: PositionalNumber;
     protected readonly multiplier: PositionalNumber;

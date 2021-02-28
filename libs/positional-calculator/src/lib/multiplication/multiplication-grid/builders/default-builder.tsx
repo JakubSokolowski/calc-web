@@ -1,5 +1,6 @@
 import { GridBuilder } from './grid-builder';
 import {
+    AnchorPosition,
     buildColumnGroupsCoords,
     CellConfig,
     CellGroup,
@@ -222,6 +223,18 @@ export class DefaultBuilder extends GridBuilder {
         return 0;
     }
 
+    protected rowMultiplicationContentBuilder(): (result: MultiplicationRowResult) => any {
+        return (result: MultiplicationRowResult) => <MultiplyRowDetails result={result}/>;
+    }
+
+    protected shouldPreventGroupTriggerOnMultiplicationRowHover(): boolean {
+        return true;
+    }
+
+    protected rowGroupAnchorPosition(): AnchorPosition {
+        return CellPosition.TopRight;
+    }
+
     protected buildRowMultiplicationGroup(result: MultiplicationRowResult, index: number): CellGroup {
         const yOffset = this.getComplementOffset();
         const { totalWidth } = this.info;
@@ -230,16 +243,24 @@ export class DefaultBuilder extends GridBuilder {
 
         const multiplicandRowStart: CellConfig = { x: 0, y: 0 + yOffset };
         const multiplicandRowEnd: CellConfig = { x: totalWidth - 1, y: 0 + yOffset };
-        const multiplicandRow = groupCellsInStraightLine(multiplicandRowStart, multiplicandRowEnd, true);
+        const multiplicandRow = groupCellsInStraightLine(
+            multiplicandRowStart,
+            multiplicandRowEnd,
+            true
+        );
 
         const resultRowStart: CellConfig = { x: 0, y: index + 2 + yOffset };
         const resultRowEnd: CellConfig = { x: totalWidth - 1, y: index + 2 + yOffset };
-        const resultRow = groupCellsInStraightLine(resultRowStart, resultRowEnd, true);
+        const resultRow = groupCellsInStraightLine(
+            resultRowStart,
+            resultRowEnd,
+            this.shouldPreventGroupTriggerOnMultiplicationRowHover()
+        );
 
         return {
             cells: [trigger, ...multiplicandRow, ...resultRow],
-            contentBuilder: (result: MultiplicationRowResult) => <MultiplyRowDetails result={result}/>,
-            anchorPosition: CellPosition.TopRight,
+            contentBuilder: this.rowMultiplicationContentBuilder(),
+            anchorPosition: this.rowGroupAnchorPosition(),
             contentProps: result
         };
     }

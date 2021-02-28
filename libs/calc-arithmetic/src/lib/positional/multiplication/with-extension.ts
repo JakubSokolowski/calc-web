@@ -19,10 +19,10 @@ import { NumberComplement } from '../number-complement';
 import { DefaultMultiplication } from './multiplication';
 
 export function multiplyWithExtensions(numbers: PositionalNumber[]): MultiplicationResult {
-    return new MultiplicationWithExtension(numbers).multiply();
+    return new WithExtension(numbers).multiply();
 }
 
-export class MultiplicationWithExtension extends DefaultMultiplication {
+export class WithExtension extends DefaultMultiplication {
     constructor(numbers: PositionalNumber[]) {
         super(numbers);
     }
@@ -151,7 +151,7 @@ export class MultiplicationWithExtension extends DefaultMultiplication {
         return lastDigit.valueInDecimal === lastDigit.base - 1;
     }
 
-    private extendComplementToPosition<T extends Digit>(complement: T[], numRows: number, rowIndex: number, position: number): T[] {
+    protected extendComplementToPosition<T extends Digit>(complement: T[], numRows: number, rowIndex: number, position: number): T[] {
         const msp = complement[0].position;
         const normalExtensionForRow = numRows - rowIndex - 1;
         const mspAfterNormalExtension = msp + normalExtensionForRow;
@@ -169,7 +169,7 @@ export class MultiplicationWithExtension extends DefaultMultiplication {
         });
     }
 
-    private someNegativeOperands<T extends Digit>(operands: T[][]) {
+    protected someNegativeOperands<T extends Digit>(operands: T[][]) {
         return operands.some(row => row[0].isComplementExtension && row[0].valueInDecimal > 0);
     }
 }

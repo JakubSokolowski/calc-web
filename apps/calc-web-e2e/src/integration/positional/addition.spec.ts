@@ -130,6 +130,31 @@ describe('Addition', () => {
         getOperationGrid().toMatchSnapshot();
     });
 
+    it('should add multiple binary numbers for multiplication without extension', () => {
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: [
+                '1000000',
+                '01010110',
+                '010101100',
+                '1000000000',
+                '10000000000',
+                '100000000000',
+                '1010101000000',
+                '(1)0000001000000'
+            ],
+            operation: OperationType.Addition,
+            algorithm: AdditionType.Default,
+            base: 2
+        };
+
+        const expected = '10011000010';
+
+        operationReturnsProperResult(config, expected);
+
+        getAdditionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
     // STUD_REQ_5_4
     it('should add 10 numbers together', () => {
         const config: OperationTemplate<AlgorithmType> = {

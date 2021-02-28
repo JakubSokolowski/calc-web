@@ -7,7 +7,7 @@ interface P {
     multiplierNegative: boolean;
 }
 
-export const WithExtensionCorrectionDetails: FC<P> = ({ multiplierNegative }) => {
+export const WithExtensionLast: FC<P> = ({ multiplierNegative }) => {
     const { t } = useTranslation();
 
     if (multiplierNegative) {

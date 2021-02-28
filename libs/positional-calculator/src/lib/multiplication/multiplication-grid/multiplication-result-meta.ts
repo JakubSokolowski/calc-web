@@ -1,9 +1,10 @@
 import { extractResultMeta, ResultMeta } from '@calc/grid';
-import { MultiplicationOperand, MultiplicationResult, MultiplicationType } from '@calc/calc-arithmetic';
+import { MultiplicationResult, MultiplicationType } from '@calc/calc-arithmetic';
 
 export interface MultiplicationResultMeta extends ResultMeta {
     numMultiplicandFractionalDigits: number;
     numMultiplierDigits: number;
+    numMultiplicandDigits:  number;
     numMultiplierFractionalDigits: number;
     maxOperandsFractionDigits: number;
     algorithmType: MultiplicationType;
@@ -12,44 +13,77 @@ export interface MultiplicationResultMeta extends ResultMeta {
 }
 
 export function extractMultiplicationResultMeta(result: MultiplicationResult): MultiplicationResultMeta {
-    const [multiplicand, multiplier] = result.numberOperands;
-
-    const numMultiplicandFractionalDigits = multiplicand.numFractionPartDigits();
-    const numMultiplierFractionalDigits = multiplier.numFractionPartDigits();
-
-    const maxOperandsFractionDigits = Math.max(numMultiplicandFractionalDigits, numMultiplierFractionalDigits);
-
-    return {
-        ...extractResultMeta(result),
-        numMultiplierDigits: multiplier.numDigits(),
-        fractionDesiredWidth: maxOperandsFractionDigits,
-        totalWidth: getTotalWidth(result),
-        numMultiplicandFractionalDigits,
-        numMultiplierFractionalDigits,
-        maxOperandsFractionDigits,
-        algorithmType: result.algorithmType as MultiplicationType,
-        totalHeight: getTotalHeight(result),
-        hasMultiplicandComplement: !!result.multiplicandComplement
-    };
+    const metaBuilder = getMetaBuilder(result);
+    return metaBuilder.buildMeta();
 }
 
-function getTotalHeight(result: MultiplicationResult): number {
-    const multiplicandComplementOffset = result.multiplicandComplement ? 1 : 0;
-    const operandsOffset = result.numberOperands.length;
-    const multiplicationRowsOffset = result.stepResults.length;
-    return multiplicandComplementOffset + operandsOffset + multiplicationRowsOffset;
+export class DefaultMultiplicationMeta {
+    result: MultiplicationResult;
+
+    constructor(result: MultiplicationResult) {
+        this.result = result;
+    }
+
+    buildMeta(): MultiplicationResultMeta {
+        const [multiplicand, multiplier] = this.result.numberOperands;
+
+        const numMultiplicandFractionalDigits = multiplicand.numFractionPartDigits();
+        const numMultiplierFractionalDigits = multiplier.numFractionPartDigits();
+
+        const maxOperandsFractionDigits = Math.max(numMultiplicandFractionalDigits, numMultiplierFractionalDigits);
+
+        return {
+            ...extractResultMeta(this.result),
+            fractionDesiredWidth: maxOperandsFractionDigits,
+            totalWidth: this.totalWidth(),
+            numMultiplicandDigits: multiplicand.numDigits(),
+            numMultiplicandFractionalDigits,
+            numMultiplierDigits: multiplier.numDigits(),
+            numMultiplierFractionalDigits,
+            maxOperandsFractionDigits,
+            algorithmType: this.result.algorithmType as MultiplicationType,
+            totalHeight: this.totalHeight(),
+            hasMultiplicandComplement: !!this.result.multiplicandComplement
+        };
+    }
+
+    protected totalHeight() {
+        const multiplicandComplementOffset = this.result.multiplicandComplement ? 1 : 0;
+        const operandsOffset = this.result.numberOperands.length;
+        const multiplicationRowsOffset = this.result.stepResults.length;
+        return multiplicandComplementOffset + operandsOffset + multiplicationRowsOffset;
+    }
+
+    protected totalWidth() {
+        const resultLength = this.result.resultDigits.length;
+        const operandsSpan = this.getMinOperandsSpan();
+        return Math.max(resultLength, operandsSpan) + 1;
+    }
+
+    protected getMinOperandsSpan(): number {
+        const [multiplicand, multiplier] = this.result.operands.map((row) => {
+            return row.filter(d => !d.isComplementExtension);
+        });
+
+        return multiplicand.length + multiplier.length - 1;
+    }
 }
 
-function getTotalWidth(result: MultiplicationResult): number {
-    const resultLength = result.resultDigits.length;
-    const operandsSpan = getMinOperandsSpan(result.operands);
-    return Math.max(resultLength, operandsSpan) + 1;
+
+class WithoutExtensionMeta extends DefaultMultiplicationMeta {
+    protected getMinOperandsSpan(): number {
+        const correctionOffset = 1;
+        return super.getMinOperandsSpan() + correctionOffset;
+    }
 }
 
-function getMinOperandsSpan(operands: MultiplicationOperand[][]): number {
-    const [multiplicand, multiplier] = operands.map((row) => {
-        return row.filter(d => !d.isComplementExtension);
-    });
 
-    return multiplicand.length + multiplier.length - 1;
+function getMetaBuilder(result: MultiplicationResult) {
+    switch (result.algorithmType) {
+        case MultiplicationType.Default:
+        case MultiplicationType.WithExtension:
+            return new DefaultMultiplicationMeta(result);
+        case MultiplicationType.WithoutExtension:
+            return new WithoutExtensionMeta(result);
+    }
 }

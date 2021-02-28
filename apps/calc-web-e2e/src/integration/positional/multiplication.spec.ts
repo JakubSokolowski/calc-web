@@ -423,4 +423,93 @@ describe('Multiplication without extension', () => {
         getCellByCoords(4, 2).trigger('mouseover')
             .getByDataTest('correction-without-extension-negative')
     });
+
+    it('should multiply two U2 numbers with negative multiplier', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(1)01011', '(1)000110'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base
+        };
+        const expected = '10011000010';
+        const expectedComplement = '(0)10011000010';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(14, 11).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=0');
+
+        getCellByCoords(4, 11).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{10}=1');
+
+        gridHasProperResultRow(expectedComplement, base, 14, 11);
+
+        // should display popover with proper content for last multiplier
+        getCellByCoords(8, 2).trigger('mouseover')
+            .getByDataTest('last-multiplier-without-extension-u2-negative');
+
+        // should display popover with proper content for multiplication by 0 row
+        getCellByCoords(8, 3).trigger('mouseover')
+            .getByDataTest('without-extension-u2-row-by-0');
+
+        // should display popover with proper content for multiplication by 1 row
+        getCellByCoords(8, 4).trigger('mouseover')
+            .getByDataTest('without-extension-u2-row-by-1');
+
+        // should display popover with proper content for correction row
+        getCellByCoords(4, 10).trigger('mouseover')
+            .getByDataTest('without-extension-u2-correction');
+    });
+
+    it('should multiply two U2 numbers with positive multiplier', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(1)01011', '(0)000110'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base
+        };
+        const expected = '-1111110';
+        const expectedComplement = '(1)0000010';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(12, 9).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=0');
+
+        getCellByCoords(5, 9).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{7}=1');
+
+         gridHasProperResultRow(expectedComplement, base, 12, 9);
+
+        // should display popover with proper content for last multiplier
+        getCellByCoords(7, 1).trigger('mouseover')
+            .getByDataTest('last-multiplier-without-extension-u2-positive');
+
+        // should display popover with proper content for multiplication by 0 row
+        getCellByCoords(7, 2).trigger('mouseover')
+            .getByDataTest('without-extension-u2-row-by-0');
+
+        // should display popover with proper content for multiplication by 1 row
+        getCellByCoords(7, 3).trigger('mouseover')
+            .getByDataTest('without-extension-u2-row-by-1');
+
+
+        // should display popover with proper content for correction row
+        getCellByCoords(7, 8).trigger('mouseover')
+            .getByDataTest('without-extension-u2-correction');
+    });
 });

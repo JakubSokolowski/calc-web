@@ -1,5 +1,5 @@
 import { fromNumber, fromStringDirect } from '../base-converter';
-import { multiplyWithExtensions } from './multiplication-with-extension';
+import { multiplyWithExtensions } from './with-extension';
 
 
 describe('multiply-with-extensions', () => {
