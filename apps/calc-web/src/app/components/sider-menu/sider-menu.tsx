@@ -88,8 +88,26 @@ export const SiderMenu = () => {
                                     path: '/theory/positional/operations/subtraction'
                                 },
                                 {
-                                    labelText: t('routes.theory.positional.operations.multiplication'),
-                                    path: '/theory/positional/operations/multiplication'
+                                    labelText: t('routes.theory.positional.operations.multiplication.title'),
+                                    path: '/theory/positional/operations/multiplication',
+                                    childNodes: [
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.with-extension'),
+                                            path: '/theory/positional/operations/multiplication/with-extension',
+                                        },
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.with-extension-u2'),
+                                            path: '/theory/positional/operations/multiplication/with-extension-u2',
+                                        },
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.without-extension'),
+                                            path: '/theory/positional/operations/multiplication/without-extension',
+                                        },
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.without-extension-u2'),
+                                            path: '/theory/positional/operations/multiplication/without-extension-u2',
+                                        }
+                                    ]
                                 }
                             ]
                         }

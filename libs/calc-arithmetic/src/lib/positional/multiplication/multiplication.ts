@@ -1,6 +1,5 @@
 import { fromDigits } from '../base-converter';
 import {
-    Digit,
     MultiplicationOperand,
     MultiplicationPositionResult,
     MultiplicationResult,
