@@ -10,7 +10,7 @@ interface P {
     lastMultiplierDigit?: MultiplicationOperand;
 }
 
-export const WithoutExtensionCorrectionDetails: FC<P> = ({multiplierNegative, lastMultiplierDigit}) => {
+export const WithoutExtensionLast: FC<P> = ({multiplierNegative, lastMultiplierDigit}) => {
     const {t} = useTranslation();
 
     if(multiplierNegative) {

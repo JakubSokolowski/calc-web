@@ -4,7 +4,8 @@ import React from 'react';
 import { GridBuilder } from './builders/grid-builder';
 import { DefaultBuilder } from './builders/default-builder';
 import { WithExtensionBuilder } from './builders/with-extension-builder';
-import { WithoutExtensionBuilder } from './builders/without-extension-builder';
+import { WithoutExtensionBuilder} from './builders/without-extension-builder';
+import { WithoutExtensionU2Builder } from './builders/without-extension-u2-builder';
 
 export function buildMultiplicationGrid(result: MultiplicationResult): HoverOperationGrid {
     return getBuilder(result).buildGrid()
@@ -17,10 +18,14 @@ function getBuilder(result: MultiplicationResult): GridBuilder {
         case MultiplicationType.WithExtension:
             return new WithExtensionBuilder(result);
         case MultiplicationType.WithoutExtension:
+            if(isBinaryMultiplication(result)) return new WithoutExtensionU2Builder(result);
             return new WithoutExtensionBuilder(result);
         default:
-            throw new Error('not implemented');
+            throw new Error(`Multiplication builder: ${result.algorithmType} not implemented`);
     }
 }
 
+function isBinaryMultiplication(result: MultiplicationResult) {
+    return result.resultDigits[0].base === 2 || result.resultDigits[0].base.toString() === '2';
+}
 

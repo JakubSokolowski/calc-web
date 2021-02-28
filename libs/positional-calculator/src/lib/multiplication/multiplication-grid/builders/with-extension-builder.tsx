@@ -1,13 +1,13 @@
 import { ComplementMultiplicationBuilder } from './complement-multiplication-builder';
 import { CellGroup, GridLabel } from '@calc/grid';
-import { WithExtensionCorrectionDetails } from '../../correction-details/with-extension-correction-details';
+import { WithExtensionLast } from '../../last-multiplication-details/with-extension-last';
 import React from 'react';
 
 export class WithExtensionBuilder extends ComplementMultiplicationBuilder {
     buildMultiplicandComplementGroup(): CellGroup {
         const { hasMultiplicandComplement } = this.info;
-        const contentBuilder = () => (<WithExtensionCorrectionDetails multiplierNegative={hasMultiplicandComplement}/>);
-        const base = this.getGroupBase();
+        const contentBuilder = () => (<WithExtensionLast multiplierNegative={hasMultiplicandComplement}/>);
+        const base = this.getMultiplicandComplementGroupBase();
 
         return {
             ...base,

@@ -8,19 +8,13 @@ import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
 import { BaseDigits } from '../base-digits';
 import { NumberComplement } from '../number-complement';
-import {
-    MultiplicationWithExtension,
-} from './multiplication-with-extension';
+import { WithExtension } from './with-extension';
 
-export function multiplyWithoutExtension(numbers: PositionalNumber[]): MultiplicationResult {
-    return new MultiplicationWithoutExtension(numbers).multiply();
-}
-
-export class MultiplicationWithoutExtension extends MultiplicationWithExtension {
+export class WithoutExtension extends WithExtension {
     prepareOperands(): MultiplicationOperand[][] {
         const [alMultiplicand, alMultiplier] = alignFractions([
             this.multiplicand.complement.asDigits(),
-            this.multiplier.complement.asDigits(),
+            this.multiplier.complement.asDigits()
         ]);
 
         return [alMultiplicand, alMultiplier.filter(d => !d.isComplementExtension)];
@@ -82,3 +76,4 @@ export class MultiplicationWithoutExtension extends MultiplicationWithExtension 
         };
     }
 }
+

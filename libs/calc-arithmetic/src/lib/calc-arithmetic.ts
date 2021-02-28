@@ -29,11 +29,7 @@ export {
 
 export {
     multiplyWithExtensions
-} from './positional/multiplication/multiplication-with-extension';
-
-export {
-    multiplyWithoutExtension
-} from './positional/multiplication/multiplication-without-extension'
+} from './positional/multiplication/with-extension';
 
 export * from './models'
 export * from './models/operation'
@@ -77,3 +73,4 @@ export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
 export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';
 export { ComplementConversionResult } from './models/complement';
+export { multiplyWithoutExtension } from './positional/multiplication';

@@ -1,10 +1,10 @@
 import { ComplementMultiplicationBuilder } from './complement-multiplication-builder';
 import { CellConfig, CellGroup, GridLabel } from '@calc/grid';
-import { WithoutExtensionCorrectionDetails } from '../../correction-details/without-extension-correction-details';
+import { WithoutExtensionLast } from '../../last-multiplication-details/without-extension-last';
 import React from 'react';
 
 export class WithoutExtensionBuilder extends ComplementMultiplicationBuilder {
-    getAnchorCell(): CellConfig {
+    getMultiplicandComplementAnchorCell(): CellConfig {
         const { totalWidth, hasMultiplicandComplement, numMultiplierDigits } = this.info;
         return {
             x: totalWidth - numMultiplierDigits,
@@ -26,13 +26,13 @@ export class WithoutExtensionBuilder extends ComplementMultiplicationBuilder {
         return superLabel;
     }
 
-    buildMultiplicandComplementGroup(): CellGroup {
+    protected buildMultiplicandComplementGroup(): CellGroup {
         const { hasMultiplicandComplement } = this.info;
-        const groupBase = this.getGroupBase();
+        const groupBase = this.getMultiplicandComplementGroupBase();
 
         const multiplierNegative = hasMultiplicandComplement;
         const contentBuilder = () => (
-            <WithoutExtensionCorrectionDetails
+            <WithoutExtensionLast
                 lastMultiplierDigit={this.result.lastMultiplierDigit}
                 multiplierNegative={multiplierNegative}
             />
@@ -44,9 +44,10 @@ export class WithoutExtensionBuilder extends ComplementMultiplicationBuilder {
         };
     }
 
-    private getMultiplierForCorrectionLabel(): string {
+    protected getMultiplierForCorrectionLabel(): string {
         const { lastMultiplierDigit } = this.result;
         const { base, valueInDecimal } = lastMultiplierDigit;
         return Math.abs(-(base - valueInDecimal)).toString();
     }
 }
+

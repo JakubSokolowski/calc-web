@@ -13,7 +13,7 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         return `\\overline{${this.multiplicandLabelStr}}`;
     }
 
-    public getAnchorCell(): CellConfig {
+    public getMultiplicandComplementAnchorCell(): CellConfig {
         const { totalWidth, hasMultiplicandComplement, numMultiplierDigits } = this.info;
         return {
             x: totalWidth - numMultiplierDigits - 1,
@@ -39,39 +39,43 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         return { labels };
     }
 
+    protected buildMultiplicandComplementRow(): GridCellConfig[] {
+        const digits = this.result
+            .multiplicandComplement
+            .complement
+            .asDigits();
+
+        return operandDigitsToCellConfig(digits, this.info, this.base);
+    }
+
+
+
     buildValues(): GridCellConfig[][] {
         const { hasMultiplicandComplement } = this.info;
         const values = super.buildValues();
 
         if (!hasMultiplicandComplement) return values;
 
-        const digits = this.result
-            .multiplicandComplement
-            .complement
-            .asDigits();
-
-        const multiplicandComplementRow = operandDigitsToCellConfig(digits, this.info, this.base);
-
-        return [multiplicandComplementRow, ...values];
+        return [this.buildMultiplicandComplementRow(), ...values];
     }
 
     protected getComplementOffset(): number {
         return this.info.hasMultiplicandComplement ? 1 : 0;
     }
 
-    protected getGroupCells(): CellConfig[] {
+    protected getMultiplicandComplementGroupCells(): CellConfig[] {
         const { hasMultiplicandComplement } = this.info;
         const multiplierNegative = hasMultiplicandComplement;
 
-        const anchor = this.getAnchorCell();
+        const anchor = this.getMultiplicandComplementAnchorCell();
         if (!multiplierNegative) return [anchor];
 
-        return [anchor, ...this.getComplementRow(), ...this.getResultRow()];
+        return [anchor, ...this.getComplementRow(), ...this.getComplementAdditionRow()];
     }
 
-    protected getGroupBase(): CellGroup {
-        const anchorCell = this.getAnchorCell();
-        const groupCells = this.getGroupCells();
+    protected getMultiplicandComplementGroupBase(): CellGroup {
+        const anchorCell = this.getMultiplicandComplementAnchorCell();
+        const groupCells = this.getMultiplicandComplementGroupCells();
 
         return {
             anchorPosition: anchorCell,
@@ -81,14 +85,14 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         };
     }
 
-    private getComplementRow(): CellConfig[] {
+    protected getComplementRow(): CellConfig[] {
         const { totalWidth } = this.info;
         const complementRowStart: CellConfig = { x: 0, y: 0 };
         const complementRowEnd: CellConfig = { x: totalWidth - 1, y: 0 };
         return groupCellsInStraightLine(complementRowStart, complementRowEnd);
     }
 
-    private getResultRow(): CellConfig[] {
+    protected getComplementAdditionRow(): CellConfig[] {
         const { totalWidth, totalHeight } = this.info;
         const resultRowStart: CellConfig = { x: 0, y: totalHeight };
         const resultRowEnd: CellConfig = { x: totalWidth - 1, y: totalHeight };
