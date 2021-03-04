@@ -60,3 +60,7 @@ $$
   "operands": ["(0)3156", "(7)6423"]
 }
 ```
+
+# Źródła
+
+1. MR-K, "Mnożenie w systemach uzupełnieniowych pełnych"   **[web.archive.org](https://web.archive.org/web/20100215194642/http://wk-group.net/mr-k/pliki/studia/arytmetyka/mnozenieUzup_v18.pdf)**
