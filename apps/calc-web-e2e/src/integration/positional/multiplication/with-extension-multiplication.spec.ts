@@ -120,6 +120,25 @@ describe('Multiplication with extension', () => {
             .contains('S_{0}=6');
     });
 
+    // BUG #151
+    it('should display proper grid with same-length rows for two U2 numbers with fraction parts', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)1101001.101', '(1)1101.111'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base
+        };
+        const expected = '-11100000.011101';
+        const expectedComplement = '(1)100011111.100011';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expectedComplement, base, 18, 11);
+    });
 
     it('should show proper information on last multiplier digit tooltip when multiplier is negative', () => {
         const config: OperationTemplate<AlgorithmType> = {

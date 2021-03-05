@@ -69,6 +69,23 @@ export class DefaultMultiplicationMeta {
     }
 }
 
+class WithExtensionMeta extends DefaultMultiplicationMeta {
+    protected getMinOperandsSpan(): number {
+        if(!this.operandsHaveFractionPart() || !this.areOperandsBinary()) return super.getMinOperandsSpan();
+        const [multiplicand, multiplier] = this.result.operands;
+        return multiplicand.length + multiplier.length - 1;
+    }
+
+    private operandsHaveFractionPart() {
+        const [multiplicand, multiplier] = this.result.numberOperands;
+        return multiplicand.numFractionPartDigits() > 0 || multiplier.numFractionPartDigits() > 0;
+    }
+
+    private areOperandsBinary() {
+        return this.result.numberResult.base().toString() === `${2}`;
+    }
+}
+
 
 class WithoutExtensionMeta extends DefaultMultiplicationMeta {
     protected getMinOperandsSpan(): number {
@@ -81,8 +98,9 @@ class WithoutExtensionMeta extends DefaultMultiplicationMeta {
 function getMetaBuilder(result: MultiplicationResult) {
     switch (result.algorithmType) {
         case MultiplicationType.Default:
-        case MultiplicationType.WithExtension:
             return new DefaultMultiplicationMeta(result);
+        case MultiplicationType.WithExtension:
+            return new WithExtensionMeta(result);
         case MultiplicationType.WithoutExtension:
             return new WithoutExtensionMeta(result);
     }
