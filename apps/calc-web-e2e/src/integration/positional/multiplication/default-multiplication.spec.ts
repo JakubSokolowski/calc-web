@@ -14,6 +14,7 @@ describe('Default Multiplication', () => {
         cy.visit('#/tools/positional/positional-calculator');
     });
 
+    // STUD_REQ_12
     it('should multiply two positive numbers', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
@@ -41,6 +42,7 @@ describe('Default Multiplication', () => {
         gridHasProperResultRow(expected, base, 5, 4);
     });
 
+    // STUD_REQ_12
     it('should multiply two negative numbers', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
@@ -59,6 +61,7 @@ describe('Default Multiplication', () => {
         gridHasProperResultRow(expected, base, 5, 4);
     });
 
+    // STUD_REQ_12
     it('should multiply negative and positive numbers', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
