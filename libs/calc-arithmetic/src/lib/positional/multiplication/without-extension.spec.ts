@@ -39,7 +39,6 @@ describe('multiplication-without-extension', () => {
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
 
-
         it('should multiply positive number by negative', () => {
             // given
             const base = 8;

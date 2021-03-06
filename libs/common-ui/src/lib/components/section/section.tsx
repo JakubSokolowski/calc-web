@@ -4,9 +4,13 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
 import MuiAccordion from '@material-ui/core/Accordion';
+import ErrorIcon from '@material-ui/icons/Error';
+import { Tooltip } from '@material-ui/core';
+import { useTranslation } from 'react-i18next';
 
 interface SectionProps {
     title: string;
+    resultPossiblyWrong?: boolean;
 }
 
 const useStyles = makeStyles((theme) => ({
@@ -27,6 +31,16 @@ const useStyles = makeStyles((theme) => ({
             height: 48,
             minHeight: 48,
         },
+    },
+    summaryRow: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        flexWrap: 'wrap'
+    },
+    iconWrapper: {
+        marginLeft: theme.spacing(1),
+        marginTop: '3px'
     }
 }));
 
@@ -59,8 +73,9 @@ export const AccordionSummary = withStyles({
     expanded: {},
 })(MuiAccordionSummary);
 
-export const Section: FC<SectionProps> = ({ title, children }) => {
+export const Section: FC<SectionProps> = ({ title, children, resultPossiblyWrong }) => {
     const classes = useStyles();
+    const {t} = useTranslation();
 
     return (
         <Accordion defaultExpanded variant={'outlined'} >
@@ -68,9 +83,19 @@ export const Section: FC<SectionProps> = ({ title, children }) => {
                 className={classes.summary}
                 expandIcon={<ExpandMoreIcon/>}
             >
-                <Typography data-test="section-title" className={classes.heading}>
-                    {title}
-                </Typography>
+                <div className={classes.summaryRow}>
+                    <Typography data-test="section-title" className={classes.heading}>
+                        {title}
+                    </Typography>
+                    {
+                        resultPossiblyWrong &&
+                        <div className={classes.iconWrapper}>
+                            <Tooltip placement='right' title={t('positionalCalculator.resultPossiblyWrong')}>
+                                <ErrorIcon/>
+                            </Tooltip>
+                        </div>
+                    }
+                </div>
             </AccordionSummary>
             <Divider/>
             <AccordionDetails className={classes.content}>
