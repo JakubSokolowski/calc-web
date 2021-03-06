@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react';
+import React, { FC, useState, SyntheticEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     AlgorithmType,
@@ -9,7 +9,7 @@ import {
     PositionalNumber
 } from '@calc/calc-arithmetic';
 import { PaddedGrid } from '@calc/grid';
-import { createStyles, Theme } from '@material-ui/core';
+import { createStyles, Theme, Snackbar, IconButton } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
 import { DndOperand } from '../operand-list/operand-list';
@@ -17,6 +17,10 @@ import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
 import { OperationResultComponent } from '../operation-result/operation-result';
 import { calculate, GridResult, OperationParams } from '../core/calculate';
+import { SanityCheck } from '../sanity-check/sanity-check';
+import { sanityCheck, serializeForSentry } from '../core/sanity-check';
+import CloseIcon from '@material-ui/icons/Close';
+import * as Sentry from '@sentry/react';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -47,6 +51,10 @@ const useStyles = makeStyles((theme: Theme) =>
 
 export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
+    const [sanityCheckFailed, setSanityCheckFailed] = useState(false);
+    const [errorOpen, setErrorOpen] = useState(false);
+    const [expected, setExepected] = useState('');
+    const [actual, setActual] = useState('');
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
     const { t } = useTranslation();
     const [res, setRes] = useState<GridResult | undefined>();
@@ -59,6 +67,7 @@ export const PositionalCalculatorView: FC = () => {
         operation: Operation,
         algorithm: OperationAlgorithm<T>
     ) {
+        setErrorOpen(false);
         const operands: PositionalNumber[] = representations.map((num) => {
             return fromStringDirect(num.representation, base).result;
         });
@@ -72,6 +81,17 @@ export const PositionalCalculatorView: FC = () => {
 
         setParams(params);
         const res = calculate(params);
+        const check = sanityCheck(params, res.result);
+
+        if(check.failed) {
+            const msg = `Sanity check failed, expected ${check.expectedDecimal.toString()} got ${check.actual.decimalValue.toString()}`;
+            const extra = serializeForSentry(check);
+            Sentry.captureException(new Error(msg), {extra});
+            setSanityCheckFailed(true);
+            setErrorOpen(true);
+            setExepected(check.expectedInBase);
+            setActual(check.actual.toString());
+        }
         setRes(res);
     };
 
@@ -88,6 +108,14 @@ export const PositionalCalculatorView: FC = () => {
     };
     const theoryPath = operation ? `/theory/positional/operations/${operation.toLowerCase()}` : '/theory/positional/operations';
 
+    const handleClose = (event?: SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setErrorOpen(false);
+    };
+
     return (
         <ViewWrapper path={'/tools/positional/positional-calculator'} theoryPath={theoryPath}>
             <Section title={t('positionalCalculator.parameters')}>
@@ -98,10 +126,10 @@ export const PositionalCalculatorView: FC = () => {
             {
                 params && res &&
                 <>
-                    <Section title={t('positionalCalculator.result')}>
+                    <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.result')}>
                         <OperationResultComponent result={res.operationResult}/>
                     </Section>
-                    <Section title={t('positionalCalculator.details')}>
+                    <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.details')}>
                         <PaddedGrid
                             {...res.grid}
                             desiredWidth={24}
@@ -118,6 +146,12 @@ export const PositionalCalculatorView: FC = () => {
                     </Section>
                 </>
             }
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                open={errorOpen}
+            >
+               <SanityCheck onClose={handleClose} expected={expected} actual={actual}/>
+            </Snackbar>
         </ViewWrapper>
     );
 };
