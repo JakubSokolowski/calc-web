@@ -45,14 +45,16 @@ export class WithoutExtensionU2Builder extends WithoutExtensionBuilder {
         ];
     }
 
-    public getMultiplicandComplementAnchorCell(): CellConfig {
-        const { totalWidth, hasMultiplicandComplement, numMultiplierDigits, numMultiplicandDigits } = this.info;
-        const offset =
-            Math.max(numMultiplierDigits, numMultiplicandDigits)
-            - (hasMultiplicandComplement ? 0: 1);
+    public getLastMultiplicationAnchorCell(): CellConfig {
+        const {
+            totalWidth,
+            hasMultiplicandComplement,
+            numMultiplicandDigits,
+            numMultiplierDigits
+        } = this.info;
 
         return {
-            x: totalWidth - offset - 1,
+            x: totalWidth - Math.max(numMultiplicandDigits, numMultiplierDigits) - 1,
             y: hasMultiplicandComplement ? 2 : 1
         };
     }
@@ -89,7 +91,7 @@ export class WithoutExtensionU2Builder extends WithoutExtensionBuilder {
         const { hasMultiplicandComplement } = this.info;
         const multiplierNegative = hasMultiplicandComplement;
 
-        const anchor = this.getMultiplicandComplementAnchorCell();
+        const anchor = this.getLastMultiplicationAnchorCell();
         if (!multiplierNegative) return [anchor, ...this.getComplementAdditionRow()];
 
         return [anchor, ...this.getComplementRow(), ...this.getComplementAdditionRow()];

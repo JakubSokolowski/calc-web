@@ -9,7 +9,7 @@ import {
     PositionalNumber
 } from '@calc/calc-arithmetic';
 import { PaddedGrid } from '@calc/grid';
-import { createStyles, Theme, Snackbar, IconButton } from '@material-ui/core';
+import { createStyles, Theme, Snackbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
 import { DndOperand } from '../operand-list/operand-list';
@@ -19,7 +19,6 @@ import { OperationResultComponent } from '../operation-result/operation-result';
 import { calculate, GridResult, OperationParams } from '../core/calculate';
 import { SanityCheck } from '../sanity-check/sanity-check';
 import { sanityCheck, serializeForSentry } from '../core/sanity-check';
-import CloseIcon from '@material-ui/icons/Close';
 import * as Sentry from '@sentry/react';
 
 const useStyles = makeStyles((theme: Theme) =>

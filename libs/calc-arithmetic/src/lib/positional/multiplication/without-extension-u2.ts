@@ -1,13 +1,14 @@
-import { alignFractions, mostSignificantPosition, shiftLeft } from '../digits';
+import { shiftLeft } from '../digits';
 import { addDigitsArrays } from '../addition';
 import { NumberComplement } from '../number-complement';
 import { getComplement, getDigitComplement } from '../complement-converter';
-import { mergeExtensionDigits } from '../complement-extension';
 import { WithoutExtension } from './without-extension';
 import { Digit, MultiplicationOperand, MultiplicationResult, MultiplicationRowResult } from '../../models';
 import { fromDigits } from '../base-converter';
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
+import { OperandsTransformType } from '../transform/preprocessor-type';
+import { applyTransformsByType } from '../transform/apply-by-type';
 
 export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
     multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
@@ -24,7 +25,6 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
         const digitsToShift = rowResults.map(r => r.resultDigits);
         const correction = this.mapToOne(multiplicandRow);
         digitsToShift.push(correction);
-
 
         const shifted = digitsToShift.map((opRow, index) => {
             if (index === digitsToShift.length - 1) {
@@ -128,41 +128,12 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
     }
 
     prepareOperands(): MultiplicationOperand[][] {
-        const aligned = alignFractions([
-            this.multiplicand.complement.asDigits(),
-            this.multiplier.complement.asDigits()
-        ]);
-
-        const [
-            extendedMultiplicand,
-            extendedMultiplier
-        ] = this.extendComplementsToMostSignificant(aligned);
-
-        return [
-            extendedMultiplicand.filter(d => !d.isComplementExtension),
-            extendedMultiplier.filter(d => !d.isComplementExtension)
-        ];
-    }
-
-    protected extendComplementsToMostSignificant<T extends Digit>(complements: T[][]) {
-        const someNegative = this.someNegativeOperands(complements);
-
-        const firstNonZero = complements.map(digits => {
-            if (someNegative && digits[0].valueInDecimal === 0) {
-                return digits[1].position;
-            }
-            return mostSignificantPosition(digits);
-        });
-
-
-        const globalMostSignificant = Math.max(...firstNonZero);
-        const maxPositionAfterExtend = globalMostSignificant + complements.length;
-
-        const merged = complements.map(mergeExtensionDigits);
-        const numRows = complements.length;
-
-        return merged.map((complement, index) => {
-            return this.extendComplementToPosition(complement, numRows, index, maxPositionAfterExtend);
-        });
+        return applyTransformsByType(
+            [
+                this.multiplicand.complement.asDigits(),
+                this.multiplier.complement.asDigits()
+            ],
+            [OperandsTransformType.WithoutExtensionU2Multiplication]
+        );
     }
 }

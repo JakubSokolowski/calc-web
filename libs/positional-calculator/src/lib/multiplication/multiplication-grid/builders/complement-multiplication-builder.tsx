@@ -13,7 +13,7 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         return `\\overline{${this.multiplicandLabelStr}}`;
     }
 
-    public getMultiplicandComplementAnchorCell(): CellConfig {
+    public getLastMultiplicationAnchorCell(): CellConfig {
         const { totalWidth, hasMultiplicandComplement, numMultiplierDigits } = this.info;
         return {
             x: totalWidth - numMultiplierDigits - 1,
@@ -67,14 +67,14 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         const { hasMultiplicandComplement } = this.info;
         const multiplierNegative = hasMultiplicandComplement;
 
-        const anchor = this.getMultiplicandComplementAnchorCell();
+        const anchor = this.getLastMultiplicationAnchorCell();
         if (!multiplierNegative) return [anchor];
 
         return [anchor, ...this.getComplementRow(), ...this.getComplementAdditionRow()];
     }
 
     protected getMultiplicandComplementGroupBase(): CellGroup {
-        const anchorCell = this.getMultiplicandComplementAnchorCell();
+        const anchorCell = this.getLastMultiplicationAnchorCell();
         const groupCells = this.getMultiplicandComplementGroupCells();
 
         return {

@@ -37,6 +37,10 @@ export function isNegative(str: string): boolean {
     return str.charAt(0) === '-';
 }
 
+export function isDigitNegativeComplement<T extends Digit>(digit: T): boolean {
+   return digit.isComplementExtension && digit.valueInDecimal !== 0;
+}
+
 
 /**
  * Check whether given string can be used to represent complement of

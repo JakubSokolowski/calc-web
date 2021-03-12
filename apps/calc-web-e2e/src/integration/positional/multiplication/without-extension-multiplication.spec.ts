@@ -198,7 +198,7 @@ describe('Multiplication without extension', () => {
     it('should multiply two U2 numbers with positive multiplier', () => {
         const base = 2;
         const config: OperationTemplate<AlgorithmType> = {
-            operands: ['(1)01011', '(0)000110'],
+            operands: ['(1)01011', '(0)110'],
             operation: OperationType.Multiplication,
             algorithm: MultiplicationType.WithoutExtension,
             base
@@ -238,5 +238,55 @@ describe('Multiplication without extension', () => {
         // should display popover with proper content for correction row
         getCellByCoords(7, 8).trigger('mouseover')
             .getByDataTest('without-extension-u2-correction');
+    });
+
+    // BUG #151
+    it('should multiply two U2 numbers with multiplicand shorter than multiplier', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)1101001', '(1)1101'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base
+        };
+        const expected = '-100111011';
+        const expectedComplement = '(1)011000101';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display proper popover for addition rows
+        getCellByCoords(16, 12).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{0}=1');
+
+        getCellByCoords(7, 12).trigger('mouseover')
+            .getByDataTest('add-at-position')
+            .contains('S_{9}=1');
+
+
+        gridHasProperResultRow(expectedComplement, base, 16, 12);
+    });
+
+    // BUG #151
+    it('should multiply two U2 numbers with fraction parts', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['(0)1101001.101', '(1)1101.111'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithoutExtension,
+            base
+        };
+        const expected = '-11100000.011101';
+        const expectedComplement = '(1)00011111.100011';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expectedComplement, base, 22, 15);
     });
 });
