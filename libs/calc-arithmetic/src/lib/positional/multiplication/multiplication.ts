@@ -16,6 +16,9 @@ import {
     Multiplication,
     multiplyDigits
 } from './common';
+import { OperandsTransformType } from '../transform/preprocessor-type';
+import { applyTransformsByType } from '../transform/apply-by-type';
+import { digitsToStr } from '../../helpers/conversion-helpers';
 
 export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
     const carryLookup: Record<number, MultiplicationOperand> = {};
@@ -84,26 +87,24 @@ export class DefaultMultiplication extends Multiplication {
         super(numbers);
     }
 
-    protected get resultNegative () {
-        return this.multiplicand.isNegative() !== this.multiplier.isNegative();
-    }
-
     multiply(): MultiplicationResult {
         const [alMultiplicand, alMultiplier] = this.prepareOperands();
         const result = this.multiplyDigitRows(alMultiplicand, alMultiplier);
         return {
             ...result,
             numberOperands: [this.multiplicand, this.multiplier]
-        }
+        };
+    }
+
+    protected get resultNegative() {
+        return this.multiplicand.isNegative() !== this.multiplier.isNegative();
     }
 
     protected prepareOperands(): MultiplicationOperand[][] {
-        return alignFractions(
-            [
-                this.multiplicand.asDigits(),
-                this.multiplier.asDigits()
-            ]
-        );
+        return applyTransformsByType([
+            this.multiplicand.asDigits(),
+            this.multiplier.asDigits()
+        ], [OperandsTransformType.AlignFractions]);
     }
 
     protected multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {

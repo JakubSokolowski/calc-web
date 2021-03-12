@@ -95,7 +95,7 @@
         "withoutExtensionU2lastOne": "Last multiplier digit is 1",
         "withoutExtensionU2One": "Multiplier digit is 1",
         "withoutExtensionU2lastZero": "Last multiplier digit is 0",
-        "withoutExtensionU2lZero": "Multiplier digit is 0",
+        "withoutExtensionU2Zero": "Multiplier digit is 0",
         "addMultiplicandComplement": "Add multiplicand complement",
         "add": "Add ",
         "withNegated": " with negated ",

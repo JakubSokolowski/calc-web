@@ -4788,7 +4788,6 @@ Array [
         },
         Object {
           "base": 8,
-          "isComplementExtension": false,
           "position": -1,
           "representationInBase": "0",
           "valueInDecimal": 0,

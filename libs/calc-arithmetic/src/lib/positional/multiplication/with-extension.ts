@@ -1,4 +1,4 @@
-import { alignFractions, isZeroDigit, leastSignificantPosition, mostSignificantPosition, shiftLeft } from '../digits';
+import { isZeroDigit, leastSignificantPosition, mostSignificantPosition, shiftLeft } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
@@ -13,10 +13,12 @@ import {
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
 import { extractResultDigitsFromMultiplicationRow } from './common';
-import { extendComplement, mergeExtensionDigits } from '../complement-extension';
+import { extendComplement } from '../complement-extension';
 import { trimStartByPredicate } from '@calc/utils';
 import { NumberComplement } from '../number-complement';
 import { DefaultMultiplication } from './multiplication';
+import { OperandsTransformType } from '../transform/preprocessor-type';
+import { applyTransformsByType } from '../transform/apply-by-type';
 
 export function multiplyWithExtensions(numbers: PositionalNumber[]): MultiplicationResult {
     return new WithExtension(numbers).multiply();
@@ -28,12 +30,10 @@ export class WithExtension extends DefaultMultiplication {
     }
 
     prepareOperands(): MultiplicationOperand[][] {
-        return alignFractions(
-            [
-                this.multiplicand.complement.asDigits(),
-                this.multiplier.complement.asDigits()
-            ]
-        );
+        return applyTransformsByType([
+            this.multiplicand.complement.asDigits(),
+            this.multiplier.complement.asDigits()
+        ], [OperandsTransformType.AlignFractions]);
     }
 
     multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
@@ -44,20 +44,21 @@ export class WithExtension extends DefaultMultiplication {
             return this.multiplyRowByDigit(multiplicandRow, multiplier);
         });
 
-        const digitsToShift = rowResults.map(res => res.resultDigits);
+        const operandsToAdd = rowResults.map(res => res.resultDigits);
 
         let multiplicandComplement: PositionalNumber;
 
         if (this.isDigitNegativeComplement(lastMultiplier)) {
             const complement = getComplement(new NumberComplement(this.multiplicand.complement.asDigits()));
-            digitsToShift.push(complement.asDigits());
+            operandsToAdd.push(complement.asDigits());
             multiplicandComplement = fromDigits(complement.asDigits()).result;
         }
 
-        const shifted = this.shiftAndExtend(digitsToShift);
         const positionCap = this.getPositionCap(multiplicandRow, multiplierRow);
-        const sum = addDigitsArrays(shifted, positionCap);
+        const transformedForAddition = this.transformForAddition(operandsToAdd);
+        const sum = addDigitsArrays(transformedForAddition, positionCap);
         const adjustedSum = this.adjustForMultiplierFraction(sum, multiplierRow);
+
         const trimmedLeadingZeros = this.trimSumDigits(adjustedSum.numberResult.asDigits());
         const resultWithProperSign = fromDigits(trimmedLeadingZeros, this.resultNegative).result;
 
@@ -73,6 +74,13 @@ export class WithExtension extends DefaultMultiplication {
             multiplicandComplement,
             lastMultiplierDigit: lastMultiplier
         };
+    }
+
+    protected transformForAddition(digitsToShift: MultiplicationOperand[][]) {
+        return applyTransformsByType(
+            digitsToShift,
+            [OperandsTransformType.MergeExtensions, OperandsTransformType.ShiftAndExtendComplements]
+        );
     }
 
     multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
@@ -117,27 +125,6 @@ export class WithExtension extends DefaultMultiplication {
             : trimStartByPredicate(digits, isZeroDigit);
     }
 
-    protected shiftAndExtend<T extends Digit>(operands: T[][]) {
-        const merged = operands.map(ops => mergeExtensionDigits(ops));
-
-        const someNegative = this.someNegativeOperands(operands);
-
-        const firstNonZero = merged.map(digits => {
-            if (someNegative && digits[0].valueInDecimal === 0) {
-                return digits[1].position;
-            }
-            return mostSignificantPosition(digits);
-        });
-
-        const globalMostSignificant = Math.max(...firstNonZero);
-        const maxPositionAfterExtend = globalMostSignificant + merged.length;
-
-        const shiftedRows = merged.map((opRow, index) => {
-            return shiftLeft(opRow, index);
-        });
-
-        return this.extendComplementsToPosition(shiftedRows, maxPositionAfterExtend);
-    }
 
     private getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): number {
         const multiplicandLSP = leastSignificantPosition(multiplicandRow);
@@ -149,27 +136,5 @@ export class WithExtension extends DefaultMultiplication {
 
     private isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {
         return lastDigit.valueInDecimal === lastDigit.base - 1;
-    }
-
-    protected extendComplementToPosition<T extends Digit>(complement: T[], numRows: number, rowIndex: number, position: number): T[] {
-        const msp = complement[0].position;
-        const normalExtensionForRow = numRows - rowIndex - 1;
-        const mspAfterNormalExtension = msp + normalExtensionForRow;
-        const actualPositionDifference = position - mspAfterNormalExtension;
-        const numPositionsToExtend = normalExtensionForRow + actualPositionDifference;
-        return extendComplement(complement, numPositionsToExtend);
-    }
-
-    private extendComplementsToPosition<T extends Digit>(complements: T[][], maxPositionAfterExtend: number) {
-        const merged = complements.map(mergeExtensionDigits);
-        const numRows = complements.length;
-
-        return merged.map((complement, index) => {
-            return this.extendComplementToPosition(complement, numRows, index, maxPositionAfterExtend);
-        });
-    }
-
-    protected someNegativeOperands<T extends Digit>(operands: T[][]) {
-        return operands.some(row => row[0].isComplementExtension && row[0].valueInDecimal > 0);
     }
 }

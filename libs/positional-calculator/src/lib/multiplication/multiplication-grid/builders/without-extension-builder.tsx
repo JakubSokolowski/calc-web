@@ -4,7 +4,7 @@ import { WithoutExtensionLast } from '../../last-multiplication-details/without-
 import React from 'react';
 
 export class WithoutExtensionBuilder extends ComplementMultiplicationBuilder {
-    getMultiplicandComplementAnchorCell(): CellConfig {
+    getLastMultiplicationAnchorCell(): CellConfig {
         const { totalWidth, hasMultiplicandComplement, numMultiplierDigits } = this.info;
         return {
             x: totalWidth - numMultiplierDigits,
