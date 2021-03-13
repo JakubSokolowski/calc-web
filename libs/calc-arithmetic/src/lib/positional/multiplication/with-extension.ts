@@ -122,9 +122,12 @@ export class WithExtension extends DefaultMultiplication {
         const onlyZeros = digits.every(isZeroDigit);
         return onlyZeros
             ? digits
-            : trimStartByPredicate(digits, isZeroDigit);
+            : trimStartByPredicate(digits, this.isZeroDigitOnGreaterThanZeroPosition);
     }
 
+    private isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
+        return digit.position > 0 && isZeroDigit(digit);
+    }
 
     private getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): number {
         const multiplicandLSP = leastSignificantPosition(multiplicandRow);

@@ -2,7 +2,7 @@ import { OperationParams } from './calculate';
 import { AlgorithmType, fromNumber, OperationType, PositionalNumber } from '@calc/calc-arithmetic';
 import BigNumber from 'bignumber.js';
 
-interface SanityCheck<T extends AlgorithmType> {
+export interface SanityCheck<T extends AlgorithmType> {
     params: OperationParams<T>;
     actual: PositionalNumber;
     expectedDecimal: number | BigNumber;
@@ -12,14 +12,16 @@ interface SanityCheck<T extends AlgorithmType> {
 
 export function serializeForSentry<T extends AlgorithmType>(check: SanityCheck<T>): Record<string, unknown> {
     return {
-        actualInBase: check.actual.toString(),
-        actualInDecimal: check.actual.decimalValue.toString(),
-        expectedInDecimal: check.expectedDecimal,
-        expectedInBase: fromNumber(check.expectedDecimal, check.params.base).result.toString(),
-        operation: check.params.operation.type,
-        algorithm: check.params.algorithm.type,
-        base: check.params.base,
-        operands: check.params.operands.map(op => op.toString())
+       extra: {
+           actualInBase: check.actual.toString(),
+           actualInDecimal: check.actual.decimalValue.toString(),
+           expectedInDecimal: check.expectedDecimal,
+           expectedInBase: fromNumber(check.expectedDecimal, check.params.base).result.toString(),
+           operation: check.params.operation.type,
+           algorithm: check.params.algorithm.type,
+           base: check.params.base,
+           operands: check.params.operands.map(op => op.toString())
+       }
     }
 }
 

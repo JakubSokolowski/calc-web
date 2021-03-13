@@ -8,7 +8,7 @@ interface P {
     onClose: () => void;
 }
 
-export const SanityCheck: FC<P> = ({expected, actual, onClose}) => {
+export const SanityCheckFailed: FC<P> = ({expected, actual, onClose}) => {
     const {t} = useTranslation();
 
     return (
