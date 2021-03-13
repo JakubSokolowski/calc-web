@@ -199,4 +199,29 @@ describe('Multiplication with extension', () => {
 
         gridHasProperResultRow(expectedComplement, base, 12, 10);
     });
+
+
+    // BUG #160
+    it('should display proper grid without empty columns for multiplication with all positive operands', () => {
+        const base = 2;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['1.1', '1'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base
+        };
+        const expected = '1.1';
+        const expectedComplement = '(0)1.10';
+
+        operationReturnsProperResult(config, expected);
+
+        getMultiplicationResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        // should display popover with proper content for last multiplier
+        getCellByCoords(2, 1).trigger('mouseover')
+            .getByDataTest('correction-with-extension-positive');
+
+        gridHasProperResultRow(expectedComplement, base, 4, 4);
+    });
 });

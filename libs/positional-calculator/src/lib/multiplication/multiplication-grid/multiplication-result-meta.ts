@@ -1,10 +1,10 @@
 import { extractResultMeta, ResultMeta } from '@calc/grid';
-import { MultiplicationResult, MultiplicationType } from '@calc/calc-arithmetic';
+import { Digit, MultiplicationResult, MultiplicationType } from '@calc/calc-arithmetic';
 
 export interface MultiplicationResultMeta extends ResultMeta {
     numMultiplicandFractionalDigits: number;
     numMultiplierDigits: number;
-    numMultiplicandDigits:  number;
+    numMultiplicandDigits: number;
     numMultiplierFractionalDigits: number;
     maxOperandsFractionDigits: number;
     algorithmType: MultiplicationType;
@@ -70,10 +70,23 @@ export class DefaultMultiplicationMeta {
 }
 
 class WithExtensionMeta extends DefaultMultiplicationMeta {
+    protected totalWidth() {
+        const resultLength = this.result.resultDigits.length;
+        const operandsSpan = this.getMinOperandsSpan();
+        return Math.max(resultLength, operandsSpan) + 1;
+    }
+
     protected getMinOperandsSpan(): number {
-        if(!this.operandsHaveFractionPart() || !this.areOperandsBinary()) return super.getMinOperandsSpan();
+        if (!this.operandsHaveFractionPart() || !this.areOperandsBinary()) {
+            return super.getMinOperandsSpan();
+        }
         const [multiplicand, multiplier] = this.result.operands;
-        return multiplicand.length + multiplier.length - 1;
+        return this.countSignificantForSpan(multiplicand) + this.countSignificantForSpan(multiplier);
+    }
+
+    private countSignificantForSpan(digits: Digit[]): number {
+        const [extension, ...rest] = digits;
+        return (extension.valueInDecimal === 0 ? 0 : 1) + rest.length;
     }
 
     private operandsHaveFractionPart() {
