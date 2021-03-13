@@ -17,7 +17,7 @@ import { CalculatorOptions } from '../calculator-options/calculator-options';
 import { getGroupBuilder } from '../core/operation-group-builer';
 import { OperationResultComponent } from '../operation-result/operation-result';
 import { calculate, GridResult, OperationParams } from '../core/calculate';
-import { SanityCheck } from '../sanity-check/sanity-check';
+import { SanityCheckFailed } from '../sanity-check/sanity-check-failed';
 import { sanityCheck, serializeForSentry } from '../core/sanity-check';
 import * as Sentry from '@sentry/react';
 
@@ -52,7 +52,7 @@ export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
     const [sanityCheckFailed, setSanityCheckFailed] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
-    const [expected, setExepected] = useState('');
+    const [expected, setExpected] = useState('');
     const [actual, setActual] = useState('');
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
     const { t } = useTranslation();
@@ -88,7 +88,7 @@ export const PositionalCalculatorView: FC = () => {
             Sentry.captureException(new Error(msg), {extra});
             setSanityCheckFailed(true);
             setErrorOpen(true);
-            setExepected(check.expectedInBase);
+            setExpected(check.expectedInBase);
             setActual(check.actual.toString());
         }
         setRes(res);
@@ -108,10 +108,7 @@ export const PositionalCalculatorView: FC = () => {
     const theoryPath = operation ? `/theory/positional/operations/${operation.toLowerCase()}` : '/theory/positional/operations';
 
     const handleClose = (event?: SyntheticEvent, reason?: string) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
+        if (reason === 'clickaway') return;
         setErrorOpen(false);
     };
 
@@ -149,7 +146,7 @@ export const PositionalCalculatorView: FC = () => {
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={errorOpen}
             >
-               <SanityCheck onClose={handleClose} expected={expected} actual={actual}/>
+               <SanityCheckFailed onClose={handleClose} expected={expected} actual={actual}/>
             </Snackbar>
         </ViewWrapper>
     );

@@ -121,5 +121,22 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.toString()).toEqual(expected);
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
+
+        // BUG #158
+        it('should multiply 1 in U2 by number between 0 and 1', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('1', base).result;
+            const y = fromStringDirect('0.1', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '0.1';
+            const expectedComplement = '(0)0.1';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
     });
 });
