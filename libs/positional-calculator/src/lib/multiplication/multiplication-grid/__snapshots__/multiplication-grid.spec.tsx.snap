@@ -2165,12 +2165,12 @@ exports[`multiplication-grid #buildMultiplicationGrid for multiplication with ex
 Array [
   Object {
     "anchorPosition": Object {
-      "x": 7,
+      "x": 5,
       "y": 2,
     },
     "cells": Array [
       Object {
-        "x": 7,
+        "x": 5,
         "y": 2,
       },
       Object {

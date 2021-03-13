@@ -14,9 +14,21 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
     }
 
     public getLastMultiplicationAnchorCell(): CellConfig {
-        const { totalWidth, hasMultiplicandComplement, numMultiplierDigits } = this.info;
+        const {
+            totalWidth,
+            hasMultiplicandComplement,
+            numMultiplierDigits,
+            numMultiplierFractionalDigits,
+            numMultiplicandFractionalDigits
+        } = this.info;
+
+        // Multiplier fraction part might have been extended to match
+        // multiplicand, so the actual num of operands might higher
+        // move left by num of cells equal to fractionDiff
+        const fractionDiff = numMultiplierFractionalDigits + numMultiplicandFractionalDigits;
+
         return {
-            x: totalWidth - numMultiplierDigits - 1,
+            x: totalWidth - (numMultiplierDigits + fractionDiff) - 1,
             y: hasMultiplicandComplement ? 2 : 1
         };
     }
@@ -39,17 +51,6 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         return { labels };
     }
 
-    protected buildMultiplicandComplementRow(): GridCellConfig[] {
-        const digits = this.result
-            .multiplicandComplement
-            .complement
-            .asDigits();
-
-        return operandDigitsToCellConfig(digits, this.info, this.base);
-    }
-
-
-
     buildValues(): GridCellConfig[][] {
         const { hasMultiplicandComplement } = this.info;
         const values = super.buildValues();
@@ -57,6 +58,15 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         if (!hasMultiplicandComplement) return values;
 
         return [this.buildMultiplicandComplementRow(), ...values];
+    }
+
+    protected buildMultiplicandComplementRow(): GridCellConfig[] {
+        const digits = this.result
+            .multiplicandComplement
+            .complement
+            .asDigits();
+
+        return operandDigitsToCellConfig(digits, this.info, this.base);
     }
 
     protected getComplementOffset(): number {

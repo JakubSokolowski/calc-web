@@ -50,8 +50,6 @@ export function buildRowGroup(row: GridCellConfig[], rowIndex: number, contentPr
 export function buildColumnGroups(cells: GridCellConfig[][], contentProps?: any[], yOffset = 0, contentBuilder?: any, preventTriggerPredicate?: PreventTriggerPredicate): CellGroup[] {
     if (!cells.length) return [];
 
-    console.log('startY')
-
     const groups: CellGroup[] = [];
 
     for (let x = 0; x < cells[0].length; x++) {
