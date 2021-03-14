@@ -99,12 +99,14 @@ class WithExtensionMeta extends DefaultMultiplicationMeta {
     }
 }
 
-
 class WithoutExtensionMeta extends DefaultMultiplicationMeta {
     protected getMinOperandsSpan(): number {
         const correctionOffset = 1;
         return super.getMinOperandsSpan() + correctionOffset;
     }
+}
+
+class BoothMeta extends DefaultMultiplicationMeta {
 }
 
 
@@ -116,5 +118,7 @@ function getMetaBuilder(result: MultiplicationResult) {
             return new WithExtensionMeta(result);
         case MultiplicationType.WithoutExtension:
             return new WithoutExtensionMeta(result);
+        case MultiplicationType.Booth:
+            return new BoothMeta(result);
     }
 }

@@ -3,10 +3,14 @@ import Adapter from 'enzyme-adapter-react-16';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+function mockT(key) {
+    return key
+}
+
 jest.mock('react-i18next', () => ({
     ...jest.requireActual('react-i18next'),
     useTranslation: () => ({
-        t: key => key,
+        t: mockT,
         i18n: {
             changeLanguage: jest.fn(),
             language: 'en'

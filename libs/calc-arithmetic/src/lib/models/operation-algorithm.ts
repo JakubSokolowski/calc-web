@@ -11,7 +11,8 @@ export enum SubtractionType {
 export enum MultiplicationType {
     Default = 'Default',
     WithExtension = 'WithExtension',
-    WithoutExtension = 'WithoutExtension'
+    WithoutExtension = 'WithoutExtension',
+    Booth = 'Booth',
 }
 
 export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
@@ -51,6 +52,11 @@ export const multiplicationAlgorithms: OperationAlgorithm<MultiplicationType>[] 
         type: MultiplicationType.WithoutExtension,
         tKey: 'operations.multiplication.withoutExtension'
     },
+    {
+        type: MultiplicationType.Booth,
+        tKey: 'operations.multiplication.booth',
+        allowedBases: [2]
+    }
 ];
 
 

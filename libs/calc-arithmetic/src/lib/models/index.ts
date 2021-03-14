@@ -1,6 +1,7 @@
 import { PositionalNumber } from '../positional/positional-number';
 import { OperationType } from './operation';
 import { AlgorithmType } from './operation-algorithm';
+import { SDConversionResult } from '../positional/signed-digit/signed-digit-converter';
 
 export interface Digit {
     valueInDecimal: number;
@@ -80,6 +81,7 @@ export interface MultiplicationResult extends OperationResult<MultiplicationOper
     stepResults: MultiplicationRowResult[];
     addition: AdditionResult;
     multiplicandComplement?: PositionalNumber;
+    sdConversion?: SDConversionResult;
     lastMultiplierDigit?: MultiplicationOperand;
 }
 

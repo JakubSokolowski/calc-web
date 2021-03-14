@@ -1,6 +1,7 @@
 import { getBconvConvertButton, getInputBaseInput, getInputStrInput, getOutputBaseInput } from './bconv';
 import 'cypress-plugin-snapshots/commands';
 import path from 'path';
+import { getCellByCoords } from './positional-calculator';
 
 declare global {
     // eslint-disable-next-line @typescript-eslint/no-namespace
@@ -22,7 +23,7 @@ declare global {
 
 function fixCypressSpec(filename: string) {
     const relative = filename.substr(1); // removes leading "/"
-    const projectRoot = Cypress.config('projectRoot' as any) ;
+    const projectRoot = Cypress.config('projectRoot' as any);
     const absolute = path.join(projectRoot, relative);
     Cypress.spec = {
         absolute,
@@ -45,7 +46,6 @@ function baseConverterInput(inputStr, inputBase, outputBase, precision = 10) {
 
 Cypress.Commands.add('getByDataTest', getByDataTest);
 Cypress.Commands.add('baseConverterInput', baseConverterInput);
-
 Cypress.Commands.add('fixCypressSpec', fixCypressSpec);
 
 export {};

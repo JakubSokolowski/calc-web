@@ -12,28 +12,32 @@ export {
 } from './positional/base-converter';
 
 export {
-    addPositionalNumbers,
-} from './positional/addition'
+    addPositionalNumbers
+} from './positional/addition';
 
 export {
-    subtractPositionalNumbers,
-} from './positional/subtraction'
+    subtractPositionalNumbers
+} from './positional/subtraction';
 
 export {
     convertUsingAssociatedBases
 } from './positional/associated-base-converter';
 
 export {
-    multiplyDefault,
+    multiplyDefault
 } from './positional/multiplication/multiplication';
 
 export {
     multiplyWithExtensions
 } from './positional/multiplication/with-extension';
 
-export * from './models'
-export * from './models/operation'
-export * from './models/operation-algorithm'
+export {
+    multiplyBooth
+} from './positional/multiplication/booth-multiplication';
+
+export * from './models';
+export * from './models/operation';
+export * from './models/operation-algorithm';
 
 export {
     PositionalNumber,
@@ -50,7 +54,7 @@ export {
 
 export {
     getComplementWithDetails
-} from './positional/complement-details'
+} from './positional/complement-details';
 
 export {
     FloatConverter,
@@ -64,13 +68,16 @@ export {
     isValidString,
     digitsToStr,
     splitToDigitsList
-} from './helpers/conversion-helpers'
+} from './helpers/conversion-helpers';
 
 export {
     BaseDigits
-} from './positional/base-digits'
+} from './positional/base-digits';
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
 export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';
 export { ComplementConversionResult } from './models/complement';
 export { multiplyWithoutExtension } from './positional/multiplication';
+export { BoothConverter } from './positional/signed-digit/booth-converter';
+export * from './positional/signed-digit/signed-digit-converter';
+

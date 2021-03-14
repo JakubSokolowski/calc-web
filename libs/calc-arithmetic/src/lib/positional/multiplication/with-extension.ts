@@ -1,4 +1,4 @@
-import { isZeroDigit, leastSignificantPosition, mostSignificantPosition, shiftLeft } from '../digits';
+import { isZeroDigit } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
@@ -12,7 +12,7 @@ import {
 } from '../../models';
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
-import { extractResultDigitsFromMultiplicationRow } from './common';
+import { extractResultDigitsFromMultiplicationRow, getMultiplicationResultPositionCap } from './common';
 import { extendComplement } from '../complement-extension';
 import { trimStartByPredicate } from '@calc/utils';
 import { NumberComplement } from '../number-complement';
@@ -130,11 +130,7 @@ export class WithExtension extends DefaultMultiplication {
     }
 
     private getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): number {
-        const multiplicandLSP = leastSignificantPosition(multiplicandRow);
-        const multiplierLSP = leastSignificantPosition(multiplierRow);
-        const globalLSP = Math.min(multiplicandLSP, multiplierLSP);
-
-        return globalLSP + multiplicandRow.length + multiplierRow.length;
+        return getMultiplicationResultPositionCap(multiplicandRow, multiplierRow);
     }
 
     private isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {

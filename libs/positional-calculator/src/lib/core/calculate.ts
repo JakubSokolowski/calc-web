@@ -6,16 +6,17 @@ import {
     BaseOperationResult,
     MultiplicationResult,
     MultiplicationType,
+    multiplyBooth,
+    multiplyDefault,
+    multiplyWithExtensions,
+    multiplyWithoutExtension,
     Operation,
     OperationAlgorithm,
     OperationType,
     PositionalNumber,
     SubtractionResult,
     SubtractionType,
-    subtractPositionalNumbers,
-    multiplyDefault,
-    multiplyWithExtensions,
-    multiplyWithoutExtension
+    subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
 import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@calc/grid';
 import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';
@@ -104,6 +105,15 @@ function handleMultiply(params: OperationParams<MultiplicationType>): GridResult
         }
         case MultiplicationType.WithoutExtension: {
             const result = multiplyWithoutExtension(params.operands);
+            const grid = buildMultiplicationGrid(result);
+            return {
+                grid,
+                result: result.numberResult,
+                operationResult: result
+            };
+        }
+        case MultiplicationType.Booth: {
+            const result = multiplyBooth(params.operands);
             const grid = buildMultiplicationGrid(result);
             return {
                 grid,

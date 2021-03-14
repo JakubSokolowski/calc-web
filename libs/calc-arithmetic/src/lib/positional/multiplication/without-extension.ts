@@ -10,6 +10,7 @@ import { NumberComplement } from '../number-complement';
 import { WithExtension } from './with-extension';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
+import { digitsToStr } from '@calc/calc-arithmetic';
 
 export class WithoutExtension extends WithExtension {
     prepareOperands(): MultiplicationOperand[][] {

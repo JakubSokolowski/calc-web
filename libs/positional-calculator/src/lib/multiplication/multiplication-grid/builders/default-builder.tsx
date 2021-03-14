@@ -61,7 +61,7 @@ export class DefaultBuilder extends GridBuilder {
             lines.push({ type: LineType.Horizontal, index: complementSeparatorIndex });
         }
 
-        const offset = hasMultiplicandComplement ? 1 : 0;
+        const offset = this.getOffsetForHorizontalLines();
 
         const multiplicationSeparatorIndex = operands.length - 1 + offset;
         lines.push({ type: LineType.Horizontal, index: multiplicationSeparatorIndex });
@@ -82,6 +82,11 @@ export class DefaultBuilder extends GridBuilder {
         }
 
         return lines;
+    }
+
+    protected getOffsetForHorizontalLines(): number {
+        const { hasMultiplicandComplement } = this.info;
+        return hasMultiplicandComplement ? 1 : 0;
     }
 
     buildLabel(): GridLabel {
@@ -109,7 +114,7 @@ export class DefaultBuilder extends GridBuilder {
     buildDigitMultiplicationGroup(stepResult: MultiplicationPositionResult, rowIndex: number, positionIndex: number): CellGroup {
         const { totalWidth } = this.info;
 
-        const offset = this.getComplementOffset();
+        const offset = this.getMultiplierRowStartOffset();
 
 
         const trigger: CellConfig = {
@@ -189,7 +194,7 @@ export class DefaultBuilder extends GridBuilder {
 
     protected buildAdditionGroups(): CellGroup[] {
         const { totalWidth } = this.info;
-        const yOffset = this.getComplementOffset();
+        const yOffset = this.getMultiplierRowStartOffset();
         const { stepResults, operands } = this.result.addition;
 
         const results = [...stepResults];
@@ -219,7 +224,7 @@ export class DefaultBuilder extends GridBuilder {
         );
     }
 
-    protected getComplementOffset(): number {
+    protected getMultiplierRowStartOffset(): number {
         return 0;
     }
 
@@ -236,7 +241,7 @@ export class DefaultBuilder extends GridBuilder {
     }
 
     protected buildRowMultiplicationGroup(result: MultiplicationRowResult, index: number): CellGroup {
-        const yOffset = this.getComplementOffset();
+        const yOffset = this.getMultiplierRowStartOffset();
         const { totalWidth } = this.info;
 
         const trigger: CellConfig = { x: totalWidth - index - 1, y: 1 + yOffset };
@@ -249,13 +254,7 @@ export class DefaultBuilder extends GridBuilder {
             true
         );
 
-        const resultRowStart: CellConfig = { x: 0, y: index + 2 + yOffset };
-        const resultRowEnd: CellConfig = { x: totalWidth - 1, y: index + 2 + yOffset };
-        const resultRow = groupCellsInStraightLine(
-            resultRowStart,
-            resultRowEnd,
-            this.shouldPreventGroupTriggerOnMultiplicationRowHover()
-        );
+        const resultRow = this.buildMultiplyByDigitResultRow(index);
 
         return {
             cells: [trigger, ...multiplicandRow, ...resultRow],
@@ -263,6 +262,19 @@ export class DefaultBuilder extends GridBuilder {
             anchorPosition: this.rowGroupAnchorPosition(),
             contentProps: result
         };
+    }
+
+    protected buildMultiplyByDigitResultRow(index: number): CellConfig[] {
+        const yOffset = this.getMultiplierRowStartOffset();
+        const { totalWidth } = this.info;
+
+        const resultRowStart: CellConfig = { x: 0, y: index + 2 + yOffset };
+        const resultRowEnd: CellConfig = { x: totalWidth - 1, y: index + 2 + yOffset };
+        return groupCellsInStraightLine(
+            resultRowStart,
+            resultRowEnd,
+            this.shouldPreventGroupTriggerOnMultiplicationRowHover()
+        );
     }
 
 }

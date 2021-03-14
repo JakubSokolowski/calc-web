@@ -97,6 +97,8 @@
         "withoutExtensionU2lastZero": "Ostatnia cyfra mnożnika to 0",
         "withoutExtensionU2Zero": "Cyfra mnożnika to 0",
         "addMultiplicandComplement": "Dodaj rozszerzenie mnożnej",
+        "sdAddRow": "Wartość cyfry [[sd]] to [[value]], dodaj [[valueToAdd]]",
+        "algorithmAllowedForBases": "Algorytm mozna użyć wyłącznie dla podstawy {{base}}",
         "add": "Dodaj ",
         "withNegated": " z zanegowaną ",
         "extensionDigitPositive": "Wartość cyfry rozszerzenia to 0",
@@ -121,7 +123,8 @@
             "title": "Mnożenie",
             "default": "Domyślny",
             "withExtension": "Z rozszerzeniem",
-            "withoutExtension": "Bez rozszerzenia"
+            "withoutExtension": "Bez rozszerzenia",
+            "booth": "Booth"
         }
     },
     "routes": {

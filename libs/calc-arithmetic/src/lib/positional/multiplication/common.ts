@@ -1,6 +1,6 @@
 import { BaseDigits } from '../base-digits';
 import { AdditionOperand, AdditionResult, MultiplicationOperand, MultiplicationPositionResult } from '../../models';
-import { shiftRight } from '../digits';
+import { leastSignificantPosition, shiftRight } from '../digits';
 import { trimEndByPredicate } from '@calc/utils';
 import { fromDigits } from '../base-converter';
 import { PositionalNumber } from '@calc/calc-arithmetic';
@@ -89,6 +89,13 @@ export function extractResultDigitsFromMultiplicationRow(positionResults: Multip
     return [...carryDigitsNotConsideredInResult.reverse(), ...digitsFromPositions.reverse()];
 }
 
+export function getMultiplicationResultPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]) {
+    const multiplicandLSP = leastSignificantPosition(multiplicandRow);
+    const multiplierLSP = leastSignificantPosition(multiplierRow);
+    const globalLSP = Math.min(multiplicandLSP, multiplierLSP);
+
+    return globalLSP + multiplicandRow.length + multiplierRow.length;
+}
 
 export class Multiplication {
     protected readonly multiplicand: PositionalNumber;
