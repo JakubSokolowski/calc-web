@@ -711,6 +711,18 @@ describe('conversion-helpers', () => {
             const expected = '-12 45.34 56';
             expect(result).toEqual(expected)
         });
+
+        it('should strip extraneous spaces around delimiter', () => {
+            // given
+            const representation = '−12 45 . 34  56  ';
+
+            // when
+            const result = serializeRepresentationStr(representation);
+
+            // then
+            const expected = '-12 45.34 56';
+            expect(result).toEqual(expected)
+        });
     });
 
     describe('#digitsToStr', () => {

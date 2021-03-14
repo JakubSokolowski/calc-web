@@ -450,6 +450,37 @@ describe('base-converter', () => {
             expect(result.decimalValue).toEqual(expectedValue);
         });
 
+        it('converts positive base64 with fraction part', () => {
+            // given
+            const input = '01.23';
+            const inputbase = 64;
+            const expectedValue = new BigNumber(1.359375);
+
+            // when
+            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const result = conv.result;
+
+            // then
+            expect(result.valueInBase).toEqual(input);
+            expect(result.decimalValue).toEqual(expectedValue);
+        });
+
+        it('converts positive base64 with fraction part with additional spaces', () => {
+            // given
+            const input = '01. 23';
+            const inputbase = 64;
+            const expectedValue = new BigNumber(1.359375);
+
+            // when
+            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const result = conv.result;
+
+            // then
+            const expectedInput = '01.23';
+            expect(result.valueInBase).toEqual(expectedInput);
+            expect(result.decimalValue).toEqual(expectedValue);
+        });
+
         it('converts negative base64', () => {
             // given
             const input = '-32 18.19';

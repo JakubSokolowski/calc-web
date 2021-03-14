@@ -138,5 +138,22 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.toString()).toEqual(expected);
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
+
+        // BUG #162
+        it('should multiply 2 b64 numbers in with fraction parts', () => {
+            // given
+            const base = 64;
+            const x = fromStringDirect('12. 34', base).result;
+            const y = fromStringDirect('11 08', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '02 11 26.16';
+            const expectedComplement = '(00) 02 11 26.16';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
     });
 });
