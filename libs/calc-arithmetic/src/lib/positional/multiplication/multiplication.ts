@@ -9,7 +9,7 @@ import { addPositionalNumbers } from '../addition';
 import { MultiplicationType } from '../../models/operation-algorithm';
 import { PositionalNumber } from '../positional-number';
 import { OperationType } from '../../models/operation';
-import { alignFractions, shiftLeft } from '../digits';
+import { shiftLeft } from '../digits';
 import {
     adjustForMultiplierFraction,
     extractResultDigitsFromMultiplicationRow,
@@ -18,7 +18,6 @@ import {
 } from './common';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
-import { digitsToStr } from '../../helpers/conversion-helpers';
 
 export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
     const carryLookup: Record<number, MultiplicationOperand> = {};

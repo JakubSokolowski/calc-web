@@ -69,7 +69,7 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         return operandDigitsToCellConfig(digits, this.info, this.base);
     }
 
-    protected getComplementOffset(): number {
+    protected getMultiplierRowStartOffset(): number {
         return this.info.hasMultiplicandComplement ? 1 : 0;
     }
 

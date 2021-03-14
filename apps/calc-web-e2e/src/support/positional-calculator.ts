@@ -76,6 +76,16 @@ export const gridHasProperResultRow = (representation: string, base: number, bot
     });
 };
 
+export const gridHasProperSdRow = (representation: string, sdRowEndX: number, sdRowEndY: number) => {
+    const sdDigits = representation.split(',').reverse();
+
+    sdDigits.forEach((d, index) => {
+        getCellByCoords(sdRowEndX - index, sdRowEndY)
+            .contains(d);
+    });
+};
+
+
 export const getCellByCoords = (x: number, y: number) => {
     return cy.getByDataTest(`operation-grid-${x}-${y}`);
 };

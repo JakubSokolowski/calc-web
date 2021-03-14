@@ -3,7 +3,9 @@ import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
     algorithmMap,
     allOperations,
-    BaseDigits, isValidComplementOrRepresentationStr, multiplicationAlgorithms,
+    BaseDigits,
+    isValidComplementOrRepresentationStr,
+    multiplicationAlgorithms,
     Operation,
     OperationAlgorithm,
     OperationType
@@ -13,7 +15,7 @@ import { clean, inRangeInclusive } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, createStyles, TextField, Theme, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { OperandList, DndOperand } from '../operand-list/operand-list';
+import { DndOperand, OperandList } from '../operand-list/operand-list';
 
 interface FormValues {
     base: number;
@@ -34,16 +36,15 @@ const useStyles = makeStyles((theme: Theme) =>
             maxWidth: 100
         },
         operand: {
-          width: '100%'
+            width: '100%'
         },
         spacer: {
-            width: theme.spacing(1),
+            width: theme.spacing(1)
         },
         growSpacer: {
             flexGrow: 1
         },
-        operandsBox: {
-        },
+        operandsBox: {},
         addOperand: {
             maxHeight: 40
         },
@@ -53,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
         optionsRow: {
             display: 'flex',
             flexDirection: 'row',
-            width: '100%',
+            width: '100%'
         }
     })
 );
@@ -73,7 +74,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
-    const initialValues: FormValues = { base: defaultBase || 10, };
+    const initialValues: FormValues = { base: defaultBase || 10 };
 
     const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidBase(base)) {
@@ -86,42 +87,45 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const validate = (values: FormValues) => {
         const errors: FormErrors<FormValues> = {
-            base: validateBase(values.base),
+            base: validateBase(values.base)
         };
 
         return clean(errors);
     };
 
     const handleSubmit = (form: FormValues) => {
-        onSubmit(form.base, operands, operation, algorithm)
+        onSubmit(form.base, operands, operation, algorithm);
     };
 
-    const form = useFormik({ initialValues, validate, onSubmit: handleSubmit});
+    const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
 
     const handleOperandChange = (newOperands: DndOperand[]) => {
         const ops: DndOperand[] = newOperands.map((op: DndOperand) => {
             return {
                 ...op,
                 valid: isValidComplementOrRepresentationStr(op.representation, form.values.base)
-            }
+            };
         });
         setOperands(ops);
     };
 
     const handleAdd = () => {
         const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
-        setOperands((prev) => [...prev, {representation: defaultStr, valid: true, dndKey: `${Date.now()}`}]);
+        setOperands((prev) => [...prev, { representation: defaultStr, valid: true, dndKey: `${Date.now()}` }]);
     };
 
     useEffect(() => {
         const everyOperandValid = operands.every((op) => op.valid);
         let newMessage = '';
-        if(!everyOperandValid) newMessage = t('positionalCalculator.operandsNotValid');
+        if (!everyOperandValid) newMessage = t('positionalCalculator.operandsNotValid');
 
-        const {minOperands, maxOperands} = operation;
+        const { minOperands, maxOperands } = operation;
 
         const allowedNumOfOperands = inRangeInclusive(operands.length, minOperands, maxOperands);
-        if(!allowedNumOfOperands) newMessage = t('positionalCalculator.wrongOperandsNum', {minOperands, maxOperands});
+        if (!allowedNumOfOperands) newMessage = t('positionalCalculator.wrongOperandsNum', {
+            minOperands,
+            maxOperands
+        });
 
         const canCalculate = everyOperandValid && allowedNumOfOperands;
         setErrorMessage(newMessage);
@@ -136,10 +140,23 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         const getPossibleAlgorithms = (op: Operation) => {
             return algorithmMap[op.type] || [];
         };
-        const algorithms = getPossibleAlgorithms(operation);
+        const algorithms = getPossibleAlgorithms(operation).map((alg) => {
+            if (alg.allowedBases) {
+                const canUseAlg = alg.allowedBases.includes(form.values.base);
+                return {
+                    ...alg,
+                    disallowedReason: t(
+                        'positionalCalculator.algorithmAllowedForBases',
+                        { base: alg.allowedBases[0] }
+                    ),
+                    disallowed: !canUseAlg
+                };
+            }
+            return alg;
+        });
         setOperationAlgorithms(algorithms);
-        if(algorithms.length) setAlgorithm(algorithms[0]);
-    }, [operation]);
+        if (algorithms.length) setAlgorithm(algorithms[0]);
+    }, [operation, form.values.base, t]);
 
     useEffect(() => {
         const canAdd = operation.maxOperands > operands.length;
@@ -158,6 +175,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     data-testid={'base'}
                     className={classes.base}
                     variant={'outlined'}
+                    type={'number'}
                     size={'small'}
                     name={'base'}
                     id={'base'}

@@ -18,3 +18,4 @@ export { ListEntry } from './lib/core/models/list-entry';
 export { TreeNode } from './lib/core/models/tree-node';
 export { InlineMath } from './lib/components/math/inline-math';
 export { BlockMath } from './lib/components/math/block-math';
+export { TranslationWithLatex } from './lib/components/translation-with-latex/translation-with-latex';

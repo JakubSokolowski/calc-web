@@ -97,6 +97,8 @@
         "withoutExtensionU2lastZero": "Last multiplier digit is 0",
         "withoutExtensionU2Zero": "Multiplier digit is 0",
         "addMultiplicandComplement": "Add multiplicand complement",
+        "sdAddRow": "[[sd]] digit value is [[value]], add [[valueToAdd]]",
+        "algorithmAllowedForBases": "Algorithm is only allowed for base {{base}}",
         "add": "Add ",
         "withNegated": " with negated ",
         "extensionDigitPositive": "Extension digit value is 0",
@@ -117,7 +119,8 @@
             "title": "Multiplication",
             "default": "Default",
             "withExtension": "With extension",
-            "withoutExtension": "Without extension"
+            "withoutExtension": "Without extension",
+            "booth": "Booth"
         }
     },
     "sandbox": {
