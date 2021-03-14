@@ -278,6 +278,9 @@ export function serializeRepresentationStr(representation: string): string {
         .replace('−', '-')
         .replace(',', '.')
         .replace(/\s+/g, ' ')
+        .replace('. ', '.')
+        .replace(' . ', '.')
+        .replace(' .', '.')
         .trim();
 }
 

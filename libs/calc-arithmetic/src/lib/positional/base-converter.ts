@@ -213,7 +213,7 @@ export class StandardBaseConverter implements BaseConverter {
         resultBase: number,
         precision = 30
     ): Conversion {
-        let valueStr = inputStr;
+        let valueStr = serializeRepresentationStr(inputStr);
         let inputSourceType = PositionalSourceType.RepresentationStr;
 
         if(isValidComplementStr(valueStr, inputBase)) {
@@ -254,7 +254,7 @@ export class StandardBaseConverter implements BaseConverter {
         inputStr: string,
         inputBase: number
     ): Conversion {
-        let valueStr = inputStr;
+        let valueStr = serializeRepresentationStr(inputStr);
         let inputType = PositionalSourceType.RepresentationStr;
 
         if(isValidComplementStr(valueStr, inputBase)) {
@@ -317,8 +317,7 @@ export function fromString(
     precision = 30,
     converter: BaseConverter = new StandardBaseConverter()
 ): Conversion {
-    const serializedStr = serializeRepresentationStr(valueStr);
-    return converter.fromString(serializedStr, inputBase, resultBase, precision);
+    return converter.fromString(valueStr, inputBase, resultBase, precision);
 }
 
 export function fromStringDirect(
@@ -326,8 +325,7 @@ export function fromStringDirect(
     inputBase: number
 ): Conversion {
     const converter = new StandardBaseConverter();
-    const serializedStr = serializeRepresentationStr(valueStr);
-    return converter.fromStringDirect(serializedStr, inputBase);
+    return converter.fromStringDirect(valueStr, inputBase);
 }
 
 export function fromDigits(
