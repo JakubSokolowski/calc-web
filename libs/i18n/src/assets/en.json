@@ -1,6 +1,6 @@
 {
     "appBar": {
-        "repo" : "GitHub repository",
+        "repo": "GitHub repository",
         "toggleDark": "Toggle dark theme",
         "toggleLight": "Toggle light theme"
     },
@@ -120,7 +120,8 @@
             "default": "Default",
             "withExtension": "With extension",
             "withoutExtension": "Without extension",
-            "booth": "Booth"
+            "booth": "Booth",
+            "boothMcSorley": "Booth-McSorley"
         }
     },
     "sandbox": {

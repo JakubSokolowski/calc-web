@@ -24,13 +24,13 @@ export function areSameBaseNumbers(numbers: PositionalNumber[]): boolean {
 
 export function addDigitsArrays(digits: AdditionOperand[][], positionCap?: number): AdditionResult {
     const carryLookup: Record<number, AdditionOperand[]> = {};
-    const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(digits);
-    const digitsPositionLookup: Record<number, AdditionOperand>[] = buildLookup(digits, mostSignificantPosition);
+    const { msp, lsp } = findPositionRange(digits);
+    const digitsPositionLookup: Record<number, AdditionOperand>[] = buildLookup(digits, msp);
     const result: AdditionPositionResult[] = [];
     const base = digits[0][0].base;
 
-    let currentPosition = leastSignificantPosition;
-    let mostSignificant = mostSignificantPosition;
+    let currentPosition = lsp;
+    let mostSignificant = msp;
 
     let prev: AdditionPositionResult;
 
@@ -60,14 +60,14 @@ export function addDigitsArrays(digits: AdditionOperand[][], positionCap?: numbe
             ? positionResult.carry[0].position
             : undefined;
 
-        if (mostSignificantCarryPosition && mostSignificantCarryPosition > mostSignificantPosition) {
+        if (mostSignificantCarryPosition && mostSignificantCarryPosition > msp) {
             mostSignificant = mostSignificantCarryPosition;
         }
         result.push(positionResult);
         currentPosition += 1;
 
         if (prev) {
-            const infiniteExtensionBegun = hasInfiniteExtension(prev, positionResult, mostSignificantPosition);
+            const infiniteExtensionBegun = hasInfiniteExtension(prev, positionResult, msp);
             if (infiniteExtensionBegun) {
                 break;
             }

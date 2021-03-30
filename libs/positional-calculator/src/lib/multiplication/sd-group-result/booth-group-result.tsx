@@ -1,5 +1,5 @@
-import { FC } from 'react'
-import React from 'react'
+import { FC } from 'react';
+import React from 'react';
 import { SDConversionGroupResult } from '@calc/calc-arithmetic';
 import { InlineMath } from '@calc/common-ui';
 import { SdAddRow } from './sd-add-row';
@@ -8,7 +8,7 @@ interface P {
     result: SDConversionGroupResult;
 }
 
-export const BoothGroupResult: FC<P> = ({result}) => {
+export const BoothGroupResult: FC<P> = ({ result }) => {
     const resultDigit = result.output[0];
     const position = resultDigit.position;
     const prevPosition = resultDigit.position - 1;
@@ -17,22 +17,17 @@ export const BoothGroupResult: FC<P> = ({result}) => {
     const positionEquation = `SD_{${position}} = x_{${prevPosition}} - x_{${position}}`;
     const equationResult = `SD_{${position}} = ${prev.valueInDecimal} - ${curr.valueInDecimal} = ${resultDigit.valueInDecimal}`;
 
-
     return (
-        <div>
+        <div data-test="booth-group">
             <div>
-                <InlineMath math={positionEquation}/>
+                <InlineMath math={positionEquation} />
             </div>
             <div>
-                <InlineMath math={equationResult}/>
+                <InlineMath math={equationResult} />
             </div>
             <div>
-                <SdAddRow digitValue={resultDigit.valueInDecimal}/>
+                <SdAddRow digitValue={resultDigit.valueInDecimal} />
             </div>
         </div>
-    )
+    );
 };
-
-
-
-

@@ -4,13 +4,13 @@ import { SubtractionOperand, SubtractionPositionResult } from '../models';
 
 export const NUM_ADDITIONAL_EXTENSIONS = 3;
 
-export function findPositionRange(allDigits: Digit[][]): { mostSignificantPosition: number; leastSignificantPosition: number } {
+export function findPositionRange(allDigits: Digit[][]): { msp: number; lsp: number } {
     const allMostSignificant = allDigits.map((digits) => digits[0].position);
     const allLeastSignificant = allDigits.map((digits) => digits[digits.length - 1].position);
 
     return {
-        mostSignificantPosition: Math.max(...allMostSignificant),
-        leastSignificantPosition: Math.min(...allLeastSignificant)
+        msp: Math.max(...allMostSignificant),
+        lsp: Math.min(...allLeastSignificant)
     };
 }
 

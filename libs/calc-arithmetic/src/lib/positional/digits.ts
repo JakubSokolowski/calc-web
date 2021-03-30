@@ -1,6 +1,6 @@
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
-import { nNext, nPrev } from '@calc/utils';
+import { inRangeInclusive, nNext, nPrev } from '@calc/utils';
 
 export function padWithZeroDigits<T extends Digit>(digits: T[], base: number, desiredLength: number, direction: 'Left' | 'Right'): T[] {
     if (digits.length >= desiredLength) return [...digits];
@@ -97,6 +97,24 @@ export function splitAtZeroPosition<T extends Digit>(digits: T[]): [T[], T[]] {
     return [integerPartDigits, fractionalPartDigits];
 }
 
+export function strArrayToDigits(strDigits: string[], base: number, positionStart: number): Digit[] {
+    return strDigits.map((d, i) => {
+        return {
+            representationInBase: d,
+            valueInDecimal: BaseDigits.getValue(d, base),
+            position: positionStart - i,
+            base
+        };
+    });
+}
+
+export function isZeroDigit<T extends Digit>(digit: T): boolean{
+    return digit.valueInDecimal === 0;
+}
+
+export function positionRangeSlice<T extends Digit>(digits: T[], from: number, to: number): T[] {
+    return digits.filter(d => inRangeInclusive(d.position, from, to))
+}
 
 function extendDigitsToFractionPoint<T extends Digit>(digits: T[]): T[] {
     if (!digits.length) return [];
@@ -151,20 +169,5 @@ function applyPositionShift<T extends Digit>(digits: T[], shift: number): T[] {
         ...digit,
         position: digit.position + shift
     }));
-}
-
-export function strArrayToDigits(strDigits: string[], base: number, positionStart: number): Digit[] {
-    return strDigits.map((d, i) => {
-        return {
-            representationInBase: d,
-            valueInDecimal: BaseDigits.getValue(d, base),
-            position: positionStart - i,
-            base
-        };
-    });
-}
-
-export function isZeroDigit<T extends Digit>(digit: T): boolean{
-    return digit.valueInDecimal === 0;
 }
 

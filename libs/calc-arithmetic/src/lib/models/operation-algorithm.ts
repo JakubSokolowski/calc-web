@@ -1,11 +1,11 @@
 import { OperationType } from './operation';
 
 export enum AdditionType {
-    Default = 'Default'
+    Default = 'Default',
 }
 
 export enum SubtractionType {
-    Default = 'Default'
+    Default = 'Default',
 }
 
 export enum MultiplicationType {
@@ -13,9 +13,10 @@ export enum MultiplicationType {
     WithExtension = 'WithExtension',
     WithoutExtension = 'WithoutExtension',
     Booth = 'Booth',
+    BoothMcSorley = 'BoothMcSorley',
 }
 
-export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType
+export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType;
 
 export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
@@ -23,42 +24,48 @@ export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     allowedBases?: number[];
 }
 
-export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>
+export type AlgorithmOperationMap = Record<OperationType, OperationAlgorithm[]>;
 
 export const additionAlgorithms: OperationAlgorithm<AdditionType>[] = [
     {
         type: AdditionType.Default,
-        tKey: 'operations.addition.default'
-    }
+        tKey: 'operations.addition.default',
+    },
 ];
 
 export const subtractionAlgorithms: OperationAlgorithm<SubtractionType>[] = [
     {
         type: SubtractionType.Default,
-        tKey: 'operations.subtraction.default'
+        tKey: 'operations.subtraction.default',
     },
 ];
 
-export const multiplicationAlgorithms: OperationAlgorithm<MultiplicationType>[] = [
+export const multiplicationAlgorithms: OperationAlgorithm<
+    MultiplicationType
+>[] = [
     {
         type: MultiplicationType.Default,
-        tKey: 'operations.multiplication.default'
+        tKey: 'operations.multiplication.default',
     },
     {
         type: MultiplicationType.WithExtension,
-        tKey: 'operations.multiplication.withExtension'
+        tKey: 'operations.multiplication.withExtension',
     },
     {
         type: MultiplicationType.WithoutExtension,
-        tKey: 'operations.multiplication.withoutExtension'
+        tKey: 'operations.multiplication.withoutExtension',
     },
     {
         type: MultiplicationType.Booth,
         tKey: 'operations.multiplication.booth',
-        allowedBases: [2]
-    }
+        allowedBases: [2],
+    },
+    {
+        type: MultiplicationType.BoothMcSorley,
+        tKey: 'operations.multiplication.boothMcSorley',
+        allowedBases: [2],
+    },
 ];
-
 
 export const algorithmMap: AlgorithmOperationMap = {
     [OperationType.Addition]: additionAlgorithms,

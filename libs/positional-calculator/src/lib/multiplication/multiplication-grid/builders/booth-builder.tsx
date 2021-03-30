@@ -10,7 +10,7 @@ import {
 } from '@calc/grid';
 import React from 'react';
 import { ComplementMultiplicationBuilder } from './complement-multiplication-builder';
-import { Digit, SDConversionGroupResult, SDConversionResult } from '@calc/calc-arithmetic';
+import { Digit, SDConversionGroupResult, SDConversionResult, SDGroupDigit } from '@calc/calc-arithmetic';
 import { flatten } from 'lodash';
 import { BoothGroupResult } from '../../sd-group-result/booth-group-result';
 
@@ -81,11 +81,14 @@ export class BoothBuilder extends ComplementMultiplicationBuilder {
         return flatten([...sdResult.groups].reverse().map((group, index) => this.buildGroupsForEachGroupOutputDigit(group, index)));
     }
 
-    protected buildGroupsForEachGroupOutputDigit(group: SDConversionGroupResult, index: number): CellGroup[] {
-        return group.output.map(outputDigit => this.buildGroupForDigit(group, outputDigit, index));
+    protected buildGroupsForEachGroupOutputDigit(group: SDConversionGroupResult, groupIndex: number): CellGroup[] {
+        return [...group.output]
+            .map((outputDigit, outputIndex) => {
+                return this.buildGroupForDigit(group, outputDigit, groupIndex, outputIndex);
+            });
     }
 
-    protected buildGroupForDigit(group: SDConversionGroupResult, output: Digit, index: number): CellGroup {
+    protected buildGroupForDigit(group: SDConversionGroupResult, output: SDGroupDigit, index: number, outputIndex: number): CellGroup {
         const rowCellsThatAreMultiplied = this.getCellsToAdd(output);
         const { totalWidth } = this.info;
         const yOffset = this.getMultiplierRowStartOffset();

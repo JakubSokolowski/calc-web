@@ -3,7 +3,7 @@ import {
     MultiplicationOperand,
     MultiplicationPositionResult,
     MultiplicationResult,
-    MultiplicationRowResult
+    MultiplicationRowResult,
 } from '../../models';
 import { addPositionalNumbers } from '../addition';
 import { MultiplicationType } from '../../models/operation-algorithm';
@@ -14,12 +14,15 @@ import {
     adjustForMultiplierFraction,
     extractResultDigitsFromMultiplicationRow,
     Multiplication,
-    multiplyDigits
+    multiplyDigits,
 } from './common';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
 
-export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
+export function multiplyRowByDigit(
+    rowDigits: MultiplicationOperand[],
+    multiplier: MultiplicationOperand
+): MultiplicationRowResult {
     const carryLookup: Record<number, MultiplicationOperand> = {};
 
     const positionResults: MultiplicationPositionResult[] = [];
@@ -30,12 +33,16 @@ export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplie
         const carry = carryLookup[position];
         const positionResult = multiplyDigits(multiplicand, multiplier, carry);
         if (positionResult.carry) {
-            carryLookup[positionResult.carry.position] = { ...positionResult.carry };
+            carryLookup[positionResult.carry.position] = {
+                ...positionResult.carry,
+            };
         }
         positionResults.push(positionResult);
     });
 
-    const resultDigits = extractResultDigitsFromMultiplicationRow(positionResults);
+    const resultDigits = extractResultDigitsFromMultiplicationRow(
+        positionResults
+    );
     return {
         multiplicands: [...rowDigits],
         valueAtPosition: {} as any,
@@ -43,16 +50,22 @@ export function multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplie
         multiplier,
         rowPositionResults: positionResults,
         resultDigits,
-        decimalProduct: 0
+        decimalProduct: 0,
     };
 }
 
-export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[], resultNegative: boolean): MultiplicationResult {
+export function multiplyDigitRows(
+    multiplicandRow: MultiplicationOperand[],
+    multiplierRow: MultiplicationOperand[],
+    resultNegative: boolean
+): MultiplicationResult {
     const positionAscending = [...multiplierRow].reverse();
 
-    const rowResults: MultiplicationRowResult[] = positionAscending.map((multiplier) => {
-        return multiplyRowByDigit(multiplicandRow, multiplier);
-    });
+    const rowResults: MultiplicationRowResult[] = positionAscending.map(
+        (multiplier) => {
+            return multiplyRowByDigit(multiplicandRow, multiplier);
+        }
+    );
 
     const resultNumbers = rowResults.map((result, index) => {
         const shifted = shiftLeft(result.resultDigits, index);
@@ -61,7 +74,10 @@ export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], mult
 
     const sum = addPositionalNumbers(resultNumbers);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
-    const resultWithProperSign = fromDigits(adjustedSum.numberResult.toDigitsList(), resultNegative).result;
+    const resultWithProperSign = fromDigits(
+        adjustedSum.numberResult.toDigitsList(),
+        resultNegative
+    ).result;
 
     return {
         operands: [multiplicandRow, multiplierRow],
@@ -72,11 +88,13 @@ export function multiplyDigitRows(multiplicandRow: MultiplicationOperand[], mult
         stepResults: rowResults,
         operation: OperationType.Multiplication,
         algorithmType: MultiplicationType.Default,
-        lastMultiplierDigit: multiplicandRow[0]
+        lastMultiplierDigit: multiplicandRow[0],
     };
 }
 
-export function multiplyDefault(numbers: PositionalNumber[]): MultiplicationResult {
+export function multiplyDefault(
+    numbers: PositionalNumber[]
+): MultiplicationResult {
     const calculator = new DefaultMultiplication(numbers);
     return calculator.multiply();
 }
@@ -86,12 +104,16 @@ export class DefaultMultiplication extends Multiplication {
         super(numbers);
     }
 
+    protected get algorithmType(): MultiplicationType {
+        return MultiplicationType.Default;
+    }
+
     multiply(): MultiplicationResult {
         const [alMultiplicand, alMultiplier] = this.prepareOperands();
         const result = this.multiplyDigitRows(alMultiplicand, alMultiplier);
         return {
             ...result,
-            numberOperands: [this.multiplicand, this.multiplier]
+            numberOperands: [this.multiplicand, this.multiplier],
         };
     }
 
@@ -100,18 +122,23 @@ export class DefaultMultiplication extends Multiplication {
     }
 
     protected prepareOperands(): MultiplicationOperand[][] {
-        return applyTransformsByType([
-            this.multiplicand.asDigits(),
-            this.multiplier.asDigits()
-        ], [OperandsTransformType.AlignFractions]);
+        return applyTransformsByType(
+            [this.multiplicand.asDigits(), this.multiplier.asDigits()],
+            [OperandsTransformType.AlignFractions]
+        );
     }
 
-    protected multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
+    protected multiplyDigitRows(
+        multiplicandRow: MultiplicationOperand[],
+        multiplierRow: MultiplicationOperand[]
+    ): MultiplicationResult {
         const positionAscending = [...multiplierRow].reverse();
 
-        const rowResults: MultiplicationRowResult[] = positionAscending.map((multiplier) => {
-            return this.multiplyRowByDigit(multiplicandRow, multiplier);
-        });
+        const rowResults: MultiplicationRowResult[] = positionAscending.map(
+            (multiplier) => {
+                return this.multiplyRowByDigit(multiplicandRow, multiplier);
+            }
+        );
 
         const resultNumbers = rowResults.map((result, index) => {
             const shifted = shiftLeft(result.resultDigits, index);
@@ -119,8 +146,14 @@ export class DefaultMultiplication extends Multiplication {
         });
 
         const sum = addPositionalNumbers(resultNumbers);
-        const adjustedSum = this.adjustForMultiplierFraction(sum, multiplierRow);
-        const resultWithProperSign = fromDigits(adjustedSum.numberResult.toDigitsList(), this.resultNegative).result;
+        const adjustedSum = this.adjustForMultiplierFraction(
+            sum,
+            multiplierRow
+        );
+        const resultWithProperSign = fromDigits(
+            adjustedSum.numberResult.toDigitsList(),
+            this.resultNegative
+        ).result;
 
         return {
             operands: [multiplicandRow, multiplierRow],
@@ -130,12 +163,15 @@ export class DefaultMultiplication extends Multiplication {
             addition: adjustedSum,
             stepResults: rowResults,
             operation: OperationType.Multiplication,
-            algorithmType: MultiplicationType.Default,
-            lastMultiplierDigit: multiplicandRow[0]
+            algorithmType: this.algorithmType,
+            lastMultiplierDigit: multiplicandRow[0],
         };
     }
 
-    protected multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
+    protected multiplyRowByDigit(
+        rowDigits: MultiplicationOperand[],
+        multiplier: MultiplicationOperand
+    ): MultiplicationRowResult {
         const carryLookup: Record<number, MultiplicationOperand> = {};
 
         const positionResults: MultiplicationPositionResult[] = [];
@@ -144,14 +180,22 @@ export class DefaultMultiplication extends Multiplication {
         positionAscending.forEach((multiplicand) => {
             const position = multiplicand.position;
             const carry = carryLookup[position];
-            const positionResult = this.multiplyDigits(multiplicand, multiplier, carry);
+            const positionResult = this.multiplyDigits(
+                multiplicand,
+                multiplier,
+                carry
+            );
             if (positionResult.carry) {
-                carryLookup[positionResult.carry.position] = { ...positionResult.carry };
+                carryLookup[positionResult.carry.position] = {
+                    ...positionResult.carry,
+                };
             }
             positionResults.push(positionResult);
         });
 
-        const resultDigits = this.extractResultDigitsFromMultiplicationRow(positionResults);
+        const resultDigits = this.extractResultDigitsFromMultiplicationRow(
+            positionResults
+        );
         return {
             multiplicands: [...rowDigits],
             valueAtPosition: {} as any,
@@ -159,7 +203,7 @@ export class DefaultMultiplication extends Multiplication {
             multiplier,
             rowPositionResults: positionResults,
             resultDigits,
-            decimalProduct: 0
+            decimalProduct: 0,
         };
     }
 }

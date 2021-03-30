@@ -1,6 +1,6 @@
 {
     "appBar": {
-        "repo" : "Repozytorium na GitHub",
+        "repo": "Repozytorium na GitHub",
         "toggleDark": "Przełącz na ciemny motyw",
         "toggleLight": "Przełącz na jasny motyw"
     },
@@ -124,7 +124,8 @@
             "default": "Domyślny",
             "withExtension": "Z rozszerzeniem",
             "withoutExtension": "Bez rozszerzenia",
-            "booth": "Booth"
+            "booth": "Booth",
+            "boothMcSorley": "Booth-McSorley"
         }
     },
     "routes": {

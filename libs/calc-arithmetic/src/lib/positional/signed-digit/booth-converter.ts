@@ -2,71 +2,100 @@ import { walkOverlaping } from '@calc/utils';
 import {
     SDConversionGroupResult,
     SDConversionResult,
+    SDGroupDigit,
     SignedDigitConversionType,
     SignedDigitConverter
 } from './signed-digit-converter';
 import { flatten } from 'lodash';
 import { Digit } from '../../models';
 import { BaseDigits } from '../base-digits';
+import { positionRangeSlice } from '../digits';
+import { findPositionRange } from '../operation-utils';
 
 export class BoothConverter implements SignedDigitConverter {
-    protected readonly groupSize = 2;
-    protected readonly overlapSize = 1;
-    private readonly digits: Digit[];
+    protected readonly digits: Digit[];
+    protected readonly isNegative: boolean;
 
-    constructor(digits: Digit[]) {
+    constructor(digits: Digit[], negative = false) {
         this.digits = digits;
+        this.isNegative = negative;
     }
 
     protected get conversionType(): SignedDigitConversionType {
         return SignedDigitConversionType.Booth;
     }
 
-    toSignedDigits(): Digit[] {
+    protected get groupSize(): number {
+        return 2;
+    }
+
+    protected get overlapSize(): number {
+        return 1;
+    }
+
+    toSignedDigits(): SDGroupDigit[] {
         return this.toSignedDigitsWithDetails().output;
     }
 
     toSignedDigitsWithDetails(): SDConversionResult {
         const groups = this.reduceToSDDigits();
-        const output: Digit[] = flatten(groups.map(g => g.output));
+        const output = this.extractOutputFromGroups(groups);
 
         return {
             groups,
             output,
             input: this.digits,
-            type: this.conversionType
+            type: this.conversionType,
         };
     }
 
-    protected extend(): Digit[] {
-        const lastPosition = this.digits[this.digits.length - 1].position;
-        const extension = BaseDigits.getDigit(0, 2, lastPosition - 1);
-        return [...this.digits, extension];
+    private extractOutputFromGroups(groups: SDConversionGroupResult[]) {
+        const output: SDGroupDigit[] = flatten(groups.map((g) => g.output));
+        const { lsp, msp } = findPositionRange([this.digits]);
+        return positionRangeSlice(output, lsp, msp);
+    }
+
+    protected extend(digits: Digit[]): SDGroupDigit[] {
+        const lastPosition = digits[digits.length - 1].position;
+        const extension: SDGroupDigit = {
+            ...BaseDigits.getDigit(0, 2, lastPosition - 1),
+            isPaddingDigit: true,
+        };
+        return [...digits, extension];
+    }
+
+    protected splitToGroups(digits: SDGroupDigit[]): SDGroupDigit[][] {
+        const groups: SDGroupDigit[][] = [];
+        walkOverlaping(digits, this.groupSize, this.overlapSize, (group) =>
+            groups.push(group)
+        );
+        return groups;
     }
 
     protected reduceToSDDigits(): SDConversionGroupResult[] {
-        const result: SDConversionGroupResult[] = [];
-        const callback = (group: Digit[]) => result.push(this.createSdDigit(group));
-        const extendedPositionAscending = this.extend().reverse();
-        walkOverlaping(extendedPositionAscending, this.groupSize, this.overlapSize, callback);
-        return [...result].reverse();
+        const extended = this.extend(this.digits);
+        const groups = this.splitToGroups(extended);
+
+        return groups.map((group) => {
+            return this.createSdDigit(group);
+        });
     }
 
-    protected createSdDigit(input: Digit[]): SDConversionGroupResult {
+    protected createSdDigit(input: SDGroupDigit[]): SDConversionGroupResult {
         // groups wil always be position ascending
         // so ex. group[0] = -1, group[1] = 0
         // For Booth algorithm, position i is generated as follows
         // x(i) = x(i-1) - x(i)
         // |value| =  prev  -  curr
-        const [prev, curr] = input;
-        const value = prev.valueInDecimal - curr.valueInDecimal;
+        const [x1, x0] = input;
+        const value = x0.valueInDecimal - x1.valueInDecimal;
         const output: Digit[] = [
             {
                 base: 2,
                 valueInDecimal: value,
                 representationInBase: value.toString(),
-                position: curr.position
-            }
+                position: x1.position,
+            },
         ];
 
         return { input, output };
