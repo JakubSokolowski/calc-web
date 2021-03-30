@@ -81,14 +81,14 @@ export function subtractDigitsAtPosition(operands: SubtractionOperand[], positio
 
 
 export function subtractDigitArrays(operands: SubtractionOperand[][]): SubtractionResult {
-    const { mostSignificantPosition, leastSignificantPosition } = findPositionRange(operands);
+    const { msp, lsp } = findPositionRange(operands);
     const positionResults: SubtractionPositionResult[] = [];
     const base = operands[0][0].base;
-    const digitsPositionLookup: Record<number, SubtractionOperand>[] = buildLookup(operands, mostSignificantPosition);
+    const digitsPositionLookup: Record<number, SubtractionOperand>[] = buildLookup(operands, msp);
 
-    let currentPosition = leastSignificantPosition;
+    let currentPosition = lsp;
 
-    while (currentPosition <= mostSignificantPosition + NUM_ADDITIONAL_EXTENSIONS - 1) {
+    while (currentPosition <= msp + NUM_ADDITIONAL_EXTENSIONS - 1) {
         const allDigitsAtCurrentPosition: SubtractionOperand[] = digitsPositionLookup
             .map((digits) => digits[currentPosition])
             .filter((digit) => !!digit);

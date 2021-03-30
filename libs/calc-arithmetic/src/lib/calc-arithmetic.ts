@@ -8,32 +8,20 @@ export {
     ConversionToArbitrary,
     ConversionToDecimal,
     ConversionType,
-    AssociatedBaseConversion
+    AssociatedBaseConversion,
 } from './positional/base-converter';
 
-export {
-    addPositionalNumbers
-} from './positional/addition';
+export { addPositionalNumbers } from './positional/addition';
 
-export {
-    subtractPositionalNumbers
-} from './positional/subtraction';
+export { subtractPositionalNumbers } from './positional/subtraction';
 
-export {
-    convertUsingAssociatedBases
-} from './positional/associated-base-converter';
+export { convertUsingAssociatedBases } from './positional/associated-base-converter';
 
-export {
-    multiplyDefault
-} from './positional/multiplication/multiplication';
+export { multiplyDefault } from './positional/multiplication/multiplication';
 
-export {
-    multiplyWithExtensions
-} from './positional/multiplication/with-extension';
+export { multiplyWithExtensions } from './positional/multiplication/with-extension';
 
-export {
-    multiplyBooth
-} from './positional/multiplication/booth-multiplication';
+export { multiplyBooth, multiplyBoothMcSorley } from './positional/multiplication/signed-digit-multiplication';
 
 export * from './models';
 export * from './models/operation';
@@ -41,38 +29,33 @@ export * from './models/operation-algorithm';
 
 export {
     PositionalNumber,
-    PositionalSourceType
+    PositionalSourceType,
 } from './positional/positional-number';
-
 
 export {
     getComplement,
     complementStrToBaseStr,
     isValidComplementStr,
-    isValidComplementOrRepresentationStr
+    isValidComplementOrRepresentationStr,
 } from './positional/complement-converter';
 
-export {
-    getComplementWithDetails
-} from './positional/complement-details';
+export { getComplementWithDetails } from './positional/complement-details';
 
 export {
     FloatConverter,
     FloatingRepresentation,
     SingleRepresentation,
     DoubleRepresentation,
-    FloatProperty
+    FloatProperty,
 } from './floating/float-converter';
 
 export {
     isValidString,
     digitsToStr,
-    splitToDigitsList
+    splitToDigitsList,
 } from './helpers/conversion-helpers';
 
-export {
-    BaseDigits
-} from './positional/base-digits';
+export { BaseDigits } from './positional/base-digits';
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
 export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';
@@ -80,4 +63,3 @@ export { ComplementConversionResult } from './models/complement';
 export { multiplyWithoutExtension } from './positional/multiplication';
 export { BoothConverter } from './positional/signed-digit/booth-converter';
 export * from './positional/signed-digit/signed-digit-converter';
-

@@ -8,11 +8,14 @@ import {
     MultiplicationOperand,
     MultiplicationPositionResult,
     MultiplicationResult,
-    MultiplicationRowResult
+    MultiplicationRowResult,
 } from '../../models';
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
-import { extractResultDigitsFromMultiplicationRow, getMultiplicationResultPositionCap } from './common';
+import {
+    extractResultDigitsFromMultiplicationRow,
+    getMultiplicationResultPositionCap,
+} from './common';
 import { extendComplement } from '../complement-extension';
 import { trimStartByPredicate } from '@calc/utils';
 import { NumberComplement } from '../number-complement';
@@ -20,7 +23,9 @@ import { DefaultMultiplication } from './multiplication';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
 
-export function multiplyWithExtensions(numbers: PositionalNumber[]): MultiplicationResult {
+export function multiplyWithExtensions(
+    numbers: PositionalNumber[]
+): MultiplicationResult {
     return new WithExtension(numbers).multiply();
 }
 
@@ -29,27 +34,41 @@ export class WithExtension extends DefaultMultiplication {
         super(numbers);
     }
 
-    prepareOperands(): MultiplicationOperand[][] {
-        return applyTransformsByType([
-            this.multiplicand.complement.asDigits(),
-            this.multiplier.complement.asDigits()
-        ], [OperandsTransformType.AlignFractions]);
+    protected get algorithmType(): MultiplicationType {
+        return MultiplicationType.WithExtension;
     }
 
-    multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
+    prepareOperands(): MultiplicationOperand[][] {
+        return applyTransformsByType(
+            [
+                this.multiplicand.complement.asDigits(),
+                this.multiplier.complement.asDigits(),
+            ],
+            [OperandsTransformType.AlignFractions]
+        );
+    }
+
+    multiplyDigitRows(
+        multiplicandRow: MultiplicationOperand[],
+        multiplierRow: MultiplicationOperand[]
+    ): MultiplicationResult {
         const positionsAscending = [...multiplierRow].reverse();
         const lastMultiplier = positionsAscending.pop();
 
-        const rowResults: MultiplicationRowResult[] = positionsAscending.map((multiplier) => {
-            return this.multiplyRowByDigit(multiplicandRow, multiplier);
-        });
+        const rowResults: MultiplicationRowResult[] = positionsAscending.map(
+            (multiplier) => {
+                return this.multiplyRowByDigit(multiplicandRow, multiplier);
+            }
+        );
 
-        const operandsToAdd = rowResults.map(res => res.resultDigits);
+        const operandsToAdd = rowResults.map((res) => res.resultDigits);
 
         let multiplicandComplement: PositionalNumber;
 
         if (this.isDigitNegativeComplement(lastMultiplier)) {
-            const complement = getComplement(new NumberComplement(this.multiplicand.complement.asDigits()));
+            const complement = getComplement(
+                new NumberComplement(this.multiplicand.complement.asDigits())
+            );
             operandsToAdd.push(complement.asDigits());
             multiplicandComplement = fromDigits(complement.asDigits()).result;
         }
@@ -57,10 +76,18 @@ export class WithExtension extends DefaultMultiplication {
         const positionCap = this.getPositionCap(multiplicandRow, multiplierRow);
         const transformedForAddition = this.transformForAddition(operandsToAdd);
         const sum = addDigitsArrays(transformedForAddition, positionCap);
-        const adjustedSum = this.adjustForMultiplierFraction(sum, multiplierRow);
+        const adjustedSum = this.adjustForMultiplierFraction(
+            sum,
+            multiplierRow
+        );
 
-        const trimmedLeadingZeros = this.trimSumDigits(adjustedSum.numberResult.asDigits());
-        const resultWithProperSign = fromDigits(trimmedLeadingZeros, this.resultNegative).result;
+        const trimmedLeadingZeros = this.trimSumDigits(
+            adjustedSum.numberResult.asDigits()
+        );
+        const resultWithProperSign = fromDigits(
+            trimmedLeadingZeros,
+            this.resultNegative
+        ).result;
 
         return {
             operands: [multiplicandRow, multiplierRow],
@@ -70,20 +97,23 @@ export class WithExtension extends DefaultMultiplication {
             addition: adjustedSum,
             stepResults: rowResults,
             operation: OperationType.Multiplication,
-            algorithmType: MultiplicationType.WithExtension,
+            algorithmType: this.algorithmType,
             multiplicandComplement,
-            lastMultiplierDigit: lastMultiplier
+            lastMultiplierDigit: lastMultiplier,
         };
     }
 
     protected transformForAddition(digitsToShift: MultiplicationOperand[][]) {
-        return applyTransformsByType(
-            digitsToShift,
-            [OperandsTransformType.MergeExtensions, OperandsTransformType.ShiftAndExtendComplements]
-        );
+        return applyTransformsByType(digitsToShift, [
+            OperandsTransformType.MergeExtensions,
+            OperandsTransformType.ShiftAndExtendComplements,
+        ]);
     }
 
-    multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
+    multiplyRowByDigit(
+        rowDigits: MultiplicationOperand[],
+        multiplier: MultiplicationOperand
+    ): MultiplicationRowResult {
         const carryLookup: Record<number, MultiplicationOperand> = {};
 
         const extended = extendComplement(rowDigits, rowDigits.length);
@@ -93,14 +123,22 @@ export class WithExtension extends DefaultMultiplication {
         positionAscending.forEach((multiplicand) => {
             const position = multiplicand.position;
             const carry = carryLookup[position];
-            const positionResult = this.multiplyDigits(multiplicand, multiplier, carry);
+            const positionResult = this.multiplyDigits(
+                multiplicand,
+                multiplier,
+                carry
+            );
             if (positionResult.carry) {
-                carryLookup[positionResult.carry.position] = { ...positionResult.carry };
+                carryLookup[positionResult.carry.position] = {
+                    ...positionResult.carry,
+                };
             }
             positionResults.push(positionResult);
         });
 
-        const resultDigits = this.extractResultDigitsFromMultiplicationRow(positionResults);
+        const resultDigits = this.extractResultDigitsFromMultiplicationRow(
+            positionResults
+        );
 
         return {
             multiplicands: [...rowDigits],
@@ -109,12 +147,16 @@ export class WithExtension extends DefaultMultiplication {
             multiplier,
             rowPositionResults: positionResults,
             resultDigits,
-            decimalProduct: 0
+            decimalProduct: 0,
         };
     }
 
-    protected extractResultDigitsFromMultiplicationRow(positionResults: MultiplicationPositionResult[]): MultiplicationOperand[] {
-        const withExtension = extractResultDigitsFromMultiplicationRow(positionResults);
+    protected extractResultDigitsFromMultiplicationRow(
+        positionResults: MultiplicationPositionResult[]
+    ): MultiplicationOperand[] {
+        const withExtension = extractResultDigitsFromMultiplicationRow(
+            positionResults
+        );
         return mergeAdditionExtensionDigit(withExtension, positionResults);
     }
 
@@ -122,18 +164,29 @@ export class WithExtension extends DefaultMultiplication {
         const onlyZeros = digits.every(isZeroDigit);
         return onlyZeros
             ? digits
-            : trimStartByPredicate(digits, this.isZeroDigitOnGreaterThanZeroPosition);
+            : trimStartByPredicate(
+                  digits,
+                  this.isZeroDigitOnGreaterThanZeroPosition
+              );
     }
 
     private isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
         return digit.position > 0 && isZeroDigit(digit);
     }
 
-    private getPositionCap(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): number {
-        return getMultiplicationResultPositionCap(multiplicandRow, multiplierRow);
+    private getPositionCap(
+        multiplicandRow: MultiplicationOperand[],
+        multiplierRow: MultiplicationOperand[]
+    ): number {
+        return getMultiplicationResultPositionCap(
+            multiplicandRow,
+            multiplierRow
+        );
     }
 
-    private isDigitNegativeComplement(lastDigit: MultiplicationOperand): boolean {
+    private isDigitNegativeComplement(
+        lastDigit: MultiplicationOperand
+    ): boolean {
         return lastDigit.valueInDecimal === lastDigit.base - 1;
     }
 }

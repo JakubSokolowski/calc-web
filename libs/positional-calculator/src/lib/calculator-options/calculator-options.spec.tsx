@@ -15,6 +15,10 @@ describe('CalculatorOptions', () => {
     const multiplication = allOperations[2];
     const multiplicationAlgorithm = multiplicationAlgorithms[0];
 
+    beforeAll(() => {
+        jest.setTimeout(10000);
+    });
+
     beforeEach(() => {
         container = shallow(
             <CalculatorOptions onSubmit={onSubmit} onOperationChange={onOperationChange}/>

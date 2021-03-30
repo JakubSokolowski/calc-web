@@ -109,6 +109,9 @@ class WithoutExtensionMeta extends DefaultMultiplicationMeta {
 class BoothMeta extends DefaultMultiplicationMeta {
 }
 
+class BoothMcSorleyMeta extends BoothMeta {
+}
+
 
 function getMetaBuilder(result: MultiplicationResult) {
     switch (result.algorithmType) {
@@ -118,7 +121,9 @@ function getMetaBuilder(result: MultiplicationResult) {
             return new WithExtensionMeta(result);
         case MultiplicationType.WithoutExtension:
             return new WithoutExtensionMeta(result);
-        case MultiplicationType.Booth:
+        case MultiplicationType.BoothMcSorley:
             return new BoothMeta(result);
+        case MultiplicationType.Booth:
+            return new BoothMcSorleyMeta(result)
     }
 }

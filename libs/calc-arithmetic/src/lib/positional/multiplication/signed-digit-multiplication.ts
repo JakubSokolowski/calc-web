@@ -13,32 +13,55 @@ import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
+import { BoothMcSorleyConverter } from '../signed-digit/booth-mcsorley-converter';
 
 export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
     constructor(numbers: PositionalNumber[]) {
         super(numbers);
     }
 
-    multiplyDigitRows(multiplicandRow: MultiplicationOperand[], multiplierRow: MultiplicationOperand[]): MultiplicationResult {
+    protected get algorithmType(): MultiplicationType {
+        return MultiplicationType.Booth;
+    }
+
+    multiplyDigitRows(
+        multiplicandRow: MultiplicationOperand[],
+        multiplierRow: MultiplicationOperand[]
+    ): MultiplicationResult {
         const sdConversion = this.convertToSD([...multiplierRow]);
         const [...positionsAscending] = sdConversion.output.reverse();
 
-        const rowResults: MultiplicationRowResult[] = positionsAscending.map((multiplier) => {
-            return this.multiplyRowByDigit(multiplicandRow, multiplier);
-        });
+        const rowResults: MultiplicationRowResult[] = positionsAscending.map(
+            (multiplier) => {
+                return this.multiplyRowByDigit(multiplicandRow, multiplier);
+            }
+        );
 
-        const digitsToShift = rowResults.map(r => r.resultDigits);
+        const digitsToShift = rowResults.map((r) => r.resultDigits);
         const shifted = digitsToShift.map((opRow, index) => {
             return shiftLeft(opRow, index);
         });
 
-        const positionCap = getMultiplicationResultPositionCap(multiplicandRow, multiplierRow);
+        const positionCap = getMultiplicationResultPositionCap(
+            multiplicandRow,
+            multiplierRow
+        );
         const sum = addDigitsArrays(shifted, positionCap);
-        const adjustedSum = this.adjustForMultiplierFraction(sum, multiplierRow);
-        const trimmedLeadingZeros = this.trimSumDigits(adjustedSum.numberResult.asDigits());
-        const resultWithProperSign = fromDigits(trimmedLeadingZeros, this.resultNegative).result;
+        const adjustedSum = this.adjustForMultiplierFraction(
+            sum,
+            multiplierRow
+        );
+        const trimmedLeadingZeros = this.trimSumDigits(
+            adjustedSum.numberResult.asDigits()
+        );
+        const resultWithProperSign = fromDigits(
+            trimmedLeadingZeros,
+            this.resultNegative
+        ).result;
 
-        const multiplicandComplement = fromDigits(getComplement(new NumberComplement(multiplicandRow)).asDigits()).result;
+        const multiplicandComplement = fromDigits(
+            getComplement(new NumberComplement(multiplicandRow)).asDigits()
+        ).result;
 
         return {
             operands: [multiplicandRow, multiplierRow],
@@ -50,14 +73,13 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
             addition: adjustedSum,
             stepResults: rowResults,
             operation: OperationType.Multiplication,
-            algorithmType: MultiplicationType.Booth
+            algorithmType: this.algorithmType
         };
     }
 
     convertToSD(multiplierRow: Digit[]): SDConversionResult {
-        return new BoothConverter(multiplierRow).toSignedDigitsWithDetails();
+        return new BoothConverter(multiplierRow, this.multiplier.isNegative()).toSignedDigitsWithDetails();
     }
-
 
     prepareOperands(): MultiplicationOperand[][] {
         return applyTransformsByType(
@@ -69,8 +91,10 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
         );
     }
 
-
-    multiplyRowByDigit(rowDigits: MultiplicationOperand[], multiplier: MultiplicationOperand): MultiplicationRowResult {
+    multiplyRowByDigit(
+        rowDigits: MultiplicationOperand[],
+        multiplier: MultiplicationOperand
+    ): MultiplicationRowResult {
         const resultDigits = this.multiplyRowBySD(rowDigits, multiplier);
 
         return {
@@ -97,9 +121,12 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
         }
     }
 
-
     multiplyByZero(digits: Digit[]): Digit[] {
-        return digits.map(d => ({ ...d, representationInBase: '0', valueInDecimal: 0 }));
+        return digits.map((d) => ({
+            ...d,
+            representationInBase: '0',
+            valueInDecimal: 0
+        }));
     }
 
     multiplyByOne(digits: Digit[]): Digit[] {
@@ -111,7 +138,29 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
     }
 }
 
-export function multiplyBooth(numbers: PositionalNumber[]): MultiplicationResult {
+export class BoothMcSorleyMultiplication extends BoothMultiplication {
+    protected get algorithmType(): MultiplicationType {
+        return MultiplicationType.BoothMcSorley;
+    }
+
+    convertToSD(multiplierRow: Digit[]): SDConversionResult {
+        return new BoothMcSorleyConverter(
+            multiplierRow,
+            this.multiplier.isNegative()
+        ).toSignedDigitsWithDetails();
+    }
+}
+
+export function multiplyBooth(
+    numbers: PositionalNumber[]
+): MultiplicationResult {
     const calculator = new BoothMultiplication(numbers);
+    return calculator.multiply();
+}
+
+export function multiplyBoothMcSorley(
+    numbers: PositionalNumber[]
+): MultiplicationResult {
+    const calculator = new BoothMcSorleyMultiplication(numbers);
     return calculator.multiply();
 }
