@@ -75,6 +75,7 @@
         "operation": "Działanie",
         "algorithm": "Algorytm",
         "parameters": "Parametery działania",
+        "operationSuccessful": "{{operation}} z użyciem algorytmu \"{{algorithm}}\" wykonano poprawnie",
         "result": "Wynik",
         "details": "Szczegóły",
         "sanityCheck": "Sprawdzenie nieudane:",
