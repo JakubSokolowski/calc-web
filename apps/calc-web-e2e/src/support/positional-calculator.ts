@@ -5,6 +5,10 @@ export const getByDataResult = (result: string) => cy.get(`[data-result="${resul
 
 export const hasProperResult = (result: string) => getByDataResult(result);
 
+export const hasSuccessNotification = () => getOperationSuccessNotification();
+
+export const getOperationSuccessNotification = () => cy.getByDataTest('operation-success');
+
 export const getAddOperandButton = () => cy.getByDataTest('add-operand-btn');
 
 export const getOperandListInput = (index: number) => {
@@ -59,6 +63,7 @@ export const calculatePositional = (config: OperationTemplate<AlgorithmType>) =>
 export const operationReturnsProperResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
     calculatePositional(config);
     hasProperResult(result);
+    hasSuccessNotification();
 };
 
 export const gridHasProperResultRow = (representation: string, base: number, bottomRightX: number, bottomRightY: number) => {

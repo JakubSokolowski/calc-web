@@ -20,6 +20,7 @@ import { calculate, GridResult, OperationParams } from '../core/calculate';
 import { SanityCheckFailed } from '../sanity-check/sanity-check-failed';
 import { sanityCheck, serializeForSentry } from '../core/sanity-check';
 import * as Sentry from '@sentry/react';
+import { OperationSuccess } from '../operation-success/operation-success';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -52,6 +53,7 @@ export const PositionalCalculatorView: FC = () => {
     const classes = useStyles();
     const [sanityCheckFailed, setSanityCheckFailed] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
+    const [successOpen, setSuccessOpen] = useState(false);
     const [expected, setExpected] = useState('');
     const [actual, setActual] = useState('');
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
@@ -90,6 +92,8 @@ export const PositionalCalculatorView: FC = () => {
             setErrorOpen(true);
             setExpected(check.expectedInBase);
             setActual(check.actual.toString());
+        } else {
+            setSuccessOpen(true);
         }
         setRes(res);
     };
@@ -107,9 +111,14 @@ export const PositionalCalculatorView: FC = () => {
     };
     const theoryPath = operation ? `/theory/positional/operations/${operation.toLowerCase()}` : '/theory/positional/operations';
 
-    const handleClose = (event?: SyntheticEvent, reason?: string) => {
+    const handleErrorClose = (event?: SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') return;
         setErrorOpen(false);
+    };
+
+    const handleSuccessClose = (event?: SyntheticEvent, reason?: string) => {
+        if (reason === 'clickaway') return;
+        setSuccessOpen(false);
     };
 
     return (
@@ -146,7 +155,15 @@ export const PositionalCalculatorView: FC = () => {
                 anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                 open={errorOpen}
             >
-               <SanityCheckFailed onClose={handleClose} expected={expected} actual={actual}/>
+               <SanityCheckFailed onClose={handleErrorClose} expected={expected} actual={actual}/>
+            </Snackbar>
+            <Snackbar
+                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                autoHideDuration={2000}
+                open={successOpen}
+                onClose={handleSuccessClose}
+            >
+                <OperationSuccess params={params} onClose={handleSuccessClose}/>
             </Snackbar>
         </ViewWrapper>
     );
