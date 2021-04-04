@@ -17,9 +17,7 @@ export const getOperandListInput = (index: number) => {
 
 export const addOperand = (representation: string, index = 0) => {
     getAddOperandButton().click();
-    getOperandListInput(index)
-        .clear()
-        .type(representation);
+    getOperandListInput(index).clear().type(representation);
 };
 
 export const addOperands = (operands: string[]) => {
@@ -49,7 +47,6 @@ export const getMultiplicationResult = () => cy.getByDataTest('multiplication-re
 export const getOperationGrid = () => cy.get('#operation-grid');
 export const getOperationGridSaveButton = () => cy.getByDataTest('operation-grid-save');
 
-
 export const calculatePositional = (config: OperationTemplate<AlgorithmType>) => {
     const { algorithm, base, operands, operation } = config;
     setOperationBase(base);
@@ -59,25 +56,25 @@ export const calculatePositional = (config: OperationTemplate<AlgorithmType>) =>
     getCalculateButton().click();
 };
 
-
 export const operationReturnsProperResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
     calculatePositional(config);
     hasProperResult(result);
     hasSuccessNotification();
 };
 
-export const gridHasProperResultRow = (representation: string, base: number, bottomRightX: number, bottomRightY: number) => {
-    const stripped = representation
-        .replace('.', '')
-        .replace('(', '')
-        .replace(')', '');
+export const gridHasProperResultRow = (
+    representation: string,
+    base: number,
+    bottomRightX: number,
+    bottomRightY: number
+) => {
+    const stripped = representation.replace('.', '').replace('(', '').replace(')', '');
 
     const asDigits = splitToDigitsList(stripped, base);
     const positionsAscending = asDigits.reverse();
 
     positionsAscending.forEach((d, index) => {
-        getCellByCoords(bottomRightX - index, bottomRightY)
-            .contains(d.representationInBase);
+        getCellByCoords(bottomRightX - index, bottomRightY).contains(d.representationInBase);
     });
 };
 
@@ -86,12 +83,12 @@ export const gridHasProperSdRow = (representation: string, sdRowEndX: number, sd
 
     sdDigits.forEach((d, index) => {
         getCellByCoords(sdRowEndX - index, sdRowEndY)
-            .contains(d);
+            .contains(d)
+            .trigger('mouseover')
+            .getByDataTest(`sd-by-${d}-details`);
     });
 };
-
 
 export const getCellByCoords = (x: number, y: number) => {
     return cy.getByDataTest(`operation-grid-${x}-${y}`);
 };
-

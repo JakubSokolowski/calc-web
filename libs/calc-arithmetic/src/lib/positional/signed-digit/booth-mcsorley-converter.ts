@@ -1,9 +1,5 @@
 import { BoothConverter } from './booth-converter';
-import { Digit } from '../../models';
-import {
-    SDConversionGroupResult,
-    SDGroupDigit, SignedDigitConversionType
-} from './signed-digit-converter';
+import { SDConversionGroupResult, SDGroupDigit, SignedDigitConversionType } from './signed-digit-converter';
 import { BaseDigits } from '../base-digits';
 import { leastSignificantPosition } from '../digits';
 
@@ -16,49 +12,48 @@ export class BoothMcSorleyConverter extends BoothConverter {
         return SignedDigitConversionType.BoothMcSorley;
     }
 
-    protected extend(): Digit[] {
+    protected extend(): SDGroupDigit[] {
         const extendFraction = this.extendFraction(this.digits);
         return this.extendIntegerPart(extendFraction);
     }
 
-    protected extendFraction(digits: Digit[]): Digit[] {
+    protected extendFraction(digits: SDGroupDigit[]): SDGroupDigit[] {
         const lsp = leastSignificantPosition(digits);
         const extensionCount = lsp % 2 === 0 ? 1 : 2;
-        if(extensionCount === 1) {
+        if (extensionCount === 1) {
             const extension: SDGroupDigit = {
-                ...BaseDigits.getDigit(0, 2, lsp -1),
                 isPaddingDigit: true,
+                ...BaseDigits.getDigit(0, 2, lsp - 1),
             };
-            return [...digits, extension]
+            return [...digits, extension];
         } else {
             const extension: SDGroupDigit = {
-                ...BaseDigits.getDigit(0, 2, lsp -1),
                 isPaddingDigit: true,
+                ...BaseDigits.getDigit(0, 2, lsp - 1),
             };
             const extension2: SDGroupDigit = {
-                ...BaseDigits.getDigit(0, 2, lsp -2),
                 isPaddingDigit: true,
+                ...BaseDigits.getDigit(0, 2, lsp - 2),
             };
-            return [...digits, extension, extension2]
+            return [...digits, extension, extension2];
         }
     }
 
-    protected extendIntegerPart(digits: Digit[]): Digit[] {
+    protected extendIntegerPart(digits: SDGroupDigit[]): SDGroupDigit[] {
         const mspDigit = digits[0];
         const shouldExtendFront = mspDigit.position % 2 === 0;
         if (!shouldExtendFront) return digits;
         const extension: SDGroupDigit = {
-            ...BaseDigits.getDigit(this.isNegative ? 1 : 0, 2, mspDigit.position + 1),
             isPaddingDigit: true,
+            ...BaseDigits.getDigit(this.isNegative ? 1 : 0, 2, mspDigit.position + 1),
         };
 
-        return [extension, ...digits]
+        return [extension, ...digits];
     }
 
     protected createSdDigit(input: SDGroupDigit[]): SDConversionGroupResult {
         const [x2, x1, x0] = input;
-        const value =
-            -2 * x2.valueInDecimal + x1.valueInDecimal + x0.valueInDecimal;
+        const value = -2 * x2.valueInDecimal + x1.valueInDecimal + x0.valueInDecimal;
         const [currValue, prevValue] = this.splitToPositionValues(value);
 
         const currDigit: SDGroupDigit = {
@@ -66,7 +61,7 @@ export class BoothMcSorleyConverter extends BoothConverter {
             valueInDecimal: currValue,
             representationInBase: currValue.toString(),
             position: x2.position,
-            isPaddingDigit: x2.isPaddingDigit
+            isPaddingDigit: x2.isPaddingDigit,
         };
 
         const prevDigit: SDGroupDigit = {
@@ -74,8 +69,8 @@ export class BoothMcSorleyConverter extends BoothConverter {
             valueInDecimal: prevValue,
             representationInBase: prevValue.toString(),
             position: x1.position,
+            isPaddingDigit: x1.isPaddingDigit,
         };
-
 
         return { input, output: [currDigit, prevDigit], value };
     }

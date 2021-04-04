@@ -1,7 +1,7 @@
 import { Digit } from '../../models';
 
 export interface SignedDigitConverter {
-    toSignedDigits(): Digit[];
+    toSignedDigits(): SDGroupDigit[];
     toSignedDigitsWithDetails(): SDConversionResult;
 }
 

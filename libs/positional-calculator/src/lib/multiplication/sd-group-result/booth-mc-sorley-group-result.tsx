@@ -23,7 +23,6 @@ export const BoothMcSorleyGroupResult: FC<P> = ({ result, outputIndex }) => {
           + ${x0.valueInDecimal}
           = ${result.value}`;
 
-
     const digitSplitResult = `${result.value} \\mapsto
       SD_${curr?.position} = ${curr?.valueInDecimal},
       SD_${prev?.position} = ${prev?.valueInDecimal}`;

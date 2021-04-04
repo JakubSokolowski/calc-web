@@ -4,19 +4,18 @@ import {
     SDConversionResult,
     SDGroupDigit,
     SignedDigitConversionType,
-    SignedDigitConverter
+    SignedDigitConverter,
 } from './signed-digit-converter';
 import { flatten } from 'lodash';
-import { Digit } from '../../models';
 import { BaseDigits } from '../base-digits';
 import { positionRangeSlice } from '../digits';
 import { findPositionRange } from '../operation-utils';
 
 export class BoothConverter implements SignedDigitConverter {
-    protected readonly digits: Digit[];
+    protected readonly digits: SDGroupDigit[];
     protected readonly isNegative: boolean;
 
-    constructor(digits: Digit[], negative = false) {
+    constructor(digits: SDGroupDigit[], negative = false) {
         this.digits = digits;
         this.isNegative = negative;
     }
@@ -49,26 +48,24 @@ export class BoothConverter implements SignedDigitConverter {
         };
     }
 
-    private extractOutputFromGroups(groups: SDConversionGroupResult[]) {
+    private extractOutputFromGroups(groups: SDConversionGroupResult[]): SDGroupDigit[] {
         const output: SDGroupDigit[] = flatten(groups.map((g) => g.output));
         const { lsp, msp } = findPositionRange([this.digits]);
         return positionRangeSlice(output, lsp, msp);
     }
 
-    protected extend(digits: Digit[]): SDGroupDigit[] {
+    protected extend(digits: SDGroupDigit[]): SDGroupDigit[] {
         const lastPosition = digits[digits.length - 1].position;
         const extension: SDGroupDigit = {
-            ...BaseDigits.getDigit(0, 2, lastPosition - 1),
             isPaddingDigit: true,
+            ...BaseDigits.getDigit(0, 2, lastPosition - 1),
         };
         return [...digits, extension];
     }
 
     protected splitToGroups(digits: SDGroupDigit[]): SDGroupDigit[][] {
         const groups: SDGroupDigit[][] = [];
-        walkOverlaping(digits, this.groupSize, this.overlapSize, (group) =>
-            groups.push(group)
-        );
+        walkOverlaping(digits, this.groupSize, this.overlapSize, (group) => groups.push(group));
         return groups;
     }
 
@@ -89,7 +86,7 @@ export class BoothConverter implements SignedDigitConverter {
         // |value| =  prev  -  curr
         const [x1, x0] = input;
         const value = x0.valueInDecimal - x1.valueInDecimal;
-        const output: Digit[] = [
+        const output: SDGroupDigit[] = [
             {
                 base: 2,
                 valueInDecimal: value,
