@@ -158,9 +158,11 @@
                     "multiplication": {
                         "title": "Multiplication",
                         "with-extension": "With extension",
-                        "with-extension-u2": "With extension U2",
+                        "with-extension-u2": "With extension (U2)",
                         "without-extension": "Without extension",
-                        "without-extension-u2": "Without extension"
+                        "without-extension-u2": "Without extension (U2)",
+                        "booth": "Booth (U2)",
+                        "booth-mc-sorley": "Booth-McSorley (U2)"
                     },
                     "subtraction": "Subtraction"
                 }
