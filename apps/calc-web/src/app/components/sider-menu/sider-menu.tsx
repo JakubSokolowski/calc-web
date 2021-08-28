@@ -106,6 +106,14 @@ export const SiderMenu = () => {
                                         {
                                             labelText: t('routes.theory.positional.operations.multiplication.without-extension-u2'),
                                             path: '/theory/positional/operations/multiplication/without-extension-u2',
+                                        },
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.booth'),
+                                            path: '/theory/positional/operations/multiplication/booth',
+                                        },
+                                        {
+                                            labelText: t('routes.theory.positional.operations.multiplication.booth-mc-sorley'),
+                                            path: '/theory/positional/operations/multiplication/booth-mc-sorley',
                                         }
                                     ]
                                 }
