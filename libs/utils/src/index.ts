@@ -13,3 +13,4 @@ export * from './lib/functions/deep-assign';
 export * from './lib/functions/test-uitls';
 export * from './lib/functions/reorder';
 export * from './lib/hooks/use-mount-effect';
+export * from './lib/hooks/use-url-params';

@@ -58,9 +58,14 @@ export const calculatePositional = (config: OperationTemplate<AlgorithmType>) =>
 
 export const operationReturnsProperResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
     calculatePositional(config);
+    checkOperationResult(config, result);
+};
+
+export const checkOperationResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
     hasProperResult(result);
     hasSuccessNotification();
 };
+
 
 export const gridHasProperResultRow = (
     representation: string,
