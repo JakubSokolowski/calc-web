@@ -7,6 +7,19 @@ import { OperandInput } from '../operand-input/operand-input';
 import { allOperations, multiplicationAlgorithms } from '@calc/calc-arithmetic';
 import { act } from 'react-dom/test-utils';
 
+const history = {
+    push: jest.fn(),
+    replace: jest.fn()
+};
+
+jest.mock('react-router-dom', () => ({
+    ...jest.requireActual('react-router-dom'),
+    useHistory: () => history,
+    useLocation: () => ({
+        pathname: '/tools/positional-calculator'
+    })
+}));
+
 describe('CalculatorOptions', () => {
     let container;
     const onSubmit = jest.fn();

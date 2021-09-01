@@ -11,11 +11,13 @@ import {
     OperationType
 } from '@calc/calc-arithmetic';
 import { useTranslation } from 'react-i18next';
-import { clean, inRangeInclusive } from '@calc/utils';
+import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, createStyles, TextField, Theme, Tooltip } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
+import { useUrlCalculatorOptions } from './url-calculator-options';
+import { useHistory } from 'react-router-dom';
 
 interface FormValues {
     base: number;
@@ -59,6 +61,7 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
+
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const classes = useStyles();
     const { t } = useTranslation();
@@ -67,6 +70,29 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [submitDisabled, setSubmitDisabled] = useState(false);
+    const optionsFromUrl = useUrlCalculatorOptions();
+    const history = useHistory();
+
+    const loadOptionsFromUrl = () => {
+        if (optionsFromUrl) {
+            const {
+                algorithm: urlAlgorithm,
+                operation: urlOperation,
+                base: urlBase,
+                operands: urlOperands
+            } = optionsFromUrl;
+
+            form.values.base = urlBase;
+            setOperands(urlOperands);
+            setTimeout(() => setAlgorithm(urlAlgorithm));
+            setOperation(urlOperation);
+
+            onSubmit(urlBase, urlOperands, urlOperation, urlAlgorithm);
+        }
+    };
+
+    useMountEffect(loadOptionsFromUrl);
+
 
     const [operands, setOperands] = useState<DndOperand[]>(
         defaultOperands || []
@@ -95,6 +121,13 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const handleSubmit = (form: FormValues) => {
         onSubmit(form.base, operands, operation, algorithm);
+        const operandsStr = operands.map(op => `op=${op.representation}`).join('&');
+        history.replace({
+            search: `?operation=${operation.type.toLowerCase()}`
+                + `&algorithm=${algorithm.type.toLowerCase()}`
+                + `&base=${form.base}`
+                + `&${operandsStr}`
+        });
     };
 
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
@@ -114,6 +147,13 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         setOperands((prev) => [...prev, { representation: defaultStr, valid: true, dndKey: `${Date.now()}` }]);
     };
 
+    const computeCanCalculate = () => {
+        const everyOperandValid = operands.every((op) => op.valid);
+        const { minOperands, maxOperands } = operation;
+        const allowedNumOfOperands = inRangeInclusive(operands.length, minOperands, maxOperands);
+        return everyOperandValid && allowedNumOfOperands;
+    };
+
     useEffect(() => {
         const everyOperandValid = operands.every((op) => op.valid);
         let newMessage = '';
@@ -127,7 +167,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
             maxOperands
         });
 
-        const canCalculate = everyOperandValid && allowedNumOfOperands;
+        const canCalculate = computeCanCalculate();
         setErrorMessage(newMessage);
         setCanCalculate(canCalculate);
     }, [operands, operation, t, form.values.base]);

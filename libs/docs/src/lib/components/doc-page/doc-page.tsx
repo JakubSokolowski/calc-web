@@ -8,15 +8,13 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useLocation } from 'react-router-dom';
 import { RendererMapping } from '../../..';
 import { NavigationBreadcrumbs } from '@calc/common-ui';
+import { useUrlParams } from '@calc/utils';
 
 export interface DocsProps {
     path: string;
     rendererMapping?: RendererMapping;
 }
 
-function useQuery() {
-    return new URLSearchParams(useLocation().search);
-}
 
 export const useStyles = makeStyles((theme: Theme) => {
     return createStyles(
@@ -44,7 +42,7 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const markdown = useDocs(docPath);
     const { pathname } = useLocation();
     const classes = useStyles();
-    const query = useQuery();
+    const params = useUrlParams();
     const ids = extractHeadingIds(markdown);
 
     useEffect(() => {
@@ -53,12 +51,12 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
 
 
     useEffect(() => {
-        const header = query.get('h');
+        const header = params.get('h');
         if (header) {
             const element = document.getElementById(header);
             if (element) scrollTo(element);
         }
-    }, [query]);
+    }, [params]);
 
     const headerHeight = 64;
 

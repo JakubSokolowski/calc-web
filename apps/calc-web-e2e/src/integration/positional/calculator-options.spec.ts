@@ -2,6 +2,8 @@ import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
     addOperands,
+    calculatePositional,
+    checkOperationResult,
     getAddOperandButton,
     getCalculateButton,
     hasProperResult,
@@ -96,4 +98,37 @@ describe('Calculator options', () => {
         setOperationBase(base);
         getCalculateButton().should('be.enabled');
     });
+
+    it('should update url search params with operation data after submit', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['78', '-88'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base
+        };
+
+        calculatePositional(config);
+
+        const expectedParams = '?operation=multiplication&algorithm=withextension&base=10&op=78&op=-88';
+        cy.location('href').should('include', expectedParams);
+    });
+
+    it('should run calculation from url params, if redirected by url', () => {
+        const params = '?operation=multiplication&algorithm=withextension&base=10&op=78&op=-88';
+        cy.visit(`#/tools/positional/positional-calculator${params}`);
+        cy.reload();
+
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['78', '-88'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.WithExtension,
+            base
+        };
+
+        // proper result should be displayed without without editing inputs and clicking submit
+        const expected = '-6864';
+        checkOperationResult(config, expected);
+    })
 });
