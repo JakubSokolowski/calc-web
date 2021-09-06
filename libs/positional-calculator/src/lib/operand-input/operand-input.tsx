@@ -33,7 +33,14 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
         };
         const err = !!validateValueStr(representation, base);
         setError(validateValueStr(representation, base));
-        onRepresentationChange(representation, index, !err)
+        onRepresentationChange(representation, index, !err);
+        // WARNING: adding all deps here MAY cause infinite loop in
+        // tests for components that use this component, so if the
+        // CI test step for some reason is stuck this may be it.
+        // This is probably because that the onRepresentationChange
+        // may be an anonymous function, and those cannot be compared
+        // The deps will be added by automatically by lint--fix,
+        // so use it with caution
     }, [base, representation]);
 
 

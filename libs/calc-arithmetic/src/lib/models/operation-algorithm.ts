@@ -14,6 +14,7 @@ export enum MultiplicationType {
     WithoutExtension = 'WithoutExtension',
     Booth = 'Booth',
     BoothMcSorley = 'BoothMcSorley',
+    BoothMcSorleyAlt = 'BoothMcSorleyAlt',
 }
 
 export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType;
@@ -63,6 +64,11 @@ export const multiplicationAlgorithms: OperationAlgorithm<
     {
         type: MultiplicationType.BoothMcSorley,
         tKey: 'operations.multiplication.boothMcSorley',
+        allowedBases: [2],
+    },
+    {
+        type: MultiplicationType.BoothMcSorleyAlt,
+        tKey: 'operations.multiplication.boothMcSorleyAlt',
         allowedBases: [2],
     },
 ];

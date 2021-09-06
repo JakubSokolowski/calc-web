@@ -8,7 +8,7 @@ export interface SignedDigitConverter {
 export enum SignedDigitConversionType {
     Booth = 'booth',
     BoothMcSorley = 'boothMcSorley',
-    BoothAlternative = 'boothAlternative',
+    BoothMcSorleyAlternative = 'boothMcSorleyAlternative',
 }
 
 export interface SDGroupDigit extends Digit {

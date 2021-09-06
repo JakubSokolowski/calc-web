@@ -21,7 +21,7 @@ export { multiplyDefault } from './positional/multiplication/multiplication';
 
 export { multiplyWithExtensions } from './positional/multiplication/with-extension';
 
-export { multiplyBooth, multiplyBoothMcSorley } from './positional/multiplication/signed-digit-multiplication';
+export { multiplyBooth, multiplyBoothMcSorley, multiplyBoothMcSorleyAlt } from './positional/multiplication/signed-digit-multiplication';
 
 export * from './models';
 export * from './models/operation';
