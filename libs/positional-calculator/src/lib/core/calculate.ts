@@ -11,6 +11,7 @@ import {
     multiplyDefault,
     multiplyWithExtensions,
     multiplyWithoutExtension,
+    multiplyBoothMcSorleyAlt,
     Operation,
     OperationAlgorithm,
     OperationType,
@@ -135,6 +136,15 @@ function handleMultiply(
         }
         case MultiplicationType.BoothMcSorley: {
             const result = multiplyBoothMcSorley(params.operands);
+            const grid = buildMultiplicationGrid(result);
+            return {
+                grid,
+                result: result.numberResult,
+                operationResult: result
+            };
+        }
+        case MultiplicationType.BoothMcSorleyAlt: {
+            const result = multiplyBoothMcSorleyAlt(params.operands);
             const grid = buildMultiplicationGrid(result);
             return {
                 grid,

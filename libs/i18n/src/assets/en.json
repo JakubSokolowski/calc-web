@@ -122,7 +122,8 @@
             "withExtension": "With extension",
             "withoutExtension": "Without extension",
             "booth": "Booth",
-            "boothMcSorley": "Booth-McSorley"
+            "boothMcSorley": "Booth-McSorley",
+            "boothMcSorleyAlt": "Booth-McSorley alt."
         }
     },
     "sandbox": {

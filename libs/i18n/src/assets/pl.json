@@ -126,7 +126,8 @@
             "withExtension": "Z rozszerzeniem",
             "withoutExtension": "Bez rozszerzenia",
             "booth": "Booth",
-            "boothMcSorley": "Booth-McSorley"
+            "boothMcSorley": "Booth-McSorley",
+            "boothMcSorleyAlt": "Booth-McSorley alt."
         }
     },
     "routes": {

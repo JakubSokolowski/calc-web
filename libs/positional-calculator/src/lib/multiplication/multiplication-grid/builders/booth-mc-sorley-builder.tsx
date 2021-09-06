@@ -14,9 +14,9 @@ export class BoothMcSorleyBuilder extends BoothBuilder {
         const evenNumOfFractionDigits = Math.max(this.info.maxOperandsFractionDigits) % 2 === 0;
 
         if (evenNumOfFractionDigits) {
-            return this.buildGroupForEven(group, output, index, outputIndex);
+            return this.buildGroupB(group, output, index, outputIndex);
         } else {
-            return this.buildGroupForOdd(group, output, index, outputIndex);
+            return this.buildGroupA(group, output, index, outputIndex);
         }
     }
 
@@ -33,7 +33,7 @@ export class BoothMcSorleyBuilder extends BoothBuilder {
         return groupCellsInStraightLine(groupStart, groupEnd, true);
     }
 
-    private buildGroupForOdd(
+    protected buildGroupA(
         group: SDConversionGroupResult,
         output: SDGroupDigit,
         index: number,
@@ -75,7 +75,7 @@ export class BoothMcSorleyBuilder extends BoothBuilder {
         };
     }
 
-    private buildGroupForEven(
+    protected buildGroupB(
         group: SDConversionGroupResult,
         output: SDGroupDigit,
         index: number,

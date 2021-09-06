@@ -1,8 +1,5 @@
 import React from 'react';
-import {
-    MultiplicationResult,
-    MultiplicationType,
-} from '@calc/calc-arithmetic';
+import { MultiplicationResult, MultiplicationType } from '@calc/calc-arithmetic';
 import { HoverOperationGrid } from '@calc/grid';
 import { GridBuilder } from './builders/grid-builder';
 import { DefaultBuilder } from './builders/default-builder';
@@ -11,6 +8,7 @@ import { WithoutExtensionBuilder } from './builders/without-extension-builder';
 import { WithoutExtensionU2Builder } from './builders/without-extension-u2-builder';
 import { BoothBuilder } from './builders/booth-builder';
 import { BoothMcSorleyBuilder } from './builders/booth-mc-sorley-builder';
+import { BoothMcSorleyAltBuilder } from './builders/booth-mc-sorley-alt-builder';
 
 export function buildMultiplicationGrid(
     result: MultiplicationResult
@@ -30,6 +28,8 @@ function getBuilder(result: MultiplicationResult): GridBuilder {
             return new WithoutExtensionBuilder(result);
         case MultiplicationType.BoothMcSorley:
             return new BoothMcSorleyBuilder(result);
+        case MultiplicationType.BoothMcSorleyAlt:
+            return new BoothMcSorleyAltBuilder(result);
         case MultiplicationType.Booth:
             return new BoothBuilder(result);
         default:

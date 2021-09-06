@@ -14,6 +14,7 @@ import { getComplement } from '../complement-converter';
 import { OperationType } from '../../models/operation';
 import { MultiplicationType } from '../../models/operation-algorithm';
 import { BoothMcSorleyConverter } from '../signed-digit/booth-mcsorley-converter';
+import { BoothMcSorleyAltConverter } from '../signed-digit/booth-mcsorley-alt-converter';
 
 export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
     constructor(numbers: PositionalNumber[]) {
@@ -151,6 +152,19 @@ export class BoothMcSorleyMultiplication extends BoothMultiplication {
     }
 }
 
+export class BoothMcSorleyAltMultiplication extends BoothMultiplication {
+    protected get algorithmType(): MultiplicationType {
+        return MultiplicationType.BoothMcSorleyAlt;
+    }
+
+    convertToSD(multiplierRow: Digit[]): SDConversionResult {
+        return new BoothMcSorleyAltConverter(
+            multiplierRow,
+            this.multiplier.isNegative()
+        ).toSignedDigitsWithDetails();
+    }
+}
+
 export function multiplyBooth(
     numbers: PositionalNumber[]
 ): MultiplicationResult {
@@ -162,5 +176,12 @@ export function multiplyBoothMcSorley(
     numbers: PositionalNumber[]
 ): MultiplicationResult {
     const calculator = new BoothMcSorleyMultiplication(numbers);
+    return calculator.multiply();
+}
+
+export function multiplyBoothMcSorleyAlt(
+    numbers: PositionalNumber[]
+): MultiplicationResult {
+    const calculator = new BoothMcSorleyAltMultiplication(numbers);
     return calculator.multiply();
 }

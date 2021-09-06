@@ -121,9 +121,10 @@ function getMetaBuilder(result: MultiplicationResult) {
             return new WithExtensionMeta(result);
         case MultiplicationType.WithoutExtension:
             return new WithoutExtensionMeta(result);
-        case MultiplicationType.BoothMcSorley:
-            return new BoothMeta(result);
         case MultiplicationType.Booth:
+            return new BoothMeta(result);
+        case MultiplicationType.BoothMcSorley:
+        case MultiplicationType.BoothMcSorleyAlt:
             return new BoothMcSorleyMeta(result)
     }
 }
