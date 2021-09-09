@@ -1,9 +1,9 @@
 import { CalculatorOptionsValue } from './calculator-options-value';
 import { algorithmMap, allOperations, BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
 import { DndOperand } from '../operand-list/operand-list';
-import { useUrlParams } from '@calc/utils';
+import { inRangeInclusive, useUrlParams } from '@calc/utils';
 
-function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorOptionsValue | undefined {
+export function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorOptionsValue | undefined {
     const operationStr = params.get('operation');
     const algorithmStr = params.get('algorithm');
     const baseStr = params.get('base');
@@ -21,6 +21,13 @@ function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorO
     const base = parseInt(baseStr);
     if (!BaseDigits.isValidBase(base)) return undefined;
 
+    const operation = allOperations.find((op) => op.type.toString().toLowerCase() === operationStr);
+    if (!operation) return undefined;
+
+    const possibleAlgorithms = algorithmMap[operation.type] || [];
+    const algorithm = possibleAlgorithms.find((alg) => alg.type.toLowerCase() === algorithmStr);
+    if (!algorithm) return undefined;
+
     const operands: DndOperand[] = operandsStrArr.map((op, idx) => {
         return ({
             representation: op,
@@ -29,15 +36,11 @@ function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorO
         });
     });
 
+    const hasProperNumOfOperands = inRangeInclusive(operands.length, operation.minOperands, operation.maxOperands);
+    if(!hasProperNumOfOperands) return;
+
     const everyOpValid = operands.every(op => op.valid);
     if (!everyOpValid) return undefined;
-
-    const operation = allOperations.find((op) => op.type.toString().toLowerCase() === operationStr);
-    if (!operation) return undefined;
-
-    const possibleAlgorithms = algorithmMap[operation.type] || [];
-    const algorithm = possibleAlgorithms.find((alg) => alg.type.toLowerCase() === algorithmStr);
-    if (!algorithm) return undefined;
 
     return { base, operation, operands, algorithm };
 }
