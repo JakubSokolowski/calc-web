@@ -85,6 +85,22 @@ export interface MultiplicationResult extends OperationResult<MultiplicationOper
     lastMultiplierDigit?: MultiplicationOperand;
 }
 
+export type DivisionOperand = AdditionOperand;
+
+
+export interface DivisionPositionResult extends PositionResult<DivisionOperand> {
+    remainder: DivisionOperand[];
+    remainderDecimal: number;
+    dividendSlice: DivisionOperand[];
+    subtractionResult: SubtractionResult;
+    multiplicationResult: MultiplicationResult;
+    divisionIndex: number;
+}
+
+export interface DivisionResult extends OperationResult<DivisionOperand, DivisionPositionResult>{
+    dividendComplement?: PositionalNumber;
+}
+
 
 export function isSubtractionOperand(obj: any): obj is SubtractionOperand {
     return !!obj.borrowChain;
