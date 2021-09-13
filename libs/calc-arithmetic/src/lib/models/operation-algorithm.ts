@@ -17,7 +17,11 @@ export enum MultiplicationType {
     BoothMcSorleyAlt = 'BoothMcSorleyAlt',
 }
 
-export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType;
+export enum DivisionType {
+    Default = 'Default'
+}
+
+export type AlgorithmType = AdditionType | SubtractionType | MultiplicationType | DivisionType;
 
 export interface OperationAlgorithm<T extends AlgorithmType = AlgorithmType> {
     type: T;
