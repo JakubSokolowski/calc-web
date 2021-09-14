@@ -67,6 +67,7 @@ function globalLeastSignificantPosition<T extends Digit>(operands: T[][]): numbe
     }, 0);
 }
 
+
 export function mostSignificantPosition<T extends Digit>(digits: T[]): number {
     return digits[0].position;
 }

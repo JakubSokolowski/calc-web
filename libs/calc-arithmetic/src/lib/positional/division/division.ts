@@ -1,5 +1,6 @@
 import {
-    BaseDigits, digitsToStr,
+    BaseDigits,
+    digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
     DivisionResult,
@@ -10,6 +11,7 @@ import {
     PositionalNumber,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
+import { leastSignificantPosition } from '../digits';
 
 
 export function divideDefault(numbers: PositionalNumber[]): DivisionResult {
@@ -20,7 +22,25 @@ export function divideDefault(numbers: PositionalNumber[]): DivisionResult {
     } as DivisionResult;
 }
 
-export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOperand[]): DivisionResult {
+
+/*
+  TODO fraction precision vs extension limit
+
+  fraction precision - how many fraction digits should be generated
+  problem: the number can have finite fraction but number of fraction digits can be greater than limit and
+           it wont be computed
+
+  extension limit - how many additional extension (moved down fallback zeros) should be generated
+  problem: non-intuitive, i can understand - do division with 5 digit precision but division with 5 extension limit
+           is not understandable. The plus side is that every finite fraction will be computed
+*/
+export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOperand[], fractionLimit = 0): DivisionResult {
+    if(!integerPartOnly(divisor)) {
+        throw Error(
+            `For divideDigits(...) divisor: ${digitsToStr(divisor)} cannot have fraction.`
+        )
+    }
+
     const positionResults: DivisionPositionResult[] = [];
     let prevResult: DivisionPositionResult | undefined = undefined;
 
@@ -55,14 +75,22 @@ function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult
     return prev.remainderDecimal !== 0;
 }
 
+function integerPartOnly(digits: DivisionOperand[]): boolean {
+    return leastSignificantPosition(digits) === 0;
+}
 
 export function divideAtPosition(dividend: DivisionOperand[], divisor: DivisionOperand[], prev?: DivisionPositionResult): DivisionPositionResult {
     const divisionIndex = prev ? prev.divisionIndex + 1 : 0;
     const dividendSlicePosNum = getDividendSlice(dividend, divisor, prev);
     const divisorPosNum = fromDigits(divisor).result;
 
+
     // estimate how many times the divisor will fit in dividend slice
-    const quotient = integerQuotient(dividendSlicePosNum, divisorPosNum, divisionIndex);
+    const outputPosition = prev
+        ? prev.valueAtPosition.position - 1
+        : dividend[0].position - divisor.length + 1;
+
+    const quotient = integerQuotient(dividendSlicePosNum, divisorPosNum, outputPosition);
     const quotientNum = fromDigits([quotient]).result;
 
     // subtraction for position - get subtrahend: dividendSlice * quotient
@@ -88,9 +116,21 @@ export function getDividendSlice(dividend: DivisionOperand[], divisor: DivisionO
 }
 
 function getNextDividendSlice(dividend: DivisionOperand[], divisor: DivisionOperand[], prev: DivisionPositionResult) {
-    const nextDividendDigit = dividend[prev.divisionIndex + divisor.length];
-    const digits = [...prev.remainder, nextDividendDigit];
+    const nextDigitIndex = prev.divisionIndex + divisor.length;
+    const nextDividendDigit = getNextWithZeroFallback(dividend, nextDigitIndex);
+    const digits = reindexToLsp([...prev.remainder, nextDividendDigit], 0);
     return fromDigits(digits).result;
+}
+
+function getNextWithZeroFallback(dividend: DivisionOperand[], digitIndex: number): DivisionOperand {
+    const nextDividendDigit = dividend[digitIndex];
+    if(nextDividendDigit) return nextDividendDigit;
+    const {base} = dividend[0];
+    return nextDividendDigit || BaseDigits.getDigit(0, base)
+}
+
+function reindexToLsp(digits: DivisionOperand[], lsp = 0): DivisionOperand[] {
+    return digits.map((d, i) => ({...d, position: digits.length - i - lsp}))
 }
 
 function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionOperand[]): PositionalNumber {
@@ -108,7 +148,6 @@ export function integerQuotient(dividend: PositionalNumber, divisor: PositionalN
     const decimalDividend = dividend.decimalValue;
     const decimalDivisor = divisor.decimalValue;
     const integerQuotient = decimalDividend.dividedToIntegerBy(decimalDivisor);
-
     return {
         ...BaseDigits.getDigit(integerQuotient.toNumber(), base, resultPosition)
     };

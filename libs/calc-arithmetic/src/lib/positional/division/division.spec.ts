@@ -1,9 +1,10 @@
 import {
-    digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
-    fromStringDirect, multiplyDefault,
-    splitToDigitsList, subtractPositionalNumbers
+    fromStringDirect,
+    multiplyDefault,
+    splitToDigitsList,
+    subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
 import { divideAtPosition, divideDigits, getDividendSlice, integerQuotient } from './division';
 
@@ -84,6 +85,24 @@ describe('#division', () => {
             const expectedStr = '8755';
             expect(result.toString()).toEqual(expectedStr);
         });
+
+        it('should extend previous remainder with zero if all dividend digits were already used', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('54625', base).result;
+            const divisor = fromStringDirect('4587', base).result;
+            const prev: DivisionPositionResult = {
+                divisionIndex: 4,
+                remainder: splitToDigitsList('875', base)
+            } as DivisionPositionResult;
+
+            // when
+            const result = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
+
+            // then
+            const expectedStr = '8750';
+            expect(result.toString()).toEqual(expectedStr);
+        });
     });
 
     describe('#divideAtPosition', () => {
@@ -102,7 +121,7 @@ describe('#division', () => {
                     representationInBase: '1',
                     valueInDecimal: 1,
                     base,
-                    position: 0
+                    position: 1
                 };
                 expect(result.valueAtPosition).toEqual(expected);
             });
@@ -157,7 +176,7 @@ describe('#division', () => {
                     representationInBase: '1',
                     valueInDecimal: 1,
                     base,
-                    position: 1
+                    position: 0
                 };
                 expect(result.valueAtPosition).toEqual(expected);
             });
@@ -199,8 +218,7 @@ describe('#division', () => {
     });
 
     describe('#divideDigits', () => {
-
-        describe('when division has integer result', () => {
+        it('should return proper result when division has integer result', () => {
             // given
             const base = 10;
             const dividend = fromStringDirect('54625', base).result;
@@ -208,12 +226,49 @@ describe('#division', () => {
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            // then
+            const expected = '10925';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
 
-            it('should return proper result', () => {
-                // then
-                const expected = '10925';
-                expect(result.numberResult.toString()).toEqual(expected);
-            });
+        it('should return proper result when division has result with finite fraction', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('62.5', base).result;
+            const divisor = fromStringDirect('5', base).result;
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+
+            // then
+            const expected = '12.5';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        // it('should return proper result when division has result with finite fraction and both dividend and divisor have fraction parts', () => {
+        //     // given
+        //     const base = 10;
+        //     const dividend = fromStringDirect('1000', base).result;
+        //     const divisor = fromStringDirect(' 312', base).result;
+        //
+        //     // when
+        //     const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+        //
+        //     // then
+        //     const expected = '12.5';
+        //     expect(result.numberResult.toString()).toEqual(expected);
+        // });
+
+        it('should throw error when divisor has fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('10', base).result;
+            const divisor = fromStringDirect('2.5', base).result;
+
+            // when
+            expect(() => {
+                divideDigits(dividend.toDigitsList(), divisor.toDigitsList())
+            }).toThrow();
         });
     });
 });
