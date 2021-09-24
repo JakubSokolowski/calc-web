@@ -274,18 +274,45 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
-        it('should return proper result when divisor is greater less then zero', () => {
+        it('should return proper result for binary numbers with integer result', () => {
             // given
-            const base = 10;
-            const fractionPrecision = 2;
-            const dividend = fromStringDirect('465600', base).result;
-            const divisor = fromStringDirect('12', base).result;
+            const base = 2;
+            const dividend = fromStringDirect('1100100', base).result;
+            const divisor = fromStringDirect('101', base).result;
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList(), fractionPrecision);
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
-            const expected = '38800';
+            const expected = '10100';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should return proper result for binary numbers with fraction result (MrK example)', () => {
+            // given
+            const base = 2;
+            const dividend = fromStringDirect('1000101', base).result; // 69
+            const divisor = fromStringDirect('101', base).result;      // 5
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+
+            // then
+            const expected = '1101.11001'; // 13.8
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should return proper result for binary numbers with fraction result', () => {
+            // given
+            const base = 2;
+            const dividend = fromStringDirect('11001001001.1011', base).result; // 1609.6875
+            const divisor = fromStringDirect('101110', base).result;            // 46
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+
+            // then
+            const expected = '100010.1111111'; // 34.9921875
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
@@ -297,7 +324,7 @@ describe('#division', () => {
 
             // when
             expect(() => {
-                divideDigits(dividend.toDigitsList(), divisor.toDigitsList())
+                divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
             }).toThrow();
         });
     });
