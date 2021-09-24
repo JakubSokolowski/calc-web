@@ -1,4 +1,4 @@
-import { isZeroDigit } from '../digits';
+import { isZeroDigit, trimLeadingZeros } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
@@ -161,17 +161,7 @@ export class WithExtension extends DefaultMultiplication {
     }
 
     protected trimSumDigits(digits: Digit[]) {
-        const onlyZeros = digits.every(isZeroDigit);
-        return onlyZeros
-            ? digits
-            : trimStartByPredicate(
-                  digits,
-                  this.isZeroDigitOnGreaterThanZeroPosition
-              );
-    }
-
-    private isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
-        return digit.position > 0 && isZeroDigit(digit);
+        return trimLeadingZeros(digits);
     }
 
     private getPositionCap(

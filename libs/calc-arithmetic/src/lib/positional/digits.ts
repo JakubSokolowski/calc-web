@@ -1,6 +1,6 @@
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
-import { inRangeInclusive, nNext, nPrev } from '@calc/utils';
+import { inRangeInclusive, nNext, nPrev, trimStartByPredicate } from '@calc/utils';
 
 export function padWithZeroDigits<T extends Digit>(digits: T[], base: number, desiredLength: number, direction: 'Left' | 'Right'): T[] {
     if (digits.length >= desiredLength) return [...digits];
@@ -107,6 +107,20 @@ export function strArrayToDigits(strDigits: string[], base: number, positionStar
             base
         };
     });
+}
+
+export function trimLeadingZeros<T extends Digit>(digits: T[]) {
+    const onlyZeros = digits.every(isZeroDigit);
+    return onlyZeros
+        ? digits
+        : trimStartByPredicate(
+            digits,
+            isZeroDigitOnGreaterThanZeroPosition
+        );
+}
+
+function isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
+    return digit.position > 0 && isZeroDigit(digit);
 }
 
 export function isZeroDigit<T extends Digit>(digit: T): boolean{

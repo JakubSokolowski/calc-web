@@ -1,5 +1,5 @@
 import {
-    BaseDigits,
+    BaseDigits, Digit,
     digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
@@ -11,7 +11,8 @@ import {
     PositionalNumber,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
-import { leastSignificantPosition } from '../digits';
+import { isZeroDigit, leastSignificantPosition, trimLeadingZeros } from '../digits';
+import { trimEndByPredicate } from '@calc/utils';
 
 
 export function divideDefault(numbers: PositionalNumber[]): DivisionResult {
@@ -22,19 +23,7 @@ export function divideDefault(numbers: PositionalNumber[]): DivisionResult {
     } as DivisionResult;
 }
 
-
-/*
-  TODO fraction precision vs extension limit
-
-  fraction precision - how many fraction digits should be generated
-  problem: the number can have finite fraction but number of fraction digits can be greater than limit and
-           it wont be computed
-
-  extension limit - how many additional extension (moved down fallback zeros) should be generated
-  problem: non-intuitive, i can understand - do division with 5 digit precision but division with 5 extension limit
-           is not understandable. The plus side is that every finite fraction will be computed
-*/
-export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOperand[], fractionLimit = 0): DivisionResult {
+export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOperand[], fractionPrecision = 5): DivisionResult {
     if(!integerPartOnly(divisor)) {
         throw Error(
             `For divideDigits(...) divisor: ${digitsToStr(divisor)} cannot have fraction.`
@@ -44,7 +33,7 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
     const positionResults: DivisionPositionResult[] = [];
     let prevResult: DivisionPositionResult | undefined = undefined;
 
-    while (keepDividing(dividend, prevResult)) {
+    while (keepDividing(dividend, prevResult, fractionPrecision)) {
         const res = divideAtPosition(dividend, divisor, prevResult);
         positionResults.push(res);
         prevResult = res;
@@ -65,13 +54,28 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
 }
 
 function positionResultsToNumber(positionResults: DivisionPositionResult[]): DivisionOperand[] {
-    return positionResults.map((r) => r.valueAtPosition);
+    const positionDigits = positionResults.map((r) => r.valueAtPosition);
+    return trimResultDigits(positionDigits);
 }
 
-function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult) {
+function trimResultDigits(digits: DivisionOperand[]): DivisionOperand[] {
+    const trimmedLeading = trimLeadingZeros(digits);
+    return trimEndByPredicate(trimmedLeading, isZeroFractionDigits);
+}
+
+function isZeroFractionDigits<T extends Digit>(digit: T): boolean {
+    return isZeroDigit(digit) && digit.position < 0;
+}
+
+function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0) {
     if (!prev) return true;
+
     const hasDividendDigitsToMoveDown = dividend.length -1 > prev.divisionIndex;
     if(hasDividendDigitsToMoveDown) return true;
+
+    const numGeneratedFractionDigits = Math.abs(prev.valueAtPosition.position);
+    if(fractionPrecision <= numGeneratedFractionDigits) return false;
+
     return prev.remainderDecimal !== 0;
 }
 
