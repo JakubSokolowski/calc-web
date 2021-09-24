@@ -245,19 +245,49 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
-        // it('should return proper result when division has result with finite fraction and both dividend and divisor have fraction parts', () => {
-        //     // given
-        //     const base = 10;
-        //     const dividend = fromStringDirect('1000', base).result;
-        //     const divisor = fromStringDirect(' 312', base).result;
-        //
-        //     // when
-        //     const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
-        //
-        //     // then
-        //     const expected = '12.5';
-        //     expect(result.numberResult.toString()).toEqual(expected);
-        // });
+        it('should return result with default 5 fraction precision when division has result with infinite fraction and fractionPrecision is not defined', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1000', base).result;
+            const divisor = fromStringDirect(' 312', base).result;
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+
+            // then
+            const expected = '3.20512';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should return result with given fraction precision when division has result with infinite fraction and fractionPrecision is defined', () => {
+            // given
+            const base = 10;
+            const fractionPrecision = 2;
+            const dividend = fromStringDirect('1000', base).result;
+            const divisor = fromStringDirect('312', base).result;
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList(), fractionPrecision);
+
+            // then
+            const expected = '3.2';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should return proper result when divisor is greater less then zero', () => {
+            // given
+            const base = 10;
+            const fractionPrecision = 2;
+            const dividend = fromStringDirect('465600', base).result;
+            const divisor = fromStringDirect('12', base).result;
+
+            // when
+            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList(), fractionPrecision);
+
+            // then
+            const expected = '38800';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
 
         it('should throw error when divisor has fraction part', () => {
             // given
