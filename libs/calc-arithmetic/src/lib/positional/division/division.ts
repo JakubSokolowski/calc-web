@@ -142,11 +142,6 @@ function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionO
     return fromDigits(dividend.slice(0, numDivisorOps)).result;
 }
 
-export interface RemDivResult {
-    integerQuotient: DivisionOperand;
-    remainder: DivisionOperand;
-}
-
 export function integerQuotient(dividend: PositionalNumber, divisor: PositionalNumber, resultPosition = 0): DivisionOperand {
     const base = dividend.base();
     const decimalDividend = dividend.decimalValue;
