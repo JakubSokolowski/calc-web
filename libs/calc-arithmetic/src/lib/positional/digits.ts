@@ -1,6 +1,6 @@
-import { Digit } from '../models';
+import { Digit, DivisionOperand } from '../models';
 import { BaseDigits } from './base-digits';
-import { inRangeInclusive, nNext, nPrev, trimStartByPredicate } from '@calc/utils';
+import { inRangeInclusive, nNext, nPrev, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
 
 export function padWithZeroDigits<T extends Digit>(digits: T[], base: number, desiredLength: number, direction: 'Left' | 'Right'): T[] {
     if (digits.length >= desiredLength) return [...digits];
@@ -125,6 +125,15 @@ function isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
 
 export function isZeroDigit<T extends Digit>(digit: T): boolean{
     return digit.valueInDecimal === 0;
+}
+
+export function isZeroFractionDigit<T extends Digit>(digit: T): boolean {
+    return isZeroDigit(digit) && digit.position < 0;
+}
+
+export function trimExcessZeros<T extends Digit>(digits: T[]): T[] {
+    const trimmedLeading = trimLeadingZeros(digits);
+    return trimEndByPredicate(trimmedLeading, isZeroFractionDigit);
 }
 
 export function positionRangeSlice<T extends Digit>(digits: T[], from: number, to: number): T[] {

@@ -1,5 +1,5 @@
 import {
-    BaseDigits, Digit,
+    BaseDigits,
     digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
@@ -11,23 +11,44 @@ import {
     PositionalNumber,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
-import { isZeroDigit, leastSignificantPosition, trimLeadingZeros } from '../digits';
-import { trimEndByPredicate } from '@calc/utils';
+import { leastSignificantPosition, trimExcessZeros } from '../digits';
+import { OperandsTransformType } from '../transform/preprocessor-type';
+import { applyTransformsByType } from '../transform/apply-by-type';
 
 
-export function divideDefault(numbers: PositionalNumber[]): DivisionResult {
+export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5): DivisionResult {
+    const [dividend, divisor] = numbers;
+    const [dividendDigits, divisorDigits] = prepareDivisionOperands(dividend, divisor);
+    const result = divideDigits(dividendDigits, divisorDigits, fractionPrecision);
 
+    const resultNegative = dividend.isNegative() !== divisor.isNegative();
+    const resultWithProperSign = fromDigits(
+        result.numberResult.toDigitsList(),
+        resultNegative
+    ).result;
 
     return {
+        ...result,
+        numberResult: resultWithProperSign,
         numberOperands: numbers
-    } as DivisionResult;
+    };
+}
+
+export function prepareDivisionOperands(dividend: PositionalNumber, divisor: PositionalNumber): DivisionOperand[][] {
+    return applyTransformsByType(
+        [
+            dividend.toDigitsList(),
+            divisor.toDigitsList()
+        ],
+        [OperandsTransformType.ScaleToDivisor]
+    );
 }
 
 export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOperand[], fractionPrecision = 5): DivisionResult {
-    if(!integerPartOnly(divisor)) {
+    if (!integerPartOnly(divisor)) {
         throw Error(
             `For divideDigits(...) divisor: ${digitsToStr(divisor)} cannot have fraction.`
-        )
+        );
     }
 
     const positionResults: DivisionPositionResult[] = [];
@@ -55,26 +76,17 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
 
 function positionResultsToNumber(positionResults: DivisionPositionResult[]): DivisionOperand[] {
     const positionDigits = positionResults.map((r) => r.valueAtPosition);
-    return trimResultDigits(positionDigits);
-}
-
-function trimResultDigits(digits: DivisionOperand[]): DivisionOperand[] {
-    const trimmedLeading = trimLeadingZeros(digits);
-    return trimEndByPredicate(trimmedLeading, isZeroFractionDigits);
-}
-
-function isZeroFractionDigits<T extends Digit>(digit: T): boolean {
-    return isZeroDigit(digit) && digit.position < 0;
+    return trimExcessZeros(positionDigits);
 }
 
 function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0) {
     if (!prev) return true;
 
-    const hasDividendDigitsToMoveDown = dividend.length -1 > prev.divisionIndex;
-    if(hasDividendDigitsToMoveDown) return true;
+    const hasDividendDigitsToMoveDown = dividend.length - 1 > prev.divisionIndex;
+    if (hasDividendDigitsToMoveDown) return true;
 
     const numGeneratedFractionDigits = Math.abs(prev.valueAtPosition.position);
-    if(fractionPrecision <= numGeneratedFractionDigits) return false;
+    if (fractionPrecision <= numGeneratedFractionDigits) return false;
 
     return prev.remainderDecimal !== 0;
 }
@@ -87,7 +99,6 @@ export function divideAtPosition(dividend: DivisionOperand[], divisor: DivisionO
     const divisionIndex = prev ? prev.divisionIndex + 1 : 0;
     const dividendSlicePosNum = getDividendSlice(dividend, divisor, prev);
     const divisorPosNum = fromDigits(divisor).result;
-
 
     // estimate how many times the divisor will fit in dividend slice
     const outputPosition = prev
@@ -128,13 +139,13 @@ function getNextDividendSlice(dividend: DivisionOperand[], divisor: DivisionOper
 
 function getNextWithZeroFallback(dividend: DivisionOperand[], digitIndex: number): DivisionOperand {
     const nextDividendDigit = dividend[digitIndex];
-    if(nextDividendDigit) return nextDividendDigit;
-    const {base} = dividend[0];
-    return nextDividendDigit || BaseDigits.getDigit(0, base)
+    if (nextDividendDigit) return nextDividendDigit;
+    const { base } = dividend[0];
+    return nextDividendDigit || BaseDigits.getDigit(0, base);
 }
 
 function reindexToLsp(digits: DivisionOperand[], lsp = 0): DivisionOperand[] {
-    return digits.map((d, i) => ({...d, position: digits.length - i - lsp}))
+    return digits.map((d, i) => ({ ...d, position: digits.length - i - lsp }));
 }
 
 function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionOperand[]): PositionalNumber {

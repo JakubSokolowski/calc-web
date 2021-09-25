@@ -7,6 +7,9 @@ import { MultiplicationComplementsExtender } from './multiplication-complements-
 import { MergeExtensions } from './merge-extensions';
 import { IncrementalLeftShift } from './shift-and-extend';
 import { WithoutExtensionU2Prepare } from './woutext-u2-multiplication';
+import { LeftShift } from './left-shift';
+import { TrimExcessZeros } from './trim-excess-zeros';
+import { ScaleToDivisor } from './scale-to-divisor';
 
 
 export function getTransform<T extends Digit>(type: OperandsTransformType): OperandsTransform<T> {
@@ -19,6 +22,8 @@ export function getTransform<T extends Digit>(type: OperandsTransformType): Oper
             return new MergeExtensions();
         case OperandsTransformType.IncrementalLeftShift:
             return new IncrementalLeftShift();
+        case OperandsTransformType.LeftShift:
+            return new LeftShift();
         case OperandsTransformType.FilterMultiplierExtension:
             return new MultiplierExtensionFilter();
         case OperandsTransformType.ExtendComplements:
@@ -27,5 +32,9 @@ export function getTransform<T extends Digit>(type: OperandsTransformType): Oper
             return new ExtensionsFilter();
         case OperandsTransformType.AlignFractions:
             return new AlignFractions();
+        case OperandsTransformType.TrimExcessZeros:
+            return new TrimExcessZeros();
+        case OperandsTransformType.ScaleToDivisor:
+            return new ScaleToDivisor();
     }
 }
