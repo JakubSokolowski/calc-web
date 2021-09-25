@@ -1,7 +1,6 @@
 import React, { FC } from 'react';
 import { MultiplicationResult } from '@calc/calc-arithmetic';
 import { OperandRow } from '../../operation-result/operand-row/operand-row';
-import { ResultDetails } from '../../result-details/result-details';
 
 interface P {
     result: MultiplicationResult;

@@ -1,19 +1,16 @@
-import {
-    BaseDigits,
-    digitsToStr,
-    DivisionOperand,
-    DivisionPositionResult,
-    DivisionResult,
-    DivisionType,
-    fromDigits,
-    multiplyDefault,
-    OperationType,
-    PositionalNumber,
-    subtractPositionalNumbers
-} from '@calc/calc-arithmetic';
+
 import { leastSignificantPosition, trimExcessZeros } from '../digits';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
+import { PositionalNumber } from '../positional-number';
+import { DivisionOperand, DivisionPositionResult, DivisionResult } from '../../models';
+import { fromDigits } from '../base-converter';
+import { BaseDigits } from '../base-digits';
+import { subtractPositionalNumbers } from '../subtraction';
+import { multiplyDefault } from '../multiplication/multiplication';
+import { digitsToStr } from '../../helpers/conversion-helpers';
+import { DivisionType } from '../../models/operation-algorithm';
+import { OperationType } from '../../models/operation';
 
 
 export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5): DivisionResult {
@@ -34,7 +31,7 @@ export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5
     };
 }
 
-export function prepareDivisionOperands(dividend: PositionalNumber, divisor: PositionalNumber): DivisionOperand[][] {
+function prepareDivisionOperands(dividend: PositionalNumber, divisor: PositionalNumber): DivisionOperand[][] {
     return applyTransformsByType(
         [
             dividend.toDigitsList(),

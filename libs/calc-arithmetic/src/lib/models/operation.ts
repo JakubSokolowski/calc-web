@@ -31,5 +31,11 @@ export const allOperations: Operation[] = [
         minOperands: 2,
         maxOperands: 2,
         tKey: 'operations.multiplication.title'
+    },
+    {
+        type: OperationType.Division,
+        minOperands: 2,
+        maxOperands: 2,
+        tKey: 'operations.division.title'
     }
 ];
