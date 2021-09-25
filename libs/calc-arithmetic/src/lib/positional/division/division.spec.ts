@@ -1,12 +1,12 @@
 import {
     DivisionOperand,
-    DivisionPositionResult,
+    DivisionPositionResult, DivisionResult, DivisionType,
     fromStringDirect,
-    multiplyDefault,
+    multiplyDefault, OperationType,
     splitToDigitsList,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
-import { divideAtPosition, divideDigits, getDividendSlice, integerQuotient } from './division';
+import { divideAtPosition, divideDefault, divideDigits, getDividendSlice, integerQuotient } from './division';
 
 
 describe('#division', () => {
@@ -326,6 +326,109 @@ describe('#division', () => {
             expect(() => {
                 divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
             }).toThrow();
+        });
+    });
+
+    describe('#divideDefault', () => {
+        describe('when dividing numbers', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('22144', base).result;
+            const divisor = fromStringDirect('64', base).result;
+            let result: DivisionResult;
+
+            beforeEach(() => {
+                // when
+                result = divideDefault([dividend, divisor]);
+            });
+
+            it('should return result with proper numberResult', () => {
+                // then
+                const expected = '346';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
+
+            it('should return result with proper operation', () => {
+                // then
+                const expected = OperationType.Division;
+                expect(result.operation).toEqual(expected);
+            });
+
+            it('should return result with proper algorithm type', () => {
+                // then
+                const expected = DivisionType.Default;
+                expect(result.algorithmType).toEqual(expected);
+            });
+        });
+
+        it('should divide numbers when divisor has fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('62', base).result;
+            const divisor = fromStringDirect('0.5', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '124';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide numbers when both dividend and divisor has fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('7834.123', base).result;
+            const divisor = fromStringDirect('0.58644', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '13358.78009';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide numbers when both dividend and divisor has fraction part and are between 0 and 1', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('0.66484', base).result;
+            const divisor = fromStringDirect('0.00124', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '536.16129';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide numbers when some of operands is a negative number', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('-0.66484', base).result;
+            const divisor = fromStringDirect('0.00124', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '-536.16129';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide numbers when both of operands are negative', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('-0.66484', base).result;
+            const divisor = fromStringDirect('-0.00124', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '536.16129';
+            expect(result.numberResult.toString()).toEqual(expected);
         });
     });
 });
