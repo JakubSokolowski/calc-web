@@ -4,14 +4,17 @@ import {
     addPositionalNumbers,
     AlgorithmType,
     BaseOperationResult,
+    divideDefault,
+    DivisionResult,
+    DivisionType,
     MultiplicationResult,
     MultiplicationType,
     multiplyBooth,
     multiplyBoothMcSorley,
+    multiplyBoothMcSorleyAlt,
     multiplyDefault,
     multiplyWithExtensions,
     multiplyWithoutExtension,
-    multiplyBoothMcSorleyAlt,
     Operation,
     OperationAlgorithm,
     OperationType,
@@ -22,6 +25,7 @@ import {
 } from '@calc/calc-arithmetic';
 import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@calc/grid';
 import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';
+import { buildDivisionGrid } from '../division/division-grid/division-grid';
 
 export interface OperationParams<T extends AlgorithmType> {
     base: number;
@@ -46,6 +50,10 @@ export function calculate<T extends AlgorithmType,
         case OperationType.Multiplication:
             return handleMultiply(
                 params as OperationParams<MultiplicationType>
+            );
+        case OperationType.Division:
+            return handleDivide(
+                params as OperationParams<DivisionType>
             );
         default:
             throw new Error(
@@ -155,6 +163,25 @@ function handleMultiply(
         default:
             throw new Error(
                 `Subtraction algorithm type: ${params.algorithm.type} not supported`
+            );
+    }
+}
+
+
+function handleDivide(params: OperationParams<DivisionType>): GridResult<DivisionResult> {
+    switch (params.algorithm.type) {
+        case DivisionType.Default: {
+            const result = divideDefault(params.operands);
+            const grid = buildDivisionGrid(result);
+            return {
+                grid,
+                result: result.numberResult,
+                operationResult: result
+            };
+        }
+        default:
+            throw new Error(
+                `Division algorithm type: ${params.algorithm.type} not supported`
             );
     }
 }

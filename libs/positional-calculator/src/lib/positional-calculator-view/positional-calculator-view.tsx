@@ -102,7 +102,8 @@ export const PositionalCalculatorView: FC = () => {
         return {
             [OperationType.Addition]: 'positionalCalculator.additionDetails',
             [OperationType.Subtraction]: 'positionalCalculator.subtractionDetails',
-            [OperationType.Multiplication]: 'positionalCalculator.multiplicationDetails'
+            [OperationType.Multiplication]: 'positionalCalculator.multiplicationDetails',
+            [OperationType.Division]: 'positionalCalculator.divisionDetails'
         }[params.operation.type] || '';
     };
 

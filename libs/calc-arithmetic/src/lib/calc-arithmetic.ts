@@ -8,7 +8,7 @@ export {
     ConversionToArbitrary,
     ConversionToDecimal,
     ConversionType,
-    AssociatedBaseConversion,
+    AssociatedBaseConversion
 } from './positional/base-converter';
 
 export { addPositionalNumbers } from './positional/addition';
@@ -21,7 +21,11 @@ export { multiplyDefault } from './positional/multiplication/multiplication';
 
 export { multiplyWithExtensions } from './positional/multiplication/with-extension';
 
-export { multiplyBooth, multiplyBoothMcSorley, multiplyBoothMcSorleyAlt } from './positional/multiplication/signed-digit-multiplication';
+export {
+    multiplyBooth, multiplyBoothMcSorley, multiplyBoothMcSorleyAlt
+} from './positional/multiplication/signed-digit-multiplication';
+
+export { divideDefault } from './positional/division/division';
 
 export * from './models';
 export * from './models/operation';
@@ -29,14 +33,14 @@ export * from './models/operation-algorithm';
 
 export {
     PositionalNumber,
-    PositionalSourceType,
+    PositionalSourceType
 } from './positional/positional-number';
 
 export {
     getComplement,
     complementStrToBaseStr,
     isValidComplementStr,
-    isValidComplementOrRepresentationStr,
+    isValidComplementOrRepresentationStr
 } from './positional/complement-converter';
 
 export { getComplementWithDetails } from './positional/complement-details';
@@ -46,13 +50,13 @@ export {
     FloatingRepresentation,
     SingleRepresentation,
     DoubleRepresentation,
-    FloatProperty,
+    FloatProperty
 } from './floating/float-converter';
 
 export {
     isValidString,
     digitsToStr,
-    splitToDigitsList,
+    splitToDigitsList
 } from './helpers/conversion-helpers';
 
 export { BaseDigits } from './positional/base-digits';

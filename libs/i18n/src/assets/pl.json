@@ -128,7 +128,12 @@
             "booth": "Booth",
             "boothMcSorley": "Booth-McSorley",
             "boothMcSorleyAlt": "Booth-McSorley alt."
+        },
+        "division": {
+            "title": "Dzielenie",
+            "default": "Domyślny"
         }
+
     },
     "routes": {
         "home": "Strona główna",

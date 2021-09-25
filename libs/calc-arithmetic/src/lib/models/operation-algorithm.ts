@@ -77,9 +77,16 @@ export const multiplicationAlgorithms: OperationAlgorithm<
     },
 ];
 
+export const divisionAlgorithms: OperationAlgorithm<DivisionType>[] = [
+    {
+        type: DivisionType.Default,
+        tKey: 'operations.division.default',
+    },
+];
+
 export const algorithmMap: AlgorithmOperationMap = {
     [OperationType.Addition]: additionAlgorithms,
     [OperationType.Subtraction]: subtractionAlgorithms,
     [OperationType.Multiplication]: multiplicationAlgorithms,
-    [OperationType.Division]: [],
+    [OperationType.Division]: divisionAlgorithms,
 };

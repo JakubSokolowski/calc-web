@@ -124,6 +124,10 @@
             "booth": "Booth",
             "boothMcSorley": "Booth-McSorley",
             "boothMcSorleyAlt": "Booth-McSorley alt."
+        },
+        "division": {
+            "title": "Division",
+            "default": "Default"
         }
     },
     "sandbox": {

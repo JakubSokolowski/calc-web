@@ -41,6 +41,8 @@ function getExpected<T extends AlgorithmType>(params: OperationParams<T>): Opera
             return new SubtractionCheck(params.operands);
         case OperationType.Multiplication:
             return new MultiplicationCheck(params.operands);
+        case OperationType.Division:
+            return new DivisionCheck(params.operands);
         default:
             throw Error(`Sanity check for ${params.operation.type} not implemented`);
     }
@@ -83,5 +85,15 @@ class MultiplicationCheck extends OperationCheck {
         return multiplicand.decimalValue.multipliedBy(multiplier.decimalValue);
     }
 }
+
+class DivisionCheck extends OperationCheck {
+    check(): BigNumber {
+        const [dividend, divisor] = this.operands;
+        return dividend.decimalValue.dividedBy(divisor.decimalValue);
+    }
+}
+
+
+
 
 
