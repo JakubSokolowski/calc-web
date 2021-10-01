@@ -79,13 +79,12 @@ function positionResultsToNumber(positionResults: DivisionPositionResult[]): Div
 function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0) {
     if (!prev) return true;
 
-    const hasDividendDigitsToMoveDown = dividend.length - 1 > prev.divisionIndex;
+    const hasDividendDigitsToMoveDown = dividend.length - 2 > prev.divisionIndex;
     if (hasDividendDigitsToMoveDown) return true;
+    if (prev.remainderDecimal === 0) return false;
 
     const numGeneratedFractionDigits = Math.abs(prev.valueAtPosition.position);
-    if (fractionPrecision <= numGeneratedFractionDigits) return false;
-
-    return prev.remainderDecimal !== 0;
+    return fractionPrecision > numGeneratedFractionDigits;
 }
 
 function integerPartOnly(digits: DivisionOperand[]): boolean {
