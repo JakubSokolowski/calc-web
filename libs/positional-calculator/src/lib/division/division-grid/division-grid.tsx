@@ -126,7 +126,7 @@ function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: nu
 
 function buildLastSubtractionRows(step: DivisionPositionResult, totalWidth: number): GridCellConfig[][] {
     const { divisionIndex } = step;
-    const leftPaddingLength = divisionIndex;
+    const leftPaddingLength = divisionIndex + 1;
 
     const [minuend, subtrahend] = step.subtractionResult.numberOperands;
     const minuendDigits = minuend.asDigits();

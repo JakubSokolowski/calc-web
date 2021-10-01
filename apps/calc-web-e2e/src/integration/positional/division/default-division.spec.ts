@@ -2,7 +2,6 @@ import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
     getDivisionResult,
-    getMultiplicationResult,
     getOperationGrid,
     gridHasProperResultRow,
     operationReturnsProperResult
@@ -15,7 +14,7 @@ describe('Default Division', () => {
         cy.visit('#/tools/positional/positional-calculator');
     });
 
-    it('should divide two positive numbers with even division result', () => {
+    it('should divide two positive numbers with integer division result', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['1224', '12'],

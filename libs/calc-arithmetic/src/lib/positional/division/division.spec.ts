@@ -361,6 +361,20 @@ describe('#division', () => {
             });
         });
 
+        it('should return proper step results', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1224', base).result;
+            const divisor = fromStringDirect('12', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '102';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
         it('should divide numbers when divisor has fraction part', () => {
             // given
             const base = 10;
