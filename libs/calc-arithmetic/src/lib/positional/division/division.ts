@@ -1,5 +1,5 @@
 
-import { leastSignificantPosition, trimExcessZeros } from '../digits';
+import { leastSignificantPosition, trimExcessZeros, trimLeadingZeros } from '../digits';
 import { OperandsTransformType } from '../transform/preprocessor-type';
 import { applyTransformsByType } from '../transform/apply-by-type';
 import { PositionalNumber } from '../positional-number';
@@ -73,7 +73,7 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
 
 function positionResultsToNumber(positionResults: DivisionPositionResult[]): DivisionOperand[] {
     const positionDigits = positionResults.map((r) => r.valueAtPosition);
-    return trimExcessZeros(positionDigits);
+    return trimLeadingZeros(positionDigits);
 }
 
 function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0) {
