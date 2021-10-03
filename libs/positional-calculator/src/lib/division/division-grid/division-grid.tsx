@@ -4,16 +4,40 @@ import {
     extractResultMeta,
     GridCellConfig,
     GridLine,
-    HoverOperationGrid, LineDefinition,
+    HoverOperationGrid,
+    LineDefinition,
     LineType,
     padWithEmptyCells,
     ResultMeta
 } from '@calc/grid';
 
 
+export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
+    const meta = extractDivisionResultMeta(result);
+    const { totalWidth } = meta;
+
+    const resultRow: GridCellConfig[] = buildResultRow(result, meta);
+    const operationRow: GridCellConfig[] = buildOperationRow(result, totalWidth);
+    const subtractionRows = buildSubtractionRows(result, totalWidth);
+
+    const values: GridCellConfig[][] = [
+        resultRow,
+        operationRow,
+        ...subtractionRows
+    ];
+
+    const lines: GridLine[] = getGridLines(result);
+
+    return {
+        lines,
+        values,
+        groups: []
+    };
+}
+
 function buildResultRow(result: DivisionResult, meta: DivisionResultMeta): GridCellConfig[] {
-    const { totalWidth, numDividendDigits, numResultDigits } = meta;
-    const leftOffset = Math.abs(numDividendDigits - numResultDigits) + 1;
+    const { totalWidth, numDividendIntegerPartDigits, numResultIntegerPartDigits } = meta;
+    const leftOffset = Math.abs(numDividendIntegerPartDigits - numResultIntegerPartDigits) + 1;
 
     const leftPadded = padWithEmptyCells(
         digitsToCellConfig(result.resultDigits),
@@ -184,32 +208,10 @@ function buildOperationRow(result: DivisionResult, totalWidth: number): GridCell
     );
 }
 
-export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
-    const meta = extractDivisionResultMeta(result);
-    const { totalWidth } = meta;
-
-    const resultRow: GridCellConfig[] = buildResultRow(result, meta);
-    const operationRow: GridCellConfig[] = buildOperationRow(result, totalWidth);
-    const subtractionRows = buildSubtractionRows(result, totalWidth);
-
-    const values: GridCellConfig[][] = [
-        resultRow,
-        operationRow,
-        ...subtractionRows
-    ];
-
-    const lines: GridLine[] = getGridLines(result);
-
-    return {
-        lines,
-        values,
-        groups: []
-    };
-}
-
 interface DivisionResultMeta extends ResultMeta {
     totalWidth: number;
     numDividendDigits: number;
+    numDividendIntegerPartDigits: number;
     numDivisorDigits: number;
     numResultDigits: number;
 }
@@ -218,12 +220,14 @@ function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
     const baseMeta = extractResultMeta(result);
     const [dividend, divisor] = result.numberOperands;
     const numDividendDigits = dividend.numDigits();
+    const numDividendIntegerPartDigits = dividend.numIntegerPartDigits();
     const numDivisorDigits = divisor.numDigits();
     const numResultDigits = result.numberResult.numDigits();
     const totalWidth = Math.max(numDividendDigits + numDivisorDigits, numResultDigits) + 2;
     return {
         ...baseMeta,
         numDividendDigits,
+        numDividendIntegerPartDigits,
         numDivisorDigits,
         totalWidth,
         numResultDigits
