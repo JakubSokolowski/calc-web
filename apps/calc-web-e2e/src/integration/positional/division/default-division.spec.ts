@@ -31,4 +31,22 @@ describe('Default Division', () => {
 
         gridHasProperResultRow(expected, base, 4, 0);
     });
+
+    it('should divide two integer numbers with fraction division result', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['122', '12'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '10.16666';
+
+        operationReturnsProperResult(config, expected);
+
+        getDivisionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expected, base, 8, 0);
+    });
 });
