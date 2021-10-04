@@ -51,8 +51,13 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
     const positionResults: DivisionPositionResult[] = [];
     let prevResult: DivisionPositionResult | undefined = undefined;
 
-    while (keepDividing(dividend, prevResult, fractionPrecision)) {
+    let firstDividendSliceLength = 0;
+    while (keepDividing(dividend, prevResult, fractionPrecision, firstDividendSliceLength)) {
         const res = divideAtPosition(dividend, divisor, prevResult);
+        if(!firstDividendSliceLength) {
+            firstDividendSliceLength = res.dividendSlice.length;
+        }
+
         positionResults.push(res);
         prevResult = res;
     }
@@ -76,13 +81,12 @@ function positionResultsToNumber(positionResults: DivisionPositionResult[]): Div
     return trimLeadingZeros(positionDigits);
 }
 
-function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0) {
+function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0, firstSliceLength = 0) {
     if (!prev) return true;
 
-    const hasDividendDigitsToMoveDown = dividend.length - 2 > prev.divisionIndex;
+    const hasDividendDigitsToMoveDown = dividend.length - firstSliceLength > prev.divisionIndex;
     if (hasDividendDigitsToMoveDown) return true;
     if (prev.remainderDecimal === 0) return false;
-
     const numGeneratedFractionDigits = Math.abs(prev.valueAtPosition.position);
     return fractionPrecision > numGeneratedFractionDigits;
 }

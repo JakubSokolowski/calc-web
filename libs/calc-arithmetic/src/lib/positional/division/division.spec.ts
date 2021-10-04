@@ -284,7 +284,7 @@ describe('#division', () => {
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
-            const expected = '10100.0';
+            const expected = '10100';
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
@@ -312,7 +312,7 @@ describe('#division', () => {
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
-            const expected = '100010.11111110'; // 34.9921875
+            const expected = '100010.11111'; // 34.9921875
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
@@ -428,6 +428,20 @@ describe('#division', () => {
 
             // then
             const expected = '536.16129';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide numbers when divisor is between 0 and 1', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('122.1', base).result;
+            const divisor = fromStringDirect('0.1', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '1221';
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
