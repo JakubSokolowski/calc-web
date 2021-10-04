@@ -104,4 +104,22 @@ describe('Default Division', () => {
 
         gridHasProperResultRow(expected, base, 9, 0);
     });
+
+    it('should divide number by divisor between 0 and 1', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['122.1', '0.1'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '1221';
+
+        operationReturnsProperResult(config, expected);
+
+        getDivisionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+
+        gridHasProperResultRow(expected, base, 6, 0);
+    });
 });
