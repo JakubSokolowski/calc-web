@@ -762,7 +762,23 @@ describe('conversion-helpers', () => {
                 // then
                 const expected = '1234.5';
                 expect(result).toEqual(expected);
-            })
+            });
+
+            it('should add leading zero when there is no integer part', () => {
+                // given
+                const base = 10;
+                const digits: Digit[] = [
+                    {representationInBase: '1', position: -1, valueInDecimal: 1, base },
+                    {representationInBase: '1', position: -2, valueInDecimal: 1, base }
+                ];
+
+                // when
+                const result = digitsToStr(digits);
+
+                // then
+                const expected = '0.11';
+                expect(result).toEqual(expected);
+            });
         });
 
         describe('when base is greater than 36', () => {

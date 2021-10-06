@@ -35,13 +35,12 @@ export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
     };
 }
 
-function buildResultRow(result: DivisionResult, meta: DivisionResultMeta): GridCellConfig[] {
-    const { totalWidth, numDividendIntegerPartDigits, numResultIntegerPartDigits, numDivisorFractionPartDigits } = meta;
-    const leftOffset = Math.abs(numDividendIntegerPartDigits - numResultIntegerPartDigits) + numDivisorFractionPartDigits + 1;
+export function buildResultRow(result: DivisionResult, meta: DivisionResultMeta): GridCellConfig[] {
+    const { resultRowLeftOffset, totalWidth } = meta;
 
     const leftPadded = padWithEmptyCells(
         digitsToCellConfig(result.resultDigits),
-        result.resultDigits.length + leftOffset,
+        result.resultDigits.length + resultRowLeftOffset + 1,
         'Left'
     );
 
@@ -91,7 +90,7 @@ function buildSubtractionRows(result: DivisionResult, totalWidth: number): GridC
     result.stepResults.forEach((step: DivisionPositionResult, index) => {
         const isInitialStep = index === 0;
         if (isInitialStep) {
-            const { maxCellWithContentIndex, cells } = buildInitialSubtractionRow(step, totalWidth);
+            const { maxCellWithContentIndex, cells } = buildInitialSubtractionRow(step, totalWidth, result.stepResults.length);
             prevMaxCellWithContentIndex = maxCellWithContentIndex;
             subtractionRows.push(...cells);
             return;
@@ -148,22 +147,33 @@ function buildDefaultSubtractionRows(step: DivisionPositionResult, totalWidth: n
     };
 }
 
-function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: number): SubtractionRowCells {
+function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: number, numSteps: number): SubtractionRowCells {
     const subtractionRows: GridCellConfig[][] = [];
-    const [, subtrahend] = step.subtractionResult.numberOperands;
+    const [minuend, subtrahend] = step.subtractionResult.numberOperands;
     const subtrahendDigits = subtrahend.asDigits();
-
+    const minuendDigits = minuend.asDigits();
     const leftPaddingLength = 1;
+    const desiredWidth = Math.max(subtrahendDigits.length, minuendDigits.length) + leftPaddingLength;
 
     const subtrahendRow = padWithEmptyCells(
         digitsToCellConfig(subtrahendDigits),
-        subtrahendDigits.length + leftPaddingLength,
+        desiredWidth,
         'Left'
     );
     subtrahendRow[leftPaddingLength - 1].content = '-';
 
-
     subtractionRows.push(padWithEmptyCells(subtrahendRow, totalWidth));
+
+    const initialStepAlsoLast = numSteps === 1;
+    if (initialStepAlsoLast) {
+        const resultDigits = step.subtractionResult.numberResult.toDigitsList();
+        const subtractionResultRow = padWithEmptyCells(
+            digitsToCellConfig(resultDigits),
+            desiredWidth,
+            'Left'
+        );
+        subtractionRows.push(padWithEmptyCells(subtractionResultRow, totalWidth));
+    }
 
     return {
         cells: subtractionRows,
@@ -241,9 +251,10 @@ interface DivisionResultMeta extends ResultMeta {
     numDivisorDigits: number;
     numDivisorFractionPartDigits: number;
     numResultDigits: number;
+    resultRowLeftOffset: number;
 }
 
-function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
+export function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
     const baseMeta = extractResultMeta(result);
     const [dividend, divisor] = result.numberOperands;
     const numDividendDigits = dividend.numDigits();
@@ -251,11 +262,17 @@ function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
     const numDivisorDigits = divisor.numDigits();
     const numDivisorFractionPartDigits = divisor.numFractionPartDigits();
     const numResultDigits = result.numberResult.numDigits();
-    const numOperandsDigits = numDividendDigits + numDivisorDigits;
-    const leftOffset = Math.abs(numDividendIntegerPartDigits - baseMeta.numResultIntegerPartDigits)
-        + numDivisorFractionPartDigits
-        + 1;
-    const totalWidth = Math.max(numOperandsDigits + numDivisorFractionPartDigits + 2, numResultDigits + leftOffset);
+
+    const [scaledDividend, scaledDivisor] = result.operands;
+    const numOperandsDigits = scaledDividend.length + scaledDivisor.length;
+    const resultRowLeftOffset = Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits);
+
+    const spaceForFirstMinusSign = 1;
+    const resultRowLength = spaceForFirstMinusSign + resultRowLeftOffset + numResultDigits;
+
+    const spaceForOperandDivisionSign = 1;
+    const operandRowLength = spaceForFirstMinusSign + numOperandsDigits + spaceForOperandDivisionSign;
+    const totalWidth = Math.max(resultRowLength, operandRowLength);
 
     return {
         ...baseMeta,
@@ -264,6 +281,7 @@ function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
         numDivisorFractionPartDigits,
         numDivisorDigits,
         totalWidth,
-        numResultDigits
+        numResultDigits,
+        resultRowLeftOffset
     };
 }

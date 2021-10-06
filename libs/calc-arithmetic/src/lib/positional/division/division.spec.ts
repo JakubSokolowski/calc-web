@@ -1,6 +1,6 @@
 import {
     DivisionOperand,
-    DivisionPositionResult, DivisionResult, DivisionType,
+    DivisionPositionResult, DivisionType,
     fromStringDirect,
     multiplyDefault, OperationType,
     splitToDigitsList,
@@ -61,11 +61,13 @@ describe('#division', () => {
             const divisor = fromStringDirect('4587', base).result;
 
             // when
-            const result = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
+            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
             const expectedStr = '5462';
-            expect(result.toString()).toEqual(expectedStr);
+            const expectedLsp = 1;
+            expect(slice.toString()).toEqual(expectedStr);
+            expect(sliceSourceLsp).toEqual(expectedLsp);
         });
 
         it('should extend previous remainder with next dividend digit', () => {
@@ -79,11 +81,13 @@ describe('#division', () => {
             } as DivisionPositionResult;
 
             // when
-            const result = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
+            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
 
             // then
             const expectedStr = '8755';
-            expect(result.toString()).toEqual(expectedStr);
+            const expectedLsp = 0;
+            expect(slice.toString()).toEqual(expectedStr);
+            expect(sliceSourceLsp).toEqual(expectedLsp);
         });
 
         it('should extend previous remainder with zero if all dividend digits were already used', () => {
@@ -97,11 +101,13 @@ describe('#division', () => {
             } as DivisionPositionResult;
 
             // when
-            const result = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
+            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
 
             // then
             const expectedStr = '8750';
-            expect(result.toString()).toEqual(expectedStr);
+            const expectedLsp = -4;
+            expect(slice.toString()).toEqual(expectedStr);
+            expect(sliceSourceLsp).toEqual(expectedLsp);
         });
     });
 
@@ -245,6 +251,7 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        // LOOPS INF
         it('should return result with default 5 fraction precision when division has result with infinite fraction and fractionPrecision is not defined', () => {
             // given
             const base = 10;
@@ -259,6 +266,7 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        // LOOPS INF
         it('should return result with given fraction precision when division has result with infinite fraction and fractionPrecision is defined', () => {
             // given
             const base = 10;
@@ -288,6 +296,7 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        // LOOPS INF
         it('should return proper result for binary numbers with fraction result (MrK example)', () => {
             // given
             const base = 2;
@@ -302,6 +311,7 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        // LOOPS INF
         it('should return proper result for binary numbers with fraction result', () => {
             // given
             const base = 2;
@@ -330,35 +340,46 @@ describe('#division', () => {
     });
 
     describe('#divideDefault', () => {
-        describe('when dividing numbers', () => {
+        it('should return result with proper numberResult', () => {
             // given
             const base = 10;
             const dividend = fromStringDirect('22144', base).result;
             const divisor = fromStringDirect('64', base).result;
-            let result: DivisionResult;
 
-            beforeEach(() => {
-                // when
-                result = divideDefault([dividend, divisor]);
-            });
+            // when
+            const result = divideDefault([dividend, divisor]);
 
-            it('should return result with proper numberResult', () => {
-                // then
-                const expected = '346';
-                expect(result.numberResult.toString()).toEqual(expected);
-            });
+            // then
+            const expected = '346';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
 
-            it('should return result with proper operation', () => {
-                // then
-                const expected = OperationType.Division;
-                expect(result.operation).toEqual(expected);
-            });
+        it('should return result with proper operation', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('22144', base).result;
+            const divisor = fromStringDirect('64', base).result;
 
-            it('should return result with proper algorithm type', () => {
-                // then
-                const expected = DivisionType.Default;
-                expect(result.algorithmType).toEqual(expected);
-            });
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = OperationType.Division;
+            expect(result.operation).toEqual(expected);
+        });
+
+        it('should return result with proper algorithm type', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('22144', base).result;
+            const divisor = fromStringDirect('64', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = DivisionType.Default;
+            expect(result.algorithmType).toEqual(expected);
         });
 
         it('should return proper step results', () => {
@@ -470,6 +491,48 @@ describe('#division', () => {
 
             // then
             const expected = '536.16129';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide dividend with fraction part by negative divisor without fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('11.7662', base).result;
+            const divisor = fromStringDirect('-231', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '-0.05093';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide smaller dividend by greater divisor', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1', base).result;
+            const divisor = fromStringDirect('100', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '0.01';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide 1.1 by 10', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1.1', base).result;
+            const divisor = fromStringDirect('10', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '0.11';
             expect(result.numberResult.toString()).toEqual(expected);
         });
     });
