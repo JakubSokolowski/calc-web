@@ -257,6 +257,7 @@ interface DivisionResultMeta extends ResultMeta {
 export function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
     const baseMeta = extractResultMeta(result);
     const [dividend, divisor] = result.numberOperands;
+
     const numDividendDigits = dividend.numDigits();
     const numDividendIntegerPartDigits = dividend.numIntegerPartDigits();
     const numDivisorDigits = divisor.numDigits();
@@ -264,8 +265,13 @@ export function extractDivisionResultMeta(result: DivisionResult): DivisionResul
     const numResultDigits = result.numberResult.numDigits();
 
     const [scaledDividend, scaledDivisor] = result.operands;
+    const dividendLsp = dividend.leastSignificantPosition();
+    const resultLsp = result.numberResult.leastSignificantPosition();
+    const positionDiff = dividendLsp - resultLsp;
     const numOperandsDigits = scaledDividend.length + scaledDivisor.length;
-    const resultRowLeftOffset = Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits);
+    const resultRowLeftOffset = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber())
+        ? Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits)
+        : positionDiff;
 
     const spaceForFirstMinusSign = 1;
     const resultRowLength = spaceForFirstMinusSign + resultRowLeftOffset + numResultDigits;

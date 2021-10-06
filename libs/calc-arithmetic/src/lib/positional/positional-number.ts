@@ -45,6 +45,10 @@ export class PositionalNumber extends NumberComplement {
         return this.asDigits();
     }
 
+    public toNumber(): number {
+        return this.decimalValue.toNumber();
+    }
+
     isNegative(): boolean {
         return this.decimalValue.isNegative();
     }

@@ -174,6 +174,6 @@ describe('Default Division', () => {
         getDivisionResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
-        gridHasProperResultRow(expected, base, 4, 0);
+        gridHasProperResultRow(expected, base, 7, 0);
     });
 });
