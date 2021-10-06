@@ -63,6 +63,21 @@ describe('division-grid', () => {
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
 
+        it('should return proper left offset when divisor is greater than dividend but dividend has longer fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('11.7662', base).result;
+            const divisor = fromStringDirect('231', base).result;
+            const result = divideDefault([dividend, divisor]);
+
+            // when
+            const meta = extractDivisionResultMeta(result);
+
+            // then
+            const expected = 1;
+            expect(meta.resultRowLeftOffset).toEqual(expected);
+        });
+
         it('should return proper left offset for division by 1', () => {
             // given
             const base = 10;
@@ -77,5 +92,6 @@ describe('division-grid', () => {
             const expected = 0;
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
+
     });
 });
