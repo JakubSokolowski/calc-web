@@ -1,3 +1,4 @@
+
 export {
     StandardBaseConverter,
     fromNumber,
@@ -59,6 +60,7 @@ export {
     splitToDigitsList
 } from './helpers/conversion-helpers';
 
+export { leastSignificantPosition, mostSignificantPosition } from './positional/digits';
 export { BaseDigits } from './positional/base-digits';
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';

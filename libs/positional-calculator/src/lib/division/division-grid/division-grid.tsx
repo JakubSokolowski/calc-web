@@ -1,4 +1,4 @@
-import { DivisionPositionResult, DivisionResult } from '@calc/calc-arithmetic';
+import { DivisionOperand, DivisionPositionResult, DivisionResult, leastSignificantPosition } from '@calc/calc-arithmetic';
 import {
     digitsToCellConfig,
     extractResultMeta,
@@ -38,8 +38,10 @@ export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
 export function buildResultRow(result: DivisionResult, meta: DivisionResultMeta): GridCellConfig[] {
     const { resultRowLeftOffset, totalWidth } = meta;
 
+    const resultCells = toCellsWithFractionSeparator(result.resultDigits);
+
     const leftPadded = padWithEmptyCells(
-        digitsToCellConfig(result.resultDigits),
+        resultCells,
         result.resultDigits.length + resultRowLeftOffset + 1,
         'Left'
     );
@@ -49,6 +51,31 @@ export function buildResultRow(result: DivisionResult, meta: DivisionResultMeta)
         totalWidth,
         'Right'
     );
+}
+
+function toCellsWithFractionSeparator(digits: DivisionOperand[], fractionPointClass = 'defaultCellWithVerticalAndHorizontalLine'): GridCellConfig[] {
+    const resultLsp = leastSignificantPosition(digits);
+    const digitCells = digitsToCellConfig(digits);
+    const hasFractionPart = resultLsp < 0;
+
+    if(hasFractionPart) {
+        const fractionPointIndex = digitCells.length -1 - (Math.abs(resultLsp));
+
+        // Usually, separators for fraction point are defined as
+        // separate vertical line in grid lines but there is an
+        // an issue with line definition for lines tha start at 0
+        // (ex. line span from 0 to 1) The first cell will not have
+        // vertical line. This should be fixed at some point, but for
+        // now we can use the cell config to define cell preset that
+        // has vertical line on its own, regardless of grid line
+        // definitions
+        digitCells[fractionPointIndex].preset = {
+            ...digitCells[fractionPointIndex].preset,
+            default: fractionPointClass
+        }
+    }
+
+    return digitCells
 }
 
 function getGridLines(result: DivisionResult): GridLine[] {
@@ -226,7 +253,7 @@ function buildOperationRow(result: DivisionResult, totalWidth: number): GridCell
     const leftOffset = 1;
 
     const operationDigitsCells: GridCellConfig[] = [
-        ...digitsToCellConfig(dividend),
+        ...toCellsWithFractionSeparator(dividend, 'defaultCellWithVerticalLine'),
         { content: ':' },
         ...digitsToCellConfig(divisor)
     ];

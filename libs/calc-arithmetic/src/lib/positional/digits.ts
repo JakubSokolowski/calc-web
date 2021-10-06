@@ -1,4 +1,4 @@
-import { Digit, DivisionOperand } from '../models';
+import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
 import { inRangeInclusive, nNext, nPrev, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
 
