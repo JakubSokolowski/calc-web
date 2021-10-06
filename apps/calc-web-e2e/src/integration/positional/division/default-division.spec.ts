@@ -86,7 +86,6 @@ describe('Default Division', () => {
         gridHasProperResultRow(expected, base, 9, 0);
     });
 
-
     it('should divide integer number by divisor with fraction part', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {

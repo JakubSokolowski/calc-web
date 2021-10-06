@@ -52190,7 +52190,7 @@ exports[`Default Division > should divide two integer numbers with fraction divi
     </div>
     <div
       data-test="operation-grid-3-0"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+      class="makeStyles-defaultCellWithVerticalAndHorizontalLine-109 makeStyles-horizontalLine-106"
     >
       0
     </div>
@@ -53029,7 +53029,7 @@ exports[`Default Division > should divide integer number by divisor with fractio
     </div>
     <div
       data-test="operation-grid-4-0"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+      class="makeStyles-defaultCellWithVerticalAndHorizontalLine-109 makeStyles-horizontalLine-106"
     >
       0
     </div>
@@ -53930,7 +53930,7 @@ exports[`Default Division > should divide two numbers with fraction part #1`] = 
     </div>
     <div
       data-test="operation-grid-4-0"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+      class="makeStyles-defaultCellWithVerticalAndHorizontalLine-109 makeStyles-horizontalLine-106"
     >
       0
     </div>
@@ -54828,7 +54828,7 @@ exports[`Default Division > should divide two positive numbers with fraction div
     </div>
     <div
       data-test="operation-grid-4-0"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+      class="makeStyles-defaultCellWithVerticalAndHorizontalLine-109 makeStyles-horizontalLine-106"
     >
       2
     </div>
@@ -57134,7 +57134,7 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     ></div>
     <div
       data-test="operation-grid-2-0"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+      class="makeStyles-defaultCellWithVerticalAndHorizontalLine-109 makeStyles-horizontalLine-106"
     >
       0
     </div>
@@ -57189,7 +57189,10 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     <div data-test="operation-grid-1-1" class="makeStyles-defaultCell-100">
       1
     </div>
-    <div data-test="operation-grid-2-1" class="makeStyles-defaultCell-100">
+    <div
+      data-test="operation-grid-2-1"
+      class="makeStyles-defaultCellWithVerticalLine-108"
+    >
       1
     </div>
     <div data-test="operation-grid-3-1" class="makeStyles-defaultCell-100">

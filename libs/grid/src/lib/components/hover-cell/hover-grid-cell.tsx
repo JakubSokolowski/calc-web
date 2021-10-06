@@ -86,7 +86,16 @@ export const useGridCellStyles = makeStyles((theme: Theme) => {
         },
         verticalLine: {
             borderRight: `1px solid ${theme.palette.action.active}`
-        }
+        },
+        defaultCellWithVerticalLine: {
+            ...baseCell,
+            borderRight: `1px solid ${theme.palette.action.active}`
+        },
+        defaultCellWithVerticalAndHorizontalLine: {
+            ...baseCell,
+            borderRight: `1px solid ${theme.palette.action.active}`,
+            borderBottom: `1px solid ${theme.palette.action.active}`
+        },
     });
 });
 
