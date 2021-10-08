@@ -1,4 +1,10 @@
-import { DivisionOperand, DivisionPositionResult, DivisionResult, leastSignificantPosition } from '@calc/calc-arithmetic';
+import {
+    digitsToStr,
+    DivisionOperand,
+    DivisionPositionResult,
+    DivisionResult,
+    leastSignificantPosition
+} from '@calc/calc-arithmetic';
 import {
     digitsToCellConfig,
     extractResultMeta,
@@ -60,6 +66,7 @@ function toCellsWithFractionSeparator(digits: DivisionOperand[], fractionPointCl
 
     if(hasFractionPart) {
         const fractionPointIndex = digitCells.length -1 - (Math.abs(resultLsp));
+        console.log(digitsToStr(digits), digitCells.length, resultLsp, digits);
 
         // Usually, separators for fraction point are defined as
         // separate vertical line in grid lines but there is an

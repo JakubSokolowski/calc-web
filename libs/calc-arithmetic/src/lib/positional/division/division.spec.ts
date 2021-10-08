@@ -1,8 +1,11 @@
 import {
+    Digit,
     DivisionOperand,
-    DivisionPositionResult, DivisionType,
+    DivisionPositionResult,
+    DivisionType,
     fromStringDirect,
-    multiplyDefault, OperationType,
+    multiplyDefault,
+    OperationType,
     splitToDigitsList,
     subtractPositionalNumbers
 } from '@calc/calc-arithmetic';
@@ -61,7 +64,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('4587', base).result;
 
             // when
-            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
             const expectedStr = '5462';
@@ -70,6 +73,23 @@ describe('#division', () => {
             expect(sliceSourceLsp).toEqual(expectedLsp);
         });
 
+
+        it('should return proper slice for initial division when slice should have more digits than divisor', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('0.76621', base).result;
+            const divisor = fromStringDirect('1224', base).result;
+            // when
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
+
+            // then
+            const expectedStr = '7662';
+            const expectedLsp = -4;
+            expect(slice.toString()).toEqual(expectedStr);
+            expect(sliceSourceLsp).toEqual(expectedLsp);
+        });
+
+
         it('should extend previous remainder with next dividend digit', () => {
             // given
             const base = 10;
@@ -77,36 +97,95 @@ describe('#division', () => {
             const divisor = fromStringDirect('4587', base).result;
             const prev: DivisionPositionResult = {
                 divisionIndex: 0,
-                remainder: splitToDigitsList('875', base)
+                remainder: splitToDigitsList('875', base),
+                dividendSlice: {
+                    sliceSourceLsp: 1
+                }
             } as DivisionPositionResult;
+            const firstSliceLength = 4;
 
             // when
-            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev, firstSliceLength);
 
             // then
-            const expectedStr = '8755';
+            const expectedDigits: Digit[] = [
+                {
+                    valueInDecimal: 8,
+                    base: 10,
+                    position: 3,
+                    representationInBase: '8'
+                },
+                {
+                    valueInDecimal: 7,
+                    base: 10,
+                    position: 2,
+                    representationInBase: '7'
+                },
+                {
+                    valueInDecimal: 5,
+                    base: 10,
+                    position: 1,
+                    representationInBase: '5'
+                },
+                {
+                    valueInDecimal: 5,
+                    base: 10,
+                    position: 0,
+                    representationInBase: '5'
+                }
+            ];
             const expectedLsp = 0;
-            expect(slice.toString()).toEqual(expectedStr);
+            expect(slice.asDigits()).toEqual(expectedDigits);
             expect(sliceSourceLsp).toEqual(expectedLsp);
         });
 
         it('should extend previous remainder with zero if all dividend digits were already used', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
+            const dividend = fromStringDirect('5462', base).result;
             const divisor = fromStringDirect('4587', base).result;
             const prev: DivisionPositionResult = {
-                divisionIndex: 4,
-                remainder: splitToDigitsList('875', base)
+                divisionIndex: 0,
+                remainder: splitToDigitsList('875', base),
+                dividendSlice: {
+                    sliceSourceLsp: 0,
+                    slice: fromStringDirect('5462', base).result
+                }
             } as DivisionPositionResult;
+            const firstSliceLength = 4;
 
             // when
-            const {slice, sliceSourceLsp} = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev);
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev, firstSliceLength);
 
             // then
-            const expectedStr = '8750';
-            const expectedLsp = -4;
-            expect(slice.toString()).toEqual(expectedStr);
+            const expectedDigits: Digit[] = [
+                {
+                    valueInDecimal: 8,
+                    base: 10,
+                    position: 3,
+                    representationInBase: '8'
+                },
+                {
+                    valueInDecimal: 7,
+                    base: 10,
+                    position: 2,
+                    representationInBase: '7'
+                },
+                {
+                    valueInDecimal: 5,
+                    base: 10,
+                    position: 1,
+                    representationInBase: '5'
+                },
+                {
+                    valueInDecimal: 0,
+                    base: 10,
+                    position: 0,
+                    representationInBase: '0'
+                }
+            ];
+            const expectedLsp = -1;
+            expect(slice.asDigits()).toEqual(expectedDigits);
             expect(sliceSourceLsp).toEqual(expectedLsp);
         });
     });
@@ -508,6 +587,20 @@ describe('#division', () => {
             expect(result.numberResult.toString()).toEqual(expected);
         });
 
+        it('should divide dividend between 0 and 1 with fraction part by divisor without fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('0.76621', base).result;
+            const divisor = fromStringDirect('1224', base).result;
+
+            // when
+            const result = divideDefault([dividend, divisor]);
+
+            // then
+            const expected = '0.000625';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
+
         it('should divide smaller dividend by greater divisor', () => {
             // given
             const base = 10;
@@ -520,6 +613,39 @@ describe('#division', () => {
             // then
             const expected = '0.01';
             expect(result.numberResult.toString()).toEqual(expected);
+        });
+
+        it('should divide smaller dividend by greater divisor and return result digits with proper positions', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1', base).result;
+            const divisor = fromStringDirect('100', base).result;
+
+            // when
+            const { resultDigits } = divideDefault([dividend, divisor]);
+
+            // then
+            const expected: DivisionOperand[] = [
+                {
+                    position: 0,
+                    base: 10,
+                    valueInDecimal: 0,
+                    representationInBase: '0'
+                },
+                {
+                    position: -1,
+                    base: 10,
+                    valueInDecimal: 0,
+                    representationInBase: '0'
+                },
+                {
+                    position: -2,
+                    base: 10,
+                    valueInDecimal: 1,
+                    representationInBase: '1'
+                }
+            ];
+            expect(resultDigits).toEqual(expected);
         });
 
         it('should divide 1.1 by 10', () => {

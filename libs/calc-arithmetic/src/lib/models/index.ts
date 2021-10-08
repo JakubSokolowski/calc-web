@@ -87,11 +87,15 @@ export interface MultiplicationResult extends OperationResult<MultiplicationOper
 
 export type DivisionOperand = AdditionOperand;
 
+export interface DividendSlice {
+    slice: PositionalNumber;
+    sliceSourceLsp: number;
+}
 
 export interface DivisionPositionResult extends PositionResult<DivisionOperand> {
     remainder: DivisionOperand[];
     remainderDecimal: number;
-    dividendSlice: DivisionOperand[];
+    dividendSlice: DividendSlice;
     subtractionResult: SubtractionResult;
     multiplicationResult: MultiplicationResult;
     divisionIndex: number;
