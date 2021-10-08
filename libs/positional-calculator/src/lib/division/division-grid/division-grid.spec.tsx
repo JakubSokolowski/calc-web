@@ -92,6 +92,5 @@ describe('division-grid', () => {
             const expected = 0;
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
-
     });
 });

@@ -175,4 +175,19 @@ describe('Default Division', () => {
 
         gridHasProperResultRow(expected, base, 7, 0);
     });
+
+    // BUG #183
+    it('should divide 1.1/100', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['1.1', '100'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '0.011';
+
+        operationReturnsProperResult(config, expected);
+        getDivisionResult().toMatchSnapshot();
+    });
 });

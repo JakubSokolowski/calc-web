@@ -54908,19 +54908,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
     <div
       data-test="operation-grid-1-2"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      0
-    </div>
+    ></div>
     <div
       data-test="operation-grid-2-2"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      0
+      9
     </div>
     <div
       data-test="operation-grid-3-2"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      8
+    </div>
     <div
       data-test="operation-grid-4-2"
       class="makeStyles-defaultCell-100"
@@ -54951,19 +54951,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-0-3"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-100">
-      1
-    </div>
+    <div
+      data-test="operation-grid-1-3"
+      class="makeStyles-defaultCell-100"
+    ></div>
     <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-100">
       2
     </div>
     <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-100">
+      5
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-100">
       3
     </div>
-    <div
-      data-test="operation-grid-4-3"
-      class="makeStyles-defaultCell-100"
-    ></div>
     <div
       data-test="operation-grid-5-3"
       class="makeStyles-defaultCell-100"
@@ -54988,30 +54988,32 @@ exports[`Default Division > should divide two positive numbers with fraction div
   <div class="makeStyles-gridRow-92">
     <div
       data-test="operation-grid-0-4"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-1-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-1-4"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    ></div>
-    <div
       data-test="operation-grid-2-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      9
+      1
     </div>
     <div
       data-test="operation-grid-3-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      8
+      9
     </div>
     <div
       data-test="operation-grid-4-4"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      6
+    </div>
     <div
       data-test="operation-grid-5-4"
       class="makeStyles-defaultCell-100"
@@ -55042,19 +55044,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-1-5"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-2-5" class="makeStyles-defaultCell-100">
-      2
-    </div>
+    <div
+      data-test="operation-grid-2-5"
+      class="makeStyles-defaultCell-100"
+    ></div>
     <div data-test="operation-grid-3-5" class="makeStyles-defaultCell-100">
       5
     </div>
     <div data-test="operation-grid-4-5" class="makeStyles-defaultCell-100">
-      3
+      7
     </div>
-    <div
-      data-test="operation-grid-5-5"
-      class="makeStyles-defaultCell-100"
-    ></div>
+    <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-100">
+      0
+    </div>
     <div
       data-test="operation-grid-6-5"
       class="makeStyles-defaultCell-100"
@@ -55079,32 +55081,32 @@ exports[`Default Division > should divide two positive numbers with fraction div
     ></div>
     <div
       data-test="operation-grid-1-6"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-2-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-2-6"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      1
-    </div>
-    <div
       data-test="operation-grid-3-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      9
+      4
     </div>
     <div
       data-test="operation-grid-4-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      6
+      9
     </div>
     <div
       data-test="operation-grid-5-6"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      0
+    </div>
     <div
       data-test="operation-grid-6-6"
       class="makeStyles-defaultCell-100"
@@ -55135,19 +55137,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-2-7"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-100">
-      5
-    </div>
+    <div
+      data-test="operation-grid-3-7"
+      class="makeStyles-defaultCell-100"
+    ></div>
     <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-100">
-      7
+      8
     </div>
     <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-100">
       0
     </div>
-    <div
-      data-test="operation-grid-6-7"
-      class="makeStyles-defaultCell-100"
-    ></div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-100">
+      0
+    </div>
     <div
       data-test="operation-grid-7-7"
       class="makeStyles-defaultCell-100"
@@ -55172,32 +55174,32 @@ exports[`Default Division > should divide two positive numbers with fraction div
     ></div>
     <div
       data-test="operation-grid-2-8"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-3-8"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-3-8"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      4
-    </div>
-    <div
       data-test="operation-grid-4-8"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      9
+      7
     </div>
     <div
       data-test="operation-grid-5-8"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      0
+      8
     </div>
     <div
       data-test="operation-grid-6-8"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      4
+    </div>
     <div
       data-test="operation-grid-7-8"
       class="makeStyles-defaultCell-100"
@@ -55228,19 +55230,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-3-9"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-4-9" class="makeStyles-defaultCell-100">
-      8
-    </div>
-    <div data-test="operation-grid-5-9" class="makeStyles-defaultCell-100">
-      0
-    </div>
-    <div data-test="operation-grid-6-9" class="makeStyles-defaultCell-100">
-      0
-    </div>
     <div
-      data-test="operation-grid-7-9"
+      data-test="operation-grid-4-9"
       class="makeStyles-defaultCell-100"
     ></div>
+    <div data-test="operation-grid-5-9" class="makeStyles-defaultCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-6-9" class="makeStyles-defaultCell-100">
+      6
+    </div>
+    <div data-test="operation-grid-7-9" class="makeStyles-defaultCell-100">
+      0
+    </div>
     <div
       data-test="operation-grid-8-9"
       class="makeStyles-defaultCell-100"
@@ -55265,32 +55267,30 @@ exports[`Default Division > should divide two positive numbers with fraction div
     ></div>
     <div
       data-test="operation-grid-3-10"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-4-10"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-4-10"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      7
-    </div>
-    <div
       data-test="operation-grid-5-10"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      8
-    </div>
+    ></div>
     <div
       data-test="operation-grid-6-10"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      4
+      9
     </div>
     <div
       data-test="operation-grid-7-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      8
+    </div>
     <div
       data-test="operation-grid-8-10"
       class="makeStyles-defaultCell-100"
@@ -55321,19 +55321,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-4-11"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-5-11" class="makeStyles-defaultCell-100">
-      1
-    </div>
+    <div
+      data-test="operation-grid-5-11"
+      class="makeStyles-defaultCell-100"
+    ></div>
     <div data-test="operation-grid-6-11" class="makeStyles-defaultCell-100">
       6
     </div>
     <div data-test="operation-grid-7-11" class="makeStyles-defaultCell-100">
+      2
+    </div>
+    <div data-test="operation-grid-8-11" class="makeStyles-defaultCell-100">
       0
     </div>
-    <div
-      data-test="operation-grid-8-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
     <div
       data-test="operation-grid-9-11"
       class="makeStyles-defaultCell-100"
@@ -55358,19 +55358,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
     ></div>
     <div
       data-test="operation-grid-4-12"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-5-12"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-5-12"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    ></div>
-    <div
       data-test="operation-grid-6-12"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      9
+      5
     </div>
     <div
       data-test="operation-grid-7-12"
@@ -55380,8 +55380,10 @@ exports[`Default Division > should divide two positive numbers with fraction div
     </div>
     <div
       data-test="operation-grid-8-12"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      8
+    </div>
     <div
       data-test="operation-grid-9-12"
       class="makeStyles-defaultCell-100"
@@ -55412,19 +55414,19 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-5-13"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-6-13" class="makeStyles-defaultCell-100">
-      6
-    </div>
-    <div data-test="operation-grid-7-13" class="makeStyles-defaultCell-100">
-      2
-    </div>
-    <div data-test="operation-grid-8-13" class="makeStyles-defaultCell-100">
-      0
-    </div>
     <div
-      data-test="operation-grid-9-13"
+      data-test="operation-grid-6-13"
       class="makeStyles-defaultCell-100"
     ></div>
+    <div data-test="operation-grid-7-13" class="makeStyles-defaultCell-100">
+      3
+    </div>
+    <div data-test="operation-grid-8-13" class="makeStyles-defaultCell-100">
+      2
+    </div>
+    <div data-test="operation-grid-9-13" class="makeStyles-defaultCell-100">
+      0
+    </div>
   </div>
   <div class="makeStyles-gridRow-92">
     <div
@@ -55449,32 +55451,32 @@ exports[`Default Division > should divide two positive numbers with fraction div
     ></div>
     <div
       data-test="operation-grid-5-14"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-6-14"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-6-14"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      5
-    </div>
-    <div
       data-test="operation-grid-7-14"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      8
+      2
     </div>
     <div
       data-test="operation-grid-8-14"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      8
+      9
     </div>
     <div
       data-test="operation-grid-9-14"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      4
+    </div>
   </div>
   <div class="makeStyles-gridRow-92">
     <div
@@ -55505,103 +55507,14 @@ exports[`Default Division > should divide two positive numbers with fraction div
       data-test="operation-grid-6-15"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-7-15" class="makeStyles-defaultCell-100">
-      3
-    </div>
+    <div
+      data-test="operation-grid-7-15"
+      class="makeStyles-defaultCell-100"
+    ></div>
     <div data-test="operation-grid-8-15" class="makeStyles-defaultCell-100">
       2
     </div>
     <div data-test="operation-grid-9-15" class="makeStyles-defaultCell-100">
-      0
-    </div>
-  </div>
-  <div class="makeStyles-gridRow-92">
-    <div
-      data-test="operation-grid-0-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-1-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-2-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-3-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-4-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-5-16"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-6-16"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      -
-    </div>
-    <div
-      data-test="operation-grid-7-16"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      2
-    </div>
-    <div
-      data-test="operation-grid-8-16"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      9
-    </div>
-    <div
-      data-test="operation-grid-9-16"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      4
-    </div>
-  </div>
-  <div class="makeStyles-gridRow-92">
-    <div
-      data-test="operation-grid-0-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-1-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-2-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-3-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-4-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-5-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-6-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-7-17"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div data-test="operation-grid-8-17" class="makeStyles-defaultCell-100">
-      2
-    </div>
-    <div data-test="operation-grid-9-17" class="makeStyles-defaultCell-100">
       6
     </div>
   </div>
@@ -57230,23 +57143,27 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     <div
       data-test="operation-grid-1-2"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    ></div>
+    >
+      1
+    </div>
     <div
       data-test="operation-grid-2-2"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      0
+      1
     </div>
     <div
       data-test="operation-grid-3-2"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      0
+      5
     </div>
     <div
       data-test="operation-grid-4-2"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      5
+    </div>
     <div
       data-test="operation-grid-5-2"
       class="makeStyles-defaultCell-100"
@@ -57277,22 +57194,23 @@ exports[`Default Division > should divide smaller dividend with fraction part by
       data-test="operation-grid-0-3"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-1-3" class="makeStyles-defaultCell-100">
-      1
-    </div>
-    <div data-test="operation-grid-2-3" class="makeStyles-defaultCell-100">
-      1
-    </div>
-    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-100">
-      7
-    </div>
-    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-100">
-      6
-    </div>
     <div
-      data-test="operation-grid-5-3"
+      data-test="operation-grid-1-3"
       class="makeStyles-defaultCell-100"
     ></div>
+    <div
+      data-test="operation-grid-2-3"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div data-test="operation-grid-3-3" class="makeStyles-defaultCell-100">
+      2
+    </div>
+    <div data-test="operation-grid-4-3" class="makeStyles-defaultCell-100">
+      1
+    </div>
+    <div data-test="operation-grid-5-3" class="makeStyles-defaultCell-100">
+      6
+    </div>
     <div
       data-test="operation-grid-6-3"
       class="makeStyles-defaultCell-100"
@@ -57317,38 +57235,34 @@ exports[`Default Division > should divide smaller dividend with fraction part by
   <div class="makeStyles-gridRow-92">
     <div
       data-test="operation-grid-0-4"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-1-4"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-2-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-1-4"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      1
-    </div>
-    <div
-      data-test="operation-grid-2-4"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      1
-    </div>
-    <div
       data-test="operation-grid-3-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      5
-    </div>
+    ></div>
     <div
       data-test="operation-grid-4-4"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      5
+      0
     </div>
     <div
       data-test="operation-grid-5-4"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      0
+    </div>
     <div
       data-test="operation-grid-6-4"
       class="makeStyles-defaultCell-100"
@@ -57392,10 +57306,9 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     <div data-test="operation-grid-5-5" class="makeStyles-defaultCell-100">
       6
     </div>
-    <div
-      data-test="operation-grid-6-5"
-      class="makeStyles-defaultCell-100"
-    ></div>
+    <div data-test="operation-grid-6-5" class="makeStyles-defaultCell-100">
+      2
+    </div>
     <div
       data-test="operation-grid-7-5"
       class="makeStyles-defaultCell-100"
@@ -57431,7 +57344,9 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     <div
       data-test="operation-grid-3-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    ></div>
+    >
+      2
+    </div>
     <div
       data-test="operation-grid-4-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
@@ -57442,12 +57357,14 @@ exports[`Default Division > should divide smaller dividend with fraction part by
       data-test="operation-grid-5-6"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      0
+      7
     </div>
     <div
       data-test="operation-grid-6-6"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      9
+    </div>
     <div
       data-test="operation-grid-7-6"
       class="makeStyles-defaultCell-100"
@@ -57478,22 +57395,23 @@ exports[`Default Division > should divide smaller dividend with fraction part by
       data-test="operation-grid-2-7"
       class="makeStyles-defaultCell-100"
     ></div>
-    <div data-test="operation-grid-3-7" class="makeStyles-defaultCell-100">
-      2
-    </div>
-    <div data-test="operation-grid-4-7" class="makeStyles-defaultCell-100">
-      1
-    </div>
-    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-100">
-      6
-    </div>
-    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-100">
-      2
-    </div>
     <div
-      data-test="operation-grid-7-7"
+      data-test="operation-grid-3-7"
       class="makeStyles-defaultCell-100"
     ></div>
+    <div
+      data-test="operation-grid-4-7"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div data-test="operation-grid-5-7" class="makeStyles-defaultCell-100">
+      8
+    </div>
+    <div data-test="operation-grid-6-7" class="makeStyles-defaultCell-100">
+      3
+    </div>
+    <div data-test="operation-grid-7-7" class="makeStyles-defaultCell-100">
+      0
+    </div>
     <div
       data-test="operation-grid-8-7"
       class="makeStyles-defaultCell-100"
@@ -57518,27 +57436,23 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     ></div>
     <div
       data-test="operation-grid-2-8"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-3-8"
+      class="makeStyles-defaultCell-100"
+    ></div>
+    <div
+      data-test="operation-grid-4-8"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
       -
     </div>
     <div
-      data-test="operation-grid-3-8"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      2
-    </div>
-    <div
-      data-test="operation-grid-4-8"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      0
-    </div>
-    <div
       data-test="operation-grid-5-8"
       class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
     >
-      7
+      6
     </div>
     <div
       data-test="operation-grid-6-8"
@@ -57548,8 +57462,10 @@ exports[`Default Division > should divide smaller dividend with fraction part by
     </div>
     <div
       data-test="operation-grid-7-8"
-      class="makeStyles-defaultCell-100"
-    ></div>
+      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
+    >
+      3
+    </div>
     <div
       data-test="operation-grid-8-8"
       class="makeStyles-defaultCell-100"
@@ -57585,13 +57501,13 @@ exports[`Default Division > should divide smaller dividend with fraction part by
       class="makeStyles-defaultCell-100"
     ></div>
     <div data-test="operation-grid-5-9" class="makeStyles-defaultCell-100">
-      8
+      1
     </div>
     <div data-test="operation-grid-6-9" class="makeStyles-defaultCell-100">
       3
     </div>
     <div data-test="operation-grid-7-9" class="makeStyles-defaultCell-100">
-      0
+      7
     </div>
     <div
       data-test="operation-grid-8-9"
@@ -57606,102 +57522,187 @@ exports[`Default Division > should divide smaller dividend with fraction part by
       class="makeStyles-defaultCell-100"
     ></div>
   </div>
-  <div class="makeStyles-gridRow-92">
-    <div
-      data-test="operation-grid-0-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-1-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-2-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-3-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-4-10"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      -
+</div>
+`;
+
+exports[`Default Division > should divide 1.1/100 #0`] = `
+<div data-test="division-result" data-result="0.011">
+  <div class="makeStyles-row-88">
+    <div class="makeStyles-operand-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>1.</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >1.1_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">.</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
     </div>
-    <div
-      data-test="operation-grid-5-10"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      6
+    <div class="makeStyles-symbol-90">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mi mathvariant="normal">/</mi></mrow
+                ><annotation encoding="application/x-tex"
+                  >/</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:1em;vertical-align:-0.25em;"
+              ></span
+              ><span class="mord">/</span></span
+            ></span
+          ></span
+        ></span
+      >
     </div>
-    <div
-      data-test="operation-grid-6-10"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      9
+    <div class="makeStyles-operand-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>10</mn><msub><mn>0</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >100_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">1</span><span class="mord">0</span
+              ><span class="mord"
+                ><span class="mord">0</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
     </div>
-    <div
-      data-test="operation-grid-7-10"
-      class="makeStyles-defaultCell-100 makeStyles-horizontalLine-106"
-    >
-      3
+    <div class="makeStyles-symbol-90">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow><mo>=</mo></mrow
+                ><annotation encoding="application/x-tex"
+                  >=</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.36687em;vertical-align:0em;"
+              ></span
+              ><span class="mrel">=</span></span
+            ></span
+          ></span
+        ></span
+      >
     </div>
-    <div
-      data-test="operation-grid-8-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-9-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-10-10"
-      class="makeStyles-defaultCell-100"
-    ></div>
-  </div>
-  <div class="makeStyles-gridRow-92">
-    <div
-      data-test="operation-grid-0-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-1-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-2-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-3-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-4-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div data-test="operation-grid-5-11" class="makeStyles-defaultCell-100">
-      1
+    <div class="makeStyles-operand-89">
+      <span
+        ><span class="katex"
+          ><span class="katex-mathml"
+            ><math xmlns="http://www.w3.org/1998/Math/MathML"
+              ><semantics
+                ><mrow
+                  ><mn>0.01</mn><msub><mn>1</mn><mn>10</mn></msub></mrow
+                ><annotation encoding="application/x-tex"
+                  >0.011_{10}</annotation
+                ></semantics
+              ></math
+            ></span
+          ><span class="katex-html" aria-hidden="true"
+            ><span class="base"
+              ><span
+                class="strut"
+                style="height:0.79444em;vertical-align:-0.15em;"
+              ></span
+              ><span class="mord">0</span><span class="mord">.</span
+              ><span class="mord">0</span><span class="mord">1</span
+              ><span class="mord"
+                ><span class="mord">1</span
+                ><span class="msupsub"
+                  ><span class="vlist-t vlist-t2"
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.30110799999999993em;"
+                        ><span
+                          style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"
+                          ><span class="pstrut" style="height:2.7em;"></span
+                          ><span class="sizing reset-size6 size3 mtight"
+                            ><span class="mord mtight"
+                              ><span class="mord mtight">1</span
+                              ><span class="mord mtight">0</span></span
+                            ></span
+                          ></span
+                        ></span
+                      ><span class="vlist-s">​</span></span
+                    ><span class="vlist-r"
+                      ><span class="vlist" style="height:0.15em;"
+                        ><span></span></span></span></span></span></span></span></span></span
+      ></span>
     </div>
-    <div data-test="operation-grid-6-11" class="makeStyles-defaultCell-100">
-      3
-    </div>
-    <div data-test="operation-grid-7-11" class="makeStyles-defaultCell-100">
-      7
-    </div>
-    <div
-      data-test="operation-grid-8-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-9-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
-    <div
-      data-test="operation-grid-10-11"
-      class="makeStyles-defaultCell-100"
-    ></div>
   </div>
 </div>
 `;
