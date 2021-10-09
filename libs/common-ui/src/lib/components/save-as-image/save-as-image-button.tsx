@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { saveAs } from 'file-saver';
-import DomToImage from 'dom-to-image'
-import { IconButton, Tooltip } from '@material-ui/core';
+import DomToImage from 'dom-to-image';
+import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
 
 interface P {
@@ -10,11 +10,15 @@ interface P {
 }
 
 export const SaveAsImageButton: FC<P> = ({ elementId, tooltipTitle }) => {
+    const [loading, setLoading] = useState(false);
+
     const saveAsImage = async () => {
+        setLoading(true);
         const element = document.getElementById(elementId);
         await DomToImage.toBlob(element)
             .then(blob => {
                 saveAs(blob, 'result.png');
+                setLoading(false);
             }).catch((error) => console.log(error));
     };
 
@@ -25,7 +29,11 @@ export const SaveAsImageButton: FC<P> = ({ elementId, tooltipTitle }) => {
                 color={'default'}
                 size={'small'}
                 onClick={saveAsImage}>
-                <SaveAltIcon/>
+                {
+                    loading
+                    ? <CircularProgress size={21}/>
+                    : <SaveAltIcon/>
+                }
             </IconButton>
         </Tooltip>
     );
