@@ -74,7 +74,7 @@ describe('division-grid', () => {
             const meta = extractDivisionResultMeta(result);
 
             // then
-            const expected = 1;
+            const expected = 0;
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
 

@@ -189,5 +189,22 @@ describe('Default Division', () => {
 
         operationReturnsProperResult(config, expected);
         getDivisionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
+    // BUG #185
+    it('should divide 1/100', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['1', '100'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '0.01';
+
+        operationReturnsProperResult(config, expected);
+        getDivisionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
     });
 });

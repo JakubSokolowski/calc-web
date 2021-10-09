@@ -94,7 +94,10 @@ function getGridLines(result: DivisionResult): GridLine[] {
     let prevTo: number | undefined = undefined;
     result.stepResults.forEach((step, idx) => {
         const [minuend, subtrahend] = step.subtractionResult.numberOperands;
-        const maxOpDigits = Math.max(minuend.numDigits(), subtrahend.numDigits());
+        const subtrahendDigits = subtrahend.toNumber() === 0
+            ? subtrahend.asDigits().slice(0, 1)
+            : subtrahend.asDigits();
+        const maxOpDigits = Math.max(minuend.numDigits(), subtrahendDigits.length);
         const lineLength = maxOpDigits + 1;
         const lineFrom = prevTo
             ? prevTo - maxOpDigits + 1
@@ -152,17 +155,21 @@ function buildDefaultSubtractionRows(step: DivisionPositionResult, totalWidth: n
     const { divisionIndex } = step;
     const [minuend, subtrahend] = step.subtractionResult.numberOperands;
     const minuendDigits = minuend.asDigits();
-    const subtrahendDigits = subtrahend.asDigits();
+    const subtrahendDigits = subtrahend.toNumber() === 0
+        ? subtrahend.asDigits().slice(0, 1)
+        : subtrahend.asDigits();
 
     const leftPaddingLength = prevMaxIndex ?
         prevMaxIndex - minuendDigits.length + 2
         : divisionIndex + 1;
+
 
     const minuendRow = padWithEmptyCells(
         digitsToCellConfig(minuendDigits),
         minuendDigits.length + leftPaddingLength,
         'Left'
     );
+
 
     const subtrahendRow = padWithEmptyCells(
         digitsToCellConfig(subtrahendDigits),
@@ -184,7 +191,9 @@ function buildDefaultSubtractionRows(step: DivisionPositionResult, totalWidth: n
 function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: number, numSteps: number): SubtractionRowCells {
     const subtractionRows: GridCellConfig[][] = [];
     const [minuend, subtrahend] = step.subtractionResult.numberOperands;
-    const subtrahendDigits = subtrahend.asDigits();
+    const subtrahendDigits = subtrahend.toNumber() === 0
+        ? subtrahend.asDigits().slice(0, 1)
+        : subtrahend.asDigits();
     const minuendDigits = minuend.asDigits();
     const leftPaddingLength = 1;
     const desiredWidth = Math.max(subtrahendDigits.length, minuendDigits.length) + leftPaddingLength;
@@ -265,6 +274,7 @@ function buildOperationRow(result: DivisionResult, totalWidth: number): GridCell
         ...digitsToCellConfig(divisor)
     ];
 
+
     const leftPadded = padWithEmptyCells(
         operationDigitsCells,
         operationDigitsCells.length + leftOffset,
@@ -299,13 +309,10 @@ export function extractDivisionResultMeta(result: DivisionResult): DivisionResul
     const numResultDigits = result.numberResult.numDigits();
 
     const [scaledDividend, scaledDivisor] = result.operands;
-    const dividendLsp = dividend.leastSignificantPosition();
-    const resultLsp = result.numberResult.leastSignificantPosition();
-    const positionDiff = dividendLsp - resultLsp;
     const numOperandsDigits = scaledDividend.length + scaledDivisor.length;
     const resultRowLeftOffset = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber())
         ? Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits)
-        : positionDiff;
+        : 0;
 
     const spaceForFirstMinusSign = 1;
     const resultRowLength = spaceForFirstMinusSign + resultRowLeftOffset + numResultDigits;
