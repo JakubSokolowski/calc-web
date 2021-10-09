@@ -6,6 +6,7 @@ import { OperandInput } from '../operand-input/operand-input';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@material-ui/icons/Add';
 import { reorder } from '@calc/utils';
+import { OperandValidator } from '@calc/calc-arithmetic';
 
 export interface DndOperand {
     representation: string;
@@ -16,6 +17,7 @@ export interface DndOperand {
 interface P {
     inputBase: number;
     operands: DndOperand[];
+    validators?: OperandValidator[];
     onChange: (operands: DndOperand[]) => void;
     onAdd: () => void;
     canAdd: boolean;
@@ -52,7 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 
-export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAdd }) => {
+export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAdd, validators }) => {
     const classes = useStyles();
     const { t } = useTranslation();
 
@@ -87,6 +89,8 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>
                 {(provided, snapshot) => (
                     <OperandInput
+                        validators={validators}
+                        numOperands={operands.length}
                         dataTest={`operand-input-${index}`}
                         ContainerComponent="li"
                         ContainerProps={{ ref: provided.innerRef }}

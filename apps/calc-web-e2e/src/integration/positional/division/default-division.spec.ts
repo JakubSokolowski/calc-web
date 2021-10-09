@@ -1,6 +1,7 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
+    enterOperation, getCalculateButton,
     getDivisionResult,
     getOperationGrid,
     gridHasProperResultRow,
@@ -206,5 +207,34 @@ describe('Default Division', () => {
         operationReturnsProperResult(config, expected);
         getDivisionResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
+    });
+
+    it('should divide 0 by num', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['0', '100'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        const expected = '0';
+
+        operationReturnsProperResult(config, expected);
+        getDivisionResult().toMatchSnapshot();
+        getOperationGrid().toMatchSnapshot();
+    });
+
+    it.only('should prevent division by 0', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['100', '0'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+
+        enterOperation(config);
+        getCalculateButton().should('be.disabled');
+        cy.get('.MuiFormHelperText-root').contains('Cannot divide by 0');
     });
 });

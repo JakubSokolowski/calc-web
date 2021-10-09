@@ -4,8 +4,9 @@ import { CalculatorOptions } from './calculator-options';
 import { DndOperand } from '../operand-list/operand-list';
 import { tick } from '@calc/utils';
 import { OperandInput } from '../operand-input/operand-input';
-import { allOperations, multiplicationAlgorithms } from '@calc/calc-arithmetic';
 import { act } from 'react-dom/test-utils';
+import { allOperations } from './operations';
+import { multiplicationAlgorithms } from './algorithms';
 
 const history = {
     push: jest.fn(),

@@ -1,7 +1,9 @@
-import { CalculatorOptionsValue } from './calculator-options-value';
-import { algorithmMap, allOperations, BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
+ import { CalculatorOptionsValue } from './calculator-options-value';
+import { BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
 import { DndOperand } from '../operand-list/operand-list';
 import { inRangeInclusive, useUrlParams } from '@calc/utils';
+import { allOperations } from './operations';
+import { algorithmMap } from './algorithms';
 
 export function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorOptionsValue | undefined {
     const operationStr = params.get('operation');

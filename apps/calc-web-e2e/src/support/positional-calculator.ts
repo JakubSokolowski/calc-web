@@ -49,12 +49,16 @@ export const getOperationGrid = () => cy.get('#operation-grid');
 export const getOperationGridSaveButton = () => cy.getByDataTest('operation-grid-save');
 
 export const calculatePositional = (config: OperationTemplate<AlgorithmType>) => {
+    enterOperation(config);
+    getCalculateButton().click();
+};
+
+export const enterOperation = (config: OperationTemplate<AlgorithmType>) => {
     const { algorithm, base, operands, operation } = config;
     setOperationBase(base);
     selectAlgorithm(algorithm);
     selectOperation(operation);
     operands.forEach((op, idx) => addOperand(op, idx));
-    getCalculateButton().click();
 };
 
 export const operationReturnsProperResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
