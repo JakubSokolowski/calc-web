@@ -74,7 +74,7 @@ describe('#division', () => {
         });
 
 
-        it('should return proper slice for initial division when slice should have more digits than divisor', () => {
+        it('should return proper slice for initial division when slice should have more digits than divisor and divisor is greater than dividend', () => {
             // given
             const base = 10;
             const dividend = fromStringDirect('0.76621', base).result;
@@ -83,8 +83,8 @@ describe('#division', () => {
             const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
 
             // then
-            const expectedStr = '7662';
-            const expectedLsp = -4;
+            const expectedStr = '0';
+            const expectedLsp = 0;
             expect(slice.toString()).toEqual(expectedStr);
             expect(sliceSourceLsp).toEqual(expectedLsp);
         });
@@ -597,7 +597,7 @@ describe('#division', () => {
             const result = divideDefault([dividend, divisor]);
 
             // then
-            const expected = '0.000625';
+            const expected = '0.00062';
             expect(result.numberResult.toString()).toEqual(expected);
         });
 

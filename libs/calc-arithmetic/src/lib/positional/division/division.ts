@@ -68,7 +68,7 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
     }
 
     const resultDigits = positionResultsToNumber(positionResults);
-    const numberResult = fromDigits(resultDigits).result;
+    const numberResult = fromDigits(trimLeadingZeros(resultDigits)).result;
 
     return {
         numberOperands: [],
@@ -192,6 +192,9 @@ function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionO
 }
 
 function initialSliceLength(dividend: DivisionOperand[], divisor: DivisionOperand[]): number {
+    const dividendAsNum = fromDigits(dividend).result.toNumber();
+    const divisorNum = fromDigits(divisor).result.toNumber();
+    if(divisorNum > dividendAsNum) return 1;
     const numDivisorDigits = divisor.length;
     const sliceAsNum = fromDigits(dividend.slice(0, numDivisorDigits)).result.toNumber();
     const divisorAsNum = fromDigits(divisor).result.toNumber();
