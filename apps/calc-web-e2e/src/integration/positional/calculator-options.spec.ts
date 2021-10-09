@@ -59,7 +59,7 @@ describe('Calculator options', () => {
     it('should prevent calculation when some operand is invalid for base', () => {
         const base = 16;
         const operands = ['FFA', 'ZXC'];
-        const message = 'Operands not valid for given base';
+        const message = 'Some operand is not valid';
 
         selectOperation('Multiplication');
         setOperationBase(base);

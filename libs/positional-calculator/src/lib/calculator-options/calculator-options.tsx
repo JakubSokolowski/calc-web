@@ -1,11 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
-    algorithmMap,
-    allOperations,
     BaseDigits,
-    isValidComplementOrRepresentationStr,
-    multiplicationAlgorithms,
+    OperandInputValue,
     Operation,
     OperationAlgorithm,
     OperationType
@@ -18,6 +15,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
 import { useUrlCalculatorOptions } from './url-calculator-options';
 import { useHistory } from 'react-router-dom';
+import { representationValidator, validateOperand } from '../validators/validators';
+import { allOperations } from './operations';
+import { algorithmMap, multiplicationAlgorithms } from './algorithms';
 
 interface FormValues {
     base: number;
@@ -133,10 +133,18 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
 
     const handleOperandChange = (newOperands: DndOperand[]) => {
-        const ops: DndOperand[] = newOperands.map((op: DndOperand) => {
+        const ops: DndOperand[] = newOperands.map((op: DndOperand, index) => {
+            const input: OperandInputValue = {
+                base: form.values.base,
+                representation: op.representation,
+                index: index,
+                totalNumOperands: newOperands.length
+            };
+            const validators = [representationValidator, ...(algorithm.operandValidators || [])];
+            const err = validateOperand(validators, input);
             return {
                 ...op,
-                valid: isValidComplementOrRepresentationStr(op.representation, form.values.base)
+                valid: !err
             };
         });
         setOperands(ops);
@@ -261,6 +269,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
             </div>
             <div className={classes.operandsBox}>
                 <OperandList
+                    validators={algorithm.operandValidators}
                     operands={operands}
                     onChange={handleOperandChange}
                     inputBase={form.values.base}

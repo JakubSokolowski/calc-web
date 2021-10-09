@@ -9,6 +9,7 @@ describe('OperandInput', () => {
         const container = mount(
             <OperandInput
                 base={10}
+                numOperands={1}
                 representationStr={'0.0'}
                 index={0}
                 onRemove={jest.fn()}
@@ -31,6 +32,7 @@ describe('OperandInput', () => {
         const container = mount(
             <OperandInput
                 base={10}
+                numOperands={1}
                 representationStr={'0.0'}
                 index={0}
                 onRemove={onRemove}
@@ -60,6 +62,7 @@ describe('OperandInput', () => {
         const container = mount(
             <OperandInput
                 base={10}
+                numOperands={1}
                 representationStr={'FFE.8'}
                 index={0}
                 onRemove={onRemove}
@@ -85,6 +88,7 @@ describe('OperandInput', () => {
 
         const container = mount(
             <OperandInput
+                numOperands={1}
                 base={10}
                 representationStr={'10'}
                 index={0}

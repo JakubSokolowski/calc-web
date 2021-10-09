@@ -84,7 +84,7 @@
         "resultPossiblyWrong": "Result is possibly wrong",
         "newOperand": "New operand",
         "maxOpReached": "Maximum number of operands for operation reached",
-        "operandsNotValid": "Operands not valid for given base",
+        "operandsNotValid": "Some operand is not valid",
         "wrongOperandsNum": "Operation allows between {{minOperands}} and {{maxOperands}} operands",
         "calculate": "Calculate",
         "correction": "Add correction: ",
@@ -127,7 +127,8 @@
         },
         "division": {
             "title": "Division",
-            "default": "Default"
+            "default": "Default",
+            "divisionByZero": "Cannot divide by 0"
         }
     },
     "sandbox": {

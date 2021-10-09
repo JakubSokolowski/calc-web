@@ -4,35 +4,45 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useTranslation } from 'react-i18next';
 import {
     BaseDigits,
-    isValidComplementOrRepresentationStr,
+    OperandInputValue,
+    OperandValidator,
 } from '@calc/calc-arithmetic';
+import { representationValidator, validateOperand } from '../validators/validators';
 
 interface P extends ListItemProps {
     representationStr: string;
     base: number;
     index: number;
+    numOperands: number;
+    validators?: OperandValidator[];
     onRemove: (index: number) => void;
     onRepresentationChange?: (representationStr: string, index: number, valid: boolean) => void;
     dataTest?: string;
 }
 
-export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, ...rest }) => {
+
+export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, numOperands, validators = [], ...rest }) => {
     const { t } = useTranslation();
     const [representation, setRepresentation] = useState(representationStr);
     const [error, setError] = useState<string | undefined>();
 
     useEffect(() => {
-        if(!BaseDigits.isValidBase(base)) return;
-        const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-            if (!isValidComplementOrRepresentationStr(valueStr, inputBase)) {
-                return t(
-                    'baseConverter.wrongRepresentationStr',
-                    { base: inputBase }
-                );
-            }
+        if (!BaseDigits.isValidBase(base)) return;
+        const baseValidators: OperandValidator[] = [representationValidator];
+        const input: OperandInputValue = {
+            base,
+            representation,
+            index,
+            totalNumOperands: numOperands
         };
-        const err = !!validateValueStr(representation, base);
-        setError(validateValueStr(representation, base));
+        const err = validateOperand([...baseValidators, ...validators], input);
+
+        if (err) {
+            const { key, options } = err;
+            setError(t(key, options));
+        } else {
+            setError(undefined);
+        }
         onRepresentationChange(representation, index, !err);
         // WARNING: adding all deps here MAY cause infinite loop in
         // tests for components that use this component, so if the
@@ -41,7 +51,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
         // may be an anonymous function, and those cannot be compared
         // The deps will be added by automatically by lint--fix,
         // so use it with caution
-    }, [base, representation]);
+    }, [base, representation, index]);
 
 
     return (

@@ -84,7 +84,7 @@
         "resultPossiblyWrong": "Wynik prawdopodobnie jest nieprawidłowy",
         "newOperand": "Nowy operand",
         "maxOpReached": "Osiągnięto max operandów dla działania",
-        "operandsNotValid": "Operandy niepoprawne dla danej podstawy",
+        "operandsNotValid": "Niektóre operandy są niepoprawne",
         "wrongOperandsNum": "Działanie wymaga od {{minOperands}} do {{maxOperands}} operandów",
         "additionDetails": "Szczegóły dodawania",
         "subtractionDetails": "Szczegóły odejmowania",
@@ -131,7 +131,8 @@
         },
         "division": {
             "title": "Dzielenie",
-            "default": "Domyślny"
+            "default": "Domyślny",
+            "divisionByZero": "Nie można podzielić przez 0"
         }
 
     },

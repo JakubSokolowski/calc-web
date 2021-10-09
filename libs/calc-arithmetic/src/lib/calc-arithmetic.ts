@@ -69,3 +69,4 @@ export { ComplementConversionResult } from './models/complement';
 export { multiplyWithoutExtension } from './positional/multiplication';
 export { BoothConverter } from './positional/signed-digit/booth-converter';
 export * from './positional/signed-digit/signed-digit-converter';
+export * from './positional/validators';
