@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { CSSProperties, useCallback, useState } from 'react';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import TreeView from '@material-ui/lab/TreeView';
 import TreeItem from '@material-ui/lab/TreeItem';
@@ -10,7 +10,7 @@ import { useMountEffect } from '@calc/utils';
 import { TreeNode } from '../../core/models/tree-node';
 
 declare module 'csstype' {
-    interface Properties {
+    interface CSSProperties {
         '--tree-view-color'?: string;
         '--tree-view-bg-color'?: string;
     }
@@ -87,7 +87,7 @@ function StyledTreeItem(props: TreeNode) {
             style={{
                 '--tree-view-color': color,
                 '--tree-view-bg-color': bgColor
-            }}
+            } as CSSProperties}
             classes={{
                 root: classes.root,
                 content: classes.content,

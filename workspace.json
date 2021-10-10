@@ -1,558 +1,546 @@
 {
-    "version": 1,
-    "projects": {
-        "calc-web": {
-            "root": "apps/calc-web",
-            "sourceRoot": "apps/calc-web/src",
-            "projectType": "application",
-            "schematics": {},
-            "architect": {
-                "build": {
-                    "builder": "@nrwl/web:build",
-                    "options": {
-                        "outputPath": "dist/apps/calc-web",
-                        "index": "apps/calc-web/src/index.html",
-                        "main": "apps/calc-web/src/main.tsx",
-                        "polyfills": "apps/calc-web/src/polyfills.ts",
-                        "tsConfig": "apps/calc-web/tsconfig.app.json",
-                        "assets": [
-                            "apps/calc-web/src/favicon.ico",
-                            "apps/calc-web/src/assets",
-                            {
-                                "input": "libs/docs/src/assets",
-                                "glob": "**/*",
-                                "output": "assets/docs"
-                            }
-                        ],
-                        "styles": [
-                            "apps/calc-web/src/styles.scss"
-                        ],
-                        "scripts": [],
-                        "webpackConfig": "apps/calc-web/webpack.config.js"
-                    },
-                    "configurations": {
-                        "production": {
-                            "fileReplacements": [
-                                {
-                                    "replace": "environments/environment.ts",
-                                    "with": "environments/environment.prod.ts"
-                                }
-                            ],
-                            "optimization": true,
-                            "outputHashing": "all",
-                            "sourceMap": false,
-                            "extractCss": true,
-                            "namedChunks": false,
-                            "extractLicenses": true,
-                            "vendorChunk": false,
-                            "budgets": [
-                                {
-                                    "type": "initial",
-                                    "maximumWarning": "2mb",
-                                    "maximumError": "5mb"
-                                }
-                            ]
-                        }
-                    }
-                },
-                "serve": {
-                    "builder": "@nrwl/web:dev-server",
-                    "options": {
-                        "buildTarget": "calc-web:build"
-                    },
-                    "configurations": {
-                        "production": {
-                            "buildTarget": "calc-web:build:production"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "apps/calc-web/.eslintrc",
-                        "tsConfig": [
-                            "apps/calc-web/tsconfig.app.json",
-                            "apps/calc-web/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!apps/calc-web/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "apps/calc-web/jest.config.js",
-                        "tsConfig": "apps/calc-web/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
+  "version": 1,
+  "projects": {
+    "calc-web": {
+      "root": "apps/calc-web",
+      "sourceRoot": "apps/calc-web/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "outputPath": "dist/apps/calc-web",
+            "index": "apps/calc-web/src/index.html",
+            "main": "apps/calc-web/src/main.tsx",
+            "polyfills": "apps/calc-web/src/polyfills.ts",
+            "tsConfig": "apps/calc-web/tsconfig.app.json",
+            "assets": [
+              "apps/calc-web/src/favicon.ico",
+              "apps/calc-web/src/assets",
+              {
+                "input": "libs/docs/src/assets",
+                "glob": "**/*",
+                "output": "assets/docs"
+              }
+            ],
+            "styles": ["apps/calc-web/src/styles.scss"],
+            "scripts": [],
+            "webpackConfig": "apps/calc-web/webpack.config.js"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "environments/environment.ts",
+                  "with": "environments/environment.prod.ts"
                 }
-            }
-        },
-        "calc-web-e2e": {
-            "root": "apps/calc-web-e2e",
-            "sourceRoot": "apps/calc-web-e2e/src",
-            "projectType": "application",
-            "architect": {
-                "e2e": {
-                    "builder": "@nrwl/cypress:cypress",
-                    "options": {
-                        "cypressConfig": "apps/calc-web-e2e/cypress.json",
-                        "tsConfig": "apps/calc-web-e2e/tsconfig.e2e.json",
-                        "devServerTarget": "calc-web:serve"
-                    },
-                    "configurations": {
-                        "production": {
-                            "devServerTarget": "calc-web:serve:production"
-                        }
-                    }
-                },
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "apps/calc-web-e2e/.eslintrc",
-                        "tsConfig": [
-                            "apps/calc-web-e2e/tsconfig.e2e.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!apps/calc-web-e2e/**"
-                        ]
-                    }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
                 }
+              ]
             }
+          }
         },
-        "calc-arithmetic": {
-            "root": "libs/calc-arithmetic",
-            "sourceRoot": "libs/calc-arithmetic/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/calc-arithmetic/.eslintrc",
-                        "tsConfig": [
-                            "libs/calc-arithmetic/tsconfig.lib.json",
-                            "libs/calc-arithmetic/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/calc-arithmetic/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/calc-arithmetic/jest.config.js",
-                        "tsConfig": "libs/calc-arithmetic/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "calc-web:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "calc-web:build:production"
             }
+          }
         },
-        "utils": {
-            "root": "libs/utils",
-            "sourceRoot": "libs/utils/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/utils/.eslintrc",
-                        "tsConfig": [
-                            "libs/utils/tsconfig.lib.json",
-                            "libs/utils/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/utils/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/utils/jest.config.js",
-                        "tsConfig": "libs/utils/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/calc-web/**/*.js",
+              "apps/calc-web/**/*.jsx",
+              "apps/calc-web/**/*.ts",
+              "apps/calc-web/**/*.tsx",
+              "apps/calc-web/**/*.spec.ts",
+              "apps/calc-web/**/*.spec.tsx",
+              "apps/calc-web/**/*.spec.js",
+              "apps/calc-web/**/*.spec.jsx",
+              "apps/calc-web/**/*.d.ts"
+            ]
+          }
         },
-        "grid": {
-            "root": "libs/grid",
-            "sourceRoot": "libs/grid/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/grid/.eslintrc",
-                        "tsConfig": [
-                            "libs/grid/tsconfig.lib.json",
-                            "libs/grid/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/grid/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/grid/jest.config.js",
-                        "tsConfig": "libs/grid/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "docs": {
-            "root": "libs/docs",
-            "sourceRoot": "libs/docs/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/docs/.eslintrc",
-                        "tsConfig": [
-                            "libs/docs/tsconfig.lib.json",
-                            "libs/docs/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/docs/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/docs/jest.config.js",
-                        "tsConfig": "libs/docs/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "calc-rs": {
-            "root": "libs/calc-rs",
-            "sourceRoot": "libs/calc-rs/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {}
-        },
-        "positional-calculator": {
-            "root": "libs/positional-calculator",
-            "sourceRoot": "libs/positional-calculator/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/positional-calculator/.eslintrc",
-                        "tsConfig": [
-                            "libs/positional-calculator/tsconfig.lib.json",
-                            "libs/positional-calculator/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/positional-calculator/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/positional-calculator/jest.config.js",
-                        "tsConfig": "libs/positional-calculator/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "i18n": {
-            "root": "libs/i18n",
-            "sourceRoot": "libs/i18n/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/i18n/.eslintrc",
-                        "tsConfig": [
-                            "libs/i18n/tsconfig.lib.json",
-                            "libs/i18n/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/i18n/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/i18n/jest.config.js",
-                        "tsConfig": "libs/i18n/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "core": {
-            "root": "libs/core",
-            "sourceRoot": "libs/core/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/core/.eslintrc",
-                        "tsConfig": [
-                            "libs/core/tsconfig.lib.json",
-                            "libs/core/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/core/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/core/jest.config.js",
-                        "tsConfig": "libs/core/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "base-converter": {
-            "root": "libs/base-converter",
-            "sourceRoot": "libs/base-converter/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/base-converter/.eslintrc",
-                        "tsConfig": [
-                            "libs/base-converter/tsconfig.lib.json",
-                            "libs/base-converter/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/base-converter/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/base-converter/jest.config.js",
-                        "tsConfig": "libs/base-converter/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "float-converter": {
-            "root": "libs/float-converter",
-            "sourceRoot": "libs/float-converter/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/float-converter/.eslintrc",
-                        "tsConfig": [
-                            "libs/float-converter/tsconfig.lib.json",
-                            "libs/float-converter/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/float-converter/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/float-converter/jest.config.js",
-                        "tsConfig": "libs/float-converter/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "common-ui": {
-            "root": "libs/common-ui",
-            "sourceRoot": "libs/common-ui/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "linter": "eslint",
-                        "config": "libs/common-ui/.eslintrc",
-                        "tsConfig": [
-                            "libs/common-ui/tsconfig.lib.json",
-                            "libs/common-ui/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/common-ui/**"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/common-ui/jest.config.js",
-                        "tsConfig": "libs/common-ui/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "positional-ui": {
-            "root": "libs/positional-ui",
-            "sourceRoot": "libs/positional-ui/src",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "lint": {
-                    "builder": "@nrwl/linter:lint",
-                    "options": {
-                        "config": "libs/positional-ui/.eslintrc",
-                        "linter": "eslint",
-                        "tsConfig": [
-                            "libs/positional-ui/tsconfig.lib.json",
-                            "libs/positional-ui/tsconfig.spec.json"
-                        ],
-                        "exclude": [
-                            "**/node_modules/**",
-                            "!libs/positional-ui/**/*"
-                        ]
-                    }
-                },
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "libs/positional-ui/jest.config.js",
-                        "tsConfig": "libs/positional-ui/tsconfig.spec.json",
-                        "passWithNoTests": true
-                    }
-                }
-            }
-        },
-        "tools-scripts": {
-            "root": "tools/scripts",
-            "sourceRoot": "tools/scripts",
-            "projectType": "library",
-            "schematics": {},
-            "architect": {
-                "test": {
-                    "builder": "@nrwl/jest:jest",
-                    "options": {
-                        "jestConfig": "tools/scripts/jest.config.js",
-                        "tsConfig": "tools/scripts/tsconfig.spec.json"
-                    }
-                }
-            }
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/calc-web/jest.config.js",
+            "passWithNoTests": true
+          }
         }
+      }
     },
-    "cli": {
-        "defaultCollection": "@nrwl/react"
-    },
-    "schematics": {
-        "@nrwl/workspace": {
-            "library": {
-                "linter": "eslint"
+    "calc-web-e2e": {
+      "root": "apps/calc-web-e2e",
+      "sourceRoot": "apps/calc-web-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/calc-web-e2e/cypress.json",
+            "tsConfig": "apps/calc-web-e2e/tsconfig.e2e.json",
+            "devServerTarget": "calc-web:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "calc-web:serve:production"
             }
+          }
         },
-        "@nrwl/cypress": {
-            "cypress-project": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/react": {
-            "application": {
-                "style": "scss",
-                "linter": "eslint",
-                "babel": true
-            },
-            "component": {
-                "style": "scss"
-            },
-            "library": {
-                "style": "scss",
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/next": {
-            "application": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/web": {
-            "application": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/node": {
-            "application": {
-                "linter": "eslint"
-            },
-            "library": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/nx-plugin": {
-            "plugin": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/nest": {
-            "application": {
-                "linter": "eslint"
-            }
-        },
-        "@nrwl/express": {
-            "application": {
-                "linter": "eslint"
-            },
-            "library": {
-                "linter": "eslint"
-            }
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/calc-web-e2e/src/**/*.ts",
+              "apps/calc-web-e2e/src/**/*.js",
+              "apps/calc-web-e2e/**/*.ts",
+              "apps/calc-web-e2e/**/*.js"
+            ]
+          }
         }
+      }
     },
-    "defaultProject": "calc-web"
+    "calc-arithmetic": {
+      "root": "libs/calc-arithmetic",
+      "sourceRoot": "libs/calc-arithmetic/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/calc-arithmetic/**/*.ts",
+              "libs/calc-arithmetic/**/*.spec.ts",
+              "libs/calc-arithmetic/**/*.spec.tsx",
+              "libs/calc-arithmetic/**/*.spec.js",
+              "libs/calc-arithmetic/**/*.spec.jsx",
+              "libs/calc-arithmetic/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/calc-arithmetic/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "utils": {
+      "root": "libs/utils",
+      "sourceRoot": "libs/utils/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/utils/**/*.ts",
+              "libs/utils/**/*.spec.ts",
+              "libs/utils/**/*.spec.tsx",
+              "libs/utils/**/*.spec.js",
+              "libs/utils/**/*.spec.jsx",
+              "libs/utils/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/utils/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "grid": {
+      "root": "libs/grid",
+      "sourceRoot": "libs/grid/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/grid/**/*.js",
+              "libs/grid/**/*.jsx",
+              "libs/grid/**/*.ts",
+              "libs/grid/**/*.tsx",
+              "libs/grid/**/*.spec.ts",
+              "libs/grid/**/*.spec.tsx",
+              "libs/grid/**/*.spec.js",
+              "libs/grid/**/*.spec.jsx",
+              "libs/grid/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/grid/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "docs": {
+      "root": "libs/docs",
+      "sourceRoot": "libs/docs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/docs/**/*.js",
+              "libs/docs/**/*.jsx",
+              "libs/docs/**/*.ts",
+              "libs/docs/**/*.tsx",
+              "libs/docs/**/*.spec.ts",
+              "libs/docs/**/*.spec.tsx",
+              "libs/docs/**/*.spec.js",
+              "libs/docs/**/*.spec.jsx",
+              "libs/docs/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/docs/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "calc-rs": {
+      "root": "libs/calc-rs",
+      "sourceRoot": "libs/calc-rs/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {}
+    },
+    "positional-calculator": {
+      "root": "libs/positional-calculator",
+      "sourceRoot": "libs/positional-calculator/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/positional-calculator/**/*.js",
+              "libs/positional-calculator/**/*.jsx",
+              "libs/positional-calculator/**/*.ts",
+              "libs/positional-calculator/**/*.tsx",
+              "libs/positional-calculator/**/*.spec.ts",
+              "libs/positional-calculator/**/*.spec.tsx",
+              "libs/positional-calculator/**/*.spec.js",
+              "libs/positional-calculator/**/*.spec.jsx",
+              "libs/positional-calculator/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/positional-calculator/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "i18n": {
+      "root": "libs/i18n",
+      "sourceRoot": "libs/i18n/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/i18n/**/*.js",
+              "libs/i18n/**/*.jsx",
+              "libs/i18n/**/*.ts",
+              "libs/i18n/**/*.tsx",
+              "libs/i18n/**/*.spec.ts",
+              "libs/i18n/**/*.spec.tsx",
+              "libs/i18n/**/*.spec.js",
+              "libs/i18n/**/*.spec.jsx",
+              "libs/i18n/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/i18n/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "core": {
+      "root": "libs/core",
+      "sourceRoot": "libs/core/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/core/**/*.js",
+              "libs/core/**/*.jsx",
+              "libs/core/**/*.ts",
+              "libs/core/**/*.tsx",
+              "libs/core/**/*.spec.ts",
+              "libs/core/**/*.spec.tsx",
+              "libs/core/**/*.spec.js",
+              "libs/core/**/*.spec.jsx",
+              "libs/core/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "base-converter": {
+      "root": "libs/base-converter",
+      "sourceRoot": "libs/base-converter/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/base-converter/**/*.js",
+              "libs/base-converter/**/*.jsx",
+              "libs/base-converter/**/*.ts",
+              "libs/base-converter/**/*.tsx",
+              "libs/base-converter/**/*.spec.ts",
+              "libs/base-converter/**/*.spec.tsx",
+              "libs/base-converter/**/*.spec.js",
+              "libs/base-converter/**/*.spec.jsx",
+              "libs/base-converter/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/base-converter/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "float-converter": {
+      "root": "libs/float-converter",
+      "sourceRoot": "libs/float-converter/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/float-converter/**/*.js",
+              "libs/float-converter/**/*.jsx",
+              "libs/float-converter/**/*.ts",
+              "libs/float-converter/**/*.tsx",
+              "libs/float-converter/**/*.spec.ts",
+              "libs/float-converter/**/*.spec.tsx",
+              "libs/float-converter/**/*.spec.js",
+              "libs/float-converter/**/*.spec.jsx",
+              "libs/float-converter/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/float-converter/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "common-ui": {
+      "root": "libs/common-ui",
+      "sourceRoot": "libs/common-ui/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/common-ui/**/*.js",
+              "libs/common-ui/**/*.jsx",
+              "libs/common-ui/**/*.ts",
+              "libs/common-ui/**/*.tsx",
+              "libs/common-ui/**/*.spec.ts",
+              "libs/common-ui/**/*.spec.tsx",
+              "libs/common-ui/**/*.spec.js",
+              "libs/common-ui/**/*.spec.jsx",
+              "libs/common-ui/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/common-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "positional-ui": {
+      "root": "libs/positional-ui",
+      "sourceRoot": "libs/positional-ui/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/positional-ui/**/*.js",
+              "libs/positional-ui/**/*.jsx",
+              "libs/positional-ui/**/*.ts",
+              "libs/positional-ui/**/*.tsx",
+              "libs/positional-ui/**/*.spec.ts",
+              "libs/positional-ui/**/*.spec.tsx",
+              "libs/positional-ui/**/*.spec.js",
+              "libs/positional-ui/**/*.spec.jsx",
+              "libs/positional-ui/**/*.d.ts"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/positional-ui/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "tools-scripts": {
+      "root": "tools/scripts",
+      "sourceRoot": "tools/scripts",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "tools/scripts/jest.config.js"
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "defaultCollection": "@nrwl/react"
+  },
+  "schematics": {
+    "@nrwl/workspace": {
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/cypress": {
+      "cypress-project": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/react": {
+      "application": {
+        "style": "scss",
+        "linter": "eslint",
+        "babel": true
+      },
+      "component": {
+        "style": "scss"
+      },
+      "library": {
+        "style": "scss",
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/next": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/web": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/node": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nx-plugin": {
+      "plugin": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/nest": {
+      "application": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/express": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      }
+    }
+  },
+  "defaultProject": "calc-web"
 }
