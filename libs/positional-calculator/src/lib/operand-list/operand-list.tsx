@@ -84,6 +84,7 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
         onChange(newOperands);
     };
 
+
     const items = operands.map((item, index) => {
         return (
             <Draggable key={item.dndKey} draggableId={`${item.dndKey}`} index={index}>

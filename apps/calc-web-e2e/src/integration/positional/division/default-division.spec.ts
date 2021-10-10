@@ -1,11 +1,11 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
-    enterOperation, getCalculateButton,
+    enterOperationParams, getCalculateButton,
     getDivisionResult,
     getOperationGrid,
     gridHasProperResultRow,
-    operationReturnsProperResult
+    operationReturnsProperResult, selectOperation
 } from '../../../support/positional-calculator';
 
 describe('Default Division', () => {
@@ -224,7 +224,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
     });
 
-    it.only('should prevent division by 0', () => {
+    it('should prevent division by 0', () => {
         const base = 10;
         const config: OperationTemplate<AlgorithmType> = {
             operands: ['100', '0'],
@@ -233,7 +233,21 @@ describe('Default Division', () => {
             base
         };
 
-        enterOperation(config);
+        enterOperationParams(config);
+        getCalculateButton().should('be.disabled');
+        cy.get('.MuiFormHelperText-root').contains('Cannot divide by 0');
+    });
+
+    it('should prevent division by 0 when operation changes to division and divisor would be 0', () => {
+        const base = 10;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['100', '0'],
+            operation: OperationType.Multiplication,
+            algorithm: MultiplicationType.Default,
+            base
+        };
+        enterOperationParams(config);
+        selectOperation(OperationType.Division);
         getCalculateButton().should('be.disabled');
         cy.get('.MuiFormHelperText-root').contains('Cannot divide by 0');
     });
