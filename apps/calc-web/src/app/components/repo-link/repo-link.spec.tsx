@@ -5,7 +5,6 @@ import { RepoLink } from './repo-link';
 describe('RepoLink', () => {
     let container;
 
-
     beforeEach(() => {
         container = mount(
             <RepoLink/>

@@ -1,9 +1,10 @@
 module.exports = {
-    name: 'tools-scripts',
-    preset: '../../jest.config.js',
-    transform: {
-        '^.+\\.[tj]sx?$': 'ts-jest'
-    },
-    moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
-    coverageDirectory: '../../coverage/tools/scripts'
+  preset: '../../jest.preset.js',
+  transform: {
+    '^.+\\.[tj]sx?$': 'ts-jest',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'html'],
+  coverageDirectory: '../../coverage/tools/scripts',
+  globals: { 'ts-jest': { tsConfig: '<rootDir>/tsconfig.spec.json' } },
+  displayName: 'tools-scripts',
 };

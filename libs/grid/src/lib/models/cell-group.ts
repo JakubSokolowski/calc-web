@@ -1,8 +1,6 @@
 import { CellConfig } from './cell-config';
-import { CellPosition } from '../..';
 import { PopoverPlacement } from './cell-position';
-
-export type AnchorPosition = CellPosition | CellConfig | undefined;
+import type { AnchorPosition } from './anchor-position';
 
 export interface CellGroup<T = any> {
   cells: CellConfig[];
