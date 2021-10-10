@@ -21,7 +21,7 @@ interface P extends ListItemProps {
 }
 
 
-export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, numOperands, validators = [], ...rest }) => {
+export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, numOperands, validators, ...rest }) => {
     const { t } = useTranslation();
     const [representation, setRepresentation] = useState(representationStr);
     const [error, setError] = useState<string | undefined>();
@@ -35,7 +35,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
             index,
             totalNumOperands: numOperands
         };
-        const err = validateOperand([...baseValidators, ...validators], input);
+        const err = validateOperand([...baseValidators, ...(validators || [])], input);
 
         if (err) {
             const { key, options } = err;
@@ -43,6 +43,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
         } else {
             setError(undefined);
         }
+
         onRepresentationChange(representation, index, !err);
         // WARNING: adding all deps here MAY cause infinite loop in
         // tests for components that use this component, so if the
@@ -51,7 +52,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
         // may be an anonymous function, and those cannot be compared
         // The deps will be added by automatically by lint--fix,
         // so use it with caution
-    }, [base, representation, index]);
+    }, [base, representation, index, validators]);
 
 
     return (

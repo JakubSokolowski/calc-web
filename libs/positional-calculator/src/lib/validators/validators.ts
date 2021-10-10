@@ -7,7 +7,7 @@ import {
 } from '@calc/calc-arithmetic';
 
 
-export const isDivisorZero: OperandValidator = (input) => {
+export function isDivisorZero(input: OperandInputValue): TranslationErrorMessage | undefined {
     const { totalNumOperands, index, representation, base } = input;
     if (totalNumOperands !== 2) return undefined;
     if (index !== 1) return undefined;
@@ -19,9 +19,9 @@ export const isDivisorZero: OperandValidator = (input) => {
             };
         }
     }
-};
+}
 
-export const representationValidator: OperandValidator = (input: OperandInputValue) => {
+export function representationValidator(input: OperandInputValue): TranslationErrorMessage | undefined {
     const { representation, base } = input;
     if (!isValidComplementOrRepresentationStr(representation, base)) {
         return {
@@ -29,7 +29,7 @@ export const representationValidator: OperandValidator = (input: OperandInputVal
             options: { base }
         };
     }
-};
+}
 
 export function validateOperand(validators: OperandValidator[], input: OperandInputValue): TranslationErrorMessage | undefined {
     for (const validator of validators) {
