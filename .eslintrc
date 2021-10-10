@@ -11,7 +11,8 @@
     ],
     "plugins": [
         "@typescript-eslint",
-        "@nrwl/nx"
+        "@nrwl/nx",
+        "mocha"
     ],
     "extends": [
         "eslint:recommended",
@@ -22,6 +23,8 @@
     ],
     "rules": {
         "quotes": [ "error", "single"],
+        "mocha/no-skipped-tests": "error",
+        "mocha/no-exclusive-tests": "error",
         "@typescript-eslint/explicit-member-accessibility": "off",
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-parameter-properties": "off",
