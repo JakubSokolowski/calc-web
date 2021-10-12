@@ -2,7 +2,7 @@ import { mount } from 'enzyme';
 import React from 'react';
 import { addPositionalNumbers, fromNumber } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from './positional-number-component';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 
 describe('PositionalNumberComponent', () => {
     let container;

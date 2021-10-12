@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button, Popover } from '@material-ui/core';
-import TranslateIcon from '@material-ui/icons/Translate';
+import { Button, Popover } from '@mui/material';
+import TranslateIcon from '@mui/icons-material/Translate';
 import { useDispatch, useSelector } from 'react-redux';
 import { availableLanguages, getNativeName, Language } from '@calc/i18n';
 import { selectAppLanguage, setLanguage } from '@calc/core';
@@ -38,6 +38,7 @@ export const LanguageMenu: FC = () => {
                 <Button
                     data-test={`language-${languageKey}`}
                     data-language={languageKey}
+                    color={'inherit'}
                     onClick={(async () => {
                         await handleClick(languageKey);
                     })}
@@ -74,9 +75,8 @@ export const LanguageMenu: FC = () => {
                 startIcon={<TranslateIcon/>}
                 aria-describedby={popoverId}
                 variant="text"
-                color="default"
-                onClick={handlePopoverClick}
-            >
+                color={'inherit'}
+                onClick={handlePopoverClick}>
                 {getNativeName(selectedLanguage)}
             </Button>
         </div>

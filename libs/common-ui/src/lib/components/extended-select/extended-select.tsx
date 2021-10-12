@@ -1,8 +1,9 @@
 import React, { ChangeEvent, ReactNode } from 'react';
-import { createStyles, IconButton, MenuItem, TextField, Theme, Tooltip } from '@material-ui/core';
-import HelpIcon from '@material-ui/icons/Help';
-import { makeStyles } from '@material-ui/core/styles';
-import { ExtendedOption } from '../../core/models/extended-option';
+import { IconButton, MenuItem, TextField, Theme, Tooltip } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import HelpIcon from '@mui/icons-material/Help';
+import makeStyles from '@mui/styles/makeStyles';
+import type { ExtendedOption } from '../../core/models/extended-option';
 import { useTranslation } from 'react-i18next';
 
 

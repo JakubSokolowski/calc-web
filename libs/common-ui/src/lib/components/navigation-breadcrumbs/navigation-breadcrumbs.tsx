@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { Breadcrumbs, createStyles, Link, Theme, Typography } from '@material-ui/core';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
-import { makeStyles } from '@material-ui/core/styles';
+import { Breadcrumbs, Link, Theme, Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import makeStyles from '@mui/styles/makeStyles';
 import { replaceAll } from '@calc/utils';
 import { useTranslation } from 'react-i18next';
 import { environment } from '@calc/env';

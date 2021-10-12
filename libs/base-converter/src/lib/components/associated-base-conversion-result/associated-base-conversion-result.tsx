@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion, fromStringDirect } from '@calc/calc-arithmetic';
 import { PositionalNumberComponent } from '@calc/positional-ui';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { InlineMath } from '@calc/common-ui';
 
 interface P {

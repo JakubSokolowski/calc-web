@@ -3,7 +3,9 @@ import React, { FC } from 'react';
 import { calculate, OperationParams } from '../core/calculate';
 import { PaddedGrid } from '@calc/grid';
 import { getGroupBuilder } from '../core/operation-group-builer';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { OperationTemplate } from '../..';
 
 const useStyles = makeStyles((theme: Theme) => {

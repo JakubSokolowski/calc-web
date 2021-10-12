@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import HomeIcon from '@material-ui/icons/Home';
-import BuildIcon from '@material-ui/icons/Build';
-import MenuBookIcon from '@material-ui/icons/MenuBook';
+import HomeIcon from '@mui/icons-material/Home';
+import BuildIcon from '@mui/icons-material/Build';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { MenuTree, TreeNode } from '@calc/common-ui';
 
 

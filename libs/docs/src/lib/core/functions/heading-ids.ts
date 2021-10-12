@@ -18,10 +18,10 @@ export function extractHeadingIds(markdown?: string): ContentsEntry[] {
             id: getHeadingSlug(withoutHashes),
             level: level
         }
-    })
+    });
 }
 
 export function getHeadingSlug(heading: string): string {
     const slug = heading.trim().toLowerCase();
-    return latinize(slug).replace(/\W/g, '-')
+    return latinize(slug).replace(/\W/g, '-');
 }

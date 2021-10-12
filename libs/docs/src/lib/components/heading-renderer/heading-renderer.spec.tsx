@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { HeadingRenderer } from './heading-renderer';
-import { IconButton, Snackbar } from '@material-ui/core';
+import { IconButton, Snackbar } from '@mui/material';
 import { act } from 'react-dom/test-utils';
 
 

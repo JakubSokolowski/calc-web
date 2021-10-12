@@ -1,5 +1,7 @@
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Theme } from '@mui/material';
+
+import createStyles from '@mui/styles/createStyles';
 
 export const useConverterStyles = makeStyles((theme: Theme) => {
     return createStyles(
@@ -24,7 +26,7 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
             row: {
                 display: 'flex',
                 flexDirection: 'row',
-                [theme.breakpoints.down('sm')]: {
+                [theme.breakpoints.down('md')]: {
                     width: '100%'
                 },
                 [theme.breakpoints.up('md')]: {
@@ -52,7 +54,7 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
                 width:'22%'
             },
             horizontalSpacer: {
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     width: theme.spacing(3)
                 },
                 [theme.breakpoints.up('lg')]: {
@@ -63,7 +65,7 @@ export const useConverterStyles = makeStyles((theme: Theme) => {
               flexGrow: 1
             },
             verticalSpacer: {
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     height: theme.spacing(2)
                 },
                 [theme.breakpoints.up('lg')]: {

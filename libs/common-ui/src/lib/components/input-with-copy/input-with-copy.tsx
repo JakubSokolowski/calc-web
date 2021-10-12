@@ -1,10 +1,10 @@
 import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createStyles, IconButton, Snackbar, TextField, TextFieldProps, Theme } from '@material-ui/core';
-import FileCopyIcon from '@material-ui/icons/FileCopy';
-import { makeStyles } from '@material-ui/core/styles';
+import { Alert, IconButton, Snackbar, TextField, TextFieldProps, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import makeStyles from '@mui/styles/makeStyles';
 import { copyToClipboard } from '../../core/functions/copy-to-clipboard';
-import { Alert } from '../alert/alert';
 
 export enum InputType {
     Text = 'text',

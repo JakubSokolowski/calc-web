@@ -1,11 +1,12 @@
 import React, { FC } from 'react';
-import { AccordionDetails, Divider, Typography, withStyles } from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { makeStyles } from '@material-ui/core/styles';
-import MuiAccordionSummary from '@material-ui/core/AccordionSummary';
-import MuiAccordion from '@material-ui/core/Accordion';
-import ErrorIcon from '@material-ui/icons/Error';
-import { Tooltip } from '@material-ui/core';
+import { AccordionDetails, Divider, Typography } from '@mui/material';
+import withStyles from '@mui/styles/withStyles';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import makeStyles from '@mui/styles/makeStyles';
+import MuiAccordionSummary from '@mui/material/AccordionSummary';
+import MuiAccordion from '@mui/material/Accordion';
+import ErrorIcon from '@mui/icons-material/Error';
+import { Tooltip } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 interface SectionProps {

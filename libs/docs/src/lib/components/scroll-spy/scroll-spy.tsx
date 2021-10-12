@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, List, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { List, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { ContentsEntry } from '../../core/models/contents-entry';
 import { useHistory } from 'react-router-dom';
 
@@ -29,11 +30,10 @@ const useStyles = makeStyles((theme: Theme) =>
         container: {
             listStyleType: 'none',
             right: theme.spacing(2),
-            top: 64 + theme.spacing(1),
             position: 'fixed',
             display: 'block',
             width: '250px',
-            [theme.breakpoints.down('md')]: {
+            [theme.breakpoints.down('lg')]: {
                 display: 'none'
             }
         }

@@ -3,7 +3,7 @@ import { buildIntegralConversionGrid, GridLabel, HoverGrid } from '@calc/grid';
 import React from 'react';
 import { fromNumber } from '@calc/calc-arithmetic';
 import HoverGridCell from '../hover-cell/hover-grid-cell';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 import { OperandLabel } from '../operand-label/operand-label';
 
 // for Material UI Tooltip. Remove after jest bump to 26.0

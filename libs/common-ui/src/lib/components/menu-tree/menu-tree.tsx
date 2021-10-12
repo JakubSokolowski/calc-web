@@ -1,15 +1,18 @@
 import React, { CSSProperties, useCallback, useState } from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
-import TreeView from '@material-ui/lab/TreeView';
-import TreeItem from '@material-ui/lab/TreeItem';
-import Typography from '@material-ui/core/Typography';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import ArrowRightIcon from '@material-ui/icons/ArrowRight';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import TreeView from '@mui/lab/TreeView';
+import TreeItem from '@mui/lab/TreeItem';
+import Typography from '@mui/material/Typography';
+import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown';
+import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { useHistory, useLocation } from 'react-router-dom';
 import { useMountEffect } from '@calc/utils';
 import { TreeNode } from '../../core/models/tree-node';
 
-declare module 'csstype' {
+
+declare module 'react' {
     interface CSSProperties {
         '--tree-view-color'?: string;
         '--tree-view-bg-color'?: string;
@@ -87,7 +90,7 @@ function StyledTreeItem(props: TreeNode) {
             style={{
                 '--tree-view-color': color,
                 '--tree-view-bg-color': bgColor
-            } as CSSProperties}
+            }}
             classes={{
                 root: classes.root,
                 content: classes.content,

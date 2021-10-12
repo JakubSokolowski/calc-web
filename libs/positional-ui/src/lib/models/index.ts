@@ -1,1 +1,1 @@
-export { DisplayBase } from './display-base';
+export type { DisplayBase } from './display-base';

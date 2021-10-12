@@ -1,8 +1,8 @@
 import React, { FC, useState } from 'react';
 import { saveAs } from 'file-saver';
 import DomToImage from 'dom-to-image';
-import { CircularProgress, IconButton, Tooltip } from '@material-ui/core';
-import SaveAltIcon from '@material-ui/icons/SaveAlt';
+import { CircularProgress, IconButton, Tooltip } from '@mui/material';
+import SaveAltIcon from '@mui/icons-material/SaveAlt';
 
 interface P {
     elementId: string;

@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
-import { Button, createStyles, List, RootRef, Theme, Tooltip } from '@material-ui/core';
+import { Button, List,  Theme, Tooltip } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { OperandInput } from '../operand-input/operand-input';
 import { useTranslation } from 'react-i18next';
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from '@mui/icons-material/Add';
 import { reorder } from '@calc/utils';
 import { OperandValidator } from '@calc/calc-arithmetic';
 
@@ -115,12 +116,10 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable">
                     {(provided) => (
-                        <RootRef rootRef={provided.innerRef}>
-                            <List>
-                                {items}
-                                {provided.placeholder}
-                            </List>
-                        </RootRef>
+                        <List ref={provided.innerRef}>
+                            {items}
+                            {provided.placeholder}
+                        </List>
                     )}
                 </Droppable>
             </DragDropContext>

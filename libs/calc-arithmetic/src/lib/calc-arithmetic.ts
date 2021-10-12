@@ -64,8 +64,7 @@ export { leastSignificantPosition, mostSignificantPosition } from './positional/
 export { BaseDigits } from './positional/base-digits';
 export { DigitMapping } from './models/digit-mapping';
 export { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';
-export { ExtendedOption } from '../../../common-ui/src/lib/core/models/extended-option';
-export { ComplementConversionResult } from './models/complement';
+export type { ComplementConversionResult } from './models/complement';
 export { multiplyWithoutExtension } from './positional/multiplication';
 export { BoothConverter } from './positional/signed-digit/booth-converter';
 export * from './positional/signed-digit/signed-digit-converter';

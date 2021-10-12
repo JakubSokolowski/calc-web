@@ -1,5 +1,7 @@
 import React from 'react';
-import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
+import { Theme } from '@mui/material/styles';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { IntegralConversionDetails } from '../integral-conversion-details/integral-conversion-details';
 import { AssociatedBaseConversion, convertUsingAssociatedBases, fromString } from '@calc/calc-arithmetic';
 import { FloatingConversionDetails } from '../floating-conversion-details/floating-conversion-details';

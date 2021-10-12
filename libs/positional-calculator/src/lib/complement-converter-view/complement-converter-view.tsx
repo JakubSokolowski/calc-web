@@ -1,7 +1,8 @@
 import React, { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { Section, ViewWrapper } from '@calc/common-ui';
 import { ComplementConverterInput } from './complement-converter-input/complement-converter-input';
 import { ComplementConversionResult, getComplementWithDetails } from '@calc/calc-arithmetic';
@@ -21,7 +22,7 @@ export const useStyles = makeStyles((theme: Theme) => {
                 margin: 'auto'
             },
             verticalSpacer: {
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     height: theme.spacing(2)
                 },
                 [theme.breakpoints.up('lg')]: {

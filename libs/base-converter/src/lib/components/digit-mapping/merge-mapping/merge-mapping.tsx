@@ -1,8 +1,9 @@
 import React, { FC, useEffect, useRef } from 'react';
 import { DigitMapping } from '@calc/calc-arithmetic';
 import { ArcherContainer, ArcherElement } from 'react-archer';
-import { Button, createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
 interface P {
     mapping: DigitMapping;

@@ -3,8 +3,9 @@ import { PaddedGrid } from '@calc/grid';
 import { getComplementWithDetails, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import { buildComplementGrid } from '../complement-grid/complement-grid';
 import { SaveAsImageButton } from '@calc/common-ui';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { useTranslation } from 'react-i18next';
 import { OperationRenderer } from '../../operation-renderer/operation-renderer';
 

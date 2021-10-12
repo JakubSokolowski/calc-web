@@ -14,8 +14,10 @@ import { CellPosition } from '../../models/cell-position';
 import { NumberSubscript } from '@calc/common-ui';
 import { anyHorizontalLineIntersects, anyVerticalLineIntersects } from '../../core/grid-line-utils';
 import { AxisConfig } from '../../models/axis-config';
-import { createStyles, Theme, Tooltip, withStyles } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme, Tooltip } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import withStyles from '@mui/styles/withStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { GridLabel } from '../../..';
 import { OperandLabel } from '../operand-label/operand-label';
 

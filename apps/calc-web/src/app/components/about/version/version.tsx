@@ -1,7 +1,8 @@
 import React, { FC } from 'react';
-import { createStyles, Link, Theme } from '@material-ui/core';
+import { Link, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { environment } from '@calc/env';
 
 

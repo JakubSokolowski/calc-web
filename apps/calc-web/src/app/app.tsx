@@ -1,27 +1,23 @@
 import React, { useEffect } from 'react';
 import { HashRouter, Route, Switch } from 'react-router-dom';
 import { HomeView } from './components/home-view/home-view';
-import './app.scss';
 import SiderMenu from './components/sider-menu/sider-menu';
 import { LanguageMenu } from './components/language-menu/language-menu';
 import {
     AppBar,
-    createStyles,
-    CssBaseline,
     Drawer,
     Hidden,
     IconButton,
     Theme,
-    ThemeProvider,
     Toolbar,
     Typography
-} from '@material-ui/core';
-import { getTheme } from '@calc/common-ui';
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThemeMenu } from './components/theme-menu/theme-menu';
-import { makeStyles } from '@material-ui/core/styles';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { RepoLink } from './components/repo-link/repo-link';
@@ -32,6 +28,7 @@ import { About } from './components/about/about';
 import { DocRoute, RendererMapping } from '@calc/docs';
 import { Tools } from './components/tools/tools';
 import { ComplementDetailsRenderer, ConversionRenderer, OperationRenderer } from '@calc/positional-calculator';
+
 
 const drawerWidth = 200;
 
@@ -90,12 +87,11 @@ const useStyles = makeStyles((theme: Theme) =>
     })
 );
 
-const rootMapping: RendererMapping = {
+export const rootMapping: RendererMapping = {
     'cconv': ComplementDetailsRenderer,
     'operation': OperationRenderer,
     'bconv': ConversionRenderer
 };
-
 
 export const App = () => {
     const theme = useSelector(selectAppTheme);
@@ -146,7 +142,7 @@ export const App = () => {
                 <div style={{ flexGrow: 1 }}/>
                 {
                     mobileOpen &&
-                    <IconButton onClick={handleDrawerClose}>
+                    <IconButton onClick={handleDrawerClose} size="large">
                         <ChevronLeftIcon/>
                     </IconButton>
                 }
@@ -158,80 +154,77 @@ export const App = () => {
 
     return (
         <div className={classes.root}>
-            <ThemeProvider theme={getTheme(theme)}>
-                <CssBaseline/>
-                <HashRouter basename='/'>
-                    <AppBar
-                        position="fixed"
-                        className={clsx(classes.appBar, {
-                            [classes.appBarShift]: mobileOpen
-                        })}
-                    >
-                        <Toolbar>
-                            <IconButton
-                                color="inherit"
-                                aria-label="open drawer"
-                                onClick={handleDrawerOpen}
-                                edge="end"
-                                className={clsx(classes.menuButton, mobileOpen && classes.hide)}
-                            >
-                                <MenuIcon/>
-                            </IconButton>
-                            <div style={{ 'flexGrow': 1 }}/>
-                            <LanguageMenu/>
-                            <ThemeMenu/>
-                            <RepoLink/>
-                        </Toolbar>
-                    </AppBar>
+            <HashRouter basename='/'>
+                <AppBar
+                    position="fixed"
+                    className={clsx(classes.appBar, {
+                        [classes.appBarShift]: mobileOpen
+                    })}
+                >
+                    <Toolbar>
+                        <IconButton
+                            color="inherit"
+                            aria-label="open drawer"
+                            onClick={handleDrawerOpen}
+                            edge="end"
+                            className={clsx(classes.menuButton, mobileOpen && classes.hide)}
+                            size="large">
+                            <MenuIcon/>
+                        </IconButton>
+                        <div style={{ 'flexGrow': 1 }}/>
+                        <LanguageMenu/>
+                        <ThemeMenu/>
+                        <RepoLink/>
+                    </Toolbar>
+                </AppBar>
 
-                    <nav className={classes.drawer}>
-                        <Hidden smUp implementation="css">
-                            <Drawer
-                                container={container}
-                                variant="temporary"
-                                anchor={'left'}
-                                open={mobileOpen}
-                                onClose={toggleDrawer}
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                                ModalProps={{
-                                    keepMounted: true
-                                }}
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                        <Hidden xsDown implementation="css">
-                            <Drawer
-                                classes={{
-                                    paper: classes.drawerPaper
-                                }}
-                                variant="permanent"
-                                open
-                            >
-                                {drawer}
-                            </Drawer>
-                        </Hidden>
-                    </nav>
+                <nav className={classes.drawer}>
+                    <Hidden smUp implementation="css">
+                        <Drawer
+                            container={container}
+                            variant="temporary"
+                            anchor={'left'}
+                            open={mobileOpen}
+                            onClose={toggleDrawer}
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                            ModalProps={{
+                                keepMounted: true
+                            }}
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                    <Hidden smDown implementation="css">
+                        <Drawer
+                            classes={{
+                                paper: classes.drawerPaper
+                            }}
+                            variant="permanent"
+                            open
+                        >
+                            {drawer}
+                        </Drawer>
+                    </Hidden>
+                </nav>
 
-                    <main
-                        className={clsx(classes.content, {
-                            [classes.contentShift]: mobileOpen
-                        })}
-                    >
-                        <div className={classes.drawerHeader}/>
-                        <div>
-                            <About/>
-                            <Switch>
-                                <Route exact path="/" component={HomeView}/>
-                                <Route path="/tools" component={Tools}/>
-                                <Route path="/theory" render={(props => <DocRoute {...props} mapping={rootMapping}/>)}/>
-                            </Switch>
-                        </div>
-                    </main>
-                </HashRouter>
-            </ThemeProvider>
+                <main
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: mobileOpen
+                    })}
+                >
+                    <div className={classes.drawerHeader}/>
+                    <div>
+                        <About/>
+                        <Switch>
+                            <Route exact path="/" component={HomeView}/>
+                            <Route path="/tools" component={Tools}/>
+                            <Route path="/theory" render={(props => <DocRoute {...props} mapping={rootMapping}/>)}/>
+                        </Switch>
+                    </div>
+                </main>
+            </HashRouter>
         </div>
     );
 };

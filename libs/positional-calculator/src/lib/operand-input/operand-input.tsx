@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
-import { IconButton, ListItem, ListItemProps, ListItemSecondaryAction, TextField } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { IconButton, ListItem, ListItemProps, ListItemSecondaryAction, TextField } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import {
     BaseDigits,
@@ -71,7 +71,7 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
             />
             <div style={{ width: '20px' }}/>
             <ListItemSecondaryAction>
-                <IconButton onClick={() => onRemove(index)}>
+                <IconButton onClick={() => onRemove(index)} size="large">
                     <CloseIcon/>
                 </IconButton>
             </ListItemSecondaryAction>

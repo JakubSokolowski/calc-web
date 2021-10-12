@@ -19,8 +19,8 @@ export const ButtonRowComponent: FC<P> = ({ onChange, values }) => {
 
 
     const style = {
-        display: 'flex' as 'flex',
-        flexDirection: 'row' as 'row'
+        display: 'flex' as const,
+        flexDirection: 'row' as const
     };
 
     return (

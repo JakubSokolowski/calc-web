@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { FloatConverterView } from '@calc/float-converter';
 
