@@ -3,8 +3,11 @@ import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
 import { InputType, InputWithCopy } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Theme } from '@mui/material';
+
+
+import createStyles from '@mui/styles/createStyles';
 
 
 const useStyles = makeStyles((theme: Theme) => {
@@ -47,8 +50,8 @@ export const FloatConverterComponent: FC = () => {
     };
 
     const style = {
-        'display': 'flex' as 'flex',
-        'flexDirection': 'row' as 'row'
+        'display': 'flex' as const,
+        'flexDirection': 'row' as const
     };
 
     return (

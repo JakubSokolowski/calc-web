@@ -10,8 +10,9 @@ import {
 import { useTranslation } from 'react-i18next';
 import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
-import { Button, createStyles, TextField, Theme, Tooltip } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Button, TextField, Theme, Tooltip } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
 import { useUrlCalculatorOptions } from './url-calculator-options';
 import { useHistory } from 'react-router-dom';

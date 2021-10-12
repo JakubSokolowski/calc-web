@@ -1,10 +1,10 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
-import { IconButton, Snackbar, Typography } from '@material-ui/core';
+import { Alert, IconButton, Snackbar, Typography } from '@mui/material';
 import { getHeadingSlug } from '../../core/functions/heading-ids';
 
-import LinkIcon from '@material-ui/icons/Link';
+import LinkIcon from '@mui/icons-material/Link';
 import { useLocation, useHistory } from 'react-router-dom';
-import { Alert, copyToClipboard } from '@calc/common-ui';
+import { copyToClipboard } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 
 interface HeadingProps {
@@ -48,7 +48,7 @@ export const HeadingRenderer: FC<HeadingProps> = ({level, children}) => {
             <Typography id={id} variant={`h${level + 3}` as any}>
                 {children}
             </Typography>
-            <IconButton onClick={() => handleCopyToClipboard()} >
+            <IconButton onClick={() => handleCopyToClipboard()} size="large">
                 <LinkIcon/>
             </IconButton>
             <Snackbar
@@ -57,8 +57,10 @@ export const HeadingRenderer: FC<HeadingProps> = ({level, children}) => {
                 autoHideDuration={1500}
                 onClose={handleClose}
             >
-                <Alert severity="info">{t('common.copy')}</Alert>
+                <Alert severity="info">
+                    {  t('common.copy')}
+                </Alert>
             </Snackbar>
         </div>
-    )
+    );
 };

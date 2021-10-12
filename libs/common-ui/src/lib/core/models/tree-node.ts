@@ -1,6 +1,6 @@
-import { TreeItemProps } from '@material-ui/lab/TreeItem';
+import { TreeItemProps } from '@mui/lab/TreeItem';
 import React from 'react';
-import { SvgIconProps } from '@material-ui/core/SvgIcon';
+import { SvgIconProps } from '@mui/material/SvgIcon';
 
 export type TreeNode = Omit<TreeItemProps, 'nodeId'> & {
     bgColor?: string;

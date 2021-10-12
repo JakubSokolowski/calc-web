@@ -1,6 +1,29 @@
-import { Theme } from '@material-ui/core';
-import { darkTheme } from './dark';
-import { lightTheme } from './light';
+import { createTheme, Theme } from '@mui/material/styles';
+
+declare module '@mui/styles/defaultTheme' {
+    // eslint-disable-next-line @typescript-eslint/no-empty-interface
+    interface DefaultTheme extends Theme {
+    }
+}
+
+
+export const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+        primary: {
+            main: '#333',
+        }
+    }
+});
+
+
+export const lightTheme = createTheme({
+    palette: {
+        mode: 'light'
+    },
+});
+
+
 
 export enum AppTheme {
     Light = 'light',

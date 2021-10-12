@@ -1,10 +1,10 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, Tooltip } from '@material-ui/core';
+import { IconButton, Tooltip } from '@mui/material';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppTheme } from '@calc/common-ui';
-import Brightness7Icon from '@material-ui/icons/Brightness7';
-import Brightness4Icon from '@material-ui/icons/Brightness4';
+import Brightness7Icon from '@mui/icons-material/Brightness7';
+import Brightness4Icon from '@mui/icons-material/Brightness4';
 import { selectAppTheme, setTheme } from '@calc/core';
 
 export const ThemeMenu: FC = () => {
@@ -22,7 +22,7 @@ export const ThemeMenu: FC = () => {
 
     return (
         <Tooltip title={currentTheme === AppTheme.Light ? t('appBar.toggleDark') : t('appBar.toggleLight')}>
-            <IconButton color="default" onClick={toggleTheme} id={buttonId}>
+            <IconButton color="default" onClick={toggleTheme} id={buttonId} size="large">
                 {
                     currentTheme === AppTheme.Light
                     ? <Brightness4Icon/>

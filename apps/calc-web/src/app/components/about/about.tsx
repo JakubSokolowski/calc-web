@@ -1,19 +1,18 @@
 import React, { FC } from 'react';
 import {
-    ClickAwayListener,
-    createStyles,
     Divider,
     IconButton,
     Link,
     Paper,
     Theme,
-    Tooltip
-} from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
-import HelpIcon from '@material-ui/icons/Help';
+    Tooltip,
+    Popover,
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import HelpIcon from '@mui/icons-material/Help';
 import { useTranslation } from 'react-i18next';
 import { Version } from './version/version';
-import Popper from '@material-ui/core/Popper';
 
 const useStyles = makeStyles((theme: Theme) => {
     return createStyles({
@@ -57,33 +56,29 @@ export const About: FC = () => {
                     <HelpIcon fontSize={'large'}/>
                 </IconButton>
             </Tooltip>
-            <Popper
-                transition
-                id={id}
-                open={open}
-                anchorEl={anchorEl}
-                placement={'top-start'}
-                popperOptions={{
-                    modifiers: {
-                        offset: {
-                            enabled: true,
-                            offset: '-75,10',
-                        },
-                    },
+            <Popover
+                anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'center',
                 }}
+                transformOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'center',
+                }}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                open={open}
             >
-                <ClickAwayListener onClickAway={() => handleClose()}>
-                    <Paper>
-                        <div data-test="bug-report" className={classes.content}>
-                            <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
-                                {t('about.submitNewIssue')}
-                            </Link>
-                        </div>
-                        <Divider/>
-                        <Version/>
-                    </Paper>
-                </ClickAwayListener>
-            </Popper>
+                <Paper>
+                    <div data-test="bug-report" className={classes.content}>
+                        <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
+                            {t('about.submitNewIssue')}
+                        </Link>
+                    </div>
+                    <Divider/>
+                    <Version/>
+                </Paper>
+            </Popover>
         </div>
     );
 };

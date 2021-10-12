@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 
 export const HomeView: FC = () => {
     const { t } = useTranslation();

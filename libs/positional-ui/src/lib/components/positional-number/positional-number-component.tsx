@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import { Tooltip } from '@material-ui/core';
+import { Tooltip } from '@mui/material';
 import { replaceAll } from '@calc/utils';
 import { InlineMath } from '@calc/common-ui';
 import { AdditionalInfo } from '../additional-info/additional-info';
@@ -25,7 +25,6 @@ export const PositionalNumberComponent: FC<P>  = ({input, showAdditionalInfo = t
     if(showAdditionalInfo) {
         return (
             <Tooltip
-                interactive
                 title={<AdditionalInfo input={input} additionalBases={additionalBases}/>}
                 placement={'top-end'}
                 arrow

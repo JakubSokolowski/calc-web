@@ -9,8 +9,9 @@ import {
     PositionalNumber
 } from '@calc/calc-arithmetic';
 import { PaddedGrid } from '@calc/grid';
-import { createStyles, Theme, Snackbar } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme, Snackbar, Alert } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
 import { DndOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';
@@ -164,7 +165,9 @@ export const PositionalCalculatorView: FC = () => {
                 open={successOpen}
                 onClose={handleSuccessClose}
             >
-                <OperationSuccess params={params} onClose={handleSuccessClose}/>
+                <Alert severity="success">
+                    <OperationSuccess params={params}/>
+                </Alert>
             </Snackbar>
         </ViewWrapper>
     );

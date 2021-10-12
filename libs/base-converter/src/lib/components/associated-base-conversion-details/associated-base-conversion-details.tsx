@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { MergeMapping } from '../digit-mapping/merge-mapping/merge-mapping';
-import { createStyles, Theme } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { SplitMapping } from '../digit-mapping/split-mapping/split-mapping';
 
 const useStyles = makeStyles((theme: Theme) => {

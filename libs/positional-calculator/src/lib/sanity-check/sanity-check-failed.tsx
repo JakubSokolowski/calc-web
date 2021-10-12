@@ -1,4 +1,4 @@
-import { Alert } from '@calc/common-ui';
+import { Alert } from '@mui/material';
 import React, {FC} from 'react';
 import { useTranslation } from 'react-i18next';
 

@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { AssociatedBaseConverterView, BaseConverterView, ComplementConverterView } from '@calc/base-converter';
 import { PositionalCalculatorView } from '@calc/positional-calculator';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { ViewWrapper } from '@calc/common-ui';
 
 export const PositionalTools: FC = () => {

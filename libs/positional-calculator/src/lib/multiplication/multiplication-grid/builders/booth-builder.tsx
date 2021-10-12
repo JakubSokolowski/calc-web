@@ -18,7 +18,7 @@ export class BoothBuilder extends ComplementMultiplicationBuilder {
 
     protected get multiplierSDLabelStr() {
         return 'SD';
-    };
+    }
 
     buildValues(): GridCellConfig[][] {
         return [

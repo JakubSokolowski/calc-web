@@ -3,8 +3,9 @@ import { Conversion } from '@calc/calc-arithmetic';
 import { buildFractionalConversionGrid, PaddedGrid } from '@calc/grid';
 import { FractionalConversionRow } from '../conversion-details/fractional-conversion-row/fractional-conversion-row';
 import { useTranslation } from 'react-i18next';
-import { makeStyles } from '@material-ui/core/styles';
-import { createStyles, Theme } from '@material-ui/core';
+import makeStyles from '@mui/styles/makeStyles';
+import { Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { SaveAsImageButton } from '@calc/common-ui';
 
 interface P {

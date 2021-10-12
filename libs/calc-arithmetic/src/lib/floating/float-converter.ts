@@ -1,7 +1,6 @@
 import { fromString } from '../positional/base-converter';
 import { chunks } from '@calc/utils';
-
-const Buffer = require('buffer/').Buffer;
+import { Buffer } from 'buffer/';
 
 export enum FloatProperty {
     Normalized,
@@ -98,57 +97,45 @@ export class FloatConverter {
     public static isPositiveZero(
         representation: FloatingRepresentation
     ): boolean {
-        return (
-            representation.sign === '0' &&
-            /^0*$/.test(representation.exponent) &&
-            /^0*$/.test(representation.mantissa)
-        );
+        return representation.sign === '0' &&
+        /^0*$/.test(representation.exponent) &&
+        /^0*$/.test(representation.mantissa);
     }
 
     public static isNegativeZero(
         representation: FloatingRepresentation
     ): boolean {
-        return (
-            representation.sign === '1' &&
-            /^0*$/.test(representation.exponent) &&
-            /^0*$/.test(representation.mantissa)
-        );
+        return representation.sign === '1' &&
+        /^0*$/.test(representation.exponent) &&
+        /^0*$/.test(representation.mantissa);
     }
 
     public static isDenormalized(
         representation: FloatingRepresentation
     ): boolean {
-        return (
-            /^0*$/.test(representation.exponent) &&
-            !/^0*$/.test(representation.mantissa)
-        );
+        return /^0*$/.test(representation.exponent) &&
+        !/^0*$/.test(representation.mantissa);
     }
 
     public static isPositiveInfinity(
         representation: FloatingRepresentation
     ): boolean {
-        return (
-            representation.sign === '0' &&
-            /^1*$/.test(representation.exponent) &&
-            /^0*$/.test(representation.mantissa)
-        );
+        return representation.sign === '0' &&
+        /^1*$/.test(representation.exponent) &&
+        /^0*$/.test(representation.mantissa);
     }
 
     public static isNegativeInfinity(
         representation: FloatingRepresentation
     ): boolean {
-        return (
-            representation.sign === '1' &&
-            /^1*$/.test(representation.exponent) &&
-            /^0*$/.test(representation.mantissa)
-        );
+        return representation.sign === '1' &&
+        /^1*$/.test(representation.exponent) &&
+        /^0*$/.test(representation.mantissa);
     }
 
     public static IsNAN(representation: FloatingRepresentation): boolean {
-        return (
-            /^1*$/.test(representation.exponent) &&
-            !/^0*$/.test(representation.mantissa)
-        );
+        return /^1*$/.test(representation.exponent) &&
+        !/^0*$/.test(representation.mantissa);
     }
 }
 

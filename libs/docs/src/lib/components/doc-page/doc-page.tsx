@@ -1,10 +1,11 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDocs } from '../../hooks/use-docs';
-import { Box, createStyles, Theme } from '@material-ui/core';
+import { Box, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useLocation } from 'react-router-dom';
 import { RendererMapping } from '../../..';
 import { NavigationBreadcrumbs } from '@calc/common-ui';
@@ -21,7 +22,7 @@ export const useStyles = makeStyles((theme: Theme) => {
         {
             box: {
                 paddingBottom: '400px',
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     paddingRight: '250px'
                 },
                 [theme.breakpoints.up('lg')]: {

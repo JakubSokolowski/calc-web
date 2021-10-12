@@ -2,7 +2,7 @@ import React from 'react';
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown';
 import 'katex/dist/katex.min.css';
 import RemarkMathPlugin from 'remark-math';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { HeadingRenderer } from '../heading-renderer/heading-renderer';
 import { RendererMapping } from '../../..';
 import { BlockMath, InlineMath } from '@calc/common-ui';

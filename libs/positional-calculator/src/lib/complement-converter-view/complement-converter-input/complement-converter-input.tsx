@@ -2,10 +2,11 @@ import React, { FC } from 'react';
 import { BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
 import { FormErrors } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
-import { Button, createStyles, TextField, Theme } from '@material-ui/core';
+import { Button, TextField, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
-import { makeStyles } from '@material-ui/core/styles';
+import makeStyles from '@mui/styles/makeStyles';
 
 interface P {
     onConversionChange?: (representationStr: string, base: number) => void;
@@ -28,7 +29,7 @@ export const useStyles = makeStyles((theme: Theme) => {
             row: {
                 display: 'flex',
                 flexDirection: 'row',
-                [theme.breakpoints.down('sm')]: {
+                [theme.breakpoints.down('md')]: {
                     width: '100%'
                 },
                 [theme.breakpoints.up('md')]: {
@@ -40,7 +41,7 @@ export const useStyles = makeStyles((theme: Theme) => {
                 maxHeight: 40
             },
             horizontalSpacer: {
-                [theme.breakpoints.down('md')]: {
+                [theme.breakpoints.down('lg')]: {
                     width: theme.spacing(3)
                 },
                 [theme.breakpoints.up('lg')]: {

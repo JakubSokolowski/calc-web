@@ -32,11 +32,11 @@ import { flatten } from 'lodash';
 export class DefaultBuilder extends GridBuilder {
     protected get multiplicandLabelStr() {
         return 'M';
-    };
+    }
 
     protected get multiplierLabelStr() {
         return 'm';
-    };
+    }
 
     buildGroups(): CellGroup[] {
         return [

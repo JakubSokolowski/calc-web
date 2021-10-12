@@ -1,5 +1,5 @@
 {
   "extends": ["../../.eslintrc", "plugin:cypress/recommended"],
   "rules": {},
-  "ignorePatterns": ["!**/*"]
+  "ignorePatterns": ["!**/*", "index.js"]
 }
