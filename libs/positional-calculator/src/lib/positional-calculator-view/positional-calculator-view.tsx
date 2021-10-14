@@ -1,4 +1,4 @@
-import React, { FC, useState, SyntheticEvent } from 'react';
+import React, { FC, SyntheticEvent, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import {
     AlgorithmType,
@@ -9,9 +9,7 @@ import {
     PositionalNumber
 } from '@calc/calc-arithmetic';
 import { PaddedGrid } from '@calc/grid';
-import { Theme, Snackbar, Alert } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Alert, Snackbar, styled } from '@mui/material';
 import { SaveAsImageButton, Section, ViewWrapper } from '@calc/common-ui';
 import { DndOperand } from '../operand-list/operand-list';
 import { CalculatorOptions } from '../calculator-options/calculator-options';
@@ -23,35 +21,42 @@ import { sanityCheck, serializeForSentry } from '../core/sanity-check';
 import * as Sentry from '@sentry/react';
 import { OperationSuccess } from '../operation-success/operation-success';
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            [theme.breakpoints.up('lg')]: {
-                maxWidth: 900
-            },
-            margin: 'auto'
-        },
-        docs: {
-            maxWidth: 700,
-            margin: 'auto'
-        },
-        options: {
-            paddingTop: theme.spacing(2),
-        },
-        actionRow: {
-            paddingTop: theme.spacing(1),
-            display: 'flex',
-            flexDirection: 'row-reverse'
-        },
-        panel: {
-            paddingTop: theme.spacing(2)
-        }
-    })
-);
 
+const PREFIX = 'PositionalCalculatorView';
+
+const classes = {
+    root: `${PREFIX}-root`,
+    docs: `${PREFIX}-docs`,
+    options: `${PREFIX}-options`,
+    actionRow: `${PREFIX}-actionRow`,
+    panel: `${PREFIX}-panel`
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.root}`]: {
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 900
+        },
+        margin: 'auto'
+    },
+    [`& .${classes.docs}`]: {
+        maxWidth: 700,
+        margin: 'auto'
+    },
+    [`& .${classes.options}`]: {
+        paddingTop: theme.spacing(2)
+    },
+    [`& .${classes.actionRow}`]: {
+        paddingTop: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'row-reverse'
+    },
+    [`& .${classes.panel}`]: {
+        paddingTop: theme.spacing(2)
+    }
+}));
 
 export const PositionalCalculatorView: FC = () => {
-    const classes = useStyles();
     const [sanityCheckFailed, setSanityCheckFailed] = useState(false);
     const [errorOpen, setErrorOpen] = useState(false);
     const [successOpen, setSuccessOpen] = useState(false);
@@ -85,10 +90,10 @@ export const PositionalCalculatorView: FC = () => {
         const res = calculate(params);
         const check = sanityCheck(params, res.result);
 
-        if(check.failed) {
+        if (check.failed) {
             const msg = `Sanity check failed, expected ${check.expectedDecimal.toString()} got ${check.actual.decimalValue.toString()}`;
             const extra = serializeForSentry(check);
-            Sentry.captureException(new Error(msg), {extra});
+            Sentry.captureException(new Error(msg), { extra });
             setSanityCheckFailed(true);
             setErrorOpen(true);
             setExpected(check.expectedInBase);
@@ -124,51 +129,53 @@ export const PositionalCalculatorView: FC = () => {
     };
 
     return (
-        <ViewWrapper path={'/tools/positional/positional-calculator'} theoryPath={theoryPath}>
-            <Section title={t('positionalCalculator.parameters')}>
-                <div className={classes.options}>
-                    <CalculatorOptions onSubmit={onSubmit} onOperationChange={setOperation}/>
-                </div>
-            </Section>
-            {
-                params && res &&
-                <>
-                    <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.result')}>
-                        <OperationResultComponent result={res.operationResult}/>
-                    </Section>
-                    <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.details')}>
-                        <PaddedGrid
-                            {...res.grid}
-                            desiredWidth={24}
-                            id={gridId}
-                            groupBuilder={groupBuilder}
-                            title={t(getTitle())}
-                        />
-                        <div className={classes.actionRow}>
-                            <SaveAsImageButton
-                                tooltipTitle={t('positionalCalculator.downloadDetails')}
-                                elementId={gridId}
+        <Root>
+            <ViewWrapper path={'/tools/positional/positional-calculator'} theoryPath={theoryPath}>
+                <Section title={t('positionalCalculator.parameters')}>
+                    <div className={classes.options}>
+                        <CalculatorOptions onSubmit={onSubmit} onOperationChange={setOperation}/>
+                    </div>
+                </Section>
+                {
+                    params && res &&
+                    <>
+                        <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.result')}>
+                            <OperationResultComponent result={res.operationResult}/>
+                        </Section>
+                        <Section resultPossiblyWrong={sanityCheckFailed} title={t('positionalCalculator.details')}>
+                            <PaddedGrid
+                                {...res.grid}
+                                desiredWidth={24}
+                                id={gridId}
+                                groupBuilder={groupBuilder}
+                                title={t(getTitle())}
                             />
-                        </div>
-                    </Section>
-                </>
-            }
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={errorOpen}
-            >
-               <SanityCheckFailed onClose={handleErrorClose} expected={expected} actual={actual}/>
-            </Snackbar>
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                autoHideDuration={2000}
-                open={successOpen}
-                onClose={handleSuccessClose}
-            >
-                <Alert severity="success">
-                    <OperationSuccess params={params}/>
-                </Alert>
-            </Snackbar>
-        </ViewWrapper>
+                            <div className={classes.actionRow}>
+                                <SaveAsImageButton
+                                    tooltipTitle={t('positionalCalculator.downloadDetails')}
+                                    elementId={gridId}
+                                />
+                            </div>
+                        </Section>
+                    </>
+                }
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={errorOpen}
+                >
+                    <SanityCheckFailed onClose={handleErrorClose} expected={expected} actual={actual}/>
+                </Snackbar>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    autoHideDuration={2000}
+                    open={successOpen}
+                    onClose={handleSuccessClose}
+                >
+                    <Alert severity="success">
+                        <OperationSuccess params={params}/>
+                    </Alert>
+                </Snackbar>
+            </ViewWrapper>
+        </Root>
     );
 };

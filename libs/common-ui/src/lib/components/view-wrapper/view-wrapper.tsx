@@ -1,7 +1,5 @@
+import { styled } from '@mui/material';
 import React, { FC } from 'react';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { NavigationBreadcrumbs } from '../navigation-breadcrumbs/navigation-breadcrumbs';
 
 interface P {
@@ -9,41 +7,56 @@ interface P {
     theoryPath?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            [theme.breakpoints.up('lg')]: {
-                maxWidth: 900
-            },
-            margin: 'auto'
+const PREFIX = "ViewWrapper";
+
+
+const classes = {
+    root: `${PREFIX}-root`,
+    link: `${PREFIX}-link`,
+    linkIcon: `${PREFIX}-linkIcon`,
+    verticalSpacer: `${PREFIX}-verticalSpacer`,
+    nav: `${PREFIX}-nav`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.root}`]: {
+        [theme.breakpoints.up('lg')]: {
+            maxWidth: 900
         },
-        link: {
-            display: 'flex'
-        },
-        linkIcon: {
-            marginRight: theme.spacing(0.5),
-            width: 20,
-            height: 20
-        },
-        verticalSpacer: {
-            height: theme.spacing(1)
-        },
-        nav: {
-            display: 'flex',
-            flexDirection: 'row'
-        }
-    })
-);
+        margin: 'auto'
+    },
+    [`& .${classes.link}`]: {
+        display: 'flex'
+    },
+
+    [`& .${classes.linkIcon}`]: {
+        marginRight: theme.spacing(0.5),
+        width: 20,
+        height: 20
+    },
+
+    [`& .${classes.verticalSpacer}`]: {
+        height: theme.spacing(1)
+    },
+
+    [`& .${classes.nav}`]: {
+        display: 'flex',
+        flexDirection: 'row'
+    },
+}));
+
+
 
 export const ViewWrapper: FC<P> = ({ path, theoryPath, children }) => {
-    const classes = useStyles();
-
     return (
-        <div className={classes.root}>
-            <NavigationBreadcrumbs path={path} theoryPath={theoryPath}/>
-            <div className={classes.verticalSpacer}/>
-            {children}
-        </div>
+        <Root>
+            <div className={classes.root}>
+                <NavigationBreadcrumbs path={path} theoryPath={theoryPath}/>
+                <div className={classes.verticalSpacer}/>
+                {children}
+            </div>
+        </Root>
     );
 };
 

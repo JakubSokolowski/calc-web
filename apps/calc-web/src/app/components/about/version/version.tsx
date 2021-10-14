@@ -1,25 +1,26 @@
 import React, { FC } from 'react';
-import { Link, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { Link, styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@mui/styles/makeStyles';
 import { environment } from '@calc/env';
 
+const PREFIX = 'Version';
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        sha: {
-            color: theme.palette.text.disabled
-        },
-        box: {
-            padding: theme.spacing(2)
-        }
-    });
-});
+const classes = {
+    sha: `${PREFIX}-sha`,
+    box: `${PREFIX}-box`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.sha}`]: {
+        color: theme.palette.text.disabled
+    },
+    [`& .${classes.box}`]: {
+        padding: theme.spacing(2)
+    },
+}));
 
 export const Version: FC = () => {
     const { t } = useTranslation();
-    const classes = useStyles();
     const sha = environment.sha;
 
     if (!sha) return null;
@@ -28,13 +29,15 @@ export const Version: FC = () => {
     const ghLink = `https://github.com/JakubSokolowski/calc-web/commit/${sha}`;
 
     return (
-        <div className={classes.box}>
+        <Root>
+            <div className={classes.box}>
            <span>
                {t('home.appName')} v.
                <Link color={'inherit'} href={ghLink}>
                    {shortSha}
                </Link>
             </span>
-        </div>
+            </div>
+        </Root>
     );
 };

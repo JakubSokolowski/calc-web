@@ -1,8 +1,6 @@
 import React, { FC } from 'react';
-import { Button, List,  Theme, Tooltip } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { Button, List, styled, Tooltip } from '@mui/material';
 import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import makeStyles from '@mui/styles/makeStyles';
 import { OperandInput } from '../operand-input/operand-input';
 import { useTranslation } from 'react-i18next';
 import AddIcon from '@mui/icons-material/Add';
@@ -24,39 +22,48 @@ interface P {
     canAdd: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        root: {
-            width: '100%',
-            maxWidth: 500,
-            backgroundColor: theme.palette.background.paper
-        },
-        normal: {
-            backgroundColor: theme.palette.background.paper
-        },
-        dragging: {
-            backgroundColor: theme.palette.background.default
-        },
-        formControl: {
-            margin: theme.spacing(1),
-            minWidth: 120
-        },
-        selectEmpty: {
-            marginTop: theme.spacing(2)
-        },
-        item: {
-            padding: 0
-        },
-        newOperand: {
-            width: '100%',
-            border: '1px dashed'
-        }
-    })
-);
+const PREFIX = 'OperandList';
+
+const classes = {
+    root: `${PREFIX}-root`,
+    normal: `${PREFIX}-normal`,
+    dragging: `${PREFIX}-dragging`,
+    formControl: `${PREFIX}-formControl`,
+    selectEmpty: `${PREFIX}-selectEmpty`,
+    item: `${PREFIX}-item`,
+    newOperand: `${PREFIX}-newOperand`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.root}`]: {
+        width: '100%',
+        maxWidth: 500,
+        backgroundColor: theme.palette.background.paper
+    },
+    [`& .${classes.normal}`]: {
+        backgroundColor: theme.palette.background.paper
+    },
+    [`& .${classes.dragging}`]: {
+        backgroundColor: theme.palette.background.default
+    },
+    [`& .${classes.dragging}`]: {
+        margin: theme.spacing(1),
+        minWidth: 120
+    },
+    [`& .${classes.selectEmpty}`]: {
+        marginTop: theme.spacing(2)
+    },
+    [`& .${classes.item}`]: {
+        padding: 0
+    },
+    [`& .${classes.newOperand}`]: {
+        width: '100%',
+        border: '1px dashed'
+    },
+}));
 
 
 export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAdd, validators }) => {
-    const classes = useStyles();
     const { t } = useTranslation();
 
     const onDragEnd = (result: any) => {
@@ -112,7 +119,7 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
     });
 
     return (
-        <div>
+        <Root>
             <DragDropContext onDragEnd={onDragEnd}>
                 <Droppable droppableId="droppable">
                     {(provided) => (
@@ -141,6 +148,6 @@ export const OperandList: FC<P> = ({ inputBase, operands, onChange, onAdd, canAd
                 </Tooltip>
             }
 
-        </div>
+        </Root>
     );
 };

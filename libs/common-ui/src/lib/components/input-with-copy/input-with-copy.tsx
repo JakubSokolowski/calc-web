@@ -1,9 +1,7 @@
 import React, { CSSProperties, FC, ReactNode, SyntheticEvent, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Alert, IconButton, Snackbar, TextField, TextFieldProps, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { Alert, IconButton, Snackbar, styled, TextField, TextFieldProps } from '@mui/material';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
-import makeStyles from '@mui/styles/makeStyles';
 import { copyToClipboard } from '../../core/functions/copy-to-clipboard';
 
 export enum InputType {
@@ -29,26 +27,34 @@ interface P {
     dataTest?: string;
 }
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        row: {
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            alignItems: 'center'
-        },
-        copyButton: {
-            paddingLeft: theme.spacing(1)
-        }
-    });
-});
+const PREFIX = "InputWithCopy";
+
+
+const classes = {
+    row: `${PREFIX}-row`,
+    copyButton: `${PREFIX}-copyButton`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.row}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        alignItems: 'center'
+    },
+
+    [`& .${classes.copyButton}`]: {
+        paddingLeft: theme.spacing(1)
+    },
+}));
+
 
 
 export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly, dataTest }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
-    const classes = useStyles();
 
     const handleClose = (event?: SyntheticEvent, reason?: string) => {
         if (reason === 'clickaway') {
@@ -103,7 +109,8 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
     };
 
     return (
-        <div className={className}>
+        <Root>
+            <div className={className}>
             <span className={classes.row}>
                 {
                     inputType === InputType.Number
@@ -118,14 +125,15 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
                     </div>
                 }
             </span>
-            <Snackbar
-                anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-                open={open}
-                autoHideDuration={1500}
-                onClose={handleClose}
-            >
-                <Alert severity="info">{t('common.copy')}</Alert>
-            </Snackbar>
-        </div>
+                <Snackbar
+                    anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+                    open={open}
+                    autoHideDuration={1500}
+                    onClose={handleClose}
+                >
+                    <Alert severity="info">{t('common.copy')}</Alert>
+                </Snackbar>
+            </div>
+        </Root>
     );
 };

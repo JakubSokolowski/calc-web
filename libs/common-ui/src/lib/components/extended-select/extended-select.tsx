@@ -1,8 +1,6 @@
 import React, { ChangeEvent, ReactNode } from 'react';
-import { IconButton, MenuItem, TextField, Theme, Tooltip } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { IconButton, MenuItem, styled, TextField, Tooltip } from '@mui/material';
 import HelpIcon from '@mui/icons-material/Help';
-import makeStyles from '@mui/styles/makeStyles';
 import type { ExtendedOption } from '../../core/models/extended-option';
 import { useTranslation } from 'react-i18next';
 
@@ -14,31 +12,41 @@ interface P<T> {
     options: T[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        select: {
-            minWidth: '180px'
-        },
-        item: {
-            display: 'flex',
-            flexDirection: 'row',
-            alignItems: 'center',
-            width: '100%'
-        },
-        spacer: {
-            flexGrow: 1
-        },
-        infoButton: {
-            cursor: 'default',
-            pointerEvents: 'initial'
-        }
-    })
-);
+const PREFIX = "ExtendedSelect";
+
+const classes = {
+    select: `${PREFIX}-select`,
+    item: `${PREFIX}-item`,
+    spacer: `${PREFIX}-spacer`,
+    infoButton: `${PREFIX}-infoButton`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.select}`]: {
+        minWidth: '180px'
+    },
+
+    [`& .${classes.item}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '100%'
+    },
+
+    [`& .${classes.spacer}`]: {
+        flexGrow: 1
+    },
+
+    [`& .${classes.infoButton}`]: {
+        cursor: 'default',
+        pointerEvents: 'initial'
+    },
+}));
+
 
 export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { children?: ReactNode }) => {
     const {t} = useTranslation();
     const {options, onChange, value, label, ...rest} = props;
-    const classes = useStyles();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -73,18 +81,20 @@ export const ExtendedSelect = <T extends ExtendedOption>(props: P<T> & { childre
     });
 
     return (
-        <TextField
-            id="standard-select-operation"
-            select
-            variant={'outlined'}
-            size={'small'}
-            className={classes.select}
-            label={label}
-            value={value.type}
-            onChange={handleChange}
-            {...rest}
-        >
-            {items}
-        </TextField>
+        <Root>
+            <TextField
+                id="standard-select-operation"
+                select
+                variant={'outlined'}
+                size={'small'}
+                className={classes.select}
+                label={label}
+                value={value.type}
+                onChange={handleChange}
+                {...rest}
+            >
+                {items}
+            </TextField>
+        </Root>
     );
 };

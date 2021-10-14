@@ -11,15 +11,55 @@ import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, MenuItem, TextField } from '@mui/material';
+import { Button, MenuItem, styled, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { clean } from '@calc/utils';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
-import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     onConversionChange: (conversion: Conversion) => void;
 }
+
+const PREFIX = 'AssociatedBaseConverter';
+
+const classes = {
+    input: `${PREFIX}-input`,
+    row: `${PREFIX}-row`,
+    inputBase: `${PREFIX}-inputBase`,
+    outputBase: `${PREFIX}-outputBase`,
+    horizontalSpacer: `${PREFIX}-horizontalSpacer`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.input}`]: {
+        paddingBottom: theme.spacing(2)
+    },
+    [`& .${classes.row}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        [theme.breakpoints.down('md')]: {
+            width: '100%'
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '100%'
+        }
+    },
+    [`& .${classes.inputBase}`]: {
+        width: '22%'
+    },
+    [`& .${classes.outputBase}`]: {
+        width: '22%'
+    },
+    [`& .${classes.horizontalSpacer}`]: {
+        [theme.breakpoints.down('lg')]: {
+            width: theme.spacing(3)
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: theme.spacing(5)
+        }
+    },
+}));
+
 
 interface FormValues {
     inputStr: string;
@@ -32,7 +72,6 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
-    const classes = useConverterStyles();
 
     const initialValues: FormValues = {
         inputStr: 'FFAFAFFAF',
@@ -132,7 +171,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     };
 
     return (
-        <div>
+        <Root>
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
                 <InputWithCopy
@@ -204,6 +243,6 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                     </Button>
                 </div>
             </form>
-        </div>
+        </Root>
     );
 };

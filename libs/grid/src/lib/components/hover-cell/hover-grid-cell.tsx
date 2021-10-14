@@ -1,9 +1,6 @@
 import React, { FC } from 'react';
 import { GridCellConfig } from '../../models/grid-cell-config';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
-
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material';
 
 export interface GridCellEvent {
     x: number;
@@ -20,11 +17,26 @@ export interface HoverCellProps {
     verticalLine?: boolean;
     onClick?: (event: GridCellEvent) => void;
     onHover?: (event: GridCellEvent) => void;
-    key? : string;
+    key?: string;
     gridId?: string;
 }
 
-export const useGridCellStyles = makeStyles((theme: Theme) => {
+const PREFIX = 'GridCell';
+
+const classes = {
+    defaultCell: `${PREFIX}-defaultCell`,
+    crossedOutCell: `${PREFIX}-crossedOutCell`,
+    crossedOutHoverCell: `${PREFIX}-crossedOutHoverCell`,
+    hoverCell: `${PREFIX}-hoverCell`,
+    highlightedCell: `${PREFIX}-highlightedCell`,
+    highlightedCellHover: `${PREFIX}-highlightedCellHover`,
+    horizontalLine: `${PREFIX}-horizontalLine`,
+    verticalLine: `${PREFIX}-verticalLine`,
+    defaultCellWithVerticalLine: `${PREFIX}-defaultCellWithVerticalLine`,
+    defaultCellWithVerticalAndHorizontalLine: `${PREFIX}-defaultCellWithVerticalAndHorizontalLine`,
+};
+
+const Root = styled('div')(({ theme }) => {
     const baseCell = {
         minWidth: '36px',
         height: '36px',
@@ -53,52 +65,53 @@ export const useGridCellStyles = makeStyles((theme: Theme) => {
         }
     };
 
-    return createStyles({
-        defaultCell: {
+    return {
+        [`& .${classes.defaultCell}`]: {
             ...baseCell
         },
-        crossedOutCell: {
+        [`& .${classes.crossedOutCell}`]: {
             ...baseCell,
             ...crossedCell
         },
-        crossedOutHoverCell: {
+        [`& .${classes.crossedOutCell}`]: {
             ...baseCell,
             ...crossedCell,
             background: theme.palette.action.focus,
             border: 'none'
         },
-        hoverCell: {
+        [`& .${classes.hoverCell}`]: {
             ...baseCell,
             background: theme.palette.action.focus,
             border: 'none'
         },
-        highlightedCell: {
+        [`& .${classes.highlightedCell}`]: {
             ...baseCell,
             background: theme.palette.primary.light,
             color: theme.palette.getContrastText(theme.palette.primary.light)
         },
-        highlightedCellHover: {
+        [`& .${classes.highlightedCellHover}`]: {
             ...baseCell,
             background: theme.palette.primary.light,
             color: theme.palette.getContrastText(theme.palette.primary.light),
             border: 'none'
         },
-        horizontalLine: {
+        [`& .${classes.horizontalLine}`]: {
             borderBottom: `1px solid ${theme.palette.action.active}`
         },
-        verticalLine: {
+        [`& .${classes.verticalLine}`]: {
             borderRight: `1px solid ${theme.palette.action.active}`
         },
-        defaultCellWithVerticalLine: {
+        [`& .${classes.defaultCellWithVerticalLine}`]: {
             ...baseCell,
             borderRight: `1px solid ${theme.palette.action.active}`
         },
-        defaultCellWithVerticalAndHorizontalLine: {
+        [`& .${classes.defaultCellWithVerticalAndHorizontalLine}`]: {
             ...baseCell,
             borderRight: `1px solid ${theme.palette.action.active}`,
             borderBottom: `1px solid ${theme.palette.action.active}`
         },
-    });
+
+    };
 });
 
 
@@ -116,7 +129,6 @@ const HoverGridCell: FC<HoverCellProps> = (
     }) => {
 
     const { content, preset } = config;
-    const classes = useGridCellStyles();
 
     const handleClick = () => {
         if (onClick) {
@@ -134,39 +146,41 @@ const HoverGridCell: FC<HoverCellProps> = (
 
     const getCellClassName = (): string => {
         if (hovered) return getHoveredCellClassName();
-        if(preset && preset.default) return classes[preset.default] || preset.default;
+        if (preset && preset.default) return classes[preset.default] || preset.default;
         return classes.defaultCell;
     };
 
     const getHoveredCellClassName = (): string => {
-        if(preset && !!preset.hover) return classes[preset.hover] || preset.hover;
+        if (preset && !!preset.hover) return classes[preset.hover] || preset.hover;
         return classes.hoverCell;
     };
 
     const getLineClassName = (): string[] => {
         const classNames = [];
-        if(horizontalLine) classNames.push(classes.horizontalLine);
-        if(verticalLine) classNames.push(classes.verticalLine);
+        if (horizontalLine) classNames.push(classes.horizontalLine);
+        if (verticalLine) classNames.push(classes.verticalLine);
 
         return classNames;
     };
 
     const getClassNames = (): string => {
         const classNames = [getCellClassName(), ...getLineClassName()];
-        return classNames.join(' ')
+        return classNames.join(' ');
     };
 
     return (
-        <div
-            data-test={`${gridId}-${x}-${y}`}
-            className={getClassNames()}
-            onClick={handleClick}
-            key={`${content}-${y}`}
-            onMouseEnter={() => handleHover(true)}
-            onMouseLeave={() => handleHover(false)}
-        >
-            {content}
-        </div>
+        <Root>
+            <div
+                data-test={`${gridId}-${x}-${y}`}
+                className={getClassNames()}
+                onClick={handleClick}
+                key={`${content}-${y}`}
+                onMouseEnter={() => handleHover(true)}
+                onMouseLeave={() => handleHover(false)}
+            >
+                {content}
+            </div>
+        </Root>
     );
 };
 
