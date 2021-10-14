@@ -94,7 +94,7 @@ export const gridHasProperSdRow = (representation: string, sdRowEndX: number, sd
     sdDigits.forEach((d, index) => {
         getCellByCoords(sdRowEndX - index, sdRowEndY)
             .contains(d)
-            .trigger('mouseover')
+            .trigger('mouseover', {force: true})
             .getByDataTest(`sd-by-${d}-details`);
     });
 };

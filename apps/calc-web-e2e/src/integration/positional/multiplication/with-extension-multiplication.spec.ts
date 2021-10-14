@@ -115,7 +115,7 @@ describe('Multiplication with extension', () => {
         getCellByCoords(4, 0).should('not.exist');
 
         // should display popover with proper content
-        getCellByCoords(3, 3).trigger('mouseover')
+        getCellByCoords(3, 3).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=6');
     });
@@ -152,7 +152,7 @@ describe('Multiplication with extension', () => {
         operationReturnsProperResult(config, expected);
 
         // should display popover with proper content
-        getCellByCoords(3, 2).trigger('mouseover')
+        getCellByCoords(3, 2).trigger('mouseover', {force: true})
             .getByDataTest('correction-with-extension-negative')
     });
 
@@ -168,7 +168,7 @@ describe('Multiplication with extension', () => {
         operationReturnsProperResult(config, expected);
 
         // should display popover with proper content
-        getCellByCoords(2, 1).trigger('mouseover')
+        getCellByCoords(2, 1).trigger('mouseover', {force: true})
             .getByDataTest('correction-with-extension-positive')
     });
 
@@ -189,11 +189,11 @@ describe('Multiplication with extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(12, 10).trigger('mouseover')
+        getCellByCoords(12, 10).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(2, 10).trigger('mouseover')
+        getCellByCoords(2, 10).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{10}=1');
 
@@ -219,7 +219,7 @@ describe('Multiplication with extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content for last multiplier
-        getCellByCoords(2, 1).trigger('mouseover')
+        getCellByCoords(2, 1).trigger('mouseover', {force: true})
             .getByDataTest('correction-with-extension-positive');
 
         gridHasProperResultRow(expectedComplement, base, 4, 4);

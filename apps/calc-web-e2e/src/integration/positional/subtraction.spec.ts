@@ -34,11 +34,11 @@ describe('Subtraction', () => {
         gridHasProperResultRow(expectedComplement, base, 4, 4);
 
         // should display details with position result operand digits after transformations
-        getCellByCoords(4, 4).trigger('mouseover')
+        getCellByCoords(4, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{0}=11-3');
 
-        getCellByCoords(3, 4).trigger('mouseover')
+        getCellByCoords(3, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{1}=11-2');
     });
@@ -63,11 +63,11 @@ describe('Subtraction', () => {
         gridHasProperResultRow(expectedComplement, base, 6, 4);
 
         // should display details with position result operand digits after transformations
-        getCellByCoords(6, 4).trigger('mouseover')
+        getCellByCoords(6, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{0}=13-9');
 
-        getCellByCoords(2, 4).trigger('mouseover')
+        getCellByCoords(2, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{4}=10-7');
     });
@@ -92,11 +92,11 @@ describe('Subtraction', () => {
         gridHasProperResultRow(expectedComplement, base, 9, 4);
 
         // should display details with position result operand digits after transformations
-        getCellByCoords(9, 4).trigger('mouseover')
+        getCellByCoords(9, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{-3}=11-9');
 
-        getCellByCoords(2, 4).trigger('mouseover')
+        getCellByCoords(2, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{4}=10-7');
     });
@@ -121,11 +121,11 @@ describe('Subtraction', () => {
         gridHasProperResultRow(expectedComplement, base, 9, 4);
 
         // should display details with position result operand digits after transformations
-        getCellByCoords(9, 4).trigger('mouseover')
+        getCellByCoords(9, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{-3}=11-9');
 
-        getCellByCoords(2, 4).trigger('mouseover')
+        getCellByCoords(2, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{4}=10-7');
     });
@@ -183,11 +183,11 @@ describe('Subtraction', () => {
         gridHasProperResultRow(expectedComplement, base, 11, 4);
 
         // should display details with position result operand digits after transformations
-        getCellByCoords(11, 4).trigger('mouseover')
+        getCellByCoords(11, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{-5}=10-3');
 
-        getCellByCoords(6, 4).trigger('mouseover')
+        getCellByCoords(6, 4).trigger('mouseover', {force: true})
             .getByDataTest('subtract-at-position')
             .contains('D_{0}=12-3');
     });

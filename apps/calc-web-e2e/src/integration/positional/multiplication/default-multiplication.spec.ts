@@ -31,11 +31,11 @@ describe('Default Multiplication', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(5, 4).trigger('mouseover')
+        getCellByCoords(5, 4).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=4');
 
-        getCellByCoords(2, 4).trigger('mouseover')
+        getCellByCoords(2, 4).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{3}=6');
 
@@ -97,11 +97,11 @@ describe('Default Multiplication', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(12, 8).trigger('mouseover')
+        getCellByCoords(12, 8).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(2, 8).trigger('mouseover')
+        getCellByCoords(2, 8).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{10}=1');
 

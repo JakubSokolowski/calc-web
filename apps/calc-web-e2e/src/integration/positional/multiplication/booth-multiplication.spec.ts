@@ -34,11 +34,11 @@ describe('Booth Multiplication', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(13, 11).trigger('mouseover')
+        getCellByCoords(13, 11).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(3, 11).trigger('mouseover')
+        getCellByCoords(3, 11).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{10}=1');
 
@@ -60,13 +60,13 @@ describe('Booth Multiplication', () => {
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
-        getCellByCoords(13, 3).trigger('mouseover')
+        getCellByCoords(13, 3).trigger('mouseover', {force: true})
             .getByDataTest('sd-by-0-details');
 
-        getCellByCoords(10, 3).trigger('mouseover')
+        getCellByCoords(10, 3).trigger('mouseover', {force: true})
             .getByDataTest('sd-by-1-details');
 
-        getCellByCoords(7, 3).trigger('mouseover')
+        getCellByCoords(7, 3).trigger('mouseover', {force: true})
             .getByDataTest('sd-by--1-details');
     });
 
@@ -87,11 +87,11 @@ describe('Booth Multiplication', () => {
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
-        getCellByCoords(11, 10).trigger('mouseover')
+        getCellByCoords(11, 10).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(4, 10).trigger('mouseover')
+        getCellByCoords(4, 10).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{7}=1');
 
