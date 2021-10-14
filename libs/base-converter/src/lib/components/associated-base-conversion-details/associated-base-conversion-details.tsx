@@ -1,34 +1,38 @@
 import React, { FC } from 'react';
 import { AssociatedBaseConversion } from '@calc/calc-arithmetic';
 import { MergeMapping } from '../digit-mapping/merge-mapping/merge-mapping';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import { SplitMapping } from '../digit-mapping/split-mapping/split-mapping';
+import { styled } from '@mui/material';
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        card: {
-            padding: theme.spacing(3)
-        },
-        equation: {
-            paddingBottom: theme.spacing(2)
-        },
-        mappings: {
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap'
-        }
-    });
-});
+const PREFIX = 'AsocBconvDetails';
+
+const classes = {
+    card: `${PREFIX}-card`,
+    equation: `${PREFIX}-equation`,
+    mappings: `${PREFIX}-mappings`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.card}`]: {
+        padding: theme.spacing(3)
+    },
+    [`& .${classes.equation}`]: {
+        paddingBottom: theme.spacing(2)
+    },
+    [`& .${classes.mappings}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap'
+    },
+}));
+
 
 interface P {
     conversion: AssociatedBaseConversion;
 }
 
 export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
-    const classes = useStyles();
-
     const isSplitMapping = conversion.details.positionMappings.some((mapping) => {
         return mapping.input.length < mapping.output.length;
     });
@@ -42,8 +46,10 @@ export const AssociatedBaseConversionDetails: FC<P> = ({ conversion }) => {
     });
 
     return (
-        <div className={classes.mappings}>
-            {mappings}
-        </div>
+        <Root>
+            <div className={classes.mappings}>
+                {mappings}
+            </div>
+        </Root>
     );
 };

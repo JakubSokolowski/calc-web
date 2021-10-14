@@ -3,9 +3,7 @@ import { Conversion } from '@calc/calc-arithmetic';
 import { buildFractionalConversionGrid, PaddedGrid } from '@calc/grid';
 import { FractionalConversionRow } from '../conversion-details/fractional-conversion-row/fractional-conversion-row';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material';
 import { SaveAsImageButton } from '@calc/common-ui';
 
 interface P {
@@ -15,18 +13,24 @@ interface P {
     widthInCells?: number;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        actionRow: {
-            paddingTop: theme.spacing(1),
-            display: 'flex',
-            flexDirection: 'row-reverse'
-        }
-    })
-);
+const PREFIX = "FloatingConversionDetails";
+
+
+const classes = {
+    actionRow: `${PREFIX}-actionRow`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.actionRow}`]: {
+        paddingTop: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'row-reverse'
+    },
+}));
+
 
 export const FloatingConversionDetails: FC<P> = ({ conversion, precision, showDownload = true, widthInCells = 24 }) => {
-    const classes = useStyles();
     const { t } = useTranslation();
     const fractionalHoverGrid =buildFractionalConversionGrid(conversion, precision);
 
@@ -37,7 +41,7 @@ export const FloatingConversionDetails: FC<P> = ({ conversion, precision, showDo
     };
 
     return (
-        <div>
+        <Root>
             <PaddedGrid
                 desiredWidth={widthInCells}
                 groupBuilder={floatingHoverPopover}
@@ -54,6 +58,6 @@ export const FloatingConversionDetails: FC<P> = ({ conversion, precision, showDo
                     />
                 </div>
             }
-        </div>
+        </Root>
     );
 };

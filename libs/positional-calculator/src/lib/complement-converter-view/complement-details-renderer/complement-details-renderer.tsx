@@ -3,9 +3,7 @@ import { PaddedGrid } from '@calc/grid';
 import { getComplementWithDetails, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import { buildComplementGrid } from '../complement-grid/complement-grid';
 import { SaveAsImageButton } from '@calc/common-ui';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { OperationRenderer } from '../../operation-renderer/operation-renderer';
 
@@ -17,18 +15,22 @@ export interface ComplementDetailsRendererParams {
     showDownload?: boolean;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        actionRow: {
-            paddingTop: theme.spacing(1),
-            display: 'flex',
-            flexDirection: 'row-reverse'
-        }
-    })
-);
+const PREFIX = 'ComplementDetailsRenderer';
+
+const classes = {
+    actionRow: `${PREFIX}-actionRow`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.actionRow}`]: {
+        paddingTop: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'row-reverse'
+    },
+}));
+
 
 export const ComplementDetailsRenderer = (params: ComplementDetailsRendererParams) => {
-    const classes = useStyles();
     const { t } = useTranslation();
 
     if(params.subtractionOperands) {
@@ -44,12 +46,14 @@ export const ComplementDetailsRenderer = (params: ComplementDetailsRendererParam
 
     if(params.additionOperands) {
         return (
-            <OperationRenderer
-                base={params.base}
-                operands={params.additionOperands}
-                operation={OperationType.Addition}
-                algorithm={MultiplicationType.Default}
-            />
+            <Root>
+                <OperationRenderer
+                    base={params.base}
+                    operands={params.additionOperands}
+                    operation={OperationType.Addition}
+                    algorithm={MultiplicationType.Default}
+                />
+            </Root>
         )
     }
 
@@ -59,7 +63,7 @@ export const ComplementDetailsRenderer = (params: ComplementDetailsRendererParam
     const gridId = 'complement-conversion-details';
 
     return (
-        <div>
+        <Root>
             <PaddedGrid desiredWidth={24} values={grid.values} groups={grid.groups} lines={grid.lines} id={gridId}/>
             {
                 showDownload &&
@@ -70,6 +74,6 @@ export const ComplementDetailsRenderer = (params: ComplementDetailsRendererParam
                     />
                 </div>
             }
-        </div>
+        </Root>
     );
 };

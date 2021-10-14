@@ -11,12 +11,11 @@ import { InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
-import { Button, IconButton, TextField, Tooltip } from '@mui/material';
+import { Button, IconButton, styled, TextField, Tooltip } from '@mui/material';
 import { clean } from '@calc/utils';
 import { useFormik } from 'formik';
 import { FormErrors } from '@calc/common-ui';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
-import { useConverterStyles } from '../../core/styles/converter-styles';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -29,11 +28,76 @@ interface FormValues {
     precision: number;
 }
 
+const PREFIX = 'BaseConverter';
+
+const classes = {
+    row: `${PREFIX}-row`,
+    inputBase: `${PREFIX}-inputBase`,
+    iconButton: `${PREFIX}-iconButton`,
+    outputBase: `${PREFIX}-outputBase`,
+    horizontalSpacer: `${PREFIX}-horizontalSpacer`,
+    precision: `${PREFIX}-precision`,
+    growHorizontalSpacer: `${PREFIX}-growHorizontalSpacer`,
+    convertButton: `${PREFIX}-convertButton`,
+    verticalSpacer: `${PREFIX}-verticalSpacer`,
+    input: `${PREFIX}-input`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.input}`]: {
+        paddingBottom: theme.spacing(2)
+    },
+    [`& .${classes.row}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        [theme.breakpoints.down('md')]: {
+            width: '100%'
+        },
+        [theme.breakpoints.up('md')]: {
+            width: '100%'
+        }
+    },
+    [`& .${classes.inputBase}`]: {
+        width: '22%'
+    },
+    [`& .${classes.outputBase}`]: {
+        width: '22%'
+    },
+    [`& .${classes.precision}`]: {
+        width: '22%'
+    },
+    [`& .${classes.iconButton}`]: {
+        width: '40px'
+    },
+    [`& .${classes.horizontalSpacer}`]: {
+        [theme.breakpoints.down('lg')]: {
+            width: theme.spacing(3)
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: theme.spacing(5)
+        }
+    },
+    [`& .${classes.growHorizontalSpacer}`]: {
+        flexGrow: 1
+    },
+    [`& .${classes.verticalSpacer}`]: {
+        [theme.breakpoints.down('lg')]: {
+            height: theme.spacing(2)
+        },
+        [theme.breakpoints.up('lg')]: {
+            height: theme.spacing(2)
+        }
+    },
+    [`& .${classes.convertButton}`]: {
+        maxHeight: '40px'
+    },
+}));
+
+
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
     const { t } = useTranslation();
-    const classes = useConverterStyles();
 
     const initialValues: FormValues = {
         inputStr: '',
@@ -136,7 +200,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
 
     return (
-        <div>
+        <Root>
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
                 <div className={classes.row}>
@@ -234,6 +298,6 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     />
                 }
             </form>
-        </div>
+        </Root>
     );
 };

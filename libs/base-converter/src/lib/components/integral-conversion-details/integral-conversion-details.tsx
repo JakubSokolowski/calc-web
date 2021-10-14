@@ -3,9 +3,7 @@ import { Conversion } from '@calc/calc-arithmetic';
 import { buildIntegralConversionGrid, PaddedGrid } from '@calc/grid';
 import { IntegralConversionRow } from '../conversion-details/integral-conversion-row/integral-conversion-row';
 import { SaveAsImageButton } from '@calc/common-ui';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 
 interface P {
@@ -14,20 +12,22 @@ interface P {
     widthInCells?: number;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        actionRow: {
-            paddingTop: theme.spacing(1),
-            display: 'flex',
-            flexDirection: 'row-reverse'
-        }
+const PREFIX = 'IntegralConversionDetails';
 
-    })
-);
+const classes = {
+    actionRow: `${PREFIX}-actionRow`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.actionRow}`]: {
+        paddingTop: theme.spacing(1),
+        display: 'flex',
+        flexDirection: 'row-reverse'
+    },
+}));
 
 
 export const IntegralConversionDetails: FC<P> = ({ conversion, showDownload = true, widthInCells = 24 }) => {
-    const classes = useStyles();
     const { t } = useTranslation();
     const integralHoverGrid = buildIntegralConversionGrid(conversion);
     const gridId = 'integral-conversion-grid';
@@ -38,7 +38,7 @@ export const IntegralConversionDetails: FC<P> = ({ conversion, showDownload = tr
     };
 
     return (
-        <div>
+        <Root>
             <PaddedGrid
                 desiredWidth={widthInCells}
                 groupBuilder={integralHoverPopover}
@@ -54,6 +54,6 @@ export const IntegralConversionDetails: FC<P> = ({ conversion, showDownload = tr
                     />
                 </div>
             }
-        </div>
+        </Root>
     );
 };

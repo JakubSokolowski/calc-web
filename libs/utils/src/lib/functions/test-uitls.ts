@@ -7,7 +7,7 @@ export function tick() {
     })
 }
 
-export async function waitForComponentToPaint<P = Record<any, any>>(
+export async function waitForComponentToPaint<P>(
     wrapper: ReactWrapper<P>,
     amount = 0,
 ) {

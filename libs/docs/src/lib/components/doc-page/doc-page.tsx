@@ -1,11 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDocs } from '../../hooks/use-docs';
-import { Box, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { Box, styled } from '@mui/material';
 import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
-import makeStyles from '@mui/styles/makeStyles';
 import { useLocation } from 'react-router-dom';
 import { RendererMapping } from '../../..';
 import { NavigationBreadcrumbs } from '@calc/common-ui';
@@ -16,33 +14,31 @@ export interface DocsProps {
     rendererMapping?: RendererMapping;
 }
 
+const PREFIX = 'DocPage';
 
-export const useStyles = makeStyles((theme: Theme) => {
-    return createStyles(
-        {
-            box: {
-                paddingBottom: '400px',
-                [theme.breakpoints.down('lg')]: {
-                    paddingRight: '250px'
-                },
-                [theme.breakpoints.up('lg')]: {
-                    paddingRight: '0px'
-                }
-            },
-            root: {
-                display: 'flex',
-                margin: 'auto',
-                maxWidth: '700px'
-            }
+const classes = {
+    box: `${PREFIX}-box`,
+    root: `${PREFIX}-root`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.box}`]: {
+        display: 'block',
+        paddingBottom: '400px',
+        [theme.breakpoints.down('lg')]: {
+            paddingRight: '250px'
+        },
+        [theme.breakpoints.up('lg')]: {
+            paddingRight: '0px'
         }
-    );
-});
+    },
+}));
 
 export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const [docPath, setDocPath] = useState(path);
     const markdown = useDocs(docPath);
     const { pathname } = useLocation();
-    const classes = useStyles();
     const params = useUrlParams();
     const ids = extractHeadingIds(markdown);
 
@@ -67,17 +63,19 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     };
 
     return (
-        <Box className={classes.box}>
-            {
-                !!ids.length && <ScrollSpy entries={ids}/>
-            }
-            <NavigationBreadcrumbs path={pathname}/>
-            <MarkdownRenderer
-                renderMapping={rendererMapping}
-                source={markdown}
-                escapeHtml={false}
-            />
-        </Box>
+        <Root>
+            <Box className={classes.box}>
+                {
+                    !!ids.length && <ScrollSpy entries={ids}/>
+                }
+                <NavigationBreadcrumbs path={pathname}/>
+                <MarkdownRenderer
+                    renderMapping={rendererMapping}
+                    source={markdown}
+                    escapeHtml={false}
+                />
+            </Box>
+        </Root>
     );
 };
 

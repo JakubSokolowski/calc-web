@@ -10,9 +10,7 @@ import {
 import { useTranslation } from 'react-i18next';
 import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
-import { Button, TextField, Theme, Tooltip } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
+import { Button, styled, TextField, Tooltip } from '@mui/material';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
 import { useUrlCalculatorOptions } from './url-calculator-options';
 import { useHistory } from 'react-router-dom';
@@ -33,38 +31,50 @@ interface P {
     defaultOperation?: Operation;
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        base: {
-            maxWidth: 100
-        },
-        operand: {
-            width: '100%'
-        },
-        spacer: {
-            width: theme.spacing(1)
-        },
-        growSpacer: {
-            flexGrow: 1
-        },
-        operandsBox: {},
-        addOperand: {
-            maxHeight: 40
-        },
-        options: {
-            padding: theme.spacing(2)
-        },
-        optionsRow: {
-            display: 'flex',
-            flexDirection: 'row',
-            width: '100%'
-        }
-    })
-);
+const PREFIX = 'CalculatorOptions';
+
+const classes = {
+    base: `${PREFIX}-base`,
+    operand: `${PREFIX}-operand`,
+    spacer: `${PREFIX}-spacer`,
+    growSpacer: `${PREFIX}-growSpacer`,
+    operandsBox: `${PREFIX}-operandsBox`,
+    addOperand: `${PREFIX}-addOperand`,
+    options: `${PREFIX}-options`,
+    optionsRow: `${PREFIX}-optionsRow`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.base}`]: {
+        maxWidth: 100
+    },
+    [`& .${classes.operand}`]: {
+        width: '100%'
+    },
+    [`& .${classes.spacer}`]: {
+        width: theme.spacing(1),
+    },
+    [`& .${classes.growSpacer}`]: {
+        flexGrow: 1
+    },
+    [`& .${classes.operandsBox}`]: {},
+    [`& .${classes.addOperand}`]: {
+        maxHeight: 40
+    },
+    [`& .${classes.options}`]: {
+        padding: theme.spacing(2)
+    },
+    [`& .${classes.optionsRow}`]: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%'
+    },
+}));
+
 
 
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
-    const classes = useStyles();
     const { t } = useTranslation();
     const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
@@ -218,7 +228,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     }, [form.isValid, operands, canCalculate]);
 
     return (
-        <div>
+        <Root>
             <div className={classes.optionsRow}>
                 <TextField
                     data-testid={'base'}
@@ -278,6 +288,6 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     canAdd={canAddOperand}
                 />
             </div>
-        </div>
+        </Root>
     );
 };

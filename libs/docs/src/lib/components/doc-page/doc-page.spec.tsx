@@ -59,7 +59,7 @@ describe('DocPage', () => {
 
         // when
         const container = mount(
-            <DocPage path={'some/path'}/>,
+            <DocPage path={'some/path?h=123'}/>,
             { attachTo: document.getElementById('container') }
         );
         await waitForComponentToPaint(container);

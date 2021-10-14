@@ -1,10 +1,7 @@
 import React, { FC } from 'react';
 import { ButtonRowComponent } from '../button-row/button-row';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
-
-import createStyles from '@mui/styles/createStyles';
+import { styled } from '@mui/material';
 
 export enum PartType {
     Sign = 'Sign',
@@ -20,21 +17,28 @@ interface P {
     onChange?: (value: string) => void;
 }
 
+const PREFIX = 'RepresentationPart';
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        root: {
-           padding: theme.spacing(2)
-        },
-        info: {
-            textAlign: 'center',
-            height: '70px'
-        },
-        title: {
-            fontWeight: 'bold'
-        }
-    });
-});
+const classes = {
+    root: `${PREFIX}-root`,
+    info: `${PREFIX}-info`,
+    title: `${PREFIX}-title`
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.root}`]: {
+        padding: theme.spacing(2)
+    },
+    [`& .${classes.info}`]: {
+        textAlign: 'center',
+        height: '70px'
+    },
+    [`& .${classes.title}`]: {
+        fontWeight: 'bold'
+    }
+}));
+
 
 export const RepresentationPart: FC<P> = (
     {
@@ -45,8 +49,6 @@ export const RepresentationPart: FC<P> = (
         onChange
     }) => {
     const { t } = useTranslation();
-    const classes = useStyles();
-
     const title = {
         [PartType.Sign]: t('floatConverter.sign'),
         [PartType.Exponent]: t('floatConverter.exponent'),
@@ -54,28 +56,30 @@ export const RepresentationPart: FC<P> = (
     }[partType];
 
     const handleChange = (values: string[]) => {
-        if(onChange) onChange(values.join(''));
+        if (onChange) onChange(values.join(''));
     };
 
     return (
-        <div className={classes.root}>
-            <div className={classes.info}>
-                <div className={classes.title}>{title}</div>
-                <div>
-                    {
-                        partType === PartType.Exponent
-                            ? <span>
+        <Root>
+            <div className={classes.root}>
+                <div className={classes.info}>
+                    <div className={classes.title}>{title}</div>
+                    <div>
+                        {
+                            partType === PartType.Exponent
+                                ? <span>
                                 2 <sup>{partValue}</sup>
                             </span>
-                            : <span>
+                                : <span>
                                 {partValue}
                             </span>
-                    }
+                        }
+                    </div>
+                    <div> {partEncoding}</div>
                 </div>
-                <div> {partEncoding}</div>
-            </div>
 
-            <ButtonRowComponent values={part} onChange={handleChange}/>
-        </div>
+                <ButtonRowComponent values={part} onChange={handleChange}/>
+            </div>
+        </Root>
     );
 };

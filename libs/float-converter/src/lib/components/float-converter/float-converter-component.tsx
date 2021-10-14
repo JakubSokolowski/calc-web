@@ -3,24 +3,24 @@ import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
 import { InputType, InputWithCopy } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
-import makeStyles from '@mui/styles/makeStyles';
-import { Theme } from '@mui/material';
+import { styled } from '@mui/material';
 
 
-import createStyles from '@mui/styles/createStyles';
+const PREFIX = 'FloatConverter';
 
+const classes = {
+    input: `${PREFIX}-input`,
+};
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        input: {
-            paddingTop: theme.spacing(2)
-        }
-    });
-});
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.input}`]: {
+        paddingTop: theme.spacing(2)
+    },
+}));
+
 
 export const FloatConverterComponent: FC = () => {
     const {t} = useTranslation();
-    const classes = useStyles();
     const initialNum = FloatConverter.ToSingle(0.0);
     const [floatingNumber, setFloatingNumber] = useState(initialNum);
     const [sign, setSign] = useState(initialNum.sign);
@@ -55,7 +55,7 @@ export const FloatConverterComponent: FC = () => {
     };
 
     return (
-        <div>
+        <Root>
             <div style={style}>
                 <RepresentationPart
                     partType={PartType.Sign}
@@ -107,6 +107,6 @@ export const FloatConverterComponent: FC = () => {
                     inputType={InputType.Text
                 }/>
             </div>
-        </div>
+        </Root>
     );
 };

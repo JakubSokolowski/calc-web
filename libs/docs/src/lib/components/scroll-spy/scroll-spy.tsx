@@ -1,7 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
-import { List, Theme } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
+import { List, styled } from '@mui/material';
 import { ContentsEntry } from '../../core/models/contents-entry';
 import { useHistory } from 'react-router-dom';
 
@@ -16,34 +14,41 @@ interface P {
     entries: ContentsEntry[];
 }
 
-const useStyles = makeStyles((theme: Theme) =>
-    createStyles({
-        active: {
-            color: theme.palette.text.secondary,
-            borderLeft: `2px solid ${theme.palette.text.secondary}`,
-            cursor: 'pointer'
-        },
-        normal: {
-            color: theme.palette.text.primary,
-            cursor: 'pointer'
-        },
-        container: {
-            listStyleType: 'none',
-            right: theme.spacing(2),
-            position: 'fixed',
-            display: 'block',
-            width: '250px',
-            [theme.breakpoints.down('lg')]: {
-                display: 'none'
-            }
+const PREFIX = 'ScrollSpy';
+
+const classes = {
+    active: `${PREFIX}-active`,
+    normal: `${PREFIX}-normal`,
+    container: `${PREFIX}-container`,
+};
+
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.active}`]: {
+        color: theme.palette.text.secondary,
+        borderLeft: `2px solid ${theme.palette.text.secondary}`,
+        cursor: 'pointer'
+    },
+    [`& .${classes.normal}`]: {
+        color: theme.palette.text.primary,
+        cursor: 'pointer'
+    },
+    [`& .${classes.container}`]: {
+        listStyleType: 'none',
+        right: theme.spacing(2),
+        position: 'fixed',
+        display: 'block',
+        width: '250px',
+        [theme.breakpoints.down('lg')]: {
+            display: 'none'
         }
-    }),
-);
+    },
+}));
+
 
 export const ScrollSpy: FC<P> = ({entries}) => {
     const [items, setItems] = useState<SpyItem[]>([]);
     const history = useHistory();
-    const classes = useStyles();
 
     const offset= 20;
     const headerHeight = 64;
@@ -91,23 +96,25 @@ export const ScrollSpy: FC<P> = ({entries}) => {
     };
 
     return (
-        <ul className={classes.container}>
-            {items.map((item, k) => {
-                return (
-                    <List
-                        style={{ paddingLeft: 2 + (item.inView ? 0 : 2) + item.level * 15}}
-                        className={item.inView ? classes.active : classes.normal}
-                        key={k}
-                        onClick={() => {
-                            const search = `?h=${item.id}`;
-                            history.push({search});
-                            scrollTo(item.element);
-                        }}
-                    >
-                       {item.element.innerText}
-                    </List>
-                );
-            })}
-        </ul>
+        <Root>
+            <ul className={classes.container}>
+                {items.map((item, k) => {
+                    return (
+                        <List
+                            style={{ paddingLeft: 2 + (item.inView ? 0 : 2) + item.level * 15}}
+                            className={item.inView ? classes.active : classes.normal}
+                            key={k}
+                            onClick={() => {
+                                const search = `?h=${item.id}`;
+                                history.push({search});
+                                scrollTo(item.element);
+                            }}
+                        >
+                            {item.element.innerText}
+                        </List>
+                    );
+                })}
+            </ul>
+        </Root>
     );
 };

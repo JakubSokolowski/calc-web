@@ -4,36 +4,39 @@ import {
     IconButton,
     Link,
     Paper,
-    Theme,
     Tooltip,
     Popover,
+    styled,
 } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
 import HelpIcon from '@mui/icons-material/Help';
 import { useTranslation } from 'react-i18next';
 import { Version } from './version/version';
 
-const useStyles = makeStyles((theme: Theme) => {
-    return createStyles({
-        icon: {
-            paddingTop: theme.spacing(2),
-            position: 'fixed',
-            bottom: theme.spacing(3),
-            right: theme.spacing(3)
-        },
-        content: {
-            padding: theme.spacing(2)
-        },
-        tooltip: {
-            fontSize: theme.typography.fontSize
-        }
-    });
-});
 
+const PREFIX = 'About';
+
+const classes = {
+    icon: `${PREFIX}-icon`,
+    content: `${PREFIX}-content`,
+    tooltip: `${PREFIX}-tooltip`,
+};
+
+const Root = styled('div')(({ theme }) => ({
+    [`& .${classes.icon}`]: {
+        paddingTop: theme.spacing(2),
+        position: 'fixed',
+        bottom: theme.spacing(3),
+        right: theme.spacing(3)
+    },
+    [`& .${classes.content}`]: {
+        padding: theme.spacing(2)
+    },
+    [`& .${classes.tooltip}`]: {
+        fontSize: theme.typography.fontSize
+    },
+}));
 
 export const About: FC = () => {
-    const classes = useStyles();
     const { t } = useTranslation();
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(null);
 
@@ -50,7 +53,7 @@ export const About: FC = () => {
 
 
     return (
-        <div>
+        <Root>
             <Tooltip data-test="help-button-tooltip"  className={classes.tooltip} title={t('about.title')} aria-describedby={id} placement={'left'}>
                 <IconButton data-test='help-button' className={classes.icon} onClick={handleClick}>
                     <HelpIcon fontSize={'large'}/>
@@ -79,6 +82,6 @@ export const About: FC = () => {
                     <Version/>
                 </Paper>
             </Popover>
-        </div>
+        </Root>
     );
 };
