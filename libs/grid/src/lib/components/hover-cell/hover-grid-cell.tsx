@@ -65,6 +65,7 @@ const Root = styled('div')(({ theme }) => {
         }
     };
 
+
     return {
         [`& .${classes.defaultCell}`]: {
             ...baseCell
@@ -74,6 +75,10 @@ const Root = styled('div')(({ theme }) => {
             ...crossedCell
         },
         [`& .${classes.crossedOutCell}`]: {
+            ...baseCell,
+            ...crossedCell,
+        },
+        [`& .${classes.crossedOutHoverCell}`]: {
             ...baseCell,
             ...crossedCell,
             background: theme.palette.action.focus,

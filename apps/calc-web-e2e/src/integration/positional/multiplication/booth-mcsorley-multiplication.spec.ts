@@ -34,9 +34,9 @@ describe('BoothMcSorley Multiplication', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(13, 11).trigger('mouseover').getByDataTest('add-at-position').contains('S_{0}=0');
+        getCellByCoords(13, 11).trigger('mouseover', {force: true}).getByDataTest('add-at-position').contains('S_{0}=0');
 
-        getCellByCoords(3, 11).trigger('mouseover').getByDataTest('add-at-position').contains('S_{10}=1');
+        getCellByCoords(3, 11).trigger('mouseover', {force: true}).getByDataTest('add-at-position').contains('S_{10}=1');
 
         gridHasProperResultRow(expectedComplement, base, 13, 11);
         gridHasProperSdRow(expectedSD, 13, 3);
@@ -56,11 +56,11 @@ describe('BoothMcSorley Multiplication', () => {
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
-        getCellByCoords(13, 3).trigger('mouseover').getByDataTest('sd-by-0-details');
+        getCellByCoords(13, 3).trigger('mouseover', {force: true}).getByDataTest('sd-by-0-details');
 
-        getCellByCoords(10, 3).trigger('mouseover').getByDataTest('sd-by-1-details');
+        getCellByCoords(10, 3).trigger('mouseover', {force: true}).getByDataTest('sd-by-1-details');
 
-        getCellByCoords(7, 3).trigger('mouseover').getByDataTest('sd-by--1-details');
+        getCellByCoords(7, 3).trigger('mouseover', {force: true}).getByDataTest('sd-by--1-details');
     });
 
     it('should multiply two U2 numbers with positive multiplier', () => {
@@ -80,9 +80,9 @@ describe('BoothMcSorley Multiplication', () => {
         getMultiplicationResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
-        getCellByCoords(11, 10).trigger('mouseover').getByDataTest('add-at-position').contains('S_{0}=0');
+        getCellByCoords(11, 10).trigger('mouseover', {force: true}).getByDataTest('add-at-position').contains('S_{0}=0');
 
-        getCellByCoords(4, 10).trigger('mouseover').getByDataTest('add-at-position').contains('S_{7}=1');
+        getCellByCoords(4, 10).trigger('mouseover', {force: true}).getByDataTest('add-at-position').contains('S_{7}=1');
 
         gridHasProperResultRow(expectedComplement, base, 11, 10);
         gridHasProperSdRow(expectedSD, 11, 3);

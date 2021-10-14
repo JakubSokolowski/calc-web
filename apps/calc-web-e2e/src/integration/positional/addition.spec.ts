@@ -93,12 +93,12 @@ describe('Addition', () => {
         getCellByCoords(4, 0).contains('1');
 
         // should display details with position result and carries
-        getCellByCoords(5, 3).trigger('mouseover')
+        getCellByCoords(5, 3).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('C_{1}=1')
             .contains('S_{0}=1');
 
-        getCellByCoords(4, 3).trigger('mouseover')
+        getCellByCoords(4, 3).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('C_{2}=1')
             .contains('S_{1}=4');
@@ -186,7 +186,7 @@ describe('Addition', () => {
 
         operationReturnsProperResult(config, expected);
 
-        getCellByCoords(0, 0).trigger('mouseover')
+        getCellByCoords(0, 0).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{7}=0');
     });

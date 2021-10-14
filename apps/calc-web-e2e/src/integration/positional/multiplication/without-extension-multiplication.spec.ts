@@ -29,7 +29,7 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content
-        getCellByCoords(8, 7).trigger('mouseover')
+        getCellByCoords(8, 7).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=5');
     });
@@ -79,7 +79,7 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content
-        getCellByCoords(8, 7).trigger('mouseover')
+        getCellByCoords(8, 7).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=2');
     });
@@ -99,7 +99,7 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display popover with proper content
-        getCellByCoords(6, 5).trigger('mouseover')
+        getCellByCoords(6, 5).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=7');
     });
@@ -131,7 +131,7 @@ describe('Multiplication without extension', () => {
         operationReturnsProperResult(config, expected);
 
         // should display popover with proper content
-        getCellByCoords(3, 1).trigger('mouseover')
+        getCellByCoords(3, 1).trigger('mouseover', {force: true})
             .getByDataTest('correction-without-extension-positive')
     });
 
@@ -147,7 +147,7 @@ describe('Multiplication without extension', () => {
         operationReturnsProperResult(config, expected);
 
         // should display popover with proper content
-        getCellByCoords(4, 2).trigger('mouseover')
+        getCellByCoords(4, 2).trigger('mouseover', {force: true})
             .getByDataTest('correction-without-extension-negative')
     });
 
@@ -168,30 +168,30 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(14, 11).trigger('mouseover')
+        getCellByCoords(14, 11).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(4, 11).trigger('mouseover')
+        getCellByCoords(4, 11).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{10}=1');
 
         gridHasProperResultRow(expectedComplement, base, 14, 11);
 
         // should display popover with proper content for last multiplier
-        getCellByCoords(8, 2).trigger('mouseover')
+        getCellByCoords(8, 2).trigger('mouseover', {force: true})
             .getByDataTest('last-multiplier-without-extension-u2-negative');
 
         // should display popover with proper content for multiplication by 0 row
-        getCellByCoords(8, 3).trigger('mouseover')
+        getCellByCoords(8, 3).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-row-by-0');
 
         // should display popover with proper content for multiplication by 1 row
-        getCellByCoords(8, 4).trigger('mouseover')
+        getCellByCoords(8, 4).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-row-by-1');
 
         // should display popover with proper content for correction row
-        getCellByCoords(4, 10).trigger('mouseover')
+        getCellByCoords(4, 10).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-correction');
     });
 
@@ -212,31 +212,31 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(12, 9).trigger('mouseover')
+        getCellByCoords(12, 9).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=0');
 
-        getCellByCoords(5, 9).trigger('mouseover')
+        getCellByCoords(5, 9).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{7}=1');
 
          gridHasProperResultRow(expectedComplement, base, 12, 9);
 
         // should display popover with proper content for last multiplier
-        getCellByCoords(7, 1).trigger('mouseover')
+        getCellByCoords(7, 1).trigger('mouseover', {force: true})
             .getByDataTest('last-multiplier-without-extension-u2-positive');
 
         // should display popover with proper content for multiplication by 0 row
-        getCellByCoords(7, 2).trigger('mouseover')
+        getCellByCoords(7, 2).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-row-by-0');
 
         // should display popover with proper content for multiplication by 1 row
-        getCellByCoords(7, 3).trigger('mouseover')
+        getCellByCoords(7, 3).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-row-by-1');
 
 
         // should display popover with proper content for correction row
-        getCellByCoords(7, 8).trigger('mouseover')
+        getCellByCoords(7, 8).trigger('mouseover', {force: true})
             .getByDataTest('without-extension-u2-correction');
     });
 
@@ -258,11 +258,11 @@ describe('Multiplication without extension', () => {
         getOperationGrid().toMatchSnapshot();
 
         // should display proper popover for addition rows
-        getCellByCoords(16, 12).trigger('mouseover')
+        getCellByCoords(16, 12).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{0}=1');
 
-        getCellByCoords(7, 12).trigger('mouseover')
+        getCellByCoords(7, 12).trigger('mouseover', {force: true})
             .getByDataTest('add-at-position')
             .contains('S_{9}=1');
 
