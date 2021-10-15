@@ -1,6 +1,6 @@
 import { AdditionOperand, Digit } from '../models';
-import { mergeExtensionDigits } from './complement-extension';
 import { SubtractionOperand, SubtractionPositionResult } from '../models';
+import { mergeComplementExtension } from './addition';
 
 export const NUM_ADDITIONAL_EXTENSIONS = 3;
 
@@ -46,5 +46,5 @@ export function generateComplementExtension<T extends Digit>(digit: T, numExtens
 export function extractResultDigitsFromSubtraction(positionResults: SubtractionPositionResult[]): SubtractionOperand[] {
     const digitsFromPositions = positionResults.map((res) => res.valueAtPosition);
     const withExtension = [...digitsFromPositions.reverse()];
-    return mergeExtensionDigits(withExtension);
+    return mergeComplementExtension(withExtension, positionResults);
 }

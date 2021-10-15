@@ -110,10 +110,10 @@ export function extractResultDigitsFromAddition(positionResults: AdditionPositio
         });
 
 
-    return mergeAdditionExtensionDigit(withExtension, positionResults);
+    return mergeComplementExtension(withExtension, positionResults);
 }
 
-export function mergeAdditionExtensionDigit<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
+export function mergeComplementExtension<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
     const [, extensionDigit, ...rest] = resultDigits;
     const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
 

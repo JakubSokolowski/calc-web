@@ -73,7 +73,7 @@ export function subtractDigitsAtPosition(operands: SubtractionOperand[], positio
             valueInDecimal: decimalPositionValue,
             representationInBase: valueInBase,
             position,
-            base
+            base,
         },
         borrow: borrow
     };

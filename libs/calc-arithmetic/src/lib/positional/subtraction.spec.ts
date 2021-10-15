@@ -1,6 +1,6 @@
 import { SubtractionOperand, SubtractionPositionResult, SubtractionResult } from '../models';
 import { subtractDigitArrays, subtractDigitsAtPosition, subtractPositionalNumbers } from './subtraction';
-import { fromNumber } from './base-converter';
+import { fromNumber, fromStringDirect } from './base-converter';
 
 describe('subtraction', () => {
     describe('#subtractDigitsAtPosition', () => {
@@ -330,7 +330,7 @@ describe('subtraction', () => {
             });
         });
 
-        describe('when subtracting twp digit arrays when some position is borrowed from, and needs borrow after', () => {
+        describe('when subtracting two digit arrays when some position is borrowed from, and needs borrow after', () => {
             let x: SubtractionOperand[];
             let y: SubtractionOperand[];
             let result: SubtractionResult;
@@ -545,6 +545,21 @@ describe('subtraction', () => {
 
                 // then
                 const expected = '91079.24757';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
+
+            // BUG #207
+            it('should return proper result when result has leading digits that look like complement extension', () => {
+                // given
+                const base = 9;
+                const minuend = fromStringDirect('13.4', base).result;
+                const subtrahend = fromStringDirect('23.4', base).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '-10.0';
                 expect(result.numberResult.toString()).toEqual(expected);
             });
         });
