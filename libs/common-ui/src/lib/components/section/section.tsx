@@ -51,7 +51,7 @@ const StyledAccordion = styled(MuiAccordion)(({ theme }) => ({
 
     [`& .${classes.iconWrapper}`]: {
         marginLeft: theme.spacing(1),
-        marginTop: '3px'
+        marginTop: '6px'
     }
 }));
 
@@ -80,7 +80,7 @@ export const Section: FC<SectionProps> = ({ title, children, resultPossiblyWrong
                         resultPossiblyWrong &&
                         <div className={classes.iconWrapper}>
                             <Tooltip placement='right' title={t('positionalCalculator.resultPossiblyWrong')}>
-                                <ErrorIcon/>
+                                <ErrorIcon color={'error'} />
                             </Tooltip>
                         </div>
                     }

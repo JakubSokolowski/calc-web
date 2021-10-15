@@ -267,7 +267,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                              data-testid="submit"
                              data-test="calculate"
                              onClick={() => handleSubmit(form.values)}
-                             color={'secondary'}
+                             color={'info'}
                              variant={'contained'}
                              className={classes.addOperand}
                              disabled={submitDisabled}
