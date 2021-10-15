@@ -144,8 +144,6 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
             inputStr
         };
 
-        console.log(errors);
-
         return clean(errors);
     };
 

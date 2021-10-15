@@ -1,7 +1,7 @@
 import { isZeroDigit, trimLeadingZeros } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
-import { addDigitsArrays, mergeAdditionExtensionDigit } from '../addition';
+import { addDigitsArrays, mergeComplementExtension } from '../addition';
 import { PositionalNumber } from '../positional-number';
 import {
     Digit,
@@ -157,7 +157,7 @@ export class WithExtension extends DefaultMultiplication {
         const withExtension = extractResultDigitsFromMultiplicationRow(
             positionResults
         );
-        return mergeAdditionExtensionDigit(withExtension, positionResults);
+        return mergeComplementExtension(withExtension, positionResults);
     }
 
     protected trimSumDigits(digits: Digit[]) {
