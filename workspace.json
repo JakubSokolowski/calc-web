@@ -24,7 +24,9 @@
                 "output": "assets/docs"
               }
             ],
-            "styles": ["apps/calc-web/src/styles.scss"],
+            "styles": [
+              "apps/calc-web/src/styles.scss"
+            ],
             "scripts": [],
             "webpackConfig": "apps/calc-web/webpack.config.js"
           },
@@ -51,7 +53,10 @@
                 }
               ]
             }
-          }
+          },
+          "outputs": [
+            "{options.outputPath}"
+          ]
         },
         "serve": {
           "builder": "@nrwl/web:dev-server",
@@ -85,7 +90,10 @@
           "options": {
             "jestConfig": "apps/calc-web/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/apps/calc-web"
+          ]
         }
       }
     },
@@ -144,7 +152,10 @@
           "options": {
             "jestConfig": "libs/calc-arithmetic/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/calc-arithmetic"
+          ]
         }
       }
     },
@@ -172,7 +183,10 @@
           "options": {
             "jestConfig": "libs/utils/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/utils"
+          ]
         }
       }
     },
@@ -203,7 +217,10 @@
           "options": {
             "jestConfig": "libs/grid/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/grid"
+          ]
         }
       }
     },
@@ -234,7 +251,10 @@
           "options": {
             "jestConfig": "libs/docs/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/docs"
+          ]
         }
       }
     },
@@ -272,7 +292,10 @@
           "options": {
             "jestConfig": "libs/positional-calculator/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/positional-calculator"
+          ]
         }
       }
     },
@@ -303,7 +326,10 @@
           "options": {
             "jestConfig": "libs/i18n/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/i18n"
+          ]
         }
       }
     },
@@ -334,7 +360,10 @@
           "options": {
             "jestConfig": "libs/core/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/core"
+          ]
         }
       }
     },
@@ -365,7 +394,10 @@
           "options": {
             "jestConfig": "libs/base-converter/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/base-converter"
+          ]
         }
       }
     },
@@ -396,7 +428,10 @@
           "options": {
             "jestConfig": "libs/float-converter/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/float-converter"
+          ]
         }
       }
     },
@@ -427,7 +462,10 @@
           "options": {
             "jestConfig": "libs/common-ui/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/common-ui"
+          ]
         }
       }
     },
@@ -458,7 +496,10 @@
           "options": {
             "jestConfig": "libs/positional-ui/jest.config.js",
             "passWithNoTests": true
-          }
+          },
+          "outputs": [
+            "coverage/libs/positional-ui"
+          ]
         }
       }
     },
@@ -472,7 +513,10 @@
           "builder": "@nrwl/jest:jest",
           "options": {
             "jestConfig": "tools/scripts/jest.config.js"
-          }
+          },
+          "outputs": [
+            "coverage/tools/scripts"
+          ]
         }
       }
     }
