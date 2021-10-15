@@ -2,7 +2,6 @@ import React, { FC } from 'react';
 import {
     Divider,
     IconButton,
-    Link,
     Paper,
     Tooltip,
     Popover,
@@ -11,25 +10,21 @@ import {
 import HelpIcon from '@mui/icons-material/Help';
 import { useTranslation } from 'react-i18next';
 import { Version } from './version/version';
+import { ReportIssue } from './report-issue/report-issue';
 
 
 const PREFIX = 'About';
 
 const classes = {
     icon: `${PREFIX}-icon`,
-    content: `${PREFIX}-content`,
     tooltip: `${PREFIX}-tooltip`,
 };
 
 const Root = styled('div')(({ theme }) => ({
     [`& .${classes.icon}`]: {
-        paddingTop: theme.spacing(2),
         position: 'fixed',
         bottom: theme.spacing(3),
         right: theme.spacing(3)
-    },
-    [`& .${classes.content}`]: {
-        padding: theme.spacing(2)
     },
     [`& .${classes.tooltip}`]: {
         fontSize: theme.typography.fontSize
@@ -54,7 +49,7 @@ export const About: FC = () => {
 
     return (
         <Root>
-            <Tooltip data-test="help-button-tooltip"  className={classes.tooltip} title={t('about.title')} aria-describedby={id} placement={'left'}>
+            <Tooltip data-test="help-button-tooltip" className={classes.tooltip} title={t('about.title')} aria-describedby={id} placement={'left'}>
                 <IconButton data-test='help-button' className={classes.icon} onClick={handleClick}>
                     <HelpIcon fontSize={'large'}/>
                 </IconButton>
@@ -73,11 +68,7 @@ export const About: FC = () => {
                 open={open}
             >
                 <Paper>
-                    <div data-test="bug-report" className={classes.content}>
-                        <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
-                            {t('about.submitNewIssue')}
-                        </Link>
-                    </div>
+                    <ReportIssue/>
                     <Divider/>
                     <Version/>
                 </Paper>
