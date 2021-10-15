@@ -1,11 +1,10 @@
 import { calculate, OperationParams } from './calculate';
 import {
     AdditionType,
-    AlgorithmType,
-    fromNumber, MultiplicationType,
-    Operation,
-    OperationAlgorithm,
-    OperationType, SubtractionType
+    fromNumber,
+    MultiplicationType,
+    OperationType,
+    SubtractionType
 } from '@calc/calc-arithmetic';
 
 
@@ -13,32 +12,18 @@ describe('calculate', () => {
     const base = 10;
     const operands = [10, 5].map((op) => fromNumber(op, base).result);
 
-    const baseParams: OperationParams<AlgorithmType> = {
-        operation: {
-            type: OperationType.Addition,
-            maxOperands: 10,
-            minOperands: 1,
-            tKey: 'operations.addition.title'
-        },
+    const baseParams: OperationParams = {
+        operation:OperationType.Addition,
         base: 10,
         operands: [...operands],
-        algorithm: {
-            type: AdditionType.Default,
-            tKey: 'operations.addition.default'
-        }
+        algorithm: AdditionType.Default
     };
 
     describe('when operation is not supported', () => {
         it('should throw error', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: 'SomeType' as OperationType,
-                tKey: ''
-            };
-
-            const params = { ...baseParams, operation: { ...operation } } as OperationParams<AlgorithmType>;
+            const operation: OperationType ='SomeType' as OperationType;
+            const params = { ...baseParams, operation };
 
             // then
             expect(() => {
@@ -51,22 +36,13 @@ describe('calculate', () => {
     describe('when operation is addition', () => {
         it('should return proper result when addition type is default', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Addition,
-                tKey: ''
-            };
+            const operation = OperationType.Addition;
+            const algorithm = AdditionType.Default;
 
-            const algorithm: OperationAlgorithm<AdditionType> = {
-                type: AdditionType.Default,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when
@@ -79,22 +55,13 @@ describe('calculate', () => {
 
         it('should throw error when addition type is not supported', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Addition,
-                tKey: ''
-            };
+            const operation = OperationType.Addition;
+            const algorithm = 'NotSupported' as AdditionType;
 
-            const algorithm: OperationAlgorithm<AdditionType> = {
-                type: 'NotSupported' as AdditionType,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when
@@ -107,22 +74,13 @@ describe('calculate', () => {
     describe('when operation is subtraction', () => {
         it('should return proper result when addition type is default', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Subtraction,
-                tKey: ''
-            };
+            const operation = OperationType.Subtraction;
+            const algorithm = SubtractionType.Default;
 
-            const algorithm: OperationAlgorithm<SubtractionType> = {
-                type: SubtractionType.Default,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when
@@ -135,22 +93,13 @@ describe('calculate', () => {
 
         it('should throw error when addition type is not supported', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Subtraction,
-                tKey: ''
-            };
+            const operation = OperationType.Subtraction;
+            const algorithm = 'NotSupported' as SubtractionType;
 
-            const algorithm: OperationAlgorithm<SubtractionType> = {
-                type: 'NotSupported' as SubtractionType,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when
@@ -163,22 +112,13 @@ describe('calculate', () => {
     describe('when operation is multiplication', () => {
         it('should return proper result when multiplication type is default', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Multiplication,
-                tKey: ''
-            };
+            const operation = OperationType.Multiplication;
+            const algorithm = MultiplicationType.Default;
 
-            const algorithm: OperationAlgorithm<MultiplicationType> = {
-                type: MultiplicationType.Default,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when
@@ -191,22 +131,13 @@ describe('calculate', () => {
 
         it('should throw error when multiplication type is not supported', () => {
             // given
-            const operation: Operation = {
-                maxOperands: 10,
-                minOperands: 2,
-                type: OperationType.Multiplication,
-                tKey: ''
-            };
+            const operation = OperationType.Multiplication;
+            const algorithm = "NotSupported" as MultiplicationType;
 
-            const algorithm: OperationAlgorithm<MultiplicationType> = {
-                type: 'NotSupported' as MultiplicationType,
-                tKey: ''
-            };
-
-            const params: OperationParams<AlgorithmType> = {
+            const params: OperationParams = {
                 ...baseParams,
-                operation: { ...operation },
-                algorithm: { ...algorithm }
+                operation,
+                algorithm
             };
 
             // when

@@ -23,17 +23,9 @@ export const OperationRenderer: FC<OperationTemplate<AlgorithmType>> = ({base, o
         return fromStringDirect(op, base).result;
     });
 
-    const opParams: OperationParams<AlgorithmType> = {
-        algorithm: {
-            type: algorithm,
-            tKey: ''
-        },
-        operation: {
-            type: operation,
-            minOperands: 0,
-            maxOperands: 10,
-            tKey: ''
-        },
+    const opParams: OperationParams = {
+        algorithm,
+        operation,
         operands: nums,
         base
     };

@@ -65,7 +65,7 @@ export const PositionalCalculatorView: FC = () => {
     const [operation, setOperation] = useState<OperationType>(OperationType.Addition);
     const { t } = useTranslation();
     const [res, setRes] = useState<GridResult | undefined>();
-    const [params, setParams] = useState<OperationParams<AlgorithmType>>();
+    const [params, setParams] = useState<OperationParams>();
     const gridId = 'operation-grid';
 
     const onSubmit = function <T extends AlgorithmType>(
@@ -79,9 +79,9 @@ export const PositionalCalculatorView: FC = () => {
             return fromStringDirect(num.representation, base).result;
         });
 
-        const params: OperationParams<T> = {
-            algorithm,
-            operation,
+        const params: OperationParams = {
+            algorithm: algorithm.type,
+            operation: operation.type,
             base,
             operands
         };
@@ -111,7 +111,7 @@ export const PositionalCalculatorView: FC = () => {
             [OperationType.Subtraction]: 'positionalCalculator.subtractionDetails',
             [OperationType.Multiplication]: 'positionalCalculator.multiplicationDetails',
             [OperationType.Division]: 'positionalCalculator.divisionDetails'
-        }[params.operation.type] || '';
+        }[params.operation] || '';
     };
 
     const groupBuilder = (positionResult: any) => {

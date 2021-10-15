@@ -10,6 +10,7 @@
     "build:wasm": "nx build calc-rs",
     "build:prod": "nx build --prod --deployUrl='calc-web/'",
     "test": "nx test",
+    "edge-case-finder": "export KAOS_MONKE=1 && jest sanity-check.spec.ts",
     "lint": "nx workspace-lint && nx lint",
     "lint:fix": "nx workspace-lint && nx lint --fix",
     "e2e": "nx run calc-web-e2e:e2e",
