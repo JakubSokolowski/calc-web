@@ -1,8 +1,10 @@
 import { BaseDigits } from './base-digits';
 import { Digit } from '../models';
 import { nNext, nPrev } from '@calc/utils';
-import { digitsToStr, fromStringDirect, PositionalNumber } from '@calc/calc-arithmetic';
 import { trimExcessZeros } from './digits';
+import { PositionalNumber } from './positional-number';
+import { fromStringDirect } from './base-converter';
+import { digitsToStr } from '../helpers/conversion-helpers';
 
 
 export function randomOperands(base: number, numOperands: number, maxNumPartDigits: number): PositionalNumber[] {

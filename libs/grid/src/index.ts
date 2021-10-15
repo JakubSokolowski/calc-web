@@ -5,10 +5,10 @@ export * from './lib/core/grid-utils';
 export * from './lib/models/hover-operation-grid';
 export type { CellConfig } from './lib/models/cell-config';
 export type { CellGroup } from './lib/models/cell-group';
-export { GridCellDisplayPreset } from './lib/models/grid-cell-display-preset';
-export { GridCellConfig } from './lib/models/grid-cell-config';
+export type { GridCellDisplayPreset } from './lib/models/grid-cell-display-preset';
+export type { GridCellConfig } from './lib/models/grid-cell-config';
 export { LineType } from './lib/models/line-type';
-export { GridLine, LineDefinition } from './lib/models/grid-line';
+export type { GridLine, LineDefinition } from './lib/models/grid-line';
 export { CellPosition } from './lib/models/cell-position';
 export {
     buildColumnGroups, gridToAscii, groupCellsInStraightLine, buildEmptyGrid, buildRowGroup
@@ -21,9 +21,9 @@ export { buildAdditionGrid } from './lib/core/addition-grid';
 export { buildSubtractionGrid } from './lib/core/subtraction-grid';
 export { HoverGrid } from './lib/components/hover-grid/hover-grid';
 export { PaddedGrid } from './lib/components/padded-grid/padded-grid';
-export { RowConversionOperation } from './lib/models/row-conversion-operation';
-export { FloatingPartConversionInfo } from './lib/models/floating-part-conversion-info';
-export { GridLookup } from './lib/models/grid-lookup';
+export type { RowConversionOperation } from './lib/models/row-conversion-operation';
+export type { FloatingPartConversionInfo } from './lib/models/floating-part-conversion-info';
+export type { GridLookup } from './lib/models/grid-lookup';
 export { getUnderline } from './lib/core/grid-line-utils';
 export type { GridLabel } from './lib/models/grid-label';
 export type { AnchorPosition } from './lib/models/anchor-position';
