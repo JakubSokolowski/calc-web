@@ -163,7 +163,9 @@ export const PositionalCalculatorView: FC = () => {
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
                     open={errorOpen}
                 >
-                    <SanityCheckFailed onClose={handleErrorClose} expected={expected} actual={actual}/>
+                    <Alert severity="error" onClose={handleErrorClose}>
+                        <SanityCheckFailed expected={expected} actual={actual}/>
+                    </Alert>
                 </Snackbar>
                 <Snackbar
                     anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
