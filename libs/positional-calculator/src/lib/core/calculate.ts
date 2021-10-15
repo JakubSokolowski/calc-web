@@ -3,7 +3,6 @@ import {
     AdditionType,
     addPositionalNumbers,
     AlgorithmType,
-    BaseOperationResult,
     divideDefault,
     DivisionResult,
     DivisionType,
@@ -15,8 +14,6 @@ import {
     multiplyDefault,
     multiplyWithExtensions,
     multiplyWithoutExtension,
-    Operation,
-    OperationAlgorithm,
     OperationType,
     PositionalNumber,
     SubtractionResult,
@@ -27,11 +24,11 @@ import { buildAdditionGrid, buildSubtractionGrid, HoverOperationGrid } from '@ca
 import { buildMultiplicationGrid } from '../multiplication/multiplication-grid/multiplication-grid';
 import { buildDivisionGrid } from '../division/division-grid/division-grid';
 
-export interface OperationParams<T extends AlgorithmType> {
+export interface OperationParams<T = PositionalNumber> {
     base: number;
-    operands: PositionalNumber[];
-    operation: Operation;
-    algorithm: OperationAlgorithm<T>;
+    operands: T[];
+    operation: OperationType;
+    algorithm: AlgorithmType;
 }
 
 export interface GridResult<T = any> {
@@ -40,32 +37,31 @@ export interface GridResult<T = any> {
     operationResult?: any;
 }
 
-export function calculate<T extends AlgorithmType,
-    D extends BaseOperationResult>(params: OperationParams<T>): GridResult<D> {
-    switch (params.operation.type) {
+export function calculate<D = AdditionResult | SubtractionResult | MultiplicationResult | DivisionResult>(params: OperationParams): GridResult<D> {
+    switch (params.operation) {
         case OperationType.Addition:
-            return handleAdd(params as OperationParams<AdditionType>);
+            return handleAdd(params);
         case OperationType.Subtraction:
-            return handleSubtract(params as OperationParams<SubtractionType>);
+            return handleSubtract(params);
         case OperationType.Multiplication:
             return handleMultiply(
-                params as OperationParams<MultiplicationType>
+                params
             );
         case OperationType.Division:
             return handleDivide(
-                params as OperationParams<DivisionType>
+                params
             );
         default:
             throw new Error(
-                `Operation type: ${params.operation.type} not supported`
+                `Operation type: ${params.operation} not supported`
             );
     }
 }
 
 function handleAdd(
-    params: OperationParams<AdditionType>
+    params: OperationParams
 ): GridResult<AdditionResult> {
-    switch (params.algorithm.type) {
+    switch (params.algorithm) {
         case AdditionType.Default: {
             const result = addPositionalNumbers(params.operands);
             const grid = buildAdditionGrid(result);
@@ -77,15 +73,15 @@ function handleAdd(
         }
         default:
             throw new Error(
-                `Addition algorithm type: ${params.algorithm.type} not supported`
+                `Addition algorithm type: ${params.algorithm} not supported`
             );
     }
 }
 
 function handleSubtract(
-    params: OperationParams<SubtractionType>
+    params: OperationParams
 ): GridResult<SubtractionResult> {
-    switch (params.algorithm.type) {
+    switch (params.algorithm) {
         case SubtractionType.Default: {
             const result = subtractPositionalNumbers(params.operands);
             const grid = buildSubtractionGrid(result);
@@ -97,15 +93,15 @@ function handleSubtract(
         }
         default:
             throw new Error(
-                `Subtraction algorithm type: ${params.algorithm.type} not supported`
+                `Subtraction algorithm type: ${params.algorithm} not supported`
             );
     }
 }
 
 function handleMultiply(
-    params: OperationParams<MultiplicationType>
+    params: OperationParams
 ): GridResult<MultiplicationResult> {
-    switch (params.algorithm.type) {
+    switch (params.algorithm) {
         case MultiplicationType.Default: {
             const result = multiplyDefault(params.operands);
             const grid = buildMultiplicationGrid(result);
@@ -162,14 +158,14 @@ function handleMultiply(
         }
         default:
             throw new Error(
-                `Subtraction algorithm type: ${params.algorithm.type} not supported`
+                `Subtraction algorithm type: ${params.algorithm} not supported`
             );
     }
 }
 
 
-function handleDivide(params: OperationParams<DivisionType>): GridResult<DivisionResult> {
-    switch (params.algorithm.type) {
+function handleDivide(params: OperationParams): GridResult<DivisionResult> {
+    switch (params.algorithm) {
         case DivisionType.Default: {
             const result = divideDefault(params.operands);
             const grid = buildDivisionGrid(result);
@@ -181,7 +177,7 @@ function handleDivide(params: OperationParams<DivisionType>): GridResult<Divisio
         }
         default:
             throw new Error(
-                `Division algorithm type: ${params.algorithm.type} not supported`
+                `Division algorithm type: ${params.algorithm} not supported`
             );
     }
 }

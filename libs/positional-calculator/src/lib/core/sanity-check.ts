@@ -1,31 +1,79 @@
-import { OperationParams } from './calculate';
-import { AlgorithmType, fromNumber, OperationType, PositionalNumber } from '@calc/calc-arithmetic';
+import { calculate, OperationParams } from './calculate';
+import {
+    AlgorithmType,
+    fromNumber,
+    getRandomInt,
+    OperationType,
+    PositionalNumber,
+    randomOperands
+} from '@calc/calc-arithmetic';
 import BigNumber from 'bignumber.js';
+import { nNext } from '@calc/utils';
 
-export interface SanityCheck<T extends AlgorithmType> {
-    params: OperationParams<T>;
+export interface SanityCheck {
+    params: OperationParams;
     actual: PositionalNumber;
     expectedDecimal: number | BigNumber;
     expectedInBase: string;
     failed: boolean;
 }
 
-export function serializeForSentry<T extends AlgorithmType>(check: SanityCheck<T>): Record<string, unknown> {
+
+function randomParams(operation: OperationType, algorithm: AlgorithmType, base: number): OperationParams {
+    return {
+        operation,
+        algorithm,
+        base,
+        operands: randomOperands(base, 2, 5)
+    }
+}
+
+
+
+export function kaosMonke(operation: OperationType, algorithm: AlgorithmType, reps = 10, base?: number): OperationParams<string>[] {
+    if(!base) {
+        base = getRandomInt(2, 16);
+    }
+    const failed: OperationParams<string>[] = [];
+    nNext(0, reps).forEach(() => {
+        const params = randomParams(operation, algorithm, base);
+        try {
+            const result = calculate(params);
+            const check = sanityCheck(params, result.result);
+            if(check.failed) {
+                failed.push(
+                    { ...params, operands: [...params.operands.map((p) => p.toString())] }
+                );
+                console.log("U dun goofed");
+                console.log(serializeForSentry(check))
+            }
+        } catch (err) {
+            console.log(err);
+            failed.push(
+                { ...params, operands: [...params.operands.map((p) => p.toString())] }
+            );
+        }
+    });
+    return failed;
+}
+
+
+export function serializeForSentry(check: SanityCheck): Record<string, unknown> {
     return {
        extra: {
            actualInBase: check.actual.toString(),
            actualInDecimal: check.actual.decimalValue.toString(),
            expectedInDecimal: check.expectedDecimal,
            expectedInBase: fromNumber(check.expectedDecimal, check.params.base).result.toString(),
-           operation: check.params.operation.type,
-           algorithm: check.params.algorithm.type,
+           operation: check.params.operation,
+           algorithm: check.params.algorithm,
            base: check.params.base,
            operands: check.params.operands.map(op => op.toString())
        }
     }
 }
 
-export function sanityCheck<T extends AlgorithmType>(params: OperationParams<T>, actual: PositionalNumber): SanityCheck<T> {
+export function sanityCheck(params: OperationParams, actual: PositionalNumber): SanityCheck {
     const expectedDecimal = getExpected(params).check();
     const expectedInBase = fromNumber(expectedDecimal, params.base).result.toString();
     const precision = 2;
@@ -50,8 +98,8 @@ export function sanityCheck<T extends AlgorithmType>(params: OperationParams<T>,
     return { params, actual, expectedDecimal, failed, expectedInBase }
 }
 
-function getExpected<T extends AlgorithmType>(params: OperationParams<T>): OperationCheck {
-    switch (params.operation.type) {
+function getExpected(params: OperationParams): OperationCheck {
+    switch (params.operation) {
         case OperationType.Addition:
             return new AdditionCheck(params.operands);
         case OperationType.Subtraction:
@@ -61,7 +109,7 @@ function getExpected<T extends AlgorithmType>(params: OperationParams<T>): Opera
         case OperationType.Division:
             return new DivisionCheck(params.operands);
         default:
-            throw Error(`Sanity check for ${params.operation.type} not implemented`);
+            throw Error(`Sanity check for ${params.operation} not implemented`);
     }
 }
 
