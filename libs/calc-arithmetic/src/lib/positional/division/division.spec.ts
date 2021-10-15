@@ -214,6 +214,7 @@ describe('#division', () => {
             it('should return proper remainder', () => {
                 // then
                 const expected: DivisionOperand[] = [
+                    { base: 10, position: 3, representationInBase: '0', valueInDecimal: 0 },
                     { base: 10, position: 2, representationInBase: '8', valueInDecimal: 8 },
                     { base: 10, position: 1, representationInBase: '7', valueInDecimal: 7 },
                     { base: 10, position: 0, representationInBase: '5', valueInDecimal: 5 }
@@ -285,7 +286,7 @@ describe('#division', () => {
 
             it('should return proper position subtraction result', () => {
                 // then
-                const minuend = fromStringDirect('8755', base).result;
+                const minuend = fromStringDirect('08755', base).result;
                 const subtrahend = fromStringDirect('4587', base).result;
                 const expected = subtractPositionalNumbers([minuend, subtrahend]);
                 expect(result.subtractionResult).toEqual(expected);

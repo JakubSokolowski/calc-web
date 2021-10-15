@@ -438,6 +438,7 @@ describe('grid-utils', () => {
                 // then
                 const expected: GridCellConfig[] = [
                     { content: '(0)' },
+                    { content: '0' },
                     { content: '9' }
                 ];
                 expect(cells).toEqual(expected);

@@ -287,9 +287,15 @@ describe('subtraction', () => {
                     {
                         valueInDecimal: 0,
                         representationInBase: '(0)',
+                        position: 2,
                         base: 10,
-                        position: 1,
                         isComplementExtension: true
+                    },
+                    {
+                        valueInDecimal: 0,
+                        representationInBase: '0',
+                        position: 1,
+                        base: 10
                     },
                     {
                         valueInDecimal: 9,
@@ -560,6 +566,21 @@ describe('subtraction', () => {
 
                 // then
                 const expected = '-10.0';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
+
+            // BUG #208
+            it('should return proper result for base 9 numbers with fraction parts', () => {
+                // given
+                const base = 9;
+                const minuend = fromStringDirect('0.72', base).result;
+                const subtrahend = fromStringDirect('0.78323', base).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '-0.06323';
                 expect(result.numberResult.toString()).toEqual(expected);
             });
         });
