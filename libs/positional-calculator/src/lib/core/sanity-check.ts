@@ -29,7 +29,24 @@ export function sanityCheck<T extends AlgorithmType>(params: OperationParams<T>,
     const expectedDecimal = getExpected(params).check();
     const expectedInBase = fromNumber(expectedDecimal, params.base).result.toString();
     const precision = 2;
-    const failed = !(expectedDecimal.toFixed(precision) === actual.decimalValue.toFixed(precision));
+    const fixedExpected = expectedDecimal.toFixed(precision);
+    const fixedActual = actual.decimalValue.toFixed(precision);
+    const differentDecimalValue = !(fixedExpected === fixedActual);
+
+    let failed = differentDecimalValue;
+    if(differentDecimalValue && params.base !== 10) {
+        // different decimal value is to be expected for different bases
+        // for example, binary division 10101/11.11 to precision 5
+        // will result in  1011.00110 which is 11.1875 in decimal
+        // sanity check on decimal value (42/3.75) will result in
+        // 11.2 ( 1011.0011001100110011001100110011 in binary)
+        // When decimal check fails, check if expected str starts with
+        // actual (the expected decimal result would be reached for
+        // higher precision)
+        const actualStr = actual.toString();
+        failed = !expectedInBase.startsWith(actualStr);
+    }
+
     return { params, actual, expectedDecimal, failed, expectedInBase }
 }
 
