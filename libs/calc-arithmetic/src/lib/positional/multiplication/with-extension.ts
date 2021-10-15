@@ -1,7 +1,7 @@
 import { isZeroDigit, trimLeadingZeros } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
-import { addDigitsArrays, mergeComplementExtension } from '../addition';
+import { addDigitsArrays} from '../addition';
 import { PositionalNumber } from '../positional-number';
 import {
     Digit,
@@ -16,7 +16,7 @@ import {
     extractResultDigitsFromMultiplicationRow,
     getMultiplicationResultPositionCap,
 } from './common';
-import { extendComplement } from '../complement-extension';
+import { extendComplement, mergeComplementExtension } from '../complement-extension';
 import { trimStartByPredicate } from '@calc/utils';
 import { NumberComplement } from '../number-complement';
 import { DefaultMultiplication } from './multiplication';

@@ -120,7 +120,7 @@ export function trimLeadingZeros<T extends Digit>(digits: T[]) {
 }
 
 function isZeroDigitOnGreaterThanZeroPosition(digit: Digit): boolean {
-    return digit.position > 0 && isZeroDigit(digit);
+    return digit.position > 0 && isZeroDigit(digit) && !digit.isComplementExtension;
 }
 
 export function isZeroDigit<T extends Digit>(digit: T): boolean{

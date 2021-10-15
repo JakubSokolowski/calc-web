@@ -264,7 +264,10 @@ describe('subtraction-grid', () => {
                     const expected: GridCellConfig[][] = [
                         [
                             {
-                                content: ''
+                                content: '',
+                                preset: {
+                                    'default': 'defaultCell'
+                                }
                             },
                             {
                                 content: '',
@@ -326,10 +329,10 @@ describe('subtraction-grid', () => {
                                 content: ''
                             },
                             {
-                                content: ''
+                                content: '(0)'
                             },
                             {
-                                content: '(0)'
+                                content: '0'
                             },
                             {
                                 content: '5'

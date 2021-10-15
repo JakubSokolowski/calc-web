@@ -1,8 +1,8 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './positional-number';
 import { fromNumber, fromStringDirect } from './base-converter';
-import { AdditionOperand, AdditionPositionResult, AdditionResult, Digit, PositionResult } from '../models';
-import { getComplementExtension, hasInfiniteExtension } from './complement-extension';
+import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
+import { hasInfiniteExtension, mergeComplementExtension } from './complement-extension';
 import { complementStrToBaseStr } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
@@ -111,46 +111,6 @@ export function extractResultDigitsFromAddition(positionResults: AdditionPositio
 
 
     return mergeComplementExtension(withExtension, positionResults);
-}
-
-export function mergeComplementExtension<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
-    const [, extensionDigit, ...rest] = resultDigits;
-    const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
-
-    let startPositionIndex = firstDifferentIndex === -1
-        ? rest.length - 1
-        : firstDifferentIndex;
-
-    const positionIndexBeforeStart = startPositionIndex - 1;
-
-    const shouldStartFromPreviousPosition = startPositionIndex >= 1
-        && prevPositionGeneratedFromInitialDigits(startPositionIndex, rest, positionResults);
-
-    if (shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
-
-    const startPosition = rest[startPositionIndex].position;
-    const mergedExtension = getComplementExtension(extensionDigit, startPosition + 1);
-    const nonExtensionDigits = rest.slice(startPositionIndex);
-
-    return [mergedExtension, ...nonExtensionDigits];
-}
-
-function prevPositionGeneratedFromInitialDigits<T extends Digit>(index: number, digits: AdditionOperand[], positionResults: PositionResult<T>[]): boolean {
-    const prevPosition = digits[index - 1].position;
-    const prevPositionResult = positionResults.find((res) => res.valueAtPosition.position === prevPosition);
-
-    return positionGeneratedFromInitialDigits(prevPositionResult);
-}
-
-function positionGeneratedFromInitialDigits<T extends Digit>(positionResult: PositionResult<T>): boolean {
-    return positionResult.operands.every((op) => !op.isComplementExtension);
-}
-
-export function findFirstNonRepeatingDigitIndex<T extends Digit>(resultDigits: T[]): number {
-    const [, extensionDigit, ...rest] = resultDigits;
-    return rest.findIndex((digit) => {
-        return digit.valueInDecimal != extensionDigit.valueInDecimal;
-    });
 }
 
 export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[]): PositionalNumber {
