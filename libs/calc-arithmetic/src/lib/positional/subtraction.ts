@@ -6,10 +6,10 @@ import {
     findPositionRange,
     NUM_ADDITIONAL_EXTENSIONS
 } from './operation-utils';
-import { areSameBaseNumbers, buildPositionalNumberFromDigits } from './addition';
+import { areSameBaseNumbers } from './addition';
 import { OperationType } from '../models/operation';
 import { SubtractionType } from '../models/operation-algorithm';
-import { fromNumber } from './base-converter';
+import { fromDigits, fromNumber } from './base-converter';
 import { PositionalNumber } from './positional-number';
 import { alignFractions } from './digits';
 
@@ -116,7 +116,7 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
     }
 
     const resultDigits = extractResultDigitsFromSubtraction(positionResults);
-    const numberResult = buildPositionalNumberFromDigits(resultDigits);
+    const numberResult = fromDigits(resultDigits).result;
 
     return {
         operands,
