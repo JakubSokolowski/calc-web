@@ -1,9 +1,8 @@
 import { BaseDigits } from './base-digits';
 import { PositionalNumber } from './positional-number';
-import { fromNumber, fromStringDirect } from './base-converter';
+import { fromDigits, fromNumber } from './base-converter';
 import { AdditionOperand, AdditionPositionResult, AdditionResult } from '../models';
 import { hasInfiniteExtension, mergeComplementExtension } from './complement-extension';
-import { complementStrToBaseStr } from './complement-converter';
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
@@ -76,7 +75,7 @@ export function addDigitsArrays(digits: AdditionOperand[][], positionCap?: numbe
     }
 
     const resultDigits = extractResultDigitsFromAddition(result, positionCap);
-    const numberResult = buildPositionalNumberFromDigits(resultDigits);
+    const numberResult = fromDigits(resultDigits).result;
 
     return {
         stepResults: result,
@@ -112,25 +111,6 @@ export function extractResultDigitsFromAddition(positionResults: AdditionPositio
 
     return mergeComplementExtension(withExtension, positionResults);
 }
-
-export function buildPositionalNumberFromDigits(resultDigits: AdditionOperand[]): PositionalNumber {
-    let complementStr = '';
-    const base = resultDigits[0].base;
-
-    resultDigits.forEach((digit) => {
-        const firstFractionalPartDigitIndex = -1;
-        if (digit.position === firstFractionalPartDigitIndex) {
-            if( base > 36)
-                complementStr = complementStr.slice(0, -1);
-            complementStr += '.'
-        }
-        complementStr += base > 36 ? digit.representationInBase + ' ' : digit.representationInBase;
-    });
-
-    const representationStr = complementStrToBaseStr(complementStr.trimRight(), base);
-    return fromStringDirect(representationStr, base).result;
-}
-
 
 export function addDigitsAtPosition(digits: AdditionOperand[], position: number, globalBase: number): AdditionPositionResult {
     const base = digits[0] ? digits[0].base : globalBase;

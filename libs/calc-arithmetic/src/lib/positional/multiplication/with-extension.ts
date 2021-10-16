@@ -1,4 +1,4 @@
-import { isZeroDigit, trimLeadingZeros } from '../digits';
+import { trimLeadingZeros } from '../digits';
 import { fromDigits } from '../base-converter';
 import { getComplement } from '../complement-converter';
 import { addDigitsArrays} from '../addition';
@@ -17,7 +17,6 @@ import {
     getMultiplicationResultPositionCap,
 } from './common';
 import { extendComplement, mergeComplementExtension } from '../complement-extension';
-import { trimStartByPredicate } from '@calc/utils';
 import { NumberComplement } from '../number-complement';
 import { DefaultMultiplication } from './multiplication';
 import { OperandsTransformType } from '../transform/preprocessor-type';

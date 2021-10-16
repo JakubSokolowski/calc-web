@@ -366,5 +366,20 @@ describe('multiplication', () => {
             const expected = '0.001';
             expect(result.numberResult.toString()).toEqual(expected);
         });
+
+        // BUG #209
+        it('should multiply base 5 number with fraction part by 0', () => {
+            // given
+            const base = 5;
+            const multiplicand = fromStringDirect("4023.442", base).result;
+            const multiplier = fromStringDirect("0", base).result;
+
+            // when
+            const result = multiplyDefault([multiplicand, multiplier]);
+
+            // then
+            const expected = '0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+        });
     });
 });
