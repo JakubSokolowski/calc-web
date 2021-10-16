@@ -139,6 +139,40 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
 
+        // BUG #206
+        it('should multiply 0 by number in U2', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('0', base).result;
+            const y = fromStringDirect('110.101', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '0.0';
+            const expectedComplement = '(0)0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
+        // BUG #206
+        it('should multiply number by 0 in U2', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('10.111', base).result;
+            const y = fromStringDirect('0', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '0.0';
+            const expectedComplement = '(0)0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
         // BUG #162
         it('should multiply 2 b64 numbers in with fraction parts', () => {
             // given
