@@ -232,7 +232,7 @@ export function computeComplementWithDetails(
  * @param base
  */
 export function complementStrToBaseStr(str: string, base: number): string {
-    let noSignStr = base > 36 ? str.substr(4) : str.substring(3);
+    let noSignStr = base > 36 ? str.substr(4).trim() : str.substring(3).trim();
 
     if (!isComplementStrNegative(str, base)) {
         if (noSignStr.startsWith('.')) {

@@ -385,6 +385,18 @@ describe('complement-converter', () => {
             );
         });
 
+        it('converts positive base64 number complement to its base string', () => {
+            // given
+            const input = '(00) 01 03 42 40';
+            const base = 64;
+            const expected = '01 03 42 40';
+
+            // then
+            expect(complementStrToBaseStr(input, base)).toEqual(
+                expected
+            );
+        });
+
         it('converts positive floating number starting with complement', () => {
             // given
             const input = '(0).1';
