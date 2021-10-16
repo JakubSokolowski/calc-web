@@ -79,10 +79,11 @@ export function sanityCheck(params: OperationParams, actual: PositionalNumber): 
     const precision = 2;
     const fixedExpected = expectedDecimal.toFixed(precision);
     const fixedActual = actual.decimalValue.toFixed(precision);
-    const differentDecimalValue = !(fixedExpected === fixedActual);
+    const differenceToBig = expectedDecimal.minus(actual.decimalValue).abs().isGreaterThan(0.01);
+    const fixedDecimalDifferent = !(fixedExpected === fixedActual);
 
-    let failed = differentDecimalValue;
-    if(differentDecimalValue && params.base !== 10) {
+    let failed = fixedDecimalDifferent && differenceToBig;
+    if(failed && params.base !== 10) {
         // different decimal value is to be expected for different bases
         // for example, binary division 10101/11.11 to precision 5
         // will result in  1011.00110 which is 11.1875 in decimal

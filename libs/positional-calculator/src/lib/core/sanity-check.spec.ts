@@ -38,6 +38,31 @@ describe('sanity-check', () => {
             const expected = false;
             expect(result.failed).toEqual(expected);
         });
+
+        it('should return proper check for decimal operation that has correct representation but wrong decimal (due to float precision loss', () => {
+            // -7.9049999999999999 != -7.905
+            // given
+            const base = 10;
+            const params: OperationParams = {
+                operands: [
+                    fromStringDirect('3.613', base).result,
+                    fromStringDirect('11.518', base).result
+                ],
+                algorithm: SubtractionType.Default,
+                operation: OperationType.Subtraction,
+                base
+            };
+            const operationResult = calculate(params).result;
+
+            // when
+            const result = sanityCheck(params, operationResult);
+
+            // then
+            const expected = false;
+            expect(result.failed).toEqual(expected);
+        });
+
+
     });
 
     describe('#kaosMonke', () => {
