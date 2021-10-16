@@ -294,6 +294,6 @@ export function digitsToStr<T extends Digit>(digits: T[]): string {
     const fractionalPart = digits.filter(d => d.position < 0).map(d => d.representationInBase);
 
     if(!fractionalPart.length) return integerPart.join(joinSymbol);
-    if(!integerPart.length) return fractionalPart.join(joinSymbol)
+    if(!integerPart.length) return fractionalPart.join(joinSymbol);
     return `${integerPart.join(joinSymbol)}${separator}${fractionalPart.join(joinSymbol)}`;
 }
