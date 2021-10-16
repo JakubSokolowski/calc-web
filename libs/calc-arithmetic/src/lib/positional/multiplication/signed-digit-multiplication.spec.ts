@@ -1,4 +1,4 @@
-import { fromStringDirect } from '@calc/calc-arithmetic';
+import { fromStringDirect } from '../base-converter';
 import {
     multiplyBooth,
     multiplyBoothMcSorley,
@@ -115,6 +115,40 @@ describe('signed-digit-multiplication', () => {
             expect(result.numberResult.complement.toString()).toEqual(
                 expectedComplement
             );
+        });
+
+        // BUG #206
+        it('should multiply 0 by number', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('0', base).result;
+            const y = fromStringDirect('110.101', base).result;
+
+            // when
+            const result = multiplyBoothMcSorley([x, y]);
+
+            // then
+            const expected = '0.0';
+            const expectedComplement = '(0)0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
+        // BUG #206
+        it('should multiply number by 0', () => {
+            // given
+            const base = 2;
+            const x = fromStringDirect('10.111', base).result;
+            const y = fromStringDirect('0', base).result;
+
+            // when
+            const result = multiplyBoothMcSorley([x, y]);
+
+            // then
+            const expected = '0.0';
+            const expectedComplement = '(0)0.0';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
     });
 
