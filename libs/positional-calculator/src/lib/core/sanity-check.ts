@@ -24,7 +24,26 @@ function randomParams(operation: OperationType, algorithm: AlgorithmType, base: 
         operation,
         algorithm,
         base,
-        operands: randomOperands(base, 2, 5)
+        operands: getValidRandomOperands(operation, algorithm, base)
+    }
+}
+
+function getValidRandomOperands(operation: OperationType, algorithm: AlgorithmType, base: number): PositionalNumber[] {
+    const operands = randomOperands(base, 2, 5);
+    if(areOperandsValid(operands, operation)) return operands;
+    return getValidRandomOperands(operation, algorithm, base);
+}
+
+function areOperandsValid(operands: PositionalNumber[], operation: OperationType): boolean {
+    switch(operation) {
+        case OperationType.Addition:
+        case OperationType.Subtraction:
+        case OperationType.Multiplication:
+            return true;
+        case OperationType.Division: {
+            const [, divisor] = operands;
+            return divisor.toNumber() !== 0;
+        }
     }
 }
 
