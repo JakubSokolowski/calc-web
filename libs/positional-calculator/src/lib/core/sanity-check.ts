@@ -9,6 +9,7 @@ import {
 } from '@calc/calc-arithmetic';
 import BigNumber from 'bignumber.js';
 import { nNext } from '@calc/utils';
+import { toUrlSearchParams } from '../calculator-options/url-calculator-options';
 
 export interface SanityCheck {
     params: OperationParams;
@@ -60,20 +61,31 @@ export function kaosMonke(operation: OperationType, algorithm: AlgorithmType, re
             const result = calculate(params);
             const check = sanityCheck(params, result.result);
             if(check.failed) {
-                failed.push(
-                    { ...params, operands: [...params.operands.map((p) => p.toString())] }
-                );
-                console.log("U dun goofed");
-                console.log(serializeForSentry(check))
+                const strOpParams: OperationParams<string> = {
+                    ...params,
+                    operands: [...params.operands.map((p) => p.toString())]
+                };
+                failed.push(strOpParams);
+                logParamsUrl(strOpParams);
             }
         } catch (err) {
-            console.log(err);
-            failed.push(
-                { ...params, operands: [...params.operands.map((p) => p.toString())] }
-            );
+            const strOpParams: OperationParams<string> = {
+                ...params,
+                operands: [...params.operands.map((p) => p.toString())]
+            };
+            failed.push(strOpParams);
+            logParamsUrl(strOpParams);
         }
     });
     return failed;
+}
+
+function logParamsUrl(params: OperationParams<string>) {
+    const searchParams = toUrlSearchParams(params);
+    const localhostUrl = `http://localhost:4200/#/tools/positional/positional-calculator${searchParams}`;
+    const prodUrl = `https://jakubsokolowski.github.io/calc-web/#/tools/positional/positional-calculator${searchParams}`;
+    const msg = `Local: ${localhostUrl}\nProd: ${prodUrl}`;
+    console.log(msg);
 }
 
 

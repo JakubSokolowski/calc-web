@@ -12,11 +12,12 @@ import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, styled, TextField, Tooltip } from '@mui/material';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
-import { useUrlCalculatorOptions } from './url-calculator-options';
+import { toUrlSearchParams, useUrlCalculatorOptions } from './url-calculator-options';
 import { useHistory } from 'react-router-dom';
 import { representationValidator, validateOperand } from '../validators/validators';
 import { allOperations } from './operations';
 import { algorithmMap, multiplicationAlgorithms } from './algorithms';
+import { OperationParams } from '../core/calculate';
 
 interface FormValues {
     base: number;
@@ -132,12 +133,16 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
 
     const handleSubmit = (form: FormValues) => {
         onSubmit(form.base, operands, operation, algorithm);
-        const operandsStr = operands.map(op => `op=${op.representation}`).join('&');
+
+        const params: OperationParams<string> = {
+            base: form.base,
+            operands: operands.map(op => op.representation),
+            operation: operation.type,
+            algorithm: algorithm.type
+        };
+
         history.replace({
-            search: `?operation=${operation.type.toLowerCase()}`
-                + `&algorithm=${algorithm.type.toLowerCase()}`
-                + `&base=${form.base}`
-                + `&${operandsStr}`
+            search: toUrlSearchParams(params)
         });
     };
 
