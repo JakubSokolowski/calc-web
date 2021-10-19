@@ -583,6 +583,21 @@ describe('subtraction', () => {
                 const expected = '-0.06323';
                 expect(result.numberResult.toString()).toEqual(expected);
             });
+
+            // BUG #215
+            it('should return proper result for base 10 with -0.01 result', () => {
+                // given
+                const base = 10;
+                const minuend = fromStringDirect('1.001', base).result;
+                const subtrahend = fromStringDirect('1.011', base).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '-0.010';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
         });
 
         describe('when subtracting multiple operands', () => {

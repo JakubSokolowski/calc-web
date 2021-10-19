@@ -88,7 +88,6 @@ export const PositionalCalculatorView: FC = () => {
 
         setParams(params);
         const res = calculate(params);
-        console.log(params);
         const check = sanityCheck(params, res.result);
 
         if (check.failed) {
