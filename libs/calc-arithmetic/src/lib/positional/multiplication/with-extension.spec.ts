@@ -189,5 +189,56 @@ describe('multiply-with-extensions', () => {
             expect(result.numberResult.toString()).toEqual(expected);
             expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
         });
+
+        // BUG #219
+        it('should multiply 2 base 7 numbers', () => {
+            // given
+            const base = 7;
+            const x = fromStringDirect('4', base).result;
+            const y = fromStringDirect('3', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '15';
+            const expectedComplement = '(0)15';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
+        // BUG #219
+        it('should multiply 2 base 11 numbers', () => {
+            // given
+            const base = 11;
+            const x = fromStringDirect('5', base).result;
+            const y = fromStringDirect('94', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '429';
+            const expectedComplement = '(0)429';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
+
+        // BUG #219
+        it('should multiply 2 base 4 numbers', () => {
+            // given
+            const base = 4;
+            const x = fromStringDirect('2', base).result;
+            const y = fromStringDirect('3300', base).result;
+
+            // when
+            const result = multiplyWithExtensions([x, y]);
+
+            // then
+            const expected = '13200';
+            const expectedComplement = '(0)13200';
+            expect(result.numberResult.toString()).toEqual(expected);
+            expect(result.numberResult.complement.toString()).toEqual(expectedComplement);
+        });
     });
 });

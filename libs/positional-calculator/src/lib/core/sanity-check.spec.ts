@@ -101,7 +101,7 @@ describe('sanity-check', () => {
 
         itIf(χάος)('should survive multiplication with extension', () => {
             // given
-            const reps = 1000;
+            const reps = 10000;
 
             // when
             const result = kaosMonke(OperationType.Multiplication, MultiplicationType.WithExtension, reps);

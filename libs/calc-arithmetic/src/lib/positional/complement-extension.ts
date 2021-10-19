@@ -96,9 +96,9 @@ export function extendComplement<T extends Digit>(digits: T[], numPositions: num
 
 
 export function mergeComplementExtension<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
+    if(!canMerge(resultDigits)) return resultDigits;
     const [, extensionDigit, ...rest] = resultDigits;
     let startPositionIndex = mergedComplementStartIndex(resultDigits);
-
     const positionIndexBeforeStart = startPositionIndex - 1;
 
     const shouldStartFromPreviousPosition = startPositionIndex >= 1
@@ -111,6 +111,16 @@ export function mergeComplementExtension<T extends Digit>(resultDigits: T[], pos
     const nonExtensionDigits = rest.slice(startPositionIndex);
 
     return [mergedExtension, ...nonExtensionDigits];
+}
+
+function canMerge<T extends Digit>(resultDigits: T[]): boolean {
+    const [, secondDigit] = resultDigits;
+    return canBeExtensionDigit(secondDigit);
+}
+
+function canBeExtensionDigit<T extends Digit>(digit: T): boolean {
+    return digit.valueInDecimal === 0 || digit.valueInDecimal === digit.base - 1;
+
 }
 
 function mergedComplementStartIndex<T extends Digit>(resultDigits: T[]): number {
@@ -127,7 +137,7 @@ function mergedComplementStartIndex<T extends Digit>(resultDigits: T[]): number 
 }
 
 
-function prevPositionGeneratedFromInitialDigits<T extends Digit>(index: number, digits: AdditionOperand[], positionResults: PositionResult<T>[]): boolean {
+function prevPositionGeneratedFromInitialDigits<T extends Digit>(index: number, digits: T[], positionResults: PositionResult<T>[]): boolean {
     const prevPosition = digits[index - 1].position;
     const prevPositionResult = positionResults.find((res) => res.valueAtPosition.position === prevPosition);
 
