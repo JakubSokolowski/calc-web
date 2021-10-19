@@ -4,6 +4,7 @@ import { DndOperand } from '../operand-list/operand-list';
 import { inRangeInclusive, useUrlParams } from '@calc/utils';
 import { allOperations } from './operations';
 import { algorithmMap } from './algorithms';
+ import { OperationParams } from '../core/calculate';
 
 export function urlParamsToCalculatorOptionsValue(params: URLSearchParams): CalculatorOptionsValue | undefined {
     const operationStr = params.get('operation');
@@ -45,6 +46,17 @@ export function urlParamsToCalculatorOptionsValue(params: URLSearchParams): Calc
     if (!everyOpValid) return undefined;
 
     return { base, operation, operands, algorithm };
+}
+
+
+export function toUrlSearchParams(params: OperationParams<string>): string {
+    const {algorithm, operation, operands, base} = params;
+    const operandsStr = operands.map(op => `op=${op}`).join('&');
+
+    return `?operation=${operation.toLowerCase()}`
+        + `&algorithm=${algorithm.toLowerCase()}`
+        + `&base=${base}`
+        + `&${operandsStr}`;
 }
 
 export function useUrlCalculatorOptions(): CalculatorOptionsValue | undefined {
