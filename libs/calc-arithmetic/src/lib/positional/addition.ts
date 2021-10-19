@@ -6,7 +6,6 @@ import { hasInfiniteExtension, mergeComplementExtension } from './complement-ext
 import { buildLookup, findPositionRange, NUM_ADDITIONAL_EXTENSIONS } from './operation-utils';
 import { OperationType } from '../models/operation';
 import { AdditionType } from '../models/operation-algorithm';
-import { digitsToStr } from '../calc-arithmetic';
 
 export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResult {
     if (!areSameBaseNumbers(numbers)) {
