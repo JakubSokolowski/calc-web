@@ -94,9 +94,58 @@ export function extendComplement<T extends Digit>(digits: T[], numPositions: num
     return [...extensions, ...rest];
 }
 
+export function mergeComplementExtensionForSubtraction<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[], operandMsp?: number): AdditionOperand[] {
+    if (!canMerge(resultDigits)) return resultDigits;
+    const [extensionDigit, ...rest] = resultDigits;
+    let startPositionIndex = mergedComplementStartIndexSub(resultDigits);
+    const positionIndexBeforeStart = startPositionIndex - 1;
+
+    const shouldStartFromPreviousPosition = startPositionIndex >= 1
+        && prevPositionGeneratedFromInitialDigits(startPositionIndex, rest, positionResults);
+
+    if (shouldStartFromPreviousPosition) startPositionIndex = positionIndexBeforeStart;
+
+    let startPosition = rest[startPositionIndex].position;
+
+    const operandMspWithoutMandatoryComplementDigit = operandMsp - 1;
+    const isExtensionNonZero = extensionDigit.valueInDecimal !== 0;
+
+    if (startPosition < operandMspWithoutMandatoryComplementDigit && isExtensionNonZero) {
+        // Some digits that look like extension but actually are not should not be merged
+        // Those numbers (in base 10) for example are -10, -100, -1000 etc.
+        // The digit for those numbers will look like 999990.0, and the digits at positions
+        // that could be generated from operands themselves (subtraction at position that is
+        // lesser than msp will ~probably~ result in digit that should not be merged
+        // If the current supposed merge index would merge such digit, shift it so that
+        // operands MSP is not merged
+        // This is only the case for non-zero digits, as leading zeros can always be merged
+        startPositionIndex -= Math.abs(operandMspWithoutMandatoryComplementDigit - startPosition);
+        startPosition = rest[startPositionIndex].position;
+    }
+
+    const mergedExtension = getComplementExtension(extensionDigit, startPosition + 1);
+    const nonExtensionDigits = rest.slice(startPositionIndex);
+
+    return [mergedExtension, ...nonExtensionDigits];
+}
+
+
+function mergedComplementStartIndexSub<T extends Digit>(resultDigits: T[]): number {
+    const [, ...rest] = resultDigits;
+    const firstDifferentIndex = findFirstNonRepeatingDigitIndex(resultDigits);
+    const startPositionIndex = firstDifferentIndex === -1
+        ? rest.length - 1
+        : firstDifferentIndex + 1;
+
+    const startPosition = resultDigits[startPositionIndex].position;
+    if (startPosition >= 0) return startPositionIndex;
+
+    return startPositionIndex - Math.abs(startPosition);
+}
+
 
 export function mergeComplementExtension<T extends Digit>(resultDigits: T[], positionResults: PositionResult<T>[]): AdditionOperand[] {
-    if(!canMerge(resultDigits)) return resultDigits;
+    if (!canMerge(resultDigits)) return resultDigits;
     const [, extensionDigit, ...rest] = resultDigits;
     let startPositionIndex = mergedComplementStartIndex(resultDigits);
     const positionIndexBeforeStart = startPositionIndex - 1;

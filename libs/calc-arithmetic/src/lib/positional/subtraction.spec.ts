@@ -598,6 +598,36 @@ describe('subtraction', () => {
                 const expected = '-0.010';
                 expect(result.numberResult.toString()).toEqual(expected);
             });
+
+            // BUG #221
+            it('should return proper result for base 10 with -10 result', () => {
+                // given
+                const base = 10;
+                const minuend = fromStringDirect('2.3', base).result;
+                const subtrahend = fromStringDirect('12.3', base).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '-10.0';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
+
+            // BUG #221
+            it('should return proper result for base 4 with -10 (-4) result', () => {
+                // given
+                const base = 4;
+                const minuend = fromStringDirect('2.3', base).result;
+                const subtrahend = fromStringDirect('12.3', base).result;
+
+                // when
+                const result = subtractPositionalNumbers([minuend, subtrahend]);
+
+                // then
+                const expected = '-10.0';
+                expect(result.numberResult.toString()).toEqual(expected);
+            });
         });
 
         describe('when subtracting multiple operands', () => {

@@ -115,7 +115,7 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
         currentPosition += 1;
     }
 
-    const resultDigits = extractResultDigitsFromSubtraction(positionResults);
+    const resultDigits = extractResultDigitsFromSubtraction(positionResults, operands);
     const numberResult = fromDigits(resultDigits).result;
 
     return {
