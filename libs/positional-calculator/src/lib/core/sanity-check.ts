@@ -110,7 +110,7 @@ export function sanityCheck(params: OperationParams, actual: PositionalNumber): 
     const precision = 2;
     const fixedExpected = expectedDecimal.toFixed(precision);
     const fixedActual = actual.decimalValue.toFixed(precision);
-    const differenceToBig = expectedDecimal.minus(actual.decimalValue).abs().isGreaterThan(0.01);
+    const differenceToBig = expectedDecimal.minus(actual.decimalValue).abs().isGreaterThan(0.1);
     const fixedDecimalDifferent = !(fixedExpected === fixedActual);
 
     let failed = fixedDecimalDifferent && differenceToBig;
