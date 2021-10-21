@@ -27,7 +27,7 @@ import { AddAtPositionHoverContent } from '../../../addition/addition-position-r
 import { MultiplyRowDetails } from '../../multiply-row-result/multiply-row-result';
 import { MultiplyPositionDetails } from '../../multiply-position-result/multiply-position-details';
 import React from 'react';
-import { flatten } from 'lodash';
+import { flatten } from '@calc/utils';
 
 export class DefaultBuilder extends GridBuilder {
     protected get multiplicandLabelStr() {
