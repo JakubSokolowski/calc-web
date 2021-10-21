@@ -1,4 +1,4 @@
-import { walkOverlaping } from '@calc/utils';
+import { flatten, walkOverlaping } from '@calc/utils';
 import {
     SDConversionGroupResult,
     SDConversionResult,
@@ -6,7 +6,6 @@ import {
     SignedDigitConversionType,
     SignedDigitConverter,
 } from './signed-digit-converter';
-import { flatten } from 'lodash';
 import { BaseDigits } from '../base-digits';
 import { positionRangeSlice } from '../digits';
 import { findPositionRange } from '../operation-utils';

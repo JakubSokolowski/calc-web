@@ -11,8 +11,8 @@ import {
 import React from 'react';
 import { ComplementMultiplicationBuilder } from './complement-multiplication-builder';
 import { Digit, SDConversionGroupResult, SDConversionResult, SDGroupDigit } from '@calc/calc-arithmetic';
-import { flatten } from 'lodash';
 import { BoothGroupResult } from '../../sd-group-result/booth-group-result';
+import { flatten } from '@calc/utils';
 
 export class BoothBuilder extends ComplementMultiplicationBuilder {
 

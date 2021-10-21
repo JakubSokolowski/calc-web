@@ -4,6 +4,7 @@ export * from './lib/functions/log';
 export * from './lib/functions/trim';
 export * from './lib/functions/range';
 export * from './lib/functions/intersect';
+export * from './lib/functions/flatten';
 export * from './lib/functions/replace-all';
 export * from './lib/functions/clean';
 export * from './lib/functions/in-range';
