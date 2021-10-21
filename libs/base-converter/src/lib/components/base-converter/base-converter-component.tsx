@@ -6,7 +6,7 @@ import {
     getComplement,
     isValidString
 } from '@calc/calc-arithmetic';
-import { SwapOutlined } from '@ant-design/icons/lib';
+import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
@@ -217,7 +217,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     />
                     <Tooltip title={t('baseConverter.swapBases')}>
                         <IconButton className={classes.iconButton} size={'small'} onClick={swap}>
-                            <SwapOutlined/>
+                            <SwapHorizIcon/>
                         </IconButton>
                     </Tooltip>
                     <TextField
