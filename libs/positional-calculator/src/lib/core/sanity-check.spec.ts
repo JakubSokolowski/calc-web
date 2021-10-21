@@ -39,6 +39,28 @@ describe('sanity-check', () => {
             expect(result.failed).toEqual(expected);
         });
 
+        it('should return proper check for binary operation that has correct binary result but wrong decimal (due to float precision loss_ v2', () => {
+            // given
+            const base = 2;
+            const params: OperationParams = {
+                operands: [
+                    fromStringDirect('0.1', base).result,
+                    fromStringDirect('11010.01', base).result
+                ],
+                algorithm: DivisionType.Default,
+                operation: OperationType.Division,
+                base
+            };
+            const operationResult = calculate(params).result;
+
+            // when
+            const result = sanityCheck(params, operationResult);
+
+            // then
+            const expected = false;
+            expect(result.failed).toEqual(expected);
+        });
+
         it('should return proper check for decimal operation that has correct representation but wrong decimal (due to float precision loss', () => {
             // -7.9049999999999999 != -7.905
             // given
@@ -61,7 +83,6 @@ describe('sanity-check', () => {
             const expected = false;
             expect(result.failed).toEqual(expected);
         });
-
 
     });
 
