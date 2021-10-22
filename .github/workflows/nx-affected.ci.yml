@@ -22,7 +22,7 @@ jobs:
                     cache-name: cache-node-modules
                 with:
                     path: ~/.npm
-                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+                    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
                     restore-keys: |
                         ${{ runner.os }}-build-${{ env.cache-name }}-
                         ${{ runner.os }}-build-
@@ -34,7 +34,7 @@ jobs:
             -   name: Fetch target branch
                 run: git fetch origin ${{ github.event.pull_request.base.ref }}
             -   name: Install packages
-                run: npm install
+                run: yarn install
             -   name: Affected Lint
                 shell: bash
                 run: npm run affected:lint -- --base=remotes/origin/${{ github.event.pull_request.base.ref }} --exclude docs
