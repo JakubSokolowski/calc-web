@@ -48,8 +48,6 @@ function areOperandsValid(operands: PositionalNumber[], operation: OperationType
     }
 }
 
-
-
 export function kaosMonke(operation: OperationType, algorithm: AlgorithmType, reps = 10, base?: number): OperationParams<string>[] {
     if(!base) {
         base = getRandomInt(2, 16);
