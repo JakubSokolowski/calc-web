@@ -87,10 +87,9 @@ describe('sanity-check', () => {
     });
 
     describe('#kaosMonke', () => {
-        itIf(χάος)('should survive addition', () => {
-            // given
-            const reps = 1000;
+        const reps = 3000;
 
+        itIf(χάος)('should survive addition', () => {
             // when
             const result = kaosMonke(OperationType.Addition, AdditionType.Default, reps);
 
@@ -99,9 +98,6 @@ describe('sanity-check', () => {
         });
 
         itIf(χάος)('should survive subtraction', () => {
-            // given
-            const reps = 1000;
-
             // when
             const result = kaosMonke(OperationType.Subtraction, SubtractionType.Default, reps);
 
@@ -110,9 +106,6 @@ describe('sanity-check', () => {
         });
 
         itIf(χάος)('should survive default multiplication', () => {
-            // given
-            const reps = 1000;
-
             // when
             const result = kaosMonke(OperationType.Multiplication, MultiplicationType.Default, reps);
 
@@ -121,9 +114,6 @@ describe('sanity-check', () => {
         });
 
         itIf(χάος)('should survive multiplication with extension', () => {
-            // given
-            const reps = 10000;
-
             // when
             const result = kaosMonke(OperationType.Multiplication, MultiplicationType.WithExtension, reps);
 
@@ -132,9 +122,6 @@ describe('sanity-check', () => {
         });
 
         itIf(χάος)('should survive multiplication without extension', () => {
-            // given
-            const reps = 1000;
-
             // when
             const result = kaosMonke(OperationType.Multiplication, MultiplicationType.WithoutExtension, reps);
 
@@ -144,7 +131,6 @@ describe('sanity-check', () => {
 
         itIf(χάος)('should survive booth multiplication', () => {
             // given
-            const reps = 1000;
             const base = 2;
 
             // when
@@ -156,7 +142,6 @@ describe('sanity-check', () => {
 
         itIf(χάος)('should survive boothMcSorley multiplication', () => {
             // given
-            const reps = 1000;
             const base = 2;
 
             // when
@@ -168,7 +153,6 @@ describe('sanity-check', () => {
 
         itIf(χάος)('should survive boothMcSorley alt multiplication', () => {
             // given
-            const reps = 1000;
             const base = 2;
 
             // when
@@ -179,9 +163,6 @@ describe('sanity-check', () => {
         });
 
         itIf(χάος)('should survive division', () => {
-            // given
-            const reps = 1000;
-
             // when
             const result = kaosMonke(OperationType.Division, DivisionType.Default, reps);
 
