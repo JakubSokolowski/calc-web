@@ -36,7 +36,7 @@ function prepareDivisionOperands(dividend: PositionalNumber, divisor: Positional
             dividend.toDigitsList(),
             divisor.toDigitsList()
         ],
-        [OperandsTransformType.ScaleToDivisor]
+        [OperandsTransformType.TrimExcessZeros, OperandsTransformType.ScaleToDivisor]
     );
 }
 

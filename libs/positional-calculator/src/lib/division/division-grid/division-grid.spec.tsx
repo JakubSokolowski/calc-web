@@ -92,5 +92,21 @@ describe('division-grid', () => {
             const expected = 0;
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
+
+        // BUG #194
+        it('should return proper left offset for division by 1 when dividend has fraction part', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('1230.99903', base).result;
+            const divisor = fromStringDirect('1', base).result;
+            const result = divideDefault([dividend, divisor]);
+
+            // when
+            const meta = extractDivisionResultMeta(result);
+
+            // then
+            const expected = 0;
+            expect(meta.resultRowLeftOffset).toEqual(expected);
+        });
     });
 });
