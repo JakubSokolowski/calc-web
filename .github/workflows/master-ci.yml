@@ -20,7 +20,7 @@ jobs:
             -   name: Install and Build
                 run: |
                     echo NX_CALC_GIT_SHA: $NX_CALC_GIT_SHA
-                    npm install
+                    yarn install
                     npm run build:prod
 
             -   name: Deploy
