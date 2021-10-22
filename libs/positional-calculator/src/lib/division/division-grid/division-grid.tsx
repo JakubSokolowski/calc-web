@@ -2,7 +2,7 @@ import {
     digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
-    DivisionResult,
+    DivisionResult, fromDigits,
     leastSignificantPosition
 } from '@calc/calc-arithmetic';
 import {
@@ -308,9 +308,7 @@ export function extractDivisionResultMeta(result: DivisionResult): DivisionResul
 
     const [scaledDividend, scaledDivisor] = result.operands;
     const numOperandsDigits = scaledDividend.length + scaledDivisor.length;
-    const resultRowLeftOffset = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber())
-        ? Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits)
-        : 0;
+    const resultRowLeftOffset = getResultRowLeftOffset(result);
 
     const spaceForFirstMinusSign = 1;
     const resultRowLength = spaceForFirstMinusSign + resultRowLeftOffset + numResultDigits;
@@ -329,4 +327,18 @@ export function extractDivisionResultMeta(result: DivisionResult): DivisionResul
         numResultDigits,
         resultRowLeftOffset
     };
+}
+
+function getResultRowLeftOffset(result: DivisionResult): number {
+    const [dividend, divisor] = result.numberOperands;
+    const [scaledDividend, scaledDivisor] = result.operands;
+    const baseMeta = extractResultMeta(result);
+
+    const isDivisionByOne = fromDigits(scaledDivisor).result.toNumber() === 1;
+    if(isDivisionByOne) return 0;
+
+    const dividendGreater = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber());
+    if(!dividendGreater) return 0;
+
+    return Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits);
 }
