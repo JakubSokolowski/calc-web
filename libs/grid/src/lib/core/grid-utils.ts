@@ -9,8 +9,6 @@ import { LineType } from '../models/line-type';
 import { GridLookup } from '../models/grid-lookup';
 import { BaseDigits, Digit, isSubtractionOperand, OperationResult, PositionResult } from '@calc/calc-arithmetic';
 import { GridCellEvent } from '../..';
-import { isFunction, isString } from 'util';
-
 
 export function buildEmptyGrid(width: number, height: number): GridCellConfig[][] {
     return [...Array(height).keys()].map(() => buildEmptyRow(width));
@@ -124,7 +122,7 @@ export type PreventTriggerPredicate = (cell: CellConfig) => boolean;
 
 
 function isPredicate(value: any): value is PreventTriggerPredicate {
-    return isFunction(value);
+    return typeof value === 'function';
 }
 
 export function groupCellsInStraightLine(a: CellConfig, b: CellConfig, preventGroupTrigger?: boolean | PreventTriggerPredicate): CellConfig[] {
@@ -391,6 +389,10 @@ export function padDigitsWithContent<T extends Digit>(digits: T[], desiredWidth:
     });
 
     return direction === 'Left' ? [...newEmptyCells, ...cells] : [...cells, ...newEmptyCells];
+}
+
+function isString(value: unknown): value is string {
+    return typeof value === 'string';
 }
 
 export function findGroupTriggeredByCell(cell: CellConfig | GridCellEvent, groups: CellGroup[]): CellGroup | undefined {
