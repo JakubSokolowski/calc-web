@@ -1,3 +1,5 @@
+export type { OperationParams, GridResult } from './lib/core/calculate';
+export { calculate } from './lib/core/calculate';
 export * from './lib/positional-calculator-view/positional-calculator-view';
 
 export { OperationRenderer} from './lib/operation-renderer/operation-renderer';
