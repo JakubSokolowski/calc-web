@@ -5,7 +5,7 @@ import {
     convertUsingAssociatedBases,
     fromString,
     getComplement,
-    isValidString
+    isValidRepresentationStr
 } from '@calc/calc-arithmetic';
 import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
@@ -95,7 +95,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if (!isValidString(valueStr, inputBase)) {
+        if (!isValidRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
                 { base: inputBase }

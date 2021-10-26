@@ -1,5 +1,5 @@
 exports[`Base converter conversion > should convert to another base when number has no fraction part #0`] = `
-<div data-test="bconv-result">
+<div data-test="bconv-result-1111011">
   <div>
     <div class="ConversionResult-equation">
       <div class="css-18uwm9r">

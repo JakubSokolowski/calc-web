@@ -6,7 +6,7 @@ import {
     decimalIntegerToArbitrary,
     digitsToStr,
     isFloatingPointStr,
-    isValidString,
+    isValidRepresentationStr,
     serializeRepresentationStr,
     splitToDigitsList,
 } from '../helpers/conversion-helpers';
@@ -220,7 +220,7 @@ export class StandardBaseConverter implements BaseConverter {
             valueStr = complementStrToBaseStr(valueStr, inputBase);
             inputSourceType = PositionalSourceType.ComplementStr;
         } else {
-            if (!isValidString(valueStr, inputBase)) {
+            if (!isValidRepresentationStr(valueStr, inputBase)) {
                 throw new Error(
                     `The string ${valueStr} does not match the input base ${inputBase}`
                 );
@@ -229,8 +229,8 @@ export class StandardBaseConverter implements BaseConverter {
 
         const conversion = new Conversion();
         const decimalValue = StandardBaseConverter.getDecimalValue(valueStr, inputBase);
+        const complement = getComplement(valueStr, inputBase);
 
-        const complement = getComplement(decimalValue.toString(), resultBase);
         // Split into two str arrays - integral part digits arr and
         // fractional part digits arr
         const digits = splitToDigitsList(decimalValue, 10);
@@ -261,7 +261,7 @@ export class StandardBaseConverter implements BaseConverter {
             valueStr = complementStrToBaseStr(valueStr, inputBase);
             inputType = PositionalSourceType.ComplementStr;
         } else {
-            if (!isValidString(valueStr, inputBase)) {
+            if (!isValidRepresentationStr(valueStr, inputBase)) {
                 throw new Error(
                     `The string ${valueStr} does not match the input base ${inputBase}`
                 );

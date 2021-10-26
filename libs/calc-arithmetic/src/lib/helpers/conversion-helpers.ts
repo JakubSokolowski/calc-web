@@ -72,7 +72,7 @@ export function removeZeroDigits(digits: string[]): string[] {
  * @param str number string
  * @param base base of positional system
  */
-export function isValidString(str: string, base: number): boolean {
+export function isValidRepresentationStr(str: string, base: number): boolean {
     if (base <= 36) {
         const re = new RegExp(getRepresentationRegexPattern(base));
         return re.test(str);
@@ -96,7 +96,7 @@ export function arbitraryIntegralToDecimal(
     repStr: string,
     base: number
 ): BigNumber {
-    if (isValidString(repStr, base)) {
+    if (isValidRepresentationStr(repStr, base)) {
         let rep = repStr.trim();
         let result = new BigNumber(0);
         let multiplier = 1;

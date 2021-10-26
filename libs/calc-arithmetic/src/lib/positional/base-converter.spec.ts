@@ -100,13 +100,13 @@ describe('base-converter', () => {
         it('converts positive base 2 integer to base 10', () => {
             // given
             const input = '11001';
-            const inputbase = 2;
-            const outputbase = 10;
+            const inputBase = 2;
+            const outputBase = 10;
             const expected = new BigNumber(25);
             const expectedComplement = '(0)25';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -117,13 +117,13 @@ describe('base-converter', () => {
         it('converts negative base 2 integer to base 10', () => {
             // given
             const input = '-11001';
-            const inputbase = 2;
-            const outputbase = 10;
+            const inputBase = 2;
+            const outputBase = 10;
             const expected = new BigNumber(-25);
             const expectedComplement = '(9)75';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -134,13 +134,13 @@ describe('base-converter', () => {
         it('converts positive floating base 2 to base 10', () => {
             // given
             const input = '11001.1';
-            const inputbase = 2;
-            const outputbase = 10;
+            const inputBase = 2;
+            const outputBase = 10;
             const expected = new BigNumber(25.5);
             const expectedComplement = '(0)25.5';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -151,13 +151,13 @@ describe('base-converter', () => {
         it('converts negative floating base 2 to base 10', () => {
             // given
             const input = '-11001.1';
-            const inputbase = 2;
-            const outputbase = 10;
+            const inputBase = 2;
+            const outputBase = 10;
             const expected = new BigNumber(-25.5);
             const expectedComplement = '(9)74.5';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -168,13 +168,13 @@ describe('base-converter', () => {
         it('converts positive floating base 16 to base 10', () => {
             // given
             const input = 'FF.8';
-            const inputbase = 16;
-            const outputbase = 10;
+            const inputBase = 16;
+            const outputBase = 10;
             const expected = new BigNumber(255.5);
             const expectedComplement = '(0)255.5';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -184,13 +184,13 @@ describe('base-converter', () => {
         it('converts negative floating base 16 to base 10', () => {
             // given
             const input = '-FF.8';
-            const inputbase = 16;
-            const outputbase = 10;
+            const inputBase = 16;
+            const outputBase = 10;
             const expected = new BigNumber(-255.5);
             const expectedComplement = '(9)744.5';
 
             // when
-            const result = BaseConverter.fromString(input, inputbase, outputbase)
+            const result = BaseConverter.fromString(input, inputBase, outputBase)
                 .result;
 
             // then
@@ -200,13 +200,13 @@ describe('base-converter', () => {
         it('converts positive floating base 2 to base 8', () => {
             // given
             const input = '11001.1';
-            const inputbase = 2;
-            const outputbase = 8;
+            const inputBase = 2;
+            const outputBase = 8;
             const expected = new BigNumber(25.5);
             const expectedValueStr = '31.4';
 
             // when
-            const conv = BaseConverter.fromString(input, inputbase, outputbase);
+            const conv = BaseConverter.fromString(input, inputBase, outputBase);
             const result = conv.result;
 
             // then
@@ -218,12 +218,12 @@ describe('base-converter', () => {
         it('throws error if repStr does match input base', () => {
             // given
             const input = '-FF8.923';
-            const inputbase = 10;
-            const outputbase = 16;
+            const inputBase = 10;
+            const outputBase = 16;
 
             // then
             expect(() => {
-                BaseConverter.fromString(input, inputbase, outputbase);
+                BaseConverter.fromString(input, inputBase, outputBase);
             }).toThrow();
         });
 
@@ -232,13 +232,13 @@ describe('base-converter', () => {
         describe('fromString conversion', () => {
             // given
             const input = '24';
-            const inputbase = 10;
-            const outputbase = 2;
+            const inputBase = 10;
+            const outputBase = 2;
             const stagesLength = 2;
 
             it('should generate 2 conversion stages for conversions', () => {
                 // when
-                const result = BaseConverter.fromString(input, inputbase, outputbase);
+                const result = BaseConverter.fromString(input, inputBase, outputBase);
 
                 // then
                 expect(result.stages.length).toEqual(stagesLength);
@@ -246,27 +246,27 @@ describe('base-converter', () => {
 
             it('should generate first conversion stage from string to base 10 number', () => {
                 // when
-                const result = BaseConverter.fromString(input, inputbase, outputbase);
+                const result = BaseConverter.fromString(input, inputBase, outputBase);
                 const firstStage = result.getFirstStage();
-                const expectedInput = [input, inputbase];
+                const expectedInput = [input, inputBase];
 
                 // then
                 expect(firstStage.input).toEqual(expectedInput);
                 expect(firstStage.result.valueInBase).toEqual(input);
-                expect(firstStage.result.base()).toEqual(inputbase);
+                expect(firstStage.result.base()).toEqual(inputBase);
             });
 
             it('should generate second conversion stage base 10 number to target base', () => {
                 // when
-                const result = BaseConverter.fromString(input, inputbase, outputbase);
+                const result = BaseConverter.fromString(input, inputBase, outputBase);
                 const secondStage = result.getLastStage();
-                const expectedInput = [input, inputbase];
+                const expectedInput = [input, inputBase];
                 const valueInBase = '11000';
 
                 // then
                 expect(secondStage.input).toEqual(expectedInput);
                 expect(secondStage.result.valueInBase).toEqual(valueInBase);
-                expect(secondStage.result.base()).toEqual(outputbase);
+                expect(secondStage.result.base()).toEqual(outputBase);
             });
         });
 
@@ -308,12 +308,12 @@ describe('base-converter', () => {
         it('converts positive base 2 integer', () => {
             // given
             const input = '11001';
-            const inputbase = 2;
+            const inputBase = 2;
             const expectedValue = new BigNumber(25);
             const expectedComplement = '(0)11001';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -325,12 +325,12 @@ describe('base-converter', () => {
         it('converts negative base 2 integer', () => {
             // given
             const input = '-11001';
-            const inputbase = 2;
+            const inputBase = 2;
             const expectedValue = new BigNumber(-25);
             const expectedComplement = '(1)00111';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -342,12 +342,12 @@ describe('base-converter', () => {
         it('converts positive floating base 2', () => {
             // given
             const input = '11001.1';
-            const inputbase = 2;
+            const inputBase = 2;
             const expectedValue = new BigNumber(25.5);
             const expectedComplement = '(0)11001.1';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -359,12 +359,12 @@ describe('base-converter', () => {
         it('converts negative floating base 2', () => {
             // given
             const input = '-11001.1';
-            const inputbase = 2;
+            const inputBase = 2;
             const expectedValue = new BigNumber(-25.5);
             const expectedComplement = '(1)00110.1';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -376,12 +376,12 @@ describe('base-converter', () => {
         it('converts positive floating base 16', () => {
             // given
             const input = 'FF.8';
-            const inputbase = 16;
+            const inputBase = 16;
             const expectedValue = new BigNumber(255.5);
             const expectedComplement = '(0)FF.8';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -393,12 +393,12 @@ describe('base-converter', () => {
         it('converts negative floating base 16', () => {
             // given
             const input = '-FF.8';
-            const inputbase = 16;
+            const inputBase = 16;
             const expectedValue = new BigNumber(-255.5);
             const expectedComplement = '(F)00.8';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -410,12 +410,12 @@ describe('base-converter', () => {
         it('converts positive floating base 2', () => {
             // given
             const input = '11001.1';
-            const inputbase = 2;
+            const inputBase = 2;
             const expectedValue = new BigNumber(25.5);
             const expectedComplement = '(0)11001.1';
 
             // when
-            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
             const result = conv.result;
 
             // then
@@ -438,11 +438,11 @@ describe('base-converter', () => {
         it('converts positive base64', () => {
             // given
             const input = '12 45 23';
-            const inputbase = 64;
+            const inputBase = 64;
             const expectedValue = new BigNumber(52055);
 
             // when
-            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
             const result = conv.result;
 
             // then
@@ -453,11 +453,11 @@ describe('base-converter', () => {
         it('converts positive base64 with fraction part', () => {
             // given
             const input = '01.23';
-            const inputbase = 64;
+            const inputBase = 64;
             const expectedValue = new BigNumber(1.359375);
 
             // when
-            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
             const result = conv.result;
 
             // then
@@ -468,11 +468,11 @@ describe('base-converter', () => {
         it('converts positive base64 with fraction part with additional spaces', () => {
             // given
             const input = '01. 23';
-            const inputbase = 64;
+            const inputBase = 64;
             const expectedValue = new BigNumber(1.359375);
 
             // when
-            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
             const result = conv.result;
 
             // then
@@ -484,11 +484,11 @@ describe('base-converter', () => {
         it('converts negative base64', () => {
             // given
             const input = '-32 18.19';
-            const inputbase = 64;
+            const inputBase = 64;
             const expectedValue = new BigNumber(-2066.296875);
 
             // when
-            const conv = BaseConverter.fromStringDirect(input, inputbase);
+            const conv = BaseConverter.fromStringDirect(input, inputBase);
             const result = conv.result;
 
             // then
@@ -499,13 +499,13 @@ describe('base-converter', () => {
         it('converts positive complement string', () => {
             // given
             const input = '(0)FF.8';
-            const inputbase = 16;
+            const inputBase = 16;
             const expectedValue = new BigNumber(255.5);
             const expectedComplement = '(0)FF.8';
             const expectedValueInBase = 'FF.8';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -517,13 +517,13 @@ describe('base-converter', () => {
         it('converts negative complement string', () => {
             // given
             const input = '(9)12.8';
-            const inputbase = 10;
+            const inputBase = 10;
             const expectedValue = new BigNumber(-87.2);
             const expectedComplement = '(9)12.8';
             const expectedValueInBase = '-87.2';
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase)
+            const result = BaseConverter.fromStringDirect(input, inputBase)
                 .result;
 
             // then
@@ -536,10 +536,10 @@ describe('base-converter', () => {
         it('should set sourceType to ComplementStr when input is complement str', () => {
             // given
             const input = '(F)FF.8';
-            const inputbase = 16;
+            const inputBase = 16;
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase).result;
+            const result = BaseConverter.fromStringDirect(input, inputBase).result;
 
             // then
             expect(result.sourceType).toEqual(PositionalSourceType.ComplementStr);
@@ -548,10 +548,10 @@ describe('base-converter', () => {
         it('should set sourceType to RepresentationStr when input is representation str', () => {
             // given
             const input = 'FF.8';
-            const inputbase = 16;
+            const inputBase = 16;
 
             // when
-            const result = BaseConverter.fromStringDirect(input, inputbase).result;
+            const result = BaseConverter.fromStringDirect(input, inputBase).result;
 
             // then
             expect(result.sourceType).toEqual(PositionalSourceType.RepresentationStr);
@@ -662,27 +662,42 @@ describe('base-converter', () => {
         it('should convert string with extra whitespace', () => {
             // given
             const input = '12  13  45  ';
-            const inputbase = 64;
-            const outputbase = 10;
+            const inputBase = 64;
+            const outputBase = 10;
             const expected = new BigNumber(50029);
 
             // when
-            const result = fromString(input, inputbase, outputbase)
+            const result = fromString(input, inputBase, outputBase)
                 .result;
 
             // then
             expect(result.valueInBase).toEqual(expected.toString());
         });
 
+        it('should convert negative decimal string', () => {
+            // given
+            const input = '-280';
+            const inputBase = 10;
+            const outputBase = 2;
+            const expected = "-100011000";
+
+            // when
+            const result = fromString(input, inputBase, outputBase)
+                .result;
+
+            // then
+            expect(result.valueInBase).toEqual(expected);
+        });
+
         it('should convert b64 number with fractional part', () => {
             // given
             const input = '12 13.45';
-            const inputbase = 64;
-            const outputbase = 10;
+            const inputBase = 64;
+            const outputBase = 10;
             const expected = new BigNumber(781.703125);
 
             // when
-            const result = fromString(input, inputbase, outputbase)
+            const result = fromString(input, inputBase, outputBase)
                 .result;
 
             // then

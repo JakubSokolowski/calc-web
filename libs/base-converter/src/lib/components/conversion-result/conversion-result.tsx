@@ -23,7 +23,7 @@ const Root = styled('div')(({ theme }) => ({
 export const ConversionResult: FC<P> = ({conversion}) => {
     return (
         <Root>
-            <div data-test="bconv-result">
+            <div data-test={`bconv-result-${conversion.result.toString()}`}>
                 {
                     conversion.type === ConversionType.DIRECT ?
                         <div className={classes.equation}>

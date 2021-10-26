@@ -55,7 +55,7 @@ export {
 } from './floating/float-converter';
 
 export {
-    isValidString,
+    isValidRepresentationStr,
     digitsToStr,
     splitToDigitsList
 } from './helpers/conversion-helpers';
