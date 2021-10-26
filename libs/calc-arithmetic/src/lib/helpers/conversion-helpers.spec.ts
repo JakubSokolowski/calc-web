@@ -7,7 +7,7 @@ import {
     digitsToStr,
     getRepresentationRegexPattern,
     isFloatingPointStr,
-    isValidString,
+    isValidRepresentationStr,
     removeZeroDigits,
     representationStrToStrArray,
     serializeRepresentationStr,
@@ -152,7 +152,7 @@ describe('conversion-helpers', () => {
             const base = 16;
 
             // when
-            expect(isValidString(str, base)).toBeTruthy();
+            expect(isValidRepresentationStr(str, base)).toBeTruthy();
         });
 
         it('returns false if string is invalid for base', () => {
@@ -161,7 +161,7 @@ describe('conversion-helpers', () => {
             const base = 10;
 
             // when
-            expect(isValidString(str, base)).toBeFalsy();
+            expect(isValidRepresentationStr(str, base)).toBeFalsy();
         });
 
         it('returns false if string does not match the base', () => {
@@ -170,7 +170,7 @@ describe('conversion-helpers', () => {
             const base = 15;
 
             // when
-            expect(isValidString(str, base)).toBeFalsy();
+            expect(isValidRepresentationStr(str, base)).toBeFalsy();
         });
 
         it('returns true if string matches the base for base > 36', () => {
@@ -179,7 +179,7 @@ describe('conversion-helpers', () => {
             const base = 64;
 
             // when
-            expect(isValidString(str, base)).toBeTruthy();
+            expect(isValidRepresentationStr(str, base)).toBeTruthy();
         });
 
         it('returns false if string does not match the base for base > 36', () => {
@@ -188,7 +188,7 @@ describe('conversion-helpers', () => {
             const base = 64;
 
             // when
-            expect(isValidString(str, base)).toBeTruthy();
+            expect(isValidRepresentationStr(str, base)).toBeTruthy();
         });
 
         it('returns false if the string has multiple signs', () => {
@@ -197,7 +197,7 @@ describe('conversion-helpers', () => {
             const base = 10;
 
             // when
-            expect(isValidString(str, base)).toBeFalsy();
+            expect(isValidRepresentationStr(str, base)).toBeFalsy();
         });
 
         it('returns false if the string has multiple delimiters', () => {
@@ -206,7 +206,7 @@ describe('conversion-helpers', () => {
             const base = 10;
 
             // when
-            expect(isValidString(str, base)).toBeFalsy();
+            expect(isValidRepresentationStr(str, base)).toBeFalsy();
         });
     });
 

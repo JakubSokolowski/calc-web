@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from 'react';
-import { FloatConverter, isValidString } from '@calc/calc-arithmetic';
+import { FloatConverter, isValidRepresentationStr } from '@calc/calc-arithmetic';
 import { PartType, RepresentationPart } from './representation-part/representation-part';
 import { InputType, InputWithCopy } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
@@ -38,7 +38,7 @@ export const FloatConverterComponent: FC = () => {
     const handleChange = (event) => {
         const value = event.target.value;
         setRawValue(value);
-        if (value && isValidString(value, 10)) {
+        if (value && isValidRepresentationStr(value, 10)) {
             try {
                 const intValue = parseFloat(value);
                 const num = FloatConverter.ToSingle(intValue);

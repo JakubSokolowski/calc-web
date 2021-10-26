@@ -13,6 +13,5 @@ export const getComplementInput = () => cy.get('[data-test=bconv-complement] > .
 
 export const getConversionToDecimal = () => cy.getByDataTest('conversion-to-decimal');
 export const getResultEquation = () => cy.getByDataTest('result-equation');
-export const getConversionResult = () => cy.getByDataTest('bconv-result');
+export const getConversionResult = (resultStr: string) => cy.getByDataTest(`bconv-result-${resultStr}`);
 export const getIntegralConversionGrid = () => cy.get('#integral-conversion-grid');
-

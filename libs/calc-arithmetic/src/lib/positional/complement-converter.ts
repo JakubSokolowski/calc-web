@@ -1,4 +1,4 @@
-import { digitsToStr, isValidString, splitToDigitsList } from '../helpers/conversion-helpers';
+import { digitsToStr, isValidRepresentationStr, splitToDigitsList } from '../helpers/conversion-helpers';
 import { BaseDigits } from './base-digits';
 import { Digit } from '../models';
 import { NumberComplement } from './number-complement';
@@ -56,7 +56,7 @@ export function isValidComplementStr(str: string, base: number): boolean {
             ? noSignComplementStr.substring(1)
             : noSignComplementStr;
 
-        return isValidString(strToCheck, base);
+        return isValidRepresentationStr(strToCheck, base);
     } else {
         return false;
     }
@@ -70,7 +70,7 @@ export function isValidComplementStr(str: string, base: number): boolean {
  * @param base
  */
 export function isValidComplementOrRepresentationStr(str: string, base: number): boolean {
-    return isValidComplementStr(str, base) || isValidString(str, base);
+    return isValidComplementStr(str, base) || isValidRepresentationStr(str, base);
 }
 
 

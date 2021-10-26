@@ -1,31 +1,20 @@
-import React, { FC, useCallback, useState } from 'react';
-import {
-    BaseDigits,
-    Conversion,
-    fromString,
-    getComplement,
-    isValidString
-} from '@calc/calc-arithmetic';
+import React, { FC, useCallback } from 'react';
+import { BaseDigits, Conversion, fromString, getComplement, isValidRepresentationStr } from '@calc/calc-arithmetic';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
-import { InputWithCopy } from '@calc/common-ui';
+import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
 import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, IconButton, styled, TextField, Tooltip } from '@mui/material';
-import { clean } from '@calc/utils';
+import { clean, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
-import { FormErrors } from '@calc/common-ui';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
+import { BaseConverterParams } from './bconv-params';
+import { toBconvUrlSearchParams, useUrlBaseConverterParams } from './bconv-url-params';
+import { useHistory } from 'react-router-dom';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
-}
-
-interface FormValues {
-    inputStr: string;
-    inputBase: number;
-    outputBase: number;
-    precision: number;
 }
 
 const PREFIX = 'BaseConverter';
@@ -97,19 +86,25 @@ const Root = styled('div')(({ theme }) => ({
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
+    const bconvUrlParams = useUrlBaseConverterParams();
+    const history = useHistory();
     const { t } = useTranslation();
 
-    const initialValues: FormValues = {
+    const initialValues: BaseConverterParams = {
         inputStr: '',
         inputBase: 10,
         outputBase: 2,
         precision: 10
     };
 
-    const onSubmit = (values: FormValues) => {
+    const onSubmit = (values: BaseConverterParams) => {
         const { inputStr, inputBase, outputBase, precision } = values;
         const conversion = fromString(inputStr, inputBase, outputBase, precision);
         onConversionChange(conversion, precision);
+
+        history.replace({
+            search: toBconvUrlSearchParams(values)
+        });
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -122,7 +117,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if (!isValidString(valueStr, inputBase)) {
+        if (!isValidRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
                 { base: inputBase }
@@ -130,7 +125,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         }
     };
 
-    const validate = (values: FormValues) => {
+    const validate = (values: BaseConverterParams) => {
         const inputBase = validateBase(values.inputBase);
         const outputBase = validateBase(values.outputBase);
 
@@ -138,7 +133,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
             ? undefined
             : validateValueStr(values.inputStr, values.inputBase);
 
-        const errors: FormErrors<FormValues> = {
+        const errors: FormErrors<BaseConverterParams> = {
             inputBase,
             outputBase,
             inputStr
@@ -153,46 +148,59 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         validate
     });
 
-    const [inputValue, setInputValue] = useState(initialValues.inputStr);
-    const [inputBase, setInputBase] = useState(initialValues.inputBase);
 
     const swap = async () => {
-        const { inputBase, outputBase } = form.values;
-        form.setFieldValue('inputBase', outputBase);
-        form.setFieldValue('outputBase', inputBase);
+        const { inputBase, outputBase, ...rest } = form.values;
+        const swappedValues = {inputBase: outputBase, outputBase: inputBase, ...rest};
+        await form.setValues(swappedValues);
         await form.validateForm();
     };
 
+    const loadOptionsFromUrl = () => {
+        if(bconvUrlParams) {
+            onSubmit(bconvUrlParams);
+            setTimeout(async () => {
+                await form.setValues(bconvUrlParams);
+            });
+        }
+    };
+
+    useMountEffect(loadOptionsFromUrl);
+
     const getDecimal = useCallback(() => {
-        try {
-            if (inputBase === 10) return inputValue;
+        const {inputStr, inputBase} = form.values;
+        if(!inputStr) return '0.0';
+        if(!BaseDigits.isValidBase(inputBase)) return '0.0';
+
+        if(isValidRepresentationStr(inputStr, inputBase)) {
+            if (inputBase === 10) return inputStr;
             return fromString(
-                inputValue,
+                inputStr,
                 inputBase,
                 10
             ).result.decimalValue.toString();
-        } catch (e) {
-            console.log(e);
+        } else {
             return '0.0';
         }
-    }, [inputBase, inputValue]);
+    }, [form.values]);
 
     const complement = useCallback(() => {
-        try {
-            return getComplement(inputValue, inputBase).toString();
-        } catch (e) {
-            console.log(e);
+        const {inputStr, inputBase} = form.values;
+        if(!inputStr) return '0.0';
+        if(!BaseDigits.isValidBase(inputBase)) return '0.0';
+
+        if(isValidRepresentationStr(inputStr, inputBase)) {
+            return getComplement(inputStr, inputBase).toString();
+        } else {
             return '0.0';
         }
-    }, [inputBase, inputValue]);
+    }, [form.values]);
 
     const handleInputStrChange = e => {
-        setInputValue(e.target.value);
         form.handleChange(e);
     };
 
     const handleInputBaseChange = e => {
-        setInputBase(e.target.value);
         form.handleChange(e)
     };
 

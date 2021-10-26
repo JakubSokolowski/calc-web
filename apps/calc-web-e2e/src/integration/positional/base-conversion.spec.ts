@@ -56,7 +56,7 @@ describe('Base converter error labels', () => {
         const labelId = '#inputStr-helper-text';
 
         getInputBaseInput().clear().type(`${base}`);
-        getInputStrInput().clear().type('FFA');
+        getInputStrInput().type('FFA');
 
         cy.get(labelId).contains(errorText);
     });
@@ -109,9 +109,28 @@ describe('Base converter conversion', () => {
         const inputStr = '123';
         const inputBase = 10;
         const outputBase = 2;
+        const expected = '1111011';
 
         cy.baseConverterInput(inputStr, inputBase, outputBase);
-        getConversionResult().toMatchSnapshot();
+        getConversionResult(expected).toMatchSnapshot();
         getIntegralConversionGrid().toMatchSnapshot({});
     });
+
+    it('should update url search params with operation data after submit', () => {
+        const inputStr = '123';
+        const inputBase = 10;
+        const outputBase = 2;
+        cy.baseConverterInput(inputStr, inputBase, outputBase);
+
+        const expectedParams = '?input=123&inputBase=10&outputBase=2&precision=10';
+        cy.location('href').should('include', expectedParams);
+    });
+
+    it('should run calculation from url params, if redirected by url', () => {
+        const params = '?input=123&inputBase=10&outputBase=2&precision=10';
+        cy.visit(`#/tools/positional/base-converter${params}`);
+        cy.reload();
+        const expected = '1111011';
+        getConversionResult(expected);
+    })
 });
