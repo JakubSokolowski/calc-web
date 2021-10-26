@@ -1,5 +1,6 @@
 import { mount } from 'enzyme';
 import React from 'react';
+import { HashRouter } from 'react-router-dom';
 import { HomeView } from './home-view';
 
 describe('HomeView', () => {
@@ -7,7 +8,9 @@ describe('HomeView', () => {
 
     beforeEach(() => {
         container = mount(
-            <HomeView/>
+            <HashRouter>
+                <HomeView/>
+            </HashRouter>
         );
     });
 

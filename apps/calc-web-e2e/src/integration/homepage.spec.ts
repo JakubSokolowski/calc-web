@@ -15,4 +15,16 @@ describe('home-page', () => {
         // should display link for bug reporting
         cy.getByDataTest('bug-report').contains('Report a bug');
     });
+
+    it('should navigate to tool after clicking tool nav tile', () => {
+        // to positional calculator
+        cy.getByDataTest('positional-calculator-nav').click();
+        cy.location('href').should('include', 'positional-calculator');
+        cy.visit('/');
+
+        // to base converter
+        cy.getByDataTest('base-converter-nav').click();
+        cy.location('href').should('include', 'base-converter');
+        cy.visit('/');
+    });
 });
