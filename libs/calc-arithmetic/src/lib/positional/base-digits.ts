@@ -15,6 +15,7 @@ export class BaseDigits {
      * @param base
      */
     public static isValidBase(base: number): boolean {
+        if(!Number.isInteger(base)) return false;
         return base >= this.MIN_BASE && base <= this.MAX_BASE;
     }
 

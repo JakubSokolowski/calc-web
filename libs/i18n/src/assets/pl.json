@@ -23,7 +23,7 @@
         "subtitle": "Konweresja między podstawami ze szczegółami",
         "result": "Wynik konwersji",
         "details": "Szczegóły konwersji",
-        "wrongBase": "Podstawa musi być pomiędzy {{minBase}} i {{maxBase}}",
+        "wrongBase": "Podstawa musi być liczbą całkowitą pomiędzy {{minBase}} i {{maxBase}}",
         "wrongRepresentationStr": "Reprezentacja zawiera niepoprawne cyfry dla podstawy {{base}}",
         "inputNumber": "Liczba wejściowa",
         "inputDecimalValue": "Wartość dziesiętna wejścia",

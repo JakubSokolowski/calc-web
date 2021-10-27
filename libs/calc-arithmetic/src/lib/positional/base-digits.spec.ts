@@ -110,6 +110,56 @@ describe('base-digits', () => {
         });
     });
 
+    describe('#isValidBase', () => {
+        it('returns false when number is not a integer', () => {
+            // given
+            const base = 12.5;
+
+            // when
+            const result = BaseDigits.isValidBase(base);
+
+            // then
+            const expected = false;
+            expect(result).toEqual(expected);
+        });
+
+        it('returns false when number is smaller than MIN_BASE', () => {
+            // given
+            const base = 1;
+
+            // when
+            const result = BaseDigits.isValidBase(base);
+
+            // then
+            const expected = false;
+            expect(result).toEqual(expected);
+        });
+
+        it('returns false when number is greater than MAX_BASE', () => {
+            // given
+            const base = 100;
+
+            // when
+            const result = BaseDigits.isValidBase(base);
+
+            // then
+            const expected = false;
+            expect(result).toEqual(expected);
+        });
+
+        it('returns false when number is an integer between MIN_BASE and MAX_BASE inclusive', () => {
+            // given
+            const base = 16;
+
+            // when
+            const result = BaseDigits.isValidBase(base);
+
+            // then
+            const expected = true;
+            expect(result).toEqual(expected);
+        });
+    });
+
     describe('#getAllPossibleBasesForAssociateConversion', () => {
         it('should return all possible options for target base, that are larger than input base', () => {
             // given
