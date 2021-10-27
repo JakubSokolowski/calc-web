@@ -22,7 +22,7 @@ const PREFIX = 'BaseConverter';
 const classes = {
     row: `${PREFIX}-row`,
     inputBase: `${PREFIX}-inputBase`,
-    iconButton: `${PREFIX}-iconButton`,
+    swapButton: `${PREFIX}-swapButton`,
     outputBase: `${PREFIX}-outputBase`,
     horizontalSpacer: `${PREFIX}-horizontalSpacer`,
     precision: `${PREFIX}-precision`,
@@ -55,8 +55,11 @@ const Root = styled('div')(({ theme }) => ({
     [`& .${classes.precision}`]: {
         width: '22%'
     },
-    [`& .${classes.iconButton}`]: {
-        width: '40px'
+    [`& .${classes.swapButton}`]: {
+        padding: theme.spacing(1),
+        alignSelf: 'flex-start',
+        marginRight: theme.spacing(1),
+        marginLeft: theme.spacing(1)
     },
     [`& .${classes.horizontalSpacer}`]: {
         [theme.breakpoints.down('lg')]: {
@@ -78,7 +81,7 @@ const Root = styled('div')(({ theme }) => ({
         }
     },
     [`& .${classes.convertButton}`]: {
-        maxHeight: '40px'
+        maxHeight: '40px',
     },
 }));
 
@@ -224,7 +227,12 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         value={form.values.inputBase}
                     />
                     <Tooltip title={t('baseConverter.swapBases')}>
-                        <IconButton className={classes.iconButton} size={'small'} onClick={swap}>
+                        <IconButton
+                            data-test="bconv-swap-bases"
+                            className={classes.swapButton}
+                            size={'small'}
+                            onClick={swap}
+                        >
                             <SwapHorizIcon/>
                         </IconButton>
                     </Tooltip>
@@ -256,13 +264,14 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         value={form.values.precision}
                     />
                     <div className={classes.growHorizontalSpacer}/>
-                    <Button data-test="bconv-convert"
-                            size={'small'}
-                            color={'secondary'}
-                            variant={'contained'}
-                            type={'submit'}
-                            className={classes.convertButton}
-                            disabled={!form.isValid}
+                    <Button
+                        data-test="bconv-convert"
+                        size={'small'}
+                        color={'info'}
+                        variant={'contained'}
+                        type={'submit'}
+                        className={classes.convertButton}
+                        disabled={!form.isValid}
                     >
                         {t('baseConverter.convert')}
                     </Button>

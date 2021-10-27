@@ -1,5 +1,5 @@
 import {
-    getBconvConvertButton,
+    getBconvConvertButton, getBconvSwapBasesButton,
     getComplementInput, getConversionResult,
     getDecimalValueInput,
     getInputBaseInput,
@@ -59,6 +59,32 @@ describe('Base converter error labels', () => {
         getInputStrInput().type('FFA');
 
         cy.get(labelId).contains(errorText);
+    });
+
+    // BUG #180
+    it('should display proper validation errors after bases are swapped', () => {
+        const errorText = 'Base must be between 2 and 99';
+        const inputBaseErrorLabelId = '#inputBase-helper-text';
+        const outputBaseErrorLabelId = '#outputBase-helper-text';
+
+        // Enter invalid inputBase and valid output base
+        getInputBaseInput().clear().type('123');
+        getOutputBaseInput().clear().type('2');
+        cy.get(inputBaseErrorLabelId).contains(errorText);
+        cy.get(outputBaseErrorLabelId).should('not.exist');
+        getBconvConvertButton().should('be.disabled');
+
+        // Swap bases
+        getBconvSwapBasesButton().click();
+
+        // Inputs should be swapped
+        getInputBaseInput().should('have.value', '2');
+        getOutputBaseInput().should('have.value', '123');
+
+        // Error labels should be swapped
+        cy.get(outputBaseErrorLabelId).contains(errorText);
+        cy.get(inputBaseErrorLabelId).should('not.exist');
+        getBconvConvertButton().should('be.disabled');
     });
 });
 

@@ -238,7 +238,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         {options}
                     </TextField>
                     <div className={classes.horizontalSpacer}/>
-                    <Button color={'secondary'} variant={'contained'} type={'submit'} size={'small'}>
+                    <Button color={'info'} variant={'contained'} type={'submit'} size={'small'}>
                         {t('baseConverter.convert')}
                     </Button>
                 </div>

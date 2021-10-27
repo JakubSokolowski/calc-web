@@ -24,7 +24,7 @@
         "result": "Wynik konwersji",
         "details": "Szczegóły konwersji",
         "wrongBase": "Podstawa musi być pomiędzy {{minBase}} i {{maxBase}}",
-        "wrongRepresentationStr": "Reprezentacja zawiera niepoprawne cyfry dla bazy {{base}}",
+        "wrongRepresentationStr": "Reprezentacja zawiera niepoprawne cyfry dla podstawy {{base}}",
         "inputNumber": "Liczba wejściowa",
         "inputDecimalValue": "Wartość dziesiętna wejścia",
         "inputComplement": "Uzupełnienie wejścia",
