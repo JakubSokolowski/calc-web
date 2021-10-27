@@ -216,8 +216,15 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     <TextField
                         data-test="bconv-input-base"
                         className={classes.inputBase}
+                        type={'number'}
                         variant={'outlined'}
                         size={'small'}
+                        InputProps={{
+                            inputProps: {
+                                min: BaseDigits.MIN_BASE,
+                                max: BaseDigits.MAX_BASE
+                            }
+                        }}
                         name={'inputBase'}
                         id={'inputBase'}
                         label={t('baseConverter.inputBase')}
@@ -241,8 +248,15 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                         className={classes.outputBase}
                         size={'small'}
                         variant={'outlined'}
+                        type={'number'}
                         name={'outputBase'}
                         id={'outputBase'}
+                        InputProps={{
+                            inputProps: {
+                                min: BaseDigits.MIN_BASE,
+                                max: BaseDigits.MAX_BASE
+                            }
+                        }}
                         label={t('baseConverter.outputBase')}
                         error={!!form.errors.outputBase}
                         helperText={form.errors.outputBase}

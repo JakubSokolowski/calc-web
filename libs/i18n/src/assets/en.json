@@ -23,7 +23,7 @@
         "subtitle": "Convert between different bases with step-by-step results",
         "result": "Conversion result",
         "details": "Conversion details",
-        "wrongBase": "Base must be between {{minBase}} and {{maxBase}}",
+        "wrongBase": "Base must be an integer between {{minBase}} and {{maxBase}}",
         "wrongRepresentationStr": "Representation strings contains invalid digits for base {{base}}",
         "inputNumber": "Input number",
         "inputDecimalValue": "Input decimal value",

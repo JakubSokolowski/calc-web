@@ -20,7 +20,7 @@ describe('Base converter error labels', () => {
     });
 
     it('should display error when input base is invalid and disable convert button', () => {
-        const errorText = 'Base must be between 2 and 99';
+        const errorText = 'Base must be an integer between 2 and 99';
         const labelId = '#inputBase-helper-text';
 
         getInputBaseInput().type('1');
@@ -36,7 +36,7 @@ describe('Base converter error labels', () => {
     });
 
     it('should display error when output base is invalid and disable convert button', () => {
-        const errorText = 'Base must be between 2 and 99';
+        const errorText = 'Base must be an integer between 2 and 99';
         const labelId = '#outputBase-helper-text';
         getOutputBaseInput().clear().type('1');
         cy.get(labelId).contains(errorText);
@@ -63,7 +63,7 @@ describe('Base converter error labels', () => {
 
     // BUG #180
     it('should display proper validation errors after bases are swapped', () => {
-        const errorText = 'Base must be between 2 and 99';
+        const errorText = 'Base must be an integer between 2 and 99';
         const inputBaseErrorLabelId = '#inputBase-helper-text';
         const outputBaseErrorLabelId = '#outputBase-helper-text';
 
@@ -85,6 +85,27 @@ describe('Base converter error labels', () => {
         cy.get(outputBaseErrorLabelId).contains(errorText);
         cy.get(inputBaseErrorLabelId).should('not.exist');
         getBconvConvertButton().should('be.disabled');
+    });
+
+    // BUG #181
+    it('should display base validation error when base is not an integer', () => {
+        const errorText = 'Base must be an integer between 2 and 99';
+        const inputBaseErrorLabelId = '#inputBase-helper-text';
+        const outputBaseErrorLabelId = '#outputBase-helper-text';
+
+        // Base is a number but not a integer
+        getInputBaseInput().clear().type('10.2');
+        getOutputBaseInput().clear().type('2.4');
+        cy.get(inputBaseErrorLabelId).contains(errorText);
+        cy.get(outputBaseErrorLabelId).contains(errorText);
+    });
+
+    // BUG #181
+    it('should prevent letters being typed into input/output base inputs', () => {
+        getInputBaseInput().clear().type('ASD');
+        getInputBaseInput().should('have.value', '');
+        getOutputBaseInput().clear().type('ZXC');
+        getOutputBaseInput().should('have.value', '');
     });
 });
 
