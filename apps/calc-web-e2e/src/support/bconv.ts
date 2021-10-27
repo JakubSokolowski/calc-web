@@ -2,6 +2,7 @@ export const getInputStrInput = () => cy.get('#inputStr');
 export const getInputBaseInput = () => cy.get('#inputBase');
 export const getOutputBaseInput = () => cy.get('#outputBase');
 export const getBconvConvertButton = () => cy.getByDataTest('bconv-convert');
+export const getBconvSwapBasesButton = () => cy.getByDataTest('bconv-swap-bases');
 
 export const getShowDecimalValueSwitchOn = () => cy.getByDataTest('show-decimal-value-on');
 export const getShowDecimalValueSwitchOff = () => cy.getByDataTest('show-decimal-value-off');
