@@ -60,7 +60,7 @@ export {
     splitToDigitsList
 } from './helpers/conversion-helpers';
 
-export { leastSignificantPosition, mostSignificantPosition } from './positional/digits';
+export { leastSignificantPosition, mostSignificantPosition, trimLeadingZeros, trimExcessZeros } from './positional/digits';
 export { BaseDigits } from './positional/base-digits';
 export type { DigitMapping } from './models/digit-mapping';
 export type { AssociatedBaseConversionDetails } from './models/associated-base-conversion-details';

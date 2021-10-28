@@ -99,6 +99,15 @@ export const gridHasProperSdRow = (representation: string, sdRowEndX: number, sd
     });
 };
 
+export const gridHasProperDivisionStepDetails = (representation: string, base: number, resultRowStartX: number, resultRowStartY: number) => {
+    const stripped = representation.replace('.', '').replace('(', '').replace(')', '');
+    const asDigits = splitToDigitsList(stripped, base);
+    asDigits.forEach((d, index) => {
+        getCellByCoords(resultRowStartX + index, resultRowStartY).trigger('mouseover', {force: true})
+            .getByDataTest(`division-step-${index}-${d.representationInBase}`)
+    })
+};
+
 export const getCellByCoords = (x: number, y: number) => {
     return cy.getByDataTest(`operation-grid-${x}-${y}`);
 };
