@@ -1,7 +1,7 @@
 import { divideDefault, fromStringDirect } from '@calc/calc-arithmetic';
-import { extractDivisionResultMeta } from './division-grid';
+import { extractDivisionResultMeta } from './divison-meta';
 
-describe('division-grid', () => {
+describe('division-meta', () => {
     describe('#extractDivisionResultMeta', () => {
         it('should return proper left offset for result row with integer operands and integer result', () => {
             // given

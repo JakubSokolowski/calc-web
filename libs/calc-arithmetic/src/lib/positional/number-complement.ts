@@ -1,6 +1,7 @@
 import { PositionalRepresentation } from '../models/positional-representation';
 import { Digit } from '../models';
 import { digitsToStr } from '../helpers/conversion-helpers';
+import { trimLeadingZeros } from './digits';
 
 export class NumberComplement implements PositionalRepresentation {
     private readonly digits: Digit[];
@@ -76,5 +77,10 @@ export class NumberComplement implements PositionalRepresentation {
     toString(withExtension = true): string {
         if(!withExtension) return digitsToStr(this.digits.slice(1));
         return digitsToStr(this.digits);
+    }
+
+    toStringWithoutExcessZeros(): string {
+        const stripped = trimLeadingZeros(this.digits);
+        return digitsToStr(stripped);
     }
 }

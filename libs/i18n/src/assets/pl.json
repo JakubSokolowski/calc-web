@@ -107,7 +107,9 @@
         "extensionDigitPositive": "Wartość cyfry rozszerzenia to 0",
         "lastDigitPositive": "Najbardziej znacząca pozycja ma wartość {{value}}, dodaj",
         "lastDigitNegative": "Najbardziej znacząca pozycja ma wartość {{value}}",
-        "nothingToDo": "Nic do zrobienia"
+        "nothingToDo": "Nic do zrobienia",
+        "divisorWillFit": "Dzielnik [[divisor]] zmieści się [[numTimes]] razy w fragmencie dzielnej [[slice]]",
+        "nextDivisionResultDigit": "Kolejna cyfra wyniku to [[digit]]"
     },
     "sandbox": {
         "title": "Sandbox",

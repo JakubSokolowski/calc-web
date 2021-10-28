@@ -2,7 +2,7 @@ import React, { FC } from 'react';
 import { fromNumber, PositionalNumber } from '@calc/calc-arithmetic';
 import { DisplayBase } from '@calc/positional-ui';
 import { InlineMath } from '@calc/common-ui';
-import { formatWithLatexSpaces } from '../../functions/format-latex';
+import { formatWithLatexSpaces } from '../../functions/latex-utils';
 
 interface P {
     input: PositionalNumber;

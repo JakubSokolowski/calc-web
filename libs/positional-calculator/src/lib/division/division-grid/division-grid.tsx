@@ -1,21 +1,22 @@
 import {
-    digitsToStr,
     DivisionOperand,
     DivisionPositionResult,
-    DivisionResult, fromDigits,
+    DivisionResult,
     leastSignificantPosition
 } from '@calc/calc-arithmetic';
 import {
+    CellConfig,
     digitsToCellConfig,
-    extractResultMeta,
     GridCellConfig,
-    GridLine,
+    GridLine, groupCellsInStraightLine,
     HoverOperationGrid,
     LineDefinition,
     LineType,
-    padWithEmptyCells,
-    ResultMeta
+    padWithEmptyCells
 } from '@calc/grid';
+import { buildGroups } from './division-grid-groups';
+import { DivisionResultMeta, extractDivisionResultMeta } from './divison-meta';
+import { SubtractionRowCells, SubtractionRows } from './models';
 
 
 export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
@@ -29,15 +30,16 @@ export function buildDivisionGrid(result: DivisionResult): HoverOperationGrid {
     const values: GridCellConfig[][] = [
         resultRow,
         operationRow,
-        ...subtractionRows
+        ...subtractionRows.allCells
     ];
 
     const lines: GridLine[] = getGridLines(result);
+    const groups = buildGroups(result, subtractionRows);
 
     return {
         lines,
         values,
-        groups: []
+        groups
     };
 }
 
@@ -59,13 +61,14 @@ export function buildResultRow(result: DivisionResult, meta: DivisionResultMeta)
     );
 }
 
+
 function toCellsWithFractionSeparator(digits: DivisionOperand[], fractionPointClass = 'defaultCellWithVerticalAndHorizontalLine'): GridCellConfig[] {
     const resultLsp = leastSignificantPosition(digits);
     const digitCells = digitsToCellConfig(digits);
     const hasFractionPart = resultLsp < 0;
 
-    if(hasFractionPart) {
-        const fractionPointIndex = digitCells.length -1 - (Math.abs(resultLsp));
+    if (hasFractionPart) {
+        const fractionPointIndex = digitCells.length - 1 - (Math.abs(resultLsp));
         // Usually, separators for fraction point are defined as
         // separate vertical line in grid lines but there is an
         // an issue with line definition for lines tha start at 0
@@ -77,10 +80,10 @@ function toCellsWithFractionSeparator(digits: DivisionOperand[], fractionPointCl
         digitCells[fractionPointIndex].preset = {
             ...digitCells[fractionPointIndex].preset,
             default: fractionPointClass
-        }
+        };
     }
 
-    return digitCells
+    return digitCells;
 }
 
 function getGridLines(result: DivisionResult): GridLine[] {
@@ -114,37 +117,43 @@ function getGridLines(result: DivisionResult): GridLine[] {
     return lines;
 }
 
-interface SubtractionRowCells {
-    cells: GridCellConfig[][];
-    maxCellWithContentIndex: number;
-}
-
-function buildSubtractionRows(result: DivisionResult, totalWidth: number): GridCellConfig[][] {
-    const subtractionRows: GridCellConfig[][] = [];
+function buildSubtractionRows(result: DivisionResult, totalWidth: number): SubtractionRows {
+    const allCells: GridCellConfig[][] = [];
+    const rowResults: SubtractionRowCells[] = [];
     let prevMaxCellWithContentIndex: number | undefined = undefined;
+
     result.stepResults.forEach((step: DivisionPositionResult, index) => {
         const isInitialStep = index === 0;
         if (isInitialStep) {
-            const { maxCellWithContentIndex, cells } = buildInitialSubtractionRow(step, totalWidth, result.stepResults.length);
+            const row = buildInitialSubtractionRow(step, totalWidth, result.stepResults.length);
+            rowResults.push(row);
+            const { maxCellWithContentIndex, cells } = row;
             prevMaxCellWithContentIndex = maxCellWithContentIndex;
-            subtractionRows.push(...cells);
+            allCells.push(...cells);
             return;
         }
 
         const isLastStep = index === result.stepResults.length - 1;
         if (isLastStep) {
-            const { maxCellWithContentIndex, cells } = buildLastSubtractionRows(step, totalWidth, prevMaxCellWithContentIndex);
-            subtractionRows.push(...cells);
+            const row = buildLastSubtractionRows(step, totalWidth, prevMaxCellWithContentIndex);
+            rowResults.push(row);
+            const { maxCellWithContentIndex, cells } = row;
+            allCells.push(...cells);
             prevMaxCellWithContentIndex = maxCellWithContentIndex;
             return;
         }
 
-        const { maxCellWithContentIndex, cells } = buildDefaultSubtractionRows(step, totalWidth, prevMaxCellWithContentIndex);
+        const row = buildDefaultSubtractionRows(step, totalWidth, prevMaxCellWithContentIndex);
+        const { maxCellWithContentIndex, cells } = row;
+        rowResults.push(row);
         prevMaxCellWithContentIndex = maxCellWithContentIndex;
-        subtractionRows.push(...cells);
+        allCells.push(...cells);
     });
 
-    return subtractionRows;
+    return {
+        allCells,
+        rowResults
+    };
 }
 
 
@@ -160,7 +169,6 @@ function buildDefaultSubtractionRows(step: DivisionPositionResult, totalWidth: n
     const leftPaddingLength = prevMaxIndex ?
         prevMaxIndex - minuendDigits.length + 2
         : divisionIndex + 1;
-
 
     const minuendRow = padWithEmptyCells(
         digitsToCellConfig(minuendDigits),
@@ -182,7 +190,8 @@ function buildDefaultSubtractionRows(step: DivisionPositionResult, totalWidth: n
 
     return {
         cells: subtractionRows,
-        maxCellWithContentIndex
+        maxCellWithContentIndex,
+        cellsBox: getCellBox(leftPaddingLength, divisionIndex, minuendDigits.length)
     };
 }
 
@@ -218,13 +227,14 @@ function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: nu
 
     return {
         cells: subtractionRows,
-        maxCellWithContentIndex: subtrahendRow.length - 1
+        maxCellWithContentIndex: subtrahendRow.length - 1,
+        cellsBox: getCellBox(leftPaddingLength, 0, minuendDigits.length)
     };
 }
 
-
 function buildLastSubtractionRows(step: DivisionPositionResult, totalWidth: number, prevMaxIndex: number): SubtractionRowCells {
     const [minuend, subtrahend] = step.subtractionResult.numberOperands;
+    const { divisionIndex } = step;
     const minuendDigits = minuend.asDigits();
     const subtrahendDigits = subtrahend.asDigits();
     const resultDigits = step.subtractionResult.numberResult.toDigitsList();
@@ -257,8 +267,30 @@ function buildLastSubtractionRows(step: DivisionPositionResult, totalWidth: numb
             padWithEmptyCells(subtrahendRow, totalWidth),
             padWithEmptyCells(lastSubtractionResultRow, totalWidth)
         ],
-        maxCellWithContentIndex: minuendRow.length - 1
+        maxCellWithContentIndex: minuendRow.length - 1,
+        cellsBox: getCellBox(leftPaddingLength, divisionIndex, minuendDigits.length)
     };
+}
+
+function getCellBox(leftPaddingLength: number, divisionIndex: number, minuendLength: number): CellConfig[] {
+    const cellsBox: CellConfig[] = [];
+    const xOffset = leftPaddingLength -1;
+    const rowLength = minuendLength;
+    const yOffset = 2 * (divisionIndex + 1) - 1;
+
+    const minuendRowStart: CellConfig = { x: xOffset, y: yOffset };
+    const minuendRowEnd = { ...minuendRowStart, x: minuendRowStart.x + rowLength };
+    cellsBox.push(...groupCellsInStraightLine(minuendRowStart, minuendRowEnd));
+
+    const subtrahendRowStart: CellConfig = { x: xOffset, y: yOffset + 1 };
+    const subtrahendRowEnd = { ...subtrahendRowStart, x: subtrahendRowStart.x + rowLength };
+    cellsBox.push(...groupCellsInStraightLine(subtrahendRowStart, subtrahendRowEnd));
+
+    const resultRowStart: CellConfig = { x: xOffset, y: yOffset + 2 };
+    const resultRowEnd = { ...resultRowStart, x: resultRowStart.x + rowLength };
+    cellsBox.push(...groupCellsInStraightLine(resultRowStart, resultRowEnd));
+
+    return cellsBox;
 }
 
 
@@ -286,59 +318,3 @@ function buildOperationRow(result: DivisionResult, totalWidth: number): GridCell
     );
 }
 
-interface DivisionResultMeta extends ResultMeta {
-    totalWidth: number;
-    numDividendDigits: number;
-    numDividendIntegerPartDigits: number;
-    numDivisorDigits: number;
-    numDivisorFractionPartDigits: number;
-    numResultDigits: number;
-    resultRowLeftOffset: number;
-}
-
-export function extractDivisionResultMeta(result: DivisionResult): DivisionResultMeta {
-    const baseMeta = extractResultMeta(result);
-    const [dividend, divisor] = result.numberOperands;
-
-    const numDividendDigits = dividend.numDigits();
-    const numDividendIntegerPartDigits = dividend.numIntegerPartDigits();
-    const numDivisorDigits = divisor.numDigits();
-    const numDivisorFractionPartDigits = divisor.numFractionPartDigits();
-    const numResultDigits = result.numberResult.numDigits();
-
-    const [scaledDividend, scaledDivisor] = result.operands;
-    const numOperandsDigits = scaledDividend.length + scaledDivisor.length;
-    const resultRowLeftOffset = getResultRowLeftOffset(result);
-
-    const spaceForFirstMinusSign = 1;
-    const resultRowLength = spaceForFirstMinusSign + resultRowLeftOffset + numResultDigits;
-
-    const spaceForOperandDivisionSign = 1;
-    const operandRowLength = spaceForFirstMinusSign + numOperandsDigits + spaceForOperandDivisionSign;
-    const totalWidth = Math.max(resultRowLength, operandRowLength);
-
-    return {
-        ...baseMeta,
-        numDividendDigits,
-        numDividendIntegerPartDigits,
-        numDivisorFractionPartDigits,
-        numDivisorDigits,
-        totalWidth,
-        numResultDigits,
-        resultRowLeftOffset
-    };
-}
-
-function getResultRowLeftOffset(result: DivisionResult): number {
-    const [dividend, divisor] = result.numberOperands;
-    const [scaledDividend, scaledDivisor] = result.operands;
-    const baseMeta = extractResultMeta(result);
-
-    const isDivisionByOne = fromDigits(scaledDivisor).result.toNumber() === 1;
-    if(isDivisionByOne) return 0;
-
-    const dividendGreater = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber());
-    if(!dividendGreater) return 0;
-
-    return Math.abs(scaledDividend.length - baseMeta.numResultIntegerPartDigits);
-}

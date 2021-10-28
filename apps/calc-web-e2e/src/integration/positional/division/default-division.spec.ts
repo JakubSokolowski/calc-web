@@ -1,11 +1,14 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
-    enterOperationParams, getCalculateButton,
+    enterOperationParams,
+    getCalculateButton,
     getDivisionResult,
     getOperationGrid,
+    gridHasProperDivisionStepDetails,
     gridHasProperResultRow,
-    operationReturnsProperResult, selectOperation
+    operationReturnsProperResult,
+    selectOperation
 } from '../../../support/positional-calculator';
 
 describe('Default Division', () => {
@@ -31,6 +34,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 4, 0);
+        gridHasProperDivisionStepDetails(expected, base, 2, 0);
     });
 
     it('should divide positive and negative numbers', () => {
@@ -49,6 +53,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 4, 0);
+        gridHasProperDivisionStepDetails(expected, base, 2, 0);
     });
 
     it('should divide two integer numbers with fraction division result', () => {
@@ -67,6 +72,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 8, 0);
+        gridHasProperDivisionStepDetails(expected, base, 2, 0);
     });
 
     it('should divide two positive numbers with fraction division result v2', () => {
@@ -85,6 +91,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 9, 0);
+        gridHasProperDivisionStepDetails(expected, base, 3, 0);
     });
 
     it('should divide integer number by divisor with fraction part', () => {
@@ -103,6 +110,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 9, 0);
+        gridHasProperDivisionStepDetails(expected, base, 3, 0);
     });
 
     it('should divide two numbers with fraction part', () => {
@@ -121,6 +129,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 9, 0);
+        gridHasProperDivisionStepDetails(expected, base, 3, 0);
     });
 
     it('should divide number by divisor between 0 and 1', () => {
@@ -139,6 +148,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 4, 0);
+        gridHasProperDivisionStepDetails(expected, base, 1, 0);
     });
 
     it('should divide number by itself', () => {
@@ -157,6 +167,7 @@ describe('Default Division', () => {
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 4, 0);
+        gridHasProperDivisionStepDetails(expected, base, 4, 0);
     });
 
     it('should divide smaller dividend with fraction part by larger divisor without fraction part', () => {
@@ -169,12 +180,16 @@ describe('Default Division', () => {
         };
         const expected = '0.05093';
 
+        // this case will have excess leading zero in grid but none in actual result
+        const expectedGrid = '00.05093';
+
         operationReturnsProperResult(config, expected);
 
         getDivisionResult().toMatchSnapshot();
         getOperationGrid().toMatchSnapshot();
 
         gridHasProperResultRow(expected, base, 7, 0);
+        gridHasProperDivisionStepDetails(expectedGrid, base, 1, 0);
     });
 
     // BUG #183

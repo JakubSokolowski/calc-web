@@ -107,7 +107,9 @@
         "extensionDigitPositive": "Extension digit value is 0",
         "lastDigitPositive": "Most significant digit value is {{value}}, add",
         "lastDigitNegative": "Most significant digit is {{value}}",
-        "nothingToDo": "Nothing to do"
+        "nothingToDo": "Nothing to do",
+        "divisorWillFit": "Divisor [[divisor]] will fit [[numTimes]] times in dividend slice [[slice]]",
+        "nextDivisionResultDigit": "Next result digits is [[digit]]"
     },
     "operations": {
         "addition": {
