@@ -19,7 +19,7 @@ export function extractDivisionResultMeta(result: DivisionResult): DivisionResul
     const numDividendIntegerPartDigits = dividend.numIntegerPartDigits();
     const numDivisorDigits = divisor.numDigits();
     const numDivisorFractionPartDigits = divisor.numFractionPartDigits();
-    const numResultDigits = result.numberResult.numDigits();
+    const numResultDigits = result.resultDigits.length;
 
     const [scaledDividend, scaledDivisor] = result.operands;
     const numOperandsDigits = scaledDividend.length + scaledDivisor.length;

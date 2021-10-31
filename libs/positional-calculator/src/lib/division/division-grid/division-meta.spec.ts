@@ -108,5 +108,21 @@ describe('division-meta', () => {
             const expected = 0;
             expect(meta.resultRowLeftOffset).toEqual(expected);
         });
+
+        // BUG #240
+        it('should return proper total width result has multiple leading zero digits', () => {
+            // given
+            const base = 10;
+            const dividend = fromStringDirect('121', base).result;
+            const divisor = fromStringDirect('123', base).result;
+            const result = divideDefault([dividend, divisor]);
+
+            // when
+            const meta = extractDivisionResultMeta(result);
+
+            // then
+            const expected = 9;
+            expect(meta.totalWidth).toEqual(expected);
+        });
     });
 });
