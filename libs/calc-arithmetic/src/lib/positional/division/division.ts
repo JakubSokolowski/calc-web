@@ -81,10 +81,16 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
     };
 }
 
-function positionResultsToNumber(positionResults: DivisionPositionResult[]): DivisionOperand[] {
+
+
+export function positionResultsToNumber(positionResults: DivisionPositionResult[]): DivisionOperand[] {
     const positionDigits = positionResults.map((r) => r.valueAtPosition);
-    assertContinuous(positionDigits);
-    return addMissingLeadingZeros(positionDigits);
+    return positionResultsDigitsToNumber(positionDigits)
+}
+
+export function positionResultsDigitsToNumber(digits: DivisionOperand[]): DivisionOperand[] {
+    assertContinuous(digits);
+    return addMissingLeadingZeros(digits);
 }
 
 function addMissingLeadingZeros(digits: DivisionOperand[]): DivisionOperand[] {
@@ -94,7 +100,7 @@ function addMissingLeadingZeros(digits: DivisionOperand[]): DivisionOperand[] {
     return padWithZeroDigits(digits, digits[0].base, digits.length + numMissing, 'Left');
 }
 
-function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0, firstSliceLength = 0) {
+export function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult, fractionPrecision = 0, firstSliceLength = 0) {
     if (!prev) return true;
 
     const hasDividendDigitsToMoveDown = dividend.length - firstSliceLength > prev.divisionIndex;
@@ -104,7 +110,7 @@ function keepDividing(dividend: DivisionOperand[], prev?: DivisionPositionResult
     return fractionPrecision > numGeneratedFractionDigits;
 }
 
-function integerPartOnly(digits: DivisionOperand[]): boolean {
+export function integerPartOnly(digits: DivisionOperand[]): boolean {
     return leastSignificantPosition(digits) === 0;
 }
 
@@ -148,7 +154,7 @@ function assertContinuous<T extends Digit>(digits: T[]) {
         if (prevPosition == null) return currPosition;
         const expectedPosition = prevPosition - 1;
         if (currPosition !== expectedPosition) {
-            const message = `Digits ${digitsToStr(digits)} are not continous at index: ${index}`
+            const message = `Digits ${digitsToStr(digits)} are not continuous at index: ${index}`
                 + `\nExpected position: ${expectedPosition} Actual position: ${currPosition}`;
             throw Error(message);
         }
@@ -162,6 +168,7 @@ function getNextDividendSlice(dividend: DivisionOperand[], divisor: DivisionOper
     const nextDividendDigitPosition = prev.dividendSlice.sliceSourceLsp -1;
     const nextDividendDigit = getNextWithZeroFallback(dividend, nextDigitIndex, nextDividendDigitPosition);
     const digitsSlice = [...prev.remainder, nextDividendDigit];
+    console.log("Slice...", digitsToStr(prev.remainder), nextDividendDigit)
     const reindexedDigitsSlice = reindexToLsp(digitsSlice, 0);
 
     return {
@@ -177,8 +184,8 @@ function getNextWithZeroFallback(dividend: DivisionOperand[], digitIndex: number
     return BaseDigits.getDigit(0, base, digitPosition);
 }
 
-function reindexToLsp(digits: DivisionOperand[], lsp = 0): DivisionOperand[] {
-    return digits.map((d, i) => ({ ...d, position: digits.length - i - lsp }));
+export function reindexToLsp(digits: DivisionOperand[], lsp = 0): DivisionOperand[] {
+    return digits.map((d, i) => ({ ...d, position: digits.length - i - lsp - 1 }));
 }
 
 function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionOperand[]): DividendSlice {
