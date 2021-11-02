@@ -844,12 +844,6 @@ Array [
           "representationInBase": "2",
           "valueInDecimal": 2,
         },
-        Object {
-          "base": 10,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
       ],
       "valueAtPosition": Object {
         "base": 10,
@@ -4792,24 +4786,6 @@ Array [
           "representationInBase": "0",
           "valueInDecimal": 0,
         },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -1,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
       ],
       "valueAtPosition": Object {
         "base": 8,
@@ -4862,30 +4838,6 @@ Array [
       "carry": Array [],
       "decimalSum": 0,
       "operands": Array [
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
-        Object {
-          "base": 8,
-          "position": -2,
-          "representationInBase": "0",
-          "valueInDecimal": 0,
-        },
         Object {
           "base": 8,
           "position": -2,

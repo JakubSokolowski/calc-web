@@ -232,6 +232,55 @@ describe('digits', () => {
             ];
             expect(result).toEqual(expected);
         });
+
+        it('should shift digits to the left by given number of positions when digits have complement extension', () => {
+            // given
+            const base = 10;
+            const digits: Digit[] = [
+                { position: 2, base, valueInDecimal: 9, representationInBase: '(9)', isComplementExtension: true, },
+                { position: 1, base, valueInDecimal: 3, representationInBase: '3' },
+                { position: 0, base, valueInDecimal: 4, representationInBase: '4' }
+            ];
+
+            const numPositions = 1;
+
+            // when
+            const result = shiftLeft(digits, numPositions);
+
+            // then
+            const expected: Digit[] = [
+                { position: 3, base, valueInDecimal: 9, representationInBase: '(9)', isComplementExtension: true, },
+                { position: 2, base, valueInDecimal: 3, representationInBase: '3' },
+                { position: 1, base, valueInDecimal: 4, representationInBase: '4' },
+                { position: 0, base, valueInDecimal: 0, representationInBase: '0' }
+            ];
+            expect(result).toEqual(expected);
+        });
+
+        it('should shift digits to the left by given number of positions when digits have complement extension and fraction part', () => {
+            // given
+            const base = 10;
+            const digits: Digit[] = [
+                { position: 1, base, valueInDecimal: 9, representationInBase: '(9)', isComplementExtension: true, },
+                { position: 0, base, valueInDecimal: 9, representationInBase: '9' },
+                { position: -1, base, valueInDecimal: 7, representationInBase: '7' },
+                { position: -2, base, valueInDecimal: 9, representationInBase: '9' }
+            ];
+
+            const numPositions = 1;
+
+            // when
+            const result = shiftLeft(digits, numPositions);
+
+            // then
+            const expected: Digit[] = [
+                { position: 2, base, valueInDecimal: 9, representationInBase: '(9)', isComplementExtension: true, },
+                { position: 1, base, valueInDecimal: 9, representationInBase: '9' },
+                { position: 0, base, valueInDecimal: 7, representationInBase: '7' },
+                { position: -1, base, valueInDecimal: 9, representationInBase: '9' }
+            ];
+            expect(result).toEqual(expected);
+        });
     });
 
     describe('#shiftRight', () => {

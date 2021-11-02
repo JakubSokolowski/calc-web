@@ -40,12 +40,12 @@ export function padWithZeroDigits<T extends Digit>(digits: T[], base: number, de
     }
 }
 
-// TODO: Fix shifting for complements
 export function shiftLeft<T extends Digit>(digits: T[], numPositions: number): T[] {
     if (numPositions < 1) return digits;
     const base = digits[0].base;
-    const desiredWidth = digits.length + numPositions;
     const shiftedDigits = applyPositionShift(digits, numPositions);
+    const lsp = leastSignificantPosition(shiftedDigits);
+    const desiredWidth = lsp > 0 ? digits.length + lsp : digits.length;
     return padWithZeroDigits(shiftedDigits, base, desiredWidth, 'Right');
 }
 
