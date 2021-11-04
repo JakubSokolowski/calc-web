@@ -7,6 +7,8 @@ export interface PositionalRepresentation {
     integerPartStr(withExtension: boolean): string;
     fractionPartDigits(): Digit[];
     integerPartDigits(): Digit[];
+    digitAtIndex(index: number): Digit;
+    digitAtPosition(position: number): Digit;
     msp(withExtension: boolean): number;
     lsp(): number;
     numDigits(): number;

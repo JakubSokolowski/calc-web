@@ -340,4 +340,53 @@ describe('NumberComplement', () => {
             expect(result).toEqual('(0)');
         })
     });
+
+    describe('#digitAtIndex', () => {
+        it('should return digit at given index if such exists', () => {
+            // given
+            const complement = new NumberComplement(digitsMock);
+
+            // when
+            const result = complement.digitAtIndex(1);
+
+            // then
+            const expected: Digit = { base, valueInDecimal: 1, representationInBase: '1', position: 2 };
+            expect(result).toEqual(expected);
+        });
+
+        it('should throw error if digits at given index does not exist', () => {
+            // given
+            const complement = new NumberComplement(digitsMock);
+
+            // when
+            expect(() => {
+                complement.digitAtIndex(20)
+            }).toThrow();
+        });
+    });
+
+    describe('#digitAtPosition', () => {
+        it('should return digit at given position if such exists', () => {
+            // given
+            const complement = new NumberComplement(digitsMock);
+
+            // when
+            const result = complement.digitAtPosition(1);
+
+            // then
+            const expected: Digit = { base, valueInDecimal: 2, representationInBase: '2', position: 1 };
+            expect(result).toEqual(expected);
+        });
+
+        it('should throw error if digits at given index does not exist', () => {
+            // given
+            const complement = new NumberComplement(digitsMock);
+
+            // when
+            expect(() => {
+                complement.digitAtPosition(-6)
+            }).toThrow();
+        });
+    });
+
 });

@@ -7,7 +7,7 @@ export class NumberComplement implements PositionalRepresentation {
     private readonly digits: Digit[];
 
     constructor(
-        digits: Digit[],
+        digits: Digit[]
     ) {
         this.digits = digits;
     }
@@ -23,7 +23,7 @@ export class NumberComplement implements PositionalRepresentation {
     }
 
     toDigits(withExtension = true): Digit[] {
-        if(!withExtension) return this.digits.filter(d => !d.isComplementExtension);
+        if (!withExtension) return this.digits.filter(d => !d.isComplementExtension);
         return this.digits;
     }
 
@@ -36,7 +36,7 @@ export class NumberComplement implements PositionalRepresentation {
     }
 
     integerPartDigits(withExtension = true): Digit[] {
-        if(!withExtension) return this.digits.filter(d => d.position >= 0 && !d.isComplementExtension);
+        if (!withExtension) return this.digits.filter(d => d.position >= 0 && !d.isComplementExtension);
         return this.digits.filter(d => d.position >= 0);
     }
 
@@ -75,12 +75,24 @@ export class NumberComplement implements PositionalRepresentation {
     }
 
     toString(withExtension = true): string {
-        if(!withExtension) return digitsToStr(this.digits.slice(1));
+        if (!withExtension) return digitsToStr(this.digits.slice(1));
         return digitsToStr(this.digits);
     }
 
     toStringWithoutExcessZeros(): string {
         const stripped = trimLeadingZeros(this.digits);
         return digitsToStr(stripped);
+    }
+
+    digitAtIndex(index: number): Digit {
+        const digit = this.digits[index];
+        if (!digit) throw new Error(`Digit at index: ${index} in number ${this.toString()} does not exist`);
+        return digit;
+    }
+
+    digitAtPosition(position: number): Digit {
+        const digit = this.digits.find(d => d.position === position);
+        if (!digit) throw new Error(`Digit at position: ${position} in number ${this.toString()} does not exist`);
+        return digit;
     }
 }
