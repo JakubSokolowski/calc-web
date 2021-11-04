@@ -62,14 +62,14 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
             this.resultNegative
-        ).result;
+        );
 
         const multiplicandComplement = this.multiplier.isNegative()
             ? fromDigits(
                   getComplement(
                       new NumberComplement(multiplicandRow)
                   ).asDigits()
-              ).result
+              )
             : undefined;
 
         return {

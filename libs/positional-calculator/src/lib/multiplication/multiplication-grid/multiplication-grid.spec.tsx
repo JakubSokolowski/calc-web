@@ -11,8 +11,8 @@ describe('multiplication-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('99', 10).result;
-                    const b = fromStringDirect('99', 10).result;
+                    const a = fromStringDirect('99', 10);
+                    const b = fromStringDirect('99', 10);
                     const product = multiplyDefault([a, b]);
                     grid = buildMultiplicationGrid(product);
                 });
@@ -59,8 +59,8 @@ describe('multiplication-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('12.8', 10).result;
-                    const b = fromStringDirect('9.9', 10).result;
+                    const a = fromStringDirect('12.8', 10);
+                    const b = fromStringDirect('9.9', 10);
                     const product = multiplyDefault([a, b]);
                     grid = buildMultiplicationGrid(product);
                 });
@@ -124,8 +124,8 @@ describe('multiplication-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('76.1', 10).result;
-                    const b = fromStringDirect('12.123', 10).result;
+                    const a = fromStringDirect('76.1', 10);
+                    const b = fromStringDirect('12.123', 10);
                     const product = multiplyDefault([a, b]);
                     grid = buildMultiplicationGrid(product);
                 });
@@ -153,8 +153,8 @@ describe('multiplication-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('(0)3156', 8).result;
-                    const b = fromStringDirect('(7)6423', 8).result;
+                    const a = fromStringDirect('(0)3156', 8);
+                    const b = fromStringDirect('(7)6423', 8);
                     const product = multiplyWithExtensions([a, b]);
                     grid = buildMultiplicationGrid(product);
                 });
@@ -187,8 +187,8 @@ describe('multiplication-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('(0)31.12', 8).result;
-                    const b = fromStringDirect('(7)64', 8).result;
+                    const a = fromStringDirect('(0)31.12', 8);
+                    const b = fromStringDirect('(7)64', 8);
                     const product = multiplyWithExtensions([a, b]);
                     grid = buildMultiplicationGrid(product);
                 });

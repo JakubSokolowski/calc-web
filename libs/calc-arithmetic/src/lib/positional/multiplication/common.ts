@@ -65,7 +65,7 @@ export function adjustForMultiplierFraction(additionResult: AdditionResult, mult
 
     const shiftedDigits = shiftRight(additionResult.resultDigits, numFractionDigits);
     const trimmedDigits = trimEndByPredicate(shiftedDigits, (digit) => digit.position < -1 && digit.valueInDecimal === 0);
-    const shiftedNum = fromDigits(trimmedDigits).result;
+    const shiftedNum = fromDigits(trimmedDigits);
 
     return {
         ...additionResult,

@@ -76,7 +76,7 @@ export const PositionalCalculatorView: FC = () => {
     ) {
         setErrorOpen(false);
         const operands: PositionalNumber[] = representations.map((num) => {
-            return fromStringDirect(num.representation, base).result;
+            return fromStringDirect(num.representation, base);
         });
 
         const params: OperationParams = {

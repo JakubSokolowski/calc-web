@@ -15,7 +15,7 @@ describe('BoothMcSorleyAltConverter', () => {
     describe('#toSignedDigits', () => {
         it('should return proper Signed Digit representation', () => {
             // given
-            const digits = fromStringDirect('1000110', base).result.asDigits();
+            const digits = fromStringDirect('1000110', base).asDigits();
 
             // when
             const result = new BoothMcSorleyAltConverter(digits).toSignedDigits();
@@ -27,7 +27,7 @@ describe('BoothMcSorleyAltConverter', () => {
 
         it('should return proper Signed Digit representation when digits are assumed to be from negative multiplier', () => {
             // given
-            const digits = fromStringDirect('1000110', base).result.asDigits();
+            const digits = fromStringDirect('1000110', base).asDigits();
 
             // when
             const result = new BoothMcSorleyAltConverter(digits, true).toSignedDigits();
@@ -42,7 +42,7 @@ describe('BoothMcSorleyAltConverter', () => {
             const digits = fromStringDirect(
                 '1000110.101',
                 base
-            ).result.asDigits();
+            ).asDigits();
 
             // when
             const result = new BoothMcSorleyAltConverter(digits).toSignedDigits();
@@ -57,7 +57,7 @@ describe('BoothMcSorleyAltConverter', () => {
             const digits = fromStringDirect(
                 '11111101111',
                 base
-            ).result.asDigits();
+            ).asDigits();
 
             // when
             const result = new BoothMcSorleyAltConverter(digits).toSignedDigits();
@@ -69,7 +69,7 @@ describe('BoothMcSorleyAltConverter', () => {
 
         it('should return proper Signed Digit representation when input almost all 1s with fraction part', () => {
             // given
-            const digits = fromStringDirect('111.101', base).result.asDigits();
+            const digits = fromStringDirect('111.101', base).asDigits();
 
             // when
             const result = new BoothMcSorleyAltConverter(digits).toSignedDigits();
@@ -84,7 +84,7 @@ describe('BoothMcSorleyAltConverter', () => {
 
         describe('The conversion result', () => {
             // given
-            const digits = fromStringDirect('1000110', base).result.asDigits();
+            const digits = fromStringDirect('1000110', base).asDigits();
             let result: SDConversionResult;
 
             beforeEach(() => {

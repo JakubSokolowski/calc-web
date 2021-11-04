@@ -32,5 +32,5 @@ function randomOperand(base: number, maxNumPartDigits: number): PositionalNumber
     const fractionLength = getRandomInt(1, maxNumPartDigits);
     const length = startPosition + fractionLength;
     const representation = randomRepresentationStr(base, startPosition, length);
-    return fromStringDirect(representation, base).result
+    return fromStringDirect(representation, base);
 }

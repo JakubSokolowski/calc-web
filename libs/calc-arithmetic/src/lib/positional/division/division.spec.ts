@@ -18,8 +18,8 @@ describe('#division', () => {
         it('should return proper quotient for division', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('5462', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('5462', base);
+            const divisor = fromStringDirect('4587', base);
 
             // when
             const result = integerQuotient(dividend, divisor);
@@ -38,8 +38,8 @@ describe('#division', () => {
         it('should return 0 when divisor is greater than dividend', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('5462', base).result;
-            const divisor = fromStringDirect('6789', base).result;
+            const dividend = fromStringDirect('5462', base);
+            const divisor = fromStringDirect('6789', base);
 
             // when
             const result = integerQuotient(dividend, divisor);
@@ -60,8 +60,8 @@ describe('#division', () => {
         it('should return proper slice for initial position division', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('54625', base);
+            const divisor = fromStringDirect('4587', base);
 
             // when
             const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
@@ -77,8 +77,8 @@ describe('#division', () => {
         it('should return proper slice for initial division when slice should have more digits than divisor and divisor is greater than dividend', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('0.76621', base).result;
-            const divisor = fromStringDirect('1224', base).result;
+            const dividend = fromStringDirect('0.76621', base);
+            const divisor = fromStringDirect('1224', base);
             // when
             const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
 
@@ -93,8 +93,8 @@ describe('#division', () => {
         it('should extend previous remainder with next dividend digit', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('54625', base);
+            const divisor = fromStringDirect('4587', base);
             const prev: DivisionPositionResult = {
                 divisionIndex: 0,
                 remainder: splitToDigitsList('875', base),
@@ -142,14 +142,14 @@ describe('#division', () => {
         it('should extend previous remainder with zero if all dividend digits were already used', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('5462', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('5462', base);
+            const divisor = fromStringDirect('4587', base);
             const prev: DivisionPositionResult = {
                 divisionIndex: 0,
                 remainder: splitToDigitsList('875', base),
                 dividendSlice: {
                     sliceSourceLsp: 0,
-                    slice: fromStringDirect('5462', base).result
+                    slice: fromStringDirect('5462', base)
                 }
             } as DivisionPositionResult;
             const firstSliceLength = 4;
@@ -194,8 +194,8 @@ describe('#division', () => {
         describe('for initial position division', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('54625', base);
+            const divisor = fromStringDirect('4587', base);
 
             // when
             const result = divideAtPosition(dividend.toDigitsList(), divisor.toDigitsList());
@@ -230,8 +230,8 @@ describe('#division', () => {
 
             it('should return proper position subtraction result', () => {
                 // then
-                const minuend = fromStringDirect('5462', base).result;
-                const subtrahend = fromStringDirect('4587', base).result;
+                const minuend = fromStringDirect('5462', base);
+                const subtrahend = fromStringDirect('4587', base);
                 const expected = subtractPositionalNumbers([minuend, subtrahend]);
                 expect(result.subtractionResult).toEqual(expected);
             });
@@ -239,8 +239,8 @@ describe('#division', () => {
 
             it('should return proper position multiplication result', () => {
                 // then
-                const divisor = fromStringDirect('4587', base).result;
-                const quotient = fromStringDirect('1', base).result;
+                const divisor = fromStringDirect('4587', base);
+                const quotient = fromStringDirect('1', base);
                 const expected = multiplyDefault([divisor, quotient]);
                 expect(result.multiplicationResult).toEqual(expected);
             });
@@ -249,8 +249,8 @@ describe('#division', () => {
         describe('for subsequent position division', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
-            const divisor = fromStringDirect('4587', base).result;
+            const dividend = fromStringDirect('54625', base);
+            const divisor = fromStringDirect('4587', base);
             const initial = divideAtPosition(dividend.toDigitsList(), divisor.toDigitsList());
 
             // when
@@ -286,8 +286,8 @@ describe('#division', () => {
 
             it('should return proper position subtraction result', () => {
                 // then
-                const minuend = fromStringDirect('08755', base).result;
-                const subtrahend = fromStringDirect('4587', base).result;
+                const minuend = fromStringDirect('08755', base);
+                const subtrahend = fromStringDirect('4587', base);
                 const expected = subtractPositionalNumbers([minuend, subtrahend]);
                 expect(result.subtractionResult).toEqual(expected);
             });
@@ -295,8 +295,8 @@ describe('#division', () => {
 
             it('should return proper position multiplication result', () => {
                 // then
-                const divisor = fromStringDirect('4587', base).result;
-                const quotient = fromStringDirect('1', base).result;
+                const divisor = fromStringDirect('4587', base);
+                const quotient = fromStringDirect('1', base);
                 const expected = multiplyDefault([divisor, quotient]);
                 expect(result.multiplicationResult).toEqual(expected);
             });
@@ -307,8 +307,8 @@ describe('#division', () => {
         it('should return proper result when division has integer result', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('54625', base).result;
-            const divisor = fromStringDirect('5', base).result;
+            const dividend = fromStringDirect('54625', base);
+            const divisor = fromStringDirect('5', base);
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -320,8 +320,8 @@ describe('#division', () => {
         it('should return proper result when division has result with finite fraction', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('62.5', base).result;
-            const divisor = fromStringDirect('5', base).result;
+            const dividend = fromStringDirect('62.5', base);
+            const divisor = fromStringDirect('5', base);
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -335,8 +335,8 @@ describe('#division', () => {
         it('should return result with default 5 fraction precision when division has result with infinite fraction and fractionPrecision is not defined', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1000', base).result;
-            const divisor = fromStringDirect(' 312', base).result;
+            const dividend = fromStringDirect('1000', base);
+            const divisor = fromStringDirect(' 312', base);
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -351,8 +351,8 @@ describe('#division', () => {
             // given
             const base = 10;
             const fractionPrecision = 2;
-            const dividend = fromStringDirect('1000', base).result;
-            const divisor = fromStringDirect('312', base).result;
+            const dividend = fromStringDirect('1000', base);
+            const divisor = fromStringDirect('312', base);
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList(), fractionPrecision);
@@ -365,8 +365,8 @@ describe('#division', () => {
         it('should return proper result for binary numbers with integer result', () => {
             // given
             const base = 2;
-            const dividend = fromStringDirect('1100100', base).result;
-            const divisor = fromStringDirect('101', base).result;
+            const dividend = fromStringDirect('1100100', base);
+            const divisor = fromStringDirect('101', base);
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -380,8 +380,8 @@ describe('#division', () => {
         it('should return proper result for binary numbers with fraction result (MrK example)', () => {
             // given
             const base = 2;
-            const dividend = fromStringDirect('1000101', base).result; // 69
-            const divisor = fromStringDirect('101', base).result;      // 5
+            const dividend = fromStringDirect('1000101', base); // 69
+            const divisor = fromStringDirect('101', base);      // 5
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -395,8 +395,8 @@ describe('#division', () => {
         it('should return proper result for binary numbers with fraction result', () => {
             // given
             const base = 2;
-            const dividend = fromStringDirect('11001001001.1011', base).result; // 1609.6875
-            const divisor = fromStringDirect('101110', base).result;            // 46
+            const dividend = fromStringDirect('11001001001.1011', base); // 1609.6875
+            const divisor = fromStringDirect('101110', base);            // 46
 
             // when
             const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
@@ -409,8 +409,8 @@ describe('#division', () => {
         it('should throw error when divisor has fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('10', base).result;
-            const divisor = fromStringDirect('2.5', base).result;
+            const dividend = fromStringDirect('10', base);
+            const divisor = fromStringDirect('2.5', base);
 
             // when
             expect(() => {
@@ -423,8 +423,8 @@ describe('#division', () => {
         it('should return result with proper numberResult', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('22144', base).result;
-            const divisor = fromStringDirect('64', base).result;
+            const dividend = fromStringDirect('22144', base);
+            const divisor = fromStringDirect('64', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -437,8 +437,8 @@ describe('#division', () => {
         it('should return result with proper operation', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('22144', base).result;
-            const divisor = fromStringDirect('64', base).result;
+            const dividend = fromStringDirect('22144', base);
+            const divisor = fromStringDirect('64', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -451,8 +451,8 @@ describe('#division', () => {
         it('should return result with proper algorithm type', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('22144', base).result;
-            const divisor = fromStringDirect('64', base).result;
+            const dividend = fromStringDirect('22144', base);
+            const divisor = fromStringDirect('64', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -465,8 +465,8 @@ describe('#division', () => {
         it('should return proper step results', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1224', base).result;
-            const divisor = fromStringDirect('12', base).result;
+            const dividend = fromStringDirect('1224', base);
+            const divisor = fromStringDirect('12', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -479,8 +479,8 @@ describe('#division', () => {
         it('should return proper step results when divisor and dividend have both fraction parts', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('122.1', base).result;
-            const divisor = fromStringDirect('12.1', base).result;
+            const dividend = fromStringDirect('122.1', base);
+            const divisor = fromStringDirect('12.1', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -493,8 +493,8 @@ describe('#division', () => {
         it('should divide numbers when divisor has fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('62', base).result;
-            const divisor = fromStringDirect('0.5', base).result;
+            const dividend = fromStringDirect('62', base);
+            const divisor = fromStringDirect('0.5', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -507,8 +507,8 @@ describe('#division', () => {
         it('should divide numbers when both dividend and divisor has fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('7834.123', base).result;
-            const divisor = fromStringDirect('0.58644', base).result;
+            const dividend = fromStringDirect('7834.123', base);
+            const divisor = fromStringDirect('0.58644', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -521,8 +521,8 @@ describe('#division', () => {
         it('should divide numbers when both dividend and divisor has fraction part and are between 0 and 1', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('0.66484', base).result;
-            const divisor = fromStringDirect('0.00124', base).result;
+            const dividend = fromStringDirect('0.66484', base);
+            const divisor = fromStringDirect('0.00124', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -535,8 +535,8 @@ describe('#division', () => {
         it('should divide numbers when divisor is between 0 and 1', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('122.1', base).result;
-            const divisor = fromStringDirect('0.1', base).result;
+            const dividend = fromStringDirect('122.1', base);
+            const divisor = fromStringDirect('0.1', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -549,8 +549,8 @@ describe('#division', () => {
         it('should divide numbers when some of operands is a negative number', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('-0.66484', base).result;
-            const divisor = fromStringDirect('0.00124', base).result;
+            const dividend = fromStringDirect('-0.66484', base);
+            const divisor = fromStringDirect('0.00124', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -563,8 +563,8 @@ describe('#division', () => {
         it('should divide numbers when both of operands are negative', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('-0.66484', base).result;
-            const divisor = fromStringDirect('-0.00124', base).result;
+            const dividend = fromStringDirect('-0.66484', base);
+            const divisor = fromStringDirect('-0.00124', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -577,8 +577,8 @@ describe('#division', () => {
         it('should divide dividend with fraction part by negative divisor without fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('11.7662', base).result;
-            const divisor = fromStringDirect('-231', base).result;
+            const dividend = fromStringDirect('11.7662', base);
+            const divisor = fromStringDirect('-231', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -591,8 +591,8 @@ describe('#division', () => {
         it('should divide dividend between 0 and 1 with fraction part by divisor without fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('0.76621', base).result;
-            const divisor = fromStringDirect('1224', base).result;
+            const dividend = fromStringDirect('0.76621', base);
+            const divisor = fromStringDirect('1224', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -605,8 +605,8 @@ describe('#division', () => {
         it('should divide smaller dividend by greater divisor', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1', base).result;
-            const divisor = fromStringDirect('100', base).result;
+            const dividend = fromStringDirect('1', base);
+            const divisor = fromStringDirect('100', base);
 
             // when
             const result = divideDefault([dividend, divisor]);
@@ -619,8 +619,8 @@ describe('#division', () => {
         it('should divide smaller dividend by greater divisor and return result digits with proper positions', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1', base).result;
-            const divisor = fromStringDirect('100', base).result;
+            const dividend = fromStringDirect('1', base);
+            const divisor = fromStringDirect('100', base);
 
             // when
             const { resultDigits } = divideDefault([dividend, divisor]);
@@ -652,8 +652,8 @@ describe('#division', () => {
         it('should divide 1.1 by 10', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1.1', base).result;
-            const divisor = fromStringDirect('10', base).result;
+            const dividend = fromStringDirect('1.1', base);
+            const divisor = fromStringDirect('10', base);
 
             // when
             const result = divideDefault([dividend, divisor]);

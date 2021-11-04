@@ -6,8 +6,8 @@ import { MultiplyPositionDetails } from './multiply-position-details';
 describe('MultiplyPositionDetails', () => {
     let container;
 
-    const a = fromNumber(76, 10).result;
-    const b = fromNumber(9, 10).result;
+    const a = fromNumber(76, 10);
+    const b = fromNumber(9, 10);
     const res = multiplyDefault([a, b]);
     const rowRes = res.stepResults[0].rowPositionResults[1];
 

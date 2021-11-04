@@ -1,12 +1,12 @@
 import { shallow, ShallowWrapper } from 'enzyme';
 import { buildIntegralConversionGrid, HoverGrid, PaddedGrid } from '@calc/grid';
 import React from 'react';
-import { fromNumber } from '@calc/calc-arithmetic';
+import { fromNumber, fromNumberDetailed } from '@calc/calc-arithmetic';
 
 describe('#PaddedGrid', () => {
     let container: ShallowWrapper;
 
-    const conversion = fromNumber(24.23, 2);
+    const conversion = fromNumberDetailed(24.23, 2);
     const { lines, groups, values } = buildIntegralConversionGrid(conversion);
 
     beforeEach(() => {

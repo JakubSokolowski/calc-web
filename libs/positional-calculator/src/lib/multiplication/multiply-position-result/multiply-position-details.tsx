@@ -10,7 +10,7 @@ export const MultiplyPositionDetails: FC<P> = ({ result }) => {
     const base = result.valueAtPosition.base;
     const [multiplicand, multiplier, carry] = result.operands;
 
-    const resultInBase = fromNumber(result.decimalProduct, base).result.toString();
+    const resultInBase = fromNumber(result.decimalProduct, base).toString();
 
     return (
         <div>

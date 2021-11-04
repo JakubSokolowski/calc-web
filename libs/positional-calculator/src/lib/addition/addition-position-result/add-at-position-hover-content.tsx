@@ -31,7 +31,7 @@ function carriesToLatexStr(carries: AdditionOperand[]): string {
 export const AddAtPositionHoverContent: FC<P> = ({ positionResult }) => {
     if (!positionResult || !positionResult.operands) return null;
 
-    const posSum = fromNumber(positionResult.decimalSum, positionResult.valueAtPosition.base).result.toString();
+    const posSum = fromNumber(positionResult.decimalSum, positionResult.valueAtPosition.base).toString();
 
     const nonZeroOperands = positionResult.operands.filter((op) => op.valueInDecimal !== 0);
     const operandsStr = operandsToLatexStr(nonZeroOperands);

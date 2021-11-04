@@ -255,8 +255,8 @@ describe('addition', () => {
 
         it('should add two digit arrays correctly when numbers are hexadecimal', () => {
             // given
-            const a: AdditionOperand[] = fromStringDirect('1B49', 16).result.complement.asDigits();
-            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).result.complement.asDigits();
+            const a: AdditionOperand[] = fromStringDirect('1B49', 16).complement.asDigits();
+            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).complement.asDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {
@@ -308,10 +308,10 @@ describe('addition', () => {
 
         it('should add digit arrays correctly when numbers are binary', () => {
             // given
-            const a: AdditionOperand[] = fromNumber(11, 2).result.complement.asDigits();
-            const b: AdditionOperand[] = fromNumber(13, 2).result.complement.asDigits();
-            const c: AdditionOperand[] = fromNumber(9, 2).result.complement.asDigits();
-            const d: AdditionOperand[] = fromNumber(15, 2).result.complement.asDigits();
+            const a: AdditionOperand[] = fromNumber(11, 2).complement.asDigits();
+            const b: AdditionOperand[] = fromNumber(13, 2).complement.asDigits();
+            const c: AdditionOperand[] = fromNumber(9, 2).complement.asDigits();
+            const d: AdditionOperand[] = fromNumber(15, 2).complement.asDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {
@@ -601,14 +601,14 @@ describe('addition', () => {
                 ['10010', '-0.00110', '10001.11010']
             ])('addPositionalNumbers([%i, %i]) should return proper result', (a: string, b: string, expected: string) => {
                 // given
-                const numA = fromStringDirect(a, base).result;
-                const numB = fromStringDirect(b, base).result;
+                const numA = fromStringDirect(a, base);
+                const numB = fromStringDirect(b, base);
 
                 // when
                 const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).result.toDigitsList();
+                const numExpected = fromStringDirect(expected, base).toDigitsList();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -627,14 +627,14 @@ describe('addition', () => {
                 [10.1236, -0.0009, 10.1227],
             ])('addPositionalNumbers([%i, %i]) should return proper result', (a, b, expected) => {
                 // given
-                const numA = fromNumber(a, base).result;
-                const numB = fromNumber(b, base).result;
+                const numA = fromNumber(a, base);
+                const numB = fromNumber(b, base);
 
                 // when
                 const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
 
                 // then
-                const numExpected = fromNumber(expected, base).result.toDigitsList();
+                const numExpected = fromNumber(expected, base).toDigitsList();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -652,14 +652,14 @@ describe('addition', () => {
                 ['12 13.45', '-44 32', '-32 18.19'],
             ])('addPositionalNumbers([%s, %s]) should return proper result', (a: string, b: string, expected: string) => {
                 // given
-                const numA = fromStringDirect(a, base).result;
-                const numB = fromStringDirect(b, base).result;
+                const numA = fromStringDirect(a, base);
+                const numB = fromStringDirect(b, base);
 
                 // when
                 const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).result.toDigitsList();
+                const numExpected = fromStringDirect(expected, base).toDigitsList();
                 expect(result).toEqual(numExpected);
             });
         });

@@ -1,6 +1,11 @@
 import React from 'react';
 import { IntegralConversionDetails } from '../integral-conversion-details/integral-conversion-details';
-import { AssociatedBaseConversion, convertUsingAssociatedBases, fromString } from '@calc/calc-arithmetic';
+import {
+    AssociatedBaseConversion,
+    convertUsingAssociatedBases,
+    fromString,
+    fromStringDetailed
+} from '@calc/calc-arithmetic';
 import { FloatingConversionDetails } from '../floating-conversion-details/floating-conversion-details';
 import { AssociatedBaseConversionDetails } from '../associated-base-conversion-details/associated-base-conversion-details';
 import { styled } from '@mui/material';
@@ -39,7 +44,7 @@ const Root = styled('div')(({ theme }) => ({
 
 export const IntegralConversionRenderer = (params: ConversionTemplate) => {
     const {inputBase, outputBase, representation} = params;
-    const conversion = fromString(representation, inputBase, outputBase);
+    const conversion = fromStringDetailed(representation, inputBase, outputBase);
 
     return (
         <Root>
@@ -52,7 +57,7 @@ export const IntegralConversionRenderer = (params: ConversionTemplate) => {
 
 export const FractionalConversionRenderer = (params: ConversionTemplate) => {
     const {inputBase, outputBase, representation, precision} = params;
-    const conversion = fromString(representation, inputBase, outputBase, precision);
+    const conversion = fromStringDetailed(representation, inputBase, outputBase, precision);
 
     return (
         <Root>

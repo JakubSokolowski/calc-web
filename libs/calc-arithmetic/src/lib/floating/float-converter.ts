@@ -210,7 +210,7 @@ export class SingleRepresentation extends FloatingRepresentation {
             '1.' + this.mantissa,
             2,
             10
-        ).result.decimalValue.toNumber();
+        ).decimalValue.toNumber();
     }
 }
 

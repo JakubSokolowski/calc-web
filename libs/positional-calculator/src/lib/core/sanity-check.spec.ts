@@ -22,8 +22,8 @@ describe('sanity-check', () => {
             const base = 2;
             const params: OperationParams = {
                 operands: [
-                    fromStringDirect('101010', base).result,
-                    fromStringDirect('11.11', base).result
+                    fromStringDirect('101010', base),
+                    fromStringDirect('11.11', base)
                 ],
                 algorithm: DivisionType.Default,
                 operation: OperationType.Division,
@@ -44,8 +44,8 @@ describe('sanity-check', () => {
             const base = 2;
             const params: OperationParams = {
                 operands: [
-                    fromStringDirect('0.1', base).result,
-                    fromStringDirect('11010.01', base).result
+                    fromStringDirect('0.1', base),
+                    fromStringDirect('11010.01', base)
                 ],
                 algorithm: DivisionType.Default,
                 operation: OperationType.Division,
@@ -67,8 +67,8 @@ describe('sanity-check', () => {
             const base = 10;
             const params: OperationParams = {
                 operands: [
-                    fromStringDirect('3.613', base).result,
-                    fromStringDirect('11.518', base).result
+                    fromStringDirect('3.613', base),
+                    fromStringDirect('11.518', base)
                 ],
                 algorithm: SubtractionType.Default,
                 operation: OperationType.Subtraction,

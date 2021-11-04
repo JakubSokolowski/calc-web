@@ -6,8 +6,8 @@ import { fromNumber, multiplyDefault } from '@calc/calc-arithmetic';
 describe('MultiplicationResultComponent', () => {
     let container;
 
-    const a = fromNumber(10, 10).result;
-    const b = fromNumber(15, 10).result;
+    const a = fromNumber(10, 10);
+    const b = fromNumber(15, 10);
     const result = multiplyDefault([a, b]);
 
     beforeEach(() => {

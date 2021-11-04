@@ -10,7 +10,7 @@ import {
 
 describe('calculate', () => {
     const base = 10;
-    const operands = [10, 5].map((op) => fromNumber(op, base).result);
+    const operands = [10, 5].map((op) => fromNumber(op, base));
 
     const baseParams: OperationParams = {
         operation:OperationType.Addition,

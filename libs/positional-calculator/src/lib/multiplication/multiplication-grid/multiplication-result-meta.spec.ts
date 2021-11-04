@@ -8,8 +8,8 @@ describe('#extractMultiplicationResultMeta', () => {
         it('should return proper total width for two positive extensions', () => {
             // given
             const base = 2;
-            const multiplicand = fromStringDirect('1.1', base).result;
-            const multiplier = fromStringDirect('1', base).result;
+            const multiplicand = fromStringDirect('1.1', base);
+            const multiplier = fromStringDirect('1', base);
             const result = multiplyWithExtensions([multiplicand, multiplier]);
 
             // when
@@ -23,8 +23,8 @@ describe('#extractMultiplicationResultMeta', () => {
         it('should return proper total width for one negative extension', () => {
             // given
             const base = 2;
-            const multiplicand = fromStringDirect('(0)1101001.101', base).result;
-            const multiplier = fromStringDirect('(1)1101.111', base).result;
+            const multiplicand = fromStringDirect('(0)1101001.101', base);
+            const multiplier = fromStringDirect('(1)1101.111', base);
             const result = multiplyWithExtensions([multiplicand, multiplier]);
 
             // when

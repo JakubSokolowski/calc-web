@@ -20,7 +20,7 @@ import {
     getOutlierAtPosition,
     groupCellsInStraightLine
 } from './grid-utils';
-import { addPositionalNumbers, fromNumber, subtractPositionalNumbers } from '@calc/calc-arithmetic';
+import { addPositionalNumbers, fromNumberDetailed, subtractPositionalNumbers } from '@calc/calc-arithmetic';
 import { buildIntegralConversionGrid } from './conversion-grid';
 import { CellPosition } from '../models/cell-position';
 import { GridLookup } from '../models/grid-lookup';
@@ -339,7 +339,7 @@ describe('grid-utils', () => {
     describe('#gridToAscii', () => {
         it('should return proper ascii representation', () => {
             // given
-            const conversion = fromNumber(24, 2);
+            const conversion = fromNumberDetailed(24, 2);
             const gridInfo = buildIntegralConversionGrid(conversion);
             const expected =
                 '\n'
@@ -360,8 +360,8 @@ describe('grid-utils', () => {
     describe('#extractResultMeta', () => {
         describe('when extracting from addition result', () => {
             // given
-            const a = fromNumber(24, 10).result;
-            const b = fromNumber(496, 10).result;
+            const a = fromNumberDetailed(24, 10).result;
+            const b = fromNumberDetailed(496, 10).result;
             const result = addPositionalNumbers([a, b]);
 
             let meta: ResultMeta;
@@ -406,8 +406,8 @@ describe('grid-utils', () => {
         describe('when building from addition result digits', () => {
             it('should return cells with proper content', () => {
                 // given
-                const a = fromNumber(19, 10).result;
-                const b = fromNumber(10, 10).result;
+                const a = fromNumberDetailed(19, 10).result;
+                const b = fromNumberDetailed(10, 10).result;
                 const result = addPositionalNumbers([a, b]);
                 const digits = result.resultDigits;
 
@@ -427,8 +427,8 @@ describe('grid-utils', () => {
         describe('when building from subtraction result digits', () => {
             it('should return cells with proper content', () => {
                 // given
-                const a = fromNumber(19, 10).result;
-                const b = fromNumber(10, 10).result;
+                const a = fromNumberDetailed(19, 10).result;
+                const b = fromNumberDetailed(10, 10).result;
                 const result = subtractPositionalNumbers([a, b]);
                 const digits = result.resultDigits;
 
@@ -448,8 +448,8 @@ describe('grid-utils', () => {
         describe('when building from subtraction operands', () => {
             it('should return cells with proper content and style preset', () => {
                 // given
-                const a = fromNumber(24, 10).result;
-                const b = fromNumber(19, 10).result;
+                const a = fromNumberDetailed(24, 10).result;
+                const b = fromNumberDetailed(19, 10).result;
                 const result = subtractPositionalNumbers([a, b]);
                 const digits = result.stepResults[0].operands;
 
@@ -536,8 +536,8 @@ describe('grid-utils', () => {
         it('should convert operands to cell config and pad it with empty zeros when policy is not specified', () => {
             // given
             const base = 10;
-            const a = fromNumber(24.5, base).result;
-            const b = fromNumber(496.92, base).result;
+            const a = fromNumberDetailed(24.5, base).result;
+            const b = fromNumberDetailed(496.92, base).result;
             const result = addPositionalNumbers([a, b]);
             const operands = result.operands[0];
             const info = extractResultMeta(result);
@@ -561,8 +561,8 @@ describe('grid-utils', () => {
         it('should convert operands to cell config and pad it with empty cells when padding policy is PadWithEmptyCells', () => {
             // given
             const base = 10;
-            const a = fromNumber(24.5, base).result;
-            const b = fromNumber(496.92, base).result;
+            const a = fromNumberDetailed(24.5, base).result;
+            const b = fromNumberDetailed(496.92, base).result;
             const result = addPositionalNumbers([a, b]);
             const operands = result.operands[0];
             const info = extractResultMeta(result);

@@ -58,11 +58,11 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
             this.resultNegative
-        ).result;
+        );
 
         const multiplicandComplement = fromDigits(
             getComplement(new NumberComplement(multiplicandRow)).asDigits()
-        ).result;
+        );
 
         return {
             operands: [multiplicandRow, multiplierRow],

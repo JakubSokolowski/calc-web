@@ -12,7 +12,7 @@ export function isDivisorZero(input: OperandInputValue): TranslationErrorMessage
     if (totalNumOperands !== 2) return undefined;
     if (index !== 1) return undefined;
     if (isValidComplementOrRepresentationStr(representation, base)) {
-        const num = fromStringDirect(representation, base).result;
+        const num = fromStringDirect(representation, base);
         if (num.toNumber() === 0) {
             return {
                 key: 'operations.division.divisionByZero'

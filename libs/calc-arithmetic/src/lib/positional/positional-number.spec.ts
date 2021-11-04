@@ -5,7 +5,7 @@ describe('PositionalNumber', () => {
     describe('toDigitsList', () => {
         it('should correctly convert to list of digits', () => {
             // given
-            const { result } = fromNumber(123, 10);
+            const result = fromNumber(123, 10);
 
             const expected: AdditionOperand[] = [
                 {
@@ -38,7 +38,7 @@ describe('PositionalNumber', () => {
 
         it('should correctly convert to list of digits when number has fractional part', () => {
             // given
-            const { result } = fromNumber(123.45, 10);
+            const result = fromNumber(123.45, 10);
             const expected: AdditionOperand[] = [
                 {
                     valueInDecimal: 1,

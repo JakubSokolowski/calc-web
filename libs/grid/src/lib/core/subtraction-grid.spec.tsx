@@ -16,8 +16,8 @@ describe('subtraction-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('24', 10).result;
-                    const b = fromStringDirect('11', 10).result;
+                    const a = fromStringDirect('24', 10);
+                    const b = fromStringDirect('11', 10);
                     const difference = subtractPositionalNumbers([a, b]);
                     grid = buildSubtractionGrid(difference);
 
@@ -252,8 +252,8 @@ describe('subtraction-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('24', 10).result;
-                    const b = fromStringDirect('19', 10).result;
+                    const a = fromStringDirect('24', 10);
+                    const b = fromStringDirect('19', 10);
                     const difference = subtractPositionalNumbers([a, b]);
                     grid = buildSubtractionGrid(difference);
 
@@ -562,8 +562,8 @@ describe('subtraction-grid', () => {
             describe('when subtracting numbers with fractional part', () => {
                 it('should return proper lines for fractional numbers with integer part length of one', () => {
                     // when
-                    const a = fromStringDirect('9.8', 10).result;
-                    const b = fromStringDirect('1.7', 10).result;
+                    const a = fromStringDirect('9.8', 10);
+                    const b = fromStringDirect('1.7', 10);
                     const difference = subtractPositionalNumbers([a, b]);
                     const grid = buildSubtractionGrid(difference);
 
@@ -583,8 +583,8 @@ describe('subtraction-grid', () => {
 
                 it('should return proper lines for fractional numbers with borrow', () => {
                     // when
-                    const a = fromStringDirect('21.8', 10).result;
-                    const b = fromStringDirect('11.9', 10).result;
+                    const a = fromStringDirect('21.8', 10);
+                    const b = fromStringDirect('11.9', 10);
                     const difference = subtractPositionalNumbers([a, b]);
                     const grid = buildSubtractionGrid(difference);
 

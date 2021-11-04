@@ -6,8 +6,8 @@ import { AddAtPositionHoverContent } from './add-at-position-hover-content';
 describe('AddAtPositionHoverContent', () => {
     let container;
 
-    const a = fromNumber(19, 10).result;
-    const b = fromNumber(5, 10).result;
+    const a = fromNumber(19, 10);
+    const b = fromNumber(5, 10);
     const result = addPositionalNumbers([a, b]);
     const positionResult = result.stepResults[0];
 

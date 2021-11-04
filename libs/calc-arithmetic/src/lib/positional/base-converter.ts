@@ -306,11 +306,30 @@ export function fromNumber(
     resultBase: number,
     precision = 30,
     converter: BaseConverter = new StandardBaseConverter()
+): PositionalNumber {
+    return converter.fromNumber(num, resultBase, precision).result;
+}
+
+export function fromNumberDetailed(
+    num: number | BigNumber,
+    resultBase: number,
+    precision = 30,
+    converter: BaseConverter = new StandardBaseConverter()
 ): Conversion {
     return converter.fromNumber(num, resultBase, precision);
 }
 
 export function fromString(
+    valueStr: string,
+    inputBase: number,
+    resultBase: number,
+    precision = 30,
+    converter: BaseConverter = new StandardBaseConverter()
+): PositionalNumber {
+    return converter.fromString(valueStr, inputBase, resultBase, precision).result;
+}
+
+export function fromStringDetailed(
     valueStr: string,
     inputBase: number,
     resultBase: number,
@@ -323,17 +342,15 @@ export function fromString(
 export function fromStringDirect(
     valueStr: string,
     inputBase: number
-): Conversion {
+): PositionalNumber {
     const converter = new StandardBaseConverter();
-    return converter.fromStringDirect(valueStr, inputBase);
+    return converter.fromStringDirect(valueStr, inputBase).result;
 }
 
 export function fromDigits(
     digits: Digit[],
     isNegative?: boolean
-): Conversion {
+): PositionalNumber {
     const converter = new StandardBaseConverter();
-    return converter.fromDigitsDirect(digits, isNegative);
+    return converter.fromDigitsDirect(digits, isNegative).result;
 }
-
-

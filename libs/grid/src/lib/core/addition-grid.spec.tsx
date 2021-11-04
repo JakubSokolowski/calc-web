@@ -10,8 +10,8 @@ describe('addition-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('123', 10).result;
-                    const b = fromStringDirect('321', 10).result;
+                    const a = fromStringDirect('123', 10);
+                    const b = fromStringDirect('321', 10);
                     const sum = addPositionalNumbers([a, b]);
                     grid = buildAdditionGrid(sum);
                 });
@@ -254,8 +254,8 @@ describe('addition-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('123.321', 10).result;
-                    const b = fromStringDirect('321.123', 10).result;
+                    const a = fromStringDirect('123.321', 10);
+                    const b = fromStringDirect('321.123', 10);
                     const sum = addPositionalNumbers([a, b]);
                     grid = buildAdditionGrid(sum);
                 });
@@ -697,8 +697,8 @@ describe('addition-grid', () => {
 
                 beforeEach(() => {
                     // when
-                    const a = fromStringDirect('1', 10).result;
-                    const b = fromStringDirect('-1', 10).result;
+                    const a = fromStringDirect('1', 10);
+                    const b = fromStringDirect('-1', 10);
                     const sum = addPositionalNumbers([a, b]);
                     grid = buildAdditionGrid(sum);
                 });

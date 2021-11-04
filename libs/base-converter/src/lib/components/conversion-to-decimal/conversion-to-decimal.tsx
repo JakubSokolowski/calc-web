@@ -34,7 +34,7 @@ const Root = styled('div')(({ theme }) => ({
 
 export const ConversionToDecimalDetails: FC<P> = ({ conversionStage }) => {
     const [inputStr, inputBase] = conversionStage.input;
-    const inputNumber = fromStringDirect(inputStr, inputBase).result;
+    const inputNumber = fromStringDirect(inputStr, inputBase);
 
     const digits = conversionStage.inputDigitList.map((digit, index, arr) => {
         const joinSymbol = index !== arr.length -1 ? ' + ' : '';

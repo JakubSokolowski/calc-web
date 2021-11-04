@@ -530,8 +530,8 @@ describe('subtraction', () => {
         describe('when subtracting two operands', () => {
             it('should return proper result when subtrahend has fraction part and minuend does not', () => {
                 // given
-                const minuend = fromNumber(10, 10).result;
-                const subtrahend = fromNumber(1.1, 10).result;
+                const minuend = fromNumber(10, 10);
+                const subtrahend = fromNumber(1.1, 10);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -543,8 +543,8 @@ describe('subtraction', () => {
 
             it('should return proper result for operands with fractional parts', () => {
                 // given
-                const minuend = fromNumber(98723.123, 10).result;
-                const subtrahend = fromNumber(7643.87543, 10).result;
+                const minuend = fromNumber(98723.123, 10);
+                const subtrahend = fromNumber(7643.87543, 10);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -558,8 +558,8 @@ describe('subtraction', () => {
             it('should return proper result when result has leading digits that look like complement extension', () => {
                 // given
                 const base = 9;
-                const minuend = fromStringDirect('13.4', base).result;
-                const subtrahend = fromStringDirect('23.4', base).result;
+                const minuend = fromStringDirect('13.4', base);
+                const subtrahend = fromStringDirect('23.4', base);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -573,8 +573,8 @@ describe('subtraction', () => {
             it('should return proper result for base 9 numbers with fraction parts', () => {
                 // given
                 const base = 9;
-                const minuend = fromStringDirect('0.72', base).result;
-                const subtrahend = fromStringDirect('0.78323', base).result;
+                const minuend = fromStringDirect('0.72', base);
+                const subtrahend = fromStringDirect('0.78323', base);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -588,8 +588,8 @@ describe('subtraction', () => {
             it('should return proper result for base 10 with -0.01 result', () => {
                 // given
                 const base = 10;
-                const minuend = fromStringDirect('1.001', base).result;
-                const subtrahend = fromStringDirect('1.011', base).result;
+                const minuend = fromStringDirect('1.001', base);
+                const subtrahend = fromStringDirect('1.011', base);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -603,8 +603,8 @@ describe('subtraction', () => {
             it('should return proper result for base 10 with -10 result', () => {
                 // given
                 const base = 10;
-                const minuend = fromStringDirect('2.3', base).result;
-                const subtrahend = fromStringDirect('12.3', base).result;
+                const minuend = fromStringDirect('2.3', base);
+                const subtrahend = fromStringDirect('12.3', base);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -618,8 +618,8 @@ describe('subtraction', () => {
             it('should return proper result for base 4 with -10 (-4) result', () => {
                 // given
                 const base = 4;
-                const minuend = fromStringDirect('2.3', base).result;
-                const subtrahend = fromStringDirect('12.3', base).result;
+                const minuend = fromStringDirect('2.3', base);
+                const subtrahend = fromStringDirect('12.3', base);
 
                 // when
                 const result = subtractPositionalNumbers([minuend, subtrahend]);
@@ -633,9 +633,9 @@ describe('subtraction', () => {
         describe('when subtracting multiple operands', () => {
             it('should return result with proper borrow chain when borrow amount is greater than 1', () => {
                 // given
-                const x = fromNumber(10, 10).result;
-                const y = fromNumber(9, 10).result;
-                const z = fromNumber(2, 10).result;
+                const x = fromNumber(10, 10);
+                const y = fromNumber(9, 10);
+                const z = fromNumber(2, 10);
 
                 // when
                 const result = subtractPositionalNumbers([x, y, z]);

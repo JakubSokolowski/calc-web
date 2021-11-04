@@ -76,7 +76,7 @@ export class WithoutExtension extends WithExtension {
 
             digitsToAdd.push(lastDigits);
 
-            multiplicandComplement = fromDigits(complement.asDigits()).result;
+            multiplicandComplement = fromDigits(complement.asDigits());
             lastMultiplierDigit = lastMultiplier;
         } else {
             lastMultiplierDigit = positionsAscending[0];
@@ -94,7 +94,7 @@ export class WithoutExtension extends WithExtension {
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
             this.resultNegative
-        ).result;
+        );
 
         return {
             operands: [multiplicandRow, multiplierRow],

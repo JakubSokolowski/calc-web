@@ -49,7 +49,7 @@ function getResultRowLeftOffset(result: DivisionResult): number {
     const [scaledDividend, scaledDivisor] = result.operands;
     const baseMeta = extractResultMeta(result);
 
-    const isDivisionByOne = fromDigits(scaledDivisor).result.toNumber() === 1;
+    const isDivisionByOne = fromDigits(scaledDivisor).toNumber() === 1;
     if (isDivisionByOne) return 0;
 
     const dividendGreater = Math.abs(dividend.toNumber()) >= Math.abs(divisor.toNumber());
