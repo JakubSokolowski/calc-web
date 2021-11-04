@@ -157,7 +157,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
 function carryToDigits(decimalValue: number, base: number, startingPosition: number): AdditionOperand[] {
     const result = fromNumber(decimalValue, base);
 
-    return result.toDigitsList()
+    return result.asDigits()
         .filter(isNonZeroDigit)
         .map((digit) => ({
             ...digit,

@@ -20,7 +20,7 @@ export function convertUsingAssociatedBases(
     }
 
     const inputNum = fromStringDirect(valueStr, inputBase);
-    const digits = inputNum.toDigitsList();
+    const digits = inputNum.asDigits();
 
     const details = mapToAssociatedBaseDigits(digits, resultBase);
     const num = fromDigits(details.resultDigits, inputNum.isNegative());
@@ -83,7 +83,7 @@ export function splitToSmallerBaseDigits(digit: Digit, outputBase: number): Digi
     const numDigitsPerPosition = Math.round(logBase(base, outputBase));
 
     const meaningfulDigits = fromNumber(valueInDecimal, outputBase)
-        .toDigitsList()
+        .asDigits()
         .map((digit) => {
             return ({ ...digit, position: 0 });
         });

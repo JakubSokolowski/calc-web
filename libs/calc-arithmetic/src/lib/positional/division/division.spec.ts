@@ -64,7 +64,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('4587', base);
 
             // when
-            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expectedStr = '5462';
@@ -80,7 +80,7 @@ describe('#division', () => {
             const dividend = fromStringDirect('0.76621', base);
             const divisor = fromStringDirect('1224', base);
             // when
-            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList());
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expectedStr = '0';
@@ -105,7 +105,7 @@ describe('#division', () => {
             const firstSliceLength = 4;
 
             // when
-            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev, firstSliceLength);
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.asDigits(), divisor.asDigits(), prev, firstSliceLength);
 
             // then
             const expectedDigits: Digit[] = [
@@ -155,7 +155,7 @@ describe('#division', () => {
             const firstSliceLength = 4;
 
             // when
-            const { slice, sliceSourceLsp } = getDividendSlice(dividend.toDigitsList(), divisor.toDigitsList(), prev, firstSliceLength);
+            const { slice, sliceSourceLsp } = getDividendSlice(dividend.asDigits(), divisor.asDigits(), prev, firstSliceLength);
 
             // then
             const expectedDigits: Digit[] = [
@@ -198,7 +198,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('4587', base);
 
             // when
-            const result = divideAtPosition(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideAtPosition(dividend.asDigits(), divisor.asDigits());
 
             it('should return proper position result', () => {
                 // then
@@ -251,10 +251,10 @@ describe('#division', () => {
             const base = 10;
             const dividend = fromStringDirect('54625', base);
             const divisor = fromStringDirect('4587', base);
-            const initial = divideAtPosition(dividend.toDigitsList(), divisor.toDigitsList());
+            const initial = divideAtPosition(dividend.asDigits(), divisor.asDigits());
 
             // when
-            const result = divideAtPosition(dividend.toDigitsList(), divisor.toDigitsList(), initial);
+            const result = divideAtPosition(dividend.asDigits(), divisor.asDigits(), initial);
 
             it('should return proper position result', () => {
                 // then
@@ -311,7 +311,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('5', base);
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
             // then
             const expected = '10925';
             expect(result.numberResult.toString()).toEqual(expected);
@@ -324,7 +324,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('5', base);
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expected = '12.5';
@@ -339,7 +339,7 @@ describe('#division', () => {
             const divisor = fromStringDirect(' 312', base);
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expected = '3.20512';
@@ -355,7 +355,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('312', base);
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList(), fractionPrecision);
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits(), fractionPrecision);
 
             // then
             const expected = '3.20';
@@ -369,7 +369,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('101', base);
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expected = '10100';
@@ -384,7 +384,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('101', base);      // 5
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expected = '1101.11001'; // 13.8
@@ -399,7 +399,7 @@ describe('#division', () => {
             const divisor = fromStringDirect('101110', base);            // 46
 
             // when
-            const result = divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+            const result = divideDigits(dividend.asDigits(), divisor.asDigits());
 
             // then
             const expected = '100010.11111'; // 34.9921875
@@ -414,7 +414,7 @@ describe('#division', () => {
 
             // when
             expect(() => {
-                divideDigits(dividend.toDigitsList(), divisor.toDigitsList());
+                divideDigits(dividend.asDigits(), divisor.asDigits());
             }).toThrow();
         });
     });

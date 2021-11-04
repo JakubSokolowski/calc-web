@@ -605,10 +605,10 @@ describe('addition', () => {
                 const numB = fromStringDirect(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
+                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).toDigitsList();
+                const numExpected = fromStringDirect(expected, base).asDigits();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -631,10 +631,10 @@ describe('addition', () => {
                 const numB = fromNumber(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
+                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
 
                 // then
-                const numExpected = fromNumber(expected, base).toDigitsList();
+                const numExpected = fromNumber(expected, base).asDigits();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -656,10 +656,10 @@ describe('addition', () => {
                 const numB = fromStringDirect(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.toDigitsList();
+                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).toDigitsList();
+                const numExpected = fromStringDirect(expected, base).asDigits();
                 expect(result).toEqual(numExpected);
             });
         });
