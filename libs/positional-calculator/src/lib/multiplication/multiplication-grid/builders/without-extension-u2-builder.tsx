@@ -111,7 +111,7 @@ export class WithoutExtensionU2Builder extends WithoutExtensionBuilder {
         const digits = this.result
             .multiplicandComplement
             .complement
-            .asDigits()
+            .toDigits()
             .filter(d => !d.isComplementExtension);
 
         return operandDigitsToCellConfig(digits, this.info, this.base);

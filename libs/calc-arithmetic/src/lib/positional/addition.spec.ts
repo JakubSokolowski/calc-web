@@ -255,8 +255,8 @@ describe('addition', () => {
 
         it('should add two digit arrays correctly when numbers are hexadecimal', () => {
             // given
-            const a: AdditionOperand[] = fromStringDirect('1B49', 16).complement.asDigits();
-            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).complement.asDigits();
+            const a: AdditionOperand[] = fromStringDirect('1B49', 16).complement.toDigits();
+            const b: AdditionOperand[] = fromStringDirect('FF2B', 16).complement.toDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {
@@ -308,10 +308,10 @@ describe('addition', () => {
 
         it('should add digit arrays correctly when numbers are binary', () => {
             // given
-            const a: AdditionOperand[] = fromNumber(11, 2).complement.asDigits();
-            const b: AdditionOperand[] = fromNumber(13, 2).complement.asDigits();
-            const c: AdditionOperand[] = fromNumber(9, 2).complement.asDigits();
-            const d: AdditionOperand[] = fromNumber(15, 2).complement.asDigits();
+            const a: AdditionOperand[] = fromNumber(11, 2).complement.toDigits();
+            const b: AdditionOperand[] = fromNumber(13, 2).complement.toDigits();
+            const c: AdditionOperand[] = fromNumber(9, 2).complement.toDigits();
+            const d: AdditionOperand[] = fromNumber(15, 2).complement.toDigits();
 
             const expectedDigits: AdditionOperand[] = [
                 {
@@ -605,10 +605,10 @@ describe('addition', () => {
                 const numB = fromStringDirect(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigits();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).asDigits();
+                const numExpected = fromStringDirect(expected, base).toDigits();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -631,10 +631,10 @@ describe('addition', () => {
                 const numB = fromNumber(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigits();
 
                 // then
-                const numExpected = fromNumber(expected, base).asDigits();
+                const numExpected = fromNumber(expected, base).toDigits();
                 expect(result).toEqual(numExpected);
             });
         });
@@ -656,10 +656,10 @@ describe('addition', () => {
                 const numB = fromStringDirect(b, base);
 
                 // when
-                const result = addPositionalNumbers([numA, numB]).numberResult.asDigits();
+                const result = addPositionalNumbers([numA, numB]).numberResult.toDigits();
 
                 // then
-                const numExpected = fromStringDirect(expected, base).asDigits();
+                const numExpected = fromStringDirect(expected, base).toDigits();
                 expect(result).toEqual(numExpected);
             });
         });

@@ -216,7 +216,7 @@ describe('NumberComplement', () => {
            const complement = new NumberComplement(digitsMock);
 
            // when
-           const result = complement.leastSignificantPosition();
+           const result = complement.lsp();
 
            // then
            expect(result).toEqual(-2);
@@ -227,7 +227,7 @@ describe('NumberComplement', () => {
             const complement = new NumberComplement(integerPartMock);
 
             // when
-            const result = complement.leastSignificantPosition();
+            const result = complement.lsp();
 
             // then
             expect(result).toEqual(0);
@@ -240,7 +240,7 @@ describe('NumberComplement', () => {
             const complement = new NumberComplement(digitsMock);
 
             // when
-            const result = complement.mostSignificantPosition();
+            const result = complement.msp();
 
             // then
             expect(result).toEqual(3);
@@ -251,7 +251,7 @@ describe('NumberComplement', () => {
             const complement = new NumberComplement(digitsMock);
 
             // when
-            const result = complement.mostSignificantPosition(false);
+            const result = complement.msp(false);
 
             // then
             expect(result).toEqual(2);
@@ -270,7 +270,7 @@ describe('NumberComplement', () => {
             const complement = new NumberComplement(digits);
 
             // when
-            const result = complement.mostSignificantPosition();
+            const result = complement.msp();
 
             // then
             expect(result).toEqual(0);
@@ -296,7 +296,7 @@ describe('NumberComplement', () => {
             const complement = new NumberComplement(digitsMock);
 
             // when
-            const result = complement.asDigits();
+            const result = complement.toDigits();
 
             // then
             expect(result).toEqual(digitsMock);

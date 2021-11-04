@@ -8,9 +8,9 @@ describe('WithoutExtensionU2Prepare', () => {
     it('should return prepared operands when multiplicand is same length as multiplier', () => {
         // given
         const multiplicandStr = '(0)1101001';
-        const multiplicand = fromStringDirect(multiplicandStr, base).complement.asDigits();
+        const multiplicand = fromStringDirect(multiplicandStr, base).complement.toDigits();
         const multiplierStr = '(1)1111101';
-        const multiplier = fromStringDirect(multiplierStr, base).complement.asDigits();
+        const multiplier = fromStringDirect(multiplierStr, base).complement.toDigits();
         const operands = [multiplicand, multiplier];
 
         const preprocessor = new WithoutExtensionU2Prepare();
@@ -29,9 +29,9 @@ describe('WithoutExtensionU2Prepare', () => {
     it('should return prepared operands when multiplicand is longer than multiplier', () => {
         // given
         const multiplicandStr = '(0)1101001';
-        const multiplicand = fromStringDirect(multiplicandStr, base).complement.asDigits();
+        const multiplicand = fromStringDirect(multiplicandStr, base).complement.toDigits();
         const multiplierStr = '(1)101';
-        const multiplier = fromStringDirect(multiplierStr, base).complement.asDigits();
+        const multiplier = fromStringDirect(multiplierStr, base).complement.toDigits();
         const operands = [multiplicand, multiplier];
 
         const preprocessor = new WithoutExtensionU2Prepare();

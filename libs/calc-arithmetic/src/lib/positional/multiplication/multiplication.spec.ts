@@ -7,7 +7,7 @@ describe('multiplication', () => {
         it('should multiply row of digits by digit', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).toDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 0,
@@ -48,7 +48,7 @@ describe('multiplication', () => {
         it('should return digits starting with least significant multiplicand position, regardless of multiplier shift', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).toDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 3,
@@ -89,7 +89,7 @@ describe('multiplication', () => {
         it('should multiply row of digits by 0', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).toDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 0,
@@ -190,8 +190,8 @@ describe('multiplication', () => {
         it('should multiply two rows of digits', () => {
             // given
             const base = 10;
-            const multiplicand: MultiplicationOperand[] = fromNumber(999, base).asDigits();
-            const multiplier: MultiplicationOperand[] = fromNumber(99, base).asDigits();
+            const multiplicand: MultiplicationOperand[] = fromNumber(999, base).toDigits();
+            const multiplier: MultiplicationOperand[] = fromNumber(99, base).toDigits();
 
             // when
             const result = multiplyDigitRows(multiplicand, multiplier, false);

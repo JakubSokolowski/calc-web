@@ -75,7 +75,7 @@ export function multiplyDigitRows(
     const sum = addPositionalNumbers(resultNumbers);
     const adjustedSum = adjustForMultiplierFraction(sum, multiplierRow);
     const resultWithProperSign = fromDigits(
-        adjustedSum.numberResult.asDigits(),
+        adjustedSum.numberResult.toDigits(),
         resultNegative
     );
 
@@ -123,7 +123,7 @@ export class DefaultMultiplication extends Multiplication {
 
     protected prepareOperands(): MultiplicationOperand[][] {
         return applyTransformsByType(
-            [this.multiplicand.asDigits(), this.multiplier.asDigits()],
+            [this.multiplicand.toDigits(), this.multiplier.toDigits()],
             [OperandsTransformType.AlignFractions]
         );
     }
@@ -151,7 +151,7 @@ export class DefaultMultiplication extends Multiplication {
             multiplierRow
         );
         const resultWithProperSign = fromDigits(
-            adjustedSum.numberResult.asDigits(),
+            adjustedSum.numberResult.toDigits(),
             this.resultNegative
         );
 

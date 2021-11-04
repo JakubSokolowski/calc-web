@@ -129,7 +129,7 @@ export function getNegativeNumberComplement(
 function getComplementsComplement(
     complement: NumberComplement,
 ): NumberComplement {
-    const [, digits] = computeComplement(complement.asDigits(false));
+    const [, digits] = computeComplement(complement.toDigits(false));
     const extension = getExtensionDigit(complement.base(), !complement.isNegative(), digits[0].position + 1);
     const complementDigits = [extension, ...digits];
     return new NumberComplement(complementDigits);

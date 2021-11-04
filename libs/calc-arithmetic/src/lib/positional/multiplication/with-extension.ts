@@ -40,8 +40,8 @@ export class WithExtension extends DefaultMultiplication {
     prepareOperands(): MultiplicationOperand[][] {
         return applyTransformsByType(
             [
-                this.multiplicand.complement.asDigits(),
-                this.multiplier.complement.asDigits(),
+                this.multiplicand.complement.toDigits(),
+                this.multiplier.complement.toDigits(),
             ],
             [OperandsTransformType.AlignFractions]
         );
@@ -66,10 +66,10 @@ export class WithExtension extends DefaultMultiplication {
 
         if (this.isDigitNegativeComplement(lastMultiplier)) {
             const complement = getComplement(
-                new NumberComplement(this.multiplicand.complement.asDigits())
+                new NumberComplement(this.multiplicand.complement.toDigits())
             );
-            operandsToAdd.push(complement.asDigits());
-            multiplicandComplement = fromDigits(complement.asDigits());
+            operandsToAdd.push(complement.toDigits());
+            multiplicandComplement = fromDigits(complement.toDigits());
         }
 
         const positionCap = this.getPositionCap(multiplicandRow, multiplierRow);
@@ -81,7 +81,7 @@ export class WithExtension extends DefaultMultiplication {
         );
 
         const trimmedLeadingZeros = this.trimSumDigits(
-            adjustedSum.numberResult.asDigits()
+            adjustedSum.numberResult.toDigits()
         );
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,

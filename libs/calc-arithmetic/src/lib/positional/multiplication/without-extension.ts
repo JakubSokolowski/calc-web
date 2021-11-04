@@ -24,8 +24,8 @@ export class WithoutExtension extends WithExtension {
 
         return applyTransformsByType(
             [
-                this.multiplicand.complement.asDigits(),
-                this.multiplier.complement.asDigits(),
+                this.multiplicand.complement.toDigits(),
+                this.multiplier.complement.toDigits(),
             ],
             transforms
         );
@@ -70,13 +70,13 @@ export class WithoutExtension extends WithExtension {
                 new NumberComplement(multiplicandRow)
             );
             const lastDigits = this.multiplyRowByDigit(
-                complement.asDigits(),
+                complement.toDigits(),
                 absDigit
             ).resultDigits;
 
             digitsToAdd.push(lastDigits);
 
-            multiplicandComplement = fromDigits(complement.asDigits());
+            multiplicandComplement = fromDigits(complement.toDigits());
             lastMultiplierDigit = lastMultiplier;
         } else {
             lastMultiplierDigit = positionsAscending[0];
@@ -89,7 +89,7 @@ export class WithoutExtension extends WithExtension {
             multiplierRow
         );
         const trimmedLeadingZeros = this.trimSumDigits(
-            adjustedSum.numberResult.asDigits()
+            adjustedSum.numberResult.toDigits()
         );
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,

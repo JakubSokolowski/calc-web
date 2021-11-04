@@ -30,7 +30,7 @@ describe('PositionalNumber', () => {
 
 
             // when
-            const digits = result.asDigits();
+            const digits = result.toDigits();
 
             // then
             expect(digits).toEqual(expected);
@@ -73,7 +73,7 @@ describe('PositionalNumber', () => {
             ];
 
             // when
-            const digits = result.asDigits();
+            const digits = result.toDigits();
 
             // then
             expect(digits).toEqual(expected);
