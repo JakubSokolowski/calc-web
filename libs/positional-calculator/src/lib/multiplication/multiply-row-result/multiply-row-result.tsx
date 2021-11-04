@@ -8,9 +8,9 @@ interface P {
 }
 
 export const MultiplyRowDetails: FC<P> = ({ result }) => {
-    const multiplicand = fromDigits(result.multiplicands).result;
-    const multiplier = fromStringDirect(result.multiplier.representationInBase, result.multiplier.base).result;
-    const resultNumber = fromDigits(result.resultDigits).result;
+    const multiplicand = fromDigits(result.multiplicands);
+    const multiplier = fromStringDirect(result.multiplier.representationInBase, result.multiplier.base);
+    const resultNumber = fromDigits(result.resultDigits);
 
     return (
         <div style={{ display: 'flex', flexDirection: 'row' }}>

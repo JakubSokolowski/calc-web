@@ -13,8 +13,8 @@ describe('ResultDetails', () => {
     describe('when result has some negative operands', () => {
         it('should complement conversion row', () => {
             // given
-            const a = fromNumber(41, 10).result;
-            const b = fromNumber(-19, 10).result;
+            const a = fromNumber(41, 10);
+            const b = fromNumber(-19, 10);
             const result = addPositionalNumbers([a, b]);
 
             // when
@@ -32,8 +32,8 @@ describe('ResultDetails', () => {
     describe('when result is addition', () => {
         it('should render', () => {
             // given
-            const a = fromNumber(41, 10).result;
-            const b = fromNumber(19, 10).result;
+            const a = fromNumber(41, 10);
+            const b = fromNumber(19, 10);
             const result = addPositionalNumbers([a, b]);
 
             // when
@@ -49,8 +49,8 @@ describe('ResultDetails', () => {
     describe('when result is subtraction', () => {
         it('should render', () => {
             // given
-            const a = fromNumber(41, 10).result;
-            const b = fromNumber(19, 10).result;
+            const a = fromNumber(41, 10);
+            const b = fromNumber(19, 10);
             const result = subtractPositionalNumbers([a, b]);
 
             // when
@@ -66,8 +66,8 @@ describe('ResultDetails', () => {
     describe('when result is not implemented operation', () => {
         it('should throw error', () => {
             // given
-            const a = fromNumber(41, 10).result;
-            const b = fromNumber(19, 10).result;
+            const a = fromNumber(41, 10);
+            const b = fromNumber(19, 10);
             const result = multiplyDefault([a, b]);
 
            // then

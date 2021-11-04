@@ -1,5 +1,12 @@
 import React, { FC, useCallback } from 'react';
-import { BaseDigits, Conversion, fromString, getComplement, isValidRepresentationStr } from '@calc/calc-arithmetic';
+import {
+    BaseDigits,
+    Conversion,
+    fromString,
+    fromStringDetailed,
+    getComplement,
+    isValidRepresentationStr
+} from '@calc/calc-arithmetic';
 import SwapHorizIcon from '@mui/icons-material/SwapHoriz';
 import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useSelector } from 'react-redux';
@@ -102,7 +109,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
     const onSubmit = (values: BaseConverterParams) => {
         const { inputStr, inputBase, outputBase, precision } = values;
-        const conversion = fromString(inputStr, inputBase, outputBase, precision);
+        const conversion = fromStringDetailed(inputStr, inputBase, outputBase, precision);
         onConversionChange(conversion, precision);
 
         history.replace({
@@ -181,7 +188,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 inputStr,
                 inputBase,
                 10
-            ).result.decimalValue.toString();
+            ).decimalValue.toString();
         } else {
             return '0.0';
         }

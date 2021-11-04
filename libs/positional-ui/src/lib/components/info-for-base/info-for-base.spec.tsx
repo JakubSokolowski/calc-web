@@ -7,7 +7,7 @@ import { DisplayBase } from '../../models';
 describe('InfoForBase', () => {
     let container;
 
-    const input = fromNumber(10, 10).result;
+    const input = fromNumber(10, 10);
     const displayBase: DisplayBase = {
         base: 8,
         showComplement: true
@@ -22,5 +22,5 @@ describe('InfoForBase', () => {
     it('should render', () => {
         expect(container).toBeTruthy();
     });
-    
+
 });

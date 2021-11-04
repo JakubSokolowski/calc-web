@@ -12,8 +12,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply two negative numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromStringDirect('(9)6745', base).result;
-            const multiplier = fromStringDirect('(9)8123', base).result;
+            const multiplicand = fromStringDirect('(9)6745', base);
+            const multiplier = fromStringDirect('(9)8123', base);
 
             // when
             const result = multiplyWithoutExtension([multiplicand, multiplier]);
@@ -26,8 +26,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply negative number by positive', () => {
             // given
             const base = 8;
-            const multiplicand = fromStringDirect('(7)45', base).result;
-            const multiplier = fromStringDirect('(0)723', base).result;
+            const multiplicand = fromStringDirect('(7)45', base);
+            const multiplier = fromStringDirect('(0)723', base);
 
             // when
             const result = multiplyWithoutExtension([multiplicand, multiplier]);
@@ -42,8 +42,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply positive number by negative', () => {
             // given
             const base = 8;
-            const multiplicand = fromStringDirect('(0)3156', base).result;
-            const multiplier = fromStringDirect('(7)6423', base).result;
+            const multiplicand = fromStringDirect('(0)3156', base);
+            const multiplier = fromStringDirect('(7)6423', base);
 
             // when
             const result = multiplyWithoutExtension([multiplicand, multiplier]);
@@ -59,8 +59,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply 2 base 7 numbers', () => {
             // given
             const base = 7;
-            const x = fromStringDirect('4', base).result;
-            const y = fromStringDirect('3', base).result;
+            const x = fromStringDirect('4', base);
+            const y = fromStringDirect('3', base);
 
             // when
             const result = multiplyWithoutExtension([x, y]);
@@ -76,8 +76,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply 2 base 11 numbers', () => {
             // given
             const base = 11;
-            const x = fromStringDirect('5', base).result;
-            const y = fromStringDirect('94', base).result;
+            const x = fromStringDirect('5', base);
+            const y = fromStringDirect('94', base);
 
             // when
             const result = multiplyWithoutExtension([x, y]);
@@ -93,8 +93,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply 2 base 4 numbers', () => {
             // given
             const base = 4;
-            const x = fromStringDirect('2', base).result;
-            const y = fromStringDirect('3300', base).result;
+            const x = fromStringDirect('2', base);
+            const y = fromStringDirect('3300', base);
 
             // when
             const result = multiplyWithoutExtension([x, y]);
@@ -109,8 +109,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply positive U2 numbers by negative', () => {
             // given
             const base = 8;
-            const multiplicand = fromStringDirect('(0)3156', base).result;
-            const multiplier = fromStringDirect('(7)6423', base).result;
+            const multiplicand = fromStringDirect('(0)3156', base);
+            const multiplier = fromStringDirect('(7)6423', base);
 
             // when
             const result = multiplyWithoutExtension([multiplicand, multiplier]);
@@ -125,8 +125,8 @@ describe('multiplication-without-extension', () => {
         it('should multiply U2 numbers', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)101011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)101011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             // when
             const result = multiplyWithoutExtension([x, y]);
@@ -144,8 +144,8 @@ describe('multiplication-without-extension', () => {
             let algorithm: MultiplicationWithoutExtensionU2;
 
             const base = 2;
-            const multiplicand = fromStringDirect('(1)101011', base).result;
-            const multiplier = fromStringDirect('(1)000110', base).result;
+            const multiplicand = fromStringDirect('(1)101011', base);
+            const multiplier = fromStringDirect('(1)000110', base);
 
             beforeEach(() => {
                 algorithm = new MultiplicationWithoutExtensionU2([multiplicand, multiplier]);
@@ -194,8 +194,8 @@ describe('multiplication-without-extension', () => {
     describe('#prepareOperands', () => {
         it('should prepare operands', () => {
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             const alg = new MultiplicationWithoutExtensionU2([x, y]);
 

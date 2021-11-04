@@ -1,7 +1,7 @@
 import { mount, ReactWrapper } from 'enzyme';
 import { buildIntegralConversionGrid, GridLabel, HoverGrid } from '@calc/grid';
 import React from 'react';
-import { fromNumber } from '@calc/calc-arithmetic';
+import { fromNumber, fromNumberDetailed } from '@calc/calc-arithmetic';
 import HoverGridCell from '../hover-cell/hover-grid-cell';
 import { OperandLabel } from '../operand-label/operand-label';
 
@@ -18,7 +18,7 @@ document.createRange = () => ({
 describe('#HoverGrid', () => {
     let container: ReactWrapper;
 
-    const conversion = fromNumber(24.23, 2);
+    const conversion = fromNumberDetailed(24.23, 2);
     const { lines, groups, values } = buildIntegralConversionGrid(conversion);
 
     beforeEach(() => {

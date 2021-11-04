@@ -20,7 +20,7 @@ const Root = styled('div')(({ theme }) => ({
 
 export const OperationRenderer: FC<OperationTemplate<AlgorithmType>> = ({base, operands, operation, algorithm}) => {
     const nums: PositionalNumber[] = operands.map((op) => {
-        return fromStringDirect(op, base).result;
+        return fromStringDirect(op, base);
     });
 
     const opParams: OperationParams = {

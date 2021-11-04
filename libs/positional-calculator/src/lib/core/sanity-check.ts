@@ -93,7 +93,7 @@ export function serializeForSentry(check: SanityCheck): Record<string, unknown> 
            actualInBase: check.actual.toString(),
            actualInDecimal: check.actual.decimalValue.toString(),
            expectedInDecimal: check.expectedDecimal,
-           expectedInBase: fromNumber(check.expectedDecimal, check.params.base).result.toString(),
+           expectedInBase: fromNumber(check.expectedDecimal, check.params.base).toString(),
            operation: check.params.operation,
            algorithm: check.params.algorithm,
            base: check.params.base,
@@ -104,7 +104,7 @@ export function serializeForSentry(check: SanityCheck): Record<string, unknown> 
 
 export function sanityCheck(params: OperationParams, actual: PositionalNumber): SanityCheck {
     const expectedDecimal = getExpected(params).check();
-    const expectedInBase = fromNumber(expectedDecimal, params.base).result.toString();
+    const expectedInBase = fromNumber(expectedDecimal, params.base).toString();
     const precision = 2;
     const fixedExpected = expectedDecimal.toFixed(precision);
     const fixedActual = actual.decimalValue.toFixed(precision);

@@ -1,5 +1,5 @@
 import { buildFractionalConversionGrid, buildIntegralConversionGrid } from './conversion-grid';
-import { fromNumber, fromString } from '@calc/calc-arithmetic';
+import { fromNumberDetailed, fromString, fromStringDetailed } from '@calc/calc-arithmetic';
 import {
     fractionalConversionExactGridMock,
     fractionalConversionGridMock,
@@ -12,7 +12,7 @@ describe('hover-operation-grid', () => {
         describe('when building grid from conversion', () => {
             // given
             let grid: HoverOperationGrid;
-            const conversion = fromNumber(24.23, 2);
+            const conversion = fromNumberDetailed(24.23, 2);
             const precision = 5;
 
             beforeEach(() => {
@@ -40,7 +40,7 @@ describe('hover-operation-grid', () => {
             // ISSUE_ID: 32
             it('should return proper gird values for such conversion which subsequent multiplicands are shorter than previous', () => {
                 // given
-                const conv = fromNumber(24.125, 2);
+                const conv = fromNumberDetailed(24.125, 2);
                 const precision = 5;
 
                 // when
@@ -57,7 +57,7 @@ describe('hover-operation-grid', () => {
         describe('when building integral grid from conversion', () => {
             // given
             let grid: HoverOperationGrid;
-            const conversion = fromNumber(24.23, 2);
+            const conversion = fromNumberDetailed(24.23, 2);
 
             beforeEach(() => {
                 // when
@@ -84,7 +84,7 @@ describe('hover-operation-grid', () => {
             // ISSUE_ID: 41
             it('should return grid with proper conversion lines for conversion to base 10', () => {
                 // given
-                const conv = fromString('111001011.01100', 2, 10);
+                const conv = fromStringDetailed('111001011.01100', 2, 10);
 
                 // when
                 const grid = buildIntegralConversionGrid(conv);

@@ -7,8 +7,8 @@ describe('ScaleToDivisor', () => {
     it('should return prepared operands when divisor has fraction part', () => {
         // given
         const base = 10;
-        const dividend = fromStringDirect('62', base).result.toDigitsList();
-        const divisor = fromStringDirect('0.5', base).result.toDigitsList();
+        const dividend = fromStringDirect('62', base).asDigits();
+        const divisor = fromStringDirect('0.5', base).asDigits();
         const operands = [dividend, divisor];
 
         const preprocessor = new ScaleToDivisor();
@@ -27,8 +27,8 @@ describe('ScaleToDivisor', () => {
     it('should return initial operands when divisor has no part', () => {
         // given
         const base = 10;
-        const dividend = fromStringDirect('62.2', base).result.toDigitsList();
-        const divisor = fromStringDirect('5', base).result.toDigitsList();
+        const dividend = fromStringDirect('62.2', base).asDigits();
+        const divisor = fromStringDirect('5', base).asDigits();
         const operands = [dividend, divisor];
 
         const preprocessor = new ScaleToDivisor();

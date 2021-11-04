@@ -31,7 +31,7 @@ interface P {
 
 export const AssociatedBaseConversionResult: FC<P> = ({ conversion }) => {
     const [inputStr, inputBase] = conversion.input;
-    const inputNumber = fromStringDirect(inputStr, inputBase).result;
+    const inputNumber = fromStringDirect(inputStr, inputBase);
 
     return (
         <Root>

@@ -14,7 +14,7 @@ export const InfoForBase:FC<P> = ({input, display}) => {
 
     const inTargetBase = input.base() === base
         ? input
-        : fromNumber(input.decimalValue, base).result;
+        : fromNumber(input.decimalValue, base);
 
     const numberRepresentation = `X_{${base}}=${formatWithLatexSpaces(inTargetBase.toString())}`;
     const complementRepresentation = `X_{U${base}}=${formatWithLatexSpaces(inTargetBase.complement.toString())}`;

@@ -618,7 +618,7 @@ describe('base-converter', () => {
             const expectedComplement = '(0)11001.1';
 
             // when
-            const result = fromNumber(input, base).result;
+            const result = fromNumber(input, base);
 
             // then
             expect(result.valueInBase).toEqual(expected);
@@ -633,7 +633,7 @@ describe('base-converter', () => {
             const expectedComplement = '(0)11001.1';
 
             // when
-            const result = fromNumber(input, base).result;
+            const result = fromNumber(input, base);
 
             // then
             expect(result.valueInBase).toEqual(expected);
@@ -648,7 +648,7 @@ describe('base-converter', () => {
             const expectedComplement = '(0)11001.1';
 
             // when
-            const result = fromNumber(input, base).result;
+            const result = fromNumber(input, base);
 
             // then
             expect(result.valueInBase).toEqual(expected);
@@ -667,8 +667,7 @@ describe('base-converter', () => {
             const expected = new BigNumber(50029);
 
             // when
-            const result = fromString(input, inputBase, outputBase)
-                .result;
+            const result = fromString(input, inputBase, outputBase);
 
             // then
             expect(result.valueInBase).toEqual(expected.toString());
@@ -682,8 +681,7 @@ describe('base-converter', () => {
             const expected = "-100011000";
 
             // when
-            const result = fromString(input, inputBase, outputBase)
-                .result;
+            const result = fromString(input, inputBase, outputBase);
 
             // then
             expect(result.valueInBase).toEqual(expected);
@@ -697,8 +695,7 @@ describe('base-converter', () => {
             const expected = new BigNumber(781.703125);
 
             // when
-            const result = fromString(input, inputBase, outputBase)
-                .result;
+            const result = fromString(input, inputBase, outputBase);
 
             // then
             expect(result.valueInBase).toEqual(expected.toString());
@@ -712,8 +709,7 @@ describe('base-converter', () => {
             const expected = new BigNumber(26);
 
             // when
-            const result = fromString(input, inputBase, outputBase)
-                .result;
+            const result = fromString(input, inputBase, outputBase);
 
             // then
             expect(result.valueInBase).toEqual(expected.toString());
@@ -728,8 +724,7 @@ describe('base-converter', () => {
             const expected = new BigNumber(26);
 
             // when
-            const result = fromString(input, inputBase, outputBase)
-                .result;
+            const result = fromString(input, inputBase, outputBase);
 
             // then
             expect(result.valueInBase).toEqual(expected.toString());

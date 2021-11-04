@@ -2,7 +2,9 @@
 export {
     StandardBaseConverter,
     fromNumber,
+    fromNumberDetailed,
     fromString,
+    fromStringDetailed,
     fromStringDirect,
     fromDigits,
     Conversion,

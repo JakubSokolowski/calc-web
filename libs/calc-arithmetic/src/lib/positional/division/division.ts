@@ -21,7 +21,7 @@ export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5
     const resultWithProperSign = fromDigits(
         result.numberResult.toDigitsList(),
         resultNegative
-    ).result;
+    );
 
     return {
         ...result,
@@ -68,7 +68,7 @@ export function divideDigits(dividend: DivisionOperand[], divisor: DivisionOpera
     }
 
     const resultDigits = positionResultsToNumber(positionResults);
-    const numberResult = fromDigits(trimLeadingZeros(resultDigits)).result;
+    const numberResult = fromDigits(trimLeadingZeros(resultDigits));
 
     return {
         numberOperands: [],
@@ -112,12 +112,12 @@ export function divideAtPosition(dividend: DivisionOperand[], divisor: DivisionO
     const divisionIndex = prev ? prev.divisionIndex + 1 : 0;
     const dividendSlice = getDividendSlice(dividend, divisor, prev, firstDividendSliceLength);
     const { slice, sliceSourceLsp } = dividendSlice;
-    const divisorPosNum = fromDigits(divisor).result;
+    const divisorPosNum = fromDigits(divisor);
 
     // estimate how many times the divisor will fit in dividend slice
     const outputPosition = prev ? prev.valueAtPosition.position - 1 : sliceSourceLsp;
     const quotient = integerQuotient(slice, divisorPosNum, outputPosition);
-    const quotientNum = fromDigits([quotient]).result;
+    const quotientNum = fromDigits([quotient]);
 
     // subtraction for position - get subtrahend: dividendSlice * quotient
     const divisorTimesQuotient = multiplyDefault([divisorPosNum, quotientNum]);
@@ -165,7 +165,7 @@ function getNextDividendSlice(dividend: DivisionOperand[], divisor: DivisionOper
     const reindexedDigitsSlice = reindexToLsp(digitsSlice, 0);
 
     return {
-        slice: fromDigits(reindexedDigitsSlice).result,
+        slice: fromDigits(reindexedDigitsSlice),
         sliceSourceLsp: leastSignificantPosition(digitsSlice)
     };
 }
@@ -186,18 +186,18 @@ function getInitialDividendSlice(dividend: DivisionOperand[], divisor: DivisionO
     const digitsSlice = dividend.slice(0, sliceLength);
     const reindexedDigitsSlice = reindexToLsp(dividend.slice(0, sliceLength), 0);
     return {
-        slice: fromDigits(trimLeadingZeros(reindexedDigitsSlice)).result,
+        slice: fromDigits(trimLeadingZeros(reindexedDigitsSlice)),
         sliceSourceLsp: leastSignificantPosition(digitsSlice)
     };
 }
 
 function initialSliceLength(dividend: DivisionOperand[], divisor: DivisionOperand[]): number {
-    const dividendAsNum = fromDigits(dividend).result.toNumber();
-    const divisorNum = fromDigits(divisor).result.toNumber();
+    const dividendAsNum = fromDigits(dividend).toNumber();
+    const divisorNum = fromDigits(divisor).toNumber();
     if(divisorNum > dividendAsNum) return 1;
     const numDivisorDigits = divisor.length;
-    const sliceAsNum = fromDigits(dividend.slice(0, numDivisorDigits)).result.toNumber();
-    const divisorAsNum = fromDigits(divisor).result.toNumber();
+    const sliceAsNum = fromDigits(dividend.slice(0, numDivisorDigits)).toNumber();
+    const divisorAsNum = fromDigits(divisor).toNumber();
     return divisorAsNum > sliceAsNum
         ? numDivisorDigits + 1
         : numDivisorDigits;

@@ -7,8 +7,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply two positive numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(999, base).result;
-            const multiplier = fromNumber(99, base).result;
+            const multiplicand = fromNumber(999, base);
+            const multiplier = fromNumber(99, base);
 
             // when
             const result = multiplyWithExtensions([multiplicand, multiplier]);
@@ -21,8 +21,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply negative by positive', () => {
             // given
             const base = 8;
-            const multiplicand = fromStringDirect('-33', base).result;
-            const multiplier = fromStringDirect('723', base).result;
+            const multiplicand = fromStringDirect('-33', base);
+            const multiplier = fromStringDirect('723', base);
 
             // when
             const result = multiplyWithExtensions([multiplicand, multiplier]);
@@ -35,8 +35,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply positive and negative in base 8', () => {
             // given
             const base = 8;
-            const multiplicand = fromStringDirect('(0)3156', base).result;
-            const multiplier = fromStringDirect('(7)6423', base).result;
+            const multiplicand = fromStringDirect('(0)3156', base);
+            const multiplier = fromStringDirect('(7)6423', base);
 
             // when
             const result = multiplyWithExtensions([multiplicand, multiplier]);
@@ -51,8 +51,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply two negative numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromStringDirect('(9)22', base).result;
-            const multiplier = fromStringDirect('(9)12', base).result;
+            const multiplicand = fromStringDirect('(9)22', base);
+            const multiplier = fromStringDirect('(9)12', base);
 
             // when
             const result = multiplyWithExtensions([multiplicand, multiplier]);
@@ -65,8 +65,8 @@ describe('multiply-with-extensions', () => {
         it('should follow associative property of multiplication', () => {
             // given
             const base = 10;
-            const x = fromStringDirect('-88', base).result;
-            const y = fromStringDirect('78', base).result;
+            const x = fromStringDirect('-88', base);
+            const y = fromStringDirect('78', base);
 
             // when
             const xy = multiplyWithExtensions([x, y]);
@@ -81,8 +81,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply by 0', () => {
             // given
             const base = 10;
-            const x = fromStringDirect('123', base).result;
-            const y = fromStringDirect('0', base).result;
+            const x = fromStringDirect('123', base);
+            const y = fromStringDirect('0', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -95,8 +95,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 0 by number', () => {
             // given
             const base = 10;
-            const x = fromStringDirect('0', base).result;
-            const y = fromStringDirect('123', base).result;
+            const x = fromStringDirect('0', base);
+            const y = fromStringDirect('123', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -109,8 +109,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply U2 numbers', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -126,8 +126,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 1 in U2 by number between 0 and 1', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('1', base).result;
-            const y = fromStringDirect('0.1', base).result;
+            const x = fromStringDirect('1', base);
+            const y = fromStringDirect('0.1', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -143,8 +143,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 0 by number in U2', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('0', base).result;
-            const y = fromStringDirect('110.101', base).result;
+            const x = fromStringDirect('0', base);
+            const y = fromStringDirect('110.101', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -160,8 +160,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply number by 0 in U2', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('10.111', base).result;
-            const y = fromStringDirect('0', base).result;
+            const x = fromStringDirect('10.111', base);
+            const y = fromStringDirect('0', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -177,8 +177,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 2 b64 numbers in with fraction parts', () => {
             // given
             const base = 64;
-            const x = fromStringDirect('12. 34', base).result;
-            const y = fromStringDirect('11 08', base).result;
+            const x = fromStringDirect('12. 34', base);
+            const y = fromStringDirect('11 08', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -194,8 +194,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 2 base 7 numbers', () => {
             // given
             const base = 7;
-            const x = fromStringDirect('4', base).result;
-            const y = fromStringDirect('3', base).result;
+            const x = fromStringDirect('4', base);
+            const y = fromStringDirect('3', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -211,8 +211,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 2 base 11 numbers', () => {
             // given
             const base = 11;
-            const x = fromStringDirect('5', base).result;
-            const y = fromStringDirect('94', base).result;
+            const x = fromStringDirect('5', base);
+            const y = fromStringDirect('94', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);
@@ -228,8 +228,8 @@ describe('multiply-with-extensions', () => {
         it('should multiply 2 base 4 numbers', () => {
             // given
             const base = 4;
-            const x = fromStringDirect('2', base).result;
-            const y = fromStringDirect('3300', base).result;
+            const x = fromStringDirect('2', base);
+            const y = fromStringDirect('3300', base);
 
             // when
             const result = multiplyWithExtensions([x, y]);

@@ -116,7 +116,7 @@ export function subtractDigitArrays(operands: SubtractionOperand[][]): Subtracti
     }
 
     const resultDigits = extractResultDigitsFromSubtraction(positionResults, operands);
-    const numberResult = fromDigits(resultDigits).result;
+    const numberResult = fromDigits(resultDigits);
 
     return {
         operands,
@@ -136,7 +136,7 @@ function borrowFromPosition(base: number, borrow: Borrow, minuendLookup: Record<
     const valueBeforeBorrow = beforeBorrow.valueInDecimal;
 
     const valueAfterBorrow = valueBeforeBorrow - amount;
-    const representationAfterBorrow = fromNumber(valueAfterBorrow, base).result.toString();
+    const representationAfterBorrow = fromNumber(valueAfterBorrow, base).toString();
     const afterBorrow: Digit = {
         ...beforeBorrow,
         valueInDecimal: valueAfterBorrow,
@@ -163,7 +163,7 @@ function borrowToSource(base: number, borrow: Borrow, lookupMinuend: Record<numb
     const positionDifference = fromPosition - sourcePosition;
 
     const valueAfterBorrow = valueBeforeBorrow + (amount * Math.pow(base, positionDifference));
-    const representationAfterBorrow = fromNumber(valueAfterBorrow, base).result.toString();
+    const representationAfterBorrow = fromNumber(valueAfterBorrow, base).toString();
 
     const afterBorrow: Digit = {
         ...beforeBorrow,

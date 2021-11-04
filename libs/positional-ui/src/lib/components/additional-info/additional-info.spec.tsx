@@ -6,7 +6,7 @@ import { AdditionalInfo } from './additional-info';
 describe('AdditionalInfo', () => {
     let container;
 
-    const input = fromNumber(10, 16).result;
+    const input = fromNumber(10, 16);
 
     beforeEach(() => {
         container = mount(

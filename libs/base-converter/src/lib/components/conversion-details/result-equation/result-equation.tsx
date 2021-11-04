@@ -40,7 +40,7 @@ export const ResultEquation: FC<P> = ({ conversion, firstStage, lastStage }) => 
 
     const output = conversion.getStage(lastStage);
     const [inputRep, inputBase] = conversion.getStage(firstStage).input;
-    const inputNumber = fromStringDirect(inputRep, inputBase).result;
+    const inputNumber = fromStringDirect(inputRep, inputBase);
 
     return (
         <Root>

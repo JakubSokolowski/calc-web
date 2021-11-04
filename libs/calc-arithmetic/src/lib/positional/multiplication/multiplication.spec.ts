@@ -7,7 +7,7 @@ describe('multiplication', () => {
         it('should multiply row of digits by digit', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).result.toDigitsList();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 0,
@@ -48,7 +48,7 @@ describe('multiplication', () => {
         it('should return digits starting with least significant multiplicand position, regardless of multiplier shift', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).result.toDigitsList();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 3,
@@ -89,7 +89,7 @@ describe('multiplication', () => {
         it('should multiply row of digits by 0', () => {
             // given
             const base = 10;
-            const digits: MultiplicationOperand[] = fromNumber(99, base).result.toDigitsList();
+            const digits: MultiplicationOperand[] = fromNumber(99, base).asDigits();
 
             const multiplier: MultiplicationOperand = {
                 position: 0,
@@ -190,8 +190,8 @@ describe('multiplication', () => {
         it('should multiply two rows of digits', () => {
             // given
             const base = 10;
-            const multiplicand: MultiplicationOperand[] = fromNumber(999, base).result.toDigitsList();
-            const multiplier: MultiplicationOperand[] = fromNumber(99, base).result.toDigitsList();
+            const multiplicand: MultiplicationOperand[] = fromNumber(999, base).asDigits();
+            const multiplier: MultiplicationOperand[] = fromNumber(99, base).asDigits();
 
             // when
             const result = multiplyDigitRows(multiplicand, multiplier, false);
@@ -244,8 +244,8 @@ describe('multiplication', () => {
         it('should multiply two positive numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(999, base).result;
-            const multiplier = fromNumber(99, base).result;
+            const multiplicand = fromNumber(999, base);
+            const multiplier = fromNumber(99, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -258,8 +258,8 @@ describe('multiplication', () => {
         it('should multiply two negative numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(-999, base).result;
-            const multiplier = fromNumber(-99, base).result;
+            const multiplicand = fromNumber(-999, base);
+            const multiplier = fromNumber(-99, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -272,8 +272,8 @@ describe('multiplication', () => {
         it('should multiply positive and negative numbers', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(999, base).result;
-            const multiplier = fromNumber(-99, base).result;
+            const multiplicand = fromNumber(999, base);
+            const multiplier = fromNumber(-99, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -286,8 +286,8 @@ describe('multiplication', () => {
         it('should multiply multiplicand with fractional part by multiplier', () => {
             // given
             const base = 10;
-            const multiplicand = fromStringDirect('12.34', base).result;
-            const multiplier = fromStringDirect('78', base).result;
+            const multiplicand = fromStringDirect('12.34', base);
+            const multiplier = fromStringDirect('78', base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -300,8 +300,8 @@ describe('multiplication', () => {
         it('should multiply multiplicand by multiplier with fractional part', () => {
             // given
             const base = 10;
-            const multiplicand = fromStringDirect('78', base).result;
-            const multiplier = fromStringDirect('12.34', base).result;
+            const multiplicand = fromStringDirect('78', base);
+            const multiplier = fromStringDirect('12.34', base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -314,8 +314,8 @@ describe('multiplication', () => {
         it('should multiply number by 0', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(9, base).result;
-            const multiplier = fromNumber(0, base).result;
+            const multiplicand = fromNumber(9, base);
+            const multiplier = fromNumber(0, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -328,8 +328,8 @@ describe('multiplication', () => {
         it('should multiply number by 0.0', () => {
             // given
             const base = 10;
-            const multiplicand = fromStringDirect('12', base).result;
-            const multiplier = fromStringDirect('0.0', base).result;
+            const multiplicand = fromStringDirect('12', base);
+            const multiplier = fromStringDirect('0.0', base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -342,8 +342,8 @@ describe('multiplication', () => {
         it('should multiply number by 0.1', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(1, base).result;
-            const multiplier = fromNumber(0.1, base).result;
+            const multiplicand = fromNumber(1, base);
+            const multiplier = fromNumber(0.1, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -356,8 +356,8 @@ describe('multiplication', () => {
         it('should multiply number by 0.001', () => {
             // given
             const base = 10;
-            const multiplicand = fromNumber(1, base).result;
-            const multiplier = fromNumber(0.001, base).result;
+            const multiplicand = fromNumber(1, base);
+            const multiplier = fromNumber(0.001, base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);
@@ -371,8 +371,8 @@ describe('multiplication', () => {
         it('should multiply base 5 number with fraction part by 0', () => {
             // given
             const base = 5;
-            const multiplicand = fromStringDirect("4023.442", base).result;
-            const multiplier = fromStringDirect("0", base).result;
+            const multiplicand = fromStringDirect("4023.442", base);
+            const multiplier = fromStringDirect("0", base);
 
             // when
             const result = multiplyDefault([multiplicand, multiplier]);

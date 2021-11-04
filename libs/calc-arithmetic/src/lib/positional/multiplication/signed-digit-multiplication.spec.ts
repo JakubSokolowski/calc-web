@@ -10,8 +10,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply two positive numbers', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             // when
             const result = multiplyBooth([x, y]);
@@ -28,8 +28,8 @@ describe('signed-digit-multiplication', () => {
         it('should negative multiplicand by positive multiplier', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(0)110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(0)110', base);
 
             // when
             const result = multiplyBooth([x, y]);
@@ -46,8 +46,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply by number with fraction part', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110.101', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110.101', base);
 
             // when
             const result = multiplyBooth([x, y]);
@@ -66,8 +66,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply two positive numbers', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             // when
             const result = multiplyBoothMcSorley([x, y]);
@@ -84,8 +84,8 @@ describe('signed-digit-multiplication', () => {
         it('should negative multiplicand by positive multiplier', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(0)110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(0)110', base);
 
             // when
             const result = multiplyBoothMcSorley([x, y]);
@@ -102,8 +102,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply by number with fraction part', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110.101', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110.101', base);
 
             // when
             const result = multiplyBoothMcSorley([x, y]);
@@ -121,8 +121,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply 0 by number', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('0', base).result;
-            const y = fromStringDirect('110.101', base).result;
+            const x = fromStringDirect('0', base);
+            const y = fromStringDirect('110.101', base);
 
             // when
             const result = multiplyBoothMcSorley([x, y]);
@@ -138,8 +138,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply number by 0', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('10.111', base).result;
-            const y = fromStringDirect('0', base).result;
+            const x = fromStringDirect('10.111', base);
+            const y = fromStringDirect('0', base);
 
             // when
             const result = multiplyBoothMcSorley([x, y]);
@@ -156,8 +156,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply two positive numbers', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110', base);
 
             // when
             const result = multiplyBoothMcSorleyAlt([x, y]);
@@ -174,8 +174,8 @@ describe('signed-digit-multiplication', () => {
         it('should negative multiplicand by positive multiplier', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(0)110', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(0)110', base);
 
             // when
             const result = multiplyBoothMcSorleyAlt([x, y]);
@@ -192,8 +192,8 @@ describe('signed-digit-multiplication', () => {
         it('should multiply by number with fraction part', () => {
             // given
             const base = 2;
-            const x = fromStringDirect('(1)01011', base).result;
-            const y = fromStringDirect('(1)000110.101', base).result;
+            const x = fromStringDirect('(1)01011', base);
+            const y = fromStringDirect('(1)000110.101', base);
 
             // when
             const result = multiplyBoothMcSorleyAlt([x, y]);

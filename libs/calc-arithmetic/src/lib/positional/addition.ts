@@ -75,7 +75,7 @@ export function addDigitsArrays(digits: AdditionOperand[][], positionCap?: numbe
     }
 
     const resultDigits = extractResultDigitsFromAddition(result, positionCap);
-    const numberResult = fromDigits(resultDigits).result;
+    const numberResult = fromDigits(resultDigits);
 
     return {
         stepResults: result,
@@ -155,7 +155,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
 }
 
 function carryToDigits(decimalValue: number, base: number, startingPosition: number): AdditionOperand[] {
-    const { result } = fromNumber(decimalValue, base);
+    const result = fromNumber(decimalValue, base);
 
     return result.toDigitsList()
         .filter(isNonZeroDigit)

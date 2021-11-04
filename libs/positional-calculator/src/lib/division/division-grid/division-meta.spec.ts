@@ -6,8 +6,8 @@ describe('division-meta', () => {
         it('should return proper left offset for result row with integer operands and integer result', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1224', base).result;
-            const divisor = fromStringDirect('12', base).result;
+            const dividend = fromStringDirect('1224', base);
+            const divisor = fromStringDirect('12', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -21,8 +21,8 @@ describe('division-meta', () => {
         it('should return proper left offset for result row with integer operands and fraction result', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1224', base).result;
-            const divisor = fromStringDirect('13', base).result;
+            const dividend = fromStringDirect('1224', base);
+            const divisor = fromStringDirect('13', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -36,8 +36,8 @@ describe('division-meta', () => {
         it('should return proper left offset when dividend and divisor are the same', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1224', base).result;
-            const divisor = fromStringDirect('1224', base).result;
+            const dividend = fromStringDirect('1224', base);
+            const divisor = fromStringDirect('1224', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -51,8 +51,8 @@ describe('division-meta', () => {
         it('should return proper left offset when divisor is smaller than dividend', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('122.1', base).result;
-            const divisor = fromStringDirect('0.1', base).result;
+            const dividend = fromStringDirect('122.1', base);
+            const divisor = fromStringDirect('0.1', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -66,8 +66,8 @@ describe('division-meta', () => {
         it('should return proper left offset when divisor is greater than dividend but dividend has longer fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('11.7662', base).result;
-            const divisor = fromStringDirect('231', base).result;
+            const dividend = fromStringDirect('11.7662', base);
+            const divisor = fromStringDirect('231', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -81,8 +81,8 @@ describe('division-meta', () => {
         it('should return proper left offset for division by 1', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1221', base).result;
-            const divisor = fromStringDirect('1', base).result;
+            const dividend = fromStringDirect('1221', base);
+            const divisor = fromStringDirect('1', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -97,8 +97,8 @@ describe('division-meta', () => {
         it('should return proper left offset for division by 1 when dividend has fraction part', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('1230.99903', base).result;
-            const divisor = fromStringDirect('1', base).result;
+            const dividend = fromStringDirect('1230.99903', base);
+            const divisor = fromStringDirect('1', base);
             const result = divideDefault([dividend, divisor]);
 
             // when
@@ -113,8 +113,8 @@ describe('division-meta', () => {
         it('should return proper total width result has multiple leading zero digits', () => {
             // given
             const base = 10;
-            const dividend = fromStringDirect('121', base).result;
-            const divisor = fromStringDirect('123', base).result;
+            const dividend = fromStringDirect('121', base);
+            const divisor = fromStringDirect('123', base);
             const result = divideDefault([dividend, divisor]);
 
             // when

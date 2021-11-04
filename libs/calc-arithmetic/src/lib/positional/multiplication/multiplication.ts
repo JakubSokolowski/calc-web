@@ -69,7 +69,7 @@ export function multiplyDigitRows(
 
     const resultNumbers = rowResults.map((result, index) => {
         const shifted = shiftLeft(result.resultDigits, index);
-        return fromDigits(shifted).result;
+        return fromDigits(shifted);
     });
 
     const sum = addPositionalNumbers(resultNumbers);
@@ -77,7 +77,7 @@ export function multiplyDigitRows(
     const resultWithProperSign = fromDigits(
         adjustedSum.numberResult.toDigitsList(),
         resultNegative
-    ).result;
+    );
 
     return {
         operands: [multiplicandRow, multiplierRow],
@@ -142,7 +142,7 @@ export class DefaultMultiplication extends Multiplication {
 
         const resultNumbers = rowResults.map((result, index) => {
             const shifted = shiftLeft(result.resultDigits, index);
-            return fromDigits(shifted).result;
+            return fromDigits(shifted);
         });
 
         const sum = addPositionalNumbers(resultNumbers);
@@ -153,7 +153,7 @@ export class DefaultMultiplication extends Multiplication {
         const resultWithProperSign = fromDigits(
             adjustedSum.numberResult.toDigitsList(),
             this.resultNegative
-        ).result;
+        );
 
         return {
             operands: [multiplicandRow, multiplierRow],

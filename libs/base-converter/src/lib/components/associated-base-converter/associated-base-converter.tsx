@@ -135,7 +135,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                 inputValue,
                 inputBase,
                 10
-            ).result.decimalValue.toString();
+            ).decimalValue.toString();
         } catch (e) {
             return '0.0';
         }

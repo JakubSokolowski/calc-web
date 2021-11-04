@@ -19,11 +19,11 @@ export function convertUsingAssociatedBases(
         );
     }
 
-    const inputNum = fromStringDirect(valueStr, inputBase).result;
+    const inputNum = fromStringDirect(valueStr, inputBase);
     const digits = inputNum.toDigitsList();
 
     const details = mapToAssociatedBaseDigits(digits, resultBase);
-    const num = fromDigits(details.resultDigits, inputNum.isNegative()).result;
+    const num = fromDigits(details.resultDigits, inputNum.isNegative());
     const conv = new Conversion();
 
     conv.addStage(
@@ -83,7 +83,6 @@ export function splitToSmallerBaseDigits(digit: Digit, outputBase: number): Digi
     const numDigitsPerPosition = Math.round(logBase(base, outputBase));
 
     const meaningfulDigits = fromNumber(valueInDecimal, outputBase)
-        .result
         .toDigitsList()
         .map((digit) => {
             return ({ ...digit, position: 0 });
@@ -162,7 +161,6 @@ export function reduceToGreaterBaseDigit(digits: Digit[], outputBase: number): D
     const digitsWithNormalizedPositions = digits.map((digit, position) => ({ ...digit, position }));
 
     const combinedDigitValue = fromDigits(digitsWithNormalizedPositions)
-        .result
         .decimalValue
         .toNumber();
 

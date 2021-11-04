@@ -69,7 +69,7 @@ export class WithExtension extends DefaultMultiplication {
                 new NumberComplement(this.multiplicand.complement.asDigits())
             );
             operandsToAdd.push(complement.asDigits());
-            multiplicandComplement = fromDigits(complement.asDigits()).result;
+            multiplicandComplement = fromDigits(complement.asDigits());
         }
 
         const positionCap = this.getPositionCap(multiplicandRow, multiplierRow);
@@ -86,7 +86,7 @@ export class WithExtension extends DefaultMultiplication {
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
             this.resultNegative
-        ).result;
+        );
 
         return {
             operands: [multiplicandRow, multiplierRow],

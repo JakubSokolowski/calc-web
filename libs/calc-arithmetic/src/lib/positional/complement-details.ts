@@ -6,7 +6,7 @@ import { BaseDigits } from './base-digits';
 import { ComplementConversionResult } from '../models/complement';
 
 export function getComplementWithDetails(representation: string, base: number): ComplementConversionResult {
-    const input = fromStringDirect(representation, base).result;
+    const input = fromStringDirect(representation, base);
     if (isValidComplementStr(representation, base)) return getComplementsComplement(input);
     if (input.isNegative()) {
         return getNegativeNumberComplementWithDetails(input);
@@ -76,5 +76,5 @@ function getMaxForPositions(base: number, startPosition: number, length: number)
         };
         digits.push(position);
     }
-    return fromDigits(digits).result;
+    return fromDigits(digits);
 }

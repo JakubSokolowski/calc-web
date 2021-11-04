@@ -6,8 +6,8 @@ import { fromNumber, subtractPositionalNumbers } from '@calc/calc-arithmetic';
 describe('SubtractionResultComponent', () => {
     let container;
 
-    const a = fromNumber(41, 10).result;
-    const b = fromNumber(19, 10).result;
+    const a = fromNumber(41, 10);
+    const b = fromNumber(19, 10);
     const result = subtractPositionalNumbers([a, b]);
 
     beforeEach(() => {

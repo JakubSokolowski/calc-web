@@ -1,12 +1,12 @@
 import { mount } from 'enzyme';
 import React from 'react';
-import { ConversionToDecimal, fromString } from '@calc/calc-arithmetic';
+import { ConversionToDecimal, fromString, fromStringDetailed } from '@calc/calc-arithmetic';
 import { ConversionToDecimalDetails } from './conversion-to-decimal';
 
 describe('ConversionToDecimalDetails', () => {
     let container;
 
-    const conversion = fromString('221232',5, 2);
+    const conversion = fromStringDetailed('221232',5, 2);
     const toDecimal = conversion.getFirstStage() as ConversionToDecimal;
 
     beforeEach(() => {
