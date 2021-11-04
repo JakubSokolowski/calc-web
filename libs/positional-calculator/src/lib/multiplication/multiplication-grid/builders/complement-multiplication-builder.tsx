@@ -64,7 +64,7 @@ export class ComplementMultiplicationBuilder extends DefaultBuilder {
         const digits = this.result
             .multiplicandComplement
             .complement
-            .asDigits();
+            .toDigits();
 
         return operandDigitsToCellConfig(digits, this.info, this.base);
     }

@@ -18,7 +18,7 @@ export function subtractPositionalNumbers(numbers: PositionalNumber[]): Subtract
     if (!areSameBaseNumbers(numbers)) {
         throw Error('Numbers to add must have same base');
     }
-    const numbersAsDigits = alignFractions( numbers.map((number) => number.complement.asDigits()));
+    const numbersAsDigits = alignFractions( numbers.map((number) => number.complement.toDigits()));
     const result = subtractDigitArrays(numbersAsDigits);
     return {...result, numberOperands: numbers};
 }

@@ -148,7 +148,7 @@ export class BoothBuilder extends ComplementMultiplicationBuilder {
         const digits = this.result
             .multiplicandComplement
             .complement
-            .asDigits()
+            .toDigits()
             .filter(d => !d.isComplementExtension);
 
         return operandDigitsToCellConfig(digits, this.info, this.base);

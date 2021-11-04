@@ -21,19 +21,19 @@ function getPositiveNumberComplementWithDetails(value: PositionalNumber): Comple
         minuendDigits: [],
         one: BaseDigits.getDigit(1, value.base()),
         inputNumber: value,
-        inputDigits: value.asDigits(false),
-        complementDigits: value.complement.asDigits(false)
+        inputDigits: value.toDigits(false),
+        complementDigits: value.complement.toDigits(false)
     };
 }
 
 function getComplementsComplement(value: PositionalNumber): ComplementConversionResult {
-    const [negation, complement] = computeComplement(value.complement.asDigits());
+    const [negation, complement] = computeComplement(value.complement.toDigits());
 
-    const inputDigits = value.complement.asDigits(false);
+    const inputDigits = value.complement.toDigits(false);
     const msp = inputDigits[0].position;
 
     const one = BaseDigits.getDigit(1, value.base(), inputDigits[inputDigits.length - 1].position);
-    const minuendDigits = getMaxForPositions(value.base(), msp, inputDigits.length).asDigits();
+    const minuendDigits = getMaxForPositions(value.base(), msp, inputDigits.length).toDigits();
 
     return {
         inputDigits,
@@ -47,12 +47,12 @@ function getComplementsComplement(value: PositionalNumber): ComplementConversion
 
 
 function getNegativeNumberComplementWithDetails(value: PositionalNumber): ComplementConversionResult {
-    const [negation, complement] = computeComplement(value.asDigits());
+    const [negation, complement] = computeComplement(value.toDigits());
 
-    const inputDigits = value.asDigits(false);
+    const inputDigits = value.toDigits(false);
 
     const one = BaseDigits.getDigit(1, value.base(), inputDigits[inputDigits.length - 1].position);
-    const minuendDigits = getMaxForPositions(value.base(), inputDigits[0].position, inputDigits.length).asDigits();
+    const minuendDigits = getMaxForPositions(value.base(), inputDigits[0].position, inputDigits.length).toDigits();
 
     return {
         inputDigits,

@@ -11,7 +11,7 @@ export function addPositionalNumbers(numbers: PositionalNumber[]): AdditionResul
     if (!areSameBaseNumbers(numbers)) {
         throw Error('Numbers to add must have same base');
     }
-    const numbersAsDigits = numbers.map((number) => number.complement.asDigits());
+    const numbersAsDigits = numbers.map((number) => number.complement.toDigits());
     const result = addDigitsArrays(numbersAsDigits);
     return { ...result, numberOperands: numbers };
 }
@@ -157,7 +157,7 @@ export function addDigitsAtPosition(digits: AdditionOperand[], position: number,
 function carryToDigits(decimalValue: number, base: number, startingPosition: number): AdditionOperand[] {
     const result = fromNumber(decimalValue, base);
 
-    return result.asDigits()
+    return result.toDigits()
         .filter(isNonZeroDigit)
         .map((digit) => ({
             ...digit,

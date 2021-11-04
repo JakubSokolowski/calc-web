@@ -57,7 +57,7 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
             multiplierRow
         );
         const trimmedLeadingZeros = this.trimSumDigits(
-            adjustedSum.numberResult.asDigits()
+            adjustedSum.numberResult.toDigits()
         );
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
@@ -68,7 +68,7 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
             ? fromDigits(
                   getComplement(
                       new NumberComplement(multiplicandRow)
-                  ).asDigits()
+                  ).toDigits()
               )
             : undefined;
 
@@ -96,7 +96,7 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
             resultDigits = this.mapToZeros(rowDigits);
         } else {
             const complement = getComplement(new NumberComplement(rowDigits));
-            const compDigits = complement.asDigits().slice(1);
+            const compDigits = complement.toDigits().slice(1);
             resultDigits = this.negateMostSignificant(compDigits);
         }
 
@@ -168,8 +168,8 @@ export class MultiplicationWithoutExtensionU2 extends WithoutExtension {
     prepareOperands(): MultiplicationOperand[][] {
         return applyTransformsByType(
             [
-                this.multiplicand.complement.asDigits(),
-                this.multiplier.complement.asDigits(),
+                this.multiplicand.complement.toDigits(),
+                this.multiplier.complement.toDigits(),
             ],
             [OperandsTransformType.WithoutExtensionU2Multiplication]
         );

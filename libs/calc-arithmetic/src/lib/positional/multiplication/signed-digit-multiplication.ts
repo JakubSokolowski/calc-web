@@ -53,7 +53,7 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
             multiplierRow
         );
         const trimmedLeadingZeros = this.trimSumDigits(
-            adjustedSum.numberResult.asDigits()
+            adjustedSum.numberResult.toDigits()
         );
         const resultWithProperSign = fromDigits(
             trimmedLeadingZeros,
@@ -61,7 +61,7 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
         );
 
         const multiplicandComplement = fromDigits(
-            getComplement(new NumberComplement(multiplicandRow)).asDigits()
+            getComplement(new NumberComplement(multiplicandRow)).toDigits()
         );
 
         return {
@@ -85,8 +85,8 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
     prepareOperands(): MultiplicationOperand[][] {
         return applyTransformsByType(
             [
-                this.multiplicand.complement.asDigits(),
-                this.multiplier.complement.asDigits()
+                this.multiplicand.complement.toDigits(),
+                this.multiplier.complement.toDigits()
             ],
             [OperandsTransformType.WithoutExtensionU2Multiplication]
         );
@@ -135,7 +135,7 @@ export class BoothMultiplication extends MultiplicationWithoutExtensionU2 {
     }
 
     multiplyByMinusOne(digits: Digit[]): Digit[] {
-        return getComplement(new NumberComplement(digits)).asDigits(false);
+        return getComplement(new NumberComplement(digits)).toDigits(false);
     }
 }
 

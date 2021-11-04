@@ -19,7 +19,7 @@ export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5
 
     const resultNegative = dividend.isNegative() !== divisor.isNegative();
     const resultWithProperSign = fromDigits(
-        result.numberResult.asDigits(),
+        result.numberResult.toDigits(),
         resultNegative
     );
 
@@ -33,8 +33,8 @@ export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5
 function prepareDivisionOperands(dividend: PositionalNumber, divisor: PositionalNumber): DivisionOperand[][] {
     return applyTransformsByType(
         [
-            dividend.asDigits(),
-            divisor.asDigits()
+            dividend.toDigits(),
+            divisor.toDigits()
         ],
         [OperandsTransformType.TrimExcessZeros, OperandsTransformType.ScaleToDivisor]
     );
@@ -122,7 +122,7 @@ export function divideAtPosition(dividend: DivisionOperand[], divisor: DivisionO
     // subtraction for position - get subtrahend: dividendSlice * quotient
     const divisorTimesQuotient = multiplyDefault([divisorPosNum, quotientNum]);
     const posSubtraction = subtractPositionalNumbers([slice, divisorTimesQuotient.numberResult]);
-    const remainder = posSubtraction.numberResult.asDigits();
+    const remainder = posSubtraction.numberResult.toDigits();
 
     return {
         operands: [],

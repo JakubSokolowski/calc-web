@@ -8,7 +8,7 @@ describe('BoothConverter', () => {
 
     it('should return proper Signed Digit representation', () => {
         // given
-        const digits = fromStringDirect('1000110', base).asDigits();
+        const digits = fromStringDirect('1000110', base).toDigits();
 
         // when
         const result = new BoothConverter(digits).toSignedDigits();
@@ -20,7 +20,7 @@ describe('BoothConverter', () => {
 
     it('should return proper Signed Digit representation when input has fraction part', () => {
         // given
-        const digits = fromStringDirect('1000110.101', base).asDigits();
+        const digits = fromStringDirect('1000110.101', base).toDigits();
 
         // when
         const result = new BoothConverter(digits).toSignedDigits();

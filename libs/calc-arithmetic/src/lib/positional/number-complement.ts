@@ -22,7 +22,7 @@ export class NumberComplement implements PositionalRepresentation {
         return !(extensionDigit.valueInDecimal === 0);
     }
 
-    asDigits(withExtension = true): Digit[] {
+    toDigits(withExtension = true): Digit[] {
         if(!withExtension) return this.digits.filter(d => !d.isComplementExtension);
         return this.digits;
     }
@@ -44,7 +44,7 @@ export class NumberComplement implements PositionalRepresentation {
         return digitsToStr(this.integerPartDigits());
     }
 
-    leastSignificantPosition(): number {
+    lsp(): number {
         if (!this.numFractionPartDigits()) {
             return 0;
         }
@@ -52,7 +52,7 @@ export class NumberComplement implements PositionalRepresentation {
         return this.fractionPartDigits()[lastDigitIndex].position;
     }
 
-    mostSignificantPosition(withExtension = true): number {
+    msp(withExtension = true): number {
         if (withExtension) return this.integerPartDigits()[0].position;
         return this.integerPartDigits()[1].position;
     }
