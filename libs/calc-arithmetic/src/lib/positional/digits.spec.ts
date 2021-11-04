@@ -491,8 +491,8 @@ describe('digits', () => {
         it('should align two numbers with fractions', () => {
             // then
             const base = 10;
-            const a: Digit[] = fromStringDirect('76.023', base).toDigitsList();
-            const b: Digit[] = fromStringDirect('12.04', base).toDigitsList();
+            const a: Digit[] = fromStringDirect('76.023', base).asDigits();
+            const b: Digit[] = fromStringDirect('12.04', base).asDigits();
 
             // when
             const result = alignFractions([a, b]);
@@ -547,7 +547,7 @@ describe('digits', () => {
         it('should extend fraction until it reaches desired position when number has fraction part', () => {
             // then
             const base = 10;
-            const digits: Digit[] = fromStringDirect('12.04', base).toDigitsList();
+            const digits: Digit[] = fromStringDirect('12.04', base).asDigits();
 
             const position = -3;
 

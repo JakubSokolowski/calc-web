@@ -216,7 +216,7 @@ function buildInitialSubtractionRow(step: DivisionPositionResult, totalWidth: nu
 
     const initialStepAlsoLast = numSteps === 1;
     if (initialStepAlsoLast) {
-        const resultDigits = step.subtractionResult.numberResult.toDigitsList();
+        const resultDigits = step.subtractionResult.numberResult.asDigits();
         const subtractionResultRow = padWithEmptyCells(
             digitsToCellConfig(resultDigits),
             desiredWidth,
@@ -237,7 +237,7 @@ function buildLastSubtractionRows(step: DivisionPositionResult, totalWidth: numb
     const { divisionIndex } = step;
     const minuendDigits = minuend.asDigits();
     const subtrahendDigits = subtrahend.asDigits();
-    const resultDigits = step.subtractionResult.numberResult.toDigitsList();
+    const resultDigits = step.subtractionResult.numberResult.asDigits();
     const leftPaddingLength = prevMaxIndex - minuendDigits.length + 2;
 
     const desiredWidth = minuendDigits.length + leftPaddingLength;

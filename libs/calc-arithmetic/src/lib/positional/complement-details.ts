@@ -52,7 +52,7 @@ function getNegativeNumberComplementWithDetails(value: PositionalNumber): Comple
     const inputDigits = value.asDigits(false);
 
     const one = BaseDigits.getDigit(1, value.base(), inputDigits[inputDigits.length - 1].position);
-    const minuendDigits = getMaxForPositions(value.base(), inputDigits[0].position, inputDigits.length).toDigitsList();
+    const minuendDigits = getMaxForPositions(value.base(), inputDigits[0].position, inputDigits.length).asDigits();
 
     return {
         inputDigits,
