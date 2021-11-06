@@ -12,12 +12,15 @@ import {
     setOperationBase
 } from '../../support/positional-calculator';
 import { getCommonTooltip } from '../../support/common';
+import { changeLanguage } from '../../support/language';
+import { Language } from '@calc/i18n';
 
 describe('Calculator options', () => {
     beforeEach(() => {
         cy.fixCypressSpec(__filename);
         cy.clearLocalStorage();
         cy.visit('#/tools/positional/positional-calculator');
+        changeLanguage(Language.en);
     });
 
     // BUG #110

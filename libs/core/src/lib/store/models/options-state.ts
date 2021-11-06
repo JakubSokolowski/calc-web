@@ -12,5 +12,5 @@ export const optionsInitialState: OptionsState = {
     showComplement: true,
     showDecimalValue: true,
     theme: AppTheme.Dark,
-    language: Language.en
+    language: Language.pl
 };
