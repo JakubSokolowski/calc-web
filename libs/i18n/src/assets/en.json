@@ -67,7 +67,8 @@
         "downloadResult": "Download result as .png",
         "downloadDetails": "Download details as .png",
         "download": "Download",
-        "theory": "Theory"
+        "theory": "Theory",
+        "toolNotFinished": "This tools is not finished yet, any and all results may be wrong"
     },
     "positionalCalculator": {
         "title": "Positional Calculator",

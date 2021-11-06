@@ -67,7 +67,8 @@
         "downloadResult": "Pobierz wynik jako .png",
         "downloadDetails": "Pobierz szegóły jako .png",
         "download": "Pobierz",
-        "theory": "Teoria"
+        "theory": "Teoria",
+        "toolNotFinished": "To narzędzie nie jest dokończone, wyniki mogą być niepoprawne"
     },
     "positionalCalculator": {
         "title": "Kalkulator liczb pozycyjnych",
