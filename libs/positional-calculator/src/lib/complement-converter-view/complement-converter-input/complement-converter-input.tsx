@@ -140,7 +140,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                             disabled={!form.isValid}
                             className={classes.convert}
                             size={'small'}
-                            color={'secondary'}
+                            color={'info'}
                             variant={'contained'}
                             type={'submit'}
                         >
