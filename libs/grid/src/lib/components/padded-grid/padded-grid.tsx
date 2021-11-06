@@ -18,7 +18,7 @@ const Root = styled('div')(({ theme }) => ({
     [`& .${classes.wrapper}`]: {
         display: 'flex',
         flexDirection: 'row',
-        overflowX: 'scroll',
+        overflowX: 'auto',
         justifyContent: 'left',
         [theme.breakpoints.down('lg')]: {
             maxWidth: '600px',
