@@ -26,7 +26,8 @@ const Root = styled('div')(({ theme }) => ({
         minWidth: '12px',
         minHeight: '20px',
         marginTop:'20px',
-        padding: '1px 6px'
+        padding: '1px 6px',
+        color: theme.palette.text.primary,
     },
 
     [`& .${classes.rootBox}`]: {
@@ -34,6 +35,7 @@ const Root = styled('div')(({ theme }) => ({
         minHeight: '20px',
         marginBottom: '20px',
         padding: '1px 6px',
+        color: theme.palette.text.primary,
     },
 
     [`& .${classes.rootDigitsRow}`]: {
