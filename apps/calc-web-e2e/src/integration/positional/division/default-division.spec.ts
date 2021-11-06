@@ -10,12 +10,15 @@ import {
     operationReturnsProperResult,
     selectOperation
 } from '../../../support/positional-calculator';
+import { changeLanguage } from '../../../support/language';
+import { Language } from '@calc/i18n';
 
 describe('Default Division', () => {
     beforeEach(() => {
         cy.fixCypressSpec(__filename);
         cy.clearLocalStorage();
         cy.visit('#/tools/positional/positional-calculator');
+        changeLanguage(Language.en);
     });
 
     it('should divide two positive numbers with integer division result', () => {

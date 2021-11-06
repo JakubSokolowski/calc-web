@@ -11,12 +11,15 @@ import {
     getShowDecimalValueSwitchOff,
     getShowDecimalValueSwitchOn
 } from '../../support/bconv';
+import { changeLanguage } from '../../support/language';
+import { Language } from '@calc/i18n';
 
 describe('Base converter error labels', () => {
     beforeEach(() => {
         cy.fixCypressSpec(__filename);
         cy.clearLocalStorage();
         cy.visit('#/tools/positional/base-converter');
+        changeLanguage(Language.en);
     });
 
     it('should display error when input base is invalid and disable convert button', () => {

@@ -1,3 +1,6 @@
+import { changeLanguage, hasLanguage } from '../../support/language';
+import { Language } from '@calc/i18n';
+
 describe('navbar', () => {
     beforeEach(() => {
         cy.clearLocalStorage();
@@ -25,18 +28,13 @@ describe('navbar', () => {
 
     // STUD_REQ-2
     it('should display translation change button and change translation on click', () => {
-        // should have english as default language
-        cy.getByDataTest('change-language')
-            .contains('English');
-
-        cy.getByDataTest('menu-tree-label').contains('Home');
+        // should have polish as default language
+        hasLanguage(Language.pl);
+        cy.getByDataTest('menu-tree-label').contains('Strona główna');
 
         // Should change language after clicking another in menu
-        cy.getByDataTest('change-language')
-            .click()
-            .getByDataTest('language-pl')
-            .click();
+        changeLanguage(Language.en);
 
-        cy.getByDataTest('menu-tree-label').contains('Strona główna');
+        cy.getByDataTest('menu-tree-label').contains('Home');
     });
 });

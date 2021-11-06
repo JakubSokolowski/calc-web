@@ -1,7 +1,12 @@
 import { getAppName, getAppNameCaption } from '../support/app.po';
+import { changeLanguage } from '../support/language';
+import { Language } from '@calc/i18n';
 
 describe('home-page', () => {
-    beforeEach(() => cy.visit('/'));
+    beforeEach(() => {
+        cy.visit('/');
+        changeLanguage(Language.en);
+    });
 
     it('should display homepage with basic info', () => {
         getAppName().contains('CALC');
