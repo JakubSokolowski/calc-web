@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import HomeIcon from '@mui/icons-material/Home';
 import BuildIcon from '@mui/icons-material/Build';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ConstructionIcon from '@mui/icons-material/Construction';
 import { MenuTree, TreeNode } from '@calc/common-ui';
 
 
@@ -48,7 +49,8 @@ export const SiderMenu = () => {
                     childNodes: [
                         {
                             labelText: t('routes.tools.floating.float-converter'),
-                            path: '/tools/floating/float-converter'
+                            path: '/tools/floating/float-converter',
+                            labelIcon: ConstructionIcon
                         }
                     ]
                 }
