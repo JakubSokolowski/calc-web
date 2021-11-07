@@ -63,7 +63,8 @@
         "details": "Details"
     },
     "common": {
-        "copy": "Copied to clipboard!",
+        "copy": "Copied to clipboard",
+        "copyLink": "Copied link to clipboard",
         "downloadResult": "Download result as .png",
         "downloadDetails": "Download details as .png",
         "download": "Download",

@@ -64,6 +64,7 @@
     },
     "common": {
         "copy": "Skopiowano do schowka",
+        "copyLink": "Link skopiowano do schowka",
         "downloadResult": "Pobierz wynik jako .png",
         "downloadDetails": "Pobierz szegóły jako .png",
         "download": "Pobierz",
