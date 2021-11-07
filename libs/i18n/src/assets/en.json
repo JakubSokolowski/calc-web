@@ -46,7 +46,7 @@
         "title": "Associated Base Converter",
         "result": "Conversion result",
         "mappings": "Digit mappings",
-        "noOutputBase": "No output bases possible"
+        "noOutputBase": "No output bases available"
     },
     "floatConverter": {
         "title": "IEEE 754",

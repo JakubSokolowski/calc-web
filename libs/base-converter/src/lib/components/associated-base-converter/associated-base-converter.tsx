@@ -13,8 +13,11 @@ import { ConversionOptions } from '../conversion-options/conversion-options';
 import { useTranslation } from 'react-i18next';
 import { Button, MenuItem, styled, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { clean } from '@calc/utils';
+import { clean, useMountEffect } from '@calc/utils';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
+import { AsocBaseConverterParams } from './asoc-bconv-params';
+import { toAsocBconvUrlSearchParams, useUrlAsocBaseConverterParams } from './asoc-bconv-url-params';
+import { useHistory } from 'react-router-dom';
 
 interface P {
     onConversionChange: (conversion: Conversion) => void;
@@ -60,29 +63,27 @@ const Root = styled('div')(({ theme }) => ({
     },
 }));
 
-
-interface FormValues {
-    inputStr: string;
-    inputBase: number;
-    outputBase: number;
-}
-
 export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
-
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
+    const asocBaseConverterParams = useUrlAsocBaseConverterParams();
+    const history = useHistory();
 
-    const initialValues: FormValues = {
-        inputStr: 'FFAFAFFAF',
+    const initialValues: AsocBaseConverterParams = {
+        inputStr: '0',
         inputBase: 16,
         outputBase: 2
     };
 
-    const onSubmit = (values: FormValues) => {
+    const onSubmit = (values: AsocBaseConverterParams) => {
         const { inputStr, inputBase, outputBase } = values;
         const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
         onConversionChange(conversion);
+
+        history.replace({
+            search: toAsocBconvUrlSearchParams(values)
+        });
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -94,7 +95,14 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         }
     };
 
+    const validateOutputBase = (): string | undefined => {
+        if(!possibleOutputBases) {
+            return t('associatedBaseConverter.noOutputBase');
+        }
+    };
+
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
+        if(!BaseDigits.isValidBase(inputBase)) return;
         if (!isValidRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
@@ -103,10 +111,10 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         }
     };
 
-    const validate = (values: FormValues) => {
-        const errors: FormErrors<FormValues> = {
+    const validate = (values: AsocBaseConverterParams) => {
+        const errors: FormErrors<AsocBaseConverterParams> = {
             inputBase: validateBase(values.inputBase),
-            outputBase: validateBase(values.outputBase),
+            outputBase: validateOutputBase(),
             inputStr: validateValueStr(values.inputStr, values.inputBase)
         };
 
@@ -121,60 +129,73 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         }
     );
 
-    const [inputValue, setInputValue] = useState(initialValues.inputStr);
-    const [inputBase, setInputBase] = useState(initialValues.inputBase);
-
     const [possibleOutputBases, setPossibleOutputBases] = useState<number[]>(() => {
         return BaseDigits.getAllPossibleBasesForAssociateConversion(initialValues.inputBase);
     });
 
     const getDecimal = useCallback(() => {
         try {
-            if (inputBase === 10) return inputValue;
+            const {inputStr, inputBase} = form.values;
+            if (inputBase === 10) return inputStr;
             return fromString(
-                inputValue,
+                inputStr,
                 inputBase,
                 10
             ).decimalValue.toString();
         } catch (e) {
             return '0.0';
         }
-    }, [inputBase, inputValue]);
+    }, [form.values]);
 
     const complement = useCallback(() => {
         try {
+            const {inputStr, inputBase} = form.values;
             return getComplement(
-                inputValue,
+                inputStr,
                 inputBase
             ).toString();
         } catch (e) {
             return '0.0';
         }
-    }, [inputBase, inputValue]);
+    }, [form.values]);
 
-    const options = possibleOutputBases.map((base, index) => {
+    const options = possibleOutputBases.map((base) => {
         return (
-            <MenuItem value={base} key={index}>{base}</MenuItem>
+            <MenuItem data-test={`output-base-${base}`} value={base} key={base}>{base}</MenuItem>
         );
     });
 
-    const handleInputBaseChange = e => {
-        const newInputBase = Number.parseInt(e.target.value);
-        setInputBase(newInputBase);
-        setPossibleOutputBases(BaseDigits.getAllPossibleBasesForAssociateConversion(newInputBase));
-        form.handleChange(e);
+    const handleInputBaseChange = async e => {
+        const inputBase = Number.parseInt(e.target.value);
+        const {inputStr} = form.values;
+        const newPossibleBases = BaseDigits.getAllPossibleBasesForAssociateConversion(inputBase);
+        if(!newPossibleBases) return;
+        setPossibleOutputBases(newPossibleBases);
+        await form.setValues({inputBase, outputBase: newPossibleBases[0], inputStr});
+        await form.validateForm();
     };
 
     const handleInputStrChange = e => {
-        setInputValue(e.target.value);
         form.handleChange(e);
     };
+
+    const loadOptionsFromUrl = () =>  {
+        if(asocBaseConverterParams) {
+            onSubmit(asocBaseConverterParams);
+            setTimeout(async () => {
+               await form.setValues(asocBaseConverterParams);
+            });
+        }
+    };
+
+    useMountEffect(loadOptionsFromUrl);
 
     return (
         <Root>
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
                 <InputWithCopy
+                    dataTest="abconv-input-str"
                     className={classes.input}
                     name={'inputStr'}
                     size={'small'}
@@ -210,8 +231,10 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
                 <div className={classes.row}>
                     <TextField
+                        data-test={"abconv-input-base"}
                         className={classes.inputBase}
                         variant={'outlined'}
+                        type={'number'}
                         name={'inputBase'}
                         id={'inputBase'}
                         size={'small'}
@@ -220,10 +243,17 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         helperText={form.errors.inputBase}
                         onChange={handleInputBaseChange}
                         value={form.values.inputBase}
+                        InputProps={{
+                            inputProps: {
+                                min: BaseDigits.MIN_BASE,
+                                max: BaseDigits.MAX_BASE
+                            }
+                        }}
                     />
                     <div className={classes.horizontalSpacer}/>
                     <TextField
                         select
+                        data-test={"abconv-output-base"}
                         className={classes.outputBase}
                         name={'outputBase'}
                         id={'outputBase'}
@@ -233,12 +263,21 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         disabled={!options.length}
                         value={form.values.outputBase}
                         onChange={form.handleChange}
+                        error={!!form.errors.outputBase}
+                        helperText={form.errors.outputBase}
                         variant={'outlined'}
                     >
                         {options}
                     </TextField>
                     <div className={classes.horizontalSpacer}/>
-                    <Button color={'info'} variant={'contained'} type={'submit'} size={'small'}>
+                    <Button
+                        data-test={"abconv-convert"}
+                        color={'info'}
+                        variant={'contained'}
+                        type={'submit'}
+                        size={'small'}
+                        disabled={!form.isValid}
+                    >
                         {t('baseConverter.convert')}
                     </Button>
                 </div>

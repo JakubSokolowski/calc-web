@@ -10,8 +10,8 @@ import {
     getShowComplementSwitchOn,
     getShowDecimalValueSwitchOff,
     getShowDecimalValueSwitchOn
-} from '../../support/bconv';
-import { changeLanguage } from '../../support/language';
+} from '../../../support/bconv';
+import { changeLanguage } from '../../../support/language';
 import { Language } from '@calc/i18n';
 
 describe('Base converter error labels', () => {

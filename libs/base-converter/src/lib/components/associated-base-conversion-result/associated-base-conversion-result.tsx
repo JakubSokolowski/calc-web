@@ -35,7 +35,7 @@ export const AssociatedBaseConversionResult: FC<P> = ({ conversion }) => {
 
     return (
         <Root>
-            <div className={classes.row}>
+            <div data-test={`abconv-result-${conversion.result.toString()}`} className={classes.row}>
                 <PositionalNumberComponent input={inputNumber}/>
                 <div className={classes.symbol}>
                     <InlineMath math={'='}/>
