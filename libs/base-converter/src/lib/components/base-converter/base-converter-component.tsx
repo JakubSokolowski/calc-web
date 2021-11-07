@@ -223,9 +223,9 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                     <TextField
                         data-test="bconv-input-base"
                         className={classes.inputBase}
-                        type={'number'}
                         variant={'outlined'}
                         size={'small'}
+                        type={'number'}
                         InputProps={{
                             inputProps: {
                                 min: BaseDigits.MIN_BASE,

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { DigitMapping } from '@calc/calc-arithmetic';
+import { DigitMapping, digitsToStr } from '@calc/calc-arithmetic';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import { Button, styled } from '@mui/material';
 
@@ -26,12 +26,14 @@ const Root = styled('div')(({ theme }) => ({
         minWidth: '12px',
         minHeight: '20px',
         marginTop:'20px',
-        padding: '1px 6px'
+        padding: '1px 6px',
+        color: theme.palette.text.primary,
     },
     [`& .${classes.rootBox}`]: {
         minWidth: '12px',
         minHeight: '20px',
         padding: '1px 6px',
+        color: theme.palette.text.primary,
     },
     [`& .${classes.rootDigitsRow}`]: {
         display: 'flex',
@@ -106,7 +108,10 @@ export const MergeMapping: FC<P> = ({ mapping }) => {
 
     return (
        <Root>
-           <div className={classes.mergeMappingBox}>
+           <div
+               data-test={`merge-mapping-${digitsToStr(mapping.input)}-${digitsToStr(mapping.output)}`}
+               className={classes.mergeMappingBox}
+           >
                <ArcherContainer noCurves ref={ref}>
                    <div
                        style={{

@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useRef } from 'react';
-import { DigitMapping } from '@calc/calc-arithmetic';
+import { DigitMapping, digitsToStr } from '@calc/calc-arithmetic';
 import { ArcherContainer, ArcherElement } from 'react-archer';
 import { Button, styled } from '@mui/material';
 
@@ -117,6 +117,7 @@ export const SplitMapping: FC<P> = ({ mapping }) => {
     return (
         <Root>
             <div
+                data-test={`split-mapping-${digitsToStr(mapping.input)}-${digitsToStr(mapping.output)}`}
                 className={classes.splitMappingBox}
             >
                 <ArcherContainer noCurves ref={ref}>

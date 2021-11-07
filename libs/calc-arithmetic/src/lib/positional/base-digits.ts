@@ -69,7 +69,6 @@ export class BaseDigits {
 
     public static getAllPossibleBasesForAssociateConversion(base: number): number[] {
         if (!this.isValidBase(base)) return [];
-
         return [
             ...this.getSmallerAssociateBases(base),
             ...this.getGreaterAssociateBases(base)
@@ -77,6 +76,7 @@ export class BaseDigits {
     }
 
     public static canConvertUsingAssociateBaseMethod(inputBase: number, outputBase: number): boolean {
+        if(!BaseDigits.isValidBase(inputBase) || !BaseDigits.isValidBase(outputBase)) return false;
         const smaller = Math.min(inputBase, outputBase);
         const greater = Math.max(inputBase, outputBase);
 
