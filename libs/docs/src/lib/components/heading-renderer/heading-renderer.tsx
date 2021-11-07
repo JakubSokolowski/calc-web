@@ -6,6 +6,7 @@ import LinkIcon from '@mui/icons-material/Link';
 import { useLocation, useHistory } from 'react-router-dom';
 import { copyToClipboard } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
+import { environment } from '@calc/env';
 
 interface HeadingProps {
     level: number;
@@ -29,7 +30,8 @@ export const HeadingRenderer: FC<HeadingProps> = ({level, children}) => {
 
     const handleCopyToClipboard = () => {
         const search  = `?h=${id}`;
-        const url = window.location.host + '/#' + pathname + search;
+        const deployPrefix = environment.deployUrl ? `/${environment.deployUrl}` : '';
+        const url = window.location.host + deployPrefix + '/#' + pathname + search;
         copyToClipboard(url);
         setOpen(true);
         history.push({search})
