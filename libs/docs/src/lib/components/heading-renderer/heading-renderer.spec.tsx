@@ -1,7 +1,7 @@
 import { mount, shallow } from 'enzyme';
 import React from 'react';
 import { HeadingRenderer } from './heading-renderer';
-import { IconButton, Snackbar } from '@mui/material';
+import { IconButton, Snackbar, Typography } from '@mui/material';
 import { act } from 'react-dom/test-utils';
 
 
@@ -56,17 +56,17 @@ describe('HeadingRenderer', () => {
                     {'Some important heading'}
                 </HeadingRenderer>
             );
-
             document.execCommand = jest.fn();
 
             // when
             container
+                .simulate('mouseenter')
                 .find(IconButton)
                 .simulate('click');
 
             // then
-            const expectedQuery = {search: '?h=some-important-heading'};
-            expect(history.push).toBeCalledWith(expectedQuery)
+            const expectedQuery = { search: '?h=some-important-heading' };
+            expect(history.push).toBeCalledWith(expectedQuery);
         });
 
         it('should show notification and auto-hide-it after some time', async () => {
@@ -80,9 +80,9 @@ describe('HeadingRenderer', () => {
             document.execCommand = jest.fn();
 
             // when
+            container.simulate('mouseenter');
             await act(async () => {
                 container
-                    .find(IconButton)
                     .simulate('click');
 
                 // then
@@ -90,7 +90,7 @@ describe('HeadingRenderer', () => {
             });
 
             // then
-            expect(container.find(Snackbar).prop('open')).toBeFalsy()
-        })
+            expect(container.find(Snackbar).prop('open')).toBeFalsy();
+        });
     });
 });
