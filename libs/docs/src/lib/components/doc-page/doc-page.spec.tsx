@@ -23,7 +23,8 @@ describe('DocPage', () => {
     const docText = '## Base Conversion' +
         '![alt text][logo]';
     const docResponse = {
-        text: () => Promise.resolve(docText)
+        text: () => Promise.resolve(docText),
+        status: 200
     } as Response;
 
     fetchMock.mockReturnValue(Promise.resolve(docResponse));

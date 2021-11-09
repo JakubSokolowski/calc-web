@@ -62,6 +62,9 @@
         "result": "Uzupełnienie",
         "details": "Szczegóły"
     },
+    "theory": {
+        "translationNotAvailable": "Tłumaczenie strony dla {{current}} nie istnieje. Załadowano tłumaczenie {{fallback}}"
+    },
     "common": {
         "copy": "Skopiowano do schowka",
         "copyLink": "Link skopiowano do schowka",
