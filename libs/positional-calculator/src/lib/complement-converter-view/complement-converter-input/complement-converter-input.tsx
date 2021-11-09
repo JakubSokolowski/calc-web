@@ -3,16 +3,17 @@ import { BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-ari
 import { FormErrors } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { Button, styled, TextField } from '@mui/material';
-import { clean } from '@calc/utils';
+import { clean, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
+import { ComplementConverterParams } from './complement-converter-params';
+import {
+    complementConverterParamsToUrlSearch,
+    useUrlComplementConverterParams
+} from './complement-converter-url-params';
+import { useHistory } from 'react-router-dom';
 
 interface P {
-    onConversionChange?: (representationStr: string, base: number) => void;
-}
-
-interface FormValues {
-    inputStr: string;
-    inputBase: number;
+    onConversionChange?: (params: ComplementConverterParams) => void;
 }
 
 const PREFIX = 'ComplementConverterInput';
@@ -64,14 +65,19 @@ const Root = styled('div')(({ theme }) => ({
 
 export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
-    const initialValues: FormValues = {
+    const urlParams = useUrlComplementConverterParams();
+    const history = useHistory();
+
+    const initialValues: ComplementConverterParams = {
         inputStr: '-123.45',
         inputBase: 10
     };
 
-    const onSubmit = (values: FormValues) => {
-        const { inputStr, inputBase } = values;
-        if (onConversionChange) onConversionChange(inputStr, inputBase);
+    const onSubmit = (values: ComplementConverterParams) => {
+        if (onConversionChange) onConversionChange(values);
+        history.replace({
+            search: complementConverterParamsToUrlSearch(values)
+        });
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -84,6 +90,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
+        if(!BaseDigits.isValidBase(inputBase)) return undefined;
         if (!isValidComplementOrRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
@@ -92,8 +99,8 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
         }
     };
 
-    const validate = (values: FormValues) => {
-        const errors: FormErrors<FormValues> = {
+    const validate = (values: ComplementConverterParams) => {
+        const errors: FormErrors<ComplementConverterParams> = {
             inputBase: validateBase(values.inputBase),
             inputStr: validateValueStr(values.inputStr, values.inputBase)
         };
@@ -103,7 +110,16 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
 
     const form = useFormik({ initialValues, onSubmit, validate });
 
-    const handleInputStrChange = e => form.handleChange(e);
+    const loadOptionsFromUrl = () =>  {
+        if(urlParams) {
+            onSubmit(urlParams);
+            setTimeout(async () => {
+                await form.setValues(urlParams);
+            });
+        }
+    };
+
+    useMountEffect(loadOptionsFromUrl);
 
     return (
         <Root>
@@ -111,6 +127,8 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                 <form onSubmit={form.handleSubmit}>
                     <div className={classes.row}>
                         <TextField
+                            type={'number'}
+                            data-test={"cconv-input-base"}
                             className={classes.inputBase}
                             variant={'outlined'}
                             size={'small'}
@@ -124,6 +142,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                         />
                         <div className={classes.horizontalSpacer}/>
                         <TextField
+                            data-test={"cconv-input-str"}
                             className={classes.input}
                             name={'inputStr'}
                             id={'inputStr'}
@@ -132,11 +151,12 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                             label={t('baseConverter.inputNumber')}
                             error={!!form.errors.inputStr}
                             helperText={form.errors.inputStr}
-                            onChange={handleInputStrChange}
+                            onChange={form.handleChange}
                             value={form.values.inputStr}
                         />
                         <div className={classes.growHorizontalSpacer}/>
                         <Button
+                            data-test={"cconv-convert"}
                             disabled={!form.isValid}
                             className={classes.convert}
                             size={'small'}

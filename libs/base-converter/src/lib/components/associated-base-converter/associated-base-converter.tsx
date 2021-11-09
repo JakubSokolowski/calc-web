@@ -258,6 +258,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                         name={'outputBase'}
                         id={'outputBase'}
                         size={'small'}
+                        type={'number'}
                         label={t('baseConverter.outputBase')}
                         placeholder={t('associatedBaseConverter.noOutputBase')}
                         disabled={!options.length}

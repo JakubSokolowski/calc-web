@@ -9,6 +9,7 @@ import {
     ComplementDetailsRenderer,
     ComplementDetailsRendererParams
 } from './complement-details-renderer/complement-details-renderer';
+import { ComplementConverterParams } from './complement-converter-input/complement-converter-params';
 
 const PREFIX = 'ComplementConverterView';
 
@@ -35,15 +36,15 @@ const Root = styled('div')(({ theme }) => ({
     },
 }));
 
-
 export const ComplementConverterView: FC = () => {
     const { t } = useTranslation();
     const [result, setResult] = useState<ComplementConversionResult>();
     const [params, setParams] = useState<ComplementDetailsRendererParams>();
 
-    const handleChange = (rep: string, base: number) => {
-        const result = getComplementWithDetails(rep, base);
-        setParams({ representation: rep, base });
+    const handleChange = (p: ComplementConverterParams) => {
+        const {inputBase, inputStr} = p;
+        const result = getComplementWithDetails(inputStr, inputBase);
+        setParams({ representation: inputStr, base: inputBase });
         setResult(result);
     };
 
