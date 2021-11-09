@@ -59,6 +59,6 @@ export const MarkdownRenderer = (props: ExtendedMarkdownProps) => {
         },
     };
     return (
-        <ReactMarkdown   {...newProps} />
+        <ReactMarkdown {...newProps} />
     );
 };

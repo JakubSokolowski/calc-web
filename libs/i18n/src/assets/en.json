@@ -62,6 +62,9 @@
         "result": "Complement",
         "details": "Details"
     },
+    "theory": {
+        "translationNotAvailable": "Page translation for {{current}} not available. Loaded fallback translation in {{fallback}}"
+    },
     "common": {
         "copy": "Copied to clipboard",
         "copyLink": "Copied link to clipboard",

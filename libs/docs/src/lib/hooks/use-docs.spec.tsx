@@ -14,6 +14,7 @@ describe('use-docs', () => {
 
         const docResponse = {
             text: () => Promise.resolve(docText),
+            status: 200,
         } as Response;
 
         fetchMock.mockReturnValueOnce(Promise.resolve(docResponse));
@@ -23,7 +24,8 @@ describe('use-docs', () => {
         await waitForNextUpdate();
 
         // then
-        expect(result.current).toEqual(docText);
+        const [doc] = result.current;
+        expect(doc).toEqual(docText);
     });
 
     it('should return error message if fetch fails', async () => {
@@ -37,6 +39,7 @@ describe('use-docs', () => {
         await waitForNextUpdate();
 
         // then
-        expect(result.current).toEqual(errorMessage);
+        const [, , error] = result.current;
+        expect(error).toEqual(errorMessage);
     });
 });

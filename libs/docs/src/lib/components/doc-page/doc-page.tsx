@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react';
 import { useDocs } from '../../hooks/use-docs';
-import { Box, styled } from '@mui/material';
+import { Alert, Box, styled } from '@mui/material';
 import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
@@ -8,6 +8,8 @@ import { useLocation } from 'react-router-dom';
 import { RendererMapping } from '../../..';
 import { NavigationBreadcrumbs } from '@calc/common-ui';
 import { useUrlParams } from '@calc/utils';
+import { Language } from '@calc/i18n';
+import { useTranslation } from 'react-i18next';
 
 export interface DocsProps {
     path: string;
@@ -19,6 +21,7 @@ const PREFIX = 'DocPage';
 const classes = {
     box: `${PREFIX}-box`,
     root: `${PREFIX}-root`,
+    fallbackWarning: `${PREFIX}-fallbackWarning`
 };
 
 
@@ -33,11 +36,17 @@ const Root = styled('div')(({ theme }) => ({
             paddingRight: '0px'
         }
     },
+    [`& .${classes.fallbackWarning}`]: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2)
+    }
 }));
 
 export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
+    const fallbackLanguage = Language.pl;
+    const { t, i18n } = useTranslation();
     const [docPath, setDocPath] = useState(path);
-    const markdown = useDocs(docPath);
+    const [markdown, isFallback] = useDocs(docPath, fallbackLanguage);
     const { pathname } = useLocation();
     const params = useUrlParams();
     const ids = extractHeadingIds(markdown);
@@ -45,7 +54,6 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     useEffect(() => {
         setDocPath(path);
     }, [path]);
-
 
     useEffect(() => {
         const header = params.get('h');
@@ -69,11 +77,29 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
                     !!ids.length && <ScrollSpy entries={ids}/>
                 }
                 <NavigationBreadcrumbs path={pathname}/>
-                <MarkdownRenderer
-                    renderMapping={rendererMapping}
-                    source={markdown}
-                    escapeHtml={false}
-                />
+                {
+                    isFallback &&
+                    <Alert className={classes.fallbackWarning} severity={'warning'}>
+                            <span data-test="translation-not-available">
+                                {
+                                    t(
+                                        'theory.translationNotAvailable',
+                                        {
+                                            current: i18n.language.toUpperCase(),
+                                            fallback: fallbackLanguage.toUpperCase()
+                                        }
+                                    )
+                                }
+                            </span>
+                    </Alert>
+                }
+                <div data-test="doc-page">
+                    <MarkdownRenderer
+                        renderMapping={rendererMapping}
+                        source={markdown}
+                        escapeHtml={false}
+                    />
+                </div>
             </Box>
         </Root>
     );
