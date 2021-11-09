@@ -22,6 +22,11 @@ const Root = styled('div')(({ theme }) => ({
     },
 }));
 
+function serializeForDataTest(value: string): string {
+    return value
+        .replace('(', '')
+        .replace(')', '');
+}
 
 export const ComplementResult: FC<P> = ({ number }) => {
     const num = `${number.toString()}_{${number.base()}}`;
@@ -31,9 +36,11 @@ export const ComplementResult: FC<P> = ({ number }) => {
         ? `\\overline{ ${complement} }=${num}`
         : `\\overline{${num}}=${number.complement.toString()}`;
 
+    const dataTest = serializeForDataTest(`cconv-result-${number.complement.toString()}`);
+
     return (
         <Root>
-            <div className={classes.row}>
+            <div data-test={dataTest} className={classes.row}>
                 <InlineMath math={math}/>
             </div>
         </Root>

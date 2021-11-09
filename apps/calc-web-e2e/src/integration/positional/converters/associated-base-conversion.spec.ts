@@ -5,7 +5,6 @@ import {
     Mapping,
     MappingType
 } from '../../../support/abconv';
-import { getConversionResult } from '../../../support/bconv';
 
 describe('Associated base converter conversion', () => {
     beforeEach(() => {

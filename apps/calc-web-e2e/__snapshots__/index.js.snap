@@ -786,7 +786,7 @@ exports[`Addition > should add two decimal numbers together #0`] = `
 <div data-test="addition-result" data-result="444">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -881,7 +881,7 @@ exports[`Addition > should add two decimal numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0321" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1329,7 +1329,10 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
 <div data-test="addition-result" data-result="-10110101100010100">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div
+        data-test="cconv-result-0100101011001101"
+        class="ComplementResult-row"
+      >
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1442,7 +1445,7 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-01101011101101" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1552,7 +1555,10 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div
+        data-test="cconv-result-100010010000100001"
+        class="ComplementResult-row"
+      >
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1669,7 +1675,7 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0111111111" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1773,7 +1779,7 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-011101010111" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -1880,7 +1886,7 @@ exports[`Addition > should add multiple binary numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0110111011" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -6243,7 +6249,7 @@ exports[`Subtraction > should subtract two decimal numbers with fraction part #0
 <div data-result="91079.24757" data-test="subtraction-result">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-098723.123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -6348,7 +6354,7 @@ exports[`Subtraction > should subtract two decimal numbers with fraction part #0
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-07643.87543" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -11680,7 +11686,7 @@ exports[`Addition > should add two decimal numbers in complement representation 
 <div data-test="addition-result" data-result="-556">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-9123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -11771,7 +11777,7 @@ exports[`Addition > should add two decimal numbers in complement representation 
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0321" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -12225,7 +12231,7 @@ exports[`Addition > should add negative number, using complement representation 
 <div data-test="addition-result" data-result="-198">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -12320,7 +12326,7 @@ exports[`Addition > should add negative number, using complement representation 
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-9679" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -12812,7 +12818,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
 <div data-test="addition-result" data-result="100">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -12906,7 +12912,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13000,7 +13006,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13094,7 +13100,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13188,7 +13194,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13282,7 +13288,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13376,7 +13382,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13470,7 +13476,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13564,7 +13570,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -13658,7 +13664,7 @@ exports[`Addition > should add 10 numbers together #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -14843,7 +14849,7 @@ exports[`Addition > should show proper position details and carries #0`] = `
 <div data-test="addition-result" data-result="7341">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0987" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -14938,7 +14944,7 @@ exports[`Addition > should show proper position details and carries #0`] = `
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-06354" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -15449,7 +15455,7 @@ exports[`Subtraction > should subtract two decimal numbers, larger from smaller 
 <div data-result="-64776" data-test="subtraction-result">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-014123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -15547,7 +15553,7 @@ exports[`Subtraction > should subtract two decimal numbers, larger from smaller 
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-078899" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -16122,7 +16128,7 @@ exports[`Subtraction > should subtract two positive decimal numbers, smaller fro
 <div data-result="198" data-test="subtraction-result">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0321" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -16217,7 +16223,7 @@ exports[`Subtraction > should subtract two positive decimal numbers, smaller fro
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0123" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -16720,7 +16726,7 @@ exports[`Subtraction > should subtract two decimal numbers, entered as complemen
 <div data-result="35223.682" data-test="subtraction-result">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-014123.451" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -16819,7 +16825,7 @@ exports[`Subtraction > should subtract two decimal numbers, entered as complemen
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-978899.769" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -17496,7 +17502,7 @@ exports[`Subtraction > should convert signed negative number to complement and t
 <div data-result="35223.682" data-test="subtraction-result">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-014123.451" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -17595,7 +17601,7 @@ exports[`Subtraction > should convert signed negative number to complement and t
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-978899.769" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20372,7 +20378,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
 <div data-test="addition-result" data-result="10011000010">
   <div class="complements-row">
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-01000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20472,7 +20478,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-001010110" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20574,7 +20580,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0010101100" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20678,7 +20684,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-01000000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20784,7 +20790,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-010000000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -20891,7 +20897,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-0100000000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -21000,7 +21006,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-01010101000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
@@ -21110,7 +21116,7 @@ exports[`Addition > should add multiple binary numbers for multiplication withou
       </div>
     </div>
     <div class="css-uu0civ">
-      <div class="ComplementResult-row">
+      <div data-test="cconv-result-10000001000000" class="ComplementResult-row">
         <span
           ><span class="katex"
             ><span class="katex-mathml"
