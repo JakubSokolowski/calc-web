@@ -1,12 +1,12 @@
 import React, { FC, SyntheticEvent, useState } from 'react';
 import { Alert, IconButton, Snackbar, Typography } from '@mui/material';
-import { getHeadingSlug } from '../../core/functions/heading-ids';
 
 import LinkIcon from '@mui/icons-material/Link';
 import { useHistory, useLocation } from 'react-router-dom';
 import { copyToClipboard } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { environment } from '@calc/env';
+import { getSlug } from '../../../../../common-ui/src/lib/core/functions/slug';
 
 interface HeadingProps {
     level: number;
@@ -27,7 +27,7 @@ export const HeadingRenderer: FC<HeadingProps> = ({ level, children }) => {
 
     const arrayChildren = React.Children.toArray(children);
     const text = arrayChildren.reduce(flatten, '');
-    const id = getHeadingSlug(text);
+    const id = getSlug(text);
 
     const handleCopyToClipboard = () => {
         const search = `?h=${id}`;

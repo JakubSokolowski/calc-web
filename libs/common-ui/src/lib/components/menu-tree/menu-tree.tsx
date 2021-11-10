@@ -8,7 +8,6 @@ import { TreeNode } from '../../core/models/tree-node';
 import { StyledTreeItem } from './menu-tree-item';
 import { styled } from '@mui/material';
 
-
 const PREFIX = 'Menutree';
 
 const classes = {
@@ -28,17 +27,20 @@ interface P {
 }
 
 export function MenuTree(props: P) {
-    const { nodes } = props;
     const history = useHistory();
+    const { nodes } = props;
     const { pathname } = useLocation();
-    const [expanded, setExpanded] = useState([]);
+    const [expanded, setExpanded] = useState<string[]>([]);
+    const [selected, setSelected] = useState<string>();
 
     const handleClick = useCallback((node: TreeNode) => {
         if (node.path) {
             history.push(node.path);
         }
-        const isExpanded = !!expanded.find(id => id === node.path);
 
+        setSelected(node.path);
+
+        const isExpanded = !!expanded.find(id => id === node.path);
         if (isExpanded) {
             setExpanded((prev) => prev.filter(id => id !== node.path));
         } else {
@@ -48,6 +50,7 @@ export function MenuTree(props: P) {
 
     useMountEffect(() => {
         if (!expanded.find(id => id === pathname)) {
+            setSelected(pathname);
             const pathFragments = pathname.split('/').filter(r => !!r);
 
             const subRoutes = pathFragments.map((_, index) => {
@@ -78,6 +81,7 @@ export function MenuTree(props: P) {
     return (
         <Root>
             <TreeView
+                selected={[selected]}
                 disableSelection
                 className={classes.root}
                 expanded={expanded}

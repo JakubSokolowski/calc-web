@@ -1,4 +1,4 @@
-import { extractHeadingIds, getHeadingSlug } from './heading-ids';
+import { extractHeadingIds} from './heading-ids';
 import { ContentsEntry } from '../models/contents-entry';
 
 describe('#header-ids', () => {
@@ -33,20 +33,6 @@ describe('#header-ids', () => {
 
             // then
             const expected: ContentsEntry[] = [];
-            expect(result).toEqual(expected);
-        });
-    });
-
-    describe('#getHeadingSlug', () => {
-        it('should return slug for heading', () => {
-            // given
-            const heading = 'Some heading with żółć tekst';
-
-            // when
-            const result = getHeadingSlug(heading);
-
-            // then
-            const expected = 'some-heading-with-zolc-tekst';
             expect(result).toEqual(expected);
         });
     });
