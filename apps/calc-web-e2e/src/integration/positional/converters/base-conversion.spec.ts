@@ -1,6 +1,8 @@
 import {
-    getBconvConvertButton, getBconvSwapBasesButton,
-    getComplementInput, getConversionResult,
+    getBconvConvertButton,
+    getBconvSwapBasesButton,
+    getComplementInput,
+    getConversionResult,
     getDecimalValueInput,
     getInputBaseInput,
     getInputStrInput,

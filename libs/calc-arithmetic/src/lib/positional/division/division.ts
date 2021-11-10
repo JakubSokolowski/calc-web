@@ -10,7 +10,14 @@ import { multiplyDefault } from '../multiplication/multiplication';
 import { digitsToStr } from '../../helpers/conversion-helpers';
 import { DivisionType } from '../../models/operation-algorithm';
 import { OperationType } from '../../models/operation';
+import { inRangeInclusive } from '@calc/utils';
 
+export const DIVISION_MIN_PRECISION = 2;
+export const DIVISION_MAX_PRECISION = 10;
+
+export function isValidPrecision(precision: number): boolean {
+    return inRangeInclusive(precision, DIVISION_MIN_PRECISION, DIVISION_MAX_PRECISION);
+}
 
 export function divideDefault(numbers: PositionalNumber[], fractionPrecision = 5): DivisionResult {
     const [dividend, divisor] = numbers;

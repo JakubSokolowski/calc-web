@@ -199,7 +199,7 @@ describe('CalculatorOptions', () => {
             await tick();
 
             // then
-            expect(onSubmit).toBeCalledWith(base, operands, multiplication, multiplicationAlgorithm);
+            expect(onSubmit).toBeCalledWith(base, operands, multiplication, multiplicationAlgorithm, 5);
         });
     });
 

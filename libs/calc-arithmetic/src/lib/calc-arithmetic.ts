@@ -28,7 +28,7 @@ export {
     multiplyBooth, multiplyBoothMcSorley, multiplyBoothMcSorleyAlt
 } from './positional/multiplication/signed-digit-multiplication';
 
-export { divideDefault } from './positional/division/division';
+export { divideDefault, DIVISION_MAX_PRECISION, DIVISION_MIN_PRECISION, isValidPrecision } from './positional/division/division';
 
 export * from './models';
 export * from './models/operation';

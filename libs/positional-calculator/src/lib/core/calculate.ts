@@ -29,6 +29,7 @@ export interface OperationParams<T = PositionalNumber> {
     operands: T[];
     operation: OperationType;
     algorithm: AlgorithmType;
+    precision?: number;
 }
 
 export interface GridResult<T = any> {
@@ -167,7 +168,8 @@ function handleMultiply(
 function handleDivide(params: OperationParams): GridResult<DivisionResult> {
     switch (params.algorithm) {
         case DivisionType.Default: {
-            const result = divideDefault(params.operands);
+            console.log("divvying up", params.precision)
+            const result = divideDefault(params.operands, params.precision);
             const grid = buildDivisionGrid(result);
             return {
                 grid,

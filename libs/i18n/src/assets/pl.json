@@ -108,6 +108,8 @@
         "sdAddRow": "Wartość cyfry [[sd]] to [[value]], dodaj [[valueToAdd]]",
         "algorithmAllowedForBases": "Algorytm mozna użyć wyłącznie dla podstawy {{base}}",
         "add": "Dodaj ",
+        "precision": "Dokładność ułamka",
+        "wrongPrecision": "Dokładność ułamka musi być liczbą całkowitą między {{minPrecision}} a {{maxPrecision}}",
         "withNegated": " z zanegowaną ",
         "extensionDigitPositive": "Wartość cyfry rozszerzenia to 0",
         "lastDigitPositive": "Najbardziej znacząca pozycja ma wartość {{value}}, dodaj",
