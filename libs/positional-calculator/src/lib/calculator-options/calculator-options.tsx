@@ -1,7 +1,8 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
-    BaseDigits,
+    BaseDigits, DIVISION_MAX_PRECISION, DIVISION_MIN_PRECISION,
+    isValidPrecision,
     OperandInputValue,
     Operation,
     OperationAlgorithm,
@@ -21,10 +22,11 @@ import { OperationParams } from '../core/calculate';
 
 interface FormValues {
     base: number;
+    precision: number;
 }
 
 interface P {
-    onSubmit: (base: number, representations: DndOperand[], operation: Operation, algorithm: OperationAlgorithm) => void;
+    onSubmit: (base: number, representations: DndOperand[], operation: Operation, algorithm: OperationAlgorithm, precision?: number) => void;
     onOperationChange: (operation: OperationType) => void;
     defaultOperands?: DndOperand[];
     defaultBase?: number;
@@ -36,6 +38,7 @@ const PREFIX = 'CalculatorOptions';
 
 const classes = {
     base: `${PREFIX}-base`,
+    precision: `${PREFIX}-precision`,
     operand: `${PREFIX}-operand`,
     spacer: `${PREFIX}-spacer`,
     growSpacer: `${PREFIX}-growSpacer`,
@@ -49,6 +52,9 @@ const classes = {
 const Root = styled('div')(({ theme }) => ({
     [`& .${classes.base}`]: {
         maxWidth: 100
+    },
+    [`& .${classes.precision}`]: {
+        maxWidth: 150
     },
     [`& .${classes.operand}`]: {
         width: '100%'
@@ -112,7 +118,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [canAddOperand, setCanAddOperand] = useState(true);
     const [canCalculate, setCanCalculate] = useState(false);
 
-    const initialValues: FormValues = { base: defaultBase || 10 };
+    const initialValues: FormValues = { base: defaultBase || 10, precision: 5 };
 
     const validateBase = (base: number): string | undefined => {
         if (!BaseDigits.isValidBase(base)) {
@@ -123,19 +129,31 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         }
     };
 
+    const validatePrecision = (precision?: number): string | undefined => {
+        if(!precision) return undefined;
+        if (!isValidPrecision(precision)) {
+            return t(
+                'positionalCalculator.wrongPrecision',
+                { minPrecision: DIVISION_MIN_PRECISION, maxPrecision: DIVISION_MAX_PRECISION }
+            );
+        }
+    };
+
     const validate = (values: FormValues) => {
         const errors: FormErrors<FormValues> = {
-            base: validateBase(values.base)
+            base: validateBase(values.base),
+            precision: validatePrecision(values.precision)
         };
 
         return clean(errors);
     };
 
     const handleSubmit = (form: FormValues) => {
-        onSubmit(form.base, operands, operation, algorithm);
+        onSubmit(form.base, operands, operation, algorithm, form.precision);
 
         const params: OperationParams<string> = {
             base: form.base,
+            precision: form.precision,
             operands: operands.map(op => op.representation),
             operation: operation.type,
             algorithm: algorithm.type
@@ -235,21 +253,6 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     return (
         <Root>
             <div className={classes.optionsRow}>
-                <TextField
-                    data-testid={'base'}
-                    className={classes.base}
-                    variant={'outlined'}
-                    type={'number'}
-                    size={'small'}
-                    name={'base'}
-                    id={'base'}
-                    label={t('baseConverter.base')}
-                    error={!!form.errors.base}
-                    helperText={form.errors.base}
-                    onChange={form.handleChange}
-                    value={form.values.base}
-                />
-                <div className={classes.spacer}/>
                 <ExtendedSelect
                     data-test='operation-select'
                     value={operation}
@@ -265,6 +268,38 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     onChange={(value) => setAlgorithm(value)}
                     options={operationAlgorithms}
                 />
+                <div className={classes.spacer}/>
+                <TextField
+                    data-testid={'base'}
+                    className={classes.base}
+                    variant={'outlined'}
+                    type={'number'}
+                    size={'small'}
+                    name={'base'}
+                    id={'base'}
+                    label={t('baseConverter.base')}
+                    error={!!form.errors.base}
+                    helperText={form.errors.base}
+                    onChange={form.handleChange}
+                    value={form.values.base}
+                />
+                <div className={classes.spacer}/>
+                {
+                    operation.type === OperationType.Division && <TextField
+                        data-testid={'precision'}
+                        className={classes.precision}
+                        variant={'outlined'}
+                        type={'number'}
+                        size={'small'}
+                        name={'precision'}
+                        id={'precision'}
+                        label={t('positionalCalculator.precision')}
+                        error={!!form.errors.precision}
+                        helperText={form.errors.precision}
+                        onChange={form.handleChange}
+                        value={form.values.precision}
+                    />
+                }
                 <div className={classes.growSpacer}/>
                 <Tooltip title={errorMessage}>
                     <span>

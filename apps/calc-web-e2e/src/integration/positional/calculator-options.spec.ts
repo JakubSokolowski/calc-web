@@ -121,17 +121,8 @@ describe('Calculator options', () => {
         const params = '?operation=multiplication&algorithm=withextension&base=10&op=78&op=-88';
         cy.visit(`#/tools/positional/positional-calculator${params}`);
         cy.reload();
-
-        const base = 10;
-        const config: OperationTemplate<AlgorithmType> = {
-            operands: ['78', '-88'],
-            operation: OperationType.Multiplication,
-            algorithm: MultiplicationType.WithExtension,
-            base
-        };
-
         // proper result should be displayed without without editing inputs and clicking submit
         const expected = '-6864';
-        checkOperationResult(config, expected);
+        checkOperationResult(expected);
     })
 });

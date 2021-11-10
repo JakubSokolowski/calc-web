@@ -72,7 +72,8 @@ export const PositionalCalculatorView: FC = () => {
         base: number,
         representations: DndOperand[],
         operation: Operation,
-        algorithm: OperationAlgorithm<T>
+        algorithm: OperationAlgorithm<T>,
+        precision?: number
     ) {
         setErrorOpen(false);
         const operands: PositionalNumber[] = representations.map((num) => {
@@ -83,7 +84,8 @@ export const PositionalCalculatorView: FC = () => {
             algorithm: algorithm.type,
             operation: operation.type,
             base,
-            operands
+            operands,
+            precision
         };
 
         setParams(params);

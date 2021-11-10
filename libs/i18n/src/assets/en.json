@@ -108,6 +108,8 @@
         "sdAddRow": "[[sd]] digit value is [[value]], add [[valueToAdd]]",
         "algorithmAllowedForBases": "Algorithm is only allowed for base {{base}}",
         "add": "Add ",
+        "precision": "Fraction precision",
+        "wrongPrecision": "Fraction precision must be an integer between {{minPrecision}} and {{maxPrecision}}",
         "withNegated": " with negated ",
         "extensionDigitPositive": "Extension digit value is 0",
         "lastDigitPositive": "Most significant digit value is {{value}}, add",

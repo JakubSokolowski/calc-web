@@ -1,6 +1,7 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
+    checkOperationResult,
     enterOperationParams,
     getCalculateButton,
     getDivisionResult,
@@ -8,7 +9,7 @@ import {
     gridHasProperDivisionStepDetails,
     gridHasProperResultRow,
     operationReturnsProperResult,
-    selectOperation
+    selectOperation, setOperationPrecision
 } from '../../../support/positional-calculator';
 import { changeLanguage } from '../../../support/language';
 import { Language } from '@calc/i18n';
@@ -268,5 +269,26 @@ describe('Default Division', () => {
         selectOperation(OperationType.Division);
         getCalculateButton().should('be.disabled');
         cy.get('.MuiFormHelperText-root').contains('Cannot divide by 0');
+    });
+
+    it('should divide with different precisions', () => {
+        const base = 10;
+        const precision = 5;
+        const config: OperationTemplate<AlgorithmType> = {
+            operands: ['2456', '12'],
+            operation: OperationType.Division,
+            algorithm: MultiplicationType.Default,
+            base,
+            precision
+        };
+        const expected = '204.66666';
+        operationReturnsProperResult(config, expected);
+
+        const newPrecision = 10;
+        setOperationPrecision(newPrecision);
+        getCalculateButton().click();
+
+        const newExpected = '204.6666666666';
+        checkOperationResult(newExpected);
     });
 });

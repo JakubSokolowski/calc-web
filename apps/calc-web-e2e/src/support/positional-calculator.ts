@@ -38,6 +38,10 @@ export const setOperationBase = (base: number) => {
     cy.get('#base').clear().type(`${base}`);
 };
 
+export const setOperationPrecision = (precision?: number) => {
+    if(precision) cy.get('#precision').clear().type(`${precision}`);
+};
+
 export const getCalculateButton = () => cy.getByDataTest('calculate');
 
 export const getAdditionResult = () => cy.getByDataTest('addition-result');
@@ -54,19 +58,20 @@ export const calculatePositional = (config: OperationTemplate<AlgorithmType>) =>
 };
 
 export const enterOperationParams = (config: OperationTemplate<AlgorithmType>) => {
-    const { algorithm, base, operands, operation } = config;
+    const { algorithm, base, operands, operation, precision } = config;
     setOperationBase(base);
     selectAlgorithm(algorithm);
     selectOperation(operation);
+    setOperationPrecision(precision);
     operands.forEach((op, idx) => addOperand(op, idx));
 };
 
 export const operationReturnsProperResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
     calculatePositional(config);
-    checkOperationResult(config, result);
+    checkOperationResult(result);
 };
 
-export const checkOperationResult = (config: OperationTemplate<AlgorithmType>, result: string) => {
+export const checkOperationResult = (result: string) => {
     hasProperResult(result);
     hasSuccessNotification();
 };
