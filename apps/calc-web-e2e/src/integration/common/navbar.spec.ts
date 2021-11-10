@@ -30,11 +30,11 @@ describe('navbar', () => {
     it('should display translation change button and change translation on click', () => {
         // should have polish as default language
         hasLanguage(Language.pl);
-        cy.getByDataTest('menu-tree-label').contains('Strona główna');
+        cy.get('.MenuTreeItem-label').first().contains('Strona główna');
 
         // Should change language after clicking another in menu
         changeLanguage(Language.en);
 
-        cy.getByDataTest('menu-tree-label').contains('Home');
+        cy.get('.MenuTreeItem-label').first().contains('Home');
     });
 });

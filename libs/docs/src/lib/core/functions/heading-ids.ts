@@ -1,5 +1,5 @@
-import { latinize } from './latinize';
 import { ContentsEntry } from '../models/contents-entry';
+import { getSlug } from '@calc/common-ui';
 
 
 export function extractHeadingIds(markdown?: string): ContentsEntry[] {
@@ -15,13 +15,9 @@ export function extractHeadingIds(markdown?: string): ContentsEntry[] {
         const level = heading.split('#').length - 1;
 
         return {
-            id: getHeadingSlug(withoutHashes),
+            id: getSlug(withoutHashes),
             level: level
         }
     });
 }
 
-export function getHeadingSlug(heading: string): string {
-    const slug = heading.trim().toLowerCase();
-    return latinize(slug).replace(/\W/g, '-');
-}

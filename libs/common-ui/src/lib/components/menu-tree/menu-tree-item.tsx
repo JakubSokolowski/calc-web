@@ -1,7 +1,8 @@
 import { styled } from '@mui/material/styles';
-import { TreeNode } from '@calc/common-ui';
+import { getSlug } from '../../core/functions/slug';
 import TreeItem from '@mui/lab/TreeItem';
 import Typography from '@mui/material/Typography';
+import { TreeNode } from '../../core/models/tree-node';
 import React from 'react';
 
 declare module 'react' {
@@ -29,11 +30,9 @@ const Root = styled('div')(({ theme }) => ({
             backgroundColor: theme.palette.action.hover
         },
         '&:focus > $content, &$selected > $content': {
-            backgroundColor: `var(--tree-view-bg-color, ${theme.palette.grey[400]})`,
             color: 'var(--tree-view-color)'
         },
         '&:focus > $content $label, &:hover > $content $label, &$selected > $content $label': {
-            backgroundColor: 'transparent'
         }
     },
     [`& .${classes.content}`]: {
@@ -76,11 +75,12 @@ export function StyledTreeItem(props: TreeNode) {
     return (
         <Root>
             <TreeItem
+                aria-selected={'true'}
                 nodeId={props.path}
                 label={
-                    <div className={classes.labelRoot}>
+                    <div data-test={`node-${getSlug(props.labelText)}`} className={classes.labelRoot}>
                         {LabelIcon && <LabelIcon color="inherit" className={classes.labelIcon}/>}
-                        <Typography data-test="menu-tree-label" variant="body2" className={classes.labelText}>
+                        <Typography variant="body2" className={classes.labelText}>
                             {labelText}
                         </Typography>
                         <Typography variant="caption" color="inherit">
