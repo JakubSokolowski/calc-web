@@ -1,7 +1,9 @@
 import React, { FC, useEffect, useState } from 'react';
 import { ExtendedSelect, FormErrors } from '@calc/common-ui';
 import {
-    BaseDigits, DIVISION_MAX_PRECISION, DIVISION_MIN_PRECISION,
+    BaseDigits,
+    DIVISION_MAX_PRECISION,
+    DIVISION_MIN_PRECISION,
     isValidPrecision,
     OperandInputValue,
     Operation,
@@ -129,7 +131,6 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     };
 
     const validatePrecision = (precision?: number): string | undefined => {
-        console.log("Validating precision", precision, isValidPrecision(precision));
         if(!precision) return undefined;
         if (!isValidPrecision(precision)) {
             return t(
@@ -145,11 +146,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
             precision: validatePrecision(values.precision)
         };
 
-        const cleaned = clean(errors);
-
-        console.log(cleaned);
-
-        return cleaned;
+        return clean(errors);
     };
 
     const handleSubmit = (form: FormValues) => {
@@ -189,7 +186,8 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     };
 
     const handleAdd = () => {
-        const defaultStr = BaseDigits.getRepresentation(0, form.values.base);
+        const base = form.isValid ? form.values.base : 10;
+        const defaultStr = BaseDigits.getRepresentation(0, base);
         setOperands((prev) => [...prev, { representation: defaultStr, valid: true, dndKey: `${Date.now()}` }]);
     };
 

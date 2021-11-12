@@ -1,13 +1,14 @@
 import { OperationTemplate } from '@calc/positional-calculator';
 import { AlgorithmType, DivisionType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
+    addOperand,
     addOperands,
     calculatePositional,
     checkOperationResult, enterOperationParams,
     getAddOperandButton,
     getCalculateButton,
     hasProperResult,
-    operationReturnsProperResult,
+    operationReturnsProperResult, selectAlgorithm,
     selectOperation,
     setOperationBase,
     setOperationPrecision
@@ -162,6 +163,34 @@ describe('Calculator options', () => {
         getCalculateButton().should('be.disabled');
 
         setOperationBase(10);
+        getCalculateButton().should('not.be.disabled');
+    });
+
+    // BUG #269
+    it('should not throw any errors when add operand is pressed and base is invalid', () => {
+        // set valid base and add some operand
+        setOperationBase(10);
+        addOperands(['25']);
+
+        // change base to invalid
+        setOperationBase(1);
+        addOperand('20', 1);
+        getCalculateButton().should('be.disabled');
+
+        // change base back to valid
+        setOperationBase(10);
+        getCalculateButton().should('not.be.disabled');
+
+        // change bases and check whether operands are valid
+        setOperationBase(2);
+        getCalculateButton().should('be.disabled');
+        setOperationBase(3);
+        getCalculateButton().should('be.disabled');
+        setOperationBase(4);
+        getCalculateButton().should('be.disabled');
+        setOperationBase(5);
+        getCalculateButton().should('be.disabled');
+        setOperationBase(6);
         getCalculateButton().should('not.be.disabled');
     });
 });
