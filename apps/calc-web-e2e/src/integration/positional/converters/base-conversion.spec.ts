@@ -184,5 +184,38 @@ describe('Base converter conversion', () => {
         cy.reload();
         const expected = '1111011';
         getConversionResult(expected);
-    })
+    });
+
+    it('should save latest operation in local storage, and execute it on reload', () => {
+        const inputStr = '123';
+        const inputBase = 10;
+        const outputBase = 2;
+        const expected = '1111011';
+        cy.baseConverterInput(inputStr, inputBase, outputBase);
+        getConversionResult(expected);
+
+        cy.visit(`/`);
+        cy.visit(`#/tools/positional/base-converter`);
+        getConversionResult(expected);
+
+        // should load latest result and update url params
+        const expectedParams = '?input=123&inputBase=10&outputBase=2&precision=10';
+        cy.location('href').should('include', expectedParams);
+    });
+
+    it('should load params from url over local storage params when both are present', () => {
+        const inputStr = '123';
+        const inputBase = 10;
+        const outputBase = 2;
+        const lsExpected = '1111011';
+        cy.baseConverterInput(inputStr, inputBase, outputBase);
+        getConversionResult(lsExpected);
+
+        cy.visit('/');
+        const params = '?input=64&inputBase=10&outputBase=2&precision=10';
+        cy.visit(`#/tools/positional/base-converter${params}`);
+        const urlExpected = '1000000';
+
+        getConversionResult(urlExpected);
+    });
 });

@@ -17,7 +17,12 @@ import { clean, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { BaseConverterParams } from './bconv-params';
-import { toBconvUrlSearchParams, useUrlBaseConverterParams } from './bconv-url-params';
+import {
+    baseConverterParamsLsKey,
+    toBconvUrlSearchParams,
+    useLsBaseConverterParams,
+    useUrlBaseConverterParams
+} from './bconv-url-params';
 import { useHistory } from 'react-router-dom';
 
 interface P {
@@ -96,7 +101,8 @@ const Root = styled('div')(({ theme }) => ({
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
-    const bconvUrlParams = useUrlBaseConverterParams();
+    const urlParams = useUrlBaseConverterParams();
+    const lsParams = useLsBaseConverterParams();
     const history = useHistory();
     const { t } = useTranslation();
 
@@ -112,9 +118,9 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         const conversion = fromStringDetailed(inputStr, inputBase, outputBase, precision);
         onConversionChange(conversion, precision);
 
-        history.replace({
-            search: toBconvUrlSearchParams(values)
-        });
+        const search = toBconvUrlSearchParams(values);
+        history.replace({ search });
+        localStorage.setItem(baseConverterParamsLsKey, search);
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -166,16 +172,31 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         await form.validateForm();
     };
 
-    const loadOptionsFromUrl = () => {
-        if(bconvUrlParams) {
-            onSubmit(bconvUrlParams);
+    const loadParams = (params?: BaseConverterParams) => {
+        if(params) {
+            onSubmit(params);
             setTimeout(async () => {
-                await form.setValues(bconvUrlParams);
+                await form.setValues(params);
             });
         }
     };
 
-    useMountEffect(loadOptionsFromUrl);
+    const loadInitialOptions = () => {
+        if(urlParams) {
+            loadParams(urlParams);
+            return
+        }
+
+        if(lsParams) {
+            loadParams(lsParams);
+            const search = localStorage.getItem(baseConverterParamsLsKey);
+            history.replace({ search });
+
+            return
+        }
+    };
+
+    useMountEffect(loadInitialOptions);
 
     const getDecimal = useCallback(() => {
         const {inputStr, inputBase} = form.values;
