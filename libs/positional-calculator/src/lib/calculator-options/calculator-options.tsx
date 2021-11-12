@@ -87,6 +87,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
     const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
+    const [submitDisabled, setSubmitDisabled] = useState(false);
     const optionsFromUrl = useUrlCalculatorOptions();
     const history = useHistory();
 
@@ -129,7 +130,6 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     };
 
     const validatePrecision = (precision?: number): string | undefined => {
-        console.log("Validating precision", precision, isValidPrecision(precision));
         if(!precision) return undefined;
         if (!isValidPrecision(precision)) {
             return t(
@@ -145,11 +145,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
             precision: validatePrecision(values.precision)
         };
 
-        const cleaned = clean(errors);
-
-        console.log(cleaned);
-
-        return cleaned;
+        return clean(errors);
     };
 
     const handleSubmit = (form: FormValues) => {
@@ -193,43 +189,30 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         setOperands((prev) => [...prev, { representation: defaultStr, valid: true, dndKey: `${Date.now()}` }]);
     };
 
-    useEffect(() => {
-        let newMessage = '';
-
-        const precisionValid = !form.errors.precision;
-        if(!precisionValid) {
-            newMessage = t(
-                'positionalCalculator.wrongPrecision',
-                { minPrecision: DIVISION_MIN_PRECISION, maxPrecision: DIVISION_MAX_PRECISION }
-            );
-        }
-
+    const computeCanCalculate = () => {
         const everyOperandValid = operands.every((op) => op.valid);
+        const { minOperands, maxOperands } = operation;
+        const allowedNumOfOperands = inRangeInclusive(operands.length, minOperands, maxOperands);
+        return everyOperandValid && allowedNumOfOperands;
+    };
+
+    useEffect(() => {
+        const everyOperandValid = operands.every((op) => op.valid);
+        let newMessage = '';
         if (!everyOperandValid) newMessage = t('positionalCalculator.operandsNotValid');
 
         const { minOperands, maxOperands } = operation;
+
         const allowedNumOfOperands = inRangeInclusive(operands.length, minOperands, maxOperands);
         if (!allowedNumOfOperands) newMessage = t('positionalCalculator.wrongOperandsNum', {
             minOperands,
             maxOperands
         });
 
-        const baseValid = !form.errors.base;
-        if(!baseValid) {
-            newMessage = t(
-                'baseConverter.wrongBase',
-                { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }
-            );
-        }
-
-        const canCalculate = baseValid
-            && everyOperandValid
-            && allowedNumOfOperands
-            && precisionValid;
-
+        const canCalculate = computeCanCalculate();
         setErrorMessage(newMessage);
         setCanCalculate(canCalculate);
-    }, [operands, operation, t, form.errors]);
+    }, [operands, operation, t, form.values.base]);
 
     useEffect(() => {
         onOperationChange(operation.type);
@@ -261,6 +244,11 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         const canAdd = operation.maxOperands > operands.length;
         setCanAddOperand(canAdd);
     }, [operands, operation]);
+
+    useEffect(() => {
+        const disabled = operands.length < 1 || !canCalculate;
+        setSubmitDisabled(disabled);
+    }, [form.isValid, operands, canCalculate]);
 
     return (
         <Root>
@@ -313,7 +301,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                     />
                 }
                 <div className={classes.growSpacer}/>
-                <Tooltip title={errorMessage} placement={'top'}>
+                <Tooltip title={errorMessage}>
                     <span>
                          <Button
                              data-testid="submit"
@@ -322,7 +310,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
                              color={'info'}
                              variant={'contained'}
                              className={classes.addOperand}
-                             disabled={!canCalculate}
+                             disabled={submitDisabled}
                          >
                             {t('positionalCalculator.calculate')}
                         </Button>

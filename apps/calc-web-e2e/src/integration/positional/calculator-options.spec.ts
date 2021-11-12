@@ -1,16 +1,15 @@
 import { OperationTemplate } from '@calc/positional-calculator';
-import { AlgorithmType, DivisionType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
+import { AlgorithmType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
 import {
     addOperands,
     calculatePositional,
-    checkOperationResult, enterOperationParams,
+    checkOperationResult,
     getAddOperandButton,
     getCalculateButton,
     hasProperResult,
     operationReturnsProperResult,
     selectOperation,
-    setOperationBase,
-    setOperationPrecision
+    setOperationBase
 } from '../../support/positional-calculator';
 import { getCommonTooltip } from '../../support/common';
 import { changeLanguage } from '../../support/language';
@@ -125,43 +124,5 @@ describe('Calculator options', () => {
         // proper result should be displayed without without editing inputs and clicking submit
         const expected = '-6864';
         checkOperationResult(expected);
-    });
-
-    // BUG #268
-    it('should disable calculate button when precision is not valid', () => {
-        const config: OperationTemplate<AlgorithmType> = {
-            operands: ['78', '-88'],
-            operation: OperationType.Division,
-            algorithm: DivisionType.Default,
-            base: 10,
-            precision: 10
-        };
-        enterOperationParams(config);
-        getCalculateButton().should('not.be.disabled');
-
-        setOperationPrecision(20);
-        getCalculateButton().should('be.disabled');
-
-        setOperationPrecision(10);
-        getCalculateButton().should('not.be.disabled');
-    });
-
-    // BUG #268
-    it('should disable calculate button when base is not valid', () => {
-        const config: OperationTemplate<AlgorithmType> = {
-            operands: ['78', '-88'],
-            operation: OperationType.Division,
-            algorithm: DivisionType.Default,
-            base: 10,
-            precision: 5
-        };
-        enterOperationParams(config);
-        getCalculateButton().should('not.be.disabled');
-
-        setOperationBase(1);
-        getCalculateButton().should('be.disabled');
-
-        setOperationBase(10);
-        getCalculateButton().should('not.be.disabled');
-    });
+    })
 });
