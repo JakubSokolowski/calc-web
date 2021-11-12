@@ -1,4 +1,5 @@
 import {
+    BaseDigits,
     fromStringDirect,
     isValidComplementOrRepresentationStr,
     OperandInputValue,
