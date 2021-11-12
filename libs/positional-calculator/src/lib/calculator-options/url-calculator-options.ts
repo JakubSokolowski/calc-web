@@ -73,3 +73,10 @@ export function toUrlSearchParams(params: OperationParams<string>): string {
 export function useUrlCalculatorOptions(): CalculatorOptionsValue | undefined {
     return urlParamsToCalculatorOptionsValue(useUrlParams());
 }
+
+export const calculatorOptionsLsKey = 'calculatorOptions';
+
+export function useLsCalculatorOptions(): CalculatorOptionsValue | undefined {
+    const search = localStorage.getItem(calculatorOptionsLsKey);
+    return urlParamsToCalculatorOptionsValue(new URLSearchParams(search))
+}
