@@ -24,6 +24,7 @@ export function isDivisorZero(input: OperandInputValue): TranslationErrorMessage
 
 export function representationValidator(input: OperandInputValue): TranslationErrorMessage | undefined {
     const { representation, base } = input;
+    if(!BaseDigits.isValidBase(base)) return;
     if (!isValidComplementOrRepresentationStr(representation, base)) {
         return {
             key: 'baseConverter.wrongRepresentationStr',

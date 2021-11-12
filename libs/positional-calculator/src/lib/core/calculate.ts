@@ -168,7 +168,6 @@ function handleMultiply(
 function handleDivide(params: OperationParams): GridResult<DivisionResult> {
     switch (params.algorithm) {
         case DivisionType.Default: {
-            console.log("divvying up", params.precision)
             const result = divideDefault(params.operands, params.precision);
             const grid = buildDivisionGrid(result);
             return {
