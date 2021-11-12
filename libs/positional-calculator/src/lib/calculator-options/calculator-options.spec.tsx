@@ -22,7 +22,6 @@ jest.mock('react-router-dom', () => ({
 }));
 
 describe('CalculatorOptions', () => {
-    let container;
     const onSubmit = jest.fn();
     const onOperationChange = jest.fn();
     const base = 10;
@@ -34,12 +33,13 @@ describe('CalculatorOptions', () => {
     });
 
     beforeEach(() => {
-        container = shallow(
-            <CalculatorOptions onSubmit={onSubmit} onOperationChange={onOperationChange}/>
-        );
+        localStorage.clear();
     });
 
     it('should render', () => {
+        const container = shallow(
+            <CalculatorOptions onSubmit={onSubmit} onOperationChange={onOperationChange}/>
+        );
         expect(container).toBeTruthy();
     });
 
@@ -206,6 +206,7 @@ describe('CalculatorOptions', () => {
     describe('when base is changed', () => {
         it('should disable submit button when base changes to invalid for current operands', () => {
             // given
+            localStorage.clear();
             const buttonTestId = 'submit';
             const baseInputTestId = 'base';
 
@@ -229,7 +230,7 @@ describe('CalculatorOptions', () => {
             );
 
             // when
-            const beforeChange = container
+            const isDisabledBeforeChange = container
                 .find(`[data-testid="${buttonTestId}"]`)
                 .at(0)
                 .prop('disabled');
@@ -245,13 +246,13 @@ describe('CalculatorOptions', () => {
             container.update();
 
             // then
-            const afterChange = container
+            const isDisabledAfterChange = container
                 .find(`[data-testid="${buttonTestId}"]`)
                 .at(0)
                 .prop('disabled');
 
-            expect(beforeChange).toBeFalsy();
-            expect(afterChange).toBeTruthy();
+            expect(isDisabledBeforeChange).toBeFalsy();
+            expect(isDisabledAfterChange).toBeTruthy();
         });
 
         it('should show error message when base is invalid', async () => {
@@ -350,3 +351,5 @@ describe('CalculatorOptions', () => {
         });
     });
 });
+
+

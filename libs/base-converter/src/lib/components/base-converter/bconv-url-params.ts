@@ -1,4 +1,3 @@
-
 import { BaseConverterParams } from './bconv-params';
 import { BaseDigits, isValidRepresentationStr } from '@calc/calc-arithmetic';
 import { useUrlParams } from '@calc/utils';
@@ -45,4 +44,11 @@ export function toBconvUrlSearchParams(params: BaseConverterParams): string {
 
 export function useUrlBaseConverterParams(): BaseConverterParams | undefined {
     return urlParamsToBaseConverterParams(useUrlParams());
+}
+
+export const baseConverterParamsLsKey = 'baseConverterParams';
+
+export function useLsBaseConverterParams(): BaseConverterParams | undefined {
+    const search = localStorage.getItem(baseConverterParamsLsKey);
+    return urlParamsToBaseConverterParams(new URLSearchParams(search));
 }
