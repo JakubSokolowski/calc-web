@@ -15,12 +15,18 @@ import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, styled, TextField, Tooltip } from '@mui/material';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
-import { toUrlSearchParams, useUrlCalculatorOptions } from './url-calculator-options';
+import {
+    calculatorOptionsLsKey,
+    toUrlSearchParams,
+    useLsCalculatorOptions,
+    useUrlCalculatorOptions
+} from './url-calculator-options';
 import { useHistory } from 'react-router-dom';
 import { representationValidator, validateOperand } from '../validators/validators';
 import { allOperations } from './operations';
 import { algorithmMap, multiplicationAlgorithms } from './algorithms';
 import { OperationParams } from '../core/calculate';
+import { CalculatorOptionsValue } from './calculator-options-value';
 
 interface FormValues {
     base: number;
@@ -90,27 +96,39 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const optionsFromUrl = useUrlCalculatorOptions();
+    const optionsFromLs = useLsCalculatorOptions();
     const history = useHistory();
 
-    const loadOptionsFromUrl = () => {
-        if (optionsFromUrl) {
-            const {
-                algorithm: urlAlgorithm,
-                operation: urlOperation,
-                base: urlBase,
-                operands: urlOperands
-            } = optionsFromUrl;
+    const loadOptions = (options: CalculatorOptionsValue) => {
+        const {
+            algorithm: savedAlgorithm,
+            operation: savedOperation,
+            base: savedBase,
+            operands: savedOperands
+        } = options;
 
-            form.values.base = urlBase;
-            setOperands(urlOperands);
-            setTimeout(() => setAlgorithm(urlAlgorithm));
-            setOperation(urlOperation);
+        form.values.base = savedBase;
+        setOperands(savedOperands);
+        setTimeout(() => setAlgorithm(savedAlgorithm));
+        setOperation(savedOperation);
+        onSubmit(savedBase, savedOperands, savedOperation, savedAlgorithm);
+    };
 
-            onSubmit(urlBase, urlOperands, urlOperation, urlAlgorithm);
+    const loadInitialOptions = () => {
+        if(optionsFromUrl) {
+            loadOptions(optionsFromUrl);
+            return
+        }
+
+        if(optionsFromLs) {
+            loadOptions(optionsFromLs);
+            const search = localStorage.getItem(calculatorOptionsLsKey);
+            history.replace({ search });
+            return
         }
     };
 
-    useMountEffect(loadOptionsFromUrl);
+    useMountEffect(loadInitialOptions);
 
 
     const [operands, setOperands] = useState<DndOperand[]>(
@@ -160,9 +178,9 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
             algorithm: algorithm.type
         };
 
-        history.replace({
-            search: toUrlSearchParams(params)
-        });
+        const search = toUrlSearchParams(params);
+        history.replace({ search });
+        localStorage.setItem(calculatorOptionsLsKey, search);
     };
 
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
