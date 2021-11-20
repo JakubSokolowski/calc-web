@@ -62,6 +62,7 @@
         "file-saver": "^2.0.2",
         "formik": "^2.1.5",
         "g": "^2.0.1",
+        "history": "^5.1.0",
         "i18next": "^19.4.4",
         "imports-loader": "^1.1.0",
         "katex": "^0.12.0",

@@ -15,17 +15,10 @@ import { clean, inRangeInclusive, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { Button, styled, TextField, Tooltip } from '@mui/material';
 import { DndOperand, OperandList } from '../operand-list/operand-list';
-import {
-    calculatorOptionsLsKey,
-    toUrlSearchParams,
-    useLsCalculatorOptions,
-    useUrlCalculatorOptions
-} from './url-calculator-options';
-import { useHistory } from 'react-router-dom';
+import { useStoredCalculatorParams } from './calculator-storage';
 import { representationValidator, validateOperand } from '../validators/validators';
 import { allOperations } from './operations';
 import { algorithmMap, multiplicationAlgorithms } from './algorithms';
-import { OperationParams } from '../core/calculate';
 import { CalculatorOptionsValue } from './calculator-options-value';
 
 interface FormValues {
@@ -53,7 +46,7 @@ const classes = {
     operandsBox: `${PREFIX}-operandsBox`,
     addOperand: `${PREFIX}-addOperand`,
     options: `${PREFIX}-options`,
-    optionsRow: `${PREFIX}-optionsRow`,
+    optionsRow: `${PREFIX}-optionsRow`
 };
 
 
@@ -68,7 +61,7 @@ const Root = styled('div')(({ theme }) => ({
         width: '100%'
     },
     [`& .${classes.spacer}`]: {
-        width: theme.spacing(1),
+        width: theme.spacing(1)
     },
     [`& .${classes.growSpacer}`]: {
         flexGrow: 1
@@ -84,9 +77,8 @@ const Root = styled('div')(({ theme }) => ({
         display: 'flex',
         flexDirection: 'row',
         width: '100%'
-    },
+    }
 }));
-
 
 
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
@@ -95,9 +87,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
     const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
-    const optionsFromUrl = useUrlCalculatorOptions();
-    const optionsFromLs = useLsCalculatorOptions();
-    const history = useHistory();
+    const [storedParams, storeParams] = useStoredCalculatorParams();
 
     const loadOptions = (options: CalculatorOptionsValue) => {
         const {
@@ -112,19 +102,12 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         setTimeout(() => setAlgorithm(savedAlgorithm));
         setOperation(savedOperation);
         onSubmit(savedBase, savedOperands, savedOperation, savedAlgorithm);
+        storeParams(options);
     };
 
     const loadInitialOptions = () => {
-        if(optionsFromUrl) {
-            loadOptions(optionsFromUrl);
-            return
-        }
-
-        if(optionsFromLs) {
-            loadOptions(optionsFromLs);
-            const search = localStorage.getItem(calculatorOptionsLsKey);
-            history.replace({ search });
-            return
+        if (storedParams) {
+            loadOptions(storedParams);
         }
     };
 
@@ -149,7 +132,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     };
 
     const validatePrecision = (precision?: number): string | undefined => {
-        if(!precision) return undefined;
+        if (!precision) return undefined;
         if (!isValidPrecision(precision)) {
             return t(
                 'positionalCalculator.wrongPrecision',
@@ -170,17 +153,15 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
     const handleSubmit = (form: FormValues) => {
         onSubmit(form.base, operands, operation, algorithm, form.precision);
 
-        const params: OperationParams<string> = {
+        const params: CalculatorOptionsValue = {
             base: form.base,
             precision: form.precision,
-            operands: operands.map(op => op.representation),
-            operation: operation.type,
-            algorithm: algorithm.type
+            operands,
+            operation,
+            algorithm
         };
 
-        const search = toUrlSearchParams(params);
-        history.replace({ search });
-        localStorage.setItem(calculatorOptionsLsKey, search);
+        storeParams(params);
     };
 
     const form = useFormik({ initialValues, validate, onSubmit: handleSubmit });
@@ -213,7 +194,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         let newMessage = '';
 
         const precisionValid = !form.errors.precision;
-        if(!precisionValid) {
+        if (!precisionValid) {
             newMessage = t(
                 'positionalCalculator.wrongPrecision',
                 { minPrecision: DIVISION_MIN_PRECISION, maxPrecision: DIVISION_MAX_PRECISION }
@@ -231,7 +212,7 @@ export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultO
         });
 
         const baseValid = !form.errors.base;
-        if(!baseValid) {
+        if (!baseValid) {
             newMessage = t(
                 'baseConverter.wrongBase',
                 { minBase: BaseDigits.MIN_BASE, maxBase: BaseDigits.MAX_BASE }

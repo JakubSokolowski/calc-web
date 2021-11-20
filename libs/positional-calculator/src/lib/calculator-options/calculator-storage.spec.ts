@@ -1,8 +1,7 @@
-import { toUrlSearchParams, urlParamsToCalculatorOptionsValue } from './url-calculator-options';
+import { toUrlSearchParams, urlParamsToCalculatorOptionsValue } from './calculator-storage';
 import { CalculatorOptionsValue } from './calculator-options-value';
-import { DivisionType, MultiplicationType, OperationType } from '@calc/calc-arithmetic';
-import { divisionAlgorithms } from './algorithms';
-import { OperationParams } from '@calc/positional-calculator';
+import { MultiplicationType, OperationType } from '@calc/calc-arithmetic';
+import { divisionAlgorithms, multiplicationAlgorithms } from './algorithms';
 
 
 describe('#urlParamsToCalculatorOptionsValue', () => {
@@ -153,13 +152,19 @@ describe('#urlParamsToCalculatorOptionsValue', () => {
     describe('#toUrlSearchParams', () => {
         it('should return search params str for operation obj with precision', () => {
             // given
-            const operation: OperationParams<string> = {
-                algorithm: DivisionType.Default,
+            const operation: CalculatorOptionsValue = {
+                algorithm: divisionAlgorithms[0],
                 base: 2,
                 operands: [
-                    '101', '11'
+                    { dndKey: '0', representation: '101', valid: true },
+                    { dndKey: '1', representation: '11', valid: true }
                 ],
-                operation: OperationType.Division,
+                operation: {
+                    maxOperands: 2,
+                    minOperands: 2,
+                    tKey: 'operations.division.title',
+                    type: OperationType.Division
+                },
                 precision: 5,
             };
 
@@ -173,13 +178,19 @@ describe('#urlParamsToCalculatorOptionsValue', () => {
 
         it('should return search params str for operation obj without precision', () => {
             // given
-            const operation: OperationParams<string> = {
-                algorithm: MultiplicationType.Default,
+            const operation: CalculatorOptionsValue = {
+                algorithm: multiplicationAlgorithms[0],
                 base: 2,
                 operands: [
-                    '101', '11'
+                    { dndKey: '0', representation: '101', valid: true },
+                    { dndKey: '1', representation: '11', valid: true }
                 ],
-                operation: OperationType.Multiplication
+                operation:  {
+                    type: OperationType.Multiplication,
+                    minOperands: 2,
+                    maxOperands: 2,
+                    tKey: 'operations.multiplication.title'
+                },
             };
 
             // when
