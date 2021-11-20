@@ -293,6 +293,20 @@ describe('associated-base-converter', () => {
                 const expected = '110100';
                 expect(result.result.valueInBase).toEqual(expected);
             });
+
+            it('should convert 0', () => {
+                // given
+                const inputStr = '0';
+                const inputBase = 8;
+                const outputBase = 2;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '0';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
         });
 
         describe('when converting to greater base', () => {
@@ -391,6 +405,20 @@ describe('associated-base-converter', () => {
 
                 // then
                 const expected = '1646.6';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
+
+            it('should convert 0', () => {
+                // given
+                const inputStr = '0';
+                const inputBase = 2;
+                const outputBase = 8;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '0';
                 expect(result.result.valueInBase).toEqual(expected);
             });
         })
