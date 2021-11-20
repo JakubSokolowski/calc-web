@@ -16,7 +16,7 @@ describe('Associated base converter conversion', () => {
         const inputStr = 'FFA';
         const inputBase = 16;
         const outputBase = 2;
-        const expected = '11111111101';
+        const expected = '111111111010';
         const expectedMappings: Mapping[] = [
             {
                 input: 'F',
