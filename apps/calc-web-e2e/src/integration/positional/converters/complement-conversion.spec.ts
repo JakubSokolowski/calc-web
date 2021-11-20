@@ -24,7 +24,6 @@ describe('Complement converter', () => {
         complementConverterHasProperResult(expected);
     });
 
-
     it('should update url search params with operation data after submit', () => {
         const inputStr = '-ABC';
         const inputBase = 16;
