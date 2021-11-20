@@ -2,7 +2,7 @@ import React, { FC, useCallback, useState } from 'react';
 import {
     BaseDigits,
     Conversion,
-    convertUsingAssociatedBases,
+    convertUsingAssociatedBases, fromNumber,
     fromString,
     getComplement,
     isValidRepresentationStr
@@ -61,6 +61,12 @@ const Root = styled('div')(({ theme }) => ({
         }
     }
 }));
+
+function getPlaceholder(base: number) {
+    const decimalValue = -123;
+    if(!BaseDigits.isValidBase(base)) return fromNumber(decimalValue, 10);
+    return fromNumber(decimalValue, base)
+}
 
 export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
@@ -190,6 +196,15 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
             <ConversionOptions/>
             <form onSubmit={form.handleSubmit}>
                 <InputWithCopy
+                    placeholder={
+                        t(
+                            'common.inputPlaceholder',
+                            {
+                                'representation': getPlaceholder(form.values.inputBase).toString(),
+                                'complement': getPlaceholder(form.values.inputBase).complement.toString()
+                            }
+                        )
+                    }
                     dataTest="abconv-input-str"
                     className={classes.input}
                     name={'inputStr'}

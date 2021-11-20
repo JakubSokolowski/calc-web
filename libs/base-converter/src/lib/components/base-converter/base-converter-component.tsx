@@ -1,7 +1,7 @@
 import React, { FC, useCallback } from 'react';
 import {
     BaseDigits,
-    Conversion,
+    Conversion, fromNumber,
     fromString,
     fromStringDetailed,
     getComplement,
@@ -37,6 +37,13 @@ const classes = {
     verticalSpacer: `${PREFIX}-verticalSpacer`,
     input: `${PREFIX}-input`
 };
+
+
+function getPlaceholder(base: number) {
+    const decimalValue = -123;
+    if(!BaseDigits.isValidBase(base)) return fromNumber(decimalValue, 10);
+    return fromNumber(decimalValue, base)
+}
 
 const Root = styled('div')(({ theme }) => ({
     [`& .${classes.input}`]: {
@@ -296,6 +303,15 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
                 <InputWithCopy
                     data-test="bconv-input-str"
                     className={classes.input}
+                    placeholder={
+                        t(
+                            'common.inputPlaceholder',
+                            {
+                                'representation': getPlaceholder(form.values.inputBase).toString(),
+                                'complement': getPlaceholder(form.values.inputBase).complement.toString()
+                            }
+                        )
+                    }
                     name={'inputStr'}
                     id={'inputStr'}
                     size={'small'}

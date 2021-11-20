@@ -3,9 +3,9 @@ import { IconButton, ListItem, ListItemProps, ListItemSecondaryAction, TextField
 import CloseIcon from '@mui/icons-material/Close';
 import { useTranslation } from 'react-i18next';
 import {
-    BaseDigits,
+    BaseDigits, fromNumber, fromStringDirect,
     OperandInputValue,
-    OperandValidator,
+    OperandValidator
 } from '@calc/calc-arithmetic';
 import { representationValidator, validateOperand } from '../validators/validators';
 
@@ -20,11 +20,17 @@ interface P extends ListItemProps {
     dataTest?: string;
 }
 
+function getPlaceholder(base: number) {
+    const decimalValue = -123;
+    if(!BaseDigits.isValidBase(base)) return fromNumber(decimalValue, 10);
+    return fromNumber(decimalValue, base)
+}
 
 export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange, base, index, onRemove, dataTest, numOperands, validators, ...rest }) => {
     const { t } = useTranslation();
     const [representation, setRepresentation] = useState(representationStr);
     const [error, setError] = useState<string | undefined>();
+    const placeholderNumber = getPlaceholder(base);
 
     useEffect(() => {
         if (!BaseDigits.isValidBase(base)) return;
@@ -58,6 +64,15 @@ export const OperandInput: FC<P> = ({ representationStr, onRepresentationChange,
     return (
         <ListItem disableGutters={true} {...rest as any}>
             <TextField
+                placeholder={
+                    t(
+                        'common.inputPlaceholder',
+                        {
+                            'representation': placeholderNumber.toString(),
+                            'complement': placeholderNumber.complement.toString()
+                        }
+                    )
+                }
                 data-test={dataTest || 'operand-input'}
                 label={<div>X<sub>{index}</sub></div>}
                 size={'small'}

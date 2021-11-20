@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { BaseDigits, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
-import { FormErrors } from '@calc/common-ui';
+import { BaseDigits, fromNumber, isValidComplementOrRepresentationStr } from '@calc/calc-arithmetic';
+import { FormErrors, InputWithCopy } from '@calc/common-ui';
 import { useTranslation } from 'react-i18next';
 import { Button, styled, TextField } from '@mui/material';
 import { clean, useMountEffect } from '@calc/utils';
@@ -59,12 +59,18 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 
+function getPlaceholder(base: number) {
+    const decimalValue = -123;
+    if(!BaseDigits.isValidBase(base)) return fromNumber(decimalValue, 10);
+    return fromNumber(decimalValue, base)
+}
+
 export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
     const [storedParams, storeParams] = useStoredCconvParams();
 
     const initialValues: ComplementConverterParams = {
-        inputStr: '-123.45',
+        inputStr: '0',
         inputBase: 10
     };
 
@@ -136,6 +142,15 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                         <div className={classes.horizontalSpacer}/>
                         <TextField
                             data-test={'cconv-input-str'}
+                            placeholder={
+                                t(
+                                    'common.inputPlaceholder',
+                                    {
+                                        'representation': getPlaceholder(form.values.inputBase).toString(),
+                                        'complement': getPlaceholder(form.values.inputBase).complement.toString()
+                                    }
+                                )
+                            }
                             className={classes.input}
                             name={'inputStr'}
                             id={'inputStr'}

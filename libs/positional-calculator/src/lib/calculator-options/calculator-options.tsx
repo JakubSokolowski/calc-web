@@ -18,7 +18,7 @@ import { DndOperand, OperandList } from '../operand-list/operand-list';
 import { useStoredCalculatorParams } from './calculator-storage';
 import { representationValidator, validateOperand } from '../validators/validators';
 import { allOperations } from './operations';
-import { algorithmMap, multiplicationAlgorithms } from './algorithms';
+import { additionAlgorithms, algorithmMap } from './algorithms';
 import { CalculatorOptionsValue } from './calculator-options-value';
 
 interface FormValues {
@@ -83,9 +83,9 @@ const Root = styled('div')(({ theme }) => ({
 
 export const CalculatorOptions: FC<P> = ({ onSubmit, onOperationChange, defaultOperands, defaultBase, defaultAlgorithm, defaultOperation }) => {
     const { t } = useTranslation();
-    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[2]);
-    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || multiplicationAlgorithms[1]);
-    const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(multiplicationAlgorithms);
+    const [operation, setOperation] = useState<Operation>(defaultOperation || allOperations[0]);
+    const [algorithm, setAlgorithm] = useState<OperationAlgorithm>(defaultAlgorithm || additionAlgorithms[0]);
+    const [operationAlgorithms, setOperationAlgorithms] = useState<OperationAlgorithm[]>(additionAlgorithms);
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [storedParams, storeParams] = useStoredCalculatorParams();
 

@@ -70,6 +70,7 @@
         "copyLink": "Copied link to clipboard",
         "downloadResult": "Download result as .png",
         "downloadDetails": "Download details as .png",
+        "inputPlaceholder": "{{representation}}, {{complement}} ...",
         "download": "Download",
         "theory": "Theory",
         "toolNotFinished": "This tools is not finished yet, any and all results may be wrong"
