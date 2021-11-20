@@ -278,7 +278,21 @@ describe('associated-base-converter', () => {
                 // then
                 const expected = '-110011.100101';
                 expect(result.result.valueInBase).toEqual(expected);
-            })
+            });
+
+            it('should convert number when last mapping has trailing zeros', () => {
+                // given
+                const inputStr = '64';
+                const inputBase = 8;
+                const outputBase = 2;
+
+                // when
+                const result = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+
+                // then
+                const expected = '110100';
+                expect(result.result.valueInBase).toEqual(expected);
+            });
         });
 
         describe('when converting to greater base', () => {

@@ -1,5 +1,5 @@
 import { AssociatedBaseConversion, Conversion, fromDigits, fromNumber, fromStringDirect } from './base-converter';
-import { chunks, chunksFromEnd, logBase, trimEndByPredicate, trimStartByPredicate } from '@calc/utils';
+import { chunks, chunksFromEnd, logBase, trimStartByPredicate } from '@calc/utils';
 import { Digit } from '../models';
 import { BaseDigits } from './base-digits';
 import { DigitMapping } from '../models/digit-mapping';
@@ -122,9 +122,7 @@ function getSmallerDigitsPositionInChunk(numDigitsPerPosition: number, greaterDi
 
 function stripRedundantZeroDigits(mappings: DigitMapping[]): DigitMapping[] {
     const result = [...mappings];
-    const lastMappingIndex = mappings.length - 1;
     result[0] = removeZeroDigitsFromFirstMapping(result[0]);
-    result[lastMappingIndex] = removeZeroDigitsFromLastMapping(result[lastMappingIndex]);
 
     return result;
 }
@@ -142,14 +140,6 @@ function removeZeroDigitsFromFirstMapping(mapping: DigitMapping): DigitMapping {
         output: areAllMappingDigitZeros
             ? output.slice(0, 1)
             : trimStartByPredicate(output, isZeroDigit)
-    };
-}
-
-function removeZeroDigitsFromLastMapping(mapping: DigitMapping): DigitMapping {
-    const { output, input } = mapping;
-    return {
-        input,
-        output: trimEndByPredicate(output, isZeroDigit)
     };
 }
 
