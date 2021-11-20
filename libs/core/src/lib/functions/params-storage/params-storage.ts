@@ -2,6 +2,8 @@ export interface ParamsSaver<T> {
     (params: T): void;
 }
 
+export type StoredParams<T> = [T | undefined, ParamsSaver<T>];
+
 export interface ParamsStorage<T> {
     loadParams(): T | undefined;
 

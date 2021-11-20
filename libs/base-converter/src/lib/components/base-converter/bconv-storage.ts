@@ -7,7 +7,7 @@ import {
     ParamsLsStorageKeys,
     ParamsSaver,
     ParamsStorage,
-    saveParams,
+    saveParams, StoredParams
 } from '@calc/core';
 import { AsocBaseConverterParams } from '../associated-base-converter/asoc-bconv-params';
 import { useHistory, useLocation } from 'react-router-dom';
@@ -33,7 +33,7 @@ function useBconvStorageSources(): ParamsStorage<BaseConverterParams>[] {
     return [new BconvUrlStorage(history, location, converter), new BconvLsStorage(converter)];
 }
 
-export function useStoredBconvParams(): [BaseConverterParams | undefined, ParamsSaver<BaseConverterParams>] {
+export function useStoredBconvParams(): StoredParams<BaseConverterParams> {
     const storageSources = useBconvStorageSources();
     const saveFunc = (params: AsocBaseConverterParams) => saveParams(params, storageSources);
     return [loadParams(storageSources), saveFunc];

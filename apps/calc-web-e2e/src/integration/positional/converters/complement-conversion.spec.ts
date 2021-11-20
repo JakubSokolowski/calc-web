@@ -47,4 +47,34 @@ describe('Complement converter', () => {
         complementConverterHasProperResult(expected);
     });
 
+
+    it('should save latest operation in local storage, and execute it on reload', () => {
+        const inputStr = '-ABC';
+        const inputBase = 16;
+        const expected = 'F544';
+
+        inputComplementConverter(inputStr, inputBase);
+        complementConverterHasProperResult(expected);
+        cy.visit(`/`);
+        cy.visit(`#/tools/positional/complement-converter`);
+
+        complementConverterHasProperResult(expected);
+        const expectedParams = '?input=-ABC&inputBase=16';
+        cy.location('href').should('include', expectedParams);
+    });
+
+    it('should load params from url over local storage params when both are present', () => {
+        const inputStr = '-ABC';
+        const inputBase = 16;
+        const expected = 'F544';
+
+        inputComplementConverter(inputStr, inputBase);
+        complementConverterHasProperResult(expected);
+
+        cy.visit(`/`);
+        const params = '?input=CDA&inputBase=16';
+        cy.visit(`#/tools/positional/complement-converter${params}`);
+        const paramsExpected = '0CDA';
+        complementConverterHasProperResult(paramsExpected);
+    });
 });

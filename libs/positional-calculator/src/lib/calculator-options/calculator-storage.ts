@@ -15,12 +15,10 @@ import {
     loadParams,
     ParamsConverter,
     ParamsLsStorageKeys,
-    ParamsSaver,
     ParamsStorage,
-    saveParams
+    saveParams, StoredParams
 } from '@calc/core';
 import { useHistory, useLocation } from 'react-router-dom';
-import { OperationParams } from '@calc/positional-calculator';
 
 
 class CalculatorParamsConverter implements ParamsConverter<CalculatorOptionsValue> {
@@ -48,7 +46,7 @@ function useCalculatorStorageSources(): ParamsStorage<CalculatorOptionsValue>[] 
     return [new CalculatorUrlStorage(history, location, converter), new CalculatorLsStorage(converter)];
 }
 
-export function useStoredCalculatorParams(): [CalculatorOptionsValue | undefined, ParamsSaver<CalculatorOptionsValue>] {
+export function useStoredCalculatorParams(): StoredParams<CalculatorOptionsValue> {
     const storageSources = useCalculatorStorageSources();
     const saveFunc = (params: CalculatorOptionsValue) => saveParams(params, storageSources);
     return [loadParams(storageSources), saveFunc];
