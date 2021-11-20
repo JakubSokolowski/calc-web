@@ -17,13 +17,7 @@ import { clean, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { BaseConverterParams } from './bconv-params';
-import {
-    baseConverterParamsLsKey,
-    toBconvUrlSearchParams,
-    useLsBaseConverterParams,
-    useUrlBaseConverterParams
-} from './bconv-url-params';
-import { useHistory } from 'react-router-dom';
+import { useStoredBconvParams } from './bconv-storage';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -41,7 +35,7 @@ const classes = {
     growHorizontalSpacer: `${PREFIX}-growHorizontalSpacer`,
     convertButton: `${PREFIX}-convertButton`,
     verticalSpacer: `${PREFIX}-verticalSpacer`,
-    input: `${PREFIX}-input`,
+    input: `${PREFIX}-input`
 };
 
 const Root = styled('div')(({ theme }) => ({
@@ -93,17 +87,15 @@ const Root = styled('div')(({ theme }) => ({
         }
     },
     [`& .${classes.convertButton}`]: {
-        maxHeight: '40px',
-    },
+        maxHeight: '40px'
+    }
 }));
 
 
 export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
-    const urlParams = useUrlBaseConverterParams();
-    const lsParams = useLsBaseConverterParams();
-    const history = useHistory();
+    const [storedParams, storeParams] = useStoredBconvParams();
     const { t } = useTranslation();
 
     const initialValues: BaseConverterParams = {
@@ -117,10 +109,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
         const { inputStr, inputBase, outputBase, precision } = values;
         const conversion = fromStringDetailed(inputStr, inputBase, outputBase, precision);
         onConversionChange(conversion, precision);
-
-        const search = toBconvUrlSearchParams(values);
-        history.replace({ search });
-        localStorage.setItem(baseConverterParamsLsKey, search);
+        storeParams(values);
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -167,43 +156,28 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
 
     const swap = async () => {
         const { inputBase, outputBase, ...rest } = form.values;
-        const swappedValues = {inputBase: outputBase, outputBase: inputBase, ...rest};
+        const swappedValues = { inputBase: outputBase, outputBase: inputBase, ...rest };
         await form.setValues(swappedValues);
         await form.validateForm();
     };
 
-    const loadParams = (params?: BaseConverterParams) => {
-        if(params) {
-            onSubmit(params);
-            setTimeout(async () => {
-                await form.setValues(params);
-            });
-        }
-    };
-
     const loadInitialOptions = () => {
-        if(urlParams) {
-            loadParams(urlParams);
-            return
-        }
-
-        if(lsParams) {
-            loadParams(lsParams);
-            const search = localStorage.getItem(baseConverterParamsLsKey);
-            history.replace({ search });
-
-            return
+        if (storedParams) {
+            onSubmit(storedParams);
+            setTimeout(async () => {
+                await form.setValues(storedParams);
+            });
         }
     };
 
     useMountEffect(loadInitialOptions);
 
     const getDecimal = useCallback(() => {
-        const {inputStr, inputBase} = form.values;
-        if(!inputStr) return '0.0';
-        if(!BaseDigits.isValidBase(inputBase)) return '0.0';
+        const { inputStr, inputBase } = form.values;
+        if (!inputStr) return '0.0';
+        if (!BaseDigits.isValidBase(inputBase)) return '0.0';
 
-        if(isValidRepresentationStr(inputStr, inputBase)) {
+        if (isValidRepresentationStr(inputStr, inputBase)) {
             if (inputBase === 10) return inputStr;
             return fromString(
                 inputStr,
@@ -216,11 +190,11 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     }, [form.values]);
 
     const complement = useCallback(() => {
-        const {inputStr, inputBase} = form.values;
-        if(!inputStr) return '0.0';
-        if(!BaseDigits.isValidBase(inputBase)) return '0.0';
+        const { inputStr, inputBase } = form.values;
+        if (!inputStr) return '0.0';
+        if (!BaseDigits.isValidBase(inputBase)) return '0.0';
 
-        if(isValidRepresentationStr(inputStr, inputBase)) {
+        if (isValidRepresentationStr(inputStr, inputBase)) {
             return getComplement(inputStr, inputBase).toString();
         } else {
             return '0.0';
@@ -232,7 +206,7 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const handleInputBaseChange = e => {
-        form.handleChange(e)
+        form.handleChange(e);
     };
 
 

@@ -16,8 +16,7 @@ import { useFormik } from 'formik';
 import { clean, useMountEffect } from '@calc/utils';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { AsocBaseConverterParams } from './asoc-bconv-params';
-import { toAsocBconvUrlSearchParams, useUrlAsocBaseConverterParams } from './asoc-bconv-url-params';
-import { useHistory } from 'react-router-dom';
+import { useStoredAbconvParams } from './abconv-storage';
 
 interface P {
     onConversionChange: (conversion: Conversion) => void;
@@ -30,7 +29,7 @@ const classes = {
     row: `${PREFIX}-row`,
     inputBase: `${PREFIX}-inputBase`,
     outputBase: `${PREFIX}-outputBase`,
-    horizontalSpacer: `${PREFIX}-horizontalSpacer`,
+    horizontalSpacer: `${PREFIX}-horizontalSpacer`
 };
 
 const Root = styled('div')(({ theme }) => ({
@@ -60,15 +59,14 @@ const Root = styled('div')(({ theme }) => ({
         [theme.breakpoints.up('lg')]: {
             width: theme.spacing(5)
         }
-    },
+    }
 }));
 
 export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
     const showComplement = useSelector(selectShowComplement);
     const showDecimalValue = useSelector(selectShowDecimalValue);
-    const asocBaseConverterParams = useUrlAsocBaseConverterParams();
-    const history = useHistory();
+    const [storedParams, storeParams] = useStoredAbconvParams();
 
     const initialValues: AsocBaseConverterParams = {
         inputStr: '0',
@@ -80,10 +78,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         const { inputStr, inputBase, outputBase } = values;
         const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
         onConversionChange(conversion);
-
-        history.replace({
-            search: toAsocBconvUrlSearchParams(values)
-        });
+        storeParams(values);
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -96,13 +91,13 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateOutputBase = (): string | undefined => {
-        if(!possibleOutputBases) {
+        if (!possibleOutputBases) {
             return t('associatedBaseConverter.noOutputBase');
         }
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if(!BaseDigits.isValidBase(inputBase)) return;
+        if (!BaseDigits.isValidBase(inputBase)) return;
         if (!isValidRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
@@ -135,7 +130,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const getDecimal = useCallback(() => {
         try {
-            const {inputStr, inputBase} = form.values;
+            const { inputStr, inputBase } = form.values;
             if (inputBase === 10) return inputStr;
             return fromString(
                 inputStr,
@@ -149,7 +144,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const complement = useCallback(() => {
         try {
-            const {inputStr, inputBase} = form.values;
+            const { inputStr, inputBase } = form.values;
             return getComplement(
                 inputStr,
                 inputBase
@@ -167,11 +162,11 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
     const handleInputBaseChange = async e => {
         const inputBase = Number.parseInt(e.target.value);
-        const {inputStr} = form.values;
+        const { inputStr } = form.values;
         const newPossibleBases = BaseDigits.getAllPossibleBasesForAssociateConversion(inputBase);
-        if(!newPossibleBases) return;
+        if (!newPossibleBases) return;
         setPossibleOutputBases(newPossibleBases);
-        await form.setValues({inputBase, outputBase: newPossibleBases[0], inputStr});
+        await form.setValues({ inputBase, outputBase: newPossibleBases[0], inputStr });
         await form.validateForm();
     };
 
@@ -179,11 +174,11 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
         form.handleChange(e);
     };
 
-    const loadOptionsFromUrl = () =>  {
-        if(asocBaseConverterParams) {
-            onSubmit(asocBaseConverterParams);
+    const loadOptionsFromUrl = () => {
+        if (storedParams) {
+            onSubmit(storedParams);
             setTimeout(async () => {
-               await form.setValues(asocBaseConverterParams);
+                await form.setValues(storedParams);
             });
         }
     };
@@ -231,7 +226,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
 
                 <div className={classes.row}>
                     <TextField
-                        data-test={"abconv-input-base"}
+                        data-test={'abconv-input-base'}
                         className={classes.inputBase}
                         variant={'outlined'}
                         type={'number'}
@@ -253,7 +248,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                     <div className={classes.horizontalSpacer}/>
                     <TextField
                         select
-                        data-test={"abconv-output-base"}
+                        data-test={'abconv-output-base'}
                         className={classes.outputBase}
                         name={'outputBase'}
                         id={'outputBase'}
@@ -272,7 +267,7 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
                     </TextField>
                     <div className={classes.horizontalSpacer}/>
                     <Button
-                        data-test={"abconv-convert"}
+                        data-test={'abconv-convert'}
                         color={'info'}
                         variant={'contained'}
                         type={'submit'}

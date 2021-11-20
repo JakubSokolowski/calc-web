@@ -79,6 +79,38 @@ describe('Associated base converter conversion', () => {
         cy.reload();
         const expected = '67';
         abconvHasProperResult(expected);
-    })
+    });
 
+    it('should save latest operation in local storage, and execute it on reload', () => {
+        const inputStr = '110111';
+        const inputBase = 2;
+        const outputBase = 8;
+        const expected = '67';
+        inputAbconv(inputStr, inputBase, outputBase);
+        abconvHasProperResult(expected);
+
+        cy.visit(`/`);
+        cy.visit(`#/tools/positional/associated-base-converter`);
+        abconvHasProperResult(expected);
+
+        // should load latest result and update url params
+        const expectedParams = '?input=110111&inputBase=2&outputBase=8';
+        cy.location('href').should('include', expectedParams);
+    });
+
+    it('should load params from url over local storage params when both are present', () => {
+        const inputStr = '110111';
+        const inputBase = 2;
+        const outputBase = 8;
+        const expected = '67';
+        inputAbconv(inputStr, inputBase, outputBase);
+        abconvHasProperResult(expected);
+
+        cy.visit(`/`);
+        const params = '?input=FFB&inputBase=16&outputBase=2';
+        cy.visit(`#/tools/positional/associated-base-converter${params}`);
+        const urlExpected = '111111111011';
+
+        abconvHasProperResult(urlExpected);
+    });
 });

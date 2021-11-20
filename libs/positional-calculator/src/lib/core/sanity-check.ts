@@ -9,7 +9,6 @@ import {
 } from '@calc/calc-arithmetic';
 import BigNumber from 'bignumber.js';
 import { nNext } from '@calc/utils';
-import { toUrlSearchParams } from '../calculator-options/url-calculator-options';
 
 export interface SanityCheck {
     params: OperationParams;
@@ -78,8 +77,22 @@ export function kaosMonke(operation: OperationType, algorithm: AlgorithmType, re
     return failed;
 }
 
+
+function opParamsToUrlParams(params: OperationParams<string>): string {
+    const { algorithm, operation, operands, base, precision } = params;
+    const operandsStr = operands.map(op => `op=${op}`).join('&');
+    const precisionStr = operation === OperationType.Division ? `&precision=${precision}` : '';
+
+    return `?operation=${operation.toLowerCase()}`
+        + `&algorithm=${algorithm.toLowerCase()}`
+        + `&base=${base}`
+        + `&${operandsStr}`
+        + precisionStr;
+}
+
+
 function logParamsUrl(params: OperationParams<string>) {
-    const searchParams = toUrlSearchParams(params);
+    const searchParams = opParamsToUrlParams(params);
     const localhostUrl = `http://localhost:4200/#/tools/positional/positional-calculator${searchParams}`;
     const prodUrl = `https://jakubsokolowski.github.io/calc-web/#/tools/positional/positional-calculator${searchParams}`;
     const msg = `Local: ${localhostUrl}\nProd: ${prodUrl}`;

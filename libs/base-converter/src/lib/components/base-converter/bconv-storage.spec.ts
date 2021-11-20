@@ -1,4 +1,4 @@
-import { urlParamsToBaseConverterParams } from './bconv-url-params';
+import { urlParamsToBaseConverterParams } from './bconv-storage';
 import { BaseConverterParams } from './bconv-params';
 
 
