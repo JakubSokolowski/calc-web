@@ -13,6 +13,7 @@ interface P {
     value?: string | number;
     id?: string;
     name?: string;
+    placeholder?: string;
     onValueChange?: (value: string) => void;
     onChange?: (event) => void;
     readOnly?: boolean;
@@ -51,7 +52,7 @@ const Root = styled('div')(({ theme }) => ({
 
 
 
-export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly, dataTest }) => {
+export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style, className, value, id, name, size, error, helperText, label, inputType, readOnly, dataTest, placeholder }) => {
     const textAreaRef = useRef(null);
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
@@ -93,6 +94,7 @@ export const InputWithCopy: FC<P> = ({ onValueChange, onChange, disabled, style,
         name,
         disabled,
         size,
+        placeholder,
         helperText,
         style: {
             ...style,

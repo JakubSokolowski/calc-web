@@ -60,8 +60,8 @@ export const calculatePositional = (config: OperationTemplate<AlgorithmType>) =>
 export const enterOperationParams = (config: OperationTemplate<AlgorithmType>) => {
     const { algorithm, base, operands, operation, precision } = config;
     setOperationBase(base);
-    selectAlgorithm(algorithm);
     selectOperation(operation);
+    selectAlgorithm(algorithm);
     setOperationPrecision(precision);
     operands.forEach((op, idx) => addOperand(op, idx));
 };

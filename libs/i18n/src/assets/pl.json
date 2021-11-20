@@ -70,6 +70,7 @@
         "copyLink": "Link skopiowano do schowka",
         "downloadResult": "Pobierz wynik jako .png",
         "downloadDetails": "Pobierz szegóły jako .png",
+        "inputPlaceholder": "{{representation}}, {{complement}} ...",
         "download": "Pobierz",
         "theory": "Teoria",
         "toolNotFinished": "To narzędzie nie jest dokończone, wyniki mogą być niepoprawne"
