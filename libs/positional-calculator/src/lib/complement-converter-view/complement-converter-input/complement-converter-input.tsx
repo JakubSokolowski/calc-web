@@ -6,11 +6,7 @@ import { Button, styled, TextField } from '@mui/material';
 import { clean, useMountEffect } from '@calc/utils';
 import { useFormik } from 'formik';
 import { ComplementConverterParams } from './complement-converter-params';
-import {
-    complementConverterParamsToUrlSearch,
-    useUrlComplementConverterParams
-} from './complement-converter-url-params';
-import { useHistory } from 'react-router-dom';
+import { useStoredCconvParams } from './cconv-storage';
 
 interface P {
     onConversionChange?: (params: ComplementConverterParams) => void;
@@ -25,7 +21,7 @@ const classes = {
     inputBase: `${PREFIX}-inputBase`,
     convert: `${PREFIX}-convert`,
     horizontalSpacer: `${PREFIX}-horizontalSpacer`,
-    growHorizontalSpacer: `${PREFIX}-growHorizontalSpacer`,
+    growHorizontalSpacer: `${PREFIX}-growHorizontalSpacer`
 };
 
 const Root = styled('div')(({ theme }) => ({
@@ -59,14 +55,13 @@ const Root = styled('div')(({ theme }) => ({
     },
     [`& .${classes.growHorizontalSpacer}`]: {
         flexGrow: 1
-    },
+    }
 }));
 
 
 export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     const { t } = useTranslation();
-    const urlParams = useUrlComplementConverterParams();
-    const history = useHistory();
+    const [storedParams, storeParams] = useStoredCconvParams();
 
     const initialValues: ComplementConverterParams = {
         inputStr: '-123.45',
@@ -75,9 +70,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
 
     const onSubmit = (values: ComplementConverterParams) => {
         if (onConversionChange) onConversionChange(values);
-        history.replace({
-            search: complementConverterParamsToUrlSearch(values)
-        });
+        storeParams(values);
     };
 
     const validateBase = (base: number): string | undefined => {
@@ -90,7 +83,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
     };
 
     const validateValueStr = (valueStr: string, inputBase: number): string | undefined => {
-        if(!BaseDigits.isValidBase(inputBase)) return undefined;
+        if (!BaseDigits.isValidBase(inputBase)) return undefined;
         if (!isValidComplementOrRepresentationStr(valueStr, inputBase)) {
             return t(
                 'baseConverter.wrongRepresentationStr',
@@ -110,11 +103,11 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
 
     const form = useFormik({ initialValues, onSubmit, validate });
 
-    const loadOptionsFromUrl = () =>  {
-        if(urlParams) {
-            onSubmit(urlParams);
+    const loadOptionsFromUrl = () => {
+        if (storedParams) {
+            onSubmit(storedParams);
             setTimeout(async () => {
-                await form.setValues(urlParams);
+                await form.setValues(storedParams);
             });
         }
     };
@@ -128,7 +121,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                     <div className={classes.row}>
                         <TextField
                             type={'number'}
-                            data-test={"cconv-input-base"}
+                            data-test={'cconv-input-base'}
                             className={classes.inputBase}
                             variant={'outlined'}
                             size={'small'}
@@ -142,7 +135,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                         />
                         <div className={classes.horizontalSpacer}/>
                         <TextField
-                            data-test={"cconv-input-str"}
+                            data-test={'cconv-input-str'}
                             className={classes.input}
                             name={'inputStr'}
                             id={'inputStr'}
@@ -156,7 +149,7 @@ export const ComplementConverterInput: FC<P> = ({ onConversionChange }) => {
                         />
                         <div className={classes.growHorizontalSpacer}/>
                         <Button
-                            data-test={"cconv-convert"}
+                            data-test={'cconv-convert'}
                             disabled={!form.isValid}
                             className={classes.convert}
                             size={'small'}

@@ -7,9 +7,8 @@ import {
     loadParams,
     ParamsConverter,
     ParamsLsStorageKeys,
-    ParamsSaver,
     ParamsStorage,
-    saveParams
+    saveParams, StoredParams
 } from '@calc/core';
 
 class AbconvParamsConverter implements ParamsConverter<AsocBaseConverterParams> {
@@ -37,7 +36,7 @@ function useAbconvStorageSources(): ParamsStorage<AsocBaseConverterParams>[] {
     return [new AsocUrlStorage(history, location, converter), new AsocLsStorage(converter)];
 }
 
-export function useStoredAbconvParams(): [AsocBaseConverterParams | undefined, ParamsSaver<AsocBaseConverterParams>] {
+export function useStoredAbconvParams(): StoredParams<AsocBaseConverterParams> {
     const storageSources = useAbconvStorageSources();
     const saveFunc = (params: AsocBaseConverterParams) => saveParams(params, storageSources);
     return [loadParams(storageSources), saveFunc];

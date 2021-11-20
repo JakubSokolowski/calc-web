@@ -1,10 +1,12 @@
 import { ParamsConverter, ParamsStorage } from './params-storage';
 
+
 export enum ParamsLsStorageKeys {
     AsocBconv = 'abconvParams',
     Bconv = 'bconvParams',
     Base = 'baseParams',
-    Calculator = 'calculatorParams'
+    Calculator = 'calculatorParams',
+    Cconv = 'cconvParams'
 }
 
 export interface LsParamsStorage<T> extends ParamsStorage<T> {
