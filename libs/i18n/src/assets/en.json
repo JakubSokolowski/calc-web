@@ -73,7 +73,8 @@
         "inputPlaceholder": "{{representation}}, {{complement}} ...",
         "download": "Download",
         "theory": "Theory",
-        "toolNotFinished": "This tools is not finished yet, any and all results may be wrong"
+        "toolNotFinished": "This tools is not finished yet, any and all results may be wrong",
+        "pageNotFound": "Page not found, details:"
     },
     "positionalCalculator": {
         "title": "Positional Calculator",

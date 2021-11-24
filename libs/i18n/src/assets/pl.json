@@ -73,7 +73,8 @@
         "inputPlaceholder": "{{representation}}, {{complement}} ...",
         "download": "Pobierz",
         "theory": "Teoria",
-        "toolNotFinished": "To narzędzie nie jest dokończone, wyniki mogą być niepoprawne"
+        "toolNotFinished": "To narzędzie nie jest dokończone, wyniki mogą być niepoprawne",
+        "pageNotFound": "Nie znaleziono strony, szczegóły:"
     },
     "positionalCalculator": {
         "title": "Kalkulator liczb pozycyjnych",
