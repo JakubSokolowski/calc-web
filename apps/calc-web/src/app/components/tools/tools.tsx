@@ -3,8 +3,8 @@ import { Typography } from '@mui/material';
 import { Route, Switch, useRouteMatch } from 'react-router-dom';
 import { PositionalTools } from './positional-tools/positional-tools';
 import { FloatingTools } from './floating-tools/floating-tools';
-import { NotFound } from '../../../../../../libs/common-ui/src/lib/components/not-found/not-found';
 import { ViewWrapper } from '@calc/common-ui';
+import { NotFound } from '@calc/common-ui';
 
 export const Tools: FC = () => {
     const { path } = useRouteMatch();
