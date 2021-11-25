@@ -1,8 +1,7 @@
 import { styled } from '@mui/material';
-import React from 'react'
+import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-
 
 const PREFIX = 'NotFound';
 
@@ -74,7 +73,7 @@ const Root = styled('div')(({ theme }) => ({
 }));
 
 
-export const NotFound = () => {
+export const NotFound: FC = () => {
     const {t} = useTranslation();
     const history = useHistory();
 

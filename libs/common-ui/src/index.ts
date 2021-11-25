@@ -17,3 +17,4 @@ export type { TreeNode } from './lib/core/models/tree-node';
 export { InlineMath } from './lib/components/math/inline-math';
 export { BlockMath } from './lib/components/math/block-math';
 export { TranslationWithLatex } from './lib/components/translation-with-latex/translation-with-latex';
+export { NotFound } from './lib/components/not-found/not-found';
