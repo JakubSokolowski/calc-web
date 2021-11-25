@@ -6,11 +6,13 @@ import { store } from '@calc/core';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 import { AppWithTheme } from './app/app-with-theme';
+import { environment } from '@calc/env';
 
 Sentry.init({
-    dsn: 'https://70bd26cd51234ad587dd3b9b2864f8a0@o528188.ingest.sentry.io/5645379',
+    dsn: environment.sentryDsn,
+    environment: environment.sentryEnvironment,
     integrations: [new Integrations.BrowserTracing()],
-    tracesSampleRate: 1.0,
+    tracesSampleRate: 1.0
 });
 
 ReactDOM.render(
