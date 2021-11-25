@@ -4,6 +4,7 @@ import { AssociatedBaseConverterView, BaseConverterView, ComplementConverterView
 import { PositionalCalculatorView } from '@calc/positional-calculator';
 import { Typography } from '@mui/material';
 import { ViewWrapper } from '@calc/common-ui';
+import { NotFound } from '@calc/common-ui';
 
 export const PositionalTools: FC = () => {
     const { path } = useRouteMatch();
@@ -22,6 +23,7 @@ export const PositionalTools: FC = () => {
             <Route path={`${path}/complement-converter`} component={ComplementConverterView}/>
             <Route path={`${path}/complement-converter`} component={ComplementConverterView}/>
             <Route path={`${path}/positional-calculator`} component={PositionalCalculatorView}/>
+            <Route path='*' exact={true} component={NotFound}/>
         </Switch>
     </div>;
 };

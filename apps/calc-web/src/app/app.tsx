@@ -26,7 +26,7 @@ import { About } from './components/about/about';
 import { DocRoute, RendererMapping } from '@calc/docs';
 import { Tools } from './components/tools/tools';
 import { ComplementDetailsRenderer, ConversionRenderer, OperationRenderer } from '@calc/positional-calculator';
-import { NotFound } from './components/not-found/not-found';
+import { NotFound } from '@calc/common-ui';
 
 const drawerWidth = 200;
 
@@ -232,7 +232,7 @@ export const App = () => {
                                 <Route exact path="/" component={HomeView}/>
                                 <Route path="/tools" component={Tools}/>
                                 <Route path="/theory" render={(props => <DocRoute {...props} mapping={rootMapping}/>)}/>
-                                <Route path='*' exact={true} component={NotFound} />
+                                <Route path='*' exact={true} component={NotFound}/>
                             </Switch>
                         </div>
                     </main>

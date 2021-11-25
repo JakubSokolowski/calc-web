@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useEffect } from 'react';
 import { useDocs } from '../../hooks/use-docs';
 import { Alert, Box, styled } from '@mui/material';
 import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
@@ -10,6 +10,7 @@ import { NavigationBreadcrumbs } from '@calc/common-ui';
 import { useUrlParams } from '@calc/utils';
 import { Language } from '@calc/i18n';
 import { useTranslation } from 'react-i18next';
+import { NotFound } from '@calc/common-ui';
 
 export interface DocsProps {
     path: string;
@@ -45,15 +46,10 @@ const Root = styled('div')(({ theme }) => ({
 export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const fallbackLanguage = Language.pl;
     const { t, i18n } = useTranslation();
-    const [docPath, setDocPath] = useState(path);
-    const [markdown, isFallback] = useDocs(docPath, fallbackLanguage);
+    const [markdown, isFallback] = useDocs(path, fallbackLanguage);
     const { pathname } = useLocation();
     const params = useUrlParams();
     const ids = extractHeadingIds(markdown);
-
-    useEffect(() => {
-        setDocPath(path);
-    }, [path]);
 
     useEffect(() => {
         const header = params.get('h');
@@ -69,6 +65,14 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
         const y = element.getBoundingClientRect().top + window.pageYOffset - headerHeight;
         window.scrollTo({ top: y, behavior: 'auto' });
     };
+
+    if(!markdown) {
+        return (
+            <Root>
+                <NotFound/>
+            </Root>
+        )
+    }
 
     return (
         <Root>
