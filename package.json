@@ -8,7 +8,7 @@
         "start": "nx serve --with-deps",
         "build": "nx build --with-deps",
         "build:wasm": "nx build calc-rs",
-        "build:prod": "nx build --prod --baseHref='calc-web/'",
+        "build:prod": "nx build --prod --baseHref='calc-web'",
         "test": "nx test",
         "edge-case-finder": "export KAOS_MONKE=1 && jest sanity-check.spec.ts",
         "lint": "nx workspace-lint && nx lint",
