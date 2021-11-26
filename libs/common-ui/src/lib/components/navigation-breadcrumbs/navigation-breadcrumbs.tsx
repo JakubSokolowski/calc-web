@@ -3,7 +3,6 @@ import { Breadcrumbs, Link, styled, Typography } from '@mui/material';
 import MenuBookIcon from '@mui/icons-material/MenuBook';
 import { replaceAll } from '@calc/utils';
 import { useTranslation } from 'react-i18next';
-import { environment } from '@calc/env';
 
 const PREFIX = 'Breadcrumbs';
 
@@ -44,7 +43,6 @@ interface P {
 export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
     const { t } = useTranslation();
     const pathFragments = path.split('/').filter(r => !!r);
-    const deployPrefix = environment.deployUrl ? `/${environment.deployUrl}` : '';
 
     const subRoutesCombinations = pathFragments.map((_, index) => {
         const all = pathFragments.slice(0, index + 1);
@@ -66,7 +64,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
             );
         } else {
             return (
-                <Link key={idx} color="inherit" href={`${deployPrefix}/#/${s}`}>
+                <Link key={idx} color="inherit" href={`/#/${s}`}>
                     {translation.title || translation}
                 </Link>
             );
@@ -84,7 +82,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
                 {
                     theoryPath &&
                     <Breadcrumbs>
-                        <Link className={classes.link} color="inherit" href={`${deployPrefix}/#${theoryPath}`}>
+                        <Link className={classes.link} color="inherit" href={`#${theoryPath}`}>
                             <MenuBookIcon className={classes.linkIcon}/>
                             {t('common.theory')}
                         </Link>
