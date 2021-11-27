@@ -46,7 +46,7 @@ const Root = styled('div')(({ theme }) => ({
 export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
     const fallbackLanguage = Language.pl;
     const { t, i18n } = useTranslation();
-    const [markdown, isFallback] = useDocs(path, fallbackLanguage);
+    const [markdown, isFallback, loading] = useDocs(path, fallbackLanguage);
     const { pathname } = useLocation();
     const params = useUrlParams();
     const ids = extractHeadingIds(markdown);
@@ -66,7 +66,7 @@ export const DocPage: FC<DocsProps> = ({ path, rendererMapping }) => {
         window.scrollTo({ top: y, behavior: 'auto' });
     };
 
-    if(!markdown) {
+    if(!markdown && !loading) {
         return (
             <Root>
                 <NotFound/>

@@ -39,7 +39,7 @@ describe('use-docs', () => {
         await waitForNextUpdate();
 
         // then
-        const [, , error] = result.current;
+        const [, , , error] = result.current;
         expect(error).toEqual(errorMessage);
     });
 });

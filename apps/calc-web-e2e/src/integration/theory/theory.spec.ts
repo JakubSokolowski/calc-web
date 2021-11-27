@@ -9,9 +9,9 @@ describe('Theory view', () => {
 
     it('should display doc page for given route and language', () => {
         const plDocText = "Test PL";
-        cy.intercept('GET', '/assets/docs/test/test_pl.md*', plDocText);
+        cy.intercept('GET', 'assets/docs/test/test_pl.md*', plDocText);
         const enDocText = "Test EN";
-        cy.intercept('GET', '/assets/docs/test/test_en.md*', enDocText);
+        cy.intercept('GET', 'assets/docs/test/test_en.md*', enDocText);
 
         changeLanguage(Language.pl);
         cy.visit('#/theory/test');
