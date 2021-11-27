@@ -5,7 +5,7 @@ import { MarkdownRenderer } from '../markdown-renderer/markdown-renderer';
 import { ScrollSpy } from '../scroll-spy/scroll-spy';
 import { extractHeadingIds } from '../../core/functions/heading-ids';
 import { useLocation } from 'react-router-dom';
-import { RendererMapping } from '../../..';
+import { RendererMapping } from '../../core/models/renderer';
 import { NavigationBreadcrumbs } from '@calc/common-ui';
 import { useUrlParams } from '@calc/utils';
 import { Language } from '@calc/i18n';
