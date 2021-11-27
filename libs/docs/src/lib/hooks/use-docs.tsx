@@ -5,11 +5,10 @@ import { environment } from '@calc/env';
 
 async function fetchDocFromPath(path: string, langKeySuffix: string): Promise<Response> {
     const fileName = path.split('/').pop();
-    const prefix = `${environment.deployUrl}/assets/docs`;
+    const prefix = `/${environment.deployUrl}/assets/docs`;
     const start = path.startsWith('/') ? path.substr(1) : path;
     const url = `${prefix}/${start}/${fileName}_${langKeySuffix}.md`;
 
-    console.log(environment, prefix, start, url);
     return fetch(url)
 }
 async function checkForError(response: Response): Promise<string> {
