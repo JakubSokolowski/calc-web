@@ -66,7 +66,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
             );
         } else {
             return (
-                <Link key={idx} color="inherit" href={`/${deployPrefix}/#/${s}`}>
+                <Link key={idx} color="inherit" href={`${deployPrefix}/#/${s}`}>
                     {translation.title || translation}
                 </Link>
             );
@@ -84,7 +84,7 @@ export const NavigationBreadcrumbs: FC<P> = ({ path, theoryPath }) => {
                 {
                     theoryPath &&
                     <Breadcrumbs>
-                        <Link className={classes.link} color="inherit" href={`/${deployPrefix}/#${theoryPath}`}>
+                        <Link className={classes.link} color="inherit" href={`${deployPrefix}/#${theoryPath}`}>
                             <MenuBookIcon className={classes.linkIcon}/>
                             {t('common.theory')}
                         </Link>
