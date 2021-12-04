@@ -3,5 +3,6 @@ export const environment = {
     deployUrl: '',
     sha: 'debug',
     sentryDsn: '',
-    sentryEnvironment: 'dev'
+    sentryEnvironment: 'dev',
+    createIssueUrl: 'https://github.com/JakubSokolowski/calc-web/issues/new'
 };

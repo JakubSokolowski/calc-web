@@ -2,6 +2,7 @@ import { styled } from '@mui/material';
 import React, { FC } from 'react'
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
+import { environment } from '@calc/env';
 
 const PREFIX = 'NotFound';
 
@@ -195,7 +196,7 @@ export const NotFound: FC = () => {
 
                         <br/>
                         <div className={classes.actions}>
-                            <button onClick={() => history.push('/')}  className={classes.button}>
+                            <button onClick={() => window.location.href = environment.createIssueUrl}  className={classes.button}>
                                 Odpowiedź
                             </button>
                             <button onClick={() => history.push('/')}  className={classes.button}>
