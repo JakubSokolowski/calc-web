@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import { Link, styled } from '@mui/material';
 import { useTranslation } from 'react-i18next';
-
+import { environment } from '@calc/env';
 const PREFIX = 'ReportIssue';
 
 const classes = {
@@ -20,7 +20,7 @@ export const ReportIssue: FC = () => {
     return (
         <Root>
             <div data-test="bug-report" className={classes.content}>
-                <Link color={'inherit'} href={'https://github.com/JakubSokolowski/calc-web/issues/new'}>
+                <Link color={'inherit'} href={environment.createIssueUrl}>
                     {t('about.submitNewIssue')}
                 </Link>
             </div>
