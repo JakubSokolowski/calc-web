@@ -59,3 +59,7 @@ To run [cypress](https://www.cypress.io/) e2e tests start cypress using:
 npm run e2e-watch
 ```
 And chose which spec to run in cypress window.
+
+## Acknowledgements
+Many thanks to Mr. K for AK1 course notes, without which this project (or for me - even passing AK1 course) would not be possible. 
+Most of the implemented algorithms in CALC are based on those notes. His website (now archived) can be found [here](http://mr-k.namyslow.eu.org/studia/arytmetyka.html).
