@@ -18,6 +18,7 @@ import { useFormik } from 'formik';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { BaseConverterParams } from './bconv-params';
 import { useStoredBconvParams } from './bconv-storage';
+import * as Sentry from '@sentry/react';
 
 interface P {
     onConversionChange?: (conversion: Conversion, precision: number) => void;
@@ -113,10 +114,18 @@ export const BaseConverterComponent: FC<P> = ({ onConversionChange }) => {
     };
 
     const onSubmit = (values: BaseConverterParams) => {
+        const transaction = Sentry.startTransaction({ name: "base-conversion" });
         const { inputStr, inputBase, outputBase, precision } = values;
         const conversion = fromStringDetailed(inputStr, inputBase, outputBase, precision);
+        const span = transaction.startChild({
+            data: { values, conversion },
+            op: 'task',
+            description: 'convert-base'
+        });
         onConversionChange(conversion, precision);
         storeParams(values);
+        span.finish();
+        transaction.finish();
     };
 
     const validateBase = (base: number): string | undefined => {

@@ -20,6 +20,7 @@ import { SanityCheckFailed } from '../sanity-check/sanity-check-failed';
 import { sanityCheck, serializeForSentry } from '../core/sanity-check';
 import * as Sentry from '@sentry/react';
 import { OperationSuccess } from '../operation-success/operation-success';
+import { SpanStatus } from '@sentry/tracing';
 
 
 const PREFIX = 'PositionalCalculatorView';
@@ -75,6 +76,7 @@ export const PositionalCalculatorView: FC = () => {
         algorithm: OperationAlgorithm<T>,
         precision?: number
     ) {
+        const transaction = Sentry.startTransaction({ name: "calculate-positional" });
         setErrorOpen(false);
         const operands: PositionalNumber[] = representations.map((num) => {
             return fromStringDirect(num.representation, base);
@@ -88,9 +90,22 @@ export const PositionalCalculatorView: FC = () => {
             precision
         };
 
+        const calculateSpan = transaction.startChild({
+            data: { params },
+            op: 'task',
+            description: 'calculate-result'
+        })
+
         setParams(params);
         const res = calculate(params);
+        calculateSpan.finish();
+
         const check = sanityCheck(params, res.result);
+        const sanitySpan = transaction.startChild({
+            data: serializeForSentry(check),
+            op: 'task',
+            description: 'sanity-check'
+        })
 
         if (check.failed) {
             const msg = `Sanity check failed, expected ${check.expectedDecimal.toString()} got ${check.actual.decimalValue.toString()}`;
@@ -100,9 +115,13 @@ export const PositionalCalculatorView: FC = () => {
             setErrorOpen(true);
             setExpected(check.expectedInBase);
             setActual(check.actual.toString());
+            sanitySpan.setStatus('sanity_check_failed');
         } else {
+            calculateSpan.setStatus(SpanStatus.Ok);
             setSuccessOpen(true);
         }
+        sanitySpan.finish();
+        transaction.finish();
         setRes(res);
     };
 
