@@ -126,7 +126,7 @@ export function arbitraryIntegralToDecimal(
         }
         return result.multipliedBy(multiplier);
     }
-    throw new Error('Invalid string for given base');
+    throw new Error(`Input: ${repStr} is not valid for base: ${base}`);
 }
 
 /**

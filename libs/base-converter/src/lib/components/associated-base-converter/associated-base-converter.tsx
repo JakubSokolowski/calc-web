@@ -17,6 +17,7 @@ import { clean, useMountEffect } from '@calc/utils';
 import { selectShowComplement, selectShowDecimalValue } from '@calc/core';
 import { AsocBaseConverterParams } from './asoc-bconv-params';
 import { useStoredAbconvParams } from './abconv-storage';
+import * as Sentry from '@sentry/react';
 
 interface P {
     onConversionChange: (conversion: Conversion) => void;
@@ -81,10 +82,18 @@ export const AssociatedBaseConverter: FC<P> = ({ onConversionChange }) => {
     };
 
     const onSubmit = (values: AsocBaseConverterParams) => {
+        const transaction = Sentry.startTransaction({ name: "asoc-base-conversion" });
         const { inputStr, inputBase, outputBase } = values;
         const conversion = convertUsingAssociatedBases(inputStr, inputBase, outputBase);
+        const span = transaction.startChild({
+            data: { values, conversion },
+            op: 'task',
+            description: 'convert-base'
+        });
         onConversionChange(conversion);
         storeParams(values);
+        span.finish();
+        transaction.finish();
     };
 
     const validateBase = (base: number): string | undefined => {
